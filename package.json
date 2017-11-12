@@ -1,0 +1,16 @@
+{
+  "private": true,
+  "name": "interviewjs",
+  "repository": "https://github.com/AJInteractive/InterviewJS.git",
+  "license": "MIT",
+  "authors": ["Laurian Gridinoc <laurian@gridinoc.name>", "Piotr Fedorczyk <piotr@piotrf.pl>"],
+  "scripts": {
+
+  },
+  "devDependencies": {
+    "lerna": "^2.5.1"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}
