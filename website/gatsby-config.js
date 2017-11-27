@@ -3,4 +3,5 @@ module.exports = {
     title: `InterviewJS`,
   },
   plugins: [`gatsby-plugin-react-helmet`],
+  pathPrefix: `/InterviewJS`,
 }
