@@ -2,11 +2,7 @@
   "private": true,
   "name": "interviewjs-packages",
   "lerna": "2.5.1",
-  "packages": [
-    "packages/*",
-    "styleguide",
-    "website"
-  ],
+  "packages": ["packages/*"],
   "version": "0.0.0",
   "npmClient": "yarn",
   "useWorkspaces": true
