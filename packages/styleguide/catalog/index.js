@@ -13,6 +13,11 @@ const pages = [
     title: "Welcome"
   },
   {
+    content: require("./pages/icons.js"),
+    path: "/icons",
+    title: "Icons"
+  },
+  {
     content: require("./pages/buttons.js"),
     path: "/buttons",
     title: "Buttons"
