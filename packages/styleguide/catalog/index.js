@@ -35,7 +35,7 @@ ReactDOM.render(
     logoSrc={InterviewJSLogo}
     pages={pages}
     styles={[Styles]}
-    // theme={theme}
+    theme={theme}
     title="InterviewJS UI Library"
   />,
   document.getElementById("catalog")
