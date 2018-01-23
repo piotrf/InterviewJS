@@ -33,4 +33,8 @@ const ButtonEl = css.button`
   ${buttonBaseStyles}
 `;
 
-export { ButtonEl };
+const LinkEl = css.a`
+  ${buttonBaseStyles}
+`;
+
+export { ButtonEl, LinkEl };

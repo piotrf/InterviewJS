@@ -8,12 +8,14 @@ export default () => markdown`
 
   ${(
     <ReactSpecimen span={3}>
-      <Button primary>Primary Button</Button>
+      <Button primary handleClick={evt => console.log(evt)}>
+        Primary Button
+      </Button>
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen span={3}>
-      <Button primary>
+      <Button primary href="http://twitter.com" target="_blank">
         <Icon name="twitter" /> Primary Button
       </Button>
     </ReactSpecimen>
@@ -23,12 +25,14 @@ export default () => markdown`
 
   ${(
     <ReactSpecimen span={3}>
-      <Button secondary>Secondary Button</Button>
+      <Button secondary handleClick={evt => console.log(evt)}>
+        Secondary Button
+      </Button>
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen span={3}>
-      <Button secondary>
+      <Button secondary href="http://facebook.com" target="_blank">
         <Icon name="facebook" /> Secondary Button
       </Button>
     </ReactSpecimen>
