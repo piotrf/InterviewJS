@@ -1,7 +1,7 @@
 import React from "react";
 import { markdown, ReactSpecimen } from "catalog";
 
-import { Button } from "../components";
+import { Button, Icon } from "../components";
 
 export default () => markdown`
   ## Primary Buttons
@@ -14,7 +14,7 @@ export default () => markdown`
   ${(
     <ReactSpecimen span={3}>
       <Button primary>
-        <i className="">icon</i> Primary Button
+        <Icon name="twitter" /> Primary Button
       </Button>
     </ReactSpecimen>
   )}
@@ -29,7 +29,7 @@ export default () => markdown`
   ${(
     <ReactSpecimen span={3}>
       <Button secondary>
-        <i className="">icon</i> Secondary Button
+        <Icon name="facebook" /> Secondary Button
       </Button>
     </ReactSpecimen>
   )}

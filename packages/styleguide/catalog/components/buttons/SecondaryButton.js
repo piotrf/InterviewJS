@@ -7,9 +7,9 @@ import { ButtonEl } from "./ButtonEl";
 
 const secondaryButtonBase = props => `
   background: ${color.white};
-  color: ${color.brandColorM};
+  color: ${color.blueM};
   &:hover {
-    color: ${color.brandColorBlk};
+    color: ${color.blueHD};
   }
 `;
 
@@ -24,11 +24,14 @@ const SecondaryButton = props => (
 );
 
 SecondaryButton.propTypes = {
-  children: oneOfType([array, object, string]),
+  children: oneOfType([array, object, string]).isRequired,
   handleClick: func,
   href: string
 };
 
-SecondaryButton.defaultProps = {};
+SecondaryButton.defaultProps = {
+  handleClick: null,
+  href: null
+};
 
 export default SecondaryButton;

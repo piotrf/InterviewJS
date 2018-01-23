@@ -1,7 +1,9 @@
 export const colors = {
-  brandColorM: "#495bbd",
-  // brandColorD: "#495bbd",
-  brandColorBlk: "#000043",
+  blueM: "#495bbd",
+  blueHD: "#14208c",
+  blueD: "#050b67",
+  blueLD: "#01034c",
+  blueBlk: "#000043",
 
   blackWt: "rgba(0,0,0,.07)",
   blackHL: "rgba(0,0,0,.17375)", // 0,07+((0,83/8)*1)

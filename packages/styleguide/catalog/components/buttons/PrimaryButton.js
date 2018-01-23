@@ -6,9 +6,10 @@ import { color } from "../../../utils";
 import { ButtonEl } from "./ButtonEl";
 
 const primaryButtonBase = props => `
-  background: ${color.brandColorM};
+  background-color: ${color.blueM};
   color: ${color.whiteBlk};
   &:hover {
+    background-color: ${color.blueHD};
     color: ${color.white};
   }
 `;
@@ -24,11 +25,14 @@ const PrimaryButton = props => (
 );
 
 PrimaryButton.propTypes = {
-  children: oneOfType([array, object, string]),
+  children: oneOfType([array, object, string]).isRequired,
   handleClick: func,
   href: string
 };
 
-PrimaryButton.defaultProps = {};
+PrimaryButton.defaultProps = {
+  handleClick: null,
+  href: null
+};
 
 export default PrimaryButton;
