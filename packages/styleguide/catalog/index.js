@@ -21,6 +21,11 @@ const pages = [
     content: require("./pages/buttons.js"),
     path: "/buttons",
     title: "Buttons"
+  },
+  {
+    content: require("./pages/containers.js"),
+    path: "/containers",
+    title: "Containers"
   }
 ];
 

@@ -16,6 +16,17 @@ export const colors = {
   blackBlk: "rgba(0,0,0,.9)",
   black: "#333",
 
+  greyWt: "#f7f7f7",
+  // greyHL: "rgba(0,0,0,.17375)", // 0,07+((0,83/8)*1)
+  // greyLt: "rgba(0,0,0,.2775)",
+  // greyLLt: "rgba(0,0,0,.38125)",
+  // greyM: "rgba(0,0,0,.485)",
+  // greyHD: "rgba(0,0,0,.58875)",
+  // greyD: "rgba(0,0,0,.6925)",
+  // greyLD: "rgba(0,0,0,.79625)",
+  // greyBlk: "rgba(0,0,0,.9)",
+  // grey: "#333",
+
   whiteWt: "rgba(255,255,255,.07)",
   whiteHL: "rgba(255,255,255,.17375)",
   whiteLt: "rgba(255,255,255,.2775)",
