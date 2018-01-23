@@ -1,4 +1,4 @@
-import { color } from "../utils";
+import { color, font } from "../utils";
 
 export default {
   // Colors
@@ -21,7 +21,7 @@ export default {
 
   // Used for navigation bar
   navBarBackground: color.greyWt,
-  navBarTextColor: color.blueBlk,
+  navBarTextColor: color.blueM,
 
   // Used in ResponsiveTabs (tab text), Download specimen (title text).
   // Typography: headings.
@@ -30,13 +30,13 @@ export default {
   sidebarColor: color.white,
   sidebarColorActive: "#D1312E",
   sidebarColorText: color.blueBlk,
-  sidebarColorTextActive: color.blackM,
+  sidebarColorTextActive: color.blueM,
   sidebarColorLine: color.blackWt,
   sidebarColorHeading: color.blueLD,
 
   // Used in the html, react, and image specimens.
-  bgLight: "#F2F2F2",
-  bgDark: "#333333",
+  bgLight: color.greyWt,
+  bgDark: color.blueBlk,
 
   // Keys appear to be PrismJS token types.
   codeStyles: {
@@ -55,8 +55,8 @@ export default {
     "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAAAAACoWZBhAAAAFklEQVQI12NQBQF2EGAghQkmwXxSmADZJQiZ2ZZ46gAAAABJRU5ErkJggg==",
 
   // Fonts
-  fontFamily: "'Roboto', sans-serif",
-  fontHeading: "'Roboto', sans-serif",
+  fontFamily: font.catalog,
+  fontHeading: font.catalog,
   fontMono: "'Roboto Mono', monospace",
 
   // Base font size in pixels.
