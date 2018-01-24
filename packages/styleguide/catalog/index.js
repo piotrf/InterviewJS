@@ -27,6 +27,11 @@ const pages = [
     content: require("./pages/containers.js"),
     path: "/containers",
     title: "Containers"
+  },
+  {
+    content: require("./pages/actionbars.js"),
+    path: "/actionbars",
+    title: "Actionbars"
   }
 ];
 
