@@ -9,14 +9,28 @@ export default () => markdown`
   ${(
     <ReactSpecimen span={3}>
       <Button primary handleClick={evt => console.log(evt)}>
-        Primary Button
+        Primary button
       </Button>
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen span={3}>
       <Button primary href="http://twitter.com" target="_blank">
-        <Icon name="twitter" /> Primary Button
+        <Icon name="twitter" /> &nbsp; Primary button
+      </Button>
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen span={3}>
+      <Button primary href="http://twitter.com" target="_blank">
+        Primary button that can go onto two lines
+      </Button>
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen span={3}>
+      <Button primary href="http://twitter.com" target="_blank" iconic>
+        <Icon name="twitter" />
       </Button>
     </ReactSpecimen>
   )}
@@ -26,14 +40,28 @@ export default () => markdown`
   ${(
     <ReactSpecimen span={3}>
       <Button secondary handleClick={evt => console.log(evt)}>
-        Secondary Button
+        Secondary button
       </Button>
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen span={3}>
       <Button secondary href="http://facebook.com" target="_blank">
-        <Icon name="facebook" /> Secondary Button
+        <Icon name="facebook" /> &nbsp; Secondary Button
+      </Button>
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen span={3}>
+      <Button secondary href="http://facebook.com" target="_blank">
+        Secondary button that can go onto two lines
+      </Button>
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen span={3}>
+      <Button secondary href="http://facebook.com" target="_blank" iconic>
+        <Icon name="facebook" />
       </Button>
     </ReactSpecimen>
   )}
