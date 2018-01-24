@@ -36,7 +36,7 @@ const linkBase = `
   text-overflow: ellipsis;
   transition: border-color ${time.l}, color ${time.l};
   white-space: nowrap;
-  i {
+  & > i {
     ${setType("s")};
     &:not(:only-child) {
       ${setSpace("mrx")};

@@ -2,11 +2,12 @@ import css from "styled-components";
 import React from "react";
 import { string } from "prop-types";
 
-import { font } from "../../../utils";
+import { font, setType } from "../../../utils";
 
 require("./iconfont/style.css");
 
 const IconEl = css.i`
+  ${({ size }) => setType(size)};
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   font-family: ${font.ico};
@@ -18,12 +19,15 @@ const IconEl = css.i`
   text-transform: none;
 `;
 
-const Icon = props => <IconEl className={`icon-${props.name} `} />;
+const Icon = props => <IconEl {...props} className={`icon-${props.name} `} />;
 
 Icon.propTypes = {
-  name: string.isRequired
+  name: string.isRequired,
+  size: string
 };
 
-Icon.defaultProps = {};
+Icon.defaultProps = {
+  size: "m"
+};
 
 export default Icon;

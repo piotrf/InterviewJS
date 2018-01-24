@@ -4,7 +4,35 @@ import { markdown, ReactSpecimen } from "catalog";
 import { Icon } from "../components";
 
 export default () => markdown`
-  ## Icons
+  ## Size variations
+
+  ${(
+    <ReactSpecimen span={1}>
+      <Icon name="twitter" size="x" />
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen span={1}>
+      <Icon name="twitter" size="s" />
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen span={1}>
+      <Icon name="twitter" size="m" />
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen span={1}>
+      <Icon name="twitter" size="l" />
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen span={1}>
+      <Icon name="twitter" size="h" />
+    </ReactSpecimen>
+  )}
+
+  ## All icons
 
   ${(
     <ReactSpecimen span={1}>

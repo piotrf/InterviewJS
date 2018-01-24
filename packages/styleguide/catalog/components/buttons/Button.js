@@ -41,7 +41,7 @@ const buttonBase = `
   transition: background-color ${time.l}, border-color ${time.l}, box-shadow ${
   time.s
 }, color ${time.l};
-  i {
+  & > i {
     ${setType("s")};
     &:not(:only-child) {
       ${setSpace("mrx")};
