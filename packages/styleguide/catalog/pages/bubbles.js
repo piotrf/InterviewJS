@@ -42,15 +42,11 @@ export default () => markdown`
   ## BubbleGroups w/ side bubbles
 
   ${(
-    <ReactSpecimen span={3}>
+    <ReactSpecimen>
       <BubbleGroup>
         <Bubble side="left">Bubble from the left</Bubble>
         <Bubble side="left">Another bubble from the left</Bubble>
       </BubbleGroup>
-    </ReactSpecimen>
-  )}
-  ${(
-    <ReactSpecimen span={3}>
       <BubbleGroup>
         <Bubble side="right">Bubble from the right</Bubble>
         <Bubble side="right">Another bubble from the right</Bubble>
