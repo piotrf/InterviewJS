@@ -21,7 +21,7 @@ export const setType = size => {
       break;
     case "x":
       return (
-        fluid("font-size", fsize.x[0], fsize.x[1]) + `line-height: ${lead.l}`
+        fluid("font-size", fsize.x[0], fsize.x[1]) + `line-height: ${lead.m}`
       );
       break;
     case "m":
