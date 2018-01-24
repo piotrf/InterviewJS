@@ -1,4 +1,5 @@
 export { default as Actionbar } from "./actionbars/Actionbar.js";
+export { default as Avatar } from "./avatars/Avatar.js";
 export { default as Bubble } from "./bubbles/Bubble.js";
 export { default as BubbleGroup } from "./bubbles/BubbleGroup.js";
 export { default as Button } from "./buttons/Button.js";

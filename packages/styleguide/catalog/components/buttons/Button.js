@@ -6,14 +6,15 @@ import {
   color,
   font,
   radius,
+  setHeight,
+  setSize,
   setSpace,
   setType,
-  setSize,
   time
 } from "../../../utils";
 
 const buttonBase = `
-  ${setSize("hl")};
+  ${setHeight("l")};
   ${setSpace("phm")};
   ${setType("x")};
   align-content: center;
@@ -52,8 +53,7 @@ const buttonBase = `
 `;
 
 const iconicButtonBase = `
-  ${setSize("hm")};
-  ${setSize("wm")};
+  ${setSize("m")};
   padding-left: 0 !important;
   padding-right: 0 !important;
 `;

@@ -2,10 +2,17 @@ import React from "react";
 import css from "styled-components";
 import { bool, oneOfType, array, object, string, func } from "prop-types";
 
-import { color, font, setSpace, setType, setSize, time } from "../../../utils";
+import {
+  color,
+  font,
+  setHeight,
+  setSpace,
+  setType,
+  time
+} from "../../../utils";
 
 const linkBase = `
-  ${setSize("hs")};
+  ${setHeight("s")};
   ${setSpace("pan")};
   ${setType("x")};
   align-content: center;

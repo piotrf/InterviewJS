@@ -39,6 +39,11 @@ const pages = [
     title: "Actionbars"
   },
   {
+    content: require("./pages/avatars.js"),
+    path: "/avatars",
+    title: "Avatars"
+  },
+  {
     content: require("./pages/bubbles.js"),
     path: "/bubbles",
     title: "Bubbles"
