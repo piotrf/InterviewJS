@@ -1,7 +1,7 @@
 import React from "react";
 import { markdown, ReactSpecimen } from "catalog";
 
-import { Actionbar, Button } from "../components";
+import { Actionbar, Button, Icon } from "../components";
 
 export default () => markdown`
   ## Plain Actionbars
@@ -49,6 +49,18 @@ export default () => markdown`
         <Button iconic>?</Button>
         <Button>Button 1</Button>
         <Button primary>Button 2</Button>
+      </Actionbar>
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen dark>
+      <Actionbar satellite="both">
+        <Button iconic inverted>
+          <Icon name="chevron-left" />
+        </Button>
+        <Button iconic inverted>
+          ?
+        </Button>
       </Actionbar>
     </ReactSpecimen>
   )}

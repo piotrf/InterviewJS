@@ -77,8 +77,8 @@ const secondaryButtonBase = `
 
 const invertedButtonBase = `
   background-color: ${color.blackHL};
-  border-color: ${color.whiteLD};
-  color: ${color.whiteBlk};
+  border-color: ${color.whiteD};
+  color: ${color.whiteD};
   &:hover {
     background-color: ${color.blackM};
     border-color: ${color.white};
