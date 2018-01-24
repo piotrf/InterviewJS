@@ -5,6 +5,12 @@ export const colors = {
   blueLD: "#01034c",
   blueBlk: "#000043",
 
+  redM: "#c54747",
+  redHD: "#971313",
+  redD: "#740505",
+  redLD: "#590101",
+  redBlk: "#400",
+
   blackWt: "rgba(0,0,0,.07)",
   blackHL: "rgba(0,0,0,.17375)", // 0,07+((0,83/8)*1)
   blackLt: "rgba(0,0,0,.2775)",

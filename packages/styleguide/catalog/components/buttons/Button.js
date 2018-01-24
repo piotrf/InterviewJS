@@ -18,8 +18,10 @@ const buttonBase = `
   ${setType("x")};
   align-content: center;
   align-items: center;
+  border-color: transparent;
   border-radius: ${radius.a};
-  border: none;
+  border-style: solid;
+  border-width: 1px;
   box-shadow: 0 2px 4px ${color.blackLt};
   cursor: pointer;
   display: inline-block;
@@ -35,7 +37,9 @@ const buttonBase = `
   text-align: center;
   text-decoration: none;
   text-overflow: ellipsis;
-  transition: background-color ${time.l}, box-shadow ${time.s}, color ${time.l};
+  transition: background-color ${time.l}, border-color ${time.l}, box-shadow ${
+  time.s
+}, color ${time.l};
   i {
     ${setType("s")};
     &:not(:only-child) {
@@ -71,18 +75,54 @@ const secondaryButtonBase = `
   }
 `;
 
+const invertedButtonBase = `
+  background-color: ${color.blackHL};
+  border-color: ${color.whiteLD};
+  color: ${color.whiteBlk};
+  &:hover {
+    background-color: ${color.blackM};
+    border-color: ${color.white};
+    color: ${color.white};
+  }
+`;
+
+const alertButtonBase = `
+  background-color: ${color.redM};
+  color: ${color.whiteBlk};
+  &:hover {
+    background-color: ${color.redHD};
+    color: ${color.white};
+  }
+`;
+
 const ButtonEl = css.button`
   ${buttonBase};
-  ${props =>
-    props.primary ? `${primaryButtonBase}` : `${secondaryButtonBase}`};
   ${props => (props.iconic ? `${iconicButtonBase}` : ``)};
+  ${props => {
+    if (props.primary) {
+      return `${primaryButtonBase}`;
+    } else if (props.alert) {
+      return `${alertButtonBase}`;
+    } else if (props.inverted) {
+      return `${invertedButtonBase}`;
+    }
+    return `${secondaryButtonBase}`;
+  }};
 `;
 
 const LinkEl = css.a`
   ${buttonBase};
-  ${props =>
-    props.primary ? `${primaryButtonBase}` : `${secondaryButtonBase}`};
   ${props => (props.iconic ? `${iconicButtonBase}` : ``)};
+  ${props => {
+    if (props.primary) {
+      return `${primaryButtonBase}`;
+    } else if (props.alert) {
+      return `${alertButtonBase}`;
+    } else if (props.inverted) {
+      return `${invertedButtonBase}`;
+    }
+    return `${secondaryButtonBase}`;
+  }};
 `;
 
 const Button = props =>

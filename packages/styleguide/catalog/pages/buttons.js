@@ -80,4 +80,80 @@ export default () => markdown`
     </ReactSpecimen>
   )}
 
+  ## Alert Buttons
+
+  ${(
+    <ReactSpecimen span={2}>
+      <Button alert handleClick={evt => console.log(evt)}>
+        Inverted button
+      </Button>
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen span={2}>
+      <Button alert href="http://facebook.com" target="_blank">
+        <Icon name="facebook" /> &nbsp; Inverted Button
+      </Button>
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen span={2}>
+      <Button alert href="http://facebook.com" target="_blank">
+        Inverted button that can go onto two lines
+      </Button>
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen span={3}>
+      <Button alert iconic>
+        ?
+      </Button>
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen span={3}>
+      <Button alert href="http://facebook.com" target="_blank" iconic>
+        <Icon name="facebook" />
+      </Button>
+    </ReactSpecimen>
+  )}
+
+  ## Inverted Buttons
+
+  ${(
+    <ReactSpecimen span={2} dark>
+      <Button inverted handleClick={evt => console.log(evt)}>
+        Inverted button
+      </Button>
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen span={2} dark>
+      <Button inverted href="http://facebook.com" target="_blank">
+        <Icon name="facebook" /> &nbsp; Inverted Button
+      </Button>
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen span={2} dark>
+      <Button inverted href="http://facebook.com" target="_blank">
+        Inverted button that can go onto two lines
+      </Button>
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen span={3} dark>
+      <Button inverted iconic>
+        ?
+      </Button>
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen span={3} dark>
+      <Button inverted href="http://facebook.com" target="_blank" iconic>
+        <Icon name="facebook" />
+      </Button>
+    </ReactSpecimen>
+  )}
+
 `;
