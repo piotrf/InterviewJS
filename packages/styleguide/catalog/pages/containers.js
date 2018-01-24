@@ -26,4 +26,21 @@ export default () => markdown`
       <Container inset>Inset</Container>
     </ReactSpecimen>
   )}
+  ${(
+    <ReactSpecimen span={3}>
+      <Container rounded>Rounded</Container>
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen span={3}>
+      <Container padded>Padded</Container>
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen span={3}>
+      <Container grey shift padded rounded>
+        Combination of a few
+      </Container>
+    </ReactSpecimen>
+  )}
 `;
