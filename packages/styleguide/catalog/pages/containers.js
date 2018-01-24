@@ -7,37 +7,37 @@ export default () => markdown`
   ## Primary Buttons
 
   ${(
-    <ReactSpecimen span={3}>
+    <ReactSpecimen>
       <Container white>White</Container>
     </ReactSpecimen>
   )}
   ${(
-    <ReactSpecimen span={3}>
+    <ReactSpecimen>
       <Container grey>Grey</Container>
     </ReactSpecimen>
   )}
   ${(
-    <ReactSpecimen span={3}>
+    <ReactSpecimen>
       <Container shift>Shift</Container>
     </ReactSpecimen>
   )}
   ${(
-    <ReactSpecimen span={3}>
+    <ReactSpecimen>
       <Container inset>Inset</Container>
     </ReactSpecimen>
   )}
   ${(
-    <ReactSpecimen span={3}>
+    <ReactSpecimen>
       <Container rounded>Rounded</Container>
     </ReactSpecimen>
   )}
   ${(
-    <ReactSpecimen span={3}>
+    <ReactSpecimen>
       <Container padded>Padded</Container>
     </ReactSpecimen>
   )}
   ${(
-    <ReactSpecimen span={3}>
+    <ReactSpecimen>
       <Container grey shift padded rounded>
         Combination of a few
       </Container>
