@@ -26,7 +26,7 @@ export default () => markdown`
 
   ${(
     <ReactSpecimen>
-      <Actionbar satellite="r">
+      <Actionbar satellite="right">
         <Button>Button 1</Button>
         <Button primary>Button 2</Button>
         <Button iconic>i</Button>
@@ -35,7 +35,7 @@ export default () => markdown`
   )}
   ${(
     <ReactSpecimen>
-      <Actionbar satellite="a">
+      <Actionbar satellite="both">
         <Button iconic>?</Button>
         <Button>Button 1</Button>
         <Button primary>Button 2</Button>
@@ -45,7 +45,7 @@ export default () => markdown`
   )}
   ${(
     <ReactSpecimen>
-      <Actionbar satellite="l">
+      <Actionbar satellite="left">
         <Button iconic>?</Button>
         <Button>Button 1</Button>
         <Button primary>Button 2</Button>

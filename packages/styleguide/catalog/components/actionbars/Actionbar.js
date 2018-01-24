@@ -19,7 +19,7 @@ const Actionbar = css.div`
   position: relative;
   & > *:first-child {
     ${props =>
-      props.satellite === "a" || props.satellite === "l"
+      props.satellite === "both" || props.satellite === "left"
         ? `
       ${satelliteBase};
       left: 0;
@@ -28,7 +28,7 @@ const Actionbar = css.div`
   }
   & > *:last-child {
     ${props =>
-      props.satellite === "a" || props.satellite === "r"
+      props.satellite === "both" || props.satellite === "right"
         ? `
       ${satelliteBase};
       right: 0;
