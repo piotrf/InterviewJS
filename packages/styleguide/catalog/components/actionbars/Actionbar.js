@@ -3,14 +3,14 @@ import { string } from "prop-types";
 
 import { setSpace } from "../../../utils";
 
-const satellitesBase = `
+const satelliteBase = `
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
 `;
 
 const Actionbar = css.div`
-  ${props => (props.satellites !== null ? `${setSpace("phl")}` : ``)}
+  ${props => (props.satellite !== null ? `${setSpace("phl")}` : ``)}
   align-content: center;
   align-items: center;
   display: flex;
@@ -19,18 +19,18 @@ const Actionbar = css.div`
   position: relative;
   & > *:first-child {
     ${props =>
-      props.satellites === "a" || props.satellites === "l"
+      props.satellite === "a" || props.satellite === "l"
         ? `
-      ${satellitesBase};
+      ${satelliteBase};
       left: 0;
     `
         : ``}
   }
   & > *:last-child {
     ${props =>
-      props.satellites === "a" || props.satellites === "r"
+      props.satellite === "a" || props.satellite === "r"
         ? `
-      ${satellitesBase};
+      ${satelliteBase};
       right: 0;
     `
         : ``}
@@ -44,11 +44,11 @@ const Actionbar = css.div`
 `;
 
 Actionbar.propTypes = {
-  satellites: string
+  satellite: string
 };
 
 Actionbar.defaultProps = {
-  satellites: null
+  satellite: null
 };
 
 export default Actionbar;
