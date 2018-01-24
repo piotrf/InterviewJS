@@ -7,27 +7,27 @@ const Bubble = css.div`
   ${setSpace("phm")};
   ${setSpace("pvs")};
   ${setType("x")};
-  align-content: flex-start;
-  align-items: flex-start;
+  align-self: ${({ side }) => (side === "right" ? `flex-end` : `flex-start`)};
   background-color: ${({ theme }) => (theme.backg ? theme.backg : color.blueM)};
   color: ${({ theme }) => (theme.color ? theme.color : color.white)};
   display: flex;
   flex-direction: column;
   font-family: ${font.pri};
   justify-content: center;
-  max-width: 260px;
+  max-width: ${({ side }) => (side ? `260px` : `none`)};
+  text-align: ${({ side }) => side};
   &:not(:last-child),
   &:not(:first-child) {
-    margin-bottom: 2px;
-    margin-top: 2px;
+    margin-bottom: 1px;
+    margin-top: 1px;
     border-radius: ${radius.s};
   }
   &:first-child {
     border-radius: ${radius.h} ${radius.h} ${radius.s} ${radius.s};
   }
   &:last-child {
-    ${({ persona }) =>
-      persona === "user"
+    ${({ side }) =>
+      side === "right"
         ? `
       border-radius: ${radius.s} ${radius.s} ${radius.s} ${radius.h};
     `
@@ -36,14 +36,18 @@ const Bubble = css.div`
     `}
   }
   &:only-child {
-    ${({ persona }) =>
-      persona === "user"
+    ${({ side }) =>
+      side === "right"
         ? `
       border-radius: ${radius.h} ${radius.h} ${radius.s} ${radius.h};
     `
         : `
       border-radius: ${radius.h} ${radius.h} ${radius.h} ${radius.s};
     `}
+  }
+  & > p {
+    ${setSpace("pan")};
+    ${setSpace("man")};
   }
 `;
 
@@ -52,7 +56,7 @@ Bubble.propTypes = {
     backg: string,
     color: string
   }),
-  persona: string
+  side: string
 };
 
 Bubble.defaultProps = {
@@ -60,7 +64,7 @@ Bubble.defaultProps = {
     background: null,
     color: null
   },
-  persona: "user"
+  side: "right"
 };
 
 export default Bubble;
