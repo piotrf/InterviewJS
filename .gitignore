@@ -58,6 +58,6 @@ typings/
 .env
 
 
-interviewjs.sublime-project
-
-interviewjs.sublime-workspace
+*.sublime-project
+*.sublime-workspace
+.DS_Store
