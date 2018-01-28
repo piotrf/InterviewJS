@@ -26,7 +26,7 @@ const linkBase = `
   display: inline-flex;
   flex-direction: row;
   flex-wrap: wrap;
-  font-family: ${font.pri};
+  font-family: ${font.serif};
   font-weight: bold;
   justify-content: center;
   line-height: 1.2em;

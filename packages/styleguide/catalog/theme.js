@@ -55,8 +55,8 @@ export default {
     "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAAAAACoWZBhAAAAFklEQVQI12NQBQF2EGAghQkmwXxSmADZJQiZ2ZZ46gAAAABJRU5ErkJggg==",
 
   // Fonts
-  fontFamily: font.catalog,
-  fontHeading: font.catalog,
+  fontFamily: font.sans,
+  fontHeading: font.sans,
   fontMono: "'Roboto Mono', monospace",
 
   // Base font size in pixels.

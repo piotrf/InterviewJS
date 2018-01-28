@@ -1,6 +1,5 @@
 export const Styles = `
-  @import url("https://fonts.googleapis.com/css?family=PT+Serif:400,400i,700");
-  @import url('https://fonts.googleapis.com/css?family=Lato:400,400i,700');
+  @import url('https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700|PT+Serif:400,400i,700');
   * {
     box-sizing: border-box;
   }

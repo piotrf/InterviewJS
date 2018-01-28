@@ -29,7 +29,7 @@ const buttonBase = `
   display: inline-flex;
   flex-direction: row;
   flex-wrap: wrap;
-  font-family: ${font.pri};
+  font-family: font.serif;
   justify-content: center;
   line-height: 1.2em;
   max-width: 160px;
