@@ -12,7 +12,7 @@ const Bubble = css.div`
   color: ${({ theme }) => (theme.color ? theme.color : color.white)};
   display: flex;
   flex-direction: column;
-  font-family: font.serif;
+  font-family: ${font.serif};
   justify-content: center;
   max-width: ${({ side }) => (side ? `260px` : `none`)};
   text-align: ${({ side }) => side};
