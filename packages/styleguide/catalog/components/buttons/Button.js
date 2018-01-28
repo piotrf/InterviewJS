@@ -1,5 +1,5 @@
 import React from "react";
-import css from "styled-components";
+import css, { withTheme } from "styled-components";
 import { bool, oneOfType, array, object, string, func } from "prop-types";
 
 import {
@@ -23,7 +23,7 @@ const buttonBase = `
   border-radius: ${radius.a};
   border-style: solid;
   border-width: 1px;
-  box-shadow: 0 2px 4px ${color.blackLt};
+  box-shadow: 0 2px 4px ${color.shadowLt};
   cursor: pointer;
   display: inline-block;
   display: inline-flex;
@@ -48,7 +48,7 @@ const buttonBase = `
     }
   }
   &:active {
-    box-shadow: 0 1px 2px ${color.blackHL};
+    box-shadow: 0 1px 2px ${color.shadowHL};
   }
 `;
 
@@ -59,38 +59,38 @@ const iconicButtonBase = `
 `;
 
 const primaryButtonBase = `
-  background-color: ${color.blueM};
-  color: ${color.whiteBlk};
+  background-color: ${color.primaryM};
+  color: ${color.flareBlk};
   &:hover {
-    background-color: ${color.blueHD};
+    background-color: ${color.primaryHD};
     color: ${color.white};
   }
 `;
 
 const secondaryButtonBase = `
   background: ${color.white};
-  color: ${color.blueM};
+  color: ${color.primaryM};
   &:hover {
-    color: ${color.blueHD};
+    color: ${color.primaryHD};
   }
 `;
 
 const invertedButtonBase = `
-  background-color: ${color.blackHL};
-  border-color: ${color.whiteD};
-  color: ${color.whiteD};
+  background-color: ${color.shadowHL};
+  border-color: ${color.flareD};
+  color: ${color.flareD};
   &:hover {
-    background-color: ${color.blackM};
+    background-color: ${color.shadowM};
     border-color: ${color.white};
     color: ${color.white};
   }
 `;
 
 const alertButtonBase = `
-  background-color: ${color.redM};
-  color: ${color.whiteBlk};
+  background-color: ${color.alertM};
+  color: ${color.flareBlk};
   &:hover {
-    background-color: ${color.redHD};
+    background-color: ${color.alertHD};
     color: ${color.white};
   }
 `;
@@ -151,4 +151,4 @@ Button.defaultProps = {
   target: null
 };
 
-export default Button;
+export default withTheme(Button);

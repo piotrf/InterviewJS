@@ -3,16 +3,16 @@ import { color, font } from "../utils";
 export default {
   // Colors
   background: color.white,
-  textColor: color.blackD,
-  codeColor: color.blueD,
-  linkColor: color.blueM,
+  textColor: color.shadowD,
+  codeColor: color.primaryD,
+  linkColor: color.primaryM,
 
   // NavigationBar background color, but also sometimes used as a foreground
   // or border color.
   lightColor: color.greyWt,
 
   // Used in PageHeader
-  pageHeadingBackground: color.blueBlk,
+  pageHeadingBackground: color.primaryBlk,
   pageHeadingTextColor: color.white,
 
   // Used in Menu and PageHeader to make sure the top parts have
@@ -21,22 +21,22 @@ export default {
 
   // Used for navigation bar
   navBarBackground: color.greyWt,
-  navBarTextColor: color.blueM,
+  navBarTextColor: color.primaryM,
 
   // Used in ResponsiveTabs (tab text), Download specimen (title text).
   // Typography: headings.
-  brandColor: color.blueM,
+  brandColor: color.primaryM,
 
   sidebarColor: color.white,
   sidebarColorActive: "#D1312E",
-  sidebarColorText: color.blueBlk,
-  sidebarColorTextActive: color.blueM,
-  sidebarColorLine: color.blackWt,
-  sidebarColorHeading: color.blueLD,
+  sidebarColorText: color.primaryBlk,
+  sidebarColorTextActive: color.primaryM,
+  sidebarColorLine: color.shadowWt,
+  sidebarColorHeading: color.primaryLD,
 
   // Used in the html, react, and image specimens.
   bgLight: color.greyWt,
-  bgDark: color.blueBlk,
+  bgDark: color.primaryBlk,
 
   // Keys appear to be PrismJS token types.
   codeStyles: {

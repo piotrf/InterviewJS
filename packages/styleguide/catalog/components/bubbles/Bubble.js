@@ -8,7 +8,8 @@ const Bubble = css.div`
   ${setSpace("pvs")};
   ${setType("x")};
   align-self: ${({ side }) => (side === "right" ? `flex-end` : `flex-start`)};
-  background-color: ${({ theme }) => (theme.backg ? theme.backg : color.blueM)};
+  background-color: ${({ theme }) =>
+    theme.backg ? theme.backg : color.primaryM};
   color: ${({ theme }) => (theme.color ? theme.color : color.white)};
   display: flex;
   flex-direction: column;

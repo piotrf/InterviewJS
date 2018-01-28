@@ -45,16 +45,16 @@ const linkBase = `
 `;
 
 const primaryLinkBase = `
-  color: ${color.blueM};
+  color: ${color.primaryM};
   &:hover {
-    border-color: ${color.blueM};
+    border-color: ${color.primaryM};
   }
 `;
 
 const secondaryLinkBase = `
-  color: ${color.blueBlk};
+  color: ${color.primaryBlk};
   &:hover {
-    border-color: ${color.blueBlk};
+    border-color: ${color.primaryBlk};
   }
 `;
 
@@ -66,9 +66,9 @@ const invertedLinkBase = `
 `;
 
 const alertLinkBase = `
-  color: ${color.redM};
+  color: ${color.alertM};
   &:hover {
-    border-color: ${color.redM};
+    border-color: ${color.alertM};
   }
 `;
 

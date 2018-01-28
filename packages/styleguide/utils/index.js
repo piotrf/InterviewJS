@@ -1,7 +1,3 @@
-// base styles
-export * from "./styles";
-export * from "./reset";
-
 // config
 export * from "./config/breakpoints";
 export * from "./config/colors";

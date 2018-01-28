@@ -19,13 +19,13 @@ const Container = css.div`
   ${props =>
     props.shift
       ? `
-    box-shadow: 0 1px 3px ${color.blackHL};
+    box-shadow: 0 1px 3px ${color.shadowHL};
   `
       : ``}
   ${props =>
     props.inset
       ? `
-    box-shadow: inset 0 1px 3px ${color.blackHL};
+    box-shadow: inset 0 1px 3px ${color.shadowHL};
   `
       : ``}
   ${props =>
