@@ -26,6 +26,11 @@ const pages = [
         content: require("./pages/actions-default.js")
       },
       {
+        path: "actions/toned-variations",
+        title: "Toned",
+        content: require("./pages/actions-toned.js")
+      },
+      {
         path: "actions/themeable-variations",
         title: "Themeable",
         content: require("./pages/actions-themeable.js")
