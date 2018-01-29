@@ -1,34 +1,34 @@
 import css from "styled-components";
 import { shape, string } from "prop-types";
 
-import { color, font, radius, setSpace, setType } from "../../../utils";
+import { radius, setSpace, setType, skin } from "../../../utils";
 
 const Bubble = css.div`
   ${setSpace("phm")};
   ${setSpace("pvs")};
   ${setType("x")};
-  align-self: ${({ side }) => (side === "right" ? `flex-end` : `flex-start`)};
+  align-self: ${({ role }) => (role === "user" ? `flex-end` : `flex-start`)};
   background-color: ${({ theme }) =>
-    theme.backg ? theme.backg : color.primaryM};
-  color: ${({ theme }) => (theme.color ? theme.color : color.white)};
+    theme.backg ? theme.backg : skin.mainColor};
+  color: ${({ theme }) => (theme.color ? theme.color : skin.brightColor)};
   display: flex;
   flex-direction: column;
-  font-family: ${font.serif};
+  font-family: ${({ theme }) => (theme.font ? theme.font : skin.font)};
   justify-content: center;
-  max-width: ${({ side }) => (side ? `260px` : `none`)};
-  text-align: ${({ side }) => side};
+  max-width: ${({ role }) => (role ? `260px` : `none`)};
+  text-align: ${({ role }) => role};
   &:not(:last-child),
   &:not(:first-child) {
+    border-radius: ${radius.s};
     margin-bottom: 1px;
     margin-top: 1px;
-    border-radius: ${radius.s};
   }
   &:first-child {
     border-radius: ${radius.h} ${radius.h} ${radius.s} ${radius.s};
   }
   &:last-child {
-    ${({ side }) =>
-      side === "right"
+    ${({ role }) =>
+      role === "user"
         ? `
       border-radius: ${radius.s} ${radius.s} ${radius.s} ${radius.h};
     `
@@ -37,8 +37,8 @@ const Bubble = css.div`
     `}
   }
   &:only-child {
-    ${({ side }) =>
-      side === "right"
+    ${({ role }) =>
+      role === "user"
         ? `
       border-radius: ${radius.h} ${radius.h} ${radius.s} ${radius.h};
     `
@@ -54,18 +54,18 @@ const Bubble = css.div`
 
 Bubble.propTypes = {
   theme: shape({
-    backg: string,
-    color: string
+    backg: string
   }),
-  side: string
+  role: string
 };
 
 Bubble.defaultProps = {
   theme: {
-    background: null,
-    color: null
+    backg: skin.mainColor,
+    color: skin.brightColor,
+    font: skin.font
   },
-  side: "right"
+  role: "user"
 };
 
 export default Bubble;

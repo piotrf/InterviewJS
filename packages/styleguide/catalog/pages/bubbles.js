@@ -1,7 +1,7 @@
 import React from "react";
 import { markdown, ReactSpecimen } from "catalog";
 
-import { Bubble, BubbleGroup } from "../components";
+import { Bubble } from "../components";
 
 export default () => markdown`
   ## Default bubbles
@@ -29,28 +29,11 @@ export default () => markdown`
 
   ${(
     <ReactSpecimen>
-      <Bubble theme={{ backg: "#ccc", color: "#333" }}>
-        Bubble with a custom background and font color
+      <Bubble theme={{ color: "cyan" }}>Custom bubble text</Bubble>
+      <Bubble theme={{ font: "sans-serif" }}>Custom bubble font</Bubble>
+      <Bubble theme={{ backg: "cyan", color: "red", font: "serif" }}>
+        Custom bubble
       </Bubble>
-      <Bubble theme={{ backg: "red" }}>Bubble with a custom background</Bubble>
-      <Bubble theme={{ color: "yellow" }}>
-        Bubble with a custom font color
-      </Bubble>
-    </ReactSpecimen>
-  )}
-
-  ## BubbleGroups w/ side bubbles
-
-  ${(
-    <ReactSpecimen>
-      <BubbleGroup>
-        <Bubble side="left">Bubble from the left</Bubble>
-        <Bubble side="left">Another bubble from the left</Bubble>
-      </BubbleGroup>
-      <BubbleGroup>
-        <Bubble side="right">Bubble from the right</Bubble>
-        <Bubble side="right">Another bubble from the right</Bubble>
-      </BubbleGroup>
     </ReactSpecimen>
   )}
 
