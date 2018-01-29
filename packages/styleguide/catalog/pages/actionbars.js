@@ -1,7 +1,7 @@
 import React from "react";
 import { markdown, ReactSpecimen } from "catalog";
 
-import { Actionbar, Button, Icon } from "../components";
+import { Actionbar, Action, Icon } from "../components";
 
 export default () => markdown`
   ## Plain Actionbars
@@ -9,15 +9,15 @@ export default () => markdown`
   ${(
     <ReactSpecimen>
       <Actionbar>
-        <Button>Button</Button>
+        <Action secondary>Action</Action>
       </Actionbar>
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen>
       <Actionbar>
-        <Button>Button 1</Button>
-        <Button primary>Button 2</Button>
+        <Action secondary>Action 1</Action>
+        <Action primary>Action 2</Action>
       </Actionbar>
     </ReactSpecimen>
   )}
@@ -27,40 +27,48 @@ export default () => markdown`
   ${(
     <ReactSpecimen>
       <Actionbar satellite="right">
-        <Button>Button 1</Button>
-        <Button primary>Button 2</Button>
-        <Button iconic>i</Button>
+        <Action secondary>Action 1</Action>
+        <Action primary>Action 2</Action>
+        <Action secondary iconic>
+          i
+        </Action>
       </Actionbar>
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen>
       <Actionbar satellite="both">
-        <Button iconic>?</Button>
-        <Button>Button 1</Button>
-        <Button primary>Button 2</Button>
-        <Button iconic>i</Button>
+        <Action secondary iconic>
+          ?
+        </Action>
+        <Action secondary>Action 1</Action>
+        <Action primary>Action 2</Action>
+        <Action secondary iconic>
+          i
+        </Action>
       </Actionbar>
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen>
       <Actionbar satellite="left">
-        <Button iconic>?</Button>
-        <Button>Button 1</Button>
-        <Button primary>Button 2</Button>
+        <Action secondary iconic>
+          ?
+        </Action>
+        <Action secondary>Action 1</Action>
+        <Action primary>Action 2</Action>
       </Actionbar>
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen dark>
       <Actionbar satellite="both">
-        <Button iconic inverted>
+        <Action iconic inverted>
           <Icon name="chevron-left" />
-        </Button>
-        <Button iconic inverted>
+        </Action>
+        <Action iconic inverted>
           ?
-        </Button>
+        </Action>
       </Actionbar>
     </ReactSpecimen>
   )}

@@ -12,6 +12,7 @@ export * from "./config/time";
 export * from "./config/tracking";
 
 // mixins
+export * from "./mixins/paint";
 export * from "./mixins/setSize";
 export * from "./mixins/setSpace";
 export * from "./mixins/setType";
@@ -19,4 +20,7 @@ export * from "./mixins/truncate";
 
 // helpers
 export * from "./helpers/styleText";
+
+// themes
+export * from "./skins/default";
 

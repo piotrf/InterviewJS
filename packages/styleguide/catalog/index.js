@@ -5,8 +5,6 @@ import { Catalog, pageLoader } from "catalog";
 import InterviewJSLogo from "./static/interviewjs-logo.png";
 import theme from "./theme";
 
-import { Styles, Reset } from "../utils";
-
 const pages = [
   {
     content: pageLoader(() => import("./WELCOME.md")),
@@ -18,25 +16,36 @@ const pages = [
     path: "/icons",
     title: "Icons"
   },
+
   {
-    content: require("./pages/buttons.js"),
-    path: "/buttons",
-    title: "Buttons"
-  },
-  {
-    content: require("./pages/links.js"),
-    path: "/links",
-    title: "Links"
-  },
-  {
-    content: require("./pages/containers.js"),
-    path: "/containers",
-    title: "Containers"
+    title: "Actions",
+    pages: [
+      {
+        path: "actions/default-variations",
+        title: "Default",
+        content: require("./pages/actions-default.js")
+      },
+      {
+        path: "actions/themeable-variations",
+        title: "Themeable",
+        content: require("./pages/actions-themeable.js")
+      },
+      {
+        path: "actions/inverted-variations",
+        title: "Inverted",
+        content: require("./pages/actions-inverted.js")
+      }
+    ]
   },
   {
     content: require("./pages/actionbars.js"),
     path: "/actionbars",
     title: "Actionbars"
+  },
+  {
+    content: require("./pages/containers.js"),
+    path: "/containers",
+    title: "Containers"
   },
   {
     content: require("./pages/avatars.js"),
@@ -54,7 +63,6 @@ ReactDOM.render(
   <Catalog
     logoSrc={InterviewJSLogo}
     pages={pages}
-    styles={[Styles]}
     theme={theme}
     title="InterviewJS UI Library"
   />,
