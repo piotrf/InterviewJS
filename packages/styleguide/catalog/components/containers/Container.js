@@ -60,8 +60,8 @@ const Container = css.div`
 `;
 
 Container.propTypes = {
-  basis: number,
   align: string,
+  basis: number,
   fill: string,
   flex: string,
   inset: bool,
@@ -71,8 +71,9 @@ Container.propTypes = {
 };
 
 Container.defaultProps = {
-  flex: null,
-  basis: null
+  align: null,
+  basis: null,
+  flex: null
 };
 
 export default Container;
