@@ -66,6 +66,11 @@ const pages = [
     content: require("./pages/bubblegroups.js"),
     path: "/bubblegroups",
     title: "Bubble groups"
+  },
+  {
+    content: require("./pages/preloaders.js"),
+    path: "/preloaders",
+    title: "Preloaders"
   }
 ];
 

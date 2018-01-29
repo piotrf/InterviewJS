@@ -1,6 +1,9 @@
+import { color } from "../";
+
 export const skin = {
-  mainColor: "#495bbd", // blue
-  negativeColor: "#c54747", // red
-  positiveColor: "#2ca25e", // green
+  mainColor: color.blue, // blue
+  negativeColor: color.red, // red
+  positiveColor: color.green, // green
+  neutralColor: color.greyBlk,
   font: "'PT Serif', serif"
 };

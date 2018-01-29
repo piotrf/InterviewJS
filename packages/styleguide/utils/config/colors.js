@@ -4,6 +4,10 @@ export const colors = {
   white: "#fff",
   black: "#333",
 
+  blue: "#495bbd",
+  green: "#2ca25e",
+  red: "#c54747",
+
   greyWt: lighten(0.22, "#bfbfbf"),
   // greyHL: lighten(0.165, "#bfbfbf"),
   // greyLt: lighten(0.11, "#bfbfbf"),
@@ -12,7 +16,7 @@ export const colors = {
   // greyHD: darken(0.055, "#bfbfbf"),
   // greyD: darken(0.11, "#bfbfbf"),
   // greyLD: darken(0.165, "#bfbfbf"),
-  // greyBlk: darken(0.22, "#bfbfbf"),
+  greyBlk: darken(0.22, "#bfbfbf"),
 
   flareWt: "rgba(255,255,255,.07)",
   flareHL: "rgba(255,255,255,.17375)",
