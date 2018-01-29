@@ -104,7 +104,7 @@ export default () => markdown`
   )}
   ${(
     <ReactSpecimen span={3}>
-      <Action href="https://fb.com" target="_blank">
+      <Action iconic href="https://fb.com" target="_blank">
         <Icon name="facebook" />
       </Action>
     </ReactSpecimen>
