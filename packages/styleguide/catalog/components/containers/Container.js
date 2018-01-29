@@ -1,51 +1,78 @@
 import css from "styled-components";
-import { string } from "prop-types";
+import { bool, number, string } from "prop-types";
 
 import { color, radius, setSpace } from "../../../utils";
 
 const Container = css.div`
-  ${props =>
-    props.white
-      ? `
-    background: ${color.white};
-  `
-      : ``}
-  ${props =>
-    props.grey
-      ? `
-    background: ${color.greyWt};
-  `
-      : ``}
-  ${props =>
-    props.shift
+  ${({ fill }) => {
+    if (fill === "white") {
+      return `background: ${color.white}`;
+    } else if (fill === "black") {
+      return `background: ${color.black}`;
+    } else if (fill === "grey") {
+      return `background: ${color.greyWt}`;
+    }
+    return null;
+  }};
+  ${({ shift }) =>
+    shift
       ? `
     box-shadow: 0 1px 3px ${color.shadowHL};
   `
-      : ``}
-  ${props =>
-    props.inset
+      : ``};
+  ${({ inset }) =>
+    inset
       ? `
     box-shadow: inset 0 1px 3px ${color.shadowHL};
   `
-      : ``}
-  ${props =>
-    props.rounded
+      : ``};
+  ${({ rounded }) =>
+    rounded
       ? `
     border-radius: ${radius.h};
   `
-      : ``}
-  ${props =>
-    props.padded
+      : ``};
+  ${({ padded }) =>
+    padded
       ? `
     ${setSpace("pam")};
   `
-      : ``}
+      : ``};
+  ${({ flex }) =>
+    flex !== null
+      ? `
+    display: flex;
+    flex-direction: ${flex};
+  `
+      : ``};
+  ${({ basis }) =>
+    basis !== null
+      ? `
+    flex-basis: ${100 / basis}%;
+  `
+      : ``};
+  ${({ align }) =>
+    align !== null
+      ? `
+    text-align: ${align};
+  `
+      : ``};
 `;
 
 Container.propTypes = {
-  name: string.isRequired
+  basis: number,
+  align: string,
+  fill: string,
+  flex: string,
+  inset: bool,
+  padded: bool,
+  rounded: bool,
+  shift: bool
 };
 
-Container.defaultProps = {};
+Container.defaultProps = {
+  flex: null,
+  basis: null
+};
 
 export default Container;
