@@ -35,10 +35,12 @@ export default () => markdown`
       <ThemeProvider
         theme={{
           font: "monospace",
-          mainColor: "red"
+          negativeColor: "red"
         }}
       >
-        <Action primary>Themed</Action>
+        <Action primary tone="negative">
+          Themed
+        </Action>
       </ThemeProvider>
     </ReactSpecimen>
   )}
@@ -72,10 +74,12 @@ export default () => markdown`
       <ThemeProvider
         theme={{
           font: "monospace",
-          mainColor: "red"
+          positiveColor: "green"
         }}
       >
-        <Action secondary>Themed</Action>
+        <Action secondary tone="positive">
+          Themed
+        </Action>
       </ThemeProvider>
     </ReactSpecimen>
   )}
@@ -109,10 +113,10 @@ export default () => markdown`
       <ThemeProvider
         theme={{
           font: "monospace",
-          mainColor: "red"
+          negativeColor: "red"
         }}
       >
-        <Action>Themed</Action>
+        <Action tone="negative">Themed</Action>
       </ThemeProvider>
     </ReactSpecimen>
   )}

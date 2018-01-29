@@ -15,14 +15,14 @@ const Button = css.button`
         return `
           ${actionBase.graphic};
           background-color: ${
-            theme.negative
+            theme.negativeColor
               ? paint(theme.negativeColor, "M")
               : paint(skin.negativeColor, "M")
           };
           color: ${color.flareBlk};
           &:hover {
             background-color: ${
-              theme.negative
+              theme.negativeColor
                 ? paint(theme.negativeColor, "HD")
                 : paint(skin.negativeColor, "HD")
             };
