@@ -5,7 +5,7 @@ import { color, paint, skin, setSize, setType } from "../../../utils";
 import actionBase from "./actionBase";
 
 const Button = css.button`
-  font-family: ${({ theme }) => theme.font};
+  font-family: ${({ theme }) => (theme.font ? theme.font : skin.font)};
 
   /* themeables */
 
@@ -14,30 +14,54 @@ const Button = css.button`
       if (tone === "negative") {
         return `
           ${actionBase.graphic};
-          background-color: ${paint(theme.negativeColor, "M")};
+          background-color: ${
+            theme.negative
+              ? paint(theme.negativeColor, "M")
+              : paint(skin.negativeColor, "M")
+          };
           color: ${color.flareBlk};
           &:hover {
-            background-color: ${paint(theme.negativeColor, "HD")};
+            background-color: ${
+              theme.negative
+                ? paint(theme.negativeColor, "HD")
+                : paint(skin.negativeColor, "HD")
+            };
             color: ${color.white};
           }
         `;
       } else if (tone === "positive") {
         return `
           ${actionBase.graphic};
-          background-color: ${paint(theme.positiveColor, "M")};
+          background-color: ${
+            theme.positiveColor
+              ? paint(theme.positiveColor, "M")
+              : paint(skin.positiveColor, "M")
+          };
           color: ${color.flareBlk};
           &:hover {
-            background-color: ${paint(theme.positiveColor, "HD")};
+            background-color: ${
+              theme.positiveColor
+                ? paint(theme.positiveColor, "HD")
+                : paint(skin.positiveColor, "HD")
+            };
             color: ${color.white};
           }
         `;
       }
       return `
         ${actionBase.graphic};
-        background-color: ${paint(theme.mainColor, "M")};
+        background-color: ${
+          theme.mainColor
+            ? paint(theme.mainColor, "M")
+            : paint(skin.mainColor, "M")
+        };
         color: ${color.flareBlk};
         &:hover {
-          background-color: ${paint(theme.mainColor, "HD")};
+          background-color: ${
+            theme.mainColor
+              ? paint(theme.mainColor, "HD")
+              : paint(skin.mainColor, "HD")
+          };
           color: ${color.white};
         }
       `;
@@ -46,27 +70,51 @@ const Button = css.button`
         return `
           ${actionBase.graphic};
           background-color: ${color.white};
-          color: ${paint(theme.negativeColor, "M")};
+          color: ${
+            theme.negativeColor
+              ? paint(theme.negativeColor, "M")
+              : paint(skin.negativeColor, "M")
+          };
           &:hover {
-            color: ${paint(theme.negativeColor, "HD")};
+            color: ${
+              theme.negativeColor
+                ? paint(theme.negativeColor, "HD")
+                : paint(skin.negativeColor, "HD")
+            };
           }
         `;
       } else if (tone === "positive") {
         return `
           ${actionBase.graphic};
           background-color: ${color.white};
-          color: ${paint(theme.positiveColor, "M")};
+          color: ${
+            theme.positiveColor
+              ? paint(theme.positiveColor, "M")
+              : paint(skin.positiveColor, "M")
+          };
           &:hover {
-            color: ${paint(theme.positiveColor, "HD")};
+            color: ${
+              theme.positiveColor
+                ? paint(theme.positiveColor, "HD")
+                : paint(skin.positiveColor, "HD")
+            };
           }
         `;
       }
       return `
         ${actionBase.graphic};
         background-color: ${color.white};
-        color: ${paint(theme.mainColor, "M")};
+        color: ${
+          theme.mainColor
+            ? paint(theme.mainColor, "M")
+            : paint(skin.mainColor, "M")
+        };
         &:hover {
-          color: ${paint(theme.mainColor, "HD")};
+          color: ${
+            theme.mainColor
+              ? paint(theme.mainColor, "HD")
+              : paint(skin.mainColor, "HD")
+          };
         }
       `;
     } else if (inverted) {
@@ -87,25 +135,49 @@ const Button = css.button`
     if (tone === "negative") {
       return `
         ${actionBase.textual};
-        color: ${paint(theme.negativeColor, "M")};
+        color: ${
+          theme.negativeColor
+            ? paint(theme.negativeColor, "M")
+            : paint(skin.negativeColor, "M")
+        };
         &:hover {
-          color: ${paint(theme.negativeColor, "HD")};
+          color: ${
+            theme.negativeColor
+              ? paint(theme.negativeColor, "HD")
+              : paint(skin.negativeColor, "HD")
+          };
         }
       `;
     } else if (tone === "positive") {
       return `
         ${actionBase.textual};
-        color: ${paint(theme.positiveColor, "M")};
+        color: ${
+          theme.positiveColor
+            ? paint(theme.positiveColor, "M")
+            : paint(skin.positiveColor, "M")
+        };
         &:hover {
-          color: ${paint(theme.positiveColor, "HD")};
+          color: ${
+            theme.positiveColor
+              ? paint(theme.positiveColor, "HD")
+              : paint(skin.positiveColor, "HD")
+          };
         }
       `;
     }
     return `
       ${actionBase.textual};
-      color: ${paint(theme.mainColor, "M")};
+      color: ${
+        theme.mainColor
+          ? paint(theme.mainColor, "M")
+          : paint(skin.mainColor, "M")
+      };
       &:hover {
-        color: ${paint(theme.mainColor, "HD")};
+        color: ${
+          theme.mainColor
+            ? paint(theme.mainColor, "HD")
+            : paint(skin.mainColor, "HD")
+        };
       }
     `;
   }}

@@ -9,10 +9,9 @@ export default () => markdown`
   ## Primary Actions
 
   ${(
-    <ReactSpecimen span={3}>
+    <ReactSpecimen span={2}>
       <ThemeProvider
         theme={{
-          font: "'PT Sans', sans-serif",
           mainColor: "magenta"
         }}
       >
@@ -21,7 +20,18 @@ export default () => markdown`
     </ReactSpecimen>
   )}
   ${(
-    <ReactSpecimen span={3}>
+    <ReactSpecimen span={2}>
+      <ThemeProvider
+        theme={{
+          font: "monospace"
+        }}
+      >
+        <Action primary>Themed</Action>
+      </ThemeProvider>
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen span={2}>
       <ThemeProvider
         theme={{
           font: "monospace",
@@ -36,10 +46,9 @@ export default () => markdown`
   ## Secondary Actions
 
   ${(
-    <ReactSpecimen span={3}>
+    <ReactSpecimen span={2}>
       <ThemeProvider
         theme={{
-          font: "'PT Sans', sans-serif",
           mainColor: "magenta"
         }}
       >
@@ -48,7 +57,18 @@ export default () => markdown`
     </ReactSpecimen>
   )}
   ${(
-    <ReactSpecimen span={3}>
+    <ReactSpecimen span={2}>
+      <ThemeProvider
+        theme={{
+          font: "'PT Sans', sans-serif"
+        }}
+      >
+        <Action secondary>Themed</Action>
+      </ThemeProvider>
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen span={2}>
       <ThemeProvider
         theme={{
           font: "monospace",
@@ -63,10 +83,9 @@ export default () => markdown`
   ## Plain Actions
 
   ${(
-    <ReactSpecimen span={3}>
+    <ReactSpecimen span={2}>
       <ThemeProvider
         theme={{
-          font: "'PT Sans', sans-serif",
           mainColor: "magenta"
         }}
       >
@@ -75,7 +94,18 @@ export default () => markdown`
     </ReactSpecimen>
   )}
   ${(
-    <ReactSpecimen span={3}>
+    <ReactSpecimen span={2}>
+      <ThemeProvider
+        theme={{
+          font: "'PT Sans', sans-serif"
+        }}
+      >
+        <Action>Themed</Action>
+      </ThemeProvider>
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen span={2}>
       <ThemeProvider
         theme={{
           font: "monospace",
