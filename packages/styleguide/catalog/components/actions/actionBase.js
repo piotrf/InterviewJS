@@ -58,6 +58,10 @@ const actionBase = {
     cursor: pointer;
     line-height: 1.2em;
     text-decoration: none;
+    transition:
+      color ${time.m},
+      opacity ${time.m}
+    ;
   `
 };
 
