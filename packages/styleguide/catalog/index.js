@@ -12,11 +12,6 @@ const pages = [
     title: "Welcome"
   },
   {
-    content: require("./pages/icons.js"),
-    path: "/icons",
-    title: "Icons"
-  },
-  {
     title: "Actions",
     pages: [
       {
@@ -47,9 +42,9 @@ const pages = [
     title: "Actionbars"
   },
   {
-    content: require("./pages/containers.js"),
-    path: "/containers",
-    title: "Containers"
+    content: require("./pages/avatars.js"),
+    path: "/avatars",
+    title: "Avatars"
   },
   {
     content: require("./pages/breadcrumbs.js"),
@@ -57,19 +52,29 @@ const pages = [
     title: "Breadcrumbs"
   },
   {
-    content: require("./pages/avatars.js"),
-    path: "/avatars",
-    title: "Avatars"
+    title: "Bubbles",
+    pages: [
+      {
+        content: require("./pages/bubbles.js"),
+        path: "/bubbles",
+        title: "Bubbles"
+      },
+      {
+        content: require("./pages/bubblegroups.js"),
+        path: "/bubblegroups",
+        title: "Bubble groups"
+      }
+    ]
   },
   {
-    content: require("./pages/bubbles.js"),
-    path: "/bubbles",
-    title: "Bubbles"
+    content: require("./pages/containers.js"),
+    path: "/containers",
+    title: "Containers"
   },
   {
-    content: require("./pages/bubblegroups.js"),
-    path: "/bubblegroups",
-    title: "Bubble groups"
+    content: require("./pages/icons.js"),
+    path: "/icons",
+    title: "Icons"
   },
   {
     content: require("./pages/preloaders.js"),
