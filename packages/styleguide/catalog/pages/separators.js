@@ -12,7 +12,6 @@ export default () => markdown`
       <Separator dir="h" />
     </ReactSpecimen>
   )}
-
   ${(
     <ReactSpecimen span={3}>
       <Separator dir="v" />
@@ -23,6 +22,16 @@ export default () => markdown`
 
   ${(
     <ReactSpecimen span={3}>
+      <Separator dir="h" size="n" />
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen span={3}>
+      <Separator dir="v" size="n" />
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen span={3}>
       <Separator dir="h" size="x" />
     </ReactSpecimen>
   )}
@@ -31,7 +40,6 @@ export default () => markdown`
       <Separator dir="v" size="x" />
     </ReactSpecimen>
   )}
-
   ${(
     <ReactSpecimen span={3}>
       <Separator dir="h" size="s" />
@@ -42,7 +50,6 @@ export default () => markdown`
       <Separator dir="v" size="s" />
     </ReactSpecimen>
   )}
-
   ${(
     <ReactSpecimen span={3}>
       <Separator dir="h" size="m" />
@@ -53,7 +60,6 @@ export default () => markdown`
       <Separator dir="v" size="m" />
     </ReactSpecimen>
   )}
-
   ${(
     <ReactSpecimen span={3}>
       <Separator dir="h" size="l" />
@@ -64,7 +70,6 @@ export default () => markdown`
       <Separator dir="v" size="l" />
     </ReactSpecimen>
   )}
-
   ${(
     <ReactSpecimen span={3}>
       <Separator dir="h" size="h" />
@@ -75,7 +80,6 @@ export default () => markdown`
       <Separator dir="v" size="h" />
     </ReactSpecimen>
   )}
-
 
   ## Effects
 
