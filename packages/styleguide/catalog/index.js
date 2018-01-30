@@ -72,6 +72,21 @@ const pages = [
     title: "Containers"
   },
   {
+    title: "Forms",
+    pages: [
+      {
+        content: require("./pages/form-elements.js"),
+        path: "/forms/elements",
+        title: "Elements"
+      },
+      {
+        content: require("./pages/form-items.js"),
+        path: "/forms/items",
+        title: "Form items"
+      }
+    ]
+  },
+  {
     content: require("./pages/icons.js"),
     path: "/icons",
     title: "Icons"
