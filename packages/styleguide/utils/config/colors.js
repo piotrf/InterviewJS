@@ -1,21 +1,32 @@
 import { darken, lighten } from "polished";
 
 export const colors = {
-  white: "#fff",
   black: "#333",
+  grey: "#bfbfbf",
+  white: "#fff",
 
   blue: "#495bbd",
   green: "#2ca25e",
   red: "#c54747",
 
+  blueWt: lighten(0.22, "#495bbd"),
+  blueHL: lighten(0.165, "#495bbd"),
+  blueLt: lighten(0.11, "#495bbd"),
+  blueLLt: lighten(0.055, "#495bbd"),
+  blueM: "#495bbd",
+  blueHD: darken(0.055, "#495bbd"),
+  blueD: darken(0.11, "#495bbd"),
+  blueLD: darken(0.165, "#495bbd"),
+  blueBlk: darken(0.22, "#495bbd"),
+
   greyWt: lighten(0.22, "#bfbfbf"),
-  // greyHL: lighten(0.165, "#bfbfbf"),
-  // greyLt: lighten(0.11, "#bfbfbf"),
-  // greyLLt: lighten(0.055, "#bfbfbf"),
-  // greyM: "#bfbfbf",
-  // greyHD: darken(0.055, "#bfbfbf"),
-  // greyD: darken(0.11, "#bfbfbf"),
-  // greyLD: darken(0.165, "#bfbfbf"),
+  greyHL: lighten(0.165, "#bfbfbf"),
+  greyLt: lighten(0.11, "#bfbfbf"),
+  greyLLt: lighten(0.055, "#bfbfbf"),
+  greyM: "#bfbfbf",
+  greyHD: darken(0.055, "#bfbfbf"),
+  greyD: darken(0.11, "#bfbfbf"),
+  greyLD: darken(0.165, "#bfbfbf"),
   greyBlk: darken(0.22, "#bfbfbf"),
 
   flareWt: "rgba(255,255,255,.07)",

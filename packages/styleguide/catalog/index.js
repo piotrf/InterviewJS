@@ -16,7 +16,6 @@ const pages = [
     path: "/icons",
     title: "Icons"
   },
-
   {
     title: "Actions",
     pages: [
@@ -51,6 +50,11 @@ const pages = [
     content: require("./pages/containers.js"),
     path: "/containers",
     title: "Containers"
+  },
+  {
+    content: require("./pages/breadcrumbs.js"),
+    path: "/breadcrumbs",
+    title: "Breadcrumbs"
   },
   {
     content: require("./pages/avatars.js"),
