@@ -16,8 +16,23 @@ export default () => markdown`
   ## Text Inputs
 
   ${(
-    <ReactSpecimen>
-      <TextInput input placeholder="Placeholder text…" />
+    <ReactSpecimen span={3}>
+      <TextInput input type="text" placeholder="Placeholder text…" />
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen span={3}>
+      <TextInput input type="email" placeholder="Placeholder text…" />
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen span={3}>
+      <TextInput input type="number" placeholder="Placeholder text…" />
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen span={3}>
+      <TextInput input type="date" placeholder="Placeholder text…" />
     </ReactSpecimen>
   )}
   ${(

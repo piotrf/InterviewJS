@@ -34,6 +34,10 @@ const FormItem = css.fieldset`
     width: 20px;
     z-index: 200;
   }
+  & sup + input,
+  & sup + textarea {
+    ${setSpace("prl")};
+  }
 `;
 
 FormItem.propTypes = {};

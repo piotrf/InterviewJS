@@ -5,8 +5,7 @@ import { bool, string } from "prop-types";
 import { color, radius, setSpace, styleText, time } from "../../../utils";
 
 const Input = css.input`
-  ${setSpace("pls")};
-  ${setSpace("prl")};
+  ${setSpace("phs")};
   ${setSpace("pvm")};
   ${styleText.input.value};
   border-radius: ${radius.m};

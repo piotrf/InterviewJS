@@ -18,8 +18,8 @@ export default () => markdown`
     <ReactSpecimen span={3}>
       <FormItem>
         <Label>Label</Label>
-        <TextInput input placeholder="Placeholder…" />
         <CharacterCount>140</CharacterCount>
+        <TextInput input placeholder="Placeholder…" />
         <Legend>i</Legend>
       </FormItem>
     </ReactSpecimen>
@@ -28,8 +28,8 @@ export default () => markdown`
     <ReactSpecimen span={3}>
       <FormItem>
         <Label>Label</Label>
-        <TextInput area placeholder="Placeholder…" />
         <CharacterCount>140</CharacterCount>
+        <TextInput area placeholder="Placeholder…" />
         <Legend>i</Legend>
       </FormItem>
     </ReactSpecimen>
@@ -43,16 +43,16 @@ export default () => markdown`
         <Label>Label</Label>
         <Container flex>
           <Container basis={3}>
+            <CharacterCount>140</CharacterCount>
             <TextInput input placeholder="Placeholder…" place="left" />
-            <CharacterCount>140</CharacterCount>
           </Container>
           <Container basis={3}>
+            <CharacterCount>140</CharacterCount>
             <TextInput input placeholder="Placeholder…" place="middle" />
-            <CharacterCount>140</CharacterCount>
           </Container>
           <Container basis={3}>
-            <TextInput input placeholder="Placeholder…" place="right" />
             <CharacterCount>140</CharacterCount>
+            <TextInput input placeholder="Placeholder…" place="right" />
           </Container>
         </Container>
         <Legend>i</Legend>
@@ -65,16 +65,16 @@ export default () => markdown`
         <Label>Label</Label>
         <Container flex>
           <Container basis={2}>
+            <CharacterCount>140</CharacterCount>
             <TextInput area placeholder="Placeholder…" place="left" />
-            <CharacterCount>140</CharacterCount>
           </Container>
           <Container basis={4}>
+            <CharacterCount>140</CharacterCount>
             <TextInput area placeholder="Placeholder…" place="middle" />
-            <CharacterCount>140</CharacterCount>
           </Container>
           <Container basis={4}>
-            <TextInput area placeholder="Placeholder…" place="right" />
             <CharacterCount>140</CharacterCount>
+            <TextInput area placeholder="Placeholder…" place="right" />
           </Container>
         </Container>
       </FormItem>
