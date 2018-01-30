@@ -1,7 +1,7 @@
 import React from "react";
 import { markdown, ReactSpecimen } from "catalog";
 
-import { Actionbar, Action, Icon } from "../components";
+import { Actionbar, Action, Icon, Preloader } from "../components";
 
 export default () => markdown`
   ## Plain Actionbars
@@ -57,6 +57,19 @@ export default () => markdown`
         </Action>
         <Action secondary>Action 1</Action>
         <Action primary>Action 2</Action>
+      </Actionbar>
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen>
+      <Actionbar satellite="both">
+        <Action secondary iconic>
+          ?
+        </Action>
+        <Preloader />
+        <Action secondary iconic>
+          i
+        </Action>
       </Actionbar>
     </ReactSpecimen>
   )}
