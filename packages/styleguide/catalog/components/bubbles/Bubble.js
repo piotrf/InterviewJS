@@ -7,7 +7,8 @@ const Bubble = css.div`
   ${setSpace("phm")};
   ${setSpace("pvs")};
   ${setType("x")};
-  align-self: ${({ role }) => (role === "user" ? `flex-end` : `flex-start`)};
+  align-self: ${({ character }) =>
+    character === "user" ? `flex-end` : `flex-start`};
   background-color: ${({ theme }) =>
     theme.backg ? theme.backg : skin.mainColor};
   color: ${({ theme }) => (theme.color ? theme.color : skin.brightColor)};
@@ -15,8 +16,8 @@ const Bubble = css.div`
   flex-direction: column;
   font-family: ${({ theme }) => (theme.font ? theme.font : skin.font)};
   justify-content: center;
-  max-width: ${({ role }) => (role ? `260px` : `none`)};
-  text-align: ${({ role }) => role};
+  max-width: ${({ character }) => (character ? `260px` : `none`)};
+  text-align: ${({ character }) => (character === "user" ? `right` : `left`)};
   &:not(:last-child),
   &:not(:first-child) {
     border-radius: ${radius.s};
@@ -27,8 +28,8 @@ const Bubble = css.div`
     border-radius: ${radius.h} ${radius.h} ${radius.s} ${radius.s};
   }
   &:last-child {
-    ${({ role }) =>
-      role === "user"
+    ${({ character }) =>
+      character === "user"
         ? `
       border-radius: ${radius.s} ${radius.s} ${radius.s} ${radius.h};
     `
@@ -37,8 +38,8 @@ const Bubble = css.div`
     `}
   }
   &:only-child {
-    ${({ role }) =>
-      role === "user"
+    ${({ character }) =>
+      character === "user"
         ? `
       border-radius: ${radius.h} ${radius.h} ${radius.s} ${radius.h};
     `
@@ -56,7 +57,7 @@ Bubble.propTypes = {
   theme: shape({
     backg: string
   }),
-  role: string
+  character: string
 };
 
 Bubble.defaultProps = {
@@ -65,7 +66,7 @@ Bubble.defaultProps = {
     color: skin.brightColor,
     font: skin.font
   },
-  role: "user"
+  character: "user"
 };
 
 export default Bubble;

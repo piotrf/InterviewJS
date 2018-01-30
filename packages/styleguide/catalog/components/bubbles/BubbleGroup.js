@@ -4,7 +4,9 @@ import { setSpace } from "../../../utils";
 
 const BubbleGroup = css.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  width: 100%;
+  align-items: flex-end;
   &:not(:first-child) {
     ${setSpace("mts")};
   }
