@@ -115,6 +115,16 @@ const pages = [
         title: "Charts"
       }
     ]
+  },
+  {
+    title: "Views",
+    pages: [
+      {
+        content: require("./pages/viewer-intro.js"),
+        path: "/views/viewer/intro",
+        title: "Viewer Intro"
+      }
+    ]
   }
 ];
 
