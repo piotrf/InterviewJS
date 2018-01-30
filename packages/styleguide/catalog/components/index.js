@@ -8,3 +8,4 @@ export { default as BubbleGroup } from "./bubbles/BubbleGroup.js";
 export { default as Container } from "./containers/Container.js";
 export { default as Icon } from "./icons/Icon.js";
 export { default as Preloader } from "./preloaders/Preloader.js";
+export { default as Separator } from "./separators/Separator.js";

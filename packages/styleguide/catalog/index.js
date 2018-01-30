@@ -80,6 +80,11 @@ const pages = [
     content: require("./pages/preloaders.js"),
     path: "/preloaders",
     title: "Preloaders"
+  },
+  {
+    content: require("./pages/separators.js"),
+    path: "/separators",
+    title: "Separators"
   }
 ];
 
