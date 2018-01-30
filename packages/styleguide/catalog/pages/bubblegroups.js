@@ -21,15 +21,21 @@ export default () => markdown`
         <BubbleAvatar>
           <Avatar size="x" image={Sample} />
         </BubbleAvatar>
-        <Bubbles character="interviewee">
-          <Bubble character="interviewee">Bubble from the left</Bubble>
-          <Bubble character="interviewee">Another bubble from the left</Bubble>
+        <Bubbles persona="speaker">
+          <Bubble persona="speaker">Bubble from the left</Bubble>
+          <Bubble persona="speaker">Another bubble from the left</Bubble>
         </Bubbles>
       </BubbleGroup>
       <BubbleGroup>
-        <Bubbles character="user">
-          <Bubble character="user">Bubble from the right</Bubble>
-          <Bubble character="user">Another bubble from the right</Bubble>
+        <Bubbles persona="system">
+          <Bubble persona="system">Bubble in the middle</Bubble>
+          <Bubble persona="system">Another bubble in the middle</Bubble>
+        </Bubbles>
+      </BubbleGroup>
+      <BubbleGroup>
+        <Bubbles persona="user">
+          <Bubble persona="user">Bubble from the right</Bubble>
+          <Bubble persona="user">Another bubble from the right</Bubble>
         </Bubbles>
       </BubbleGroup>
     </ReactSpecimen>

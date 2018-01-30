@@ -8,8 +8,8 @@ const Bubbles = css.div`
   flex-direction: column;
   justify-content: stretch;
   width: 100%;
-  ${({ character }) =>
-    character === "user"
+  ${({ persona }) =>
+    persona === "user"
       ? `
     ${setSpace("prs")};
     align-items: flex-end;
