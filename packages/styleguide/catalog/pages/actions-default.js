@@ -82,13 +82,13 @@ export default () => markdown`
 
   ${(
     <ReactSpecimen span={3}>
-      <Action onClick={evt => console.log(evt)}>Secondary action</Action>
+      <Action onClick={evt => console.log(evt)}>Plain action</Action>
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen span={3}>
       <Action onClick={evt => console.log(evt)}>
-        Secondary action wouldn’t go onto two lines
+        Plain action doesn’t have a set max width
       </Action>
     </ReactSpecimen>
   )}
@@ -98,7 +98,7 @@ export default () => markdown`
   ${(
     <ReactSpecimen span={3}>
       <Action href="https://fb.com" target="_blank">
-        <Icon name="facebook" /> &nbsp; Secondary Action
+        <Icon name="facebook" /> &nbsp; Plain Action
       </Action>
     </ReactSpecimen>
   )}

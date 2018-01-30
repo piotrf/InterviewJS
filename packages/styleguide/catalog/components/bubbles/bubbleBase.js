@@ -1,8 +1,7 @@
 import { radius, setSpace, setType } from "../../../utils";
 
 const bubbleBase = `
-  ${setSpace("phm")};
-  ${setSpace("pvs")};
+  ${setSpace("pas")};
   ${setType("x")};};
   display: flex;
   flex-direction: column;

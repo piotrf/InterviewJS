@@ -12,7 +12,7 @@ const SystemBubble = css.div`
   font-family: ${({ theme }) => (theme.font ? theme.font : skin.font)};
   margin-left: auto;
   margin-right: auto;
-  text-align: right;
+  text-align: left;
   &:first-child {
     border-radius: ${radius.h} ${radius.h} ${radius.s} ${radius.s};
   }
