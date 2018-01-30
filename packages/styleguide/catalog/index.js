@@ -100,6 +100,16 @@ const pages = [
     content: require("./pages/separators.js"),
     path: "/separators",
     title: "Separators"
+  },
+  {
+    title: "Partials",
+    pages: [
+      {
+        content: require("./pages/charts.js"),
+        path: "/partials/charts",
+        title: "Charts"
+      }
+    ]
   }
 ];
 
