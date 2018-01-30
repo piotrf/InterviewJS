@@ -28,7 +28,7 @@ const FormItem = css.fieldset`
     ${setSpace("mrs")};
     ${setSpace("mtm")};
     position: absolute;
-    right: 0;
+    right: 2px;
     text-align: center;
     top: 0;
     width: 20px;
