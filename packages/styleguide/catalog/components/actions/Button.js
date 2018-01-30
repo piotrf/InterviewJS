@@ -9,7 +9,7 @@ const Button = css.button`
 
   /* themeables */
 
-  ${({ primary, secondary, inverted, tone, theme }) => {
+  ${({ primary, secondary, inverted, tone, theme, active }) => {
     if (primary) {
       if (tone === "negative") {
         return `
@@ -128,8 +128,19 @@ const Button = css.button`
           color: ${color.white};
         };
         &:active {
+          background: ${color.flareLt};
+          color: ${color.white};
           opacity: 0.75;
         }
+        ${
+          active
+            ? `
+          background: ${color.flareLt};
+          color: ${color.white};
+          opacity: 0.75;
+        `
+            : ``
+        };
       `;
     }
     if (tone === "negative") {

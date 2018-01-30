@@ -39,4 +39,21 @@ export default () => markdown`
     </ReactSpecimen>
   )}
 
+  ## Active variations
+
+  ${(
+    <ReactSpecimen span={3} dark>
+      <Action inverted active href="https://fb.com" target="_blank">
+        <Icon name="facebook" /> &nbsp; Inverted Action
+      </Action>
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen span={3} dark>
+      <Action inverted active iconic href="https://fb.com" target="_blank">
+        <Icon name="facebook" />
+      </Action>
+    </ReactSpecimen>
+  )}
+
 `;
