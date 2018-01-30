@@ -92,6 +92,11 @@ const pages = [
     title: "Icons"
   },
   {
+    content: require("./pages/messages.js"),
+    path: "/messages",
+    title: "Messages"
+  },
+  {
     content: require("./pages/preloaders.js"),
     path: "/preloaders",
     title: "Preloaders"
