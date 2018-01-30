@@ -12,7 +12,7 @@ import {
 
 export default () => markdown`
 
-  ## Unique input
+  ## Unique inputs
 
   ${(
     <ReactSpecimen span={3}>
@@ -20,7 +20,7 @@ export default () => markdown`
         <Label>Label</Label>
         <CharacterCount>140</CharacterCount>
         <TextInput input placeholder="Placeholder…" />
-        <Legend>i</Legend>
+        <Legend tip="tip">i</Legend>
       </FormItem>
     </ReactSpecimen>
   )}
@@ -30,7 +30,7 @@ export default () => markdown`
         <Label>Label</Label>
         <CharacterCount>140</CharacterCount>
         <TextInput area placeholder="Placeholder…" />
-        <Legend>i</Legend>
+        <Legend tip="tip">i</Legend>
       </FormItem>
     </ReactSpecimen>
   )}
@@ -55,7 +55,7 @@ export default () => markdown`
             <TextInput input placeholder="Placeholder…" place="right" />
           </Container>
         </Container>
-        <Legend>i</Legend>
+        <Legend tip="tip">i</Legend>
       </FormItem>
     </ReactSpecimen>
   )}
