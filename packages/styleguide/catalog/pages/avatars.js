@@ -9,27 +9,27 @@ export default () => markdown`
   ## Avatars
 
   ${(
-    <ReactSpecimen>
+    <ReactSpecimen span={2}>
       <Avatar size="x" image={Sample} />
     </ReactSpecimen>
   )}
   ${(
-    <ReactSpecimen>
+    <ReactSpecimen span={2}>
       <Avatar size="s" image={Sample} />
     </ReactSpecimen>
   )}
   ${(
-    <ReactSpecimen>
+    <ReactSpecimen span={2}>
       <Avatar size="m" image={Sample} />
     </ReactSpecimen>
   )}
   ${(
-    <ReactSpecimen>
+    <ReactSpecimen span={2}>
       <Avatar size="l" image={Sample} />
     </ReactSpecimen>
   )}
   ${(
-    <ReactSpecimen>
+    <ReactSpecimen span={2}>
       <Avatar size="h" image={Sample} />
     </ReactSpecimen>
   )}

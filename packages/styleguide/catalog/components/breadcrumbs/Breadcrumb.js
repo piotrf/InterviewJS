@@ -2,15 +2,7 @@ import React from "react";
 import css from "styled-components";
 import { string } from "prop-types";
 
-import {
-  color,
-  font,
-  paint,
-  radius,
-  setSpace,
-  setType,
-  time
-} from "../../../utils";
+import { color, font, radius, setSpace, setType, time } from "../../../utils";
 
 const BreadcrumbEl = css.li`
   ${setSpace("pts")};
@@ -18,11 +10,8 @@ const BreadcrumbEl = css.li`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition:
-    color ${time.m},
-    background-color ${time.m},
-    border-color ${time.m},
-  ;
+  overflow: hidden;
+  transition: color ${time.m};
 
   ${({ state }) =>
     state === "passed"
@@ -55,7 +44,7 @@ const BreadcrumbEl = css.li`
     display: block;
     height: 1px;
     position: absolute;
-    width: 200px;
+    width: 280px;
     z-index: 100;
   }
   & > span:first-child::before {
@@ -86,6 +75,7 @@ const BreadcrumbIndex = css.span`
     border-color ${time.m},
     color ${time.m}
   ;
+  z-index: 500;
 
   ${({ state }) =>
     state === "passed"

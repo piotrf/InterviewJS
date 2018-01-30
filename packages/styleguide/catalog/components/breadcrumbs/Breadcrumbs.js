@@ -11,8 +11,11 @@ const Breadcrumbs = css.ol`
   justify-content: space-between;
   margin-left: auto;
   margin-right: auto;
-  max-width: 600px;
+  max-width: 800px;
   width: 100%;
+  & > * {
+    flex-basis: ${({ count }) => 100 / count}%;
+  }
 `;
 
 Breadcrumbs.propTypes = {};

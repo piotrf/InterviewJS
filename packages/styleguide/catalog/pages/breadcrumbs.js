@@ -9,43 +9,46 @@ export default () => markdown`
 
   ${(
     <ReactSpecimen>
-      <Breadcrumbs>
-        <Breadcrumb state="active" onClick={evt => console.log(evt)}>
-          Step one
-        </Breadcrumb>
-        <Breadcrumb>Step two</Breadcrumb>
-        <Breadcrumb>Step three</Breadcrumb>
-      </Breadcrumbs>
-    </ReactSpecimen>
-  )}
-
-  ${(
-    <ReactSpecimen>
-      <Breadcrumbs>
+      <Breadcrumbs count={4}>
         <Breadcrumb state="passed" onClick={evt => console.log(evt)}>
           Step one
         </Breadcrumb>
         <Breadcrumb state="active" onClick={evt => console.log(evt)}>
           Step two
         </Breadcrumb>
-        <Breadcrumb>Step three</Breadcrumb>
-      </Breadcrumbs>
-    </ReactSpecimen>
-  )}
-
-  ${(
-    <ReactSpecimen>
-      <Breadcrumbs>
         <Breadcrumb state="passed" onClick={evt => console.log(evt)}>
-          Step one
-        </Breadcrumb>
-        <Breadcrumb state="passed" onClick={evt => console.log(evt)}>
-          Step two
-        </Breadcrumb>
-        <Breadcrumb state="active" onClick={evt => console.log(evt)}>
           Step three
         </Breadcrumb>
+        <Breadcrumb>Step four</Breadcrumb>
       </Breadcrumbs>
     </ReactSpecimen>
   )}
+
+  ${(
+    <ReactSpecimen>
+      <Breadcrumbs count={3}>
+        <Breadcrumb state="passed" onClick={evt => console.log(evt)}>
+          Step one
+        </Breadcrumb>
+        <Breadcrumb state="active" onClick={evt => console.log(evt)}>
+          Step two
+        </Breadcrumb>
+        <Breadcrumb>Step three</Breadcrumb>
+      </Breadcrumbs>
+    </ReactSpecimen>
+  )}
+
+  ${(
+    <ReactSpecimen>
+      <Breadcrumbs count={2}>
+        <Breadcrumb state="passed" onClick={evt => console.log(evt)}>
+          Step one
+        </Breadcrumb>
+        <Breadcrumb state="active" onClick={evt => console.log(evt)}>
+          Step two
+        </Breadcrumb>
+      </Breadcrumbs>
+    </ReactSpecimen>
+  )}
+
 `;

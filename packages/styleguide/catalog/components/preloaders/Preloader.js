@@ -1,8 +1,7 @@
 import css, { keyframes } from "styled-components";
 import React from "react";
-import { string, shape } from "prop-types";
 
-import { radius, skin } from "../../../utils";
+import { color, radius } from "../../../utils";
 
 const bouncedelay = keyframes`
   0%, 80%, 100% {
@@ -18,8 +17,7 @@ const PreloaderEl = css.div`
   display: inline-block;
   & > div {
     animation: ${bouncedelay} 1.4s infinite ease-in-out both;
-    background-color: ${({ theme }) =>
-      theme.neutralColor ? theme.neutralColor : skin.neutralColor};
+    background-color: ${color.greyHD};
     border-radius: ${radius.a};
     display: inline-block;
     height: 12px;
@@ -45,16 +43,8 @@ const Preloader = props => (
   </PreloaderEl>
 );
 
-Preloader.propTypes = {
-  theme: shape({
-    color: string
-  })
-};
+Preloader.propTypes = {};
 
-Preloader.defaultProps = {
-  theme: {
-    color: skin.neutralColor
-  }
-};
+Preloader.defaultProps = {};
 
 export default Preloader;
