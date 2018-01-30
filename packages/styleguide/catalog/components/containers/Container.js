@@ -1,9 +1,10 @@
+import React from "react";
 import css from "styled-components";
 import { bool, number, string } from "prop-types";
 
 import { color, radius, setSpace } from "../../../utils";
 
-const Container = css.div`
+export const ContainerEl = css.div`
   position: relative;
   ${({ fill }) => {
     if (fill === "white") {
@@ -60,9 +61,45 @@ const Container = css.div`
       : ``};
 `;
 
+export default class Container extends React.Component {
+  constructor() {
+    super();
+    this.state = { pageHeight: null };
+    this.updateDimensions = this.updateDimensions.bind(this);
+  }
+  componentDidMount() {
+    this.updateDimensions();
+    window.addEventListener("resize", this.updateDimensions);
+  }
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.updateDimensions);
+  }
+  updateDimensions() {
+    const windowHeight = window.innerHeight;
+    return this.setState({
+      pageHeight: windowHeight
+    });
+  }
+  render() {
+    return (
+      <ContainerEl
+        {...this.props}
+        style={
+          this.props.cover
+            ? {
+                minHeight: this.state.pageHeight
+              }
+            : null
+        }
+      />
+    );
+  }
+}
+
 Container.propTypes = {
   align: string,
   basis: number,
+  cover: bool,
   fill: string,
   flex: string,
   inset: bool,
@@ -74,7 +111,11 @@ Container.propTypes = {
 Container.defaultProps = {
   align: null,
   basis: null,
-  flex: null
+  cover: null,
+  fill: null,
+  flex: null,
+  inset: null,
+  padded: null,
+  rounded: null,
+  shift: null
 };
-
-export default Container;

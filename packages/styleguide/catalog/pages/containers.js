@@ -88,4 +88,14 @@ export default () => markdown`
       </Container>
     </ReactSpecimen>
   )}
+
+  ## Cover container
+
+  ${(
+    <ReactSpecimen>
+      <Container fill="black" cover>
+        Cover container takes window height
+      </Container>
+    </ReactSpecimen>
+  )}
 `;
