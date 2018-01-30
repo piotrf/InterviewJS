@@ -18,6 +18,10 @@ export const styleText = {
     ${setType("x")};
     font-family: ${font.serif};
     font-weight: bold;
+  `,
+  characterCount: `
+    ${setType("x")};
+    font-family: ${font.serif};
   `
 };
 

@@ -4,6 +4,7 @@ import { bool, number, string } from "prop-types";
 import { color, radius, setSpace } from "../../../utils";
 
 const Container = css.div`
+  position: relative;
   ${({ fill }) => {
     if (fill === "white") {
       return `background: ${color.white}`;

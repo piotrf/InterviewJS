@@ -1,7 +1,7 @@
 import React from "react";
 import { markdown, ReactSpecimen } from "catalog";
 
-import { Form, Label, TextInput } from "../components";
+import { CharacterCount, Form, Label, TextInput } from "../components";
 
 export default () => markdown`
 
@@ -31,6 +31,14 @@ export default () => markdown`
   ${(
     <ReactSpecimen>
       <Label>Input label</Label>
+    </ReactSpecimen>
+  )}
+
+  ## Add-ons
+
+  ${(
+    <ReactSpecimen>
+      <CharacterCount>50</CharacterCount>
     </ReactSpecimen>
   )}
 
