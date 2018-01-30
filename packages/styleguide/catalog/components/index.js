@@ -7,6 +7,7 @@ export { default as Bubble } from "./bubbles/Bubble.js";
 export { default as BubbleGroup } from "./bubbles/BubbleGroup.js";
 export { default as Container } from "./containers/Container.js";
 export { default as Form } from "./forms/Form.js";
+export { default as FormItem } from "./forms/FormItem.js";
 export { default as Icon } from "./icons/Icon.js";
 export { default as Label } from "./forms/Label.js";
 export { default as Preloader } from "./preloaders/Preloader.js";
