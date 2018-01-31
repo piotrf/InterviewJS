@@ -1,6 +1,6 @@
 import React from "react";
 import css from "styled-components";
-import { string } from "prop-types";
+import { array, oneOfType, node, string } from "prop-types";
 
 import { color, font, radius, setSpace, setType, time } from "../../../utils";
 
@@ -113,10 +113,12 @@ const Breadcrumb = props => (
 );
 
 Breadcrumb.propTypes = {
+  children: oneOfType([array, string, node]),
   state: string
 };
 
 Breadcrumb.defaultProps = {
+  children: null,
   state: "locked"
 };
 
