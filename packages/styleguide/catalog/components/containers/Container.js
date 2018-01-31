@@ -2,7 +2,7 @@ import React from "react";
 import css from "styled-components";
 import { bool, number, string } from "prop-types";
 
-import { color, radius, setSpace } from "../../../utils";
+import { breakpoint, color, radius, setSpace } from "../../../utils";
 
 export const ContainerEl = css.div`
   position: relative;
@@ -59,6 +59,16 @@ export const ContainerEl = css.div`
     text-align: ${align};
   `
       : ``};
+  ${({ limit }) =>
+    limit !== null
+      ? `
+    ${breakpoint.tablet} {
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 768px;
+    }
+  `
+      : ``};
 `;
 
 export default class Container extends React.Component {
@@ -103,6 +113,7 @@ Container.propTypes = {
   fill: string,
   flex: string,
   inset: bool,
+  limit: bool,
   padded: bool,
   rounded: bool,
   shift: bool
@@ -115,6 +126,7 @@ Container.defaultProps = {
   fill: null,
   flex: null,
   inset: null,
+  limit: null,
   padded: null,
   rounded: null,
   shift: null

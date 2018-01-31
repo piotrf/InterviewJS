@@ -89,6 +89,14 @@ export default () => markdown`
     </ReactSpecimen>
   )}
 
+  ## Limit container
+
+  ${(
+    <ReactSpecimen responsive>
+      <Container limit>Limit container has set a max-width</Container>
+    </ReactSpecimen>
+  )}
+
   ## Cover container
 
   ${(
