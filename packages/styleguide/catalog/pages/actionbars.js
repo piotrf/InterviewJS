@@ -47,7 +47,7 @@ export default () => markdown`
   )}
   ${(
     <ReactSpecimen>
-      <Actionbar satellite="both">
+      <Actionbar limit satellite="both">
         <Action secondary iconic>
           ?
         </Action>
@@ -80,7 +80,7 @@ export default () => markdown`
   )}
   ${(
     <ReactSpecimen>
-      <Actionbar satellite="both">
+      <Actionbar limit satellite="both">
         <Action secondary iconic>
           ?
         </Action>

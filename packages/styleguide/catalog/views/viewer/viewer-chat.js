@@ -24,13 +24,13 @@ export const ChatHead = css(Container)`
 `;
 
 export const ChatBody = css(Container)`
-  flex: 1 0 0%;
+  flex: 1 0 0;
   justify-content: flex-end;
   overflow-y: auto;
 `;
 
 export const ChatFoot = css(Container)`
-  flex: 0 0 50px;
+  flex: 0 0 0;
 `;
 
 const ViewerIntro = () => (
@@ -72,7 +72,7 @@ const ViewerIntro = () => (
       </BubbleGroup>
     </ChatBody>
     <ChatFoot fill="white" padded>
-      <Actionbar>
+      <Actionbar limit satellite="both">
         <Action secondary iconic onClick={evt => console.log(evt)}>
           <Icon name="chevron-right" />
         </Action>

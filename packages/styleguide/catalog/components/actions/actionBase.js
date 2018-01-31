@@ -38,7 +38,8 @@ const actionBase = {
       border-color ${time.m},
       box-shadow ${time.m},
       color ${time.m},
-      opacity ${time.m}
+      opacity ${time.m},
+      transform ${time.m}
     ;
     & > i {
       ${setType("s")};
@@ -48,6 +49,7 @@ const actionBase = {
     }
     &:active {
       box-shadow: 0 1px 2px ${color.shadowHL};
+      transform: translateY(1px);
     }
   `,
   textual: `

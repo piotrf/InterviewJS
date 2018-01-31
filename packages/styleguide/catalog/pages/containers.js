@@ -93,7 +93,9 @@ export default () => markdown`
 
   ${(
     <ReactSpecimen responsive>
-      <Container limit>Limit container has set a max-width</Container>
+      <Container fill="white" limit>
+        Limit container has set a max-width
+      </Container>
     </ReactSpecimen>
   )}
 
@@ -101,7 +103,7 @@ export default () => markdown`
 
   ${(
     <ReactSpecimen>
-      <Container fill="black" cover>
+      <Container fill="white" cover>
         Cover container takes window height
       </Container>
     </ReactSpecimen>

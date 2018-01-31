@@ -5,41 +5,61 @@ import { setSpace } from "../../../utils";
 
 const satelliteBase = `
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
 `;
 
 const Actionbar = css.div`
-  ${props => (props.satellite !== null ? `${setSpace("phl")}` : ``)};
+  ${({ limit }) =>
+    limit
+      ? `
+    max-width: 300px;
+  `
+      : `
+    ${setSpace("phl")};
+  `};
   align-content: center;
   align-items: center;
   display: flex;
   flex-direction: row;
   justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
   position: relative;
+  & > * {
+    ${setSpace("mhx")};
+  }
   & > *:first-child {
-    ${props =>
-      props.satellite === "both" || props.satellite === "left"
+    ${({ limit, satellite }) =>
+      satellite === "both" || satellite === "left"
         ? `
       ${satelliteBase};
-      left: 0;
+      ${
+        limit
+          ? `
+        right: 100%;
+      `
+          : `
+        left: 0;
+      `
+      };
     `
         : ``}
   }
   & > *:last-child {
-    ${props =>
-      props.satellite === "both" || props.satellite === "right"
+    ${({ limit, satellite }) =>
+      satellite === "both" || satellite === "right"
         ? `
       ${satelliteBase};
-      right: 0;
+      ${
+        limit
+          ? `
+        left: 100%;
+      `
+          : `
+        right: 0;
+      `
+      };
     `
         : ``}
-  }
-  & > *:not(:first-child) {
-    ${setSpace("mlx")};
-  }
-  & > *:not(:last-child) {
-    ${setSpace("mrx")};
   }
 `;
 
