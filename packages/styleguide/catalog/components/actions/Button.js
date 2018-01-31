@@ -204,7 +204,6 @@ const Button = css.button`
             : paint(skin.mainColor, "M")
         };
         &:active {
-          transform: translateY(1px);
           color: ${
             theme.mainColor
               ? paint(theme.mainColor, "HD")

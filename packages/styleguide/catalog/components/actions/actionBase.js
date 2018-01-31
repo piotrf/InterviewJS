@@ -65,6 +65,9 @@ const actionBase = {
       opacity ${time.m},
       transform ${time.m}
     ;
+    &:active {
+      transform: translateY(1px);
+    }
   `
 };
 
