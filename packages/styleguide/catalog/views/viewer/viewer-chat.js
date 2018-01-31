@@ -81,7 +81,7 @@ const ViewerIntro = () => (
           <Icon name="chevron-right" />
         </Action>
         <Action fixed primary onClick={evt => console.log(evt)}>
-          An action
+          An action that can be lengthy
         </Action>
         <Action fixed primary onClick={evt => console.log(evt)}>
           Another action

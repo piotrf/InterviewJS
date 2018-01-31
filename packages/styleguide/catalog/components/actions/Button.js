@@ -12,8 +12,6 @@ import {
 import actionBase from "./actionBase";
 
 const Button = css.button`
-  display: inline-block;
-  display: inline-flex;
   font-family: ${({ theme }) => (theme.font ? theme.font : skin.font)};
   ${({ fixed }) =>
     fixed
