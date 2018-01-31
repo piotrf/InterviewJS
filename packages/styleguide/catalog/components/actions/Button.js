@@ -29,7 +29,7 @@ const Button = css.button`
 
   /* themeables */
 
-  ${({ primary, secondary, inverted, tone, theme, iconic, active }) => {
+  ${({ primary, secondary, inverted, tone, theme, active }) => {
     if (primary) {
       if (tone === "negative") {
         return `
