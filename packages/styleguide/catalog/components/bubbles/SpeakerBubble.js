@@ -20,7 +20,7 @@ const SystemBubble = css.div`
     border-radius: ${radius.h} ${radius.h} ${radius.h} ${radius.m};
   }
   &:last-child {
-    border-radius: ${radius.m} ${radius.h} ${radius.h} ${radius.m};
+    border-radius: ${radius.m} ${radius.h} ${radius.h} ${radius.h};
   }
   &:only-child {
     border-radius: ${radius.h};
