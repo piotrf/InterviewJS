@@ -1,7 +1,7 @@
 import css from "styled-components";
 import { string } from "prop-types";
 
-import { setHeight, setSpace } from "../../../utils";
+import { setSpace } from "../../../utils";
 
 const satelliteBase = `
   position: absolute;
@@ -11,7 +11,6 @@ const satelliteBase = `
 
 const Actionbar = css.div`
   ${props => (props.satellite !== null ? `${setSpace("phl")}` : ``)};
-  ${setHeight("l")};
   align-content: center;
   align-items: center;
   display: flex;

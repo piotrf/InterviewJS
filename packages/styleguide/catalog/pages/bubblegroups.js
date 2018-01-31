@@ -19,7 +19,7 @@ export default () => markdown`
     <ReactSpecimen>
       <BubbleGroup>
         <BubbleAvatar>
-          <Avatar size="x" image={Sample} />
+          <Avatar size="s" image={Sample} />
         </BubbleAvatar>
         <Bubbles persona="speaker">
           <Bubble persona="speaker">Bubble from the left</Bubble>

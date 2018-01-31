@@ -34,28 +34,24 @@ export const ChatFoot = css(Container)`
 `;
 
 const ViewerIntro = () => (
-  <Container cover limit fill="white" flex="column">
+  <Container cover fill="white" flex="column">
     <ChatHead fill="grey" padded>
-      <Container flex="row">
-        <Container basis={5} align="left">
+      <Container>
+        <Actionbar satellite="both">
           <Action iconic onClick={evt => console.log(evt)}>
-            <Icon name="question-circle" />
+            <Icon name="chevron-left" />
           </Action>
-        </Container>
-        <Container basis={1.666666667} align="center">
           <Action onClick={evt => console.log(evt)}>Barack Obama</Action>
-        </Container>
-        <Container basis={5} align="right">
           <Action iconic onClick={evt => console.log(evt)}>
             <Icon name="question-circle" />
           </Action>
-        </Container>
+        </Actionbar>
       </Container>
     </ChatHead>
     <ChatBody flex="column">
       <BubbleGroup>
         <BubbleAvatar>
-          <Avatar size="x" image={Sample} />
+          <Avatar size="s" image={Sample} />
         </BubbleAvatar>
         <Bubbles persona="speaker">
           <Bubble persona="speaker">Bubble from the left</Bubble>
@@ -76,7 +72,7 @@ const ViewerIntro = () => (
       </BubbleGroup>
     </ChatBody>
     <ChatFoot fill="white" padded>
-      <Actionbar satellite="both">
+      <Actionbar>
         <Action secondary iconic onClick={evt => console.log(evt)}>
           <Icon name="chevron-right" />
         </Action>
