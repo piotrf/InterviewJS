@@ -132,6 +132,11 @@ ReactDOM.render(
   <Catalog
     logoSrc={InterviewJSLogo}
     pages={pages}
+    responsiveSizes={[
+      { name: "phone", width: 360, height: 640 },
+      { name: "tablet", width: 1024, height: 768 },
+      { name: "desktop", width: 1440, height: 900 }
+    ]}
     theme={theme}
     title="InterviewJS UI Library"
   />,
