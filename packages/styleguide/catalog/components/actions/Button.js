@@ -39,7 +39,7 @@ const Button = css.button`
               : paint(skin.negativeColor, "M")
           };
           color: ${color.flareBlk};
-          &:hover {
+          &:active {
             background-color: ${
               theme.negativeColor
                 ? paint(theme.negativeColor, "HD")
@@ -57,7 +57,7 @@ const Button = css.button`
               : paint(skin.positiveColor, "M")
           };
           color: ${color.flareBlk};
-          &:hover {
+          &:active {
             background-color: ${
               theme.positiveColor
                 ? paint(theme.positiveColor, "HD")
@@ -75,7 +75,7 @@ const Button = css.button`
             : paint(skin.mainColor, "M")
         };
         color: ${color.flareBlk};
-        &:hover {
+        &:active {
           background-color: ${
             theme.mainColor
               ? paint(theme.mainColor, "HD")
@@ -94,7 +94,7 @@ const Button = css.button`
               ? paint(theme.negativeColor, "M")
               : paint(skin.negativeColor, "M")
           };
-          &:hover {
+          &:active {
             color: ${
               theme.negativeColor
                 ? paint(theme.negativeColor, "HD")
@@ -111,7 +111,7 @@ const Button = css.button`
               ? paint(theme.positiveColor, "M")
               : paint(skin.positiveColor, "M")
           };
-          &:hover {
+          &:active {
             color: ${
               theme.positiveColor
                 ? paint(theme.positiveColor, "HD")
@@ -128,7 +128,7 @@ const Button = css.button`
             ? paint(theme.mainColor, "M")
             : paint(skin.mainColor, "M")
         };
-        &:hover {
+        &:active {
           color: ${
             theme.mainColor
               ? paint(theme.mainColor, "HD")
@@ -142,7 +142,7 @@ const Button = css.button`
         background-color: ${color.shadowHL};
         border-color: ${color.flareLt};
         color: ${color.flareBlk};
-        &:hover {
+        &:active {
           border-color: ${color.flareLLt};
           color: ${color.white};
         };
@@ -170,7 +170,7 @@ const Button = css.button`
             ? paint(theme.negativeColor, "M")
             : paint(skin.negativeColor, "M")
         };
-        &:hover {
+        &:active {
           color: ${
             theme.negativeColor
               ? paint(theme.negativeColor, "HD")
@@ -186,7 +186,7 @@ const Button = css.button`
             ? paint(theme.positiveColor, "M")
             : paint(skin.positiveColor, "M")
         };
-        &:hover {
+        &:active {
           color: ${
             theme.positiveColor
               ? paint(theme.positiveColor, "HD")
@@ -202,7 +202,7 @@ const Button = css.button`
           ? paint(theme.mainColor, "M")
           : paint(skin.mainColor, "M")
       };
-      &:hover {
+      &:active {
         color: ${
           theme.mainColor
             ? paint(theme.mainColor, "HD")
@@ -218,7 +218,7 @@ const Button = css.button`
             ? paint(theme.mainColor, "LD")
             : paint(skin.mainColor, "LD")
         };
-        &:hover {
+        &:active {
           color: ${
             theme.mainColor
               ? paint(theme.mainColor, "Blk")
