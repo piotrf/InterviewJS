@@ -51,16 +51,19 @@ const actionBase = {
     }
   `,
   textual: `
-    ${setType("s")};
+    ${setType("x")};
     background: transparent;
     border: none;
     cursor: pointer;
+    font-weight: bold;
     line-height: 1.2em;
+    outline: none;
     padding: 0 !important;
     text-decoration: none;
     transition:
       color ${time.m},
-      opacity ${time.m}
+      opacity ${time.m},
+      transform ${time.m}
     ;
   `
 };

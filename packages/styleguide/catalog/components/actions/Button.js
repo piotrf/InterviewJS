@@ -194,35 +194,20 @@ const Button = css.button`
           };
         }
       `;
-    } else if (!primary && !secondary && !inverted && iconic) {
-      return `
-      ${actionBase.textual};
-      color: ${
-        theme.mainColor
-          ? paint(theme.mainColor, "M")
-          : paint(skin.mainColor, "M")
-      };
-      &:active {
-        color: ${
-          theme.mainColor
-            ? paint(theme.mainColor, "HD")
-            : paint(skin.mainColor, "HD")
-        };
-      }
-    `;
     }
     return `
         ${actionBase.textual};
         color: ${
           theme.mainColor
-            ? paint(theme.mainColor, "LD")
-            : paint(skin.mainColor, "LD")
+            ? paint(theme.mainColor, "M")
+            : paint(skin.mainColor, "M")
         };
         &:active {
+          transform: translateY(1px);
           color: ${
             theme.mainColor
-              ? paint(theme.mainColor, "Blk")
-              : paint(skin.mainColor, "Blk")
+              ? paint(theme.mainColor, "HD")
+              : paint(skin.mainColor, "HD")
           };
         }
       `;
@@ -243,7 +228,7 @@ const Button = css.button`
       `;
     } else if (iconic && (!primary && !secondary && !inverted)) {
       return `
-        ${setType("l")}
+        ${setType("l")};
         & > i {
           position: relative;
           top: -1px;
