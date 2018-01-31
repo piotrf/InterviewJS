@@ -51,12 +51,12 @@ const actionBase = {
     }
   `,
   textual: `
-    ${setSpace("phn")};
     ${setType("s")};
     background: transparent;
     border: none;
     cursor: pointer;
     line-height: 1.2em;
+    padding: 0 !important;
     text-decoration: none;
     transition:
       color ${time.m},

@@ -9,7 +9,7 @@ const Button = css.button`
 
   /* themeables */
 
-  ${({ primary, secondary, inverted, tone, theme, active }) => {
+  ${({ primary, secondary, inverted, tone, theme, iconic, active }) => {
     if (primary) {
       if (tone === "negative") {
         return `
@@ -175,8 +175,8 @@ const Button = css.button`
           };
         }
       `;
-    }
-    return `
+    } else if (!primary && !secondary && !inverted && iconic) {
+      return `
       ${actionBase.textual};
       color: ${
         theme.mainColor
@@ -191,6 +191,22 @@ const Button = css.button`
         };
       }
     `;
+    }
+    return `
+        ${actionBase.textual};
+        color: ${
+          theme.mainColor
+            ? paint(theme.mainColor, "LD")
+            : paint(skin.mainColor, "LD")
+        };
+        &:hover {
+          color: ${
+            theme.mainColor
+              ? paint(theme.mainColor, "Blk")
+              : paint(skin.mainColor, "Blk")
+          };
+        }
+      `;
   }}
 
   /* iconic */
@@ -208,7 +224,6 @@ const Button = css.button`
       `;
     } else if (iconic && (!primary && !secondary && !inverted)) {
       return `
-        ${setSize("m")};
         ${setType("l")}
         & > i {
           position: relative;
