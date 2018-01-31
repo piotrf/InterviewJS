@@ -1,4 +1,4 @@
-import { radius, setSpace, setType } from "../../../utils";
+import { setSpace, setType } from "../../../utils";
 
 const bubbleBase = `
   ${setSpace("pvs")};
