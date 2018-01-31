@@ -8,7 +8,7 @@ export default () => markdown`
   # Viewer Intro
 
   ${(
-    <ReactSpecimen responsive>
+    <ReactSpecimen responsive noSource>
       <ViewerIntro />
     </ReactSpecimen>
   )}

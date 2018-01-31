@@ -11,7 +11,7 @@ const Actionbar = css.div`
   ${({ limit }) =>
     limit
       ? `
-    max-width: 300px;
+    max-width: 280px;
   `
       : `
     ${setSpace("phl")};

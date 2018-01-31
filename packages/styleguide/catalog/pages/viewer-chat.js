@@ -8,7 +8,7 @@ export default () => markdown`
   # Viewer Chat
 
   ${(
-    <ReactSpecimen responsive>
+    <ReactSpecimen responsive noSource>
       <ViewerChat />
     </ReactSpecimen>
   )}
