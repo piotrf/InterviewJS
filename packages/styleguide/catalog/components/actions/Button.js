@@ -5,9 +5,10 @@ import {
   breakpoint,
   color,
   paint,
-  skin,
   setSize,
-  setType
+  setType,
+  setWidth,
+  skin
 } from "../../../utils";
 import actionBase from "./actionBase";
 
@@ -229,6 +230,7 @@ const Button = css.button`
     } else if (iconic && (!primary && !secondary && !inverted)) {
       return `
         ${setType("l")};
+        ${setWidth("m")};
         & > i {
           position: relative;
           top: -1px;
