@@ -2,7 +2,7 @@ import React from "react";
 import css from "styled-components";
 import { array, bool, oneOfType, node, string } from "prop-types";
 
-import { color, setHeight } from "../../../utils";
+import { color, setHeight, setSpace } from "../../../utils";
 
 const CoverEl = css.div`
   background-color: ${color.black};
@@ -15,6 +15,7 @@ const CoverEl = css.div`
   min-height: 100px;
   position: relative;
   text-align: center;
+  text-shadow: 0 2px 2px ${color.shadowBlk};
 `;
 
 const CoverBody = css.div`
@@ -22,7 +23,7 @@ const CoverBody = css.div`
   display: flex;
   flex-direction: column;
   flex: 1 0 0;
-  justify-content: center;
+  justify-content: flex-end;
   position: relative;
   &:after {
     ${setHeight("h")};
@@ -38,6 +39,11 @@ const CoverBody = css.div`
 `;
 
 const CoverSauce = css.div`
+  ${setSpace("mbl")};
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 100px;
+  justify-content: flex-end;
   position: relative;
   z-index: 200;
 `;
@@ -45,7 +51,7 @@ const CoverSauce = css.div`
 const Cover = props => (
   <CoverEl {...props}>
     <CoverBody>
-      {!props.compact ? <CoverSauce>{props.children}</CoverSauce> : null}
+      <CoverSauce>{props.children}</CoverSauce>
     </CoverBody>
   </CoverEl>
 );

@@ -17,9 +17,7 @@ export default () => markdown`
 
   ${(
     <ReactSpecimen dark span={3}>
-      <Cover image={SampleImage} compact>
-        Children
-      </Cover>
+      <Cover image={SampleImage} />
     </ReactSpecimen>
   )}
 
