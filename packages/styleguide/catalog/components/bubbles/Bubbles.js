@@ -3,7 +3,7 @@ import css from "styled-components";
 import { setSpace } from "../../../utils";
 
 const Bubbles = css.div`
-  align-content: stretch;
+  align-items: stretch;
   display: flex;
   flex-direction: column;
   justify-content: stretch;

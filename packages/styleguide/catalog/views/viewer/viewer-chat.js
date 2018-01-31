@@ -2,76 +2,63 @@ import React from "react";
 import css from "styled-components";
 import {} from "prop-types";
 
-import {} from "../../../utils";
+import {
+  Avatar,
+  Bubble,
+  BubbleAvatar,
+  BubbleGroup,
+  Bubbles,
+  Container
+} from "../../components";
 
-export const Layout = css.div`
-  background: yellow;
-  display: flex;
-  flex-direction: column;
-  flex: 3;
-  height: 100%;
-  min-height: 100%;
+import Sample from "../../static/avatar.png";
+
+export const ChatHead = css(Container)`
+  flex: 0 0 60px;
 `;
 
-export const ViewHead = css.div`
-  flex: 0 0 50px;
-  background: cyan;
-`;
-
-export const ViewBody = css.div`
-  background: magenta;
-  display: flex;
-  flex-direction: reverse-column;
-  flex: 2 0 0%;
+export const ChatBody = css(Container)`
+  flex: 1 0 0%;
+  justify-content: flex-end;
   overflow-y: auto;
 `;
 
-export const ViewFoot = css.div`
-  flex: 0 0 80px;
-  background: green;
+export const ChatFoot = css(Container)`
+  flex: 0 0 60px;
 `;
 
-export default class ViewerChat extends React.Component {
-  constructor() {
-    super();
-    this.state = { pageHeight: null };
-    this.updateDimensions = this.updateDimensions.bind(this);
-  }
-  componentDidMount() {
-    this.updateDimensions();
-    window.addEventListener("resize", this.updateDimensions);
-  }
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.updateDimensions);
-  }
-  updateDimensions() {
-    /*
-      don’t do this, this is just for documentation purpouse
-      as responsive Catalog specimens are wrapped in iframes:
-    */
-    const windowHeight = document.getElementsByTagName("iframe")[0]
-      .contentWindow.document.body.clientHeight; // see comment above
-    return this.setState({
-      pageHeight: windowHeight
-    });
-  }
-  render() {
-    return (
-      <Layout
-        {...this.props}
-        pageHeight={this.state.pageHeight}
-        style={{
-          minHeight: this.state.pageHeight
-        }}
-      >
-        <ViewHead>Head</ViewHead>
-        <ViewBody>Body</ViewBody>
-        <ViewFoot>Foot</ViewFoot>
-      </Layout>
-    );
-  }
-}
+const ViewerIntro = () => (
+  <Container cover limit fill="white" flex="column">
+    <ChatHead fill="grey" padded>
+      Head
+    </ChatHead>
+    <ChatBody flex="column">
+      <BubbleGroup>
+        <BubbleAvatar>
+          <Avatar size="x" image={Sample} />
+        </BubbleAvatar>
+        <Bubbles persona="speaker">
+          <Bubble persona="speaker">Bubble from the left</Bubble>
+          <Bubble persona="speaker">Another bubble from the left</Bubble>
+        </Bubbles>
+      </BubbleGroup>
+      <BubbleGroup>
+        <Bubbles persona="system">
+          <Bubble persona="system">Bubble in the middle</Bubble>
+          <Bubble persona="system">Another bubble in the middle</Bubble>
+        </Bubbles>
+      </BubbleGroup>
+      <BubbleGroup>
+        <Bubbles persona="user">
+          <Bubble persona="user">Bubble from the right</Bubble>
+          <Bubble persona="user">Another bubble from the right</Bubble>
+        </Bubbles>
+      </BubbleGroup>
+    </ChatBody>
+    <ChatFoot fill="white" padded>
+      Foot
+    </ChatFoot>
+  </Container>
+);
 
-ViewerChat.propTypes = {};
-
-ViewerChat.defaultProps = {};
+export default ViewerIntro;

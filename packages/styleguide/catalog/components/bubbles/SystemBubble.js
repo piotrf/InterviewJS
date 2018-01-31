@@ -13,11 +13,18 @@ const SystemBubble = css.div`
   margin-left: auto;
   margin-right: auto;
   text-align: left;
+  width: 100%;
+  &:not(:last-child),
+  &:not(:first-child) {
+    border-radius: ${radius.m};
+    margin-bottom: 1px;
+    margin-top: 1px;
+  }
   &:first-child {
-    border-radius: ${radius.h} ${radius.h} ${radius.s} ${radius.s};
+    border-radius: ${radius.h} ${radius.h} ${radius.m} ${radius.m};
   }
   &:last-child {
-    border-radius: ${radius.s} ${radius.s} ${radius.h} ${radius.h};
+    border-radius: ${radius.m} ${radius.m} ${radius.h} ${radius.h};
   }
   &:only-child {
     border-radius: ${radius.h};

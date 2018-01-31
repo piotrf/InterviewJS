@@ -7,26 +7,25 @@ import { Cover } from "../../partials";
 
 import CoverImg from "../../static/cover.jpg";
 
-export const ViewHead = css(Cover)`
+export const IntroHead = css(Cover)`
   flex: 1 0 50%;
 `;
 
-export const ViewBody = css.div`
+export const IntroBody = css.div`
   display: flex;
-  flex-direction: reverse-column;
   flex: 2 0 0%;
   overflow-y: auto;
 `;
 
-export const ViewFoot = css.div`
+export const IntroFoot = css.div`
   flex: 0 0 80px;
 `;
 
 const ViewerIntro = () => (
   <Container cover limit fill="black" flex="column">
-    <ViewHead image={CoverImg}>Head</ViewHead>
-    <ViewBody>Body</ViewBody>
-    <ViewFoot>Foot</ViewFoot>
+    <IntroHead image={CoverImg}>Head</IntroHead>
+    <IntroBody>Body</IntroBody>
+    <IntroFoot>Foot</IntroFoot>
   </Container>
 );
 

@@ -12,14 +12,18 @@ const SystemBubble = css.div`
   font-family: ${({ theme }) => (theme.font ? theme.font : skin.font)};
   align-self: flex-start;
   text-align: left;
+  &:not(:last-child),
+  &:not(:first-child) {
+    border-radius: ${radius.m} ${radius.h} ${radius.h} ${radius.m};
+  }
   &:first-child {
-    border-radius: ${radius.h} ${radius.h} ${radius.s} ${radius.s};
+    border-radius: ${radius.h} ${radius.h} ${radius.h} ${radius.m};
   }
   &:last-child {
-    border-radius: ${radius.s} ${radius.s} ${radius.h};
+    border-radius: ${radius.m} ${radius.h} ${radius.h} ${radius.m};
   }
   &:only-child {
-    border-radius: ${radius.h} ${radius.h} ${radius.h} ${radius.s};
+    border-radius: ${radius.h};
   }
 `;
 

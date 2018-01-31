@@ -1,15 +1,16 @@
 import { radius, setSpace, setType } from "../../../utils";
 
 const bubbleBase = `
-  ${setSpace("pas")};
+  ${setSpace("pvs")};
+  ${setSpace("phm")};
   ${setType("x")};};
   display: flex;
   flex-direction: column;
   justify-content: center;
-  max-width: 260px;
+  max-width: 300px;
+  min-height: 40px;
   &:not(:last-child),
   &:not(:first-child) {
-    border-radius: ${radius.s};
     margin-bottom: 1px;
     margin-top: 1px;
   }

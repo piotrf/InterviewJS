@@ -8,7 +8,7 @@ const BubbleGroup = css.div`
   width: 100%;
   align-items: flex-end;
   &:not(:first-child) {
-    ${setSpace("mts")};
+    ${setSpace("mtm")};
   }
 `;
 
