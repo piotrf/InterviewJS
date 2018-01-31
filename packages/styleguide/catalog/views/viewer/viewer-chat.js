@@ -6,6 +6,7 @@ import { color } from "../../../utils";
 
 import {
   Action,
+  Actionbar,
   Avatar,
   Bubble,
   BubbleAvatar,
@@ -18,7 +19,7 @@ import {
 import Sample from "../../static/avatar.png";
 
 export const ChatHead = css(Container)`
-  flex: 0 0 50px;
+  flex: 0 0 0;
   border-bottom: 1px solid ${color.greyLt};
 `;
 
@@ -37,15 +38,15 @@ const ViewerIntro = () => (
     <ChatHead fill="grey" padded>
       <Container flex="row">
         <Container basis={5} align="left">
-          <Action onClick={evt => console.log(evt)}>
+          <Action iconic onClick={evt => console.log(evt)}>
             <Icon name="question-circle" />
           </Action>
         </Container>
         <Container basis={1.666666667} align="center">
-          1
+          <Action onClick={evt => console.log(evt)}>Barack Obama</Action>
         </Container>
         <Container basis={5} align="right">
-          <Action onClick={evt => console.log(evt)}>
+          <Action iconic onClick={evt => console.log(evt)}>
             <Icon name="question-circle" />
           </Action>
         </Container>
@@ -75,7 +76,20 @@ const ViewerIntro = () => (
       </BubbleGroup>
     </ChatBody>
     <ChatFoot fill="white" padded>
-      Foot
+      <Actionbar satellite="both">
+        <Action secondary iconic onClick={evt => console.log(evt)}>
+          <Icon name="chevron-right" />
+        </Action>
+        <Action fixed primary onClick={evt => console.log(evt)}>
+          An action
+        </Action>
+        <Action fixed primary onClick={evt => console.log(evt)}>
+          Another action
+        </Action>
+        <Action secondary iconic onClick={evt => console.log(evt)}>
+          <Icon name="emo-smiley" />
+        </Action>
+      </Actionbar>
     </ChatFoot>
   </Container>
 );

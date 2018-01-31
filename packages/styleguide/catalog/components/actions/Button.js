@@ -1,11 +1,32 @@
 import css from "styled-components";
 import { bool, string, shape } from "prop-types";
 
-import { color, paint, skin, setSize, setType } from "../../../utils";
+import {
+  breakpoint,
+  color,
+  paint,
+  skin,
+  setSize,
+  setType
+} from "../../../utils";
 import actionBase from "./actionBase";
 
 const Button = css.button`
+  display: inline-block;
+  display: inline-flex;
   font-family: ${({ theme }) => (theme.font ? theme.font : skin.font)};
+  ${({ fixed }) =>
+    fixed
+      ? `
+    width: 130px;
+    ${breakpoint.tablet} {
+      width: 150px;
+    }
+    ${breakpoint.desktop} {
+      width: 180px;
+    }
+  `
+      : ``};
 
   /* themeables */
 

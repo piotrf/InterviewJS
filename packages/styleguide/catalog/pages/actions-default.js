@@ -109,4 +109,21 @@ export default () => markdown`
       </Action>
     </ReactSpecimen>
   )}
+
+  ### Fixed-width actions
+
+  ${(
+    <ReactSpecimen span={3}>
+      <Action fixed primary href="https://fb.com" target="_blank">
+        A fixed action
+      </Action>
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen span={3}>
+      <Action fixed secondary href="https://fb.com" target="_blank">
+        A fixed action
+      </Action>
+    </ReactSpecimen>
+  )}
 `;

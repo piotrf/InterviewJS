@@ -9,15 +9,21 @@ export default () => markdown`
   ${(
     <ReactSpecimen>
       <Actionbar>
-        <Action secondary>Action</Action>
+        <Action fixed secondary>
+          Action
+        </Action>
       </Actionbar>
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen>
       <Actionbar>
-        <Action secondary>Action 1</Action>
-        <Action primary>Action 2</Action>
+        <Action fixed secondary>
+          Action 1
+        </Action>
+        <Action fixed primary>
+          Action 2
+        </Action>
       </Actionbar>
     </ReactSpecimen>
   )}
@@ -27,8 +33,12 @@ export default () => markdown`
   ${(
     <ReactSpecimen>
       <Actionbar satellite="right">
-        <Action secondary>Action 1</Action>
-        <Action primary>Action 2</Action>
+        <Action fixed secondary>
+          Action 1
+        </Action>
+        <Action fixed primary>
+          Action 2
+        </Action>
         <Action secondary iconic>
           i
         </Action>
@@ -41,8 +51,12 @@ export default () => markdown`
         <Action secondary iconic>
           ?
         </Action>
-        <Action secondary>Action 1</Action>
-        <Action primary>Action 2</Action>
+        <Action fixed secondary>
+          Action 1
+        </Action>
+        <Action fixed primary>
+          Action 2
+        </Action>
         <Action secondary iconic>
           i
         </Action>
@@ -55,8 +69,12 @@ export default () => markdown`
         <Action secondary iconic>
           ?
         </Action>
-        <Action secondary>Action 1</Action>
-        <Action primary>Action 2</Action>
+        <Action fixed secondary>
+          Action 1
+        </Action>
+        <Action fixed primary>
+          Action 2
+        </Action>
       </Actionbar>
     </ReactSpecimen>
   )}
