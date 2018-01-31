@@ -2,7 +2,7 @@ import React from "react";
 import css from "styled-components";
 import {} from "prop-types";
 
-import { setHeight } from "../../../utils";
+import {} from "../../../utils";
 
 export const Layout = css.div`
   background: yellow;
@@ -14,19 +14,24 @@ export const Layout = css.div`
 `;
 
 export const ViewHead = css.div`
-  ${setHeight("l")};
+  flex: 0 0 50px;
+  background: cyan;
 `;
 
 export const ViewBody = css.div`
+  background: magenta;
   display: flex;
-  flex: 1 1 0%;
-  flex-direction: row-reverse;
+  flex-direction: reverse-column;
+  flex: 2 0 0%;
+  overflow-y: auto;
 `;
 
 export const ViewFoot = css.div`
+  flex: 0 0 80px;
+  background: green;
 `;
 
-export default class ViewerIntro extends React.Component {
+export default class ViewerChat extends React.Component {
   constructor() {
     super();
     this.state = { pageHeight: null };
@@ -60,15 +65,13 @@ export default class ViewerIntro extends React.Component {
         }}
       >
         <ViewHead>Head</ViewHead>
-        <ViewBody>
-          Body
-          <ViewFoot>Foot</ViewFoot>
-        </ViewBody>
+        <ViewBody>Body</ViewBody>
+        <ViewFoot>Foot</ViewFoot>
       </Layout>
     );
   }
 }
 
-ViewerIntro.propTypes = {};
+ViewerChat.propTypes = {};
 
-ViewerIntro.defaultProps = {};
+ViewerChat.defaultProps = {};

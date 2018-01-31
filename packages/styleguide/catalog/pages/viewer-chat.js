@@ -1,7 +1,7 @@
 import React from "react";
 import { markdown, ReactSpecimen } from "catalog";
 
-import { ViewerIntro } from "../views";
+import { ViewerChat } from "../views";
 
 export default () => markdown`
 
@@ -9,7 +9,7 @@ export default () => markdown`
 
   ${(
     <ReactSpecimen responsive>
-      <ViewerIntro />
+      <ViewerChat />
     </ReactSpecimen>
   )}
 `;
