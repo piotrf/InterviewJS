@@ -2,19 +2,24 @@ import React from "react";
 import css from "styled-components";
 import {} from "prop-types";
 
+import { color } from "../../../utils";
+
 import {
+  Action,
   Avatar,
   Bubble,
   BubbleAvatar,
   BubbleGroup,
   Bubbles,
-  Container
+  Container,
+  Icon
 } from "../../components";
 
 import Sample from "../../static/avatar.png";
 
 export const ChatHead = css(Container)`
-  flex: 0 0 60px;
+  flex: 0 0 50px;
+  border-bottom: 1px solid ${color.greyLt};
 `;
 
 export const ChatBody = css(Container)`
@@ -24,13 +29,27 @@ export const ChatBody = css(Container)`
 `;
 
 export const ChatFoot = css(Container)`
-  flex: 0 0 60px;
+  flex: 0 0 50px;
 `;
 
 const ViewerIntro = () => (
   <Container cover limit fill="white" flex="column">
     <ChatHead fill="grey" padded>
-      Head
+      <Container flex="row">
+        <Container basis={5} align="left">
+          <Action onClick={evt => console.log(evt)}>
+            <Icon name="question-circle" />
+          </Action>
+        </Container>
+        <Container basis={1.666666667} align="center">
+          1
+        </Container>
+        <Container basis={5} align="right">
+          <Action onClick={evt => console.log(evt)}>
+            <Icon name="question-circle" />
+          </Action>
+        </Container>
+      </Container>
     </ChatHead>
     <ChatBody flex="column">
       <BubbleGroup>
