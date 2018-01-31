@@ -16,7 +16,7 @@ import {
   Icon
 } from "../../components";
 
-import Sample from "../../static/avatar.png";
+import SampleAvatar from "../../static/avatar.png";
 
 export const ChatHead = css(Container)`
   flex: 0 0 0;
@@ -34,7 +34,7 @@ export const ChatFoot = css(Container)`
 `;
 
 const ViewerIntro = () => (
-  <Container cover fill="white" flex="column">
+  <Container cover fill="white" dir="column">
     <ChatHead fill="grey" padded>
       <Container>
         <Actionbar satellite="both">
@@ -48,10 +48,10 @@ const ViewerIntro = () => (
         </Actionbar>
       </Container>
     </ChatHead>
-    <ChatBody flex="column">
+    <ChatBody dir="column">
       <BubbleGroup>
         <BubbleAvatar>
-          <Avatar size="s" image={Sample} />
+          <Avatar size="s" image={SampleAvatar} />
         </BubbleAvatar>
         <Bubbles persona="speaker">
           <Bubble persona="speaker">Bubble from the left</Bubble>
@@ -59,9 +59,30 @@ const ViewerIntro = () => (
         </Bubbles>
       </BubbleGroup>
       <BubbleGroup>
+        <Bubbles persona="user">
+          <Bubble persona="user">I want to talk to somebody else</Bubble>
+        </Bubbles>
+      </BubbleGroup>
+      <BubbleGroup>
         <Bubbles persona="system">
-          <Bubble persona="system">Bubble in the middle</Bubble>
-          <Bubble persona="system">Another bubble in the middle</Bubble>
+          <Bubble persona="system">
+            <Container dir="row">
+              <Container>
+                <Avatar size="m" image={SampleAvatar} />
+              </Container>
+              <Container>Bubble in the middle</Container>
+              <Container>Actions</Container>
+            </Container>
+          </Bubble>
+          <Bubble persona="system">
+            <Container dir="row">
+              <Container>
+                <Avatar size="m" image={SampleAvatar} />
+              </Container>
+              <Container>Another bubble in the middle</Container>
+              <Container>Actions</Container>
+            </Container>
+          </Bubble>
         </Bubbles>
       </BubbleGroup>
       <BubbleGroup>

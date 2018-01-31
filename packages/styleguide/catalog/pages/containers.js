@@ -68,12 +68,12 @@ export default () => markdown`
 
   ${(
     <ReactSpecimen span={3}>
-      <Container flex="row">
-        <Container basis="2">100/2</Container>
-        <Container basis="4" align="center">
-          100/4
+      <Container dir="row">
+        <Container flex={[0, 0, `${100 / 4}%`]}>100/4</Container>
+        <Container flex={[0, 0, `${100 / 2}%`]} align="center">
+          100/2
         </Container>
-        <Container basis="4" align="right">
+        <Container flex={[0, 0, `${100 / 4}%`]} align="right">
           100/4
         </Container>
       </Container>
@@ -81,10 +81,10 @@ export default () => markdown`
   )}
   ${(
     <ReactSpecimen span={3}>
-      <Container flex="column">
-        <Container basis="2">100/2</Container>
-        <Container basis="4">100/4</Container>
-        <Container basis="4">100/4</Container>
+      <Container dir="column">
+        <Container flex={[0, 0, `${100 / 4}%`]}>100/4</Container>
+        <Container flex={[0, 0, `${100 / 2}%`]}>100/2</Container>
+        <Container flex={[0, 0, `${100 / 4}%`]}>100/4</Container>
       </Container>
     </ReactSpecimen>
   )}

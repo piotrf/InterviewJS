@@ -41,16 +41,16 @@ export default () => markdown`
     <ReactSpecimen>
       <FormItem>
         <Label>Label</Label>
-        <Container flex>
-          <Container basis={3}>
+        <Container dir="row">
+          <Container flex={[0, 0, `${100 / 2}%`]}>
             <CharacterCount>140</CharacterCount>
             <TextInput input placeholder="Placeholder…" place="left" />
           </Container>
-          <Container basis={3}>
+          <Container flex={[0, 0, `${100 / 4}%`]}>
             <CharacterCount>140</CharacterCount>
             <TextInput input placeholder="Placeholder…" place="middle" />
           </Container>
-          <Container basis={3}>
+          <Container flex={[0, 0, `${100 / 4}%`]}>
             <CharacterCount>140</CharacterCount>
             <TextInput input placeholder="Placeholder…" place="right" />
           </Container>
@@ -63,16 +63,16 @@ export default () => markdown`
     <ReactSpecimen>
       <FormItem>
         <Label>Label</Label>
-        <Container flex>
-          <Container basis={2}>
+        <Container dir="row">
+          <Container flex={[0, 0, `${100 / 3}%`]}>
             <CharacterCount>140</CharacterCount>
             <TextInput area placeholder="Placeholder…" place="left" />
           </Container>
-          <Container basis={4}>
+          <Container flex={[0, 0, `${100 / 3}%`]}>
             <CharacterCount>140</CharacterCount>
             <TextInput area placeholder="Placeholder…" place="middle" />
           </Container>
-          <Container basis={4}>
+          <Container flex={[0, 0, `${100 / 3}%`]}>
             <CharacterCount>140</CharacterCount>
             <TextInput area placeholder="Placeholder…" place="right" />
           </Container>

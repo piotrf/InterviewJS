@@ -22,7 +22,7 @@ export const IntroFoot = css.div`
 `;
 
 const ViewerIntro = () => (
-  <Container cover fill="black" flex="column">
+  <Container cover fill="black" dir="column">
     <IntroHead image={CoverImg}>Head</IntroHead>
     <IntroBody>Body</IntroBody>
     <IntroFoot>Foot</IntroFoot>

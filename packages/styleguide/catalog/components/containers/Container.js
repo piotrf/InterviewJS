@@ -1,6 +1,6 @@
 import React from "react";
 import css from "styled-components";
-import { bool, number, string } from "prop-types";
+import { arrayOf, bool, number, string } from "prop-types";
 
 import { breakpoint, color, radius, setSpace } from "../../../utils";
 
@@ -40,17 +40,17 @@ export const ContainerEl = css.div`
     ${setSpace("pam")};
   `
       : ``};
+  ${({ dir }) =>
+    dir !== null
+      ? `
+    display: flex;
+    flex-direction: ${dir};
+  `
+      : ``};
   ${({ flex }) =>
     flex !== null
       ? `
-    display: flex;
-    flex-direction: ${flex};
-  `
-      : ``};
-  ${({ basis }) =>
-    basis !== null
-      ? `
-    flex-basis: ${100 / basis}%;
+    flex: ${flex[0]} ${flex[1]} ${flex[2]};
   `
       : ``};
   ${({ align }) =>
@@ -108,10 +108,10 @@ export default class Container extends React.Component {
 
 Container.propTypes = {
   align: string,
-  basis: number,
+  flex: arrayOf([number, number, string]),
   cover: bool,
   fill: string,
-  flex: string,
+  dir: string,
   inset: bool,
   limit: bool,
   padded: bool,
@@ -121,10 +121,10 @@ Container.propTypes = {
 
 Container.defaultProps = {
   align: null,
-  basis: null,
+  flex: null,
   cover: null,
   fill: null,
-  flex: null,
+  dir: null,
   inset: null,
   limit: null,
   padded: null,
