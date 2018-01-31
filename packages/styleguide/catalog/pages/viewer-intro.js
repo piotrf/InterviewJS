@@ -1,15 +1,15 @@
 import React from "react";
 import { markdown, ReactSpecimen } from "catalog";
 
-import { ViewerChat } from "../views";
+import { ViewerIntro } from "../views";
 
 export default () => markdown`
 
-  # Viewer Chat
+  # Viewer Intro
 
   ${(
     <ReactSpecimen responsive>
-      <ViewerChat />
+      <ViewerIntro />
     </ReactSpecimen>
   )}
 `;

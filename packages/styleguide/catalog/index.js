@@ -123,6 +123,11 @@ const pages = [
         content: require("./pages/viewer-chat.js"),
         path: "/views/viewer/chat",
         title: "Viewer Chat"
+      },
+      {
+        content: require("./pages/viewer-intro.js"),
+        path: "/views/viewer/intro",
+        title: "Viewer Intro"
       }
     ]
   }
