@@ -110,9 +110,9 @@ const pages = [
     title: "Partials",
     pages: [
       {
-        content: require("./pages/charts.js"),
-        path: "/partials/charts",
-        title: "Charts"
+        content: require("./pages/partials-viewer.js"),
+        path: "/partials/viewer",
+        title: "Viewer Partials"
       }
     ]
   },
