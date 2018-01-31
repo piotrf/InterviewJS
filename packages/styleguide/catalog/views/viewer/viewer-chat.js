@@ -104,20 +104,28 @@ export default class ViewerChat extends React.Component {
             <Bubbles persona="system">
               <Bubble persona="system">
                 <Container dir="row">
-                  <Container>
+                  <Container flex={[0, 0, `36px`]}>
                     <Avatar size="m" image={SampleAvatar} />
                   </Container>
-                  <Container>Bubble in the middle</Container>
-                  <Container>Actions</Container>
+                  <Container flex={[1, 0, 0]}>Bubble in the middle</Container>
+                  <Container flex={[0, 0, `100px`]} align="right">
+                    <Action iconic theme={{ mainColor: color.greyM }}>
+                      <Icon name="chevron-right" />
+                    </Action>
+                  </Container>
                 </Container>
               </Bubble>
               <Bubble persona="system">
                 <Container dir="row">
-                  <Container>
+                  <Container flex={[0, 0, `36px`]}>
                     <Avatar size="m" image={SampleAvatar} />
                   </Container>
-                  <Container>Another bubble in the middle</Container>
-                  <Container>Actions</Container>
+                  <Container flex={[1, 0, 0]}>Bubble in the middle</Container>
+                  <Container flex={[0, 0, `100px`]} align="right">
+                    <Action iconic theme={{ mainColor: color.greyM }}>
+                      <Icon name="chevron-right" />
+                    </Action>
+                  </Container>
                 </Container>
               </Bubble>
             </Bubbles>

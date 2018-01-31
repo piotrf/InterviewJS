@@ -43,6 +43,7 @@ export const ContainerEl = css.div`
   ${({ dir }) =>
     dir !== null
       ? `
+    align-items: center;
     display: flex;
     flex-direction: ${dir};
   `

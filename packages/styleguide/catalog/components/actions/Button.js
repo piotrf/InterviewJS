@@ -214,7 +214,8 @@ const Button = css.button`
   }}
 
   /* iconic */
-
+  ${({ iconic, primary, secondary, inverted }) =>
+    (primary || secondary || inverted) && !iconic ? `min-height: 40px;` : ``};
   ${({ primary, secondary, inverted, iconic }) => {
     if (iconic && (primary || secondary || inverted)) {
       return `

@@ -1,14 +1,14 @@
-import { color, paint } from "../";
+import { color } from "../";
 
 export const skin = {
   mainColor: color.blue, // blue
   negativeColor: color.red, // red
   positiveColor: color.green, // green
 
-  speakerBackg: paint(color.green, "HL"),
-  speakerColor: color.green,
-  sysBackg: color.greyHL,
-  sysColor: color.greyBlk,
+  speakerBackg: color.greyWt,
+  speakerColor: color.blueBlk,
+  sysBackg: color.greyWt,
+  sysColor: color.blue,
   userBackg: color.blue,
   userColor: color.white,
 

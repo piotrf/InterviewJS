@@ -9,7 +9,6 @@ import {
 
 const actionBase = {
   graphic: `
-    ${setHeight("l")};
     ${setSpace("phs")};
     ${setType("x")};
     align-content: center;
