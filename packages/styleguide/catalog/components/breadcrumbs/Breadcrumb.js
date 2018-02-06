@@ -17,7 +17,7 @@ const BreadcrumbEl = css.li`
     state === "passed"
       ? `
     cursor: pointer;
-    color: ${color.blue};
+    color: ${color.blueM};
   `
       : ``};
   ${({ state }) =>
@@ -80,8 +80,8 @@ const BreadcrumbIndex = css.span`
   ${({ state }) =>
     state === "passed"
       ? `
-    background-color: ${color.blue};
-    border-color: ${color.blue};
+    background-color: ${color.blueM};
+    border-color: ${color.blueM};
   `
       : ``};
   ${({ state }) =>

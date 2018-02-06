@@ -12,6 +12,16 @@ const pages = [
     title: "Welcome"
   },
   {
+    title: "Utils",
+    pages: [
+      {
+        path: "utils/colors",
+        title: "Colors",
+        content: require("./pages/utils-colors.js")
+      }
+    ]
+  },
+  {
     title: "Actions",
     pages: [
       {

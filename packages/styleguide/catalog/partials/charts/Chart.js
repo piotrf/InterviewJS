@@ -46,10 +46,10 @@ const ChartBody = css.div`
 
 const ChartNo = css.div`
   ${chartBase};
-  background-color: ${color.red};
+  background-color: ${color.redM};
   flex-basis: ${({ value }) => value}%;
   & > span {
-    color: ${color.red};
+    color: ${color.redM};
     right: 0;
     text-align: left;
   }
@@ -57,10 +57,10 @@ const ChartNo = css.div`
 
 const ChartYes = css.div`
   ${chartBase};
-  background-color: ${color.green};
+  background-color: ${color.greenM};
   flex-basis: ${({ value }) => value}%;
   & > span {
-    color: ${color.green};
+    color: ${color.greenM};
     left: 0;
     text-align: left;
   }
