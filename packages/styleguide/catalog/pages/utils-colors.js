@@ -24,14 +24,7 @@ const getColors = filter => {
 
 export default () => markdown`
 
-  ## Rainbow palettes
-
-  ${<ColorPaletteSpecimen horizontal colors={getColors("blue")} />}
-  ${<ColorPaletteSpecimen horizontal colors={getColors("red")} />}
-  ${<ColorPaletteSpecimen horizontal colors={getColors("green")} />}
-
   ## Monochrome palettes
-
 
   ${(
     <ColorPaletteSpecimen
@@ -43,6 +36,12 @@ export default () => markdown`
     />
   )}
   ${<ColorPaletteSpecimen horizontal colors={getColors("grey")} />}
+
+  ## Rainbow palettes
+
+  ${<ColorPaletteSpecimen horizontal colors={getColors("blue")} />}
+  ${<ColorPaletteSpecimen horizontal colors={getColors("red")} />}
+  ${<ColorPaletteSpecimen horizontal colors={getColors("green")} />}
 
   # Semi-transparent palettes (for flares and shadows)
   ${<ColorPaletteSpecimen horizontal colors={getColors("shadow")} />}
