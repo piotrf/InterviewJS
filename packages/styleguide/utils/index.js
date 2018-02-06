@@ -1,3 +1,6 @@
+// vendor
+require("./vendor/reset.css");
+
 // config
 export * from "./config/breakpoints";
 export * from "./config/colors";

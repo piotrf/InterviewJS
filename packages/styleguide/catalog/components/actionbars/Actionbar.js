@@ -1,7 +1,7 @@
 import css from "styled-components";
 import { string } from "prop-types";
 
-import { setSpace } from "../../../utils";
+import { breakpoint, setSpace } from "../../../utils";
 
 const satelliteBase = `
   position: absolute;
@@ -11,7 +11,10 @@ const Actionbar = css.div`
   ${({ limit }) =>
     limit
       ? `
-    max-width: 280px;
+      max-width: 280px;
+      ${breakpoint.tablet} {
+        max-width: 300px;
+      }
   `
       : `
     ${setSpace("phl")};

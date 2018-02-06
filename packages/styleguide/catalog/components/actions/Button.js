@@ -19,10 +19,10 @@ const Button = css.button`
       ? `
     width: 130px;
     ${breakpoint.tablet} {
-      width: 150px;
+      width: 160px;
     }
     ${breakpoint.desktop} {
-      width: 180px;
+      width: 190px;
     }
   `
       : ``};

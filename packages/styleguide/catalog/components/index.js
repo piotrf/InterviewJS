@@ -18,6 +18,8 @@ export { default as FormItem } from "./forms/FormItem.js";
 export { default as Icon } from "./icons/Icon.js";
 export { default as Label } from "./forms/Label.js";
 export { default as Legend } from "./forms/Legend.js";
+export { default as List } from "./lists/List.js";
+export { default as ListItem } from "./lists/ListItem.js";
 export { default as Message } from "./messages/Message.js";
 export { default as Preloader } from "./preloaders/Preloader.js";
 export { default as Separator } from "./separators/Separator.js";
