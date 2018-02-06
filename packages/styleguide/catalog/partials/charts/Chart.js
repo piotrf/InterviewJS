@@ -5,9 +5,9 @@ import { shape, number } from "prop-types";
 import { color, radius, setType, track } from "../../../utils";
 
 const chartBase = `
+  border-radius: ${radius.a};
   height: 3px;
   margin: 0 1px;
-  border-radius: ${radius.a};
   position: relative;
 `;
 
@@ -33,6 +33,7 @@ const ChartEl = css.div`
 
 const ChartAnswer = css.div`
   ${setType("x")};
+  color: ${color.white};
   font-weight: bold;
   letter-spacing: ${track.s};
   text-transform: uppercase;
