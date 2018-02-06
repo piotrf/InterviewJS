@@ -23,8 +23,9 @@
     "prettier": "^1.10.2"
   },
   "scripts": {
-    "catalog-start": "catalog start",
     "catalog-build": "catalog build",
-    "catalog-publish": "node scripts/publish.js"
+    "catalog-publish": "node scripts/publish.js",
+    "catalog-start": "catalog start",
+    "dev": "catalog start"
   }
 }
