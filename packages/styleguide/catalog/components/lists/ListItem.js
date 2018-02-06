@@ -6,8 +6,8 @@ const ListItem = css.li`
   ${setSpace("pam")};
   display: block;
   list-style: none;
-  &:not(:last-child) {
-    border-bottom: 1px solid ${color.greyLt};
+  &:not(:first-child) {
+    border-top: 1px solid ${color.greyLt};
   }
 `;
 
