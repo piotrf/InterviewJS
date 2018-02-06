@@ -1,15 +1,15 @@
 import { color } from "../";
 
 export const skin = {
-  mainColor: color.blue, // blue
-  negativeColor: color.red, // red
-  positiveColor: color.green, // green
+  mainColor: color.blueM, // blue
+  negativeColor: color.redM, // red
+  positiveColor: color.greenM, // green
 
   speakerBackg: color.greyWt,
   speakerColor: color.blueBlk,
   sysBackg: color.greyWt,
-  sysColor: color.blue,
-  userBackg: color.blue,
+  sysColor: color.blueM,
+  userBackg: color.blueM,
   userColor: color.white,
 
   font: "'PT Serif', serif"

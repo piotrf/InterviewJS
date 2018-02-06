@@ -1,18 +1,18 @@
-import { color, font, paint } from "../utils";
+import { color, font } from "../utils";
 
 export default {
   // Colors
   background: color.white,
   textColor: color.shadowD,
-  codeColor: paint("#495bbd", "D"),
-  linkColor: paint("#495bbd", "M"),
+  codeColor: color.blueD,
+  linkColor: color.blueM,
 
   // NavigationBar background color, but also sometimes used as a foreground
   // or border color.
   lightColor: color.greyWt,
 
   // Used in PageHeader
-  pageHeadingBackground: paint("#495bbd", "Blk"),
+  pageHeadingBackground: color.blueBlk,
   pageHeadingTextColor: color.white,
 
   // Used in Menu and PageHeader to make sure the top parts have
@@ -21,22 +21,22 @@ export default {
 
   // Used for navigation bar
   navBarBackground: color.greyWt,
-  navBarTextColor: paint("#495bbd", "M"),
+  navBarTextColor: color.blueM,
 
   // Used in ResponsiveTabs (tab text), Download specimen (title text).
   // Typography: headings.
-  brandColor: paint("#495bbd", "M"),
+  brandColor: color.blueM,
 
   sidebarColor: color.white,
   sidebarColorActive: "#D1312E",
-  sidebarColorText: paint("#495bbd", "Blk"),
-  sidebarColorTextActive: paint("#495bbd", "M"),
+  sidebarColorText: color.blueBlk,
+  sidebarColorTextActive: color.blueM,
   sidebarColorLine: color.shadowWt,
-  sidebarColorHeading: paint("#495bbd", "LD"),
+  sidebarColorHeading: color.blueLD,
 
   // Used in the html, react, and image specimens.
   bgLight: color.greyWt,
-  bgDark: paint("#495bbd", "Blk"),
+  bgDark: color.blueBlk,
 
   // Keys appear to be PrismJS token types.
   codeStyles: {
