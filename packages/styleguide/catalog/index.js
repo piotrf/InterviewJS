@@ -18,6 +18,11 @@ const pages = [
         path: "utils/colors",
         title: "Colors",
         content: require("./pages/utils-colors.js")
+      },
+      {
+        path: "utils/type",
+        title: "Typography",
+        content: require("./pages/utils-type.js")
       }
     ]
   },
