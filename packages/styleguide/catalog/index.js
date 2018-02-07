@@ -18,11 +18,26 @@ const pages = [
         path: "utils/colors",
         title: "Colors",
         content: require("./pages/utils-colors.js")
+      }
+    ]
+  },
+  {
+    title: "Text",
+    pages: [
+      {
+        path: "text/titles",
+        title: "Titles",
+        content: require("./pages/text-titles.js")
       },
       {
-        path: "utils/type",
-        title: "Typography",
-        content: require("./pages/utils-type.js")
+        path: "text/body",
+        title: "Body text",
+        content: require("./pages/text-body.js")
+      },
+      {
+        path: "text/extends",
+        title: "Extends",
+        content: require("./pages/text-extends.js")
       }
     ]
   },
