@@ -46,6 +46,7 @@ export const ContainerEl = css.div`
     align-items: center;
     display: flex;
     flex-direction: ${dir};
+    justify-content: center;
   `
       : ``};
   ${({ flex }) =>

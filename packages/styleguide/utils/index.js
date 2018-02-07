@@ -21,9 +21,5 @@ export * from "./mixins/setSpace";
 export * from "./mixins/setType";
 export * from "./mixins/truncate";
 
-// helpers
-export * from "./helpers/styleText";
-
 // themes
 export * from "./skins/default";
-

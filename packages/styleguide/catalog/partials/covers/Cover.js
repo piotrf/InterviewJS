@@ -15,7 +15,7 @@ const CoverEl = css.div`
   min-height: 100px;
   position: relative;
   text-align: center;
-  text-shadow: 0 2px 2px ${color.shadowBlk};
+  text-shadow: 0 1px 4px ${color.shadowD};
 `;
 
 const CoverBody = css.div`
@@ -26,7 +26,7 @@ const CoverBody = css.div`
   justify-content: flex-end;
   position: relative;
   &:after {
-    ${setHeight("h")};
+    height: 50%;
     background: linear-gradient(rgba(0,0,0,0), ${color.black});
     bottom: 0;
     content: " ";
@@ -48,7 +48,7 @@ const CoverSauce = css.div`
   z-index: 200;
 `;
 
-const Cover = props => (
+const Cover = (props) => (
   <CoverEl {...props}>
     <CoverBody>
       <CoverSauce>{props.children}</CoverSauce>
