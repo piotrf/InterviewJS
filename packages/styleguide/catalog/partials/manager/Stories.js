@@ -8,6 +8,7 @@ import { Container, Text } from "../../components";
 import { Story } from "../../partials";
 
 const StoriesListHead = css(Container)`
+  ${setSpace("mhl")};
   color: ${color.greyM};
 `;
 const StoriesList = css.ol`
@@ -21,13 +22,13 @@ const StoriesListItem = css.li`
 const Stories = (props) => (
   <Container>
     <StoriesListHead dir="row" padded>
-      <Container flex={[0, 0, "50%"]}>
+      <Container flex={[1, 1, "60%"]}>
         <Text typo="p5">Title</Text>
       </Container>
-      <Container flex={[0, 0, "25%"]} align="center">
+      <Container flex={[0, 0, "20%"]} align="center">
         <Text typo="p5">Last Modified</Text>
       </Container>
-      <Container flex={[0, 0, "25%"]} align="right">
+      <Container flex={[0, 0, "20%"]} align="right">
         <Text typo="p5">Characters</Text>
       </Container>
     </StoriesListHead>

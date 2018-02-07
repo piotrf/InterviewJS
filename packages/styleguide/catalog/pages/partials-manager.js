@@ -50,7 +50,7 @@ export default () => markdown`
 
   ${(
     <ReactSpecimen>
-      <Story data={storyObj} />
+      <Story data={storyObj} handleOpen={(evt) => console.log(evt)} />
     </ReactSpecimen>
   )}
 
