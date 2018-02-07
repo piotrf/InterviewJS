@@ -76,7 +76,7 @@ const ChartVal = css.span`
   top: 100%;
 `;
 
-const Chart = props => (
+const Chart = (props) => (
   <ChartEl>
     <ChartAnswer>Yes</ChartAnswer>
     <ChartBody>

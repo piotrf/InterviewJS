@@ -6,6 +6,7 @@ import bubbleBase from "./bubbleBase";
 
 const SystemBubble = css.div`
   ${bubbleBase};
+  cursor: ${(props) => (props.onClick ? `pointer` : `default`)};
   background-color: ${({ theme }) =>
     theme.backg ? theme.backg : skin.sysBackg};
   color: ${({ theme }) => (theme.color ? theme.color : skin.sysColor)};

@@ -6,10 +6,12 @@ import {
   Bubble,
   Bubbles,
   BubbleGroup,
-  BubbleAvatar
+  BubbleAvatar,
+  Container,
+  Icon
 } from "../components";
 
-import Sample from "../static/avatar.png";
+import SampleAvatar from "../static/avatar.png";
 
 export default () => markdown`
 
@@ -19,7 +21,7 @@ export default () => markdown`
     <ReactSpecimen>
       <BubbleGroup>
         <BubbleAvatar>
-          <Avatar size="s" image={Sample} />
+          <Avatar size="s" image={SampleAvatar} />
         </BubbleAvatar>
         <Bubbles persona="speaker">
           <Bubble persona="speaker">Bubble from the left</Bubble>
@@ -36,6 +38,39 @@ export default () => markdown`
         <Bubbles persona="user">
           <Bubble persona="user">Bubble from the right</Bubble>
           <Bubble persona="user">Another bubble from the right</Bubble>
+        </Bubbles>
+      </BubbleGroup>
+    </ReactSpecimen>
+  )}
+
+  ## BubbleGroups w/ actionable bubbles
+
+  ${(
+    <ReactSpecimen dark>
+      <BubbleGroup>
+        <Bubbles persona="system">
+          <Bubble persona="system" onClick={(evt) => console.log(evt)}>
+            <Container dir="row">
+              <Container flex={[0, 0, "40px"]}>
+                <Avatar size="s" image={SampleAvatar} />
+              </Container>
+              <Container flex={[1, 1, 0]}>Barack Obama</Container>
+              <Container flex={[0, 0, "40px"]} align="right">
+                <Icon name="chevron-right" />
+              </Container>
+            </Container>
+          </Bubble>
+          <Bubble persona="system" onClick={(evt) => console.log(evt)}>
+            <Container dir="row">
+              <Container flex={[0, 0, "40px"]}>
+                <Avatar size="s" image={SampleAvatar} />
+              </Container>
+              <Container flex={[1, 1, 0]}>Barack Obama</Container>
+              <Container flex={[0, 0, "40px"]} align="right">
+                <Icon name="chevron-right" />
+              </Container>
+            </Container>
+          </Bubble>
         </Bubbles>
       </BubbleGroup>
     </ReactSpecimen>

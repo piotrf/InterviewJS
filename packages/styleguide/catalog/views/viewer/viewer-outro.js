@@ -3,34 +3,16 @@ import css from "styled-components";
 
 import { breakpoint, color, setSpace } from "../../../utils";
 
-import {
-  Action,
-  Actionbar,
-  Container,
-  Separator,
-  Text
-} from "../../components";
+import { Action, Actionbar, Container, Text } from "../../components";
 import { Cover } from "../../partials";
 
 import CoverImg from "../../static/cover.jpg";
 
-const PageTitle = Text.withComponent("h1");
-const PageSubtitle = css(Text.withComponent("h2"))`
-  opacity: ${1 / 3 * 2};
-`;
 const PageText = css(Text.withComponent("p"))`
   margin-left: auto;
   margin-right: auto;
   max-width: 420px;
 `;
-const PageOutro = css(Text.withComponent("p"))`
-  ${setSpace("mbm")};
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 420px;
-  opacity: ${1 / 3 * 2};
-`;
-
 export const Layout = css.div`
   background-color: ${color.black};
   display: flex;

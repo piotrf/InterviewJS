@@ -1,107 +1,97 @@
 import css from "styled-components";
 import { string } from "prop-types";
 
-import { color, font, setType, skin } from "../../../utils";
+import { setType, skin } from "../../../utils";
 
 const Text = css.span`
   font-family: ${skin.font};
-  ${({ typo }) => {
-    if (typo === "h1") {
-      return `
-        ${setType("l")};
-        font-weight: bold;
-        `;
-    }
-  }}
-  ${({ typo }) => {
-    if (typo === "h2") {
-      return `
+  ${({ typo }) =>
+    typo === "h1"
+      ? `
+    ${setType("l")};
+    font-weight: bold;`
+      : ``};
+  }
+  ${({ typo }) =>
+    typo === "h2"
+      ? `
         ${setType("m")};
         font-weight: bold;
-        `;
-    }
-  }}
-  ${({ typo }) => {
-    if (typo === "h3") {
-      return `
+        `
+      : ``}
+  ${({ typo }) =>
+    typo === "h3"
+      ? `
         ${setType("l")};
         font-style: italic;
-        `;
-    }
-  }}
-  ${({ typo }) => {
-    if (typo === "h4") {
-      return `
+        `
+      : ``}
+  ${({ typo }) =>
+    typo === "h4"
+      ? `
         ${setType("m")};
         font-style: italic;
-        `;
-    }
-  }}
-  ${({ typo }) => {
-    if (typo === "h5") {
-      return `
+        `
+      : ``}
+  ${({ typo }) =>
+    typo === "h5"
+      ? `
         ${setType("s")};
         font-style: italic;
-        `;
-    }
-  }}
-  ${({ typo }) => {
-    if (typo === "h6") {
-      return `
+        `
+      : ``}
+  ${({ typo }) =>
+    typo === "h6"
+      ? `
         ${setType("x")};
         font-style: italic;
-        `;
-    }
-  }}
-  ${({ typo }) => {
-    if (typo === "p1") {
-      return `
+        `
+      : ``}
+  ${({ typo }) =>
+    typo === "p1"
+      ? `
         ${setType("s")};
         font-weight: bold;
-        `;
-    }
-  }}
-  ${({ typo }) => {
-    if (typo === "p2") {
-      return `
+        `
+      : ``}
+  ${({ typo }) =>
+    typo === "p2"
+      ? `
         ${setType("s")};
-        `;
-    }
-  }}
-  ${({ typo }) => {
-    if (typo === "p3") {
-      return `
+        `
+      : ``}
+  ${({ typo }) =>
+    typo === "p3"
+      ? `
         ${setType("s")};
         font-style: italic;
-        `;
-    }
-  }}
-  ${({ typo }) => {
-    if (typo === "p4") {
-      return `
+        `
+      : ``}
+  ${({ typo }) =>
+    typo === "p4"
+      ? `
         ${setType("x")};
         font-weight: bold;
-        `;
-    }
-  }}
-  ${({ typo }) => {
-    if (typo === "p5") {
-      return `
+        `
+      : ``}
+  ${({ typo }) =>
+    typo === "p5"
+      ? `
         ${setType("x")};
-        `;
-    }
-  }}
-  ${({ typo }) => {
-    if (typo === "p6") {
-      return `
+        `
+      : ``}
+  ${({ typo }) =>
+    typo === "p6"
+      ? `
         ${setType("x")};
         font-style: italic;
-        `;
-    }
-  }}
+        `
+      : ``}
 `;
 
-Text.propTypes = {};
+Text.propTypes = {
+  typo: string
+};
 
 Text.defaultProps = {};
 

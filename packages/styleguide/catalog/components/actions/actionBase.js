@@ -1,11 +1,4 @@
-import {
-  color,
-  radius,
-  setHeight,
-  setSpace,
-  setType,
-  time
-} from "../../../utils";
+import { color, radius, setSpace, setType, time } from "../../../utils";
 
 const actionBase = {
   graphic: `

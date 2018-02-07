@@ -2,7 +2,7 @@ import React from "react";
 import css from "styled-components";
 import { array, bool, oneOfType, node, string } from "prop-types";
 
-import { color, setHeight, setSpace } from "../../../utils";
+import { color, setSpace } from "../../../utils";
 
 import { Container } from "../../components";
 

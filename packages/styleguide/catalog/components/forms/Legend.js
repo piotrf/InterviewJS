@@ -9,10 +9,6 @@ const LegendWrapper = css.legend`
   display: inline-block;
 `;
 
-const Tip = css.div`
-  background-color: ${color.blueBlk};
-`;
-
 const LegendBody = css.span`
   ${setType("x")};
   background-color: ${color.white};
@@ -27,7 +23,7 @@ const LegendBody = css.span`
   width: 20px;
 `;
 
-const Legend = props => (
+const Legend = (props) => (
   <LegendWrapper {...props}>
     <Tooltip
       animation="fade"
