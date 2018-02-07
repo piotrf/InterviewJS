@@ -43,7 +43,7 @@ export const Body = css(Container)`
   text-align: center;
 `;
 
-export const BodyText = css(Container)`
+export const BodyWrapper = css(Container)`
   max-height: 200px;
   &:after {
     background: linear-gradient(rgba(0,0,0,0), ${color.black});
@@ -59,13 +59,13 @@ export const BodyText = css(Container)`
   ${breakpoint.tablet} {
     max-height: 220px;
   }
-  & > * {
-    max-height: 180px;
-    overflow-y: auto;
-    padding-bottom: 20px;
-    ${breakpoint.tablet} {
-      max-height: 200px;
-    }
+`;
+export const BodyText = css(Container)`
+  max-height: 180px;
+  overflow-y: auto;
+  padding-bottom: 20px;
+  ${breakpoint.tablet} {
+    max-height: 200px;
   }
 `;
 
@@ -76,7 +76,7 @@ export const Foot = css.div`
   text-align: center;
 `;
 
-export default class ViewerIntro extends React.Component {
+export default class ViewerIntro2 extends React.Component {
   constructor() {
     super();
     this.state = { pageHeight: null };
@@ -111,19 +111,21 @@ export default class ViewerIntro extends React.Component {
       >
         <Cover image={CoverImg} flex={[0, 0, `${100 / 3}%`]} />
         <Body dir="column" flex={[2, 0, `${100 / 4}%`]}>
-          <BodyText>
-            <PageText typo="h4">
-              The Affordable CAre Act (ACA) is former Democratic President
-              Barack Obama’s signature law. Generally known as “Obamacare” it’s
-              divided US opinion. Supporters say it gives access to millions of
-              uninsured citizens and keeps the healthcare industry in check,
-              opponents argue many people now pay higher premiums and taxes go
-              up. Who do you believe? US opinion. Supporters say it gives access
-              to millions of uninsured citizens and keeps the healthcare
-              industry in check, opponents argue many people now pay higher
-              premiums and taxes go up. Who do you believe?
-            </PageText>
-          </BodyText>
+          <BodyWrapper>
+            <BodyText>
+              <PageText typo="h4">
+                The Affordable CAre Act (ACA) is former Democratic President
+                Barack Obama’s signature law. Generally known as “Obamacare”
+                it’s divided US opinion. Supporters say it gives access to
+                millions of uninsured citizens and keeps the healthcare industry
+                in check, opponents argue many people now pay higher premiums
+                and taxes go up. Who do you believe? US opinion. Supporters say
+                it gives access to millions of uninsured citizens and keeps the
+                healthcare industry in check, opponents argue many people now
+                pay higher premiums and taxes go up. Who do you believe?
+              </PageText>
+            </BodyText>
+          </BodyWrapper>
         </Body>
         <Foot dir="column" flex={[1, 1, `${100 / 4}%`]}>
           <Container>

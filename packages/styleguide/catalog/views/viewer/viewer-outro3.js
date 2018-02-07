@@ -10,7 +10,7 @@ import {
   Separator,
   Text
 } from "../../components";
-import { Cover } from "../../partials";
+import { Chart, Cover } from "../../partials";
 
 import CoverImg from "../../static/cover.jpg";
 
@@ -76,7 +76,7 @@ export const Foot = css.div`
   text-align: center;
 `;
 
-export default class ViewerIntro extends React.Component {
+export default class ViewerOutro3 extends React.Component {
   constructor() {
     super();
     this.state = { pageHeight: null };
@@ -109,29 +109,32 @@ export default class ViewerIntro extends React.Component {
           minHeight: this.state.pageHeight
         }}
       >
-        <Cover image={CoverImg} flex={[0, 0, `${100 / 2}%`]}>
-          <PageTitle typo="h1">Obamacare — One Year In</PageTitle>
-          <Separator size="s" effect="silent" />
-          <PageSubtitle typo="p6">Featuring:</PageSubtitle>
-          <Separator size="s" effect="silent" />
-        </Cover>
+        <Cover image={CoverImg} flex={[0, 0, `${100 / 3}%`]} />
         <Body dir="column" flex={[2, 0, `${100 / 4}%`]}>
           <BodyWrapper>
             <BodyText>
               <PageText typo="h3">
-                Investigate whether Obamacare can make healthcare better for
-                America’s poor.
+                1. Do you think Obama made healthcare better for America’s poor?
               </PageText>
+              <Separator size="m" effect="silent" />
+              <Chart data={{ positive: 40, negative: 60 }} />
+              <Separator size="m" effect="silent" />
+              <PageText typo="h3">
+                2. Is it ok to pay more taxes to have state funded healthcare
+                for everyone?
+              </PageText>
+              <Separator size="m" effect="silent" />
+              <Chart data={{ positive: 40, negative: 60 }} />
+              <Separator size="m" effect="silent" />
+              <PageText typo="h3">
+                3. I’m with Trump — just keep the costs down!
+              </PageText>
+              <Separator size="m" effect="silent" />
+              <Chart data={{ positive: 40, negative: 60 }} />
             </BodyText>
           </BodyWrapper>
         </Body>
         <Foot dir="column" flex={[1, 1, `${100 / 4}%`]}>
-          <Container>
-            <PageOutro typo="p6">
-              InterviewJS lets you chat to people at the heart of a story. Hear
-              from them in their own words.
-            </PageOutro>
-          </Container>
           <Actionbar>
             <Action fixed primary>
               Continue

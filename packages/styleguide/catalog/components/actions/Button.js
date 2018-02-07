@@ -148,14 +148,14 @@ const Button = css.button`
           color: ${color.white};
         };
         &:active {
-          background: ${color.flareLt};
+          background: ${color.flareLLt};
           color: ${color.white};
           opacity: 0.75;
         }
         ${
           active
             ? `
-          background: ${color.flareLt};
+          background: ${color.flareLLt};
           color: ${color.white};
           opacity: 0.75;
         `

@@ -163,6 +163,11 @@ const pages = [
         content: require("./pages/viewer-intro.js"),
         path: "/views/viewer/intro",
         title: "Viewer Intro"
+      },
+      {
+        content: require("./pages/viewer-outro.js"),
+        path: "/views/viewer/outro",
+        title: "Viewer Outro"
       }
     ]
   }
