@@ -1,18 +1,9 @@
 import React from "react";
+import css from "styled-components";
 import { markdown, ReactSpecimen } from "catalog";
 
 export default () => markdown`
 
-  ## Text styles
-
-  You can apply a style to any tag with the styleText mixin.
-
-  ${(
-    <ReactSpecimen>
-      <span>
-        Primary button
-      </span>
-    </ReactSpecimen>
-  )}
+  You can apply a style to any tag with the styleText mixin
 
 `;

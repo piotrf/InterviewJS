@@ -1,11 +1,12 @@
 import css from "styled-components";
 import {} from "prop-types";
 
-import { color, styleText } from "../../../utils";
+import { color, font, setType } from "../../../utils";
 
 const CharacterCount = css.sup`
-  ${styleText.characterCount};
+  ${setType("x")};
   color: ${color.greyLt};
+  font-family: ${font.serif};
 `;
 
 CharacterCount.propTypes = {};

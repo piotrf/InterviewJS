@@ -2,15 +2,16 @@ import css from "styled-components";
 import React from "react";
 import { bool, string } from "prop-types";
 
-import { color, radius, setSpace, styleText, time } from "../../../utils";
+import { color, font, radius, setSpace, setType, time } from "../../../utils";
 
 const Input = css.input`
   ${setSpace("phs")};
   ${setSpace("pvm")};
-  ${styleText.input.value};
+  ${setType("x")};
   border-radius: ${radius.m};
   border: 1px solid ${color.greyLt};
   color: ${color.blueBlk};
+  font-family: ${font.serif};
   position: relative;
   transition: border-color ${time.m};
   width: 100%;
@@ -20,8 +21,10 @@ const Input = css.input`
     z-index: 50;
   }
   &::placeholder {
-    ${styleText.input.placeholder};
+    ${setType("x")};
     color: ${color.greyLLt};
+    font-family: ${font.serif};
+    font-style: italic;
   }
   ${({ area }) =>
     area
