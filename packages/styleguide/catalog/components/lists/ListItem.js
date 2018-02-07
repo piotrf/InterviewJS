@@ -4,7 +4,7 @@ import { color, setSpace } from "../../../utils";
 
 const ListItem = css.li`
   ${setSpace("pam")};
-  border-bottom: 1px solid ${color.greyLt};
+  border-bottom: 1px solid ${color.greyHL};
   display: block;
   list-style: none;
 `;

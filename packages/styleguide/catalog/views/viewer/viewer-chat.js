@@ -26,7 +26,7 @@ export const Layout = css.div`
 
 export const ChatHead = css(Container)`
   flex: 0 0 0;
-  border-bottom: 1px solid ${color.greyLt};
+  border-bottom: 1px solid ${color.greyHL};
 `;
 
 export const ChatBody = css(Container)`
@@ -75,11 +75,11 @@ export default class ViewerChat extends React.Component {
         <ChatHead fill="grey" padded>
           <Container>
             <Actionbar satellite="both">
-              <Action iconic onClick={evt => console.log(evt)}>
+              <Action iconic onClick={(evt) => console.log(evt)}>
                 <Icon name="chevron-left" />
               </Action>
-              <Action onClick={evt => console.log(evt)}>Barack Obama</Action>
-              <Action iconic onClick={evt => console.log(evt)}>
+              <Action onClick={(evt) => console.log(evt)}>Barack Obama</Action>
+              <Action iconic onClick={(evt) => console.log(evt)}>
                 <Icon name="question-circle" />
               </Action>
             </Actionbar>
@@ -139,16 +139,16 @@ export default class ViewerChat extends React.Component {
         </ChatBody>
         <ChatFoot fill="white" padded>
           <Actionbar limit satellite="both">
-            <Action secondary iconic onClick={evt => console.log(evt)}>
+            <Action secondary iconic onClick={(evt) => console.log(evt)}>
               <Icon name="chevron-right" />
             </Action>
-            <Action fixed primary onClick={evt => console.log(evt)}>
+            <Action fixed primary onClick={(evt) => console.log(evt)}>
               An action that can be lengthy
             </Action>
-            <Action fixed primary onClick={evt => console.log(evt)}>
+            <Action fixed primary onClick={(evt) => console.log(evt)}>
               Another action
             </Action>
-            <Action secondary iconic onClick={evt => console.log(evt)}>
+            <Action secondary iconic onClick={(evt) => console.log(evt)}>
               <Icon name="emo-smiley" />
             </Action>
           </Actionbar>

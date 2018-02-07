@@ -24,7 +24,7 @@ export const Layout = css.div`
 
 export const ChatHead = css(Container)`
   flex: 0 0 0;
-  border-bottom: 1px solid ${color.greyLt};
+  border-bottom: 1px solid ${color.greyHL};
 `;
 
 export const ChatBody = css(Container)`
@@ -73,7 +73,7 @@ export default class ViewerChat extends React.Component {
         <ChatHead fill="grey" padded>
           <Container>
             <Actionbar satellite="left">
-              <Action iconic onClick={evt => console.log(evt)}>
+              <Action iconic onClick={(evt) => console.log(evt)}>
                 <Icon name="chevron-left" />
               </Action>
               <Action>Interviewees</Action>
