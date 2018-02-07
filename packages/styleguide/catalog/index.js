@@ -143,6 +143,11 @@ const pages = [
         content: require("./pages/partials-viewer.js"),
         path: "/partials/viewer",
         title: "Viewer Partials"
+      },
+      {
+        content: require("./pages/partials-manager.js"),
+        path: "/partials/manager",
+        title: "Manager Partials"
       }
     ]
   },
