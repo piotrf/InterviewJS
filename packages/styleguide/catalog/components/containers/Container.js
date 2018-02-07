@@ -19,13 +19,13 @@ export const ContainerEl = css.div`
   ${({ shift }) =>
     shift
       ? `
-    box-shadow: 0 1px 3px ${color.shadowHL};
+    box-shadow: 0 2px 4px ${color.shadowHL};
   `
       : ``};
   ${({ inset }) =>
     inset
       ? `
-    box-shadow: inset 0 1px 3px ${color.shadowHL};
+    box-shadow: inset 0 2px 4px ${color.shadowHL};
   `
       : ``};
   ${({ rounded }) =>

@@ -13,7 +13,7 @@ const StoryEl = css(Container)`
   cursor: pointer;
   transition: box-shadow ${time.m}, transform ${time.m};
   &:active {
-    box-shadow: none;
+    box-shadow: 0 1px 2px ${color.shadowHL};
     transform: translateY(1px);
   }
 `;
