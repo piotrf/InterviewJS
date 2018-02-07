@@ -70,8 +70,8 @@ export const BodyText = css(Container)`
 `;
 
 export const Foot = css.div`
-  ${setSpace("pbl")};
   ${setSpace("phl")};
+  ${setSpace("pbl")};
   color: ${color.white};
   text-align: center;
 `;
@@ -109,25 +109,27 @@ export default class ViewerIntro extends React.Component {
           minHeight: this.state.pageHeight
         }}
       >
-        <Cover image={CoverImg} flex={[0, 0, `${100 / 2}%`]}>
-          <PageTitle typo="h1">Obamacare — One Year In</PageTitle>
-          <Separator size="s" effect="silent" />
-          <PageSubtitle typo="p6">Featuring:</PageSubtitle>
-          <Separator size="s" effect="silent" />
-        </Cover>
+        <Cover image={CoverImg} flex={[0, 0, `${100 / 3}%`]} />
         <Body dir="column" flex={[2, 0, `${100 / 4}%`]}>
           <BodyText>
-            <PageText typo="h3">
-              Investigate whether Obamacare can make healthcare better for
-              America’s poor.
+            <PageText typo="h4">
+              The Affordable CAre Act (ACA) is former Democratic President
+              Barack Obama’s signature law. Generally known as “Obamacare” it’s
+              divided US opinion. Supporters say it gives access to millions of
+              uninsured citizens and keeps the healthcare industry in check,
+              opponents argue many people now pay higher premiums and taxes go
+              up. Who do you believe? US opinion. Supporters say it gives access
+              to millions of uninsured citizens and keeps the healthcare
+              industry in check, opponents argue many people now pay higher
+              premiums and taxes go up. Who do you believe?
             </PageText>
           </BodyText>
         </Body>
         <Foot dir="column" flex={[1, 1, `${100 / 4}%`]}>
           <Container>
             <PageOutro typo="p6">
-              InterviewJS lets you chat to people at the heart of a story. Hear
-              from them in their own words.
+              The more people you interview the more information you gather. In
+              the end you’ll get feedback on how well you’ve done.
             </PageOutro>
           </Container>
           <Actionbar>
