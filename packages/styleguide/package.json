@@ -27,6 +27,7 @@
     "catalog-build": "catalog build",
     "catalog-publish": "node scripts/publish.js",
     "catalog-start": "catalog start",
-    "dev": "catalog start"
+    "dev": "catalog start",
+    "release": "yarn run catalog-build && yarn run catalog-publish"
   }
 }
