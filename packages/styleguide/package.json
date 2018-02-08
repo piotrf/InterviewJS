@@ -24,9 +24,9 @@
     "prettier-eslint": "8.8.1"
   },
   "scripts": {
-    "catalog-build": "catalog build",
-    "catalog-publish": "node scripts/publish.js",
-    "catalog-start": "catalog start",
-    "dev": "catalog start"
+    "build": "catalog build",
+    "publish": "node scripts/publish.js",
+    "dev": "catalog start",
+    "release": "yarn run build && yarn run publish"
   }
 }
