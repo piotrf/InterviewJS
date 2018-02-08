@@ -1,11 +1,10 @@
-import { withTheme } from "styled-components";
 import React from "react";
 import { string } from "prop-types";
 
 import Button from "./Button";
 import Link from "./Link";
 
-const Action = props =>
+const Action = (props) =>
   props.href ? <Link {...props} /> : <Button {...props} />;
 
 Action.propTypes = {
@@ -16,4 +15,4 @@ Action.defaultProps = {
   href: null
 };
 
-export default withTheme(Action);
+export default Action;
