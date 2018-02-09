@@ -5,6 +5,8 @@ import { Router, Route, IndexRoute } from "react-router";
 
 import store, { history } from "./store";
 
+import "./styles/styles";
+
 import App from "./App";
 import Composer from "./views/Composer";
 import Listing from "./views/Listing";
