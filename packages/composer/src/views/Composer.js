@@ -71,7 +71,7 @@ const Composer = props => {
           </Action>
         </Container>
         <Container flex={[1, 0, `${100 / 3}%`]} align="center">
-          <PageTitle typo="h1" unwrap>
+          <PageTitle typo="h2" unwrap>
             {story.title}
           </PageTitle>
         </Container>
