@@ -19,7 +19,11 @@ const Listing = props => (
 );
 
 Listing.propTypes = {
-  stories: arrayOf({ object }).isRequired
+  stories: arrayOf(object)
+};
+
+Listing.defaultProps = {
+  stories: []
 };
 
 export default Listing;

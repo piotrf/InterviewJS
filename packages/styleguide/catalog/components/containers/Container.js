@@ -1,6 +1,6 @@
 import React from "react";
 import css from "styled-components";
-import { arrayOf, bool, number, string } from "prop-types";
+import { arrayOf, bool, number, oneOfType, string } from "prop-types";
 
 import { breakpoint, color, radius, setSpace } from "../../../utils";
 
@@ -110,7 +110,7 @@ export default class Container extends React.Component {
 
 Container.propTypes = {
   align: string,
-  flex: arrayOf([number, number, string]),
+  flex: arrayOf(oneOfType([number, string])),
   cover: bool,
   fill: string,
   dir: string,
