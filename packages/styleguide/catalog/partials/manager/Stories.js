@@ -18,7 +18,7 @@ const StoriesList = css.ol`
 `;
 
 const Stories = props => (
-  <Container>
+  <Container fill="grey">
     <StoriesListHead dir="row" padded>
       <Container flex={[1, 1, "60%"]}>
         <Text typo="p5">Title</Text>

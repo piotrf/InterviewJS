@@ -5,7 +5,7 @@ import { Router, Route, IndexRoute } from "react-router";
 
 import store, { history } from "./store";
 
-import "./styles/styles";
+import globalStyles from "interviewjs-styleguide";
 
 import App from "./App";
 import Composer from "./views/Composer";

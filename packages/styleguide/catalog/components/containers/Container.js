@@ -69,6 +69,12 @@ export const ContainerEl = css.div`
       margin-right: auto;
       max-width: 768px;
     }
+    ${breakpoint.desktop} {
+      max-width: 1024px;
+    }
+    ${breakpoint.hdesktop} {
+      max-width: 1200px;
+    }
   `
       : ``};
 `;
