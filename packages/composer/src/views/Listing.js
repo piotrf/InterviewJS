@@ -4,27 +4,42 @@ import { arrayOf, object, shape, string } from "prop-types";
 
 import {
   Action,
-  Avatar,
   Container,
   Separator,
   Stories,
   Story,
   Text,
+  UserMenu,
   setSpace
 } from "interviewjs-styleguide";
 
+const Page = css(Container)`
+  align-content: stretch;
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  height: 100%;
+`;
 const PageTitle = Text.withComponent("h1");
 const PageHead = css(Container)`
   ${setSpace("pvs")};
   ${setSpace("phm")};
 `;
+const PageBody = css(Container)`
+  ${setSpace("phm")};
+  ${setSpace("pbm")};
+  align-items: stretch;
+  & > * {
+    ${setSpace("mhs")};
+  }
+`;
 
 const Listing = props => (
-  <Container>
-    {console.log(props)}
+  <Page>
     <PageHead dir="row" flex={[0, 0, "60px"]}>
       <Container flex={[0, 1, `${100 / 3}%`]}>
-        <Avatar image={props.user.avatar} /> {props.user.name}
+        <UserMenu data={props.user} />
       </Container>
       <Container flex={[1, 0, `${100 / 3}%`]} align="center">
         <PageTitle typo="h1" unwrap>
@@ -37,8 +52,7 @@ const Listing = props => (
         </Action>
       </Container>
     </PageHead>
-    <Separator size="l" effect="silent" />
-    <Container padded limit>
+    <PageBody flex={[1, 1, "100%"]}>
       <Stories>
         {props.stories.map((story, i) => (
           <Story
@@ -49,8 +63,8 @@ const Listing = props => (
           />
         ))}
       </Stories>
-    </Container>
-  </Container>
+    </PageBody>
+  </Page>
 );
 
 Listing.propTypes = {

@@ -26,8 +26,6 @@ const StoryTitle = css(Text.withComponent("h2"))`
 const StorySummary = css(Text.withComponent("p"))`
   ${disselect};
   color: ${color.blueHL};
-  white-space: nowrap;
-  text-overflow: ellipsis;
 `;
 const StoryDate = css(Text)`
   ${disselect};
@@ -54,14 +52,14 @@ const AvatarListItem = css.li`
 
 const Story = props => (
   <StoryEl dir="row" fill="white" padded shift {...props}>
-    <Container flex={[1, 1, "60%"]}>
+    <Container flex={[1, 2, "60%"]}>
       <StoryTitle typo="h2">{props.data.title}</StoryTitle>
       <StorySummary typo="p5">{props.data.intro}</StorySummary>
     </Container>
-    <Container flex={[0, 0, "20%"]} align="center">
+    <Container flex={[2, 1, "20%"]} align="center">
       <StoryDate typo="p5">{props.data.byline.moddate}</StoryDate>
     </Container>
-    <Container flex={[0, 0, "20%"]} align="right">
+    <Container flex={[2, 1, "20%"]} align="right">
       <AvatarList>
         {props.data.interviewees.map(el => (
           <AvatarListItem key={el.name}>

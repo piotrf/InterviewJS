@@ -21,13 +21,19 @@ const Stories = props => (
   <Container>
     <StoriesListHead dir="row" padded>
       <Container flex={[1, 1, "60%"]}>
-        <Text typo="p5">Title</Text>
+        <Text typo="p5" nowrap>
+          Title
+        </Text>
       </Container>
       <Container flex={[0, 0, "20%"]} align="center">
-        <Text typo="p5">Last Modified</Text>
+        <Text typo="p5" nowrap>
+          Last Modified
+        </Text>
       </Container>
       <Container flex={[0, 0, "20%"]} align="right">
-        <Text typo="p5">Characters</Text>
+        <Text typo="p5" nowrap>
+          Characters
+        </Text>
       </Container>
     </StoriesListHead>
     <StoriesList>{props.children}</StoriesList>

@@ -87,7 +87,7 @@ const Text = css.span`
         font-style: italic;
         `
       : ``}
-  ${({ unwrap }) => (unwrap ? `${truncate}` : ``)}
+  ${({ nowrap }) => (nowrap ? `${truncate}` : ``)}
 `;
 
 Text.propTypes = {
