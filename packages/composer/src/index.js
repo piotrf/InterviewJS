@@ -1,15 +1,23 @@
-import React from 'react';
-import { render } from 'react-dom';
-import { Provider } from 'react-redux';
-import configureStore from 'store';
-import Routes from 'routes';
-import 'styles/global-styles';
-import registerServiceWorker from 'utils/registerServiceWorker';
+import { Provider } from "react-redux";
+import React from "react";
+import { render } from "react-dom";
+import { Router, Route, IndexRoute } from "react-router";
 
-render(
-  <Provider store={configureStore()}>
-    <Routes />
-  </Provider>,
-  document.getElementById('root')
+import store, { history } from "./store";
+
+import App from "./App";
+import Composer from "./views/Composer";
+import Listing from "./views/Listing";
+
+const router = (
+  <Provider store={store}>
+    <Router history={history}>
+      <Route path="/" component={App}>
+        <IndexRoute component={Listing} />
+        <Route path="/stories/:storyId" component={Composer} />
+      </Route>
+    </Router>
+  </Provider>
 );
-registerServiceWorker();
+
+render(router, document.getElementById("root"));
