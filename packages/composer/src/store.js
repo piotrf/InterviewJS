@@ -1,16 +1,15 @@
 import { createStore, compose } from "redux";
 import { syncHistoryWithStore } from "react-router-redux";
-// import { createBrowserHistory } from "history";
 import { browserHistory } from "react-router";
 
 import rootReducer from "./reducers/index";
 
-// import comments from "./data/comments";
 import stories from "./data/stories";
+import user from "./data/user";
 
 const defaultState = {
-  stories
-  // comments
+  stories,
+  user
 };
 
 const enhancers = compose(

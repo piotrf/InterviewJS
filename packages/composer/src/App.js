@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 import * as actionCreators from "./actions/actionCreators";
 
 const mapStateToProps = state => ({
-  stories: state.stories
+  stories: state.stories,
+  user: state.user
 });
 
 const mapDispatchToProps = dispatch =>
