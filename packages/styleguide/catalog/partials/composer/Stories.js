@@ -27,12 +27,12 @@ const Stories = props => (
       </Container>
       <Container flex={[0, 0, "20%"]} align="center">
         <Text typo="p5" nowrap>
-          Last Modified
+          Modified
         </Text>
       </Container>
       <Container flex={[0, 0, "20%"]} align="right">
         <Text typo="p5" nowrap>
-          Characters
+          Interviewees
         </Text>
       </Container>
     </StoriesListHead>

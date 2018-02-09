@@ -5,7 +5,6 @@ import { arrayOf, object, shape, string } from "prop-types";
 import {
   Action,
   Container,
-  Separator,
   Stories,
   Story,
   Text,
@@ -28,11 +27,7 @@ const PageHead = css(Container)`
 `;
 const PageBody = css(Container)`
   ${setSpace("phm")};
-  ${setSpace("pbm")};
-  align-items: stretch;
-  & > * {
-    ${setSpace("mhs")};
-  }
+  justify-content: center;
 `;
 
 const Listing = props => (
@@ -53,16 +48,18 @@ const Listing = props => (
       </Container>
     </PageHead>
     <PageBody flex={[1, 1, "100%"]}>
-      <Stories>
-        {props.stories.map((story, i) => (
-          <Story
-            key={story.id}
-            i={i}
-            data={story}
-            onClick={() => props.router.push(`stories/${story.id}`)}
-          />
-        ))}
-      </Stories>
+      <Container limit>
+        <Stories>
+          {props.stories.map((story, i) => (
+            <Story
+              key={story.id}
+              i={i}
+              data={story}
+              onClick={() => props.router.push(`stories/${story.id}`)}
+            />
+          ))}
+        </Stories>
+      </Container>
     </PageBody>
   </Page>
 );

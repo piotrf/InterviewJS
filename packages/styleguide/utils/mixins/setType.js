@@ -2,7 +2,7 @@ import fluid from "../functions/fluid";
 
 import { lead, fsize } from "../";
 
-export const setType = (size) => {
+export const setType = size => {
   switch (size) {
     case "h":
       return `${fluid("font-size", fsize.h[0], fsize.h[1])}line-height: ${
@@ -27,7 +27,7 @@ export const setType = (size) => {
     case "m":
     default:
       return `${fluid("font-size", fsize.m[0], fsize.m[1])}line-height: ${
-        lead.l
+        lead.m
       }`;
   }
 };
