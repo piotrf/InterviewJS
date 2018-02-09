@@ -49,7 +49,7 @@ const AvatarListItem = css.li`
 `;
 
 const Story = props => (
-  <StoryEl dir="row" fill="white" padded shift>
+  <StoryEl dir="row" fill="white" padded shift {...props}>
     <Container flex={[1, 1, "60%"]}>
       <StoryTitle typo="h2">{props.data.title}</StoryTitle>
       <StorySummary typo="p5">{props.data.intro}</StorySummary>
@@ -90,7 +90,9 @@ Story.propTypes = {
   data: shape({
     title: string.isRequired,
     intro: string.isRequired,
-    modified: string.isRequired
+    byline: shape({
+      moddate: string.isRequired
+    }).isRequired
   }).isRequired
 };
 

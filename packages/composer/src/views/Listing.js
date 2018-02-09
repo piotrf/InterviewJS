@@ -1,6 +1,5 @@
 import React from "react";
-import { Link } from "react-router";
-import { withRouter } from "react-router-dom";
+import { arrayOf, object } from "prop-types";
 
 import { Container, Stories, Story } from "interviewjs-styleguide";
 
@@ -8,10 +7,19 @@ const Listing = props => (
   <Container fill="grey">
     <Stories>
       {props.stories.map((story, i) => (
-        <Story key={i} i={i} data={story} onClick={() => console.log(story)} />
+        <Story
+          key={story.id}
+          i={i}
+          data={story}
+          onClick={() => props.router.push(`stories/${story.id}`)}
+        />
       ))}
     </Stories>
   </Container>
 );
+
+Listing.propTypes = {
+  stories: arrayOf({ object }).isRequired
+};
 
 export default Listing;
