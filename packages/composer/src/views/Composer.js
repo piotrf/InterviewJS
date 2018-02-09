@@ -1,5 +1,10 @@
 import React from "react";
 
-const Composer = props => <div>Composer</div>;
+import { Container } from "interviewjs-styleguide";
+
+const Composer = props => {
+  console.log(props);
+  return <Container>Composer</Container>;
+};
 
 export default Composer;

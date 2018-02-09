@@ -5,7 +5,6 @@ import * as actionCreators from "./actions/actionCreators";
 
 const mapStateToProps = state => ({
   stories: state.stories
-  // comments: state.comments
 });
 
 const mapDispatchToProps = dispatch =>
