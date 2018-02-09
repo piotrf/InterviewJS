@@ -18,6 +18,12 @@ const globalStyles = injectGlobal`
   #root {
     overflow: hidden;
   }
+  ::selection {
+    background: ${color.blueWt};
+  }
+  ::-moz-selection {
+    background: ${color.blueWt};
+  }
 `;
 
 export default globalStyles;

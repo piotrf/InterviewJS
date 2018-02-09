@@ -3,11 +3,12 @@ import { Tooltip } from "react-tippy";
 import css from "styled-components";
 import React from "react";
 
-import { color, radius, setSpace, time } from "../../../utils";
+import { color, radius, setSpace, time, disselect } from "../../../utils";
 
 import { Action, Avatar, Container, Icon, Text } from "../../components";
 
 const StoryEl = css(Container)`
+  ${disselect};
   ${setSpace("mhl")};
   border-radius: ${radius.l};
   cursor: pointer;
@@ -18,15 +19,18 @@ const StoryEl = css(Container)`
   }
 `;
 const StoryTitle = css(Text.withComponent("h2"))`
+  ${disselect};
   ${setSpace("mbx")};
   color: ${color.blueBlk};
 `;
 const StorySummary = css(Text.withComponent("p"))`
+  ${disselect};
   color: ${color.blueHL};
   white-space: nowrap;
   text-overflow: ellipsis;
 `;
 const StoryDate = css(Text)`
+  ${disselect};
   color: ${color.greyM};
 `;
 const StoryMenu = css.div`

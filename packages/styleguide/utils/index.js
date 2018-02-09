@@ -15,6 +15,7 @@ export * from "./config/time";
 export * from "./config/tracking";
 
 // mixins
+export * from "./mixins/disselect";
 export * from "./mixins/paint";
 export * from "./mixins/setSize";
 export * from "./mixins/setSpace";
