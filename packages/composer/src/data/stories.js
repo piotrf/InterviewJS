@@ -5,7 +5,7 @@ const stories = [
     byline: {
       author: "Piotr F.",
       url: "https://twitter.com/presentday",
-      pubdate: "11-03-2017"
+      moddate: "11-03-2017"
     },
     intro: "Text",
     context: "Context",
@@ -40,7 +40,7 @@ const stories = [
     byline: {
       author: "Laurian g.",
       url: "https://twitter.com/gridinoc",
-      pubdate: "24-07-2016"
+      moddate: "24-07-2016"
     },
     intro: "Text",
     context: "Context",

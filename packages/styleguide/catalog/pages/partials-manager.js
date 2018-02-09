@@ -5,44 +5,39 @@ import { Story, Stories } from "../partials";
 
 import SampleAvatar from "../static/avatar.png";
 
-const stories = {
-  id1: {
-    title: "Dangerous Ground Report",
-    summary:
-      "This would be a summary of the story, lorem ipsum dolor sit consequeter",
-    modified: "2017-09-20",
-    interviewees: [
-      {
-        name: "Barack Obama",
-        avatar: SampleAvatar
-      },
-      {
-        name: "Donald Trump",
-        avatar: SampleAvatar
-      }
-    ]
+const storyObj = {
+  title: "Obamacare — One Year In",
+  id: "1161022966406956503",
+  byline: {
+    author: "Piotr F.",
+    url: "https://twitter.com/presentday",
+    moddate: "11-03-2017"
   },
-  id2: {
-    title: "Obamacare—One Year In",
-    summary:
-      "This would be a summary of the story, lorem ipsum dolor sit consequeter",
-    modified: "2017-09-20",
-    interviewees: [
-      {
-        name: "Barack Obama",
-        avatar: SampleAvatar
-      },
-      {
-        name: "Donald Trump",
-        avatar: SampleAvatar
-      }
-    ]
-  }
+  intro: "Text",
+  context: "Context",
+  media: {
+    cover: "",
+    logo: "",
+    attachments: [{ url: "", id: "" }]
+  },
+  interviewees: [
+    {
+      name: "Barack Obama",
+      bio: "",
+      title: "",
+      avatar: SampleAvatar,
+      color: "blue"
+    },
+    {
+      name: "Donald Trump",
+      bio: "",
+      title: "",
+      avatar: SampleAvatar,
+      color: "red"
+    }
+  ],
+  storyline: []
 };
-const storiesIds = ["id1", "id2"];
-
-const storyObj = stories[storiesIds[0]];
-const storiesObj = { stories, storiesIds };
 
 export default () => markdown`
 
@@ -50,13 +45,16 @@ export default () => markdown`
 
   ${(
     <ReactSpecimen>
-      <Story data={storyObj} handleOpen={(evt) => console.log(evt)} />
+      <Story data={storyObj} handleOpen={evt => console.log(evt)} />
     </ReactSpecimen>
   )}
 
   ${(
     <ReactSpecimen>
-      <Stories data={storiesObj} />
+      <Stories>
+        <Story data={storyObj} handleOpen={evt => console.log(evt)} />
+        <Story data={storyObj} handleOpen={evt => console.log(evt)} />
+      </Stories>
     </ReactSpecimen>
   )}
 

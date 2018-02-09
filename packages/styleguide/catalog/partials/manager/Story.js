@@ -1,4 +1,4 @@
-import { func, shape, string } from "prop-types";
+import { shape, string } from "prop-types";
 import { Tooltip } from "react-tippy";
 import css from "styled-components";
 import React from "react";
@@ -48,18 +48,18 @@ const AvatarListItem = css.li`
   position: relative;
 `;
 
-const Story = (props) => (
-  <StoryEl dir="row" fill="white" padded shift onClick={props.handleOpen}>
+const Story = props => (
+  <StoryEl dir="row" fill="white" padded shift>
     <Container flex={[1, 1, "60%"]}>
       <StoryTitle typo="h2">{props.data.title}</StoryTitle>
-      <StorySummary typo="p5">{props.data.summary}</StorySummary>
+      <StorySummary typo="p5">{props.data.intro}</StorySummary>
     </Container>
     <Container flex={[0, 0, "20%"]} align="center">
-      <StoryDate typo="p5">{props.data.modified}</StoryDate>
+      <StoryDate typo="p5">{props.data.byline.moddate}</StoryDate>
     </Container>
     <Container flex={[0, 0, "20%"]} align="right">
       <AvatarList>
-        {props.data.interviewees.map((el) => (
+        {props.data.interviewees.map(el => (
           <AvatarListItem key={el.name}>
             <Tooltip
               animation="fade"
@@ -89,10 +89,9 @@ const Story = (props) => (
 Story.propTypes = {
   data: shape({
     title: string.isRequired,
-    summary: string.isRequired,
+    intro: string.isRequired,
     modified: string.isRequired
-  }).isRequired,
-  handleOpen: func.isRequired
+  }).isRequired
 };
 
 Story.defaultProps = {};
