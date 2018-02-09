@@ -42,6 +42,11 @@ export default () => markdown`
   )}
   ${(
     <ReactSpecimen span={3}>
+      <Container bordered>Bordered</Container>
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen span={3}>
       <Container padded>Padded</Container>
     </ReactSpecimen>
   )}

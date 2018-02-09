@@ -1,6 +1,6 @@
 import React from "react";
 import css from "styled-components";
-import { array, object, shape } from "prop-types";
+import { arrayOf, oneOfType, node } from "prop-types";
 
 import { color, setSpace } from "../../../utils";
 
@@ -13,12 +13,12 @@ const StoriesListHead = css(Container)`
 const StoriesList = css.ol`
   display: block;
   & > * {
-    ${setSpace("mbs")};
+    ${setSpace("mbm")};
   }
 `;
 
 const Stories = props => (
-  <Container fill="grey">
+  <Container>
     <StoriesListHead dir="row" padded>
       <Container flex={[1, 1, "60%"]}>
         <Text typo="p5">Title</Text>
@@ -34,7 +34,9 @@ const Stories = props => (
   </Container>
 );
 
-Stories.propTypes = {};
+Stories.propTypes = {
+  children: oneOfType([arrayOf(node), node]).isRequired
+};
 
 Stories.defaultProps = {};
 

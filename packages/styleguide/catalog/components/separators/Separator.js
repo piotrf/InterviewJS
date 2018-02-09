@@ -6,7 +6,7 @@ import { color, setSpace } from "../../../utils";
 const Separator = css.hr`
   ${setSpace("pan")};
   border-style: solid;
-  ${(props) =>
+  ${props =>
     props.dir === "v"
       ? `
       ${setSpace(`mh${props.size}`)};
@@ -14,8 +14,9 @@ const Separator = css.hr`
       border-color: ${props.effect === "silent" ? `transparent` : color.greyHL};
       border-width: 0 0 0 1px;
       display: inline-block;
-      height: 1.25em;
+      height: 1em;
       vertical-align: text-top;
+      transform: translateY(9%);
   `
       : `
       ${setSpace("mhn")}

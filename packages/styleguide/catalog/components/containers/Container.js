@@ -6,6 +6,12 @@ import { breakpoint, color, radius, setSpace } from "../../../utils";
 
 export const ContainerEl = css.div`
   position: relative;
+  ${({ bordered }) =>
+    bordered
+      ? `
+    border: 1px solid ${color.greyLt};
+  `
+      : ``};
   ${({ fill }) => {
     if (fill === "white") {
       return `background: ${color.white}`;

@@ -7,7 +7,8 @@ const stories = [
       url: "https://twitter.com/presentday",
       moddate: "11-03-2017"
     },
-    intro: "Text",
+    intro:
+      "Investigate whether Obamacare can make healthcare better for America’s poor",
     context: "Context",
     media: {
       cover: "",
@@ -42,7 +43,8 @@ const stories = [
       url: "https://twitter.com/gridinoc",
       moddate: "24-07-2016"
     },
-    intro: "Text",
+    intro:
+      "Investigate whether Obamacare can make healthcare better for America’s poor",
     context: "Context",
     media: {
       cover: "",
