@@ -3,9 +3,10 @@ import React from "react";
 import { render } from "react-dom";
 import { Router, Route, IndexRoute } from "react-router";
 
-import store, { history } from "./store";
-
+/* eslint no-unused-vars: 0 */
 import globalStyles from "interviewjs-styleguide";
+
+import store, { history } from "./store";
 
 import App from "./App";
 import Composer from "./views/Composer";
