@@ -1,7 +1,19 @@
-# InterviewJS Styleguide
+# InterviewJS Style-guide
 
-1. Running:
+1. Run locally:
 
 ```
-yarn run catalog-start
+yarn dev
+```
+
+2. Build locally:
+
+```
+yarn build
+```
+
+3. Update styleguide.interviewjs.io:
+
+```
+yarn release
 ```
