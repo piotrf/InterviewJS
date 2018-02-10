@@ -1,4 +1,4 @@
-import { shape, string } from "prop-types";
+import { bool, shape, string } from "prop-types";
 import { Tooltip } from "react-tippy";
 import css from "styled-components";
 import React from "react";
@@ -32,10 +32,8 @@ const StoryDate = css(Text)`
   color: ${color.greyM};
 `;
 const StoryMenu = css.div`
-  ${setSpace("mlm")};
-  ${setSpace("plx")};
-  left: 100%;
   position: absolute;
+  right: 0;
   top: 50%;
   transform: translateY(-50%);
 `;
@@ -50,43 +48,51 @@ const AvatarListItem = css.li`
   position: relative;
 `;
 
-const Story = props => (
-  <StoryEl dir="row" fill="white" padded shift {...props}>
-    <Container flex={[1, 2, "60%"]}>
-      <StoryTitle typo="h2">{props.data.title}</StoryTitle>
-      <StorySummary typo="p5">{props.data.intro}</StorySummary>
-    </Container>
-    <Container flex={[2, 1, "20%"]} align="center">
-      <StoryDate typo="p5">{props.data.byline.moddate}</StoryDate>
-    </Container>
-    <Container flex={[2, 1, "20%"]} align="right">
-      <AvatarList>
-        {props.data.interviewees.map(el => (
-          <AvatarListItem key={el.name}>
-            <Tooltip
-              animation="fade"
-              arrow
-              arrowSize="small"
-              hideDelay={350}
-              interactiveBorder={5}
-              position="bottom"
-              sticky
-              theme="dark"
-              title={el.name}
-            >
-              <Avatar size="m" image={el.avatar} />
-            </Tooltip>
-          </AvatarListItem>
-        ))}
-      </AvatarList>
+const Story = props => {
+  const { allowsActions } = props;
+  const toggleActions = e => {
+    console.log(e);
+  };
+  return (
+    <Container>
+      <StoryEl dir="row" fill="white" padded shift {...props}>
+        <Container flex={[1, 2, "60%"]}>
+          <StoryTitle typo="h2">{props.data.title}</StoryTitle>
+          <StorySummary typo="p5">{props.data.intro}</StorySummary>
+        </Container>
+        <Container flex={[2, 1, "20%"]} align="center">
+          <StoryDate typo="p5">{props.data.byline.moddate}</StoryDate>
+        </Container>
+        <Container flex={[2, 1, "20%"]} align="right">
+          <AvatarList>
+            {props.data.interviewees.map(el => (
+              <AvatarListItem key={el.name}>
+                <Tooltip
+                  animation="fade"
+                  arrow
+                  arrowSize="small"
+                  hideDelay={350}
+                  interactiveBorder={5}
+                  position="bottom"
+                  sticky
+                  theme="dark"
+                  title={el.name}
+                >
+                  <Avatar size="m" image={el.avatar} />
+                </Tooltip>
+              </AvatarListItem>
+            ))}
+          </AvatarList>
+        </Container>
+      </StoryEl>
       <StoryMenu>
-        <Action iconic>
+        <Action iconic onClick={e => toggleActions(e)}>
           <Icon name="ellipsis" />
         </Action>
       </StoryMenu>
     </Container>
-  </StoryEl>
-);
+  );
+};
 
 Story.propTypes = {
   data: shape({
@@ -95,9 +101,12 @@ Story.propTypes = {
     byline: shape({
       moddate: string.isRequired
     }).isRequired
-  }).isRequired
+  }).isRequired,
+  allowsActions: bool
 };
 
-Story.defaultProps = {};
+Story.defaultProps = {
+  allowsActions: false
+};
 
 export default Story;
