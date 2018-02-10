@@ -43,8 +43,7 @@ const stories = [
       url: "https://twitter.com/gridinoc",
       moddate: "24-07-2016"
     },
-    intro:
-      "Investigate whether Obamacare can make healthcare better for America’s poor",
+    intro: "Short Intro",
     context: "Context",
     media: {
       cover: "",

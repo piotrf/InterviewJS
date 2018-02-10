@@ -1,8 +1,12 @@
 import { injectGlobal } from "styled-components";
 import { color } from "../../utils";
 
+import reset from "./reset";
+import modals from "./modals";
+
 /* eslint no-unused-expressions: 0 */
 const globalStyles = injectGlobal`
+  ${reset};
   html,
   body,
   #root,
@@ -24,6 +28,7 @@ const globalStyles = injectGlobal`
   ::-moz-selection {
     background: ${color.blueWt};
   }
+  ${modals};
 `;
 
 export default globalStyles;

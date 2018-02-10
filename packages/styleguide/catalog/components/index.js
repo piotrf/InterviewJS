@@ -1,7 +1,3 @@
-// vendor styles
-import "./vendor/tippy.css";
-
-// interviewjs components
 export { default as Action } from "./actions/Action.js";
 export { default as Actionbar } from "./actionbars/Actionbar.js";
 export { default as Avatar } from "./avatars/Avatar.js";
