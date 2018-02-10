@@ -5,7 +5,7 @@ export const modals = `
   }
   .ReactModal__Overlay {
     align-items: center;
-    background: rgba(228,225,236,0.3);
+    background: rgba(247,247,247,0.5);
     bottom: 0;
     display: flex;
     justify-content: center;
@@ -13,7 +13,7 @@ export const modals = `
     position: fixed;
     right: 0;
     top: 0;
-    z-index:a 5;
+    z-index: 5;
   }
   .ReactModal__Content {
     ${setSpace("pam")};
@@ -24,6 +24,7 @@ export const modals = `
     max-height: 500px;
     min-height: 320px;
     overflow-y: auto;
+    z-index: 10;
     &:focus {
       outline: none;
     }
