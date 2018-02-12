@@ -10,7 +10,7 @@ export default () => markdown`
   ## Modals with default size
 
   ${(
-    <ReactSpecimen>
+    <ReactSpecimen responsive>
       <Modal handleClose={e => console.log(e)}>
         <ModalHead>I’m a head</ModalHead>
         <ModalBody>I’m a body</ModalBody>
@@ -20,7 +20,7 @@ export default () => markdown`
   )}
 
   ${(
-    <ReactSpecimen>
+    <ReactSpecimen responsive>
       <Modal persistent>
         <ModalHead>I’m a head</ModalHead>
         <ModalBody>I’m a body</ModalBody>
@@ -32,8 +32,8 @@ export default () => markdown`
   ## Modals with custom size
 
   ${(
-    <ReactSpecimen span={3}>
-      <Modal height="200px" width="300px">
+    <ReactSpecimen responsive>
+      <Modal height="300px" width="300px">
         <ModalHead>I’m a head</ModalHead>
         <ModalBody>I’m a body</ModalBody>
         <ModalFoot>I’m a foot</ModalFoot>
@@ -42,7 +42,7 @@ export default () => markdown`
   )}
 
   ${(
-    <ReactSpecimen span={3}>
+    <ReactSpecimen responsive>
       <Modal height="100%" width="100%">
         <ModalHead>I’m a head</ModalHead>
         <ModalBody>I’m a body</ModalBody>

@@ -8,26 +8,26 @@ import { breakpoint, color, font, radius, setSpace } from "../../../utils";
 require("./modals.css");
 
 const ModalEl = css.div`
-  ${setSpace("pam")};
   background: ${color.white};
   box-shadow: 0 2px 4px ${color.greyLt};
   color: ${color.blueD};
   font-family: ${font.serif};
+  height: ${props => (props.height ? `${props.height}` : `auto`)};
   left: 50%;
-  max-width: 660px;
   overflow-y: auto;
   position: fixed;
   top: 50%;
   transform: translate(-50%, -50%);
+  width: ${props => (props.width ? `${props.width}` : `auto`)};
   ${breakpoint.onlyphone} {
-    height: 100%;
+    max-height: 100%;
+    min-height: 100%;
     width: 100%;
   }
   ${breakpoint.tablet} {
     border-radius: ${radius.h};
-    height: ${props => (props.height ? `${props.height}` : `auto`)};
     max-height: calc(100% - 80px);
-    width: ${props => (props.width ? `${props.width}` : `auto`)};
+    max-width: 680px;
   }
   & > button {
     ${setSpace("mrm")};

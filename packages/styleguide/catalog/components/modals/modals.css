@@ -5,12 +5,12 @@
   bottom: 0;
   height: 100%;
   left: 0;
+  overflow-y: auto;
   position: fixed;
   right: 0;
   top: 0;
   width: 100%;
   z-index: 5;
-  overflow-y: auto;
 }
 .ReactModal__Content {
   background: none;
