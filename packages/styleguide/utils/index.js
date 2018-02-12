@@ -21,7 +21,6 @@ export * from "./mixins/paint";
 export * from "./mixins/setSize";
 export * from "./mixins/setSpace";
 export * from "./mixins/setType";
-export * from "./mixins/truncate";
 
 // themes
 export * from "./skins/default";
