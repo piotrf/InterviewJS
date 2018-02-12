@@ -3,7 +3,7 @@
 1. Run locally:
 
 ```
-yarn dev
+yarn start
 ```
 
 2. Build locally:
