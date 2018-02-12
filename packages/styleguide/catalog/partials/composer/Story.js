@@ -5,7 +5,7 @@ import React from "react";
 
 import { color, radius, setSpace, time, disselect } from "../../../utils";
 
-import { Action, Avatar, Container, Icon, Text } from "../../components";
+import { Action, Avatar, Container, Icon, Text, Tip } from "../../components";
 
 const StoryEl = css(Container)`
   ${disselect};
@@ -39,6 +39,7 @@ const StoryMenu = css.div`
 `;
 const AvatarList = css.ul`
   text-align: right;
+  white-space: nowrap;
 `;
 const AvatarListItem = css.li`
   border: 2px solid ${color.white};
@@ -49,7 +50,6 @@ const AvatarListItem = css.li`
 `;
 
 const Story = props => {
-  const { allowsActions } = props;
   const toggleActions = e => {
     console.log(e);
   };
@@ -67,7 +67,7 @@ const Story = props => {
           <AvatarList>
             {props.data.interviewees.map(el => (
               <AvatarListItem key={el.name}>
-                <Tooltip
+                <Tip
                   animation="fade"
                   arrow
                   arrowSize="small"
@@ -79,7 +79,7 @@ const Story = props => {
                   title={el.name}
                 >
                   <Avatar size="m" image={el.avatar} />
-                </Tooltip>
+                </Tip>
               </AvatarListItem>
             ))}
           </AvatarList>
@@ -101,12 +101,9 @@ Story.propTypes = {
     byline: shape({
       moddate: string.isRequired
     }).isRequired
-  }).isRequired,
-  allowsActions: bool
+  }).isRequired
 };
 
-Story.defaultProps = {
-  allowsActions: false
-};
+Story.defaultProps = {};
 
 export default Story;

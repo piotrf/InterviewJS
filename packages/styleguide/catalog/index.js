@@ -137,6 +137,11 @@ const pages = [
     title: "Separators"
   },
   {
+    content: require("./pages/tips.js"),
+    path: "/tips",
+    title: "Tips"
+  },
+  {
     title: "Partials",
     pages: [
       {
