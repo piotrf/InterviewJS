@@ -1,9 +1,10 @@
 import css from "styled-components";
 
-import { setSpace } from "../../../utils";
+import { color, setSpace } from "../../../utils";
 
 const ModalHead = css.div`
   ${setSpace("pam")};
+  color: ${color.blueBlk};
   flex: 1 2 auto;
   text-align: center;
 `;

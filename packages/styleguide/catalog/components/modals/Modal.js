@@ -3,11 +3,12 @@ import React from "react";
 import { array, bool, func, node, oneOfType, string } from "prop-types";
 
 import { ModalClose } from "../../components";
-import { color, radius, setSpace } from "../../../utils";
+import { color, font, radius, setSpace } from "../../../utils";
 
 require("./modals.css");
 
 const ModalEl = css.div`
+  font-family: ${font.serif};
   ${setSpace("pam")};
   background: ${color.white};
   border-radius: ${radius.h};

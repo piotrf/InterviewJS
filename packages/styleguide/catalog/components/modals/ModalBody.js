@@ -1,9 +1,10 @@
 import css from "styled-components";
 
-import { setSpace } from "../../../utils";
+import { color, setSpace } from "../../../utils";
 
 const ModalBody = css.div`
   ${setSpace("pam")};
+  color: ${color.blueD};
   flex: 2 1 100%;
   overflow-y: auto;
 `;
