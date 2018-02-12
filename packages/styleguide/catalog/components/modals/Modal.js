@@ -12,13 +12,11 @@ const ModalEl = css.div`
   box-shadow: 0 2px 4px ${color.greyLt};
   color: ${color.blueD};
   font-family: ${font.serif};
-  height: ${props => (props.height ? `${props.height}` : `auto`)};
   left: 50%;
   overflow-y: auto;
   position: fixed;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: ${props => (props.width ? `${props.width}` : `auto`)};
   ${breakpoint.onlyphone} {
     max-height: 100%;
     min-height: 100%;

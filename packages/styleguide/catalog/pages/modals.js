@@ -29,26 +29,4 @@ export default () => markdown`
     </ReactSpecimen>
   )}
 
-  ## Modals with custom size
-
-  ${(
-    <ReactSpecimen responsive>
-      <Modal height="300px" width="300px">
-        <ModalHead>I’m a head</ModalHead>
-        <ModalBody>I’m a body</ModalBody>
-        <ModalFoot>I’m a foot</ModalFoot>
-      </Modal>
-    </ReactSpecimen>
-  )}
-
-  ${(
-    <ReactSpecimen responsive>
-      <Modal height="100%" width="100%">
-        <ModalHead>I’m a head</ModalHead>
-        <ModalBody>I’m a body</ModalBody>
-        <ModalFoot>I’m a foot</ModalFoot>
-      </Modal>
-    </ReactSpecimen>
-  )}
-
 `;
