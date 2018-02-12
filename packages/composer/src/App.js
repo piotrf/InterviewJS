@@ -11,7 +11,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(actionCreators, dispatch);
 
-const Main = props => <div>{React.cloneElement(props.children, props)}</div>;
+const Main = props => React.cloneElement(props.children, props);
 
 const App = connect(mapStateToProps, mapDispatchToProps)(Main);
 
