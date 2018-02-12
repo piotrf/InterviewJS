@@ -3,7 +3,7 @@ import ReactModal from "react-modal";
 import { injectGlobal } from "styled-components";
 import { Provider } from "react-redux";
 import { render } from "react-dom";
-import { Router, Route, IndexRoute } from "react-router";
+import { Router, Route, IndexRoute, Redirect } from "react-router";
 
 import { color, reset } from "interviewjs-styleguide";
 
@@ -36,10 +36,11 @@ injectGlobal`
 const router = (
   <Provider store={store}>
     <Router history={history}>
-      <Route path="/" component={App}>
+      <Route path="composer" component={App}>
         <IndexRoute component={Listing} />
         <Route path="/stories/:storyId" component={Composer} />
       </Route>
+      <Redirect from="*" to="composer" />
     </Router>
   </Provider>
 );
