@@ -3,6 +3,7 @@
   "description": "",
   "version": "0.0.0",
   "author": "",
+  "homepage": "http://interviewjs.io/composer/",
   "dependencies": {
     "interviewjs-styleguide": "*",
     "prop-types": "15.6.0",
@@ -31,6 +32,7 @@
     "eslint-plugin-jsx-a11y": "6.0.3",
     "eslint-plugin-prettier": "2.6.0",
     "eslint-plugin-react": "7.6.1",
+    "gh-pages": "^1.1.0",
     "husky": "0.14.3",
     "lint-staged": "6.1.0",
     "node-plop": "0.9.0",
@@ -49,7 +51,8 @@
     "eslint-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
     "lint": "eslint **/*.js --quiet",
     "lint-fix": "eslint --fix",
-    "generate": "plop --plopfile generators/index.js"
+    "generate": "plop --plopfile generators/index.js",
+    "deploy": "npm run build && gh-pages -d build -e composer -a"
   },
   "lint-staged": {
     "{,!(build|generators)/**/}*.js": [
