@@ -8,11 +8,12 @@ import { color, font, radius, setSpace } from "../../../utils";
 require("./modals.css");
 
 const ModalEl = css.div`
-  font-family: ${font.serif};
   ${setSpace("pam")};
   background: ${color.white};
   border-radius: ${radius.h};
   box-shadow: 0 2px 4px ${color.greyLt};
+  color: ${color.blueD};
+  font-family: ${font.serif};
   height: ${props => (props.height ? `${props.height}` : `600px`)};
   position: relative;
   width: ${props => (props.width ? `${props.width}` : `600px`)};
