@@ -1,6 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Catalog, pageLoader } from "catalog";
+import { injectGlobal } from "styled-components";
+
+import { reset } from "./styles";
+
+/* eslint no-unused-expressions: 0 */
+const styles = injectGlobal`
+  ${reset};
+`;
 
 import InterviewJSLogo from "./static/interviewjs-logo.png";
 import theme from "./theme";

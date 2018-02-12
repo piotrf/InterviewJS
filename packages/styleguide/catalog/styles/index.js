@@ -1,1 +1,1 @@
-export { default as globals } from "./global.js";
+export { default as reset } from "./chunks/reset";

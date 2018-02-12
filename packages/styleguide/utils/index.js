@@ -1,7 +1,3 @@
-// vendor
-require("./vendor/reset.css");
-require("./vendor/tippy.css");
-
 // config
 export * from "./config/breakpoints";
 export * from "./config/colors";
