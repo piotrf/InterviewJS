@@ -8,6 +8,8 @@ import { Container, Text } from "../../components";
 
 const StoriesListHead = css(Container)`
   ${setSpace("mhl")};
+  ${setSpace("phm")};
+  ${setSpace("pbm")};
   color: ${color.greyM};
 `;
 const StoriesList = css.ol`
@@ -19,7 +21,7 @@ const StoriesList = css.ol`
 
 const Stories = props => (
   <Container>
-    <StoriesListHead dir="row" padded>
+    <StoriesListHead dir="row">
       <Container flex={[1, 1, "60%"]}>
         <Text typo="p5" nowrap>
           Title

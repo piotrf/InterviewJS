@@ -1,46 +1,53 @@
 import React from "react";
-import css from "styled-components";
 import { markdown, ReactSpecimen } from "catalog";
 
-import { Text } from "../components";
+import { Text, PageTitle } from "../components";
 
 export default () => markdown`
 
-  ## Title-level text
+  ## PageTitle
 
   ${(
     <ReactSpecimen>
-      <Text typo="h1">Some text</Text>
+      <PageTitle typo="h1">Renders as h1</PageTitle>
+    </ReactSpecimen>
+  )}
+
+  ## All title-level text
+
+  ${(
+    <ReactSpecimen>
+      <Text typo="h1">Renders as span</Text>
     </ReactSpecimen>
   )}
 
   ${(
     <ReactSpecimen>
-      <Text typo="h2">Some text</Text>
+      <Text typo="h2">Renders as span</Text>
     </ReactSpecimen>
   )}
 
   ${(
     <ReactSpecimen>
-      <Text typo="h3">Some text</Text>
+      <Text typo="h3">Renders as span</Text>
     </ReactSpecimen>
   )}
 
   ${(
     <ReactSpecimen>
-      <Text typo="h4">Some text</Text>
+      <Text typo="h4">Renders as span</Text>
     </ReactSpecimen>
   )}
 
   ${(
     <ReactSpecimen>
-      <Text typo="h5">Some text</Text>
+      <Text typo="h5">Renders as span</Text>
     </ReactSpecimen>
   )}
 
   ${(
     <ReactSpecimen>
-      <Text typo="h6">Some text</Text>
+      <Text typo="h6">Renders as span</Text>
     </ReactSpecimen>
   )}
 

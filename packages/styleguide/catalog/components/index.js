@@ -18,6 +18,7 @@ export { default as List } from "./lists/List.js";
 export { default as ListItem } from "./lists/ListItem.js";
 export { default as Message } from "./messages/Message.js";
 export { default as Modal } from "./modals/Modal.js";
+export { default as PageTitle } from "./texts/PageTitle.js";
 export { default as Preloader } from "./preloaders/Preloader.js";
 export { default as Separator } from "./separators/Separator.js";
 export { default as Text } from "./texts/Text.js";

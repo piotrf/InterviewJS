@@ -8,21 +8,51 @@ import {
   Container,
   Icon,
   Modal,
-  Text,
+  PageTitle,
   Separator,
-  breakpoint
+  breakpoint,
+  setSpace
 } from "interviewjs-styleguide";
 
-import { Page, PageBody, PageHead, PageTitle } from "../components";
-
-const ComposerPage = css(Page)`
+const Page = css.div`
+  align-content: stretch;
+  align-items: stretch;
   display: none;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
   ${breakpoint.tablet} {
     display: flex;
   }
 `;
 
-const MobileComposerPage = css(Container)`
+const PageHead = css.div`
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex: 1 0 auto;
+`;
+
+const PageBody = css.div`
+  ${setSpace("pbm")};
+  ${setSpace("phm")};
+  align-content: stretch;
+  align-items: stretch;
+  display: flex;
+  flex-direction: row;
+  flex: 0 1 100%;
+  & > *:first-child {
+    ${setSpace("mrs")};
+  }
+  & > *:nth-child(2) {
+    ${setSpace("mhs")};
+  }
+  & > *:last-child {
+    ${setSpace("mls")};
+  }
+`;
+
+const MobilePage = css(Container)`
   display: none;
   ${breakpoint.onlyphone} {
     align-content: center;
@@ -55,9 +85,9 @@ export default class Composer extends React.Component {
     const i = this.props.stories.findIndex(story => story.id === storyId);
     const story = this.props.stories[i];
     return [
-      <ComposerPage key="Page">
-        <PageHead dir="row" flex={[0, 0, "60px"]}>
-          <Container flex={[0, 1, `${100 / 3}%`]}>
+      <Page key="Page">
+        <PageHead>
+          <Container flex={[1, 1, `${100 / 3}%`]} padded>
             <Action onClick={() => this.props.router.push(`/`)}>
               <Icon name="chevron-left" size="x" /> Back
             </Action>
@@ -70,14 +100,14 @@ export default class Composer extends React.Component {
               <Icon name="palette" size="x" /> Customise
             </Action>
           </Container>
-          <Container flex={[1, 0, `${100 / 3}%`]} align="center">
+          <Container flex={[1, 1, `${100 / 3}%`]} align="center" padded>
             <PageTitle typo="h2">{story.title}</PageTitle>
           </Container>
-          <Container flex={[0, 1, `${100 / 3}%`]} align="right">
+          <Container flex={[1, 1, `${100 / 3}%`]} align="right" padded>
             <Action primary>Publish Story</Action>
           </Container>
         </PageHead>
-        <PageBody dir="row" flex={[1, 1, "100%"]}>
+        <PageBody>
           <Container
             fill="white"
             flex={[1, 1, `${100 / 3}%`]}
@@ -106,10 +136,10 @@ export default class Composer extends React.Component {
             Right
           </Container>
         </PageBody>
-      </ComposerPage>,
-      <MobileComposerPage key="Placeholder">
+      </Page>,
+      <MobilePage key="Placeholder">
         <Container>
-          <Text typo="h2">This Page works only on desktop</Text>
+          <PageTitle typo="h2">This Page works only on desktop</PageTitle>
           <Separator effect="silent" size="m" />
           <Actionbar>
             <Action primary fixed onClick={() => this.props.router.push(`/`)}>
@@ -117,7 +147,7 @@ export default class Composer extends React.Component {
             </Action>
           </Actionbar>
         </Container>
-      </MobileComposerPage>,
+      </MobilePage>,
       <Modal
         key="EditInfoModal"
         isOpen={this.state.showInfoModal}

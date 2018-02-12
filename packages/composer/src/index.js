@@ -23,6 +23,9 @@ injectGlobal`
     background: ${color.greyWt};
     height: 100%;
   }
+  #root {
+    height: 100%;
+  }
   ::selection { background: ${color.blueWt}; }
   ::-moz-selection { background: ${color.blueWt}; }
 `;

@@ -1,4 +1,4 @@
-import { Text } from "interviewjs-styleguide";
+import Text from "./Text";
 
 const PageTitle = Text.withComponent("h1");
 
