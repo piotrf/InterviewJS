@@ -9,7 +9,6 @@ export * from "./config/fonts";
 export * from "./config/fsizes";
 export * from "./config/leading";
 export * from "./config/radii";
-export * from "./config/settings";
 export * from "./config/sizes";
 export * from "./config/spaces";
 export * from "./config/time";

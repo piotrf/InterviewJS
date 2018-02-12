@@ -1,5 +1,6 @@
 import { darken, lighten } from "polished";
 
+/* eslint import/prefer-default-export: 0 */
 export const paint = (hex, val) => {
   switch (val) {
     case "Wt":
@@ -32,4 +33,3 @@ export const paint = (hex, val) => {
       break;
   }
 };
-
