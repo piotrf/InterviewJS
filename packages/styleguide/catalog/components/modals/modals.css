@@ -12,5 +12,13 @@
   top: 0;
   z-index: 5;
 }
+.ReactModal__Overlay {
+}
 .ReactModal__Content {
+  background: none;
+  border: none;
+  outline: none;
+}
+.ReactModal__Content:focus {
+  outline: none;
 }

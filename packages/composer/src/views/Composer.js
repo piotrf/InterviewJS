@@ -1,5 +1,6 @@
 import React from "react";
 import css from "styled-components";
+import ReactModal from "react-modal";
 import { arrayOf, object, shape, string } from "prop-types";
 
 import {
@@ -148,56 +149,28 @@ export default class Composer extends React.Component {
           </Actionbar>
         </Container>
       </MobilePage>,
-      <Modal
-        key="EditInfoModal"
+      <ReactModal
+        // onAfterOpen={handleAfterOpenFunc}
+        bodyOpenClassName="ReactModal__Body--open"
+        className="ReactModal__Content"
         isOpen={this.state.showInfoModal}
-        // onAfterOpen={handleAfterOpenFunc}
+        key="EditInfoModal"
         onRequestClose={() => this.toggleInfoModal()}
-        // style={{ overlay: {}, content: {} }}
-        contentLabel="Edit info modal"
-        portalClassName="ReactModalPortal"
         overlayClassName="ReactModal__Overlay"
-        className="ReactModal__Content"
-        bodyOpenClassName="ReactModal__Body--open"
-        ariaHideApp={false}
-        shouldFocusAfterRender
-        shouldCloseOnOverlayClick
-        shouldCloseOnEsc
-        shouldReturnFocusAfterClose
-        role="dialog"
-        parentSelector={() => document.body}
-        aria={{
-          labelledby: "heading",
-          describedby: "full_description"
-        }}
+        portalClassName="ReactModalPortal"
       >
-        Edit Info
-      </Modal>,
-      <Modal
-        key="CustomiseModal"
-        isOpen={this.state.showCustomiseModal}
+        <Modal>Edit Info</Modal>
+      </ReactModal>,
+      <ReactModal
         // onAfterOpen={handleAfterOpenFunc}
+        styles
+        isOpen={this.state.showCustomiseModal}
+        key="CustomiseModal"
+        style={{ overlay: {}, content: {} }}
         onRequestClose={() => this.toggleCustomiseModal()}
-        // style={{ overlay: {}, content: {} }}
-        contentLabel="Customise modal"
-        portalClassName="ReactModalPortal"
-        overlayClassName="ReactModal__Overlay"
-        className="ReactModal__Content"
-        bodyOpenClassName="ReactModal__Body--open"
-        ariaHideApp={false}
-        shouldFocusAfterRender
-        shouldCloseOnOverlayClick
-        shouldCloseOnEsc
-        shouldReturnFocusAfterClose
-        role="dialog"
-        parentSelector={() => document.body}
-        aria={{
-          labelledby: "heading",
-          describedby: "full_description"
-        }}
       >
-        Customise
-      </Modal>
+        <Modal>Customise</Modal>
+      </ReactModal>
     ];
   }
 }

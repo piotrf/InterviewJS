@@ -135,6 +135,11 @@ const pages = [
     title: "Messages"
   },
   {
+    content: require("./pages/modals.js"),
+    path: "/modals",
+    title: "Modals"
+  },
+  {
     content: require("./pages/preloaders.js"),
     path: "/preloaders",
     title: "Preloaders"

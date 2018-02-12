@@ -1,4 +1,5 @@
 import React from "react";
+import ReactModal from "react-modal";
 import { injectGlobal } from "styled-components";
 import { Provider } from "react-redux";
 import { render } from "react-dom";
@@ -11,6 +12,8 @@ import Composer from "./views/Composer";
 import Listing from "./views/Listing";
 
 import store, { history } from "./store";
+
+ReactModal.defaultStyles = {};
 
 /* eslint no-unused-expressions: 0 */
 injectGlobal`
