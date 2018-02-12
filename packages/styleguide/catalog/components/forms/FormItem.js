@@ -30,7 +30,7 @@ const FormItem = css.fieldset`
     position: absolute;
     right: 2px;
     text-align: center;
-    top: 0;
+    top: 2px;
     width: 20px;
     z-index: 200;
   }

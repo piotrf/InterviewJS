@@ -5,11 +5,12 @@ import { bool, string } from "prop-types";
 import { color, font, radius, setSpace, setType, time } from "../../../utils";
 
 const Input = css.input`
-  ${setSpace("phs")};
+  ${setSpace("phm")};
   ${setSpace("pvm")};
   ${setType("x")};
   border-radius: ${radius.m};
   border: 1px solid ${color.greyLt};
+  box-shadow: none;
   color: ${color.blueBlk};
   font-family: ${font.serif};
   position: relative;
@@ -41,7 +42,8 @@ const Input = css.input`
     if (place !== null) {
       return `border-radius: 0`;
     }
-  }}
+  }};
+  ${({ nooffset }) => (nooffset ? `right: 0; left: 0;` : ``)};
 `;
 
 const Textarea = Input.withComponent("textarea");
