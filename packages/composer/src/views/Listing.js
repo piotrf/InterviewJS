@@ -11,8 +11,7 @@ import {
   Story,
   UserMenu,
   color,
-  setHeight,
-  setSpace
+  setHeight
 } from "interviewjs-styleguide";
 
 const Page = css.div`
