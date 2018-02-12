@@ -1,6 +1,5 @@
 import React from "react";
 import css from "styled-components";
-import ReactModal from "react-modal";
 import { arrayOf, object, shape, string } from "prop-types";
 
 import {
@@ -8,37 +7,22 @@ import {
   Actionbar,
   Container,
   Icon,
+  Modal,
   Text,
   Separator,
-  breakpoint,
-  setSpace
+  breakpoint
 } from "interviewjs-styleguide";
 
-const PageTitle = Text.withComponent("h1");
-const Page = css(Container)`
+import { Page, PageBody, PageHead, PageTitle } from "../components";
+
+const ComposerPage = css(Page)`
   display: none;
   ${breakpoint.tablet} {
-    align-content: stretch;
-    align-items: stretch;
     display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    height: 100%;
   }
 `;
-const PageHead = css(Container)`
-  ${setSpace("pvs")};
-  ${setSpace("phm")};
-`;
-const PageBody = css(Container)`
-  ${setSpace("phm")};
-  ${setSpace("pbm")};
-  align-items: stretch;
-  & > * {
-    ${setSpace("mhs")};
-  }
-`;
-const PagePlaceholder = css(Container)`
+
+const MobileComposerPage = css(Container)`
   display: none;
   ${breakpoint.onlyphone} {
     align-content: center;
@@ -71,7 +55,7 @@ export default class Composer extends React.Component {
     const i = this.props.stories.findIndex(story => story.id === storyId);
     const story = this.props.stories[i];
     return [
-      <Page key="Page">
+      <ComposerPage key="Page">
         <PageHead dir="row" flex={[0, 0, "60px"]}>
           <Container flex={[0, 1, `${100 / 3}%`]}>
             <Action onClick={() => this.props.router.push(`/`)}>
@@ -87,9 +71,7 @@ export default class Composer extends React.Component {
             </Action>
           </Container>
           <Container flex={[1, 0, `${100 / 3}%`]} align="center">
-            <PageTitle typo="h2" unwrap>
-              {story.title}
-            </PageTitle>
+            <PageTitle typo="h2">{story.title}</PageTitle>
           </Container>
           <Container flex={[0, 1, `${100 / 3}%`]} align="right">
             <Action primary>Publish Story</Action>
@@ -124,8 +106,8 @@ export default class Composer extends React.Component {
             Right
           </Container>
         </PageBody>
-      </Page>,
-      <PagePlaceholder key="Placeholder">
+      </ComposerPage>,
+      <MobileComposerPage key="Placeholder">
         <Container>
           <Text typo="h2">This Page works only on desktop</Text>
           <Separator effect="silent" size="m" />
@@ -135,8 +117,8 @@ export default class Composer extends React.Component {
             </Action>
           </Actionbar>
         </Container>
-      </PagePlaceholder>,
-      <ReactModal
+      </MobileComposerPage>,
+      <Modal
         key="EditInfoModal"
         isOpen={this.state.showInfoModal}
         // onAfterOpen={handleAfterOpenFunc}
@@ -160,8 +142,8 @@ export default class Composer extends React.Component {
         }}
       >
         Edit Info
-      </ReactModal>,
-      <ReactModal
+      </Modal>,
+      <Modal
         key="CustomiseModal"
         isOpen={this.state.showCustomiseModal}
         // onAfterOpen={handleAfterOpenFunc}
@@ -185,7 +167,7 @@ export default class Composer extends React.Component {
         }}
       >
         Customise
-      </ReactModal>
+      </Modal>
     ];
   }
 }

@@ -1,5 +1,4 @@
 import React from "react";
-import css from "styled-components";
 import { arrayOf, object, shape, string } from "prop-types";
 
 import {
@@ -7,28 +6,10 @@ import {
   Container,
   Stories,
   Story,
-  Text,
-  UserMenu,
-  setSpace
+  UserMenu
 } from "interviewjs-styleguide";
 
-const Page = css(Container)`
-  align-content: stretch;
-  align-items: stretch;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  height: 100%;
-`;
-const PageTitle = Text.withComponent("h1");
-const PageHead = css(Container)`
-  ${setSpace("pvs")};
-  ${setSpace("phm")};
-`;
-const PageBody = css(Container)`
-  ${setSpace("phm")};
-  justify-content: center;
-`;
+import { Page, PageBody, PageHead, PageTitle } from "../components";
 
 const Listing = props => (
   <Page>
@@ -37,9 +18,7 @@ const Listing = props => (
         <UserMenu data={props.user} />
       </Container>
       <Container flex={[1, 0, `${100 / 3}%`]} align="center">
-        <PageTitle typo="h1" unwrap>
-          Your Stories
-        </PageTitle>
+        <PageTitle typo="h1">Your Stories</PageTitle>
       </Container>
       <Container flex={[0, 1, `${100 / 3}%`]} align="right">
         <Action primary onClick={() => console.log("launch wizard")}>
@@ -47,7 +26,7 @@ const Listing = props => (
         </Action>
       </Container>
     </PageHead>
-    <PageBody flex={[1, 1, "100%"]}>
+    <PageBody>
       <Container limit>
         <Stories>
           {props.stories.map((story, i) => (
