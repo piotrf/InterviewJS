@@ -14,6 +14,7 @@ import {
   ModalHead,
   PageTitle,
   Separator,
+  StoryDetailsForm,
   breakpoint,
   setSpace
 } from "interviewjs-styleguide";
@@ -83,6 +84,10 @@ export default class Composer extends React.Component {
   }
   toggleCustomiseModal() {
     this.setState({ showCustomiseModal: !this.state.showCustomiseModal });
+  }
+  handleStoryDetailsForm(e) {
+    e.preventDefault();
+    console.log(this.refs);
   }
   render() {
     const { storyId } = this.props.params;
@@ -163,7 +168,9 @@ export default class Composer extends React.Component {
           <ModalHead>
             <PageTitle typo="h1">Edit story details</PageTitle>
           </ModalHead>
-          <ModalBody>Body</ModalBody>
+          <ModalBody>
+            <StoryDetailsForm />
+          </ModalBody>
           <ModalFoot>
             <Actionbar>
               <Action fixed secondary onClick={() => this.toggleInfoModal()}>
@@ -192,8 +199,8 @@ export default class Composer extends React.Component {
             <Actionbar>
               <Action
                 fixed
-                secondary
                 onClick={() => this.toggleCustomiseModal()}
+                secondary
               >
                 Cancel
               </Action>

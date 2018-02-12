@@ -4,7 +4,7 @@ import { setSpace } from "../../../utils";
 
 const ModalFoot = css.div`
   ${setSpace("pam")};
-  flex: 1 2 auto;
+  flex: 0 2 auto;
   text-align: center;
 `;
 

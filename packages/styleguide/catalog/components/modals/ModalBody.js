@@ -4,8 +4,9 @@ import { setSpace } from "../../../utils";
 
 const ModalBody = css.div`
   ${setSpace("pam")};
-  flex: 2 1 100%;
+  flex: 2 1 auto;
   overflow-y: auto;
+  position: relative;
 `;
 
 export default ModalBody;

@@ -5,7 +5,7 @@ import { color, setSpace } from "../../../utils";
 const ModalHead = css.div`
   ${setSpace("pam")};
   color: ${color.blueBlk};
-  flex: 1 2 auto;
+  flex: 0 2 auto;
   text-align: center;
 `;
 

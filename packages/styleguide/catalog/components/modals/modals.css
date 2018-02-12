@@ -1,18 +1,16 @@
 .ReactModalPortal {
 }
 .ReactModal__Overlay {
-  align-items: center;
   background: rgba(247,247,247,0.75);
   bottom: 0;
-  display: flex;
-  justify-content: center;
+  height: 100%;
   left: 0;
   position: fixed;
   right: 0;
   top: 0;
+  width: 100%;
   z-index: 5;
-}
-.ReactModal__Overlay {
+  overflow-y: auto;
 }
 .ReactModal__Content {
   background: none;

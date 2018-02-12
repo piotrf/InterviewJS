@@ -3,20 +3,32 @@ import React from "react";
 import { array, bool, func, node, oneOfType, string } from "prop-types";
 
 import { ModalClose } from "../../components";
-import { color, font, radius, setSpace } from "../../../utils";
+import { breakpoint, color, font, radius, setSpace } from "../../../utils";
 
 require("./modals.css");
 
 const ModalEl = css.div`
   ${setSpace("pam")};
   background: ${color.white};
-  border-radius: ${radius.h};
   box-shadow: 0 2px 4px ${color.greyLt};
   color: ${color.blueD};
   font-family: ${font.serif};
-  height: ${props => (props.height ? `${props.height}` : `600px`)};
-  position: relative;
-  width: ${props => (props.width ? `${props.width}` : `600px`)};
+  left: 50%;
+  max-width: 660px;
+  overflow-y: auto;
+  position: fixed;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  ${breakpoint.onlyphone} {
+    height: 100%;
+    width: 100%;
+  }
+  ${breakpoint.tablet} {
+    border-radius: ${radius.h};
+    height: ${props => (props.height ? `${props.height}` : `auto`)};
+    max-height: calc(100% - 80px);
+    width: ${props => (props.width ? `${props.width}` : `auto`)};
+  }
   & > button {
     ${setSpace("mrm")};
     ${setSpace("mtm")};
@@ -28,7 +40,7 @@ const ModalEl = css.div`
 
 const ModalContent = css.div`
   align-content: stretch;
-  align-items: center;
+  align-items: stretch;
   display: flex;
   flex-direction: column;
   height: 100%;
