@@ -1,16 +1,31 @@
-import { Provider } from "react-redux";
 import React from "react";
+import { injectGlobal } from "styled-components";
+import { Provider } from "react-redux";
 import { render } from "react-dom";
 import { Router, Route, IndexRoute } from "react-router";
 
-/* eslint no-unused-vars: 0 */
-import globalStyles from "interviewjs-styleguide";
-
-import store, { history } from "./store";
+import { color, reset } from "interviewjs-styleguide";
 
 import App from "./App";
 import Composer from "./views/Composer";
 import Listing from "./views/Listing";
+
+import store, { history } from "./store";
+
+/* eslint no-unused-expressions: 0 */
+injectGlobal`
+  ${reset};
+  html {
+    height: 100%;
+    width: 100%;
+  }
+  body {
+    background: ${color.greyWt};
+    height: 100%;
+  }
+  ::selection { background: ${color.blueWt}; }
+  ::-moz-selection { background: ${color.blueWt}; }
+`;
 
 const router = (
   <Provider store={store}>
