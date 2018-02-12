@@ -2,7 +2,7 @@
 }
 .ReactModal__Overlay {
   align-items: center;
-  background: rgba(247,247,247,0.5);
+  background: rgba(247,247,247,0.75);
   bottom: 0;
   display: flex;
   justify-content: center;

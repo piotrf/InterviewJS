@@ -9,6 +9,9 @@ import {
   Container,
   Icon,
   Modal,
+  ModalBody,
+  ModalFoot,
+  ModalHead,
   PageTitle,
   Separator,
   breakpoint,
@@ -151,25 +154,55 @@ export default class Composer extends React.Component {
       </MobilePage>,
       <ReactModal
         // onAfterOpen={handleAfterOpenFunc}
-        bodyOpenClassName="ReactModal__Body--open"
-        className="ReactModal__Content"
+        ariaHideApp={false}
         isOpen={this.state.showInfoModal}
         key="EditInfoModal"
         onRequestClose={() => this.toggleInfoModal()}
-        overlayClassName="ReactModal__Overlay"
-        portalClassName="ReactModalPortal"
       >
-        <Modal>Edit Info</Modal>
+        <Modal handleClose={() => this.toggleInfoModal()}>
+          <ModalHead>
+            <PageTitle typo="h1">Edit story details</PageTitle>
+          </ModalHead>
+          <ModalBody>Body</ModalBody>
+          <ModalFoot>
+            <Actionbar>
+              <Action fixed secondary onClick={() => this.toggleInfoModal()}>
+                Cancel
+              </Action>
+              <Action fixed primary onClick={e => console.log("save")}>
+                Save
+              </Action>
+            </Actionbar>
+          </ModalFoot>
+        </Modal>
       </ReactModal>,
       <ReactModal
         // onAfterOpen={handleAfterOpenFunc}
-        styles
+        ariaHideApp={false}
         isOpen={this.state.showCustomiseModal}
         key="CustomiseModal"
-        style={{ overlay: {}, content: {} }}
         onRequestClose={() => this.toggleCustomiseModal()}
       >
-        <Modal>Customise</Modal>
+        <Modal handleClose={() => this.toggleCustomiseModal()}>
+          <ModalHead>
+            <PageTitle typo="h1">Customise</PageTitle>
+          </ModalHead>
+          <ModalBody>Body</ModalBody>
+          <ModalFoot>
+            <Actionbar>
+              <Action
+                fixed
+                secondary
+                onClick={() => this.toggleCustomiseModal()}
+              >
+                Cancel
+              </Action>
+              <Action fixed primary onClick={e => console.log("save")}>
+                Save
+              </Action>
+            </Actionbar>
+          </ModalFoot>
+        </Modal>
       </ReactModal>
     ];
   }
