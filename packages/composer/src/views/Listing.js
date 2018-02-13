@@ -52,7 +52,11 @@ const PageBody = css.div`
 `;
 
 const newStory = {
-  byline: {},
+  byline: {
+    url: "https://someurl.com",
+    author: "JR",
+    pubDate: "Dec 2017"
+  },
   context: "Some context",
   id: "sdfs",
   interviewees: [],
