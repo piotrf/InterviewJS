@@ -6,7 +6,7 @@ function stories(state = [], action) {
     case "CREATE_STORY":
       console.log("creating a story");
       console.log("action", action);
-      return [...state, action.payload];
+      return [action.payload, ...state];
     case "DELETE_STORY":
       console.log("deleting a story");
       return [...state.slice(0, action.i), ...state.slice(action.i + 1)];
