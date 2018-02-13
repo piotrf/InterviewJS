@@ -11,7 +11,7 @@ const storyObj = {
   byline: {
     author: "Piotr F.",
     url: "https://twitter.com/presentday",
-    moddate: "11-03-2017"
+    pubDate: "11-03-2017"
   },
   intro: "Text",
   context: "Context",
@@ -45,15 +45,27 @@ export default () => markdown`
 
   ${(
     <ReactSpecimen>
-      <Story data={storyObj} handleOpen={evt => console.log(evt)} />
+      <Story
+        data={storyObj}
+        handleDelete={evt => console.log(evt)}
+        handleOpen={evt => console.log(evt)}
+      />
     </ReactSpecimen>
   )}
 
   ${(
     <ReactSpecimen>
       <Stories>
-        <Story data={storyObj} handleOpen={evt => console.log(evt)} />
-        <Story data={storyObj} handleOpen={evt => console.log(evt)} />
+        <Story
+          data={storyObj}
+          handleDelete={evt => console.log(evt)}
+          handleOpen={evt => console.log(evt)}
+        />
+        <Story
+          data={storyObj}
+          handleDelete={evt => console.log(evt)}
+          handleOpen={evt => console.log(evt)}
+        />
       </Stories>
     </ReactSpecimen>
   )}

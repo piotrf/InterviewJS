@@ -95,9 +95,11 @@ export default class Listing extends React.Component {
                 <Story
                   data={story}
                   handleDelete={() => this.props.deleteStory(i)}
+                  handleOpen={() =>
+                    this.props.router.push(`stories/${story.id}`)
+                  }
                   i={i}
                   key={story.id}
-                  onClick={() => this.props.router.push(`stories/${story.id}`)}
                 />
               ))}
             </Stories>

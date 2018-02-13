@@ -50,7 +50,14 @@ const AvatarListItem = css.li`
 
 const Story = props => (
   <Container>
-    <StoryEl dir="row" fill="white" padded shift {...props}>
+    <StoryEl
+      {...props}
+      dir="row"
+      fill="white"
+      onClick={props.handleOpen}
+      padded
+      shift
+    >
       <Container flex={[1, 2, "60%"]}>
         <StoryTitle typo="h2">{props.data.title}</StoryTitle>
         <StorySummary typo="p5">{props.data.intro}</StorySummary>
@@ -97,7 +104,8 @@ Story.propTypes = {
     intro: string.isRequired,
     title: string.isRequired
   }).isRequired,
-  handleDelete: func.isRequired
+  handleDelete: func.isRequired,
+  handleOpen: func.isRequired
 };
 
 Story.defaultProps = {};
