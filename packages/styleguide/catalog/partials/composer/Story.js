@@ -56,7 +56,7 @@ const Story = props => (
         <StorySummary typo="p5">{props.data.intro}</StorySummary>
       </Container>
       <Container flex={[2, 1, "20%"]} align="center">
-        <StoryDate typo="p5">{props.data.byline.moddate}</StoryDate>
+        <StoryDate typo="p5">{props.data.byline.pubDate}</StoryDate>
       </Container>
       <Container flex={[2, 1, "20%"]} align="right">
         <AvatarList>
@@ -91,7 +91,7 @@ const Story = props => (
 Story.propTypes = {
   data: shape({
     byline: shape({
-      moddate: string.isRequired
+      pubDate: string.isRequired
     }).isRequired,
     id: string.isRequried,
     intro: string.isRequired,

@@ -7,7 +7,7 @@ const stories = [
     byline: {
       author: "Piotr F.",
       url: "https://twitter.com/presentday",
-      moddate: "11-03-2017"
+      pubDate: "11-03-2017"
     },
     intro:
       "Investigate whether Obamacare can make healthcare better for America’s poor",
@@ -43,7 +43,7 @@ const stories = [
     byline: {
       author: "Laurian g.",
       url: "https://twitter.com/gridinoc",
-      moddate: "01-12-2016"
+      pubDate: "01-12-2016"
     },
     intro: "Short Intro",
     context: "Context",
@@ -78,7 +78,7 @@ const stories = [
     byline: {
       author: "Laurian g.",
       url: "https://twitter.com/gridinoc",
-      moddate: "24-07-2016"
+      pubDate: "24-07-2016"
     },
     intro: "Short Intro",
     context: "Context",
@@ -113,7 +113,7 @@ const stories = [
     byline: {
       author: "Laurian g.",
       url: "https://twitter.com/gridinoc",
-      moddate: "12-01-2015"
+      pubDate: "12-01-2015"
     },
     intro:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",

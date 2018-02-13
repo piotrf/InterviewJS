@@ -1,11 +1,28 @@
 import uuidv4 from "uuid/v4";
 
-export function createStory(title, intro) {
+export function createStory({
+  author = "",
+  byline = {},
+  context = "",
+  interviewees = [],
+  intro = "",
+  media = [],
+  storyline = [],
+  title = ""
+}) {
   return {
     type: "CREATE_STORY",
-    id: uuidv4(),
-    intro,
-    title
+    payload: {
+      author,
+      byline,
+      context,
+      id: uuidv4(),
+      interviewees,
+      intro,
+      media,
+      storyline,
+      title
+    }
   };
 }
 

@@ -51,6 +51,17 @@ const PageHead = css.div`
 const PageBody = css.div`
 `;
 
+const newStory = {
+  byline: {},
+  context: "Some context",
+  id: "sdfs",
+  interviewees: [],
+  intro: "An intro",
+  media: {},
+  storyline: [],
+  title: "A new story"
+};
+
 export default class Listing extends React.Component {
   constructor() {
     super();
@@ -67,7 +78,7 @@ export default class Listing extends React.Component {
             <PageTitle typo="h1">Your Stories</PageTitle>
           </Container>
           <Container flex={[1, 1, `${100 / 3}%`]} align="right" padded>
-            <Action primary onClick={this.props.createStory}>
+            <Action primary onClick={() => this.props.createStory(newStory)}>
               Create new
             </Action>
           </Container>
