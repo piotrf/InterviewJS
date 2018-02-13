@@ -2,10 +2,17 @@ import uuidv4 from "uuid/v4";
 
 export function createStory(title, intro) {
   return {
+    type: "CREATE_STORY",
     id: uuidv4(),
     intro,
-    title,
-    type: "CREATE_STORY"
+    title
+  };
+}
+
+export function deleteStory(i) {
+  return {
+    type: "DELETE_STORY",
+    i
   };
 }
 

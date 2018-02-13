@@ -55,10 +55,6 @@ export default class Listing extends React.Component {
   constructor() {
     super();
     this.state = {};
-    this.createStory = this.createStory.bind(this);
-  }
-  createStory() {
-    this.props.createStory("a title", "an intro", console.log(this.props));
   }
   render() {
     return (
@@ -71,7 +67,7 @@ export default class Listing extends React.Component {
             <PageTitle typo="h1">Your Stories</PageTitle>
           </Container>
           <Container flex={[1, 1, `${100 / 3}%`]} align="right" padded>
-            <Action primary onClick={this.createStory}>
+            <Action primary onClick={this.props.createStory}>
               Create new
             </Action>
           </Container>
@@ -82,9 +78,10 @@ export default class Listing extends React.Component {
             <Stories>
               {this.props.stories.map((story, i) => (
                 <Story
-                  key={story.id}
-                  i={i}
                   data={story}
+                  handleDelete={() => this.props.deleteStory(i)}
+                  i={i}
+                  key={story.id}
                   onClick={() => this.props.router.push(`stories/${story.id}`)}
                 />
               ))}
@@ -98,6 +95,7 @@ export default class Listing extends React.Component {
 
 Listing.propTypes = {
   createStory: func,
+  deleteStory: func,
   router: object,
   stories: arrayOf(object),
   user: shape({
@@ -109,6 +107,7 @@ Listing.propTypes = {
 
 Listing.defaultProps = {
   createStory: null,
+  deleteStory: null,
   stories: [],
   user: {},
   router: null

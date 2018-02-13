@@ -4,6 +4,7 @@
 function stories(state = [], action) {
   switch (action.type) {
     case "CREATE_STORY":
+      console.log("creating a story");
       const newStory = {
         id: action.id,
         intro: action.intro,
@@ -11,6 +12,9 @@ function stories(state = [], action) {
       };
       state.push(newStory);
       return state;
+    case "DELETE_STORY":
+      console.log("deleting a story");
+      return [...state.slice(0, action.i), ...state.slice(action.i + 1)];
     default:
       return state;
   }
