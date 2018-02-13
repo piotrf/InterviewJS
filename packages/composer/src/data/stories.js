@@ -4,11 +4,9 @@ const stories = [
   {
     title: "Obamacare — One Year In",
     id: uuidv4(),
-    byline: {
-      author: "Piotr F.",
-      link: "https://twitter.com/presentday",
-      pubDate: "11-03-2017"
-    },
+    byName: "Piotr F.",
+    byLink: "https://twitter.com/presentday",
+    pubDate: "11-03-2017",
     intro:
       "Investigate whether Obamacare can make healthcare better for America’s poor",
     context: "Context",
@@ -40,11 +38,9 @@ const stories = [
   {
     title: "Top 10 Big Data Trends for 2017",
     id: uuidv4(),
-    byline: {
-      author: "Laurian g.",
-      link: "https://twitter.com/gridinoc",
-      pubDate: "01-12-2016"
-    },
+    byName: "Laurian g.",
+    byLink: "https://twitter.com/gridinoc",
+    pubDate: "01-12-2016",
     intro: "Short Intro",
     context: "Context",
     media: {
@@ -75,11 +71,9 @@ const stories = [
   {
     title: "Another interviewJS story",
     id: uuidv4(),
-    byline: {
-      author: "Laurian g.",
-      link: "https://twitter.com/gridinoc",
-      pubDate: "24-07-2016"
-    },
+    byName: "Laurian g.",
+    byLink: "https://twitter.com/gridinoc",
+    pubDate: "24-07-2016",
     intro: "Short Intro",
     context: "Context",
     media: {
@@ -110,11 +104,9 @@ const stories = [
   {
     title: "Yet another interview",
     id: uuidv4(),
-    byline: {
-      author: "Laurian g.",
-      link: "https://twitter.com/gridinoc",
-      pubDate: "12-01-2015"
-    },
+    byName: "Laurian g.",
+    byLink: "https://twitter.com/gridinoc",
+    pubDate: "12-01-2015",
     intro:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
     context: "Context",

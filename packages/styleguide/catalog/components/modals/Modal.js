@@ -23,9 +23,9 @@ const ModalEl = css.div`
     width: 100%;
   }
   ${breakpoint.tablet} {
-    border-radius: ${radius.h};
+    border-radius: ${({ wizard }) => (wizard ? `` : radius.h)};
     max-height: calc(100% - 80px);
-    max-width: 680px;
+    max-width: ${({ wizard }) => (wizard ? `` : `680px`)};
   }
   & > button {
     ${setSpace("mrm")};
@@ -34,6 +34,14 @@ const ModalEl = css.div`
     right: 0;
     top: 0;
   }
+  ${({ wizard }) =>
+    wizard
+      ? `
+  max-height: 100%;
+  min-height: 100%;
+  width: 100%;
+  `
+      : ``};
 `;
 
 const ModalContent = css.div`
@@ -55,12 +63,16 @@ const Modal = props => (
 Modal.propTypes = {
   children: oneOfType([array, string, node]).isRequired,
   handleClose: func,
-  persistent: bool
+  height: string,
+  persistent: bool,
+  width: string
 };
 
 Modal.defaultProps = {
   handleClose: null,
-  persistent: false
+  height: null,
+  persistent: false,
+  width: null
 };
 
 export default Modal;

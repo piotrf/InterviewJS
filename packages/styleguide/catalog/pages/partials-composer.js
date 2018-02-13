@@ -8,11 +8,9 @@ import SampleAvatar from "../static/avatar.png";
 const storyObj = {
   title: "Obamacare — One Year In",
   id: "1161022966406956503",
-  byline: {
-    author: "Piotr F.",
-    link: "https://twitter.com/presentday",
-    pubDate: "11-03-2017"
-  },
+  author: "Piotr F.",
+  link: "https://twitter.com/presentday",
+  pubDate: "11-03-2017",
   intro: "Text",
   context: "Context",
   media: {

@@ -70,8 +70,8 @@ const MobilePage = css(Container)`
 `;
 
 export default class Composer extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       showInfoModal: false,
       showCustomiseModal: false

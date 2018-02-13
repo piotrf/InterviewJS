@@ -5,6 +5,7 @@ function stories(state = [], action) {
   switch (action.type) {
     case "CREATE_STORY":
       console.log("creating a story");
+      console.log("action", action);
       return [...state, action.payload];
     case "DELETE_STORY":
       console.log("deleting a story");

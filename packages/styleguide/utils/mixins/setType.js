@@ -12,7 +12,7 @@ export const setType = size => {
       break;
     case "l":
       return `${fluid("font-size", fsize.l[0], fsize.l[1])}line-height: ${
-        lead.s
+        lead.l
       }`;
       break;
     case "s":

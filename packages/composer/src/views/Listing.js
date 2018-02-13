@@ -1,7 +1,6 @@
 /* eslint react/forbid-prop-types: 0 */
-
-import React from "react";
 import css from "styled-components";
+import React from "react";
 import { arrayOf, func, object, shape, string } from "prop-types";
 
 import {
@@ -15,6 +14,7 @@ import {
   color,
   setHeight
 } from "interviewjs-styleguide";
+import { CreateStoryModal } from "../modals";
 
 const Page = css.div`
   align-content: stretch;
@@ -51,28 +51,17 @@ const PageHead = css.div`
 const PageBody = css.div`
 `;
 
-const newStory = {
-  byline: {
-    url: "https://someurl.com",
-    author: "JR",
-    pubDate: "Dec 2017"
-  },
-  context: "Some context",
-  id: "sdfs",
-  interviewees: [],
-  intro: "An intro",
-  media: {},
-  storyline: [],
-  title: "A new story"
-};
-
 export default class Listing extends React.Component {
-  constructor() {
-    super();
-    this.state = {};
+  constructor(props) {
+    super(props);
+    this.state = { createStoryModal: false };
+    this.toggleCreateStoryModal = this.toggleCreateStoryModal.bind(this);
+  }
+  toggleCreateStoryModal() {
+    this.setState({ createStoryModal: !this.state.createStoryModal });
   }
   render() {
-    return (
+    return [
       <Page key="Page">
         <PageHead>
           <Container flex={[1, 1, `${100 / 3}%`]} padded>
@@ -82,7 +71,7 @@ export default class Listing extends React.Component {
             <PageTitle typo="h1">Your Stories</PageTitle>
           </Container>
           <Container flex={[1, 1, `${100 / 3}%`]} align="right" padded>
-            <Action primary onClick={() => this.props.createStory(newStory)}>
+            <Action primary onClick={() => this.toggleCreateStoryModal()}>
               Create new
             </Action>
           </Container>
@@ -105,8 +94,14 @@ export default class Listing extends React.Component {
             </Stories>
           </Container>
         </PageBody>
-      </Page>
-    );
+      </Page>,
+      <CreateStoryModal
+        handleClose={this.toggleCreateStoryModal}
+        handleCreateStory={this.props.createStory}
+        isOpen={this.state.createStoryModal}
+        key="CreateStoryModal"
+      />
+    ];
   }
 }
 
