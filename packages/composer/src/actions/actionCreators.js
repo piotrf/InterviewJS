@@ -2,7 +2,11 @@ import uuidv4 from "uuid/v4";
 
 export function createStory({
   author = "",
-  byline = {},
+  byline = {
+    author: "",
+    link: "",
+    pubDate: ""
+  },
   context = "",
   interviewees = [],
   intro = "",

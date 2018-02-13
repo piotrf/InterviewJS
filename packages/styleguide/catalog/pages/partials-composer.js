@@ -10,7 +10,7 @@ const storyObj = {
   id: "1161022966406956503",
   byline: {
     author: "Piotr F.",
-    url: "https://twitter.com/presentday",
+    link: "https://twitter.com/presentday",
     pubDate: "11-03-2017"
   },
   intro: "Text",

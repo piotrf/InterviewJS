@@ -6,7 +6,7 @@ const stories = [
     id: uuidv4(),
     byline: {
       author: "Piotr F.",
-      url: "https://twitter.com/presentday",
+      link: "https://twitter.com/presentday",
       pubDate: "11-03-2017"
     },
     intro:
@@ -42,7 +42,7 @@ const stories = [
     id: uuidv4(),
     byline: {
       author: "Laurian g.",
-      url: "https://twitter.com/gridinoc",
+      link: "https://twitter.com/gridinoc",
       pubDate: "01-12-2016"
     },
     intro: "Short Intro",
@@ -77,7 +77,7 @@ const stories = [
     id: uuidv4(),
     byline: {
       author: "Laurian g.",
-      url: "https://twitter.com/gridinoc",
+      link: "https://twitter.com/gridinoc",
       pubDate: "24-07-2016"
     },
     intro: "Short Intro",
@@ -112,7 +112,7 @@ const stories = [
     id: uuidv4(),
     byline: {
       author: "Laurian g.",
-      url: "https://twitter.com/gridinoc",
+      link: "https://twitter.com/gridinoc",
       pubDate: "12-01-2015"
     },
     intro:
