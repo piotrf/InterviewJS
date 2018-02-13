@@ -1,6 +1,8 @@
+/* eslint react/forbid-prop-types: 0 */
+
 import React from "react";
 import css from "styled-components";
-import { arrayOf, object, shape, string } from "prop-types";
+import { arrayOf, func, object, shape, string } from "prop-types";
 
 import {
   Action,
@@ -49,40 +51,54 @@ const PageHead = css.div`
 const PageBody = css.div`
 `;
 
-const Listing = props => (
-  <Page key="Page">
-    <PageHead>
-      <Container flex={[1, 1, `${100 / 3}%`]} padded>
-        <UserMenu data={props.user} />
-      </Container>
-      <Container flex={[1, 1, `${100 / 3}%`]} align="center" padded>
-        <PageTitle typo="h1">Your Stories</PageTitle>
-      </Container>
-      <Container flex={[1, 1, `${100 / 3}%`]} align="right" padded>
-        <Action primary onClick={() => console.log("launch wizard")}>
-          Create new
-        </Action>
-      </Container>
-    </PageHead>
-    <Separator effect="silent" size="h" />
-    <PageBody>
-      <Container limit>
-        <Stories>
-          {props.stories.map((story, i) => (
-            <Story
-              key={story.id}
-              i={i}
-              data={story}
-              onClick={() => props.router.push(`stories/${story.id}`)}
-            />
-          ))}
-        </Stories>
-      </Container>
-    </PageBody>
-  </Page>
-);
+export default class Listing extends React.Component {
+  constructor() {
+    super();
+    this.state = {};
+    this.createStory = this.createStory.bind(this);
+  }
+  createStory() {
+    this.props.createStory("a title", "an intro", console.log(this.props));
+  }
+  render() {
+    return (
+      <Page key="Page">
+        <PageHead>
+          <Container flex={[1, 1, `${100 / 3}%`]} padded>
+            <UserMenu data={this.props.user} />
+          </Container>
+          <Container flex={[1, 1, `${100 / 3}%`]} align="center" padded>
+            <PageTitle typo="h1">Your Stories</PageTitle>
+          </Container>
+          <Container flex={[1, 1, `${100 / 3}%`]} align="right" padded>
+            <Action primary onClick={this.createStory}>
+              Create new
+            </Action>
+          </Container>
+        </PageHead>
+        <Separator effect="silent" size="h" />
+        <PageBody>
+          <Container limit>
+            <Stories>
+              {this.props.stories.map((story, i) => (
+                <Story
+                  key={story.id}
+                  i={i}
+                  data={story}
+                  onClick={() => this.props.router.push(`stories/${story.id}`)}
+                />
+              ))}
+            </Stories>
+          </Container>
+        </PageBody>
+      </Page>
+    );
+  }
+}
 
 Listing.propTypes = {
+  createStory: func,
+  router: object,
   stories: arrayOf(object),
   user: shape({
     name: string,
@@ -92,7 +108,8 @@ Listing.propTypes = {
 };
 
 Listing.defaultProps = {
-  stories: []
+  createStory: null,
+  stories: [],
+  user: {},
+  router: null
 };
-
-export default Listing;

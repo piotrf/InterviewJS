@@ -1,3 +1,4 @@
+/* eslint global-require: 0 */
 import { createStore, compose } from "redux";
 import { syncHistoryWithStore } from "react-router-redux";
 import { browserHistory } from "react-router";
