@@ -98,8 +98,9 @@ export default () => markdown`
 
   ${(
     <ReactSpecimen responsive>
-      <Container fill="white" limit>
-        Limit container has set a max-width
+      <Container fill="white" limit="s">
+        Limit container has set a max-width, accepts `s`, `m` and `l` as
+        argument.
       </Container>
     </ReactSpecimen>
   )}

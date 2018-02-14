@@ -67,23 +67,52 @@ export const ContainerEl = css.div`
     text-align: ${align};
   `
       : ``};
-  ${({ limit }) =>
-    limit !== null
-      ? `
-    ${breakpoint.tablet} {
-      margin-left: auto;
-      margin-right: auto;
-      max-width: 768px;
+  ${({ limit }) => {
+    if (limit === "s") {
+      return `
+        ${breakpoint.tablet} {
+          margin-left: auto;
+          margin-right: auto;
+          max-width: 500px;
+        }
+        ${breakpoint.desktop} {
+          max-width: 700px;
+        }
+        ${breakpoint.hdesktop} {
+          max-width: 900px;
+        }
+        `;
+    } else if (limit === "m") {
+      return `
+        ${breakpoint.tablet} {
+          margin-left: auto;
+          margin-right: auto;
+          max-width: 600px;
+        }
+        ${breakpoint.desktop} {
+          max-width: 800px;
+        }
+        ${breakpoint.hdesktop} {
+          max-width: 1000px;
+        }
+      `;
+    } else if (limit === "l") {
+      return `
+        ${breakpoint.tablet} {
+          margin-left: auto;
+          margin-right: auto;
+          max-width: 768px;
+        }
+        ${breakpoint.desktop} {
+          max-width: 1024px;
+        }
+        ${breakpoint.hdesktop} {
+          max-width: 1200px;
+        }
+      `;
     }
-    ${breakpoint.desktop} {
-      max-width: 1024px;
-    }
-    ${breakpoint.hdesktop} {
-      max-width: 1200px;
-    }
-  `
-      : ``};
-`;
+    return null;
+  }}`;
 
 export default class Container extends React.Component {
   constructor() {
@@ -127,7 +156,7 @@ Container.propTypes = {
   fill: string,
   dir: string,
   inset: bool,
-  limit: bool,
+  limit: string,
   padded: bool,
   rounded: bool,
   shift: bool

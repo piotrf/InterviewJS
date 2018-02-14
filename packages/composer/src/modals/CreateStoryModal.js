@@ -50,7 +50,7 @@ export default class CreateStoryModal extends React.Component {
         <Modal handleClose={this.props.handleClose} wizard>
           <ModalHead>
             <PageTitle typo="h1">Create New Story</PageTitle>
-            <Separator size="m" effect="silent" />
+            <Separator size="s" effect="silent" />
             <Breadcrumbs count={3}>
               <Breadcrumb
                 onClick={step >= 0 ? () => console.log("s1") : null}
@@ -73,7 +73,7 @@ export default class CreateStoryModal extends React.Component {
             </Breadcrumbs>
           </ModalHead>
           <ModalBody>
-            <Container limit align="center">
+            <Container limit="s" align="center">
               <Separator size="m" effect="silent" />
               <PageSubtitle typo="h3">
                 Start by adding a few details and meta info about your story.

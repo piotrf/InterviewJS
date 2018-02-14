@@ -78,7 +78,7 @@ export default class Listing extends React.Component {
         </PageHead>
         <Separator effect="silent" size="h" />
         <PageBody>
-          <Container limit>
+          <Container limit="l">
             <Stories>
               {this.props.stories.map((story, i) => (
                 <Story
