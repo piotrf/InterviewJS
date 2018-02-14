@@ -118,6 +118,7 @@ export default class Story extends React.Component {
         </StoryEl>
         <StoryMenu>
           <Dropdown
+            onRequestClose={this.toggleDropdown}
             open={this.state.dropdown}
             html={
               <DropdownContent>
