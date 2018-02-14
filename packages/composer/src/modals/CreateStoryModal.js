@@ -8,7 +8,6 @@ import {
   Container,
   Modal,
   ModalBody,
-  ModalFoot,
   ModalHead,
   PageTitle,
   PageSubtitle,
@@ -46,7 +45,7 @@ export default class CreateStoryModal extends React.Component {
   render() {
     const { step } = this.state;
     const getModalBody = () => {
-      if (this.state.step === 0) {
+      if (step === 0) {
         return (
           <Container limit="s" align="center">
             <Separator size="m" effect="silent" />
@@ -61,7 +60,7 @@ export default class CreateStoryModal extends React.Component {
             />
           </Container>
         );
-      } else if (this.state.step === 1) {
+      } else if (step === 1) {
         return (
           <Container limit="s" align="center">
             <Separator size="m" effect="silent" />
@@ -76,7 +75,7 @@ export default class CreateStoryModal extends React.Component {
             />
           </Container>
         );
-      } else if (this.state.step === 2) {
+      } else if (step === 2) {
         return (
           <Container limit="s" align="center">
             Step 3
@@ -118,7 +117,6 @@ export default class CreateStoryModal extends React.Component {
             </Breadcrumbs>
           </ModalHead>
           <ModalBody>{getModalBody()}</ModalBody>
-          <ModalFoot />
         </Modal>
       </ReactModal>
     );

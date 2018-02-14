@@ -5,16 +5,16 @@ import { arrayOf, func, object, shape, string } from "prop-types";
 
 import {
   Action,
+  color,
   Container,
   PageTitle,
   Separator,
-  Stories,
-  Story,
-  UserMenu,
-  color,
-  setHeight
+  setHeight,
+  UserMenu
 } from "interviewjs-styleguide";
+
 import { CreateStoryModal } from "../modals";
+import { Story, Stories } from "../partials";
 
 const Page = css.div`
   align-content: stretch;
@@ -82,6 +82,7 @@ export default class Listing extends React.Component {
             <Stories>
               {this.props.stories.map((story, i) => (
                 <Story
+                  {...this.props}
                   data={story}
                   handleDelete={() => this.props.deleteStory(i)}
                   handleOpen={() =>

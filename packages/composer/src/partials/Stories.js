@@ -2,9 +2,7 @@ import React from "react";
 import css from "styled-components";
 import { arrayOf, oneOfType, node } from "prop-types";
 
-import { color, setSpace } from "../../../utils";
-
-import { Container, Text } from "../../components";
+import { Container, Text, color, setSpace } from "interviewjs-styleguide";
 
 const StoriesListHead = css(Container)`
   ${setSpace("mhl")};

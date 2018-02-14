@@ -2,8 +2,6 @@ import { func, shape, string } from "prop-types";
 import css from "styled-components";
 import React from "react";
 
-import { color, radius, setSpace, time, disselect } from "../../../utils";
-
 import {
   Action,
   Avatar,
@@ -12,8 +10,15 @@ import {
   DropdownContent,
   Icon,
   Text,
-  Tip
-} from "../../components";
+  Tip,
+  color,
+  radius,
+  setSpace,
+  time,
+  disselect
+} from "interviewjs-styleguide";
+
+import { EditStoryDetailsModal } from "../modals";
 
 const StoryEl = css(Container)`
   ${disselect};
@@ -60,10 +65,14 @@ const AvatarListItem = css.li`
 export default class Story extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { dropdown: false };
+    this.state = { dropdown: false, modal: false };
     this.toggleDropdown = this.toggleDropdown.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
     this.triggerDelete = this.triggerDelete.bind(this);
     this.triggerInfo = this.triggerInfo.bind(this);
+  }
+  toggleModal() {
+    this.setState({ modal: !this.state.modal });
   }
   toggleDropdown() {
     this.setState({ dropdown: !this.state.dropdown });
@@ -73,12 +82,12 @@ export default class Story extends React.Component {
     this.props.handleDelete();
   }
   triggerInfo() {
+    this.toggleModal();
     this.toggleDropdown();
-    console.log("triggerInfo()");
   }
   render() {
-    return (
-      <Container>
+    return [
+      <Container key="body">
         <StoryEl
           {...this.props}
           dir="row"
@@ -140,8 +149,14 @@ export default class Story extends React.Component {
             </Action>
           </Dropdown>
         </StoryMenu>
-      </Container>
-    );
+      </Container>,
+      <EditStoryDetailsModal
+        key="modal"
+        isOpen={this.state.modal}
+        handleClose={this.toggleModal}
+        handleUpdateStory={this.props.updateStory}
+      />
+    ];
   }
 }
 
