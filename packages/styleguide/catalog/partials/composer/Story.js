@@ -124,9 +124,6 @@ export default class Story extends React.Component {
               <DropdownContent>
                 <ul>
                   <li>
-                    <Action onClick={this.props.handleOpen}>Open</Action>
-                  </li>
-                  <li>
                     <Action onClick={this.triggerInfo}>Info</Action>
                   </li>
                   <li>
