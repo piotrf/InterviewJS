@@ -6,9 +6,9 @@ require("./contextuals.css");
 
 const Dropdown = props => (
   <Tooltip
-    animation="scale"
     arrow
     arrowSize="small"
+    duration={200}
     effect="solid"
     hideDelay={350}
     html={props.children}
