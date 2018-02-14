@@ -6,13 +6,13 @@ import { Story, Stories } from "../partials";
 import SampleAvatar from "../static/avatar.png";
 
 const storyObj = {
-  title: "Obamacare — One Year In",
-  id: "1161022966406956503",
   author: "Piotr F.",
-  link: "https://twitter.com/presentday",
-  pubDate: "11-03-2017",
-  intro: "Text",
+  byLink: "https://twitter.com/presentday",
   context: "Context",
+  id: "1161022966406956503",
+  intro: "Text",
+  pubDate: "11-03-2017",
+  title: "Obamacare — One Year In",
   media: {
     cover: "",
     logo: "",
@@ -45,8 +45,8 @@ export default () => markdown`
     <ReactSpecimen>
       <Story
         data={storyObj}
-        handleDelete={evt => console.log(evt)}
-        handleOpen={evt => console.log(evt)}
+        handleDelete={() => console.log("handleDelete")}
+        handleOpen={e => console.log(e)}
       />
     </ReactSpecimen>
   )}
@@ -56,13 +56,13 @@ export default () => markdown`
       <Stories>
         <Story
           data={storyObj}
-          handleDelete={evt => console.log(evt)}
-          handleOpen={evt => console.log(evt)}
+          handleDelete={() => console.log("handleDelete")}
+          handleOpen={e => console.log(e)}
         />
         <Story
           data={storyObj}
-          handleDelete={evt => console.log(evt)}
-          handleOpen={evt => console.log(evt)}
+          handleDelete={() => console.log("handleDelete")}
+          handleOpen={e => console.log(e)}
         />
       </Stories>
     </ReactSpecimen>

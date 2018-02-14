@@ -14,7 +14,6 @@ import {
   ModalHead,
   PageTitle,
   Separator,
-  StoryDetailsForm,
   breakpoint,
   setSpace
 } from "interviewjs-styleguide";
@@ -168,9 +167,7 @@ export default class Composer extends React.Component {
           <ModalHead>
             <PageTitle typo="h1">Edit story details</PageTitle>
           </ModalHead>
-          <ModalBody>
-            <StoryDetailsForm />
-          </ModalBody>
+          <ModalBody>Body</ModalBody>
           <ModalFoot>
             <Actionbar>
               <Action fixed secondary onClick={() => this.toggleInfoModal()}>

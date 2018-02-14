@@ -6,6 +6,7 @@ import {
   color,
   paint,
   setSize,
+  setSpace,
   setType,
   setWidth,
   skin
@@ -220,8 +221,7 @@ const Button = css.button`
     if (iconic && (primary || secondary || inverted)) {
       return `
         ${setSize("m")};
-        padding-left: 0 !important;
-        padding-right: 0 !important;
+        ${setSpace("pan")};
         & > i {
           position: relative;
           top: -1px;

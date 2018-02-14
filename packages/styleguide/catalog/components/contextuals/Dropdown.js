@@ -1,22 +1,18 @@
-import css from "styled-components";
 import React from "react";
 import { array, node, oneOfType, string } from "prop-types";
 import { Tooltip } from "react-tippy";
 
 require("./contextuals.css");
 
-const DropdownEl = css(Tooltip)`
-
-`;
-
 const Dropdown = props => (
-  <DropdownEl
+  <Tooltip
     animation="scale"
     arrow
     arrowSize="small"
     effect="solid"
     hideDelay={350}
     html={props.children}
+    interactive
     interactiveBorder={5}
     position={props.position}
     sticky

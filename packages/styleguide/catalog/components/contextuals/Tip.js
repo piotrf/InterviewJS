@@ -1,16 +1,11 @@
-import css from "styled-components";
 import React from "react";
 import { string } from "prop-types";
 import { Tooltip } from "react-tippy";
 
 require("./contextuals.css");
 
-const TipEl = css(Tooltip)`
-
-`;
-
 const Tip = props => (
-  <TipEl
+  <Tooltip
     animation="fade"
     arrow
     arrowSize="small"

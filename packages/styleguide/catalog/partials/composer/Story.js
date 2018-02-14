@@ -4,7 +4,16 @@ import React from "react";
 
 import { color, radius, setSpace, time, disselect } from "../../../utils";
 
-import { Action, Avatar, Container, Icon, Text, Tip } from "../../components";
+import {
+  Action,
+  Avatar,
+  Container,
+  Dropdown,
+  DropdownContent,
+  Icon,
+  Text,
+  Tip
+} from "../../components";
 
 const StoryEl = css(Container)`
   ${disselect};
@@ -48,52 +57,95 @@ const AvatarListItem = css.li`
   position: relative;
 `;
 
-const Story = props => (
-  <Container>
-    <StoryEl
-      {...props}
-      dir="row"
-      fill="white"
-      onClick={props.handleOpen}
-      padded
-      shift
-    >
-      <Container flex={[1, 2, "60%"]}>
-        <StoryTitle typo="h2">{props.data.title}</StoryTitle>
-        <StorySummary typo="p5">{props.data.intro}</StorySummary>
+export default class Story extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { dropdown: false };
+    this.toggleDropdown = this.toggleDropdown.bind(this);
+    this.triggerDelete = this.triggerDelete.bind(this);
+    this.triggerInfo = this.triggerInfo.bind(this);
+  }
+  toggleDropdown() {
+    this.setState({ dropdown: !this.state.dropdown });
+  }
+  triggerDelete() {
+    this.toggleDropdown();
+    this.props.handleDelete();
+  }
+  triggerInfo() {
+    this.toggleDropdown();
+    console.log("triggerInfo()");
+  }
+  render() {
+    return (
+      <Container>
+        <StoryEl
+          {...this.props}
+          dir="row"
+          fill="white"
+          onClick={this.props.handleOpen}
+          padded
+          shift
+        >
+          <Container flex={[1, 2, "60%"]}>
+            <StoryTitle typo="h2">{this.props.data.title}</StoryTitle>
+            <StorySummary typo="p5">{this.props.data.intro}</StorySummary>
+          </Container>
+          <Container flex={[2, 1, "20%"]} align="center">
+            <StoryDate typo="p5">{this.props.data.pubDate}</StoryDate>
+          </Container>
+          <Container flex={[2, 1, "20%"]} align="right">
+            <AvatarList>
+              {this.props.data.interviewees.map(el => (
+                <AvatarListItem key={el.name}>
+                  <Tip
+                    animation="fade"
+                    arrow
+                    arrowSize="small"
+                    hideDelay={350}
+                    interactiveBorder={5}
+                    position="bottom"
+                    sticky
+                    theme="dark"
+                    title={el.name}
+                  >
+                    <Avatar size="m" image={el.avatar} />
+                  </Tip>
+                </AvatarListItem>
+              ))}
+            </AvatarList>
+          </Container>
+        </StoryEl>
+        <StoryMenu>
+          <Dropdown
+            open={this.state.dropdown}
+            html={
+              <DropdownContent>
+                <ul>
+                  <li>
+                    <Action onClick={this.props.handleOpen}>Open</Action>
+                  </li>
+                  <li>
+                    <Action onClick={this.triggerInfo}>Info</Action>
+                  </li>
+                  <li>
+                    <Action tone="negative" onClick={this.triggerDelete}>
+                      Delete
+                    </Action>
+                  </li>
+                </ul>
+              </DropdownContent>
+            }
+          >
+            <Action iconic onClick={this.toggleDropdown}>
+              <Icon name="ellipsis" />
+            </Action>
+          </Dropdown>
+        </StoryMenu>
       </Container>
-      <Container flex={[2, 1, "20%"]} align="center">
-        <StoryDate typo="p5">{props.data.pubDate}</StoryDate>
-      </Container>
-      <Container flex={[2, 1, "20%"]} align="right">
-        <AvatarList>
-          {props.data.interviewees.map(el => (
-            <AvatarListItem key={el.name}>
-              <Tip
-                animation="fade"
-                arrow
-                arrowSize="small"
-                hideDelay={350}
-                interactiveBorder={5}
-                position="bottom"
-                sticky
-                theme="dark"
-                title={el.name}
-              >
-                <Avatar size="m" image={el.avatar} />
-              </Tip>
-            </AvatarListItem>
-          ))}
-        </AvatarList>
-      </Container>
-    </StoryEl>
-    <StoryMenu>
-      <Action iconic onClick={props.handleDelete}>
-        <Icon name="ellipsis" />
-      </Action>
-    </StoryMenu>
-  </Container>
-);
+    );
+  }
+}
 
 Story.propTypes = {
   data: shape({
@@ -107,5 +159,3 @@ Story.propTypes = {
 };
 
 Story.defaultProps = {};
-
-export default Story;

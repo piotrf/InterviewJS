@@ -52,7 +52,7 @@ const actionBase = {
     font-weight: bold;
     line-height: 1.2em;
     outline: none;
-    padding: 0 !important;
+    padding: 0;
     text-decoration: none;
     transition:
       color ${time.m},
