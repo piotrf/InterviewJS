@@ -110,6 +110,21 @@ const pages = [
     title: "Containers"
   },
   {
+    title: "Contextuals",
+    pages: [
+      {
+        content: require("./pages/contextuals-dropdowns.js"),
+        path: "/dropdowns",
+        title: "Dropdowns"
+      },
+      {
+        content: require("./pages/contextuals-tips.js"),
+        path: "/contextuals-tips",
+        title: "Tips"
+      }
+    ]
+  },
+  {
     title: "Forms",
     pages: [
       {
@@ -148,11 +163,6 @@ const pages = [
     content: require("./pages/separators.js"),
     path: "/separators",
     title: "Separators"
-  },
-  {
-    content: require("./pages/tips.js"),
-    path: "/tips",
-    title: "Tips"
   },
   {
     title: "Partials",

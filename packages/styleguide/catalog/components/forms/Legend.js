@@ -1,8 +1,8 @@
 import css from "styled-components";
 import React from "react";
 import { string } from "prop-types";
-import { Tooltip } from "react-tippy";
 
+import { Tip } from "../";
 import { color, radius, setType } from "../../../utils";
 
 const LegendWrapper = css.legend`
@@ -23,22 +23,11 @@ const LegendBody = css.span`
   width: 20px;
 `;
 
-const Legend = (props) => (
+const Legend = props => (
   <LegendWrapper {...props}>
-    <Tooltip
-      animation="fade"
-      arrow
-      arrowSize="small"
-      hideDelay={350}
-      interactiveBorder={5}
-      position="bottom"
-      sticky
-      theme="dark"
-      title={props.tip}
-      trigger="click"
-    >
+    <Tip position="bottom" title={props.tip} trigger="click">
       <LegendBody>i</LegendBody>
-    </Tooltip>
+    </Tip>
   </LegendWrapper>
 );
 
