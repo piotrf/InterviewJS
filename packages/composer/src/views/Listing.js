@@ -96,8 +96,10 @@ export default class Listing extends React.Component {
         </PageBody>
       </Page>,
       <CreateStoryModal
+        {...this.props}
         handleClose={this.toggleCreateStoryModal}
         handleCreateStory={this.props.createStory}
+        handleUpdateStory={this.props.updateStory}
         isOpen={this.state.createStoryModal}
         key="CreateStoryModal"
       />
@@ -110,6 +112,7 @@ Listing.propTypes = {
   deleteStory: func,
   router: object,
   stories: arrayOf(object),
+  updateStory: func,
   user: shape({
     name: string,
     id: string,
@@ -120,7 +123,8 @@ Listing.propTypes = {
 Listing.defaultProps = {
   createStory: null,
   deleteStory: null,
+  router: null,
   stories: [],
-  user: {},
-  router: null
+  updateStory: null,
+  user: {}
 };

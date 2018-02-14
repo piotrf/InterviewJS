@@ -7,7 +7,7 @@ import SampleAvatar from "../static/avatar.png";
 
 const storyObj = {
   author: "Piotr F.",
-  byLink: "https://twitter.com/presentday",
+  authorLink: "https://twitter.com/presentday",
   context: "Context",
   id: "1161022966406956503",
   intro: "Text",

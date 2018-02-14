@@ -92,6 +92,7 @@ export default class Composer extends React.Component {
     const { storyId } = this.props.params;
     const i = this.props.stories.findIndex(story => story.id === storyId);
     const story = this.props.stories[i];
+    console.log(story);
     return [
       <Page key="Page">
         <PageHead>

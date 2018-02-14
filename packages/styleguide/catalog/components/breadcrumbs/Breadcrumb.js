@@ -67,9 +67,9 @@ const BreadcrumbIndex = css.span`
   border-radius: ${radius.a};
   border-style: solid;
   border-width: 1px;
-  height: 15px;
+  height: 14px;
   position: relative;
-  width: 15px;
+  width: 14px;
   transition:
     background-color ${time.m},
     border-color ${time.m},

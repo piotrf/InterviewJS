@@ -19,12 +19,13 @@ export default class StoryMetaForm extends React.Component {
     super(props);
     this.state = {
       formData: {
-        byName: "",
-        byLink: "",
+        author: "",
+        authorLink: "",
         pubDate: "",
         title: ""
       }
     };
+    this.handleInput = this.handleInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleSubmit(e) {
@@ -60,12 +61,12 @@ export default class StoryMetaForm extends React.Component {
           <Container dir="row">
             <Container flex={[0, 0, `${100 / 3}%`]}>
               <CharacterCount>
-                {70 - this.state.formData.byName.length}
+                {70 - this.state.formData.author.length}
               </CharacterCount>
               <TextInput
                 input
                 maxlength="70"
-                name="byName"
+                name="author"
                 onChange={e => this.handleInput(e)}
                 place="left"
                 placeholder="Author’s name"
@@ -74,7 +75,7 @@ export default class StoryMetaForm extends React.Component {
             <Container flex={[0, 0, `${100 / 3}%`]}>
               <TextInput
                 input
-                name="byLink"
+                name="authorLink"
                 onChange={e => this.handleInput(e)}
                 place="middle"
                 placeholder="Link…"

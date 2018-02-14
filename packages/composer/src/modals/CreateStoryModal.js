@@ -1,6 +1,6 @@
 import React from "react";
 import ReactModal from "react-modal";
-import { bool, func } from "prop-types";
+import { arrayOf, bool, func, object } from "prop-types";
 
 import {
   Breadcrumb,
@@ -15,7 +15,7 @@ import {
   Separator
 } from "interviewjs-styleguide";
 
-import { StoryMetaForm } from "../forms";
+import { StoryDetailsForm, StoryMetaForm } from "../forms";
 
 const getStepState = (step, i) => {
   if (step === i) {
@@ -27,19 +27,64 @@ const getStepState = (step, i) => {
 };
 
 export default class CreateStoryModal extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       step: 0
     };
     this.handleStep0 = this.handleStep0.bind(this);
+    this.handleStep1 = this.handleStep1.bind(this);
   }
   handleStep0(data) {
     this.props.handleCreateStory(data);
     this.setState({ step: this.state.step + 1 });
   }
+  handleStep1(data) {
+    this.props.handleUpdateStory(data, 0);
+    this.setState({ step: this.state.step + 1 });
+  }
   render() {
     const { step } = this.state;
+    const getModalBody = () => {
+      if (this.state.step === 0) {
+        return (
+          <Container limit="s" align="center">
+            <Separator size="m" effect="silent" />
+            <PageSubtitle typo="h3">
+              Start by adding a few details and meta info about your story. You
+              can attach a cover photo and your organisation logo here too.
+            </PageSubtitle>
+            <Separator size="m" effect="silent" />
+            <StoryMetaForm
+              handleCancel={this.props.handleClose}
+              handleSubmit={this.handleStep0}
+            />
+          </Container>
+        );
+      } else if (this.state.step === 1) {
+        return (
+          <Container limit="s" align="center">
+            <Separator size="m" effect="silent" />
+            <PageSubtitle typo="h3">
+              Add interviewees for the user to chat to. You will be able to
+              script separate chats for each interviewee later.
+            </PageSubtitle>
+            <Separator size="m" effect="silent" />
+            <StoryDetailsForm
+              handleSubmit={this.handleStep1}
+              story={this.props.stories[0]}
+            />
+          </Container>
+        );
+      } else if (this.state.step === 2) {
+        return (
+          <Container limit="s" align="center">
+            Step 3
+          </Container>
+        );
+      }
+      return null;
+    };
     return (
       <ReactModal
         ariaHideApp={false}
@@ -47,46 +92,32 @@ export default class CreateStoryModal extends React.Component {
         key="CreateStoryModal"
         onRequestClose={this.props.handleClose}
       >
-        <Modal handleClose={this.props.handleClose} wizard>
+        <Modal {...this.props} wizard>
           <ModalHead>
             <PageTitle typo="h1">Create New Story</PageTitle>
             <Separator size="s" effect="silent" />
             <Breadcrumbs count={3}>
               <Breadcrumb
-                onClick={step >= 0 ? () => console.log("s1") : null}
+                onClick={step >= 0 ? () => this.setState({ step: 0 }) : null}
                 state={getStepState(step, 0)}
               >
                 Basic info
               </Breadcrumb>
               <Breadcrumb
-                onClick={step >= 1 ? () => console.log("s2") : null}
+                onClick={step >= 1 ? () => this.setState({ step: 1 }) : null}
                 state={getStepState(step, 1)}
               >
                 Intro
               </Breadcrumb>
               <Breadcrumb
-                onClick={step >= 2 ? () => console.log("s3") : null}
+                onClick={step >= 2 ? () => this.setState({ step: 2 }) : null}
                 state={getStepState(step, 2)}
               >
                 Interviewees
               </Breadcrumb>
             </Breadcrumbs>
           </ModalHead>
-          <ModalBody>
-            <Container limit="s" align="center">
-              <Separator size="m" effect="silent" />
-              <PageSubtitle typo="h3">
-                Start by adding a few details and meta info about your story.
-                You can attach a cover photo and your organisation logo here
-                too.
-              </PageSubtitle>
-              <Separator size="m" effect="silent" />
-              <StoryMetaForm
-                handleCancel={this.props.handleClose}
-                handleSubmit={this.handleStep0}
-              />
-            </Container>
-          </ModalBody>
+          <ModalBody>{getModalBody()}</ModalBody>
           <ModalFoot />
         </Modal>
       </ReactModal>
@@ -97,5 +128,11 @@ export default class CreateStoryModal extends React.Component {
 CreateStoryModal.propTypes = {
   handleClose: func.isRequired,
   handleCreateStory: func.isRequired,
-  isOpen: bool.isRequired
+  handleUpdateStory: func.isRequired,
+  isOpen: bool.isRequired,
+  stories: arrayOf(object)
+};
+
+CreateStoryModal.defaultProps = {
+  stories: []
 };
