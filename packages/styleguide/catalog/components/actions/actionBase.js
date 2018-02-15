@@ -49,6 +49,8 @@ const actionBase = {
     background: transparent;
     border: none;
     cursor: pointer;
+    display: inline-block;
+    display: inline-flex;
     font-weight: bold;
     line-height: 1.2em;
     outline: none;

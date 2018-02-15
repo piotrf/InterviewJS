@@ -10,14 +10,14 @@ export default () => markdown`
 
   ${(
     <ReactSpecimen span={3}>
-      <Action primary onClick={evt => console.log(evt)}>
+      <Action primary onClick={(evt) => console.log(evt)}>
         Primary action
       </Action>
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen span={3}>
-      <Action primary onClick={evt => console.log(evt)}>
+      <Action primary onClick={(evt) => console.log(evt)}>
         Primary action that can go onto two lines
       </Action>
     </ReactSpecimen>
@@ -46,14 +46,14 @@ export default () => markdown`
 
   ${(
     <ReactSpecimen span={3}>
-      <Action secondary onClick={evt => console.log(evt)}>
+      <Action secondary onClick={(evt) => console.log(evt)}>
         Secondary action
       </Action>
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen span={3}>
-      <Action secondary onClick={evt => console.log(evt)}>
+      <Action secondary onClick={(evt) => console.log(evt)}>
         Secondary action that can go onto two lines
       </Action>
     </ReactSpecimen>
@@ -82,13 +82,20 @@ export default () => markdown`
 
   ${(
     <ReactSpecimen span={3}>
-      <Action onClick={evt => console.log(evt)}>Plain action</Action>
+      <Action onClick={(evt) => console.log(evt)}>Plain action</Action>
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen span={3}>
-      <Action onClick={evt => console.log(evt)}>
+      <Action onClick={(evt) => console.log(evt)}>
         Plain action doesn’t have a set max width
+      </Action>
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen>
+      <Action active onClick={(evt) => console.log(evt)}>
+        Plain action does have an 'active' variation
       </Action>
     </ReactSpecimen>
   )}

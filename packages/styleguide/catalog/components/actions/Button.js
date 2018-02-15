@@ -11,64 +11,52 @@ import {
   setWidth,
   skin
 } from "../../../utils";
+
 import actionBase from "./actionBase";
 
 const Button = css.button`
   font-family: ${({ theme }) => (theme.font ? theme.font : skin.font)};
-  ${({ fixed }) =>
-    fixed
-      ? `
-    width: 130px;
-    ${breakpoint.tablet} {
-      width: 160px;
-    }
-    ${breakpoint.desktop} {
-      width: 190px;
-    }
-  `
-      : ``};
 
-  /* themeables */
+  /* primary */
 
-  ${({ primary, secondary, inverted, tone, theme, active }) => {
-    if (primary) {
-      if (tone === "negative") {
-        return `
-          ${actionBase.graphic};
+  ${({ primary, tone, theme }) => {
+    if (primary && tone === "negative") {
+      return `
+        ${actionBase.graphic};
+        background-color: ${
+          theme.negativeColor
+            ? paint(theme.negativeColor, "M")
+            : paint(skin.negativeColor, "M")
+        };
+        color: ${color.flareBlk};
+        &:active {
           background-color: ${
             theme.negativeColor
-              ? paint(theme.negativeColor, "M")
-              : paint(skin.negativeColor, "M")
+              ? paint(theme.negativeColor, "HD")
+              : paint(skin.negativeColor, "HD")
           };
-          color: ${color.flareBlk};
-          &:active {
-            background-color: ${
-              theme.negativeColor
-                ? paint(theme.negativeColor, "HD")
-                : paint(skin.negativeColor, "HD")
-            };
-            color: ${color.white};
-          }
-        `;
-      } else if (tone === "positive") {
-        return `
-          ${actionBase.graphic};
+          color: ${color.white};
+        }
+      `;
+    } else if (primary && tone === "positive") {
+      return `
+        ${actionBase.graphic};
+        background-color: ${
+          theme.positiveColor
+            ? paint(theme.positiveColor, "M")
+            : paint(skin.positiveColor, "M")
+        };
+        color: ${color.flareBlk};
+        &:active {
           background-color: ${
             theme.positiveColor
-              ? paint(theme.positiveColor, "M")
-              : paint(skin.positiveColor, "M")
+              ? paint(theme.positiveColor, "HD")
+              : paint(skin.positiveColor, "HD")
           };
-          color: ${color.flareBlk};
-          &:active {
-            background-color: ${
-              theme.positiveColor
-                ? paint(theme.positiveColor, "HD")
-                : paint(skin.positiveColor, "HD")
-            };
-            color: ${color.white};
-          }
-        `;
-      }
+          color: ${color.white};
+        }
+      `;
+    } else if (primary) {
       return `
         ${actionBase.graphic};
         background-color: ${
@@ -86,42 +74,48 @@ const Button = css.button`
           color: ${color.white};
         }
       `;
-    } else if (secondary) {
-      if (tone === "negative") {
-        return `
-          ${actionBase.graphic};
-          background-color: ${color.white};
+    }
+    return null;
+  }}}
+
+  /* secondary */
+
+  ${({ secondary, tone, theme }) => {
+    if (secondary && tone === "negative") {
+      return `
+        ${actionBase.graphic};
+        background-color: ${color.white};
+        color: ${
+          theme.negativeColor
+            ? paint(theme.negativeColor, "M")
+            : paint(skin.negativeColor, "M")
+        };
+        &:active {
           color: ${
             theme.negativeColor
-              ? paint(theme.negativeColor, "M")
-              : paint(skin.negativeColor, "M")
+              ? paint(theme.negativeColor, "HD")
+              : paint(skin.negativeColor, "HD")
           };
-          &:active {
-            color: ${
-              theme.negativeColor
-                ? paint(theme.negativeColor, "HD")
-                : paint(skin.negativeColor, "HD")
-            };
-          }
-        `;
-      } else if (tone === "positive") {
-        return `
-          ${actionBase.graphic};
-          background-color: ${color.white};
+        }
+      `;
+    } else if (secondary && tone === "positive") {
+      return `
+        ${actionBase.graphic};
+        background-color: ${color.white};
+        color: ${
+          theme.positiveColor
+            ? paint(theme.positiveColor, "M")
+            : paint(skin.positiveColor, "M")
+        };
+        &:active {
           color: ${
             theme.positiveColor
-              ? paint(theme.positiveColor, "M")
-              : paint(skin.positiveColor, "M")
+              ? paint(theme.positiveColor, "HD")
+              : paint(skin.positiveColor, "HD")
           };
-          &:active {
-            color: ${
-              theme.positiveColor
-                ? paint(theme.positiveColor, "HD")
-                : paint(skin.positiveColor, "HD")
-            };
-          }
-        `;
-      }
+        }
+      `;
+    } else if (secondary) {
       return `
         ${actionBase.graphic};
         background-color: ${color.white};
@@ -138,7 +132,13 @@ const Button = css.button`
           };
         }
       `;
-    } else if (inverted) {
+    }
+    return null;
+  }}}
+
+  /* inverted */
+  ${({ inverted, active }) => {
+    if (inverted) {
       return `
         ${actionBase.graphic};
         background-color: ${color.shadowHL};
@@ -164,40 +164,47 @@ const Button = css.button`
         };
       `;
     }
-    if (tone === "negative") {
-      return `
-        ${actionBase.textual};
-        color: ${
-          theme.negativeColor
-            ? paint(theme.negativeColor, "M")
-            : paint(skin.negativeColor, "M")
-        };
-        &:active {
+    return null;
+  }}
+
+  /* plain */
+
+  ${({ primary, secondary, inverted, tone, theme, active }) => {
+    if (!primary && !secondary && !inverted) {
+      if (tone === "negative") {
+        return `
+          ${actionBase.textual};
           color: ${
             theme.negativeColor
-              ? paint(theme.negativeColor, "HD")
-              : paint(skin.negativeColor, "HD")
+              ? paint(theme.negativeColor, "M")
+              : paint(skin.negativeColor, "M")
           };
-        }
-      `;
-    } else if (tone === "positive") {
-      return `
-        ${actionBase.textual};
-        color: ${
-          theme.positiveColor
-            ? paint(theme.positiveColor, "M")
-            : paint(skin.positiveColor, "M")
-        };
-        &:active {
+          &:active {
+            color: ${
+              theme.negativeColor
+                ? paint(theme.negativeColor, "HD")
+                : paint(skin.negativeColor, "HD")
+            };
+          }
+        `;
+      } else if (tone === "positive") {
+        return `
+          ${actionBase.textual};
           color: ${
             theme.positiveColor
-              ? paint(theme.positiveColor, "HD")
-              : paint(skin.positiveColor, "HD")
+              ? paint(theme.positiveColor, "M")
+              : paint(skin.positiveColor, "M")
           };
-        }
-      `;
-    }
-    return `
+          &:active {
+            color: ${
+              theme.positiveColor
+                ? paint(theme.positiveColor, "HD")
+                : paint(skin.positiveColor, "HD")
+            };
+          }
+        `;
+      }
+      return `
         ${actionBase.textual};
         color: ${
           theme.mainColor
@@ -211,34 +218,60 @@ const Button = css.button`
               : paint(skin.mainColor, "HD")
           };
         }
-      `;
-  }}
-
-  /* iconic */
-  ${({ iconic, primary, secondary, inverted }) =>
-    (primary || secondary || inverted) && !iconic ? `min-height: 40px;` : ``};
-  ${({ primary, secondary, inverted, iconic }) => {
-    if (iconic && (primary || secondary || inverted)) {
-      return `
-        ${setSize("m")};
-        ${setSpace("pan")};
-        & > i {
-          position: relative;
-          top: -1px;
-        }
-      `;
-    } else if (iconic && (!primary && !secondary && !inverted)) {
-      return `
-        ${setType("l")};
-        ${setWidth("m")};
-        & > i {
-          position: relative;
-          top: -1px;
+        ${
+          active
+            ? `
+          color: ${color.greyBlk};
+          &:hover {
+            color: ${
+              theme.mainColor
+                ? paint(theme.mainColor, "M")
+                : paint(skin.mainColor, "M")
+            }
+          }
+        `
+            : ``
         }
       `;
     }
     return null;
   }}
+
+  /* iconic */
+
+  ${({ iconic, primary, secondary, inverted }) => {
+    if (iconic && (primary || secondary || inverted)) {
+      return `
+        ${setSize("m")};
+        ${setSpace("pan")};
+      `;
+    } else if (iconic && (!primary && !secondary && !inverted)) {
+      return `
+        ${setWidth("m")};
+        ${setType("l")};
+      `;
+    } else if (!iconic && (primary || secondary || inverted)) {
+      return `
+        min-height: 40px;
+      `;
+    }
+    return null;
+  }}
+
+  /* fixed-width */
+  ${({ fixed }) =>
+    fixed
+      ? `
+    width: 130px;
+    ${breakpoint.tablet} {
+      width: 160px;
+    }
+    ${breakpoint.desktop} {
+      width: 190px;
+    }
+  `
+      : ``};
+
 `;
 
 Button.propTypes = {
