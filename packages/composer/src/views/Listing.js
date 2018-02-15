@@ -83,9 +83,9 @@ export default class Listing extends React.Component {
               {this.props.stories.map((story, i) => (
                 <Story
                   {...this.props}
-                  data={story}
-                  handleDelete={() => this.props.deleteStory(i)}
-                  handleOpen={() =>
+                  story={story}
+                  deleteStory={() => this.props.deleteStory(i)}
+                  openStory={() =>
                     this.props.router.push(`stories/${story.id}`)
                   }
                   i={i}
@@ -100,7 +100,7 @@ export default class Listing extends React.Component {
         {...this.props}
         handleClose={this.toggleCreateStoryModal}
         handleCreateStory={this.props.createStory}
-        handleUpdateStory={this.props.updateStory}
+        updateStory={this.props.updateStory}
         isOpen={this.state.createStoryModal}
         key="CreateStoryModal"
       />

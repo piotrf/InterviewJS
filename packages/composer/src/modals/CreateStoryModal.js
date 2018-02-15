@@ -38,13 +38,13 @@ export default class CreateStoryModal extends React.Component {
   handleStep0(data) {
     return (
       this.state.storyCreated
-        ? this.props.handleUpdateStory(data, 0)
+        ? this.props.updateStory(data, 0)
         : this.props.handleCreateStory(data),
       this.setState({ step: this.state.step + 1, storyCreated: true })
     );
   }
   handleStep1(data) {
-    this.props.handleUpdateStory(data, 0);
+    this.props.updateStory(data, 0);
     this.setState({ step: this.state.step + 1 });
   }
   render() {
@@ -134,7 +134,7 @@ export default class CreateStoryModal extends React.Component {
 CreateStoryModal.propTypes = {
   handleClose: func.isRequired,
   handleCreateStory: func.isRequired,
-  handleUpdateStory: func.isRequired,
+  updateStory: func.isRequired,
   isOpen: bool.isRequired,
   stories: arrayOf(object)
 };

@@ -24,6 +24,7 @@ export default class EditStoryDetailsModal extends React.Component {
     };
   }
   render() {
+    console.log(this.props);
     const { tab } = this.state;
     const getModalBody = () => {
       if (tab === "meta") {
@@ -69,7 +70,7 @@ export default class EditStoryDetailsModal extends React.Component {
 
 EditStoryDetailsModal.propTypes = {
   handleClose: func.isRequired,
-  handleUpdateStory: func.isRequired,
+  updateStory: func.isRequired,
   isOpen: bool.isRequired
 };
 

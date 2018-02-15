@@ -4,7 +4,7 @@ import Text from "./Text";
 import { color } from "../../../utils";
 
 const PageSubtitle = css(Text.withComponent("h2"))`
-  color: ${color.blueBlk};
+  color: ${color.greyBlk};
 `;
 
 export default PageSubtitle;

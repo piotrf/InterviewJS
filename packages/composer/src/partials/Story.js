@@ -79,7 +79,7 @@ export default class Story extends React.Component {
   }
   triggerDelete() {
     this.toggleDropdown();
-    this.props.handleDelete();
+    this.props.deleteStory();
   }
   triggerInfo() {
     this.toggleModal();
@@ -92,20 +92,20 @@ export default class Story extends React.Component {
           {...this.props}
           dir="row"
           fill="white"
-          onClick={this.props.handleOpen}
+          onClick={this.props.openStory}
           padded
           shift
         >
           <Container flex={[1, 2, "60%"]}>
-            <StoryTitle typo="h2">{this.props.data.title}</StoryTitle>
-            <StorySummary typo="p5">{this.props.data.intro}</StorySummary>
+            <StoryTitle typo="h2">{this.props.story.title}</StoryTitle>
+            <StorySummary typo="p5">{this.props.story.intro}</StorySummary>
           </Container>
           <Container flex={[2, 1, "20%"]} align="center">
-            <StoryDate typo="p5">{this.props.data.pubDate}</StoryDate>
+            <StoryDate typo="p5">{this.props.story.pubDate}</StoryDate>
           </Container>
           <Container flex={[2, 1, "20%"]} align="right">
             <AvatarList>
-              {this.props.data.interviewees.map(el => (
+              {this.props.story.interviewees.map((el) => (
                 <AvatarListItem key={el.name}>
                   <Tip
                     animation="fade"
@@ -154,21 +154,22 @@ export default class Story extends React.Component {
         key="modal"
         isOpen={this.state.modal}
         handleClose={this.toggleModal}
-        handleUpdateStory={this.props.updateStory}
+        updateStory={this.props.updateStory}
       />
     ];
   }
 }
 
 Story.propTypes = {
-  data: shape({
+  story: shape({
     id: string.isRequried,
     intro: string.isRequired,
     pubDate: string.isRequired,
     title: string.isRequired
   }).isRequired,
-  handleDelete: func.isRequired,
-  handleOpen: func.isRequired
+  deleteStory: func.isRequired,
+  openStory: func.isRequired,
+  updateStory: func.isRequired
 };
 
 Story.defaultProps = {};
