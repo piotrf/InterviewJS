@@ -7,6 +7,7 @@ const stories = [
     author: "Piotr F.",
     authorLink: "https://twitter.com/presentday",
     pubDate: "11-03-2017",
+    modDate: 1514949999478,
     intro:
       "Investigate whether Obamacare can make healthcare better for America’s poor",
     context: "Context",
@@ -41,6 +42,7 @@ const stories = [
     author: "Laurian g.",
     authorLink: "https://twitter.com/gridinoc",
     pubDate: "01-12-2016",
+    modDate: 1502949999478,
     intro: "Short Intro",
     context: "Context",
     media: {
@@ -74,6 +76,7 @@ const stories = [
     author: "Laurian g.",
     authorLink: "https://twitter.com/gridinoc",
     pubDate: "24-07-2016",
+    modDate: 1501449999478,
     intro: "Short Intro",
     context: "Context",
     media: {
@@ -107,6 +110,7 @@ const stories = [
     author: "Laurian g.",
     authorLink: "https://twitter.com/gridinoc",
     pubDate: "12-01-2015",
+    modDate: 1466421111478,
     intro:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
     context: "Context",

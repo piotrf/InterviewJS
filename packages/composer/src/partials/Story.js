@@ -1,6 +1,7 @@
 import css from "styled-components";
 import React from "react";
 import { func, number, shape, string } from "prop-types";
+import { format } from "date-fns";
 
 import {
   Action,
@@ -121,7 +122,9 @@ export default class Story extends React.Component {
             <StorySummary typo="p5">{this.props.story.intro}</StorySummary>
           </Container>
           <Container flex={[2, 1, "20%"]} align="center" hide="phone">
-            <StoryDate typo="p5">{this.props.story.pubDate}</StoryDate>
+            <StoryDate typo="p5">
+              {format(this.props.story.modDate, "D MMM YYYY")}
+            </StoryDate>
           </Container>
           <Container flex={[2, 1, "20%"]} align="right">
             <AvatarList>

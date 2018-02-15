@@ -16,12 +16,13 @@ export function createStory({
       author,
       authorLink,
       context,
-      id: uuidv4(),
       interviewees,
       intro,
       media,
       pubDate,
-      title
+      title,
+      id: uuidv4(),
+      modDate: new Date()
     }
   };
 }
