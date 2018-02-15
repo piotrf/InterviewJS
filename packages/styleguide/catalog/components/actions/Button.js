@@ -218,20 +218,6 @@ const Button = css.button`
               : paint(skin.mainColor, "HD")
           };
         }
-        ${
-          active
-            ? `
-          color: ${color.greyBlk};
-          &:hover {
-            color: ${
-              theme.mainColor
-                ? paint(theme.mainColor, "M")
-                : paint(skin.mainColor, "M")
-            }
-          }
-        `
-            : ``
-        }
       `;
     }
     return null;
@@ -253,6 +239,9 @@ const Button = css.button`
     } else if (!iconic && (primary || secondary || inverted)) {
       return `
         min-height: 40px;
+        & > i {
+          ${setSpace("mrx")};
+        }
       `;
     }
     return null;

@@ -17,6 +17,7 @@ const ModalEl = css.div`
   position: fixed;
   top: 50%;
   transform: translate(-50%, -50%);
+  width: 100%;
   ${breakpoint.onlyphone} {
     max-height: 100%;
     min-height: 100%;
@@ -53,7 +54,7 @@ const ModalContent = css.div`
   justify-content: space-between;
 `;
 
-const Modal = props => (
+const Modal = (props) => (
   <ModalEl {...props}>
     {!props.persistent ? <ModalClose onClick={props.handleClose} /> : null}
     <ModalContent>{props.children}</ModalContent>

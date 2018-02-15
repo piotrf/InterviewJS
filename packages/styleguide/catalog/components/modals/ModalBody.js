@@ -3,8 +3,7 @@ import css from "styled-components";
 import { color, setSpace } from "../../../utils";
 
 const ModalBody = css.div`
-  ${setSpace("phl")};
-  ${setSpace("pvm")};
+  ${setSpace("pal")};
   color: ${color.greyBlk};
   flex: 2 1 auto;
   overflow-y: auto;

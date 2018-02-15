@@ -13,7 +13,7 @@ import {
   UserMenu
 } from "interviewjs-styleguide";
 
-import { CreateStoryModal } from "../modals";
+import { NewStoryModal } from "../modals";
 import { Story, Stories } from "../partials";
 
 const Page = css.div`
@@ -55,9 +55,9 @@ export default class Listing extends React.Component {
   constructor(props) {
     super(props);
     this.state = { createStoryModal: false };
-    this.toggleCreateStoryModal = this.toggleCreateStoryModal.bind(this);
+    this.toggleNewStoryModal = this.toggleNewStoryModal.bind(this);
   }
-  toggleCreateStoryModal() {
+  toggleNewStoryModal() {
     this.setState({ createStoryModal: !this.state.createStoryModal });
   }
   render() {
@@ -71,12 +71,12 @@ export default class Listing extends React.Component {
             <PageTitle typo="h1">Your Stories</PageTitle>
           </Container>
           <Container flex={[1, 1, `${100 / 3}%`]} align="right" padded>
-            <Action primary onClick={() => this.toggleCreateStoryModal()}>
+            <Action primary onClick={() => this.toggleNewStoryModal()}>
               Create new
             </Action>
           </Container>
         </PageHead>
-        <Separator effect="silent" size="h" />
+        <Separator silent size="h" />
         <PageBody>
           <Container limit="l">
             <Stories>
@@ -96,13 +96,13 @@ export default class Listing extends React.Component {
           </Container>
         </PageBody>
       </Page>,
-      <CreateStoryModal
+      <NewStoryModal
         {...this.props}
-        handleClose={this.toggleCreateStoryModal}
+        handleClose={this.toggleNewStoryModal}
         handleCreateStory={this.props.createStory}
         updateStory={this.props.updateStory}
         isOpen={this.state.createStoryModal}
-        key="CreateStoryModal"
+        key="NewStoryModal"
       />
     ];
   }

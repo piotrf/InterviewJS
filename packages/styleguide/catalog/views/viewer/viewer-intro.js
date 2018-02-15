@@ -111,9 +111,9 @@ export default class ViewerIntro extends React.Component {
       >
         <Cover image={CoverImg} flex={[0, 0, `${100 / 2}%`]}>
           <PageTitle typo="h1">Obamacare — One Year In</PageTitle>
-          <Separator size="s" effect="silent" />
+          <Separator size="s" silent />
           <PageSubtitle typo="p6">Featuring:</PageSubtitle>
-          <Separator size="s" effect="silent" />
+          <Separator size="s" silent />
         </Cover>
         <Body dir="column" flex={[2, 0, `${100 / 4}%`]}>
           <BodyWrapper>

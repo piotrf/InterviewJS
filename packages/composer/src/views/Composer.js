@@ -1,22 +1,19 @@
 import React from "react";
 import css from "styled-components";
-import ReactModal from "react-modal";
-import { arrayOf, object, shape, string } from "prop-types";
+import { arrayOf, func, object, shape, string } from "prop-types";
 
 import {
   Action,
   Actionbar,
   Container,
   Icon,
-  Modal,
-  ModalBody,
-  ModalFoot,
-  ModalHead,
   PageTitle,
   Separator,
   breakpoint,
   setSpace
 } from "interviewjs-styleguide";
+
+import { StoryDetailsModal, StoryMetaModal } from "../modals";
 
 const Page = css.div`
   align-content: stretch;
@@ -72,27 +69,34 @@ export default class Composer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showInfoModal: false,
-      showCustomiseModal: false
+      metaModal: false,
+      detailsModal: false,
+      customiseModal: false
     };
-    this.toggleInfoModal = this.toggleInfoModal.bind(this);
     this.toggleCustomiseModal = this.toggleCustomiseModal.bind(this);
+    this.toggleDetailsModal = this.toggleDetailsModal.bind(this);
+    this.toggleMetaModal = this.toggleMetaModal.bind(this);
+    this.updateStory = this.updateStory.bind(this);
   }
-  toggleInfoModal() {
-    this.setState({ showInfoModal: !this.state.showInfoModal });
+  toggleMetaModal() {
+    this.setState({ metaModal: !this.state.metaModal });
   }
   toggleCustomiseModal() {
-    this.setState({ showCustomiseModal: !this.state.showCustomiseModal });
+    this.setState({ customiseModal: !this.state.customiseModal });
   }
-  handleStoryDetailsForm(e) {
-    e.preventDefault();
-    console.log(this.refs);
+  toggleDetailsModal() {
+    this.setState({ detailsModal: !this.state.detailsModal });
+  }
+  updateStory(data) {
+    const { storyId } = this.props.params;
+    const i = this.props.stories.findIndex((story) => story.id === storyId);
+    this.props.updateStory(data, i);
+    this.setState({ detailsModal: false, metaModal: false });
   }
   render() {
     const { storyId } = this.props.params;
-    const i = this.props.stories.findIndex(story => story.id === storyId);
+    const i = this.props.stories.findIndex((story) => story.id === storyId);
     const story = this.props.stories[i];
-    console.log(story);
     return [
       <Page key="Page">
         <PageHead>
@@ -101,10 +105,14 @@ export default class Composer extends React.Component {
               <Icon name="chevron-left" size="x" /> Back
             </Action>
             <Separator dir="v" size="m" />
-            <Action onClick={() => this.toggleInfoModal()}>
+            <Action onClick={() => this.toggleMetaModal()}>
               <Icon name="info-circle" size="x" /> Edit Info
             </Action>
-            <Separator dir="v" size="s" effect="silent" />
+            <Separator dir="v" size="m" />
+            <Action onClick={() => this.toggleDetailsModal()}>
+              <Icon name="info-circle" size="x" /> Edit Details
+            </Action>
+            <Separator dir="v" size="s" silent />
             <Action onClick={() => this.toggleCustomiseModal()}>
               <Icon name="palette" size="x" /> Customise
             </Action>
@@ -149,7 +157,7 @@ export default class Composer extends React.Component {
       <MobilePage key="Placeholder">
         <Container>
           <PageTitle typo="h2">This Page works only on desktop</PageTitle>
-          <Separator effect="silent" size="m" />
+          <Separator silent size="m" />
           <Actionbar>
             <Action primary fixed onClick={() => this.props.router.push(`/`)}>
               Go back
@@ -157,67 +165,35 @@ export default class Composer extends React.Component {
           </Actionbar>
         </Container>
       </MobilePage>,
-      <ReactModal
-        // onAfterOpen={handleAfterOpenFunc}
-        ariaHideApp={false}
-        isOpen={this.state.showInfoModal}
-        key="EditInfoModal"
-        onRequestClose={() => this.toggleInfoModal()}
-      >
-        <Modal handleClose={() => this.toggleInfoModal()}>
-          <ModalHead>
-            <PageTitle typo="h1">Edit story details</PageTitle>
-          </ModalHead>
-          <ModalBody>Body</ModalBody>
-          <ModalFoot>
-            <Actionbar>
-              <Action fixed secondary onClick={() => this.toggleInfoModal()}>
-                Cancel
-              </Action>
-              <Action fixed primary onClick={e => console.log("save")}>
-                Save
-              </Action>
-            </Actionbar>
-          </ModalFoot>
-        </Modal>
-      </ReactModal>,
-      <ReactModal
-        // onAfterOpen={handleAfterOpenFunc}
-        ariaHideApp={false}
-        isOpen={this.state.showCustomiseModal}
-        key="CustomiseModal"
-        onRequestClose={() => this.toggleCustomiseModal()}
-      >
-        <Modal handleClose={() => this.toggleCustomiseModal()}>
-          <ModalHead>
-            <PageTitle typo="h1">Customise</PageTitle>
-          </ModalHead>
-          <ModalBody>Body</ModalBody>
-          <ModalFoot>
-            <Actionbar>
-              <Action
-                fixed
-                onClick={() => this.toggleCustomiseModal()}
-                secondary
-              >
-                Cancel
-              </Action>
-              <Action fixed primary onClick={e => console.log("save")}>
-                Save
-              </Action>
-            </Actionbar>
-          </ModalFoot>
-        </Modal>
-      </ReactModal>
+      this.state.detailsModal ? (
+        <StoryDetailsModal
+          handleClose={this.toggleDetailsModal}
+          isOpen={this.state.detailsModal}
+          key="StoryDetailsModal"
+          story={story}
+          updateStory={this.updateStory}
+        />
+      ) : null,
+      this.state.metaModal ? (
+        <StoryMetaModal
+          handleClose={this.toggleMetaModal}
+          isOpen={this.state.metaModal}
+          key="StoryMetaModal"
+          story={story}
+          updateStory={this.updateStory}
+        />
+      ) : null
     ];
   }
 }
 
 Composer.propTypes = {
   params: shape({ storyId: string.isRequired }).isRequired,
-  stories: arrayOf(object)
+  stories: arrayOf(object),
+  updateStory: func
 };
 
 Composer.defaultProps = {
-  stories: []
+  stories: [],
+  updateStory: null
 };

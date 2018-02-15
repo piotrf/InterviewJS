@@ -1,14 +1,22 @@
 import css from "styled-components";
 
-import { setSpace } from "../../../utils";
+import { color, setSpace } from "../../../utils";
 
 const DropdownContent = css.div`
   & ul, & li, & button {
     display: block;
-    text-align: center;
+    text-align: left;
+  }
+  & li {
+    ${setSpace("mhx")};
+    ${setSpace("pvx")};
+  }
+  & li:not(:first-child) {
+    border-top: 1px solid ${color.greyWt};
   }
   & button {
-    ${setSpace("pas")};
+    ${setSpace("pvs")};
+    ${setSpace("phx")};
     width: 100%;
   }
 `;

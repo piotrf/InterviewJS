@@ -1,6 +1,6 @@
-import { func, shape, string } from "prop-types";
 import css from "styled-components";
 import React from "react";
+import { func, number, shape, string } from "prop-types";
 
 import {
   Action,
@@ -18,7 +18,7 @@ import {
   disselect
 } from "interviewjs-styleguide";
 
-import { EditStoryDetailsModal } from "../modals";
+import { StoryDetailsModal, StoryMetaModal } from "../modals";
 
 const StoryEl = css(Container)`
   ${disselect};
@@ -34,11 +34,11 @@ const StoryEl = css(Container)`
 const StoryTitle = css(Text.withComponent("h2"))`
   ${disselect};
   ${setSpace("mbx")};
-  color: ${color.blueBlk};
+  color: ${color.blueM};
 `;
 const StorySummary = css(Text.withComponent("p"))`
   ${disselect};
-  color: ${color.blueHL};
+  color: ${color.greyHD};
 `;
 const StoryDate = css(Text)`
   ${disselect};
@@ -65,14 +65,18 @@ const AvatarListItem = css.li`
 export default class Story extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { dropdown: false, modal: false };
+    this.state = {
+      detailsModal: false,
+      dropdown: false,
+      metaModal: false
+    };
+    this.toggleDetailsModal = this.toggleDetailsModal.bind(this);
     this.toggleDropdown = this.toggleDropdown.bind(this);
-    this.toggleModal = this.toggleModal.bind(this);
+    this.toggleMetaModal = this.toggleMetaModal.bind(this);
     this.triggerDelete = this.triggerDelete.bind(this);
-    this.triggerInfo = this.triggerInfo.bind(this);
-  }
-  toggleModal() {
-    this.setState({ modal: !this.state.modal });
+    this.triggerDetails = this.triggerDetails.bind(this);
+    this.triggerMeta = this.triggerMeta.bind(this);
+    this.updateStory = this.updateStory.bind(this);
   }
   toggleDropdown() {
     this.setState({ dropdown: !this.state.dropdown });
@@ -81,11 +85,26 @@ export default class Story extends React.Component {
     this.toggleDropdown();
     this.props.deleteStory();
   }
-  triggerInfo() {
-    this.toggleModal();
+  toggleMetaModal() {
+    this.setState({ metaModal: !this.state.metaModal });
+  }
+  toggleDetailsModal() {
+    this.setState({ detailsModal: !this.state.detailsModal });
+  }
+  triggerMeta() {
+    this.toggleMetaModal();
     this.toggleDropdown();
   }
+  triggerDetails() {
+    this.toggleDetailsModal();
+    this.toggleDropdown();
+  }
+  updateStory(data) {
+    this.props.updateStory(data, this.props.i);
+    this.setState({ detailsModal: false, metaModal: false });
+  }
   render() {
+    const { detailsModal, metaModal } = this.state;
     return [
       <Container key="body">
         <StoryEl
@@ -133,11 +152,14 @@ export default class Story extends React.Component {
               <DropdownContent>
                 <ul>
                   <li>
-                    <Action onClick={this.triggerInfo}>Info</Action>
+                    <Action onClick={this.triggerMeta}>Edit meta</Action>
+                  </li>
+                  <li>
+                    <Action onClick={this.triggerDetails}>Edit details</Action>
                   </li>
                   <li>
                     <Action tone="negative" onClick={this.triggerDelete}>
-                      Delete
+                      Delete story
                     </Action>
                   </li>
                 </ul>
@@ -150,12 +172,24 @@ export default class Story extends React.Component {
           </Dropdown>
         </StoryMenu>
       </Container>,
-      <EditStoryDetailsModal
-        key="modal"
-        isOpen={this.state.modal}
-        handleClose={this.toggleModal}
-        updateStory={this.props.updateStory}
-      />
+      detailsModal ? (
+        <StoryDetailsModal
+          handleClose={this.toggleDetailsModal}
+          isOpen={this.state.detailsModal}
+          key="StoryDetailsModal"
+          story={this.props.story}
+          updateStory={this.updateStory}
+        />
+      ) : null,
+      metaModal ? (
+        <StoryMetaModal
+          handleClose={this.toggleMetaModal}
+          isOpen={this.state.metaModal}
+          key="StoryMetaModal"
+          story={this.props.story}
+          updateStory={this.updateStory}
+        />
+      ) : null
     ];
   }
 }
@@ -168,6 +202,7 @@ Story.propTypes = {
     title: string.isRequired
   }).isRequired,
   deleteStory: func.isRequired,
+  i: number.isRequired,
   openStory: func.isRequired,
   updateStory: func.isRequired
 };

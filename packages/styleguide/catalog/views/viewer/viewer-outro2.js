@@ -105,7 +105,7 @@ export default class ViewerOutro2 extends React.Component {
               <PageText typo="h3">
                 1. Do you think Obama made healthcare better for America’s poor?
               </PageText>
-              <Separator size="m" effect="silent" />
+              <Separator size="m" silent />
               <Actionbar>
                 <Action inverted style={{ width: "100px" }}>
                   Yes
@@ -114,12 +114,12 @@ export default class ViewerOutro2 extends React.Component {
                   No
                 </Action>
               </Actionbar>
-              <Separator size="m" effect="silent" />
+              <Separator size="m" silent />
               <PageText typo="h3">
                 2. Is it ok to pay more taxes to have state funded healthcare
                 for everyone?
               </PageText>
-              <Separator size="m" effect="silent" />
+              <Separator size="m" silent />
               <Actionbar>
                 <Action inverted style={{ width: "100px" }} active>
                   Yes
@@ -128,11 +128,11 @@ export default class ViewerOutro2 extends React.Component {
                   No
                 </Action>
               </Actionbar>
-              <Separator size="m" effect="silent" />
+              <Separator size="m" silent />
               <PageText typo="h3">
                 3. I’m with Trump — just keep the costs down!
               </PageText>
-              <Separator size="m" effect="silent" />
+              <Separator size="m" silent />
               <Actionbar>
                 <Action inverted style={{ width: "100px" }}>
                   Yes

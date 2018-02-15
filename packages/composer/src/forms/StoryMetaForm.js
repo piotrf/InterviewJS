@@ -1,9 +1,9 @@
 import React from "react";
-import { func, oneOfType, shape, string, object, node } from "prop-types";
+import { func, object, shape, string } from "prop-types";
 
 import {
-  Action,
   Actionbar,
+  Action,
   CharacterCount,
   Container,
   Form,
@@ -43,7 +43,7 @@ export default class StoryMetaForm extends React.Component {
   }
   render() {
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form onSubmit={(e) => this.handleSubmit(e)}>
         <FormItem>
           <Label>Title</Label>
           <CharacterCount>
@@ -60,7 +60,7 @@ export default class StoryMetaForm extends React.Component {
           />
           <Legend tip="This is a title">i</Legend>
         </FormItem>
-        <Separator size="m" effect="silent" />
+        <Separator size="m" silent />
         <FormItem>
           <Label>Byline</Label>
           <Container dir="row">
@@ -104,7 +104,7 @@ export default class StoryMetaForm extends React.Component {
           </Container>
           <Legend tip="tip">i</Legend>
         </FormItem>
-        <Separator size="m" effect="silent" />
+        <Separator size="m" silent />
         <FormItem>
           <Label>Imagery</Label>
           <Container dir="row">
@@ -132,11 +132,8 @@ export default class StoryMetaForm extends React.Component {
           </Container>
           <Legend tip="tip">i</Legend>
         </FormItem>
-        <Separator size="m" effect="silent" />
+        <Separator size="m" silent />
         <Actionbar>
-          <Action fixed onClick={this.props.handleCancel} secondary>
-            Cancel
-          </Action>
           <Action fixed primary type="submit">
             Save
           </Action>
@@ -147,17 +144,13 @@ export default class StoryMetaForm extends React.Component {
 }
 
 StoryMetaForm.propTypes = {
-  handleCancel: func.isRequired,
   handleSubmit: func.isRequired,
   story: shape({
     title: string,
     author: string,
     authorLink: string,
     pubDate: string,
-    media: shape({
-      cover: oneOfType([string, object, node]),
-      logo: oneOfType([string, object, node])
-    })
+    media: object
   })
 };
 

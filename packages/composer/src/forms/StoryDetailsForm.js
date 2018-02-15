@@ -2,8 +2,8 @@ import { func, shape, string } from "prop-types";
 import React from "react";
 
 import {
-  Action,
   Actionbar,
+  Action,
   CharacterCount,
   Form,
   FormItem,
@@ -36,7 +36,7 @@ export default class StoryDetailsForm extends React.Component {
   }
   render() {
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form onSubmit={(e) => this.handleSubmit(e)}>
         <FormItem>
           <Label>Intro</Label>
           <CharacterCount>
@@ -46,13 +46,13 @@ export default class StoryDetailsForm extends React.Component {
             area
             maxlength="280"
             name="intro"
-            onChange={e => this.handleInput(e)}
+            onChange={(e) => this.handleInput(e)}
             placeholder="Best to start with something like ‘Find out how…’, ‘Investigate…’, ‘Learn…’"
             value={this.state.formData.intro}
           />
           <Legend tip="This is a tip">i</Legend>
         </FormItem>
-        <Separator size="m" effect="silent" />
+        <Separator size="m" silent />
         <FormItem>
           <Label>Context</Label>
           <CharacterCount>
@@ -62,13 +62,13 @@ export default class StoryDetailsForm extends React.Component {
             area
             maxlength="280"
             name="context"
-            onChange={e => this.handleInput(e)}
+            onChange={(e) => this.handleInput(e)}
             placeholder="This text helps the reader understand what the interviews are about…"
             value={this.state.formData.context}
           />
           <Legend tip="This is a tip">i</Legend>
         </FormItem>
-        <Separator size="m" effect="silent" />
+        <Separator size="m" silent />
         <Actionbar>
           <Action fixed primary type="submit">
             Save

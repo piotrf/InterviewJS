@@ -53,14 +53,13 @@ export default class CreateStoryModal extends React.Component {
       if (step === 0) {
         return (
           <Container limit="s" align="center">
-            <Separator size="m" effect="silent" />
+            <Separator size="m" silent />
             <PageSubtitle typo="h3">
               Start by adding a few details and meta info about your story. You
               can attach a cover photo and your organisation logo here too.
             </PageSubtitle>
-            <Separator size="m" effect="silent" />
+            <Separator size="m" silent />
             <StoryMetaForm
-              handleCancel={this.props.handleClose}
               handleSubmit={this.handleStep0}
               story={
                 this.state.storyCreated ? this.props.stories[0] : undefined
@@ -71,12 +70,12 @@ export default class CreateStoryModal extends React.Component {
       } else if (step === 1) {
         return (
           <Container limit="s" align="center">
-            <Separator size="m" effect="silent" />
+            <Separator size="m" silent />
             <PageSubtitle typo="h3">
               Add interviewees for the user to chat to. You will be able to
               script separate chats for each interviewee later.
             </PageSubtitle>
-            <Separator size="m" effect="silent" />
+            <Separator size="m" silent />
             <StoryDetailsForm
               handleSubmit={this.handleStep1}
               story={this.props.stories[0]}
@@ -102,7 +101,7 @@ export default class CreateStoryModal extends React.Component {
         <Modal {...this.props} wizard>
           <ModalHead>
             <PageTitle typo="h1">Create New Story</PageTitle>
-            <Separator size="s" effect="silent" />
+            <Separator size="s" silent />
             <Breadcrumbs count={3}>
               <Breadcrumb
                 onClick={step >= 0 ? () => this.setState({ step: 0 }) : null}

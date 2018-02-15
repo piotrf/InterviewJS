@@ -1,2 +1,3 @@
-export { default as CreateStoryModal } from "./CreateStoryModal";
-export { default as EditStoryDetailsModal } from "./EditStoryDetailsModal";
+export { default as NewStoryModal } from "./NewStoryModal";
+export { default as StoryDetailsModal } from "./StoryDetailsModal";
+export { default as StoryMetaModal } from "./StoryMetaModal";

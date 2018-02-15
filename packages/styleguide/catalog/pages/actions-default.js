@@ -92,13 +92,6 @@ export default () => markdown`
       </Action>
     </ReactSpecimen>
   )}
-  ${(
-    <ReactSpecimen>
-      <Action active onClick={(evt) => console.log(evt)}>
-        Plain action does have an 'active' variation
-      </Action>
-    </ReactSpecimen>
-  )}
 
   ### Rendered as links
 

@@ -105,20 +105,20 @@ export default class ViewerOutro3 extends React.Component {
               <PageText typo="h3">
                 1. Do you think Obama made healthcare better for America’s poor?
               </PageText>
-              <Separator size="m" effect="silent" />
+              <Separator size="m" silent />
               <Chart data={{ positive: 40, negative: 60 }} />
-              <Separator size="m" effect="silent" />
+              <Separator size="m" silent />
               <PageText typo="h3">
                 2. Is it ok to pay more taxes to have state funded healthcare
                 for everyone?
               </PageText>
-              <Separator size="m" effect="silent" />
+              <Separator size="m" silent />
               <Chart data={{ positive: 40, negative: 60 }} />
-              <Separator size="m" effect="silent" />
+              <Separator size="m" silent />
               <PageText typo="h3">
                 3. I’m with Trump — just keep the costs down!
               </PageText>
-              <Separator size="m" effect="silent" />
+              <Separator size="m" silent />
               <Chart data={{ positive: 40, negative: 60 }} />
             </BodyText>
           </BodyWrapper>

@@ -11,7 +11,7 @@ const Input = css.input`
   border-radius: ${radius.m};
   border: 1px solid ${color.greyLt};
   box-shadow: none;
-  color: ${color.blueBlk};
+  color: ${color.greyBlk};
   font-family: ${font.serif};
   position: relative;
   transition: border-color ${time.m};
@@ -48,7 +48,7 @@ const Input = css.input`
 
 const Textarea = Input.withComponent("textarea");
 
-const TextInput = props =>
+const TextInput = (props) =>
   props.area ? <Textarea {...props} /> : <Input {...props} />;
 
 TextInput.propTypes = {

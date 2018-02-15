@@ -85,12 +85,12 @@ export default () => markdown`
 
   ${(
     <ReactSpecimen span={3}>
-      <Separator dir="h" effect="silent" />
+      <Separator dir="h" silent />
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen span={3}>
-      <Separator dir="v" effect="silent" />
+      <Separator dir="v" silent />
     </ReactSpecimen>
   )}
 

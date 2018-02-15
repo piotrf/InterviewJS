@@ -3,7 +3,6 @@ import css from "styled-components";
 import { color, setSpace } from "../../../utils";
 
 const ModalHead = css.div`
-  ${setSpace("pbm")};
   ${setSpace("phl")};
   ${setSpace("ptl")};
   color: ${color.blueBlk};
