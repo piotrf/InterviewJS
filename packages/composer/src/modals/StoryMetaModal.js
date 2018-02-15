@@ -1,6 +1,6 @@
 import React from "react";
 import ReactModal from "react-modal";
-import { bool, func, node, object, oneOfType, shape, string } from "prop-types";
+import { bool, func, object, shape, string } from "prop-types";
 
 import {
   Container,
@@ -52,10 +52,7 @@ StoryDetailsModal.propTypes = {
     context: string,
     author: string,
     authorLink: string,
-    media: {
-      cover: oneOfType([string, object, node]),
-      logo: oneOfType([string, object, node])
-    },
+    media: object,
     pubDate: string
   }).isRequired
 };
