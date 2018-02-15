@@ -30,26 +30,6 @@ const pages = [
     ]
   },
   {
-    title: "Text",
-    pages: [
-      {
-        path: "text/titles",
-        title: "Titles",
-        content: require("./pages/text-titles.js")
-      },
-      {
-        path: "text/body",
-        title: "Body text",
-        content: require("./pages/text-body.js")
-      },
-      {
-        path: "text/extends",
-        title: "Extends",
-        content: require("./pages/text-extends.js")
-      }
-    ]
-  },
-  {
     title: "Actions",
     pages: [
       {
@@ -171,6 +151,31 @@ const pages = [
         content: require("./pages/partials-viewer.js"),
         path: "/partials/viewer",
         title: "Viewer Partials"
+      }
+    ]
+  },
+  {
+    content: require("./pages/tabs.js"),
+    path: "/tabs",
+    title: "Tabs"
+  },
+  {
+    title: "Text",
+    pages: [
+      {
+        path: "text/titles",
+        title: "Titles",
+        content: require("./pages/text-titles.js")
+      },
+      {
+        path: "text/body",
+        title: "Body text",
+        content: require("./pages/text-body.js")
+      },
+      {
+        path: "text/extends",
+        title: "Extends",
+        content: require("./pages/text-extends.js")
       }
     ]
   },

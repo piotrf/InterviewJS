@@ -28,6 +28,8 @@ export { default as PageSubtitle } from "./texts/PageSubtitle.js";
 export { default as PageTitle } from "./texts/PageTitle.js";
 export { default as Preloader } from "./preloaders/Preloader.js";
 export { default as Separator } from "./separators/Separator.js";
+export { default as Tab } from "./tabs/Tab.js";
+export { default as Tabs } from "./tabs/Tabs.js";
 export { default as Text } from "./texts/Text.js";
 export { default as TextInput } from "./forms/TextInput.js";
 export { default as Tip } from "./contextuals/Tip.js";
