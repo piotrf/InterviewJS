@@ -9,7 +9,7 @@ require("./modals.css");
 
 const ModalEl = css.div`
   background: ${color.white};
-  box-shadow: 0 2px 4px ${color.greyLt};
+  box-shadow: 0 0 6px 2px ${color.shadowWt};
   color: ${color.blueD};
   font-family: ${font.serif};
   left: 50%;
