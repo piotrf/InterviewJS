@@ -42,7 +42,6 @@ export default class StoryMetaForm extends React.Component {
     });
   }
   render() {
-    console.log(this.props);
     return (
       <Form onSubmit={this.handleSubmit}>
         <FormItem>
