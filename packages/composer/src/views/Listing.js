@@ -67,7 +67,7 @@ export default class Listing extends React.Component {
           <Container flex={[1, 1, `${100 / 3}%`]} padded>
             <UserMenu data={this.props.user} />
           </Container>
-          <Container flex={[1, 1, `${100 / 3}%`]} align="center" padded>
+          <Container flex={[1, 1, `${100 / 3}%`]} align="center">
             <PageTitle typo="h1">Your Stories</PageTitle>
           </Container>
           <Container flex={[1, 1, `${100 / 3}%`]} align="right" padded>

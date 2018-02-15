@@ -106,9 +106,9 @@ export default class Composer extends React.Component {
             </Action>
             <Separator dir="v" size="m" />
             <Action onClick={() => this.toggleMetaModal()}>
-              <Icon name="info-circle" size="x" /> Edit Info
+              <Icon name="info-circle" size="x" /> Edit Meta
             </Action>
-            <Separator dir="v" size="m" />
+            <Separator dir="v" size="s" silent />
             <Action onClick={() => this.toggleDetailsModal()}>
               <Icon name="info-circle" size="x" /> Edit Details
             </Action>
@@ -117,7 +117,7 @@ export default class Composer extends React.Component {
               <Icon name="palette" size="x" /> Customise
             </Action>
           </Container>
-          <Container flex={[1, 1, `${100 / 3}%`]} align="center" padded>
+          <Container flex={[1, 1, `${100 / 3}%`]} align="center">
             <PageTitle typo="h2">{story.title}</PageTitle>
           </Container>
           <Container flex={[1, 1, `${100 / 3}%`]} align="right" padded>

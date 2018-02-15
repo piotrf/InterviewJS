@@ -22,6 +22,14 @@ export const ContainerEl = css.div`
     }
     return null;
   }};
+  ${({ hide }) =>
+    hide === "phone"
+      ? `
+    ${breakpoint.onlyphone} { 
+      display: none;
+    }
+  `
+      : ""};
   ${({ shift }) =>
     shift
       ? `

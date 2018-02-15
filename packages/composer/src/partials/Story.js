@@ -22,7 +22,7 @@ import { StoryDetailsModal, StoryMetaModal } from "../modals";
 
 const StoryEl = css(Container)`
   ${disselect};
-  ${setSpace("mhl")};
+  ${setSpace("mhh")};
   border-radius: ${radius.l};
   cursor: pointer;
   transition: box-shadow ${time.m}, transform ${time.m};
@@ -45,6 +45,7 @@ const StoryDate = css(Text)`
   color: ${color.greyM};
 `;
 const StoryMenu = css.div`
+  ${setSpace("mrm")};
   position: absolute;
   right: 0;
   top: 50%;
@@ -119,7 +120,7 @@ export default class Story extends React.Component {
             <StoryTitle typo="h2">{this.props.story.title}</StoryTitle>
             <StorySummary typo="p5">{this.props.story.intro}</StorySummary>
           </Container>
-          <Container flex={[2, 1, "20%"]} align="center">
+          <Container flex={[2, 1, "20%"]} align="center" hide="phone">
             <StoryDate typo="p5">{this.props.story.pubDate}</StoryDate>
           </Container>
           <Container flex={[2, 1, "20%"]} align="right">

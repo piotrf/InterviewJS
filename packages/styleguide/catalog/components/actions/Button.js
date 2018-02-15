@@ -137,6 +137,7 @@ const Button = css.button`
   }}}
 
   /* inverted */
+
   ${({ inverted, active }) => {
     if (inverted) {
       return `
@@ -169,7 +170,7 @@ const Button = css.button`
 
   /* plain */
 
-  ${({ primary, secondary, inverted, tone, theme, active }) => {
+  ${({ primary, secondary, inverted, tone, theme }) => {
     if (!primary && !secondary && !inverted) {
       if (tone === "negative") {
         return `
@@ -230,11 +231,13 @@ const Button = css.button`
       return `
         ${setSize("m")};
         ${setSpace("pan")};
+        text-align: center;
       `;
     } else if (iconic && (!primary && !secondary && !inverted)) {
       return `
         ${setWidth("m")};
         ${setType("l")};
+        text-align: center;
       `;
     } else if (!iconic && (primary || secondary || inverted)) {
       return `

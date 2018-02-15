@@ -5,7 +5,7 @@ import { arrayOf, oneOfType, node } from "prop-types";
 import { Container, Text, color, setSpace } from "interviewjs-styleguide";
 
 const StoriesListHead = css(Container)`
-  ${setSpace("mhl")};
+  ${setSpace("mhh")};
   ${setSpace("phm")};
   ${setSpace("pbm")};
   color: ${color.greyM};
@@ -17,7 +17,7 @@ const StoriesList = css.ol`
   }
 `;
 
-const Stories = props => (
+const Stories = (props) => (
   <Container>
     <StoriesListHead dir="row">
       <Container flex={[1, 1, "60%"]}>
@@ -25,7 +25,7 @@ const Stories = props => (
           Title
         </Text>
       </Container>
-      <Container flex={[0, 0, "20%"]} align="center">
+      <Container flex={[0, 0, "20%"]} align="center" hide="phone">
         <Text typo="p5" nowrap>
           Modified
         </Text>

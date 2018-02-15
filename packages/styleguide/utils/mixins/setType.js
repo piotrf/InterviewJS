@@ -3,7 +3,7 @@ import fluid from "../functions/fluid";
 import { lead, fsize } from "../";
 
 /* eslint import/prefer-default-export: 0 */
-export const setType = size => {
+export const setType = (size) => {
   switch (size) {
     case "h":
       return `${fluid("font-size", fsize.h[0], fsize.h[1])}line-height: ${
@@ -12,7 +12,7 @@ export const setType = size => {
       break;
     case "l":
       return `${fluid("font-size", fsize.l[0], fsize.l[1])}line-height: ${
-        lead.l
+        lead.m
       }`;
       break;
     case "s":

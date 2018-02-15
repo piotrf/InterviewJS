@@ -12,7 +12,7 @@ import {
 
 import { StoryDetailsForm } from "../forms";
 
-export default class EditStoryDetailsModal extends React.Component {
+export default class StoryDetailsModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -22,7 +22,6 @@ export default class EditStoryDetailsModal extends React.Component {
       <ReactModal
         ariaHideApp={false}
         isOpen={this.props.isOpen}
-        key="EditStoryDetailsModal"
         onRequestClose={this.props.handleClose}
       >
         <Modal {...this.props}>
@@ -43,10 +42,10 @@ export default class EditStoryDetailsModal extends React.Component {
   }
 }
 
-EditStoryDetailsModal.propTypes = {
+StoryDetailsModal.propTypes = {
   handleClose: func.isRequired,
-  updateStory: func.isRequired,
   isOpen: bool.isRequired,
+  updateStory: func.isRequired,
   story: shape({
     title: string,
     intro: string,
@@ -58,4 +57,4 @@ EditStoryDetailsModal.propTypes = {
   }).isRequired
 };
 
-EditStoryDetailsModal.defaultProps = {};
+StoryDetailsModal.defaultProps = {};
