@@ -26,7 +26,7 @@ const ModalEl = css.div`
   ${breakpoint.tablet} {
     border-radius: ${({ wizard }) => (wizard ? `` : radius.h)};
     max-height: calc(100% - 80px);
-    max-width: ${({ wizard }) => (wizard ? `` : `680px`)};
+    max-width: ${({ wizard }) => (wizard ? `` : `600px`)};
   }
   & > button {
     ${setSpace("mrm")};
