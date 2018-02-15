@@ -25,7 +25,7 @@ export const ContainerEl = css.div`
   ${({ hide }) =>
     hide === "phone"
       ? `
-    ${breakpoint.onlyphone} { 
+    ${breakpoint.onlyphone} {
       display: none;
     }
   `
@@ -84,10 +84,10 @@ export const ContainerEl = css.div`
           max-width: 500px;
         }
         ${breakpoint.desktop} {
-          max-width: 700px;
+          max-width: 580px;
         }
         ${breakpoint.hdesktop} {
-          max-width: 900px;
+          max-width: 660px;
         }
         `;
     } else if (limit === "m") {

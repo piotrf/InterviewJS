@@ -20,6 +20,7 @@ const Input = css.input`
     outline: none;
     border-color: ${color.blueM};
     z-index: 50;
+    color: ${color.blueBlk};
   }
   &::placeholder {
     ${setType("x")};
@@ -42,6 +43,7 @@ const Input = css.input`
     if (place !== null) {
       return `border-radius: 0`;
     }
+    return null;
   }};
   ${({ nooffset }) => (nooffset ? `right: 0; left: 0;` : ``)};
 `;
