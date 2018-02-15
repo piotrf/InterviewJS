@@ -1,19 +1,25 @@
 import React from "react";
 import { markdown, ReactSpecimen } from "catalog";
 
-import { Text, PageTitle } from "../components";
+import { Text, PageSubtitle, PageTitle } from "../components";
 
 export default () => markdown`
 
-  ## PageTitle
+  ## Page text (tag-specific)
 
   ${(
-    <ReactSpecimen>
+    <ReactSpecimen span={3}>
       <PageTitle typo="h1">Renders as h1</PageTitle>
     </ReactSpecimen>
   )}
 
-  ## All title-level text
+  ${(
+    <ReactSpecimen span={3}>
+      <PageSubtitle typo="h1">Renders as h2</PageSubtitle>
+    </ReactSpecimen>
+  )}
+
+  ## All text variations
 
   ${(
     <ReactSpecimen>
