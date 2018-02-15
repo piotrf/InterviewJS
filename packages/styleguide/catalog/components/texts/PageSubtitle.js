@@ -1,5 +1,10 @@
+import css from "styled-components";
 import Text from "./Text";
 
-const PageSubtitle = Text.withComponent("h2");
+import { color } from "../../../utils";
+
+const PageSubtitle = css(Text.withComponent("h2"))`
+  color: ${color.blueBlk};
+`;
 
 export default PageSubtitle;
