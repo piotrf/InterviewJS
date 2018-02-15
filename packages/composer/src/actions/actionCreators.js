@@ -6,7 +6,7 @@ export function createStory({
   context = "",
   interviewees = [],
   intro = "",
-  media = [],
+  media = {},
   pubDate = "",
   title = ""
 }) {

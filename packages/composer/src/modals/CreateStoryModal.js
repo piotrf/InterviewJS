@@ -29,14 +29,19 @@ export default class CreateStoryModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      step: 0
+      step: 0,
+      storyCreated: false
     };
     this.handleStep0 = this.handleStep0.bind(this);
     this.handleStep1 = this.handleStep1.bind(this);
   }
   handleStep0(data) {
-    this.props.handleCreateStory(data);
-    this.setState({ step: this.state.step + 1 });
+    return (
+      this.state.storyCreated
+        ? this.props.handleUpdateStory(data, 0)
+        : this.props.handleCreateStory(data),
+      this.setState({ step: this.state.step + 1, storyCreated: true })
+    );
   }
   handleStep1(data) {
     this.props.handleUpdateStory(data, 0);
@@ -57,6 +62,9 @@ export default class CreateStoryModal extends React.Component {
             <StoryMetaForm
               handleCancel={this.props.handleClose}
               handleSubmit={this.handleStep0}
+              story={
+                this.state.storyCreated ? this.props.stories[0] : undefined
+              }
             />
           </Container>
         );

@@ -1,5 +1,5 @@
 import React from "react";
-import { func } from "prop-types";
+import { func, oneOfType, shape, string, object, node } from "prop-types";
 
 import {
   Action,
@@ -19,10 +19,14 @@ export default class StoryMetaForm extends React.Component {
     super(props);
     this.state = {
       formData: {
-        author: "",
-        authorLink: "",
-        pubDate: "",
-        title: ""
+        author: this.props.story.author,
+        authorLink: this.props.story.authorLink,
+        media: {
+          cover: this.props.story.media.cover,
+          logo: this.props.story.media.logo
+        },
+        pubDate: this.props.story.pubDate,
+        title: this.props.story.title
       }
     };
     this.handleInput = this.handleInput.bind(this);
@@ -38,6 +42,7 @@ export default class StoryMetaForm extends React.Component {
     });
   }
   render() {
+    console.log(this.props);
     return (
       <Form onSubmit={this.handleSubmit}>
         <FormItem>
@@ -49,9 +54,10 @@ export default class StoryMetaForm extends React.Component {
             input
             maxlength="140"
             name="title"
-            onChange={e => this.handleInput(e)}
+            onChange={(e) => this.handleInput(e)}
             placeholder="Placeholder…"
             required
+            value={this.state.formData.title}
           />
           <Legend tip="This is a title">i</Legend>
         </FormItem>
@@ -67,16 +73,17 @@ export default class StoryMetaForm extends React.Component {
                 input
                 maxlength="70"
                 name="author"
-                onChange={e => this.handleInput(e)}
+                onChange={(e) => this.handleInput(e)}
                 place="left"
                 placeholder="Author’s name"
+                value={this.state.formData.author}
               />
             </Container>
             <Container flex={[0, 0, `${100 / 3}%`]}>
               <TextInput
                 input
                 name="authorLink"
-                onChange={e => this.handleInput(e)}
+                onChange={(e) => this.handleInput(e)}
                 place="middle"
                 placeholder="Link…"
               />
@@ -89,9 +96,10 @@ export default class StoryMetaForm extends React.Component {
                 input
                 maxlength="70"
                 name="pubDate"
-                onChange={e => this.handleInput(e)}
+                onChange={(e) => this.handleInput(e)}
                 place="right"
                 placeholder="Publication date…"
+                value={this.state.formData.pubDate}
               />
             </Container>
           </Container>
@@ -104,20 +112,22 @@ export default class StoryMetaForm extends React.Component {
             <Container flex={[0, 0, `${100 / 2}%`]}>
               <TextInput
                 input
-                onChange={e => this.handleInput(e)}
+                onChange={(e) => this.handleInput(e)}
                 place="left"
                 placeholder="Cover photo"
                 type="file"
+                value={this.state.formData.media.cover}
               />
             </Container>
             <Container flex={[0, 0, `${100 / 2}%`]}>
               <TextInput
                 input
                 nooffset
-                onChange={e => this.handleInput(e)}
+                onChange={(e) => this.handleInput(e)}
                 place="right"
                 placeholder="Custom logo"
                 type="file"
+                value={this.state.formData.media.logo}
               />
             </Container>
           </Container>
@@ -139,7 +149,28 @@ export default class StoryMetaForm extends React.Component {
 
 StoryMetaForm.propTypes = {
   handleCancel: func.isRequired,
-  handleSubmit: func.isRequired
+  handleSubmit: func.isRequired,
+  story: shape({
+    title: string,
+    author: string,
+    authorLink: string,
+    pubDate: string,
+    media: shape({
+      cover: oneOfType([string, object, node]),
+      logo: oneOfType([string, object, node])
+    })
+  })
 };
 
-StoryMetaForm.defaultProps = {};
+StoryMetaForm.defaultProps = {
+  story: {
+    title: "",
+    author: "",
+    authorLink: "",
+    pubDate: "",
+    media: {
+      cover: undefined,
+      logo: undefined
+    }
+  }
+};
