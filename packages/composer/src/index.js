@@ -1,11 +1,8 @@
 import React from "react";
 import ReactModal from "react-modal";
-import { injectGlobal } from "styled-components";
 import { Provider } from "react-redux";
 import { render } from "react-dom";
-import { Router, Route, IndexRoute, Redirect } from "react-router";
-
-import { color, reset } from "interviewjs-styleguide";
+import { Route, Router, IndexRoute, Redirect } from "react-router";
 
 import App from "./App";
 import Composer from "./views/Composer";
@@ -13,25 +10,13 @@ import Listing from "./views/Listing";
 
 import store, { history } from "./store";
 
+require("./globalStyles.js");
+
 ReactModal.defaultStyles = {};
 
 /* eslint no-unused-expressions: 0 */
-injectGlobal`
-  ${reset};
-  html {
-    height: 100%;
-    width: 100%;
-  }
-  body {
-    background: ${color.greyWt};
-    height: 100%;
-  }
-  #root {
-    height: 100%;
-  }
-  ::selection { background: ${color.blueWt}; }
-  ::-moz-selection { background: ${color.blueWt}; }
-`;
+
+// Build the middleware for intercepting and dispatching navigation actions
 
 const rootEl = document.getElementById("root");
 
