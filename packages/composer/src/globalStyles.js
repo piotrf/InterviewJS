@@ -1,4 +1,6 @@
+/* eslint no-unused-expressions: 0 */
 import { injectGlobal } from "styled-components";
+import ReactModal from "react-modal";
 
 import { color, reset } from "interviewjs-styleguide";
 
@@ -18,3 +20,5 @@ injectGlobal`
   ::selection { background: ${color.blueWt}; }
   ::-moz-selection { background: ${color.blueWt}; }
 `;
+
+ReactModal.defaultStyles = {};
