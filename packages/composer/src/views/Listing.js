@@ -1,6 +1,6 @@
 /* eslint react/forbid-prop-types: 0 */
 import css from "styled-components";
-import React from "react";
+import React, { Component } from "react";
 import { arrayOf, func, object, shape, string } from "prop-types";
 
 import {
@@ -51,7 +51,7 @@ const PageHead = css.div`
 const PageBody = css.div`
 `;
 
-export default class Listing extends React.Component {
+export default class Listing extends Component {
   constructor(props) {
     super(props);
     this.state = { createStoryModal: false };
@@ -102,6 +102,7 @@ export default class Listing extends React.Component {
         handleCreateStory={this.props.createStory}
         updateStory={this.props.updateStory}
         isOpen={this.state.createStoryModal}
+        // isOpen // TODO revert to this.state.createStoryModal
         key="NewStoryModal"
       />
     ];

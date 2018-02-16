@@ -19,8 +19,8 @@ const stories = [
     interviewees: [
       {
         name: "Barack Obama",
-        bio: "",
-        title: "",
+        bio: "Has bio",
+        title: "44th President of the US",
         avatar:
           "https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/e35/12407344_1283694208323785_735653395_n.jpg",
         color: "blue"
@@ -28,7 +28,7 @@ const stories = [
       {
         name: "Donald Trump",
         bio: "",
-        title: "",
+        title: "45th President of the US",
         avatar:
           "https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/e35/12407344_1283694208323785_735653395_n.jpg",
         color: "red"

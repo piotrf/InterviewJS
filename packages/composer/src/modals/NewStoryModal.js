@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import ReactModal from "react-modal";
 import { arrayOf, bool, func, object } from "prop-types";
 
@@ -25,11 +25,11 @@ const getStepState = (step, i) => {
   return null;
 };
 
-export default class CreateStoryModal extends React.Component {
+export default class CreateStoryModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      step: 0,
+      step: 0, // TODO revert to 0
       storyCreated: false
     };
     this.handleStep0 = this.handleStep0.bind(this);
@@ -49,7 +49,6 @@ export default class CreateStoryModal extends React.Component {
     this.setState({ step: this.state.step + 1 });
   }
   handleStep2(data) {
-    console.log(data);
     // this.props.updateStory(data, 0);
     // this.setState({ step: this.state.step + 1 });
   }
@@ -78,8 +77,8 @@ export default class CreateStoryModal extends React.Component {
           <Container limit="s" align="center">
             <Separator size="m" silent />
             <PageSubtitle typo="h3">
-              Add interviewees for the user to chat to. You will be able to
-              script separate chats for each interviewee later.
+              Give the readers a quest, tell them what they will learn about a
+              topic when speaking to the interviewees.
             </PageSubtitle>
             <Separator size="m" silent />
             <StoryDetailsForm
@@ -91,9 +90,15 @@ export default class CreateStoryModal extends React.Component {
       } else if (step === 2) {
         return (
           <Container limit="s" align="center">
+            <Separator size="m" silent />
+            <PageSubtitle typo="h3">
+              Add interviewees for the user to chat to. You will be able to
+              script separate chats for each interviewee later.
+            </PageSubtitle>
+            <Separator size="m" silent />
             <IntervieweesForm
               handleSubmit={this.handleStep2}
-              story={this.props.stories[0]}
+              interviewees={this.props.stories[0].interviewees}
             />
           </Container>
         );
