@@ -14,7 +14,7 @@ import {
   Separator
 } from "interviewjs-styleguide";
 
-import { StoryDetailsForm, StoryMetaForm } from "../forms";
+import { StoryDetailsForm, StoryMetaForm, IntervieweesForm } from "../forms";
 
 const getStepState = (step, i) => {
   if (step === i) {
@@ -34,6 +34,7 @@ export default class CreateStoryModal extends React.Component {
     };
     this.handleStep0 = this.handleStep0.bind(this);
     this.handleStep1 = this.handleStep1.bind(this);
+    this.handleStep2 = this.handleStep2.bind(this);
   }
   handleStep0(data) {
     return (
@@ -46,6 +47,11 @@ export default class CreateStoryModal extends React.Component {
   handleStep1(data) {
     this.props.updateStory(data, 0);
     this.setState({ step: this.state.step + 1 });
+  }
+  handleStep2(data) {
+    console.log(data);
+    // this.props.updateStory(data, 0);
+    // this.setState({ step: this.state.step + 1 });
   }
   render() {
     const { step } = this.state;
@@ -85,7 +91,10 @@ export default class CreateStoryModal extends React.Component {
       } else if (step === 2) {
         return (
           <Container limit="s" align="center">
-            Step 3
+            <IntervieweesForm
+              handleSubmit={this.handleStep2}
+              story={this.props.stories[0]}
+            />
           </Container>
         );
       }
