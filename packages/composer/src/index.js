@@ -33,6 +33,8 @@ injectGlobal`
   ::-moz-selection { background: ${color.blueWt}; }
 `;
 
+const rootEl = document.getElementById("root");
+
 const router = (
   <Provider store={store}>
     <Router history={history}>
@@ -45,4 +47,4 @@ const router = (
   </Provider>
 );
 
-render(router, document.getElementById("root"));
+render(router, rootEl);
