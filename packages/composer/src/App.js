@@ -1,18 +1,16 @@
-import React from "react";
+import { cloneElement } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import * as actionCreators from "./actions/actionCreators";
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   stories: state.stories,
   user: state.user
 });
 
-const mapDispatchToProps = dispatch =>
+const mapDispatchToProps = (dispatch) =>
   bindActionCreators(actionCreators, dispatch);
 
-const Main = props => React.cloneElement(props.children, props);
+const Main = (props) => cloneElement(props.children, props);
 
-const App = connect(mapStateToProps, mapDispatchToProps)(Main);
-
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(Main);
