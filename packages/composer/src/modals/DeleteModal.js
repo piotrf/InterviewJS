@@ -11,7 +11,6 @@ import {
   ModalFoot,
   ModalHead,
   PageTitle,
-  Separator,
   Text
 } from "interviewjs-styleguide";
 
