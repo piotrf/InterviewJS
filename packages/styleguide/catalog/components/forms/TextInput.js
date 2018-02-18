@@ -56,12 +56,14 @@ const TextInput = (props) =>
 TextInput.propTypes = {
   area: bool,
   input: bool,
+  nooffset: bool,
   place: string
 };
 
 TextInput.defaultProps = {
   area: false,
   input: false,
+  nooffset: false,
   place: null
 };
 

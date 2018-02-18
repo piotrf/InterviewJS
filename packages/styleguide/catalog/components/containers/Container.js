@@ -9,7 +9,7 @@ export const ContainerEl = css.div`
   ${({ bordered }) =>
     bordered
       ? `
-    border: 1px solid ${color.greyLt};
+    border: 1px solid ${color.greyHL};
   `
       : ``};
   ${({ fill }) => {

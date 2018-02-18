@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { func, shape, string } from "prop-types";
+import { bool, func, shape, string } from "prop-types";
 
 import {
   Action,
@@ -96,10 +96,10 @@ export default class IntervieweeForm extends Component {
                 input
                 name="avatar"
                 onChange={(e) => this.handleInput(e)}
+                place="left"
                 placeholder=""
                 type="file"
                 value={this.state.formData.avatar}
-                place="left"
               />
               <Legend tip="Small profile pic for you interviewee, best to upload a photo in square format.">
                 i
@@ -112,10 +112,11 @@ export default class IntervieweeForm extends Component {
               <TextInput
                 input
                 name="color"
+                nooffset
                 onChange={(e) => this.handleInput(e)}
+                place="right"
                 placeholder="#495abd"
                 value={this.state.formData.color}
-                place="right"
               />
               <Legend tip="Provide hex colour to customise interviewee’s speech bubbles.">
                 i
@@ -125,6 +126,11 @@ export default class IntervieweeForm extends Component {
         </Container>
         <Separator size="m" silent />
         <Actionbar>
+          {!this.props.persistent ? (
+            <Action fixed secondary onClick={this.props.handleCancel}>
+              Cancel
+            </Action>
+          ) : null}
           <Action fixed primary type="submit">
             Save
           </Action>
@@ -135,7 +141,9 @@ export default class IntervieweeForm extends Component {
 }
 
 IntervieweeForm.propTypes = {
+  handleCancel: func,
   handleSubmit: func.isRequired,
+  persistent: bool,
   interviewee: shape({
     avatar: string,
     bio: string,
@@ -146,11 +154,13 @@ IntervieweeForm.propTypes = {
 };
 
 IntervieweeForm.defaultProps = {
+  handleCancel: null,
   interviewee: {
     avatar: "",
     bio: "",
     color: "",
     name: "",
     title: ""
-  }
+  },
+  persistent: false
 };
