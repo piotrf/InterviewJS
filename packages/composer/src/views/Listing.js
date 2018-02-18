@@ -61,6 +61,7 @@ export default class Listing extends Component {
     this.setState({ createStoryModal: !this.state.createStoryModal });
   }
   render() {
+    console.log("listing props", this.props);
     return [
       <Page key="Page">
         <PageHead>

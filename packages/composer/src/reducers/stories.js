@@ -29,7 +29,7 @@ function stories(state = [], action) {
             ...state[action.storyIndex].interviewees
           ]
         },
-        ...state.slice(action.i + 1)
+        ...state.slice(action.storyIndex + 1)
       ];
     case "UPDATE_INTERVIEWEE":
       console.log("updating interviewee");

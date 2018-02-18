@@ -60,6 +60,7 @@ export default class Interviewees extends React.Component {
     this.props.handleSubmit(this.state.formData);
   }
   createInterviewee(data) {
+    console.log(`createInterviewee: `, this.props.storyIndex, data);
     this.props.createInterviewee(this.props.storyIndex, data);
   }
   updateInterviewee(intervieweeIndex, data) {
@@ -119,7 +120,7 @@ export default class Interviewees extends React.Component {
           <Separator size="m" silent />
           <Actionbar>
             <Action fixed onClick={this.handleSubmit} primary>
-              Save
+              Done
             </Action>
           </Actionbar>
         </Container>
