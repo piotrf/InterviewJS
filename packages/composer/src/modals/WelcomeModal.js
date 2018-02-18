@@ -16,6 +16,8 @@ import {
   Separator
 } from "interviewjs-styleguide";
 
+import WelcomeImage from "./assets/welcome-image.png";
+
 export default class WelcomeModal extends React.Component {
   constructor(props) {
     super(props);
@@ -41,7 +43,7 @@ export default class WelcomeModal extends React.Component {
               </PageSubtitle>
               <Separator size="m" silent />
               <Container align="center" limit="s">
-                <Image src="/assets/images/intro-image.png" alt="" />
+                <Image src={WelcomeImage} alt="" />
               </Container>
             </Container>
           </ModalBody>

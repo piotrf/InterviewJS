@@ -65,7 +65,6 @@ export default class Listing extends Component {
     this.setState({ createStoryModal: !this.state.createStoryModal });
   }
   blockWelcomeModal() {
-    console.log("blockWelcomeModal");
     localStorage.setItem("welcomeModalBlocker", "active");
     this.setState({ welcomeModal: false, createStoryModal: true });
   }
