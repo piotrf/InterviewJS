@@ -14,7 +14,8 @@ import {
   Separator
 } from "interviewjs-styleguide";
 
-import { StoryDetailsForm, StoryMetaForm, IntervieweesForm } from "../forms";
+import { StoryDetailsForm, StoryMetaForm } from "../forms";
+import { Interviewees } from "../partials";
 
 const getStepState = (step, i) => {
   if (step === i) {
@@ -25,22 +26,22 @@ const getStepState = (step, i) => {
   return null;
 };
 
-export default class CreateStoryModal extends Component {
+export default class NewStoryModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
       step: 0, // TODO revert to 0
       storyCreated: false
     };
-    this.handleStep0 = this.handleStep0.bind(this);
+    this.createStory = this.createStory.bind(this);
     this.handleStep1 = this.handleStep1.bind(this);
     this.handleStep2 = this.handleStep2.bind(this);
   }
-  handleStep0(data) {
+  createStory(data) {
     return (
       this.state.storyCreated
         ? this.props.updateStory(data, 0)
-        : this.props.handleCreateStory(data),
+        : this.props.createStory(data),
       this.setState({ step: this.state.step + 1, storyCreated: true })
     );
   }
@@ -48,9 +49,8 @@ export default class CreateStoryModal extends Component {
     this.props.updateStory(data, 0);
     this.setState({ step: this.state.step + 1 });
   }
-  handleStep2(data) {
-    // this.props.updateStory(data, 0);
-    // this.setState({ step: this.state.step + 1 });
+  handleStep2() {
+    this.props.handleClose();
   }
   render() {
     const { step } = this.state;
@@ -65,7 +65,7 @@ export default class CreateStoryModal extends Component {
             </PageSubtitle>
             <Separator size="m" silent />
             <StoryMetaForm
-              handleSubmit={this.handleStep0}
+              handleSubmit={this.createStory}
               story={
                 this.state.storyCreated ? this.props.stories[0] : undefined
               }
@@ -96,9 +96,11 @@ export default class CreateStoryModal extends Component {
               script separate chats for each interviewee later.
             </PageSubtitle>
             <Separator size="m" silent />
-            <IntervieweesForm
+            <Interviewees
+              {...this.props}
               handleSubmit={this.handleStep2}
               interviewees={this.props.stories[0].interviewees}
+              storyIndex={0}
             />
           </Container>
         );
@@ -109,7 +111,7 @@ export default class CreateStoryModal extends Component {
       <ReactModal
         ariaHideApp={false}
         isOpen={this.props.isOpen}
-        key="CreateStoryModal"
+        key="NewStoryModal"
         onRequestClose={this.props.handleClose}
       >
         <Modal {...this.props} wizard>
@@ -144,14 +146,14 @@ export default class CreateStoryModal extends Component {
   }
 }
 
-CreateStoryModal.propTypes = {
+NewStoryModal.propTypes = {
   handleClose: func.isRequired,
-  handleCreateStory: func.isRequired,
+  createStory: func.isRequired,
   updateStory: func.isRequired,
   isOpen: bool.isRequired,
   stories: arrayOf(object)
 };
 
-CreateStoryModal.defaultProps = {
+NewStoryModal.defaultProps = {
   stories: []
 };

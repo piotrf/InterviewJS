@@ -1,6 +1,6 @@
 import css from "styled-components";
 import React from "react";
-import { func, number, shape, string } from "prop-types";
+import { array, func, number, shape, string } from "prop-types";
 import { format } from "date-fns";
 
 import {
@@ -19,7 +19,11 @@ import {
   disselect
 } from "interviewjs-styleguide";
 
-import { StoryDetailsModal, StoryMetaModal } from "../modals";
+import {
+  IntervieweesModal,
+  StoryDetailsModal,
+  StoryMetaModal
+} from "../modals";
 
 const StoryEl = css(Container)`
   ${disselect};
@@ -70,13 +74,16 @@ export default class Story extends React.Component {
     this.state = {
       detailsModal: false,
       dropdown: false,
+      intervieweesModal: false,
       metaModal: false
     };
     this.toggleDetailsModal = this.toggleDetailsModal.bind(this);
     this.toggleDropdown = this.toggleDropdown.bind(this);
+    this.toggleIntervieweesModal = this.toggleIntervieweesModal.bind(this);
     this.toggleMetaModal = this.toggleMetaModal.bind(this);
     this.triggerDelete = this.triggerDelete.bind(this);
     this.triggerDetails = this.triggerDetails.bind(this);
+    this.triggerInterviewees = this.triggerInterviewees.bind(this);
     this.triggerMeta = this.triggerMeta.bind(this);
     this.updateStory = this.updateStory.bind(this);
   }
@@ -93,6 +100,9 @@ export default class Story extends React.Component {
   toggleDetailsModal() {
     this.setState({ detailsModal: !this.state.detailsModal });
   }
+  toggleIntervieweesModal() {
+    this.setState({ intervieweesModal: !this.state.intervieweesModal });
+  }
   triggerMeta() {
     this.toggleMetaModal();
     this.toggleDropdown();
@@ -101,12 +111,16 @@ export default class Story extends React.Component {
     this.toggleDetailsModal();
     this.toggleDropdown();
   }
+  triggerInterviewees() {
+    this.toggleIntervieweesModal();
+    this.toggleDropdown();
+  }
   updateStory(data) {
-    this.props.updateStory(data, this.props.i);
+    this.props.updateStory(data, this.props.storyIndex);
     this.setState({ detailsModal: false, metaModal: false });
   }
   render() {
-    const { detailsModal, metaModal } = this.state;
+    const { detailsModal, intervieweesModal, metaModal } = this.state;
     return [
       <Container key="body">
         <StoryEl
@@ -156,14 +170,19 @@ export default class Story extends React.Component {
               <DropdownContent>
                 <ul>
                   <li>
-                    <Action onClick={this.triggerMeta}>Edit meta</Action>
+                    <Action onClick={this.triggerMeta}>Meta</Action>
                   </li>
                   <li>
-                    <Action onClick={this.triggerDetails}>Edit details</Action>
+                    <Action onClick={this.triggerDetails}>Details</Action>
+                  </li>
+                  <li>
+                    <Action onClick={this.triggerInterviewees}>
+                      Interviewees
+                    </Action>
                   </li>
                   <li>
                     <Action tone="negative" onClick={this.triggerDelete}>
-                      Delete story
+                      Delete
                     </Action>
                   </li>
                 </ul>
@@ -193,6 +212,16 @@ export default class Story extends React.Component {
           story={this.props.story}
           updateStory={this.updateStory}
         />
+      ) : null,
+      intervieweesModal ? (
+        <IntervieweesModal
+          {...this.props}
+          handleClose={this.toggleIntervieweesModal}
+          isOpen={this.state.intervieweesModal}
+          key="IntervieweesModal"
+          storyIndex={this.props.storyIndex}
+          interviewees={this.props.story.interviewees}
+        />
       ) : null
     ];
   }
@@ -201,12 +230,13 @@ export default class Story extends React.Component {
 Story.propTypes = {
   story: shape({
     id: string.isRequried,
+    interviewees: array.isRequired,
     intro: string.isRequired,
     pubDate: string.isRequired,
     title: string.isRequired
   }).isRequired,
   deleteStory: func.isRequired,
-  i: number.isRequired,
+  storyIndex: number.isRequired,
   openStory: func.isRequired,
   updateStory: func.isRequired
 };

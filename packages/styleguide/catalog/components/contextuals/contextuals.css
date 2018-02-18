@@ -5,7 +5,7 @@
   transition: none !important;
 }
 .tippy-popper {
-  max-width: 400px;
+  max-width: 200px;
   -webkit-perspective: 800px;
   perspective: 800px;
   z-index: 9999;
@@ -522,17 +522,18 @@
   background-color: transparent;
 }
 .tippy-tooltip {
-  position: relative;
-  color: #fff;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  background-color: #28336e;
   border-radius: 4px;
-  font-size: 0.8rem;
-  padding: 0.5rem 0.5rem;
+  color: #fff;
   font-family: "PT Serif", serif;
+  font-size: 0.8rem;
+  line-height: 1.2em;
+  padding: 0.5rem 0.5rem;
+  position: relative;
   text-align: center;
   will-change: transform;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #28336e;
 }
 .tippy-tooltip--small {
   padding: 0.25rem 0.5rem;

@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import { func, shape, string } from "prop-types";
 
 import {
-  Actionbar,
   Action,
+  Actionbar,
   CharacterCount,
+  Container,
   Form,
   FormItem,
   Label,
+  Legend,
   Separator,
   TextInput
 } from "interviewjs-styleguide";
@@ -82,10 +84,45 @@ export default class IntervieweeForm extends Component {
             name="bio"
             onChange={(e) => this.handleInput(e)}
             placeholder=""
-            required
             value={this.state.formData.bio}
           />
         </FormItem>
+        <Separator size="m" silent />
+        <Container dir="row">
+          <Container flex={[0, 0, "50%"]}>
+            <FormItem>
+              <Label>Avatar</Label>
+              <TextInput
+                input
+                name="avatar"
+                onChange={(e) => this.handleInput(e)}
+                placeholder=""
+                type="file"
+                value={this.state.formData.avatar}
+                place="left"
+              />
+              <Legend tip="Small profile pic for you interviewee, best to upload a photo in square format.">
+                i
+              </Legend>
+            </FormItem>
+          </Container>
+          <Container flex={[0, 0, "50%"]}>
+            <FormItem>
+              <Label>Color</Label>
+              <TextInput
+                input
+                name="color"
+                onChange={(e) => this.handleInput(e)}
+                placeholder="#495abd"
+                value={this.state.formData.color}
+                place="right"
+              />
+              <Legend tip="Provide hex colour to customise interviewee’s speech bubbles.">
+                i
+              </Legend>
+            </FormItem>
+          </Container>
+        </Container>
         <Separator size="m" silent />
         <Actionbar>
           <Action fixed primary type="submit">

@@ -83,13 +83,13 @@ export default class Listing extends Component {
               {this.props.stories.map((story, i) => (
                 <Story
                   {...this.props}
-                  story={story}
                   deleteStory={() => this.props.deleteStory(i)}
+                  key={story.id}
                   openStory={() =>
                     this.props.router.push(`stories/${story.id}`)
                   }
-                  i={i}
-                  key={story.id}
+                  story={story}
+                  storyIndex={i}
                 />
               ))}
             </Stories>
@@ -98,12 +98,12 @@ export default class Listing extends Component {
       </Page>,
       <NewStoryModal
         {...this.props}
-        handleClose={this.toggleNewStoryModal}
-        handleCreateStory={this.props.createStory}
-        updateStory={this.props.updateStory}
-        isOpen={this.state.createStoryModal}
         // isOpen // TODO revert to this.state.createStoryModal
+        createStory={this.props.createStory}
+        handleClose={this.toggleNewStoryModal}
+        isOpen={this.state.createStoryModal}
         key="NewStoryModal"
+        updateStory={this.props.updateStory}
       />
     ];
   }

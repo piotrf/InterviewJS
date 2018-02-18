@@ -27,11 +27,11 @@ export function createStory({
   };
 }
 
-export function updateStory(data, i) {
+export function updateStory(payload, i) {
   return {
     type: "UPDATE_STORY",
     i,
-    payload: data
+    payload
   };
 }
 
@@ -39,5 +39,29 @@ export function deleteStory(i) {
   return {
     type: "DELETE_STORY",
     i
+  };
+}
+
+export function createInterviewee(storyIndex, payload) {
+  return {
+    type: "CREATE_INTERVIEWEE",
+    storyIndex,
+    payload
+  };
+}
+
+export function updateInterviewee(storyIndex, i, payload) {
+  return {
+    type: "UPDATE_INTERVIEWEE",
+    i,
+    payload,
+    storyIndex
+  };
+}
+export function deleteInterviewee(storyIndex, i) {
+  return {
+    type: "DELETE_INTERVIEWEE",
+    i,
+    storyIndex
   };
 }
