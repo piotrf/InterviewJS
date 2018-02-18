@@ -39,13 +39,13 @@ export default class IntervieweeForm extends Component {
     });
   }
   render() {
+    console.log("props: ", this.props);
+    console.log("state: ", this.state);
+
     return (
       <Form onSubmit={(e) => this.handleSubmit(e)}>
         <FormItem>
           <Label>Name</Label>
-          <CharacterCount>
-            {50 - this.state.formData.name.length}
-          </CharacterCount>
           <TextInput
             input
             maxlength="50"
@@ -55,6 +55,9 @@ export default class IntervieweeForm extends Component {
             required
             value={this.state.formData.name}
           />
+          <CharacterCount>
+            {50 - this.state.formData.name.length}
+          </CharacterCount>
         </FormItem>
         <Separator size="m" silent />
         <FormItem>
@@ -99,7 +102,6 @@ export default class IntervieweeForm extends Component {
                 place="left"
                 placeholder=""
                 type="file"
-                value={this.state.formData.avatar}
               />
               <Legend tip="Small profile pic for you interviewee, best to upload a photo in square format.">
                 i
@@ -111,6 +113,8 @@ export default class IntervieweeForm extends Component {
               <Label>Color</Label>
               <TextInput
                 input
+                maxlength="7"
+                minlength="3"
                 name="color"
                 nooffset
                 onChange={(e) => this.handleInput(e)}

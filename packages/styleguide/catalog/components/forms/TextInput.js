@@ -9,9 +9,9 @@ const Input = css.input`
   ${setSpace("pvm")};
   ${setType("x")};
   border-radius: ${radius.m};
-  border: 1px solid ${color.greyLt};
+  border: 1px solid ${color.greyHL};
   box-shadow: none;
-  color: ${color.greyBlk};
+  color: ${color.blueBlk};
   font-family: ${font.serif};
   position: relative;
   transition: border-color ${time.m};
@@ -20,7 +20,6 @@ const Input = css.input`
     outline: none;
     border-color: ${color.blueM};
     z-index: 50;
-    color: ${color.blueBlk};
   }
   &::placeholder {
     ${setType("x")};

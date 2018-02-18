@@ -1,3 +1,4 @@
+/* eslint react/forbid-prop-types: 0 */
 import React, { Component } from "react";
 import ReactModal from "react-modal";
 import { arrayOf, bool, func, object } from "prop-types";
@@ -51,6 +52,7 @@ export default class NewStoryModal extends Component {
   }
   handleStep2() {
     this.props.handleClose();
+    this.props.router.push(`stories/${this.props.stories[0].id}`);
   }
   render() {
     const { step } = this.state;
@@ -147,11 +149,12 @@ export default class NewStoryModal extends Component {
 }
 
 NewStoryModal.propTypes = {
-  handleClose: func.isRequired,
   createStory: func.isRequired,
-  updateStory: func.isRequired,
+  handleClose: func.isRequired,
   isOpen: bool.isRequired,
-  stories: arrayOf(object)
+  router: object.isRequired,
+  stories: arrayOf(object),
+  updateStory: func.isRequired
 };
 
 NewStoryModal.defaultProps = {

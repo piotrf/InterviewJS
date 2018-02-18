@@ -18,8 +18,6 @@ function stories(state = [], action) {
       return [...state.slice(0, action.i), ...state.slice(action.i + 1)];
     case "CREATE_INTERVIEWEE":
       console.log("creating interviewee");
-      console.log("storyIndex:", action.storyIndex);
-      console.log("payload:", action.payload);
       return [
         ...state.slice(0, action.storyIndex),
         {
@@ -33,9 +31,6 @@ function stories(state = [], action) {
       ];
     case "UPDATE_INTERVIEWEE":
       console.log("updating interviewee");
-      console.log("storyIndex:", action.storyIndex);
-      console.log("i:", action.i);
-      console.log("payload:", action.payload);
       const storyInterviewees = state[action.storyIndex].interviewees;
       return [
         ...state.slice(0, action.storyIndex),
@@ -47,13 +42,21 @@ function stories(state = [], action) {
             ...storyInterviewees.slice(action.i + 1)
           ]
         },
-        ...state.slice(action.i + 1)
+        ...state.slice(action.storyIndex + 1)
       ];
     case "DELETE_INTERVIEWEE":
       console.log("deleting interviewee");
-      console.log("storyIndex:", action.storyIndex);
-      console.log("i:", action.i);
-      return state;
+      return [
+        ...state.slice(0, action.storyIndex),
+        {
+          ...state[action.storyIndex],
+          interviewees: [
+            ...storyInterviewees.slice(0, action.i),
+            ...storyInterviewees.slice(action.i + 1)
+          ]
+        },
+        ...state.slice(action.storyIndex + 1)
+      ];
     default:
       return state;
   }

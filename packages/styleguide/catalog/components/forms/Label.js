@@ -7,9 +7,8 @@ const Label = css.label`
   ${setSpace("phs")};
   ${setType("x")};
   background: ${color.white};
-  color: ${color.blueBlk};
+  color: ${color.greyBlk};
   font-family: ${font.serif};
-  font-weight: bold;
 `;
 
 Label.propTypes = {};

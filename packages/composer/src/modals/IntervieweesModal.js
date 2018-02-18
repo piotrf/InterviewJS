@@ -26,7 +26,7 @@ export default class IntervieweesModal extends React.Component {
       >
         <Modal {...this.props}>
           <ModalHead>
-            <PageTitle typo="h2">Interviewees</PageTitle>
+            <PageTitle typo="h2">Edit Interviewees</PageTitle>
           </ModalHead>
           <ModalBody>
             <Container align="center">

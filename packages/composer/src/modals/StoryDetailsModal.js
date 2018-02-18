@@ -26,7 +26,7 @@ export default class StoryDetailsModal extends React.Component {
       >
         <Modal {...this.props}>
           <ModalHead>
-            <PageTitle typo="h2">Story details</PageTitle>
+            <PageTitle typo="h2">Edit Story Details</PageTitle>
           </ModalHead>
           <ModalBody>
             <Container align="center">

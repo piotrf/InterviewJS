@@ -20,7 +20,7 @@ const IntervieweesList = css.ul`
   display: block;
 `;
 const Interviewee = css.li`
-  ${setSpace("pvm")};
+  ${setSpace("pam")};
   align-content: center;
   align-items: center;
   border-bottom: 1px solid ${color.greyHL};
@@ -58,8 +58,8 @@ export default class Interviewees extends React.Component {
     this.props.handleSubmit(this.state.formData);
   }
   createInterviewee(data) {
-    console.log(`createInterviewee: `, this.props.storyIndex, data);
     this.props.createInterviewee(this.props.storyIndex, data);
+    this.setState({ editItem: null });
   }
   updateInterviewee(data) {
     const { storyIndex } = this.props;
@@ -71,7 +71,7 @@ export default class Interviewees extends React.Component {
     this.props.deleteInterviewee(this.props.storyIndex, intervieweeIndex);
   }
   toggleAddInterviewee() {
-    console.log("toggleAddInterviewee");
+    this.setState({ editItem: "new" });
   }
   toggleEditInterviewee(i) {
     this.setState({ editItem: i });
@@ -80,44 +80,52 @@ export default class Interviewees extends React.Component {
     const { interviewees } = this.props;
     const getPartialBody = () => {
       if (interviewees.length > 0) {
-        if (this.state.editItem === null) {
+        if (this.state.editItem === "new") {
+          return (
+            <IntervieweeForm
+              handleCancel={() => this.setState({ editItem: null })}
+              handleSubmit={this.createInterviewee}
+            />
+          );
+        } else if (this.state.editItem === null) {
           return (
             <Container>
-              <IntervieweesList>
-                {interviewees.map((interviewee, i) => (
-                  <Interviewee key={interviewee.name}>
-                    <Container flex={[1, 1, "auto"]}>
-                      <Avatar image={interviewee.avatar} size="l" />
-                    </Container>
-                    <Container flex={[1, 2, "100%"]} align="left">
-                      <IntervieweeName typo="p4">
-                        {interviewee.name}
-                      </IntervieweeName>
-                      <IntervieweeTitle typo="p5">
-                        {interviewee.title}
-                      </IntervieweeTitle>
-                      <IntervieweeBio typo="p5">
-                        {interviewee.bio}
-                      </IntervieweeBio>
-                    </Container>
-                    <Container flex={[1, 1, "auto"]}>
-                      <Action
-                        iconic
-                        secondary
-                        onClick={() => this.toggleEditInterviewee(i)}
-                      >
-                        <Icon name="pencil" />
-                      </Action>
-                    </Container>
-                  </Interviewee>
-                ))}
-              </IntervieweesList>
-              <Separator size="m" silent />
-              <Actionbar>
-                <Action onClick={this.toggleAddInterviewee}>
-                  <Icon name="plus" size="s" /> Create new
-                </Action>
-              </Actionbar>
+              <Container bordered rounded>
+                <IntervieweesList>
+                  {interviewees.map((interviewee, i) => (
+                    <Interviewee key={interviewee.name}>
+                      <Container flex={[1, 1, "auto"]}>
+                        <Avatar image={interviewee.avatar} size="l" />
+                      </Container>
+                      <Container flex={[1, 2, "100%"]} align="left">
+                        <IntervieweeName typo="p4">
+                          {interviewee.name}
+                        </IntervieweeName>
+                        <IntervieweeTitle typo="p5">
+                          {interviewee.title}
+                        </IntervieweeTitle>
+                        <IntervieweeBio typo="p5">
+                          {interviewee.bio}
+                        </IntervieweeBio>
+                      </Container>
+                      <Container flex={[1, 1, "auto"]}>
+                        <Action
+                          iconic
+                          secondary
+                          onClick={() => this.toggleEditInterviewee(i)}
+                        >
+                          <Icon name="pencil" />
+                        </Action>
+                      </Container>
+                    </Interviewee>
+                  ))}
+                </IntervieweesList>
+                <Container padded>
+                  <Action onClick={this.toggleAddInterviewee}>
+                    <Icon name="plus" size="s" /> Create new
+                  </Action>
+                </Container>
+              </Container>
               <Separator size="m" silent />
               <Actionbar>
                 <Action fixed onClick={this.handleSubmit} primary>
