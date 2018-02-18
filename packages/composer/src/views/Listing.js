@@ -8,8 +8,14 @@ import {
   color,
   Container,
   PageTitle,
+  PageSubtitle,
   Separator,
+  Text,
+  disselect,
+  radius,
   setHeight,
+  setSpace,
+  time,
   UserMenu
 } from "interviewjs-styleguide";
 
@@ -45,6 +51,25 @@ const PageHead = css.div`
     right: 0;
     top: 100%;s
     width: 100%;
+  }
+`;
+
+const StoryNew = css(Container)`
+  ${disselect};
+  ${setSpace("mhh")};
+  border-radius: ${radius.l};
+  cursor: pointer;
+  ${PageSubtitle} {
+    ${setSpace("mbx")};
+    color: ${color.blueM};
+  }
+  ${Text} {
+    color: ${color.greyBlk};
+  }
+  transition: box-shadow ${time.m}, transform ${time.m};
+  &:active {
+    box-shadow: 0 1px 2px ${color.shadowHL};
+    transform: translateY(1px);
   }
 `;
 
@@ -88,7 +113,7 @@ export default class Listing extends Component {
             <PageTitle typo="h1">Your Stories</PageTitle>
           </Container>
           <Container flex={[1, 1, `${100 / 3}%`]} align="right" padded>
-            <Action primary onClick={() => this.toggleNewStoryModal()}>
+            <Action primary onClick={this.toggleNewStoryModal}>
               Create new
             </Action>
           </Container>
@@ -97,18 +122,30 @@ export default class Listing extends Component {
         <PageBody>
           <Container limit="l">
             <Stories>
-              {this.props.stories.map((story, i) => (
-                <Story
-                  {...this.props}
-                  deleteStory={() => this.props.deleteStory(i)}
-                  key={story.id}
-                  openStory={() =>
-                    this.props.router.push(`stories/${story.id}`)
-                  }
-                  story={story}
-                  storyIndex={i}
-                />
-              ))}
+              {this.props.stories.length > 0 ? (
+                this.props.stories.map((story, i) => (
+                  <Story
+                    {...this.props}
+                    deleteStory={() => this.props.deleteStory(i)}
+                    key={story.id}
+                    openStory={() =>
+                      this.props.router.push(`stories/${story.id}`)
+                    }
+                    story={story}
+                    storyIndex={i}
+                  />
+                ))
+              ) : (
+                <StoryNew
+                  fill="white"
+                  onClick={this.toggleNewStoryModal}
+                  padded
+                  shift
+                >
+                  <PageSubtitle typo="h2">Create new</PageSubtitle>
+                  <Text typo="p2">Start your new story here…</Text>
+                </StoryNew>
+              )}
             </Stories>
           </Container>
         </PageBody>
