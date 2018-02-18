@@ -13,7 +13,7 @@ import {
   UserMenu
 } from "interviewjs-styleguide";
 
-import { NewStoryModal } from "../modals";
+import { WelcomeModal, NewStoryModal } from "../modals";
 import { Story, Stories } from "../partials";
 
 const Page = css.div`
@@ -54,14 +54,32 @@ const PageBody = css.div`
 export default class Listing extends Component {
   constructor(props) {
     super(props);
-    this.state = { createStoryModal: false };
+    this.state = {
+      createStoryModal: false,
+      welcomeModal: true
+    };
     this.toggleNewStoryModal = this.toggleNewStoryModal.bind(this);
+    this.blockWelcomeModal = this.blockWelcomeModal.bind(this);
   }
   toggleNewStoryModal() {
     this.setState({ createStoryModal: !this.state.createStoryModal });
   }
+  blockWelcomeModal() {
+    console.log("blockWelcomeModal");
+    localStorage.setItem("welcomeModalBlocker", "active");
+    this.setState({ welcomeModal: false, createStoryModal: true });
+  }
   render() {
+    const { createStoryModal, welcomeModal } = this.state;
+    const welcomeModalBlocker = localStorage.getItem("welcomeModalBlocker");
     return [
+      welcomeModalBlocker !== "active" ? (
+        <WelcomeModal
+          handleClose={this.blockWelcomeModal}
+          isOpen={welcomeModal}
+          key="WelcomeModal"
+        />
+      ) : null,
       <Page key="Page">
         <PageHead>
           <Container flex={[1, 1, `${100 / 3}%`]} padded>
@@ -96,15 +114,16 @@ export default class Listing extends Component {
           </Container>
         </PageBody>
       </Page>,
-      <NewStoryModal
-        {...this.props}
-        // isOpen // TODO revert to this.state.createStoryModal
-        createStory={this.props.createStory}
-        handleClose={this.toggleNewStoryModal}
-        isOpen={this.state.createStoryModal}
-        key="NewStoryModal"
-        updateStory={this.props.updateStory}
-      />
+      createStoryModal ? (
+        <NewStoryModal
+          {...this.props}
+          createStory={this.props.createStory}
+          handleClose={this.toggleNewStoryModal}
+          isOpen={createStoryModal}
+          key="NewStoryModal"
+          updateStory={this.props.updateStory}
+        />
+      ) : null
     ];
   }
 }

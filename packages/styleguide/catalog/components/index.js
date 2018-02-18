@@ -14,6 +14,7 @@ export { default as DropdownContent } from "./contextuals/DropdownContent.js";
 export { default as Form } from "./forms/Form.js";
 export { default as FormItem } from "./forms/FormItem.js";
 export { default as Icon } from "./icons/Icon.js";
+export { default as Image } from "./images/Image.js";
 export { default as Label } from "./forms/Label.js";
 export { default as Legend } from "./forms/Legend.js";
 export { default as List } from "./lists/List.js";
