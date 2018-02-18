@@ -7,7 +7,9 @@ import {
   Modal,
   ModalBody,
   ModalHead,
-  PageTitle
+  PageTitle,
+  Separator,
+  Text
 } from "interviewjs-styleguide";
 
 import { StoryDetailsForm } from "../forms";
@@ -26,7 +28,9 @@ export default class StoryDetailsModal extends React.Component {
       >
         <Modal {...this.props}>
           <ModalHead>
-            <PageTitle typo="h2">Edit Story Details</PageTitle>
+            <Text typo="p2">Edit Details</Text>
+            <Separator silent size="x" />
+            <PageTitle typo="h2">{this.props.story.title}</PageTitle>
           </ModalHead>
           <ModalBody>
             <Container align="center">

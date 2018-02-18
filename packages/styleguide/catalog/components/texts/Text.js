@@ -1,7 +1,7 @@
 import css from "styled-components";
 import { string } from "prop-types";
 
-import { setType, skin } from "../../../utils";
+import { setType, skin, track } from "../../../utils";
 
 const Text = css.span`
   font-family: ${skin.font};
@@ -87,6 +87,9 @@ const Text = css.span`
         font-style: italic;
         `
       : ``}
+  & strong {
+    font-weight: bold;
+  }
 `;
 
 Text.propTypes = {

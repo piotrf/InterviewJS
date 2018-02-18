@@ -1,13 +1,15 @@
 import React from "react";
 import ReactModal from "react-modal";
-import { arrayOf, bool, func, number, object } from "prop-types";
+import { arrayOf, bool, func, number, object, shape, string } from "prop-types";
 
 import {
   Container,
   Modal,
   ModalBody,
   ModalHead,
-  PageTitle
+  PageTitle,
+  Separator,
+  Text
 } from "interviewjs-styleguide";
 
 import { Interviewees } from "../partials";
@@ -26,14 +28,16 @@ export default class IntervieweesModal extends React.Component {
       >
         <Modal {...this.props}>
           <ModalHead>
-            <PageTitle typo="h2">Edit Interviewees</PageTitle>
+            <Text typo="p2">Edit Interviewees</Text>
+            <Separator silent size="x" />
+            <PageTitle typo="h2">{this.props.story.title}</PageTitle>
           </ModalHead>
           <ModalBody>
             <Container align="center">
               <Interviewees
                 {...this.props}
                 handleSubmit={this.props.handleClose}
-                interviewees={this.props.interviewees}
+                interviewees={this.props.story.interviewees}
                 storyIndex={this.props.storyIndex}
               />
             </Container>
@@ -46,11 +50,12 @@ export default class IntervieweesModal extends React.Component {
 
 IntervieweesModal.propTypes = {
   handleClose: func.isRequired,
-  interviewees: arrayOf(object),
+  story: shape({
+    interviewees: arrayOf(object),
+    title: string.isRequired
+  }).isRequired,
   isOpen: bool.isRequired,
   storyIndex: number.isRequired
 };
 
-IntervieweesModal.defaultProps = {
-  interviewees: []
-};
+IntervieweesModal.defaultProps = {};

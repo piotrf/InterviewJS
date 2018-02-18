@@ -20,6 +20,7 @@ import {
 } from "interviewjs-styleguide";
 
 import {
+  DeleteModal,
   IntervieweesModal,
   StoryDetailsModal,
   StoryMetaModal
@@ -72,11 +73,13 @@ export default class Story extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      deleteModal: false,
       detailsModal: false,
       dropdown: false,
       intervieweesModal: false,
       metaModal: false
     };
+    this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
     this.toggleDetailsModal = this.toggleDetailsModal.bind(this);
     this.toggleDropdown = this.toggleDropdown.bind(this);
     this.toggleIntervieweesModal = this.toggleIntervieweesModal.bind(this);
@@ -92,13 +95,16 @@ export default class Story extends React.Component {
   }
   triggerDelete() {
     this.toggleDropdown();
-    this.props.deleteStory();
+    this.toggleDeleteModal();
   }
   toggleMetaModal() {
     this.setState({ metaModal: !this.state.metaModal });
   }
   toggleDetailsModal() {
     this.setState({ detailsModal: !this.state.detailsModal });
+  }
+  toggleDeleteModal() {
+    this.setState({ deleteModal: !this.state.deleteModal });
   }
   toggleIntervieweesModal() {
     this.setState({ intervieweesModal: !this.state.intervieweesModal });
@@ -120,7 +126,12 @@ export default class Story extends React.Component {
     this.setState({ detailsModal: false, metaModal: false });
   }
   render() {
-    const { detailsModal, intervieweesModal, metaModal } = this.state;
+    const {
+      deleteModal,
+      detailsModal,
+      intervieweesModal,
+      metaModal
+    } = this.state;
     return [
       <Container key="body">
         <StoryEl
@@ -219,8 +230,18 @@ export default class Story extends React.Component {
           handleClose={this.toggleIntervieweesModal}
           isOpen={this.state.intervieweesModal}
           key="IntervieweesModal"
+          story={this.props.story}
           storyIndex={this.props.storyIndex}
-          interviewees={this.props.story.interviewees}
+        />
+      ) : null,
+      deleteModal ? (
+        <DeleteModal
+          {...this.props}
+          deleteStory={() => this.props.deleteStory(this.props.storyIndex)}
+          handleClose={this.toggleDeleteModal}
+          isOpen={this.state.deleteModal}
+          key="DeleteModal"
+          story={this.props.story}
         />
       ) : null
     ];

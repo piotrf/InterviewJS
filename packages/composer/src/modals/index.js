@@ -1,3 +1,4 @@
+export { default as DeleteModal } from "./DeleteModal";
 export { default as IntervieweesModal } from "./IntervieweesModal";
 export { default as NewStoryModal } from "./NewStoryModal";
 export { default as StoryDetailsModal } from "./StoryDetailsModal";
