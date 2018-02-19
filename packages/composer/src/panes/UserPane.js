@@ -31,7 +31,7 @@ export default class UserPane extends React.Component {
         <Container flex={[1, 1, "100%"]} padded>
           Body
         </Container>
-        <Container flex={[0, 0, `180px`]} padded>
+        <Container flex={[0, 0, `200px`]} padded>
           <PaneBubbleEditor fill="grey">PaneBubbleEditor</PaneBubbleEditor>
         </Container>
       </PaneEl>

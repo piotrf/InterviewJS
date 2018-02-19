@@ -104,7 +104,7 @@ export default class IntervieweePane extends React.Component {
         <Container flex={[1, 1, "100%"]} padded>
           {getPaneContent()}
         </Container>
-        <Container flex={[0, 0, `180px`]} padded>
+        <Container flex={[0, 0, `200px`]} padded>
           <PaneBubbleEditor fill="grey">PaneBubbleEditor</PaneBubbleEditor>
         </Container>
       </PaneEl>

@@ -166,13 +166,13 @@ export default class Composer extends React.Component {
         </PageHead>
         <PageBody>
           <Container flex={[1, 1, `${100 / 3}%`]}>
-            <IntervieweePane />
+            <IntervieweePane {...this.props} story={story} />
           </Container>
           <Container flex={[1, 1, `${100 / 3}%`]}>
-            <StoryPane />
+            <StoryPane {...this.props} story={story} />
           </Container>
           <Container flex={[1, 1, `${100 / 3}%`]}>
-            <UserPane />
+            <UserPane {...this.props} story={story} />
           </Container>
         </PageBody>
       </Page>,

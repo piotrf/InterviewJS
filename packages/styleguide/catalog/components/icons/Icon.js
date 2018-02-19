@@ -14,12 +14,12 @@ const IconEl = css.i`
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  line-height: 1;
+  line-height: 1em !important;
   speak: none;
   text-transform: none;
 `;
 
-const Icon = props => <IconEl {...props} className={`icon-${props.name} `} />;
+const Icon = (props) => <IconEl {...props} className={`icon-${props.name} `} />;
 
 Icon.propTypes = {
   name: string.isRequired,
