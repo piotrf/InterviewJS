@@ -86,12 +86,18 @@ export default class Composer extends React.Component {
       detailsModal: false,
       intervieweesModal: false,
       metaModal: false,
-      stylesModal: false
+      stylesModal: false,
+
+      currentInterviewee: 0
     };
+    this.switchInterviewee = this.switchInterviewee.bind(this);
     this.toggleDropdown = this.toggleDropdown.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
     this.triggerModal = this.triggerModal.bind(this);
     this.updateStory = this.updateStory.bind(this);
+  }
+  switchInterviewee(interviewee) {
+    this.setState({ currentInterviewee: interviewee });
   }
   toggleModal(modal) {
     this.setState({ [modal]: !this.state[modal] });
@@ -175,7 +181,11 @@ export default class Composer extends React.Component {
             <StoryPane
               {...this.props}
               story={story}
-              editInterviewees={() => this.toggleModal("intervieweesModal")}
+              switchInterviewee={this.switchInterviewee}
+              currentInterviewee={this.state.currentInterviewee}
+              toggleEditInterviewees={() =>
+                this.toggleModal("intervieweesModal")
+              }
             />
           </Container>
           <Container flex={[1, 1, `${100 / 3}%`]}>

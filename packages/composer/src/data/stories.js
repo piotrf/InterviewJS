@@ -21,7 +21,8 @@ const stories = [
         title: "44th President of the US",
         avatar:
           "https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/e35/12407344_1283694208323785_735653395_n.jpg",
-        color: "blue"
+        color: "blue",
+        storyline: []
       },
       {
         name: "Donald Trump",
@@ -29,10 +30,10 @@ const stories = [
         title: "45th President of the US",
         avatar:
           "https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/e35/12407344_1283694208323785_735653395_n.jpg",
-        color: "red"
+        color: "red",
+        storyline: []
       }
-    ],
-    storyline: []
+    ]
   },
   {
     title: "Top 10 Big Data Trends for 2017",
@@ -55,7 +56,8 @@ const stories = [
         title: "",
         avatar:
           "https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/e35/12407344_1283694208323785_735653395_n.jpg",
-        color: "green"
+        color: "green",
+        storyline: []
       },
       {
         name: "The Guardian",
@@ -63,10 +65,10 @@ const stories = [
         title: "",
         avatar:
           "https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/e35/12407344_1283694208323785_735653395_n.jpg",
-        color: "blue"
+        color: "blue",
+        storyline: []
       }
-    ],
-    storyline: []
+    ]
   },
   {
     title: "Another interviewJS story",
@@ -89,7 +91,8 @@ const stories = [
         title: "",
         avatar:
           "https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/e35/12407344_1283694208323785_735653395_n.jpg",
-        color: "green"
+        color: "green",
+        storyline: []
       },
       {
         name: "The Guardian",
@@ -97,10 +100,10 @@ const stories = [
         title: "",
         avatar:
           "https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/e35/12407344_1283694208323785_735653395_n.jpg",
-        color: "blue"
+        color: "blue",
+        storyline: []
       }
-    ],
-    storyline: []
+    ]
   },
   {
     title: "Yet another interview",
@@ -124,7 +127,8 @@ const stories = [
         title: "A title",
         avatar:
           "https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/e35/12407344_1283694208323785_735653395_n.jpg",
-        color: "yellow"
+        color: "yellow",
+        storyline: []
       },
       {
         name: "Piotr F.",
@@ -132,7 +136,8 @@ const stories = [
         title: "A title",
         avatar:
           "https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/e35/12407344_1283694208323785_735653395_n.jpg",
-        color: "purple"
+        color: "purple",
+        storyline: []
       },
       {
         name: "Techcrunch",
@@ -140,7 +145,8 @@ const stories = [
         title: "",
         avatar:
           "https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/e35/12407344_1283694208323785_735653395_n.jpg",
-        color: "green"
+        color: "green",
+        storyline: []
       },
       {
         name: "The Guardian",
@@ -148,10 +154,10 @@ const stories = [
         title: "",
         avatar:
           "https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/e35/12407344_1283694208323785_735653395_n.jpg",
-        color: "blue"
+        color: "blue",
+        storyline: []
       }
-    ],
-    storyline: []
+    ]
   }
 ];
 

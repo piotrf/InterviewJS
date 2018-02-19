@@ -1,6 +1,6 @@
 import css from "styled-components";
 import React from "react";
-import {} from "prop-types";
+import { array, func, shape, number } from "prop-types";
 
 import {
   Action,
@@ -8,8 +8,12 @@ import {
   Container,
   Icon,
   Tip,
+  color,
+  radius,
   setSize,
-  setSpace
+  setSpace,
+  skin,
+  time
 } from "interviewjs-styleguide";
 
 const PaneEl = css(Container)`
@@ -50,10 +54,26 @@ const Interviewees = css.ol`
 `;
 
 const Interviewee = css.li`
+  border-color: transparent;
+  border-radius: ${radius.a};
+  border-style: solid;
+  border-width: 2px;
   display: inline-block;
+  line-height: 0;
   margin-left: 3px;
   margin-right: 3px;
   text-align: center;
+  transition: border ${time.m};
+  & button {
+    min-height: auto;
+    padding: 0;
+  }
+  ${({ active, intervieweeColor }) =>
+    active
+      ? `
+  border-color: ${intervieweeColor || skin.speakerColor};
+  `
+      : ``}
 `;
 
 export default class StoryPane extends React.Component {
@@ -70,12 +90,17 @@ export default class StoryPane extends React.Component {
           <IntervieweesWrapper>
             <Interviewees>
               {interviewees.map((interviewee, intervieweeIndex) => (
-                <Interviewee key={interviewee.name}>
+                <Interviewee
+                  active={this.props.currentInterviewee === intervieweeIndex}
+                  intervieweeColor={interviewee.color}
+                  key={interviewee.name}
+                >
                   <Tip position="bottom" title={interviewee.name}>
                     <Action
                       secondary
-                      iconic
-                      onClick={() => console.log("interviewee")}
+                      onClick={() =>
+                        this.props.switchInterviewee(intervieweeIndex)
+                      }
                     >
                       <Avatar image={interviewee.avatar} size="m" />
                     </Action>
@@ -85,7 +110,11 @@ export default class StoryPane extends React.Component {
             </Interviewees>
             <IntervieweesButtonWrapper>
               <Tip position="bottom" title="Manage interviewees">
-                <Action secondary iconic onClick={this.props.editInterviewees}>
+                <Action
+                  secondary
+                  iconic
+                  onClick={this.props.toggleEditInterviewees}
+                >
                   <Icon name="pencil" size="x" />
                 </Action>
               </Tip>
@@ -98,6 +127,13 @@ export default class StoryPane extends React.Component {
   }
 }
 
-StoryPane.propTypes = {};
+StoryPane.propTypes = {
+  switchInterviewee: func.isRequired,
+  currentInterviewee: number.isRequired,
+  toggleEditInterviewees: func.isRequired,
+  story: shape({
+    interviewees: array.isRequired
+  }).isRequired
+};
 
 StoryPane.defaultProps = {};
