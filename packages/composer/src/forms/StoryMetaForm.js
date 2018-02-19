@@ -85,6 +85,7 @@ export default class StoryMetaForm extends React.Component {
                 onChange={(e) => this.handleInput(e)}
                 place="middle"
                 placeholder="Link…"
+                value={this.state.formData.authorLink}
               />
             </Container>
             <Container flex={[0, 0, `${100 / 3}%`]}>
