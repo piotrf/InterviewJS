@@ -8,7 +8,6 @@ import {
   Container,
   Icon,
   Tip,
-  color,
   radius,
   setSize,
   setSpace,
