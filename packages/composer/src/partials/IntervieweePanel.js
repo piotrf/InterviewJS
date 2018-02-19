@@ -2,10 +2,11 @@ import css from "styled-components";
 import React from "react";
 import {} from "prop-types";
 
-import { Container, Tabs, Tab } from "interviewjs-styleguide";
+import { Container, PaneTabs, PaneTab } from "interviewjs-styleguide";
 
 const PaneEl = css(Container)`
   height: 100%;
+  overflow: hidden;
 `;
 
 export default class IntervieweePane extends React.Component {
@@ -37,50 +38,50 @@ export default class IntervieweePane extends React.Component {
     };
     return (
       <PaneEl fill="white" rounded shift>
-        <Tabs>
-          <Tab
+        <PaneTabs>
+          <PaneTab
             active={this.state.tab === "text"}
             onClick={() => this.setState({ tab: "text" })}
           >
             T
-          </Tab>
-          <Tab
+          </PaneTab>
+          <PaneTab
             active={this.state.tab === "link"}
             onClick={() => this.setState({ tab: "link" })}
           >
             L
-          </Tab>
-          <Tab
+          </PaneTab>
+          <PaneTab
             active={this.state.tab === "image"}
             onClick={() => this.setState({ tab: "image" })}
           >
             I
-          </Tab>
-          <Tab
+          </PaneTab>
+          <PaneTab
             active={this.state.tab === "embed"}
             onClick={() => this.setState({ tab: "embed" })}
           >
             E
-          </Tab>
-          <Tab
+          </PaneTab>
+          <PaneTab
             active={this.state.tab === "map"}
             onClick={() => this.setState({ tab: "map" })}
           >
             M
-          </Tab>
-          <Tab
+          </PaneTab>
+          <PaneTab
             active={this.state.tab === "document"}
             onClick={() => this.setState({ tab: "document" })}
           >
             D
-          </Tab>
-          <Tab
+          </PaneTab>
+          <PaneTab
             active={this.state.tab === "media"}
             onClick={() => this.setState({ tab: "media" })}
           >
             M
-          </Tab>
-        </Tabs>
+          </PaneTab>
+        </PaneTabs>
         {getPaneContent()}
       </PaneEl>
     );

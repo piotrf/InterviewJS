@@ -28,6 +28,8 @@ export { default as ModalHead } from "./modals/ModalHead.js";
 export { default as PageParagraph } from "./texts/PageParagraph.js";
 export { default as PageSubtitle } from "./texts/PageSubtitle.js";
 export { default as PageTitle } from "./texts/PageTitle.js";
+export { default as PaneTab } from "./tabs/PaneTab.js";
+export { default as PaneTabs } from "./tabs/PaneTabs.js";
 export { default as Preloader } from "./preloaders/Preloader.js";
 export { default as Separator } from "./separators/Separator.js";
 export { default as Tab } from "./tabs/Tab.js";
