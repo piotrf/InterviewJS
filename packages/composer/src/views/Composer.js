@@ -31,6 +31,9 @@ const Page = css.div`
   flex-direction: column;
   height: 100%;
   justify-content: space-between;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1400px;
   ${breakpoint.tablet} {
     display: flex;
   }

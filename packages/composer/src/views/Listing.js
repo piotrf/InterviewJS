@@ -29,6 +29,9 @@ const Page = css.div`
   flex-direction: column;
   height: 100%;
   justify-content: flex-start;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1400px;
 `;
 
 const PageHead = css.div`
@@ -42,6 +45,9 @@ const PageHead = css.div`
   right: 0;
   top: 0;
   z-index: 5;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1400px;
   &:after {
     ${setHeight("m")};
     background: linear-gradient(${color.greyWt}, rgba(247, 247, 247, 0));
