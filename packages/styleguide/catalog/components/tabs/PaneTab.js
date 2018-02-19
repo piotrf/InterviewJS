@@ -5,6 +5,9 @@ import { array, bool, func, node, oneOfType, string } from "prop-types";
 import { color, font, setSpace, setType, time } from "../../../utils";
 
 const PaneTabEl = css.li`
+  border-style: solid;
+  border-color: transparent;
+  border-width: 1px;
   flex: 1 1 100%;
   & > button {
     ${setSpace("phm")};
