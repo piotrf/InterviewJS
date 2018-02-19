@@ -1,7 +1,7 @@
 import React from "react";
 import { markdown, ReactSpecimen } from "catalog";
 
-import { Text, PageSubtitle, PageTitle } from "../components";
+import { Text, PageParagraph, PageSubtitle, PageTitle } from "../components";
 
 const TextExtend = Text.extend`
   color: red;
@@ -15,14 +15,20 @@ export default () => markdown`
   ## Page Title extends
 
   ${(
-    <ReactSpecimen span={3}>
+    <ReactSpecimen span={2}>
       <PageTitle typo="h1">Renders as h1</PageTitle>
     </ReactSpecimen>
   )}
 
   ${(
-    <ReactSpecimen span={3}>
+    <ReactSpecimen span={2}>
       <PageSubtitle typo="h1">Renders as h2</PageSubtitle>
+    </ReactSpecimen>
+  )}
+
+  ${(
+    <ReactSpecimen span={2}>
+      <PageParagraph typo="h1">Renders as p</PageParagraph>
     </ReactSpecimen>
   )}
 

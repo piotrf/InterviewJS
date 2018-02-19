@@ -13,7 +13,8 @@ import {
   ModalHead,
   PageSubtitle,
   PageTitle,
-  Separator
+  Separator,
+  PageParagraph
 } from "interviewjs-styleguide";
 
 import WelcomeImage from "./assets/welcome-image.png";
@@ -48,11 +49,19 @@ export default class WelcomeModal extends React.Component {
             </Container>
           </ModalBody>
           <ModalFoot>
-            <Actionbar>
-              <Action fixed primary onClick={this.props.handleClose}>
-                Create your first story
-              </Action>
-            </Actionbar>
+            <Container align="center" limit="m">
+              <PageParagraph typo="p3">
+                The InterviewJS platform works for long-form storytelling,
+                features and investigations—stories with at least four different
+                longform interviewees and ideally with opposing points of views.
+              </PageParagraph>
+              <Separator size="m" silent />
+              <Actionbar>
+                <Action fixed primary onClick={this.props.handleClose}>
+                  Create your first story
+                </Action>
+              </Actionbar>
+            </Container>
           </ModalFoot>
         </Modal>
       </ReactModal>

@@ -25,6 +25,7 @@ export { default as ModalBody } from "./modals/ModalBody.js";
 export { default as ModalClose } from "./modals/ModalClose.js";
 export { default as ModalFoot } from "./modals/ModalFoot.js";
 export { default as ModalHead } from "./modals/ModalHead.js";
+export { default as PageParagraph } from "./texts/PageParagraph.js";
 export { default as PageSubtitle } from "./texts/PageSubtitle.js";
 export { default as PageTitle } from "./texts/PageTitle.js";
 export { default as Preloader } from "./preloaders/Preloader.js";
