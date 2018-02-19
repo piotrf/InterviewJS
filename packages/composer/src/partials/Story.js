@@ -75,51 +75,24 @@ export default class Story extends React.Component {
     this.state = {
       deleteModal: false,
       detailsModal: false,
-      dropdown: false,
+      settingsDropdown: false,
       intervieweesModal: false,
       metaModal: false
     };
-    this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
-    this.toggleDetailsModal = this.toggleDetailsModal.bind(this);
     this.toggleDropdown = this.toggleDropdown.bind(this);
-    this.toggleIntervieweesModal = this.toggleIntervieweesModal.bind(this);
-    this.toggleMetaModal = this.toggleMetaModal.bind(this);
-    this.triggerDelete = this.triggerDelete.bind(this);
-    this.triggerDetails = this.triggerDetails.bind(this);
-    this.triggerInterviewees = this.triggerInterviewees.bind(this);
-    this.triggerMeta = this.triggerMeta.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
+    this.triggerModal = this.triggerModal.bind(this);
     this.updateStory = this.updateStory.bind(this);
   }
-  toggleDropdown() {
-    this.setState({ dropdown: !this.state.dropdown });
+  toggleModal(modal) {
+    this.setState({ [modal]: !this.state[modal] });
   }
-  triggerDelete() {
-    this.toggleDropdown();
-    this.toggleDeleteModal();
+  toggleDropdown(dropdown) {
+    this.setState({ [dropdown]: !this.state[dropdown] });
   }
-  toggleMetaModal() {
-    this.setState({ metaModal: !this.state.metaModal });
-  }
-  toggleDetailsModal() {
-    this.setState({ detailsModal: !this.state.detailsModal });
-  }
-  toggleDeleteModal() {
-    this.setState({ deleteModal: !this.state.deleteModal });
-  }
-  toggleIntervieweesModal() {
-    this.setState({ intervieweesModal: !this.state.intervieweesModal });
-  }
-  triggerMeta() {
-    this.toggleMetaModal();
-    this.toggleDropdown();
-  }
-  triggerDetails() {
-    this.toggleDetailsModal();
-    this.toggleDropdown();
-  }
-  triggerInterviewees() {
-    this.toggleIntervieweesModal();
-    this.toggleDropdown();
+  triggerModal(modal) {
+    this.toggleModal(modal);
+    this.toggleDropdown("settingsDropdown");
   }
   updateStory(data) {
     this.props.updateStory(data, this.props.storyIndex);
@@ -175,24 +148,33 @@ export default class Story extends React.Component {
         </StoryEl>
         <StoryMenu>
           <Dropdown
-            onRequestClose={this.toggleDropdown}
-            open={this.state.dropdown}
+            onRequestClose={() => this.toggleDropdown("settingsDropdown")}
+            open={this.state.settingsDropdown}
             html={
               <DropdownContent>
                 <ul>
                   <li>
-                    <Action onClick={this.triggerMeta}>Meta</Action>
+                    <Action onClick={() => this.triggerModal("metaModal")}>
+                      Meta
+                    </Action>
                   </li>
                   <li>
-                    <Action onClick={this.triggerDetails}>Details</Action>
+                    <Action onClick={() => this.triggerModal("detailsModal")}>
+                      Details
+                    </Action>
                   </li>
                   <li>
-                    <Action onClick={this.triggerInterviewees}>
+                    <Action
+                      onClick={() => this.triggerModal("intervieweesModal")}
+                    >
                       Interviewees
                     </Action>
                   </li>
                   <li>
-                    <Action tone="negative" onClick={this.triggerDelete}>
+                    <Action
+                      tone="negative"
+                      onClick={() => this.triggerModal("deleteModal")}
+                    >
                       Delete
                     </Action>
                   </li>
@@ -200,7 +182,10 @@ export default class Story extends React.Component {
               </DropdownContent>
             }
           >
-            <Action iconic onClick={this.toggleDropdown}>
+            <Action
+              iconic
+              onClick={() => this.toggleDropdown("settingsDropdown")}
+            >
               <Icon name="ellipsis" />
             </Action>
           </Dropdown>
@@ -208,18 +193,18 @@ export default class Story extends React.Component {
       </Container>,
       detailsModal ? (
         <StoryDetailsModal
-          handleClose={this.toggleDetailsModal}
+          handleClose={() => this.toggleModal("detailsModal")}
           isOpen={this.state.detailsModal}
-          key="StoryDetailsModal"
+          key="DetailsModal"
           story={this.props.story}
           updateStory={this.updateStory}
         />
       ) : null,
       metaModal ? (
         <StoryMetaModal
-          handleClose={this.toggleMetaModal}
+          handleClose={() => this.toggleModal("metaModal")}
           isOpen={this.state.metaModal}
-          key="StoryMetaModal"
+          key="MetaModal"
           story={this.props.story}
           updateStory={this.updateStory}
         />
@@ -227,7 +212,7 @@ export default class Story extends React.Component {
       intervieweesModal ? (
         <IntervieweesModal
           {...this.props}
-          handleClose={this.toggleIntervieweesModal}
+          handleClose={() => this.toggleModal("intervieweesModal")}
           isOpen={this.state.intervieweesModal}
           key="IntervieweesModal"
           story={this.props.story}
@@ -238,7 +223,7 @@ export default class Story extends React.Component {
         <DeleteModal
           {...this.props}
           deleteStory={() => this.props.deleteStory(this.props.storyIndex)}
-          handleClose={this.toggleDeleteModal}
+          handleClose={() => this.toggleModal("deleteModal")}
           isOpen={this.state.deleteModal}
           key="DeleteModal"
           story={this.props.story}
