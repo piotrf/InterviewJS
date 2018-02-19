@@ -1,5 +1,7 @@
 import uuidv4 from "uuid/v4";
 
+import AVA from "./media/ava.png";
+
 const stories = [
   {
     title: "Meeting Ava",
@@ -23,8 +25,7 @@ const stories = [
         bio:
           "Ava has a robotic body but a human-looking face, and is confined to your browser window.",
         title: "Humanoid robot with artificial intelligence",
-        avatar:
-          "http://3.bp.blogspot.com/-4LhUwagGzfA/VUfQAIEtV3I/AAAAAAAAFZQ/dTm0p-y9OqM/s1600/EX-MACHINA%2B1.jpg",
+        avatar: AVA,
         color: "#88a3a0",
         storyline: [
           {
