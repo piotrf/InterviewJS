@@ -26,11 +26,12 @@ class Routes extends React.Component {
   render() {
     return (
       <Router key="Root" history={history}>
-        <Route path="composer" component={App}>
+        {/* <Route path="composer" component={App}> TODO */}
+        <Route path="/" component={App}>
           <IndexRoute component={Listing} />
           <Route path="/stories/:storyId" component={Composer} />
         </Route>
-        <Redirect from="*" to="composer" />
+        {/* <Redirect from="*" to="composer" /> TODO */}
       </Router>
     );
   }

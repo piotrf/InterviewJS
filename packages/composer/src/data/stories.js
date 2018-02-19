@@ -1,9 +1,7 @@
-import uuidv4 from "uuid/v4";
-
 const stories = [
   {
     title: "Obamacare — One Year In",
-    id: uuidv4(),
+    id: "0bf34b30-743b-46ab-9788-c875326d86f6",
     author: "Piotr F.",
     authorLink: "https://twitter.com/presentday",
     pubDate: "11-03-2017",
@@ -38,7 +36,7 @@ const stories = [
   },
   {
     title: "Top 10 Big Data Trends for 2017",
-    id: uuidv4(),
+    id: "deced883-a5c9-4392-baa2-9ae38f38f888",
     author: "Laurian g.",
     authorLink: "https://twitter.com/gridinoc",
     pubDate: "01-12-2016",
@@ -72,7 +70,7 @@ const stories = [
   },
   {
     title: "Another interviewJS story",
-    id: uuidv4(),
+    id: "ad36db0f-4b72-4cff-b9c3-e46c8d4554ee",
     author: "Laurian g.",
     authorLink: "https://twitter.com/gridinoc",
     pubDate: "24-07-2016",
@@ -106,7 +104,7 @@ const stories = [
   },
   {
     title: "Yet another interview",
-    id: uuidv4(),
+    id: "a4682632-ea09-4bd3-aa42-a8e72c5c067f",
     author: "Laurian g.",
     authorLink: "https://twitter.com/gridinoc",
     pubDate: "12-01-2015",
