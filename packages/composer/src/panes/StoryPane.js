@@ -59,13 +59,14 @@ const Interviewee = css.li`
   border-width: 2px;
   display: inline-block;
   line-height: 0;
-  margin-left: 3px;
-  margin-right: 3px;
+  margin-left: 2px;
+  margin-right: 2px;
   text-align: center;
   transition: border ${time.m};
   & button {
     min-height: auto;
     padding: 0;
+    border-width: 2px;
   }
   ${({ active, intervieweeColor }) =>
     active
@@ -120,7 +121,13 @@ export default class StoryPane extends React.Component {
             </IntervieweesButtonWrapper>
           </IntervieweesWrapper>
         </PaneHead>
-        <Container padded>StoryPane</Container>
+        <Container padded>
+          <pre>
+            {
+              // this.props.story.interviewees[this.props.currentInterviewee].storyline
+            }
+          </pre>
+        </Container>
       </PaneEl>
     );
   }
