@@ -1,0 +1,28 @@
+import css from "styled-components";
+import React from "react";
+import {} from "prop-types";
+
+import { Container } from "interviewjs-styleguide";
+
+const PaneEl = css(Container)`
+  height: 100%;
+`;
+
+export default class UserPane extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+    // this.toggleDropdown = this.toggleDropdown.bind(this);
+  }
+  render() {
+    return (
+      <PaneEl fill="white" rounded shift>
+        UserPane
+      </PaneEl>
+    );
+  }
+}
+
+UserPane.propTypes = {};
+
+UserPane.defaultProps = {};

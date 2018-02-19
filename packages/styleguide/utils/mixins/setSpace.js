@@ -3,7 +3,7 @@ import fluid from "../functions/fluid";
 import { space } from "../";
 
 /* eslint import/prefer-default-export: 0 */
-export const setSpace = args => {
+export const setSpace = (args) => {
   const prop = args.substr(0, 1);
   const pos = args.substr(1, 1);
   const size = args.substr(2, 1);
@@ -21,21 +21,18 @@ export const setSpace = args => {
   switch (pos) {
     case "a":
       return fluid(`${properties[prop]}`, space[size][0], space[size][1]);
-      break;
     case "h":
       return fluid(
         [`${properties[prop]}-left`, `${properties[prop]}-right`],
         space[size][0],
         space[size][1]
       );
-      break;
     case "v":
       return fluid(
         [`${properties[prop]}-top`, `${properties[prop]}-bottom`],
         space[size][0],
         space[size][1]
       );
-      break;
     default:
       return fluid(
         `${properties[prop]}-${positions[pos]}`,
