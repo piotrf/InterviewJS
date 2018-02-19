@@ -39,7 +39,7 @@ const IntervieweesButtonWrapper = css.span`
   ${setSize("s")};
   top: 50%;
   transform: translateY(-50%);
-  & > button {
+  & button {
     ${setSize("s")};
   }
 `;
@@ -84,13 +84,11 @@ export default class StoryPane extends React.Component {
               ))}
             </Interviewees>
             <IntervieweesButtonWrapper>
-              <Action
-                secondary
-                iconic
-                onClick={() => console.log("interviewee")}
-              >
-                <Icon name="plus" size="x" />
-              </Action>
+              <Tip position="bottom" title="Manage interviewees">
+                <Action secondary iconic onClick={this.props.editInterviewees}>
+                  <Icon name="pencil" size="x" />
+                </Action>
+              </Tip>
             </IntervieweesButtonWrapper>
           </IntervieweesWrapper>
         </PaneHead>

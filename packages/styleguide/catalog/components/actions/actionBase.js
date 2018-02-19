@@ -34,7 +34,6 @@ const actionBase = {
       transform ${time.m}
     ;
     & > i {
-      ${setType("s")};
       &:not(:only-child) {
         ${setSpace("mrx")};
       }

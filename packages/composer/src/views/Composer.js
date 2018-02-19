@@ -169,7 +169,11 @@ export default class Composer extends React.Component {
             <IntervieweePane {...this.props} story={story} />
           </Container>
           <Container flex={[1, 1, `${100 / 3}%`]}>
-            <StoryPane {...this.props} story={story} />
+            <StoryPane
+              {...this.props}
+              story={story}
+              editInterviewees={() => this.toggleModal("intervieweesModal")}
+            />
           </Container>
           <Container flex={[1, 1, `${100 / 3}%`]}>
             <UserPane {...this.props} story={story} />
