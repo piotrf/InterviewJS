@@ -34,12 +34,12 @@ const IntervieweesWrapper = css.div`
   position: relative;
 `;
 
-const IntervieweesButtonWrapper = css.span`
+const IntervieweesAction = css.span`
+  ${setSize("s")};
   ${setSpace("mlx")};
   display: inline-block;
   left: 100%;
   position: absolute;
-  ${setSize("s")};
   top: 50%;
   transform: translateY(-50%);
   & button {
@@ -67,6 +67,9 @@ const Interviewee = css.li`
     min-height: auto;
     padding: 0;
     border-width: 2px;
+  }
+  & button:active {
+    transform: none !important;
   }
   ${({ active, intervieweeColor }) =>
     active
@@ -108,7 +111,7 @@ export default class StoryPane extends React.Component {
                 </Interviewee>
               ))}
             </Interviewees>
-            <IntervieweesButtonWrapper>
+            <IntervieweesAction>
               <Tip position="bottom" title="Manage interviewees">
                 <Action
                   secondary
@@ -118,7 +121,7 @@ export default class StoryPane extends React.Component {
                   <Icon name="pencil" size="x" />
                 </Action>
               </Tip>
-            </IntervieweesButtonWrapper>
+            </IntervieweesAction>
           </IntervieweesWrapper>
         </PaneHead>
         <Container padded>
