@@ -22,7 +22,7 @@ import {
   StoryMetaModal
 } from "../modals";
 
-import { IntervieweePane, UserPane } from "../partials";
+import { IntervieweePane, StoryPane, UserPane } from "../panes";
 
 const Page = css.div`
   align-content: stretch;
@@ -168,14 +168,8 @@ export default class Composer extends React.Component {
           <Container flex={[1, 1, `${100 / 3}%`]}>
             <IntervieweePane />
           </Container>
-          <Container
-            fill="white"
-            flex={[1, 1, `${100 / 3}%`]}
-            padded
-            rounded
-            shift
-          >
-            Center
+          <Container flex={[1, 1, `${100 / 3}%`]}>
+            <StoryPane />
           </Container>
           <Container flex={[1, 1, `${100 / 3}%`]}>
             <UserPane />
