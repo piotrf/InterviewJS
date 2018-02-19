@@ -17,7 +17,7 @@ export default class StoryPane extends React.Component {
   render() {
     return (
       <PaneEl fill="white" rounded shift>
-        StoryPane
+        <Container padded>StoryPane</Container>
       </PaneEl>
     );
   }
