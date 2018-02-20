@@ -9,14 +9,11 @@ import {
   Actionbar,
   Avatar,
   Bubble,
-  BubbleAvatar,
   BubbleGroup,
   Bubbles,
   Container,
   Icon
 } from "../../components";
-
-import SampleAvatar from "../../static/avatar.png";
 
 export const Layout = css.div`
   background-color: ${color.white};
@@ -87,9 +84,6 @@ export default class ViewerChat extends React.Component {
         </ChatHead>
         <ChatBody dir="column">
           <BubbleGroup>
-            <BubbleAvatar>
-              <Avatar size="s" image={SampleAvatar} />
-            </BubbleAvatar>
             <Bubbles persona="speaker">
               <Bubble persona="speaker">Bubble from the left</Bubble>
               <Bubble persona="speaker">Another bubble from the left</Bubble>
