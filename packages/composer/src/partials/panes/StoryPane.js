@@ -1,5 +1,6 @@
 import css from "styled-components";
 import React from "react";
+import StayScrolled from "react-stay-scrolled";
 import { array, func, shape, number } from "prop-types";
 
 import {
@@ -15,9 +16,13 @@ import {
   time
 } from "interviewjs-styleguide";
 
+import { Message } from "../";
+
 const PaneEl = css(Container)`
   height: 100%;
   position: relative;
+  display: flex;
+  flex-direction: column;
 `;
 
 const PaneHead = css.div`
@@ -27,6 +32,18 @@ const PaneHead = css.div`
   right: 0;
   text-align: center;
   transform: translateY(50%);
+  z-index: 5;
+`;
+const PaneBody = css.div`
+  height: 100%;
+  width: 100%;
+  & > div {
+    ${setSpace("pam")};
+    display: block;
+    height: 100%;
+    overflow: auto;
+    width: 100%;
+  }
 `;
 
 const IntervieweesWrapper = css.div`
@@ -83,10 +100,11 @@ export default class StoryPane extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
-    // this.toggleDropdown = this.toggleDropdown.bind(this);
   }
   render() {
     const { interviewees } = this.props.story;
+    const { currentInterviewee } = this.props;
+    const { storyline } = interviewees[currentInterviewee];
     return (
       <PaneEl fill="white" rounded shift dir="column">
         <PaneHead>
@@ -120,13 +138,11 @@ export default class StoryPane extends React.Component {
             </IntervieweesAction>
           </IntervieweesWrapper>
         </PaneHead>
-        <Container padded>
-          <pre>
-            {
-              // this.props.story.interviewees[this.props.currentInterviewee].storyline
-            }
-          </pre>
-        </Container>
+        <PaneBody>
+          <StayScrolled component="div">
+            {storyline.map((msg, i) => <Message msg={msg} key={msg.id} />)}
+          </StayScrolled>
+        </PaneBody>
       </PaneEl>
     );
   }
