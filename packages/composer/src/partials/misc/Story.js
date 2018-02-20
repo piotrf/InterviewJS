@@ -69,23 +69,27 @@ export default class Story extends React.Component {
     super(props);
     this.state = {
       deleteModal: false,
-      detailsModal: false,
+      detailsModal: "",
       settingsDropdown: false
     };
+    this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
+    this.toggleDetailsModal = this.toggleDetailsModal.bind(this);
     this.toggleDropdown = this.toggleDropdown.bind(this);
-    this.toggleModal = this.toggleModal.bind(this);
-    this.triggerModal = this.triggerModal.bind(this);
     this.updateStory = this.updateStory.bind(this);
   }
-  toggleModal(modal) {
-    this.setState({ [modal]: !this.state[modal] });
+  toggleDetailsModal(tab) {
+    return tab
+      ? this.setState({ detailsModal: tab, settingsDropdown: false })
+      : this.setState({ detailsModal: "" });
+  }
+  toggleDeleteModal() {
+    this.setState({
+      deleteModal: !this.state.deleteModal,
+      settingsDropdown: false
+    });
   }
   toggleDropdown(dropdown) {
     this.setState({ [dropdown]: !this.state[dropdown] });
-  }
-  triggerModal(modal) {
-    this.toggleModal(modal);
-    this.toggleDropdown("settingsDropdown");
   }
   updateStory(data) {
     this.props.updateStory(data, this.props.storyIndex);
@@ -141,15 +145,12 @@ export default class Story extends React.Component {
               <DropdownContent>
                 <ul>
                   <li>
-                    <Action onClick={() => this.triggerModal("detailsModal")}>
+                    <Action onClick={() => this.toggleDetailsModal("meta")}>
                       Details
                     </Action>
                   </li>
                   <li>
-                    <Action
-                      tone="negative"
-                      onClick={() => this.triggerModal("deleteModal")}
-                    >
+                    <Action tone="negative" onClick={this.toggleDeleteModal}>
                       Delete
                     </Action>
                   </li>
@@ -166,14 +167,15 @@ export default class Story extends React.Component {
           </Dropdown>
         </StoryMenu>
       </Container>,
-      detailsModal ? (
+      detailsModal !== "" ? (
         <DetailsModal
           {...this.props}
-          handleClose={() => this.toggleModal("detailsModal")}
           isOpen
           key="DetailsModal"
           story={this.props.story}
           storyIndex={this.props.storyIndex}
+          tab={this.state.detailsModal}
+          toggleModal={() => this.toggleDetailsModal()}
           updateStory={this.updateStory}
         />
       ) : null,

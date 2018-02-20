@@ -77,13 +77,7 @@ export default class Composer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      settingsDropdown: false,
-
-      detailsModal: false,
-      intervieweesModal: false,
-      metaModal: false,
-      stylesModal: false,
-
+      detailsModal: "",
       currentInterviewee: 0
     };
     this.switchInterviewee = this.switchInterviewee.bind(this);
@@ -93,8 +87,10 @@ export default class Composer extends React.Component {
   switchInterviewee(interviewee) {
     this.setState({ currentInterviewee: interviewee });
   }
-  toggleModal(modal) {
-    this.setState({ [modal]: !this.state[modal] });
+  toggleModal(tab) {
+    return tab
+      ? this.setState({ detailsModal: tab })
+      : this.setState({ detailsModal: "" });
   }
   updateStory(data) {
     const { storyId } = this.props.params;
@@ -115,7 +111,7 @@ export default class Composer extends React.Component {
               <Icon name="chevron-left" size="x" /> Back
             </Action>
             <Separator dir="v" size="m" />
-            <Action onClick={() => this.toggleModal("detailsModal")}>
+            <Action onClick={() => this.toggleModal("meta")}>
               <Icon name="info-circle" size="x" /> Details
             </Action>
           </Container>
@@ -133,12 +129,10 @@ export default class Composer extends React.Component {
           <Container flex={[1, 1, `${100 / 3}%`]}>
             <StoryPane
               {...this.props}
+              currentInterviewee={this.state.currentInterviewee}
               story={story}
               switchInterviewee={this.switchInterviewee}
-              currentInterviewee={this.state.currentInterviewee}
-              toggleEditInterviewees={() =>
-                this.toggleModal("intervieweesModal")
-              }
+              toggleModal={() => this.toggleModal("interviewees")}
             />
           </Container>
           <Container flex={[1, 1, `${100 / 3}%`]}>
@@ -157,14 +151,15 @@ export default class Composer extends React.Component {
           </Actionbar>
         </Container>
       </MobilePage>,
-      this.state.detailsModal ? (
+      this.state.detailsModal !== "" ? (
         <DetailsModal
           {...this.props}
-          handleClose={() => this.toggleModal("detailsModal")}
           isOpen
           key="DetailsModal"
           story={story}
           storyIndex={storyIndex}
+          tab={this.state.detailsModal}
+          toggleModal={() => this.toggleModal()}
           updateStory={this.updateStory}
         />
       ) : null

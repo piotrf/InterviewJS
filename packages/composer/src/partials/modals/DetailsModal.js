@@ -17,12 +17,8 @@ import { Interviewees, DetailsForm, MetaForm } from "../";
 export default class DetailsModal extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { tab: "meta" };
+    this.state = { tab: this.props.tab };
     this.switchTab = this.switchTab.bind(this);
-    this.closeModal = this.closeModal.bind(this);
-  }
-  closeModal() {
-    this.props.handleClose();
   }
   switchTab(target) {
     this.setState({ tab: target });
@@ -36,7 +32,7 @@ export default class DetailsModal extends React.Component {
             <DetailsForm
               cta="Done"
               handleSave={this.props.updateStory}
-              handleSubmit={this.closeModal}
+              handleSubmit={this.props.toggleModal}
               story={this.props.story}
             />
           );
@@ -46,7 +42,7 @@ export default class DetailsModal extends React.Component {
               createInterviewee={this.props.createInterviewee}
               cta="Done"
               deleteInterviewee={this.props.deleteInterviewee}
-              handleSubmit={this.closeModal}
+              handleSubmit={this.props.toggleModal}
               interviewees={this.props.story.interviewees}
               storyIndex={this.props.storyIndex}
               updateInterviewee={this.props.updateInterviewee}
@@ -60,7 +56,7 @@ export default class DetailsModal extends React.Component {
             <MetaForm
               cta="Done"
               handleSave={this.props.updateStory}
-              handleSubmit={this.closeModal}
+              handleSubmit={this.props.toggleModal}
               story={this.props.story}
             />
           );
@@ -70,7 +66,7 @@ export default class DetailsModal extends React.Component {
       <ReactModal
         ariaHideApp={false}
         isOpen={this.props.isOpen}
-        onRequestClose={this.props.handleClose}
+        onRequestClose={this.props.toggleModal}
         role="dialog"
       >
         <Modal {...this.props}>
@@ -115,16 +111,18 @@ export default class DetailsModal extends React.Component {
 DetailsModal.propTypes = {
   createInterviewee: func.isRequired,
   deleteInterviewee: func.isRequired,
-  handleClose: func.isRequired,
+  toggleModal: func.isRequired,
   isOpen: bool,
   story: shape({
     title: string.isRequired
   }).isRequired,
   storyIndex: number.isRequired,
+  tab: string,
   updateInterviewee: func.isRequired,
   updateStory: func.isRequired
 };
 
 DetailsModal.defaultProps = {
-  isOpen: false
+  isOpen: false,
+  tab: "meta"
 };
