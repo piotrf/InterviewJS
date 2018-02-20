@@ -154,12 +154,12 @@ export default class Composer extends React.Component {
       this.state.detailsModal !== "" ? (
         <DetailsModal
           {...this.props}
+          handleClose={() => this.toggleModal()}
           isOpen
           key="DetailsModal"
           story={story}
           storyIndex={storyIndex}
           tab={this.state.detailsModal}
-          toggleModal={() => this.toggleModal()}
           updateStory={this.updateStory}
         />
       ) : null

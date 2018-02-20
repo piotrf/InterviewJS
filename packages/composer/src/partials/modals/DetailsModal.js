@@ -32,7 +32,7 @@ export default class DetailsModal extends React.Component {
             <DetailsForm
               cta="Done"
               handleSave={this.props.updateStory}
-              handleSubmit={this.props.toggleModal}
+              handleSubmit={this.props.handleClose}
               story={this.props.story}
             />
           );
@@ -42,7 +42,7 @@ export default class DetailsModal extends React.Component {
               createInterviewee={this.props.createInterviewee}
               cta="Done"
               deleteInterviewee={this.props.deleteInterviewee}
-              handleSubmit={this.props.toggleModal}
+              handleSubmit={this.props.handleClose}
               interviewees={this.props.story.interviewees}
               storyIndex={this.props.storyIndex}
               updateInterviewee={this.props.updateInterviewee}
@@ -56,7 +56,7 @@ export default class DetailsModal extends React.Component {
             <MetaForm
               cta="Done"
               handleSave={this.props.updateStory}
-              handleSubmit={this.props.toggleModal}
+              handleSubmit={this.props.handleClose}
               story={this.props.story}
             />
           );
@@ -66,7 +66,7 @@ export default class DetailsModal extends React.Component {
       <ReactModal
         ariaHideApp={false}
         isOpen={this.props.isOpen}
-        onRequestClose={this.props.toggleModal}
+        onRequestClose={this.props.handleClose}
         role="dialog"
       >
         <Modal {...this.props}>
@@ -111,7 +111,7 @@ export default class DetailsModal extends React.Component {
 DetailsModal.propTypes = {
   createInterviewee: func.isRequired,
   deleteInterviewee: func.isRequired,
-  toggleModal: func.isRequired,
+  handleClose: func.isRequired,
   isOpen: bool,
   story: shape({
     title: string.isRequired
