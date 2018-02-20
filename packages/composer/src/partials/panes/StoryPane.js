@@ -16,7 +16,7 @@ import {
   time
 } from "interviewjs-styleguide";
 
-import { Message } from "../";
+import { Storyline } from "../";
 
 const PaneEl = css(Container)`
   height: 100%;
@@ -37,7 +37,7 @@ const PaneHead = css.div`
 const PaneBody = css.div`
   height: 100%;
   width: 100%;
-  & > div {
+  & > * {
     ${setSpace("pam")};
     display: block;
     height: 100%;
@@ -139,8 +139,8 @@ export default class StoryPane extends React.Component {
           </IntervieweesWrapper>
         </PaneHead>
         <PaneBody>
-          <StayScrolled component="div">
-            {storyline.map((msg, i) => <Message msg={msg} key={msg.id} />)}
+          <StayScrolled>
+            <Storyline storyline={storyline} />
           </StayScrolled>
         </PaneBody>
       </PaneEl>
