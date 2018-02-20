@@ -19,9 +19,9 @@ export default () => markdown`
   ${(
     <ReactSpecimen>
       <BubbleGroup>
-        <Bubbles persona="speaker">
-          <Bubble persona="speaker">Bubble from the left</Bubble>
-          <Bubble persona="speaker">Another bubble from the left</Bubble>
+        <Bubbles persona="interviewee">
+          <Bubble persona="interviewee">Bubble from the left</Bubble>
+          <Bubble persona="interviewee">Another bubble from the left</Bubble>
         </Bubbles>
       </BubbleGroup>
       <BubbleGroup>
