@@ -114,6 +114,7 @@ export default class NewStoryModal extends Component {
         isOpen={this.props.isOpen}
         key="NewStoryModal"
         onRequestClose={this.props.handleClose}
+        role="dialog"
       >
         <Modal {...this.props} wizard>
           <ModalHead>

@@ -71,6 +71,7 @@ export default class DetailsModal extends React.Component {
         ariaHideApp={false}
         isOpen={this.props.isOpen}
         onRequestClose={this.props.handleClose}
+        role="dialog"
       >
         <Modal {...this.props}>
           <ModalHead fill="grey">

@@ -30,6 +30,7 @@ export default class WelcomeModal extends React.Component {
         ariaHideApp={false}
         isOpen={this.props.isOpen}
         onRequestClose={this.props.handleClose}
+        role="dialog"
       >
         <Modal {...this.props} wizard>
           <ModalHead>
