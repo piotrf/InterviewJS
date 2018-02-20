@@ -53,11 +53,6 @@ const stories = [
           },
           {
             id: uuidv4(),
-            content: "Hello, Caleb.",
-            role: "interviewee"
-          },
-          {
-            id: uuidv4(),
             content: "…Do you have a name?",
             role: "user"
           },
