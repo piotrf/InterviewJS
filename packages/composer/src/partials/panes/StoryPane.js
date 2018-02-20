@@ -140,7 +140,10 @@ export default class StoryPane extends React.Component {
         </PaneHead>
         <PaneBody>
           <StayScrolled>
-            <Storyline storyline={storyline} />
+            <Storyline
+              interviewee={interviewees[currentInterviewee]}
+              storyline={storyline}
+            />
           </StayScrolled>
         </PaneBody>
       </PaneEl>

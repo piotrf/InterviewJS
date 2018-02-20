@@ -5,10 +5,10 @@ import SpeakerBubble from "./SpeakerBubble";
 import SystemBubble from "./SystemBubble";
 import UserBubble from "./UserBubble";
 
-const Bubble = props => {
+const Bubble = (props) => {
   if (props.persona === "user") {
     return <UserBubble {...props} />;
-  } else if (props.persona === "speaker") {
+  } else if (props.persona === "interviewee") {
     return <SpeakerBubble {...props} />;
   }
   return <SystemBubble {...props} />;

@@ -1,6 +1,5 @@
 // misc
 export { default as Interviewees } from "./misc/Interviewees";
-export { default as Message } from "./misc/Message";
 export { default as Stories } from "./misc/Stories";
 export { default as Story } from "./misc/Story";
 export { default as Storyline } from "./misc/Storyline";

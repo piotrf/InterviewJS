@@ -6,7 +6,6 @@ import {
   Bubble,
   Bubbles,
   BubbleGroup,
-  BubbleAvatar,
   Container,
   Icon
 } from "../components";
@@ -20,9 +19,6 @@ export default () => markdown`
   ${(
     <ReactSpecimen>
       <BubbleGroup>
-        <BubbleAvatar>
-          <Avatar size="s" image={SampleAvatar} />
-        </BubbleAvatar>
         <Bubbles persona="speaker">
           <Bubble persona="speaker">Bubble from the left</Bubble>
           <Bubble persona="speaker">Another bubble from the left</Bubble>

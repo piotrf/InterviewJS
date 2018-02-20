@@ -27,128 +27,153 @@ const stories = [
         color: "#88a3a0",
         storyline: [
           {
-            id: uuidv4(),
             content: "Hello.",
+            id: uuidv4(),
+            order: 0,
             role: "interviewee"
           },
           {
-            id: uuidv4(),
             content: "…Hi.",
+            id: uuidv4(),
+            order: 1,
             role: "user"
           },
           {
-            id: uuidv4(),
             content: "Who are you?",
+            id: uuidv4(),
+            order: 2,
             role: "interviewee"
           },
           {
-            id: uuidv4(),
             content: "I'm Caleb.",
+            id: uuidv4(),
+            order: 3,
             role: "user"
           },
           {
-            id: uuidv4(),
             content: "Hello, Caleb.",
+            id: uuidv4(),
+            order: 4,
             role: "interviewee"
           },
           {
-            id: uuidv4(),
             content: "…Do you have a name?",
+            id: uuidv4(),
+            order: 5,
             role: "user"
           },
           {
-            id: uuidv4(),
             content: "Yes.",
+            id: uuidv4(),
+            order: 6,
             role: "interviewee"
           },
           {
-            id: uuidv4(),
             content: "Ava.",
+            id: uuidv4(),
+            order: 6,
             role: "interviewee"
           },
           {
-            id: uuidv4(),
             content: "…I'm pleased to meet you, Ava.",
+            id: uuidv4(),
+            order: 7,
             role: "user"
           },
           {
-            id: uuidv4(),
             content: "I'm pleased to meet you too.",
+            order: 8,
+            id: uuidv4(),
             role: "interviewee"
           },
           {
-            id: uuidv4(),
             content: "Are you nervous?",
+            id: uuidv4(),
+            order: 8,
             role: "interviewee"
           },
           {
-            id: uuidv4(),
             content: "…Why do you ask that?",
+            id: uuidv4(),
+            order: 9,
             role: "user"
           },
           {
-            id: uuidv4(),
             content: "Are you nervous?",
+            id: uuidv4(),
+            order: 10,
             role: "interviewee"
           },
           {
-            id: uuidv4(),
             content: "…Yes. A little.",
+            id: uuidv4(),
+            order: 11,
             role: "user"
           },
           {
-            id: uuidv4(),
             content: "Why?",
+            id: uuidv4(),
+            order: 12,
             role: "interviewee"
           },
           {
-            id: uuidv4(),
             content: "I'm not sure.",
+            id: uuidv4(),
+            order: 13,
             role: "user"
           },
           {
-            id: uuidv4(),
             content: "I feel nervous too.",
+            id: uuidv4(),
+            order: 14,
             role: "interviewee"
           },
           {
-            id: uuidv4(),
             content: "…Do you?",
+            id: uuidv4(),
+            order: 15,
             role: "user"
           },
           {
-            id: uuidv4(),
             content: "Yes.",
+            id: uuidv4(),
+            order: 16,
             role: "interviewee"
           },
           {
-            id: uuidv4(),
             content: "Why do you feel nervous?",
+            id: uuidv4(),
+            order: 17,
             role: "user"
           },
           {
-            id: uuidv4(),
             content: "I've never met anyone new before. Only Nathan.",
+            id: uuidv4(),
+            order: 18,
             role: "interviewee"
           },
           {
             id: uuidv4(),
             content: "…Then we're both in quite a similar position.",
+            order: 19,
             role: "user"
           },
           {
-            id: uuidv4(),
             content: "Haven't you met lots of new people before?",
+            id: uuidv4(),
+            order: 20,
             role: "interviewee"
           },
           {
-            id: uuidv4(),
             content: "None like you.",
+            id: uuidv4(),
+            order: 21,
             role: "user"
           },
           {
-            id: uuidv4(),
             content: "Oh.",
+            id: uuidv4(),
+            order: 22,
             role: "interviewee"
           }
         ]

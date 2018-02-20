@@ -1,7 +1,5 @@
 import css from "styled-components";
 
-import { setSpace } from "../../../utils";
-
 const Bubbles = css.div`
   align-items: stretch;
   display: flex;
@@ -11,7 +9,6 @@ const Bubbles = css.div`
   ${({ persona }) =>
     persona === "user"
       ? `
-    ${setSpace("prs")};
     align-items: flex-end;
   `
       : `
