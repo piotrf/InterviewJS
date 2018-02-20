@@ -100,7 +100,6 @@ export default class Composer extends React.Component {
     const { storyId } = this.props.params;
     const i = this.props.stories.findIndex((story) => story.id === storyId);
     this.props.updateStory(data, i);
-    this.setState({ detailsModal: false, metaModal: false });
   }
   render() {
     const { storyId } = this.props.params;
@@ -162,7 +161,7 @@ export default class Composer extends React.Component {
         <DetailsModal
           {...this.props}
           handleClose={() => this.toggleModal("detailsModal")}
-          isOpen={this.state.detailsModal}
+          isOpen
           key="DetailsModal"
           story={story}
           storyIndex={storyIndex}

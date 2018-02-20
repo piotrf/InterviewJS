@@ -170,7 +170,7 @@ export default class Story extends React.Component {
         <DetailsModal
           {...this.props}
           handleClose={() => this.toggleModal("detailsModal")}
-          isOpen={this.state.detailsModal}
+          isOpen
           key="DetailsModal"
           story={this.props.story}
           storyIndex={this.props.storyIndex}
@@ -182,7 +182,7 @@ export default class Story extends React.Component {
           {...this.props}
           deleteStory={() => this.props.deleteStory(this.props.storyIndex)}
           handleClose={() => this.toggleModal("deleteModal")}
-          isOpen={this.state.deleteModal}
+          isOpen
           key="DeleteModal"
           story={this.props.story}
         />
