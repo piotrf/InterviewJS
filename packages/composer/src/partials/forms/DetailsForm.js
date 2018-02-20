@@ -1,5 +1,5 @@
-import { func, shape, string } from "prop-types";
 import React from "react";
+import { func, shape, string } from "prop-types";
 
 import {
   Actionbar,
@@ -13,7 +13,9 @@ import {
   TextInput
 } from "interviewjs-styleguide";
 
-export default class StoryDetailsForm extends React.Component {
+import validateField from "./validateField";
+
+export default class DetailsForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,14 +24,22 @@ export default class StoryDetailsForm extends React.Component {
         context: this.props.story.context
       }
     };
-    this.handleInput = this.handleInput.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleSubmit(e) {
     if (e) e.preventDefault();
     this.props.handleSubmit(this.state.formData);
   }
-  handleInput(e) {
+  handleBlur(e) {
+    const { target } = e;
+    const { name } = target;
+    return this.props.handleSave && validateField(target)
+      ? this.props.handleSave({ [name]: this.state.formData[name] })
+      : null;
+  }
+  handleChange(e) {
     this.setState({
       formData: { ...this.state.formData, [e.target.name]: e.target.value }
     });
@@ -44,9 +54,10 @@ export default class StoryDetailsForm extends React.Component {
           </CharacterCount>
           <TextInput
             area
-            maxlength="280"
+            maxLength="280"
             name="intro"
-            onChange={(e) => this.handleInput(e)}
+            onBlur={(e) => this.handleBlur(e)}
+            onChange={(e) => this.handleChange(e)}
             placeholder="Best to start with something like ‘Find out how…’, ‘Investigate…’, ‘Learn…’"
             value={this.state.formData.intro}
           />
@@ -60,9 +71,10 @@ export default class StoryDetailsForm extends React.Component {
           </CharacterCount>
           <TextInput
             area
-            maxlength="280"
+            maxLength="280"
             name="context"
-            onChange={(e) => this.handleInput(e)}
+            onBlur={(e) => this.handleBlur(e)}
+            onChange={(e) => this.handleChange(e)}
             placeholder="This text helps the reader understand what the interviews are about…"
             value={this.state.formData.context}
           />
@@ -71,7 +83,7 @@ export default class StoryDetailsForm extends React.Component {
         <Separator size="m" silent />
         <Actionbar>
           <Action fixed primary type="submit">
-            Save
+            {this.props.cta}
           </Action>
         </Actionbar>
       </Form>
@@ -79,7 +91,9 @@ export default class StoryDetailsForm extends React.Component {
   }
 }
 
-StoryDetailsForm.propTypes = {
+DetailsForm.propTypes = {
+  cta: string,
+  handleSave: func,
   handleSubmit: func.isRequired,
   story: shape({
     context: string,
@@ -87,11 +101,11 @@ StoryDetailsForm.propTypes = {
   })
 };
 
-StoryDetailsForm.defaultProps = {
+DetailsForm.defaultProps = {
+  cta: "Save",
+  handleSave: null,
   story: {
     context: "",
     intro: ""
   }
 };
-
-StoryDetailsForm.defaultProps = {};

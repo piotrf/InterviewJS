@@ -38,13 +38,14 @@ const PaneTabEl = css.li`
     active
       ? `
     background: ${color.white};
+    border-bottom: 1px solid ${color.white};
+    border-top: 1px solid ${color.greyHL};
     &:not(:first-child) {
       border-left: 1px solid ${color.greyHL};
     }
     &:not(:last-child) {
       border-right: 1px solid ${color.greyHL};
     }
-    borer-bottom: 1px solid ${color.white};
   `
       : `
         border-bottom: 1px solid ${color.greyHL};

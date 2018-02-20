@@ -14,29 +14,47 @@ import {
   TextInput
 } from "interviewjs-styleguide";
 
-export default class StoryMetaForm extends React.Component {
+import validateField from "./validateField";
+
+export default class MetaForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       formData: {
         author: this.props.story.author,
         authorLink: this.props.story.authorLink,
-        media: {
-          cover: this.props.story.media.cover,
-          logo: this.props.story.media.logo
-        },
+        cover: this.props.story.cover,
+        logo: this.props.story.logo,
         pubDate: this.props.story.pubDate,
         title: this.props.story.title
+      },
+      formValidation: {
+        title: null
       }
     };
-    this.handleInput = this.handleInput.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleSubmit(e) {
     if (e) e.preventDefault();
     this.props.handleSubmit(this.state.formData);
   }
-  handleInput(e) {
+  handleBlur(e) {
+    const { target } = e;
+    const { name } = target;
+    this.setState({
+      formValidation: {
+        ...this.state.formValidation,
+        [name]: validateField(target)
+      }
+    });
+    console.log(this.props.handleSave && validateField(target));
+    return this.props.handleSave && validateField(target)
+      ? this.props.handleSave({ [name]: this.state.formData[name] })
+      : null;
+  }
+  handleChange(e) {
     this.setState({
       formData: { ...this.state.formData, [e.target.name]: e.target.value }
     });
@@ -47,15 +65,18 @@ export default class StoryMetaForm extends React.Component {
         <FormItem>
           <Label>Title</Label>
           <CharacterCount>
-            {140 - this.state.formData.title.length}
+            {70 - this.state.formData.title.length}
           </CharacterCount>
           <TextInput
             input
-            maxlength="140"
+            maxLength="70"
+            minLength="5"
             name="title"
-            onChange={(e) => this.handleInput(e)}
+            onBlur={(e) => this.handleBlur(e)}
+            onChange={(e) => this.handleChange(e)}
             placeholder="Placeholder…"
             required
+            valid={this.state.formValidation.title}
             value={this.state.formData.title}
           />
           <Legend tip="This is a title">i</Legend>
@@ -66,13 +87,14 @@ export default class StoryMetaForm extends React.Component {
           <Container dir="row">
             <Container flex={[0, 0, `${100 / 3}%`]}>
               <CharacterCount>
-                {70 - this.state.formData.author.length}
+                {35 - this.state.formData.author.length}
               </CharacterCount>
               <TextInput
                 input
-                maxlength="70"
+                maxLength="35"
                 name="author"
-                onChange={(e) => this.handleInput(e)}
+                onBlur={(e) => this.handleBlur(e)}
+                onChange={(e) => this.handleChange(e)}
                 place="left"
                 placeholder="Author’s name"
                 value={this.state.formData.author}
@@ -82,7 +104,8 @@ export default class StoryMetaForm extends React.Component {
               <TextInput
                 input
                 name="authorLink"
-                onChange={(e) => this.handleInput(e)}
+                onBlur={(e) => this.handleBlur(e)}
+                onChange={(e) => this.handleChange(e)}
                 place="middle"
                 placeholder="Link…"
                 value={this.state.formData.authorLink}
@@ -90,13 +113,14 @@ export default class StoryMetaForm extends React.Component {
             </Container>
             <Container flex={[0, 0, `${100 / 3}%`]}>
               <CharacterCount>
-                {70 - this.state.formData.pubDate.length}
+                {35 - this.state.formData.pubDate.length}
               </CharacterCount>
               <TextInput
                 input
-                maxlength="70"
+                maxLength="35"
                 name="pubDate"
-                onChange={(e) => this.handleInput(e)}
+                onBlur={(e) => this.handleBlur(e)}
+                onChange={(e) => this.handleChange(e)}
                 place="right"
                 placeholder="Publication date…"
                 value={this.state.formData.pubDate}
@@ -112,22 +136,26 @@ export default class StoryMetaForm extends React.Component {
             <Container flex={[0, 0, `${100 / 2}%`]}>
               <TextInput
                 input
-                onChange={(e) => this.handleInput(e)}
+                name="cover"
+                onBlur={(e) => this.handleBlur(e)}
+                onChange={(e) => this.handleChange(e)}
                 place="left"
                 placeholder="Cover photo"
                 type="file"
-                value={this.state.formData.media.cover}
+                value={this.state.formData.cover}
               />
             </Container>
             <Container flex={[0, 0, `${100 / 2}%`]}>
               <TextInput
                 input
+                name="logo"
                 nooffset
-                onChange={(e) => this.handleInput(e)}
+                onBlur={(e) => this.handleBlur(e)}
+                onChange={(e) => this.handleChange(e)}
                 place="right"
                 placeholder="Custom logo"
                 type="file"
-                value={this.state.formData.media.logo}
+                value={this.state.formData.logo}
               />
             </Container>
           </Container>
@@ -136,7 +164,7 @@ export default class StoryMetaForm extends React.Component {
         <Separator size="m" silent />
         <Actionbar>
           <Action fixed primary type="submit">
-            Save
+            {this.props.cta}
           </Action>
         </Actionbar>
       </Form>
@@ -144,7 +172,9 @@ export default class StoryMetaForm extends React.Component {
   }
 }
 
-StoryMetaForm.propTypes = {
+MetaForm.propTypes = {
+  cta: string,
+  handleSave: func,
   handleSubmit: func.isRequired,
   story: shape({
     title: string,
@@ -155,7 +185,9 @@ StoryMetaForm.propTypes = {
   })
 };
 
-StoryMetaForm.defaultProps = {
+MetaForm.defaultProps = {
+  cta: "Save",
+  handleSave: null,
   story: {
     title: "",
     author: "",

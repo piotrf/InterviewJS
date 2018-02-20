@@ -27,6 +27,12 @@ const Input = css.input`
     font-family: ${font.serif};
     font-style: italic;
   }
+  ${({ valid }) =>
+    valid === false
+      ? `
+    border-color: ${color.redM} !important;
+  `
+      : ``};
   ${({ area }) =>
     area
       ? `

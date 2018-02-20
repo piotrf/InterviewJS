@@ -6,8 +6,6 @@ import {
   Action,
   Actionbar,
   Container,
-  Dropdown,
-  DropdownContent,
   Icon,
   PageTitle,
   Separator,
@@ -16,13 +14,11 @@ import {
 } from "interviewjs-styleguide";
 
 import {
-  StylesModal,
-  IntervieweesModal,
-  StoryDetailsModal,
-  StoryMetaModal
-} from "../modals";
-
-import { IntervieweePane, StoryPane, UserPane } from "../panes";
+  DetailsModal,
+  IntervieweePane,
+  StoryPane,
+  UserPane
+} from "../partials";
 
 const Page = css.div`
   align-content: stretch;
@@ -91,9 +87,7 @@ export default class Composer extends React.Component {
       currentInterviewee: 0
     };
     this.switchInterviewee = this.switchInterviewee.bind(this);
-    this.toggleDropdown = this.toggleDropdown.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
-    this.triggerModal = this.triggerModal.bind(this);
     this.updateStory = this.updateStory.bind(this);
   }
   switchInterviewee(interviewee) {
@@ -101,13 +95,6 @@ export default class Composer extends React.Component {
   }
   toggleModal(modal) {
     this.setState({ [modal]: !this.state[modal] });
-  }
-  toggleDropdown(dropdown) {
-    this.setState({ [dropdown]: !this.state[dropdown] });
-  }
-  triggerModal(modal) {
-    this.toggleModal(modal);
-    this.toggleDropdown("settingsDropdown");
   }
   updateStory(data) {
     const { storyId } = this.props.params;
@@ -129,42 +116,9 @@ export default class Composer extends React.Component {
               <Icon name="chevron-left" size="x" /> Back
             </Action>
             <Separator dir="v" size="m" />
-            <Dropdown
-              onRequestClose={() => this.toggleDropdown("settingsDropdown")}
-              open={this.state.settingsDropdown}
-              html={
-                <DropdownContent>
-                  <ul>
-                    <li>
-                      <Action onClick={() => this.triggerModal("metaModal")}>
-                        Meta
-                      </Action>
-                    </li>
-                    <li>
-                      <Action onClick={() => this.triggerModal("detailsModal")}>
-                        Details
-                      </Action>
-                    </li>
-                    <li>
-                      <Action
-                        onClick={() => this.triggerModal("intervieweesModal")}
-                      >
-                        Interviewees
-                      </Action>
-                    </li>
-                    <li>
-                      <Action onClick={() => this.triggerModal("stylesModal")}>
-                        Styles
-                      </Action>
-                    </li>
-                  </ul>
-                </DropdownContent>
-              }
-            >
-              <Action onClick={() => this.toggleDropdown("settingsDropdown")}>
-                <Icon name="ellipsis" /> Settings
-              </Action>
-            </Dropdown>
+            <Action onClick={() => this.toggleModal("detailsModal")}>
+              <Icon name="info-circle" size="x" /> Details
+            </Action>
           </Container>
           <Container flex={[1, 1, `${100 / 3}%`]} align="center">
             <PageTitle typo="h2">{story.title}</PageTitle>
@@ -205,39 +159,13 @@ export default class Composer extends React.Component {
         </Container>
       </MobilePage>,
       this.state.detailsModal ? (
-        <StoryDetailsModal
+        <DetailsModal
+          {...this.props}
           handleClose={() => this.toggleModal("detailsModal")}
           isOpen={this.state.detailsModal}
           key="DetailsModal"
           story={story}
-          updateStory={this.updateStory}
-        />
-      ) : null,
-      this.state.metaModal ? (
-        <StoryMetaModal
-          handleClose={() => this.toggleModal("metaModal")}
-          isOpen={this.state.metaModal}
-          key="MetaModal"
-          story={story}
-          updateStory={this.updateStory}
-        />
-      ) : null,
-      this.state.intervieweesModal ? (
-        <IntervieweesModal
-          {...this.props}
-          handleClose={() => this.toggleModal("intervieweesModal")}
-          isOpen={this.state.intervieweesModal}
-          key="IntervieweesModal"
-          story={story}
           storyIndex={storyIndex}
-        />
-      ) : null,
-      this.state.stylesModal ? (
-        <StylesModal
-          handleClose={() => this.toggleModal("stylesModal")}
-          isOpen={this.state.stylesModal}
-          key="StylesModal"
-          story={story}
           updateStory={this.updateStory}
         />
       ) : null

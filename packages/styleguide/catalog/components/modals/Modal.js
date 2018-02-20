@@ -34,6 +34,7 @@ const ModalEl = css.div`
     position: absolute;
     right: 0;
     top: 0;
+    z-index: 5;
   }
   ${({ wizard }) =>
     wizard

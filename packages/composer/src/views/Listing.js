@@ -19,8 +19,7 @@ import {
   UserMenu
 } from "interviewjs-styleguide";
 
-import { WelcomeModal, NewStoryModal } from "../modals";
-import { Story, Stories } from "../partials";
+import { NewStoryModal, Stories, Story, WelcomeModal } from "../partials";
 
 const Page = css.div`
   align-content: stretch;

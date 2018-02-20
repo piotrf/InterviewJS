@@ -19,12 +19,7 @@ import {
   disselect
 } from "interviewjs-styleguide";
 
-import {
-  DeleteModal,
-  IntervieweesModal,
-  StoryDetailsModal,
-  StoryMetaModal
-} from "../modals";
+import { DeleteModal, DetailsModal } from "../";
 
 const StoryEl = css(Container)`
   ${disselect};
@@ -75,9 +70,7 @@ export default class Story extends React.Component {
     this.state = {
       deleteModal: false,
       detailsModal: false,
-      settingsDropdown: false,
-      intervieweesModal: false,
-      metaModal: false
+      settingsDropdown: false
     };
     this.toggleDropdown = this.toggleDropdown.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
@@ -96,15 +89,9 @@ export default class Story extends React.Component {
   }
   updateStory(data) {
     this.props.updateStory(data, this.props.storyIndex);
-    this.setState({ detailsModal: false, metaModal: false });
   }
   render() {
-    const {
-      deleteModal,
-      detailsModal,
-      intervieweesModal,
-      metaModal
-    } = this.state;
+    const { deleteModal, detailsModal } = this.state;
     return [
       <Container key="body">
         <StoryEl
@@ -154,20 +141,8 @@ export default class Story extends React.Component {
               <DropdownContent>
                 <ul>
                   <li>
-                    <Action onClick={() => this.triggerModal("metaModal")}>
-                      Meta
-                    </Action>
-                  </li>
-                  <li>
                     <Action onClick={() => this.triggerModal("detailsModal")}>
                       Details
-                    </Action>
-                  </li>
-                  <li>
-                    <Action
-                      onClick={() => this.triggerModal("intervieweesModal")}
-                    >
-                      Interviewees
                     </Action>
                   </li>
                   <li>
@@ -192,31 +167,14 @@ export default class Story extends React.Component {
         </StoryMenu>
       </Container>,
       detailsModal ? (
-        <StoryDetailsModal
+        <DetailsModal
+          {...this.props}
           handleClose={() => this.toggleModal("detailsModal")}
           isOpen={this.state.detailsModal}
           key="DetailsModal"
           story={this.props.story}
-          updateStory={this.updateStory}
-        />
-      ) : null,
-      metaModal ? (
-        <StoryMetaModal
-          handleClose={() => this.toggleModal("metaModal")}
-          isOpen={this.state.metaModal}
-          key="MetaModal"
-          story={this.props.story}
-          updateStory={this.updateStory}
-        />
-      ) : null,
-      intervieweesModal ? (
-        <IntervieweesModal
-          {...this.props}
-          handleClose={() => this.toggleModal("intervieweesModal")}
-          isOpen={this.state.intervieweesModal}
-          key="IntervieweesModal"
-          story={this.props.story}
           storyIndex={this.props.storyIndex}
+          updateStory={this.updateStory}
         />
       ) : null,
       deleteModal ? (

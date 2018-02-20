@@ -26,31 +26,28 @@ export default class IntervieweeForm extends Component {
         title: this.props.interviewee.title
       }
     };
-    this.handleInput = this.handleInput.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleSubmit(e) {
     if (e) e.preventDefault();
     this.props.handleSubmit(this.state.formData);
   }
-  handleInput(e) {
+  handleChange(e) {
     this.setState({
       formData: { ...this.state.formData, [e.target.name]: e.target.value }
     });
   }
   render() {
-    console.log("props: ", this.props);
-    console.log("state: ", this.state);
-
     return (
       <Form onSubmit={(e) => this.handleSubmit(e)}>
         <FormItem>
           <Label>Name</Label>
           <TextInput
             input
-            maxlength="50"
+            maxLength="50"
             name="name"
-            onChange={(e) => this.handleInput(e)}
+            onChange={(e) => this.handleChange(e)}
             placeholder="i.e. Barack Obama"
             required
             value={this.state.formData.name}
@@ -67,9 +64,9 @@ export default class IntervieweeForm extends Component {
           </CharacterCount>
           <TextInput
             input
-            maxlength="50"
+            maxLength="50"
             name="title"
-            onChange={(e) => this.handleInput(e)}
+            onChange={(e) => this.handleChange(e)}
             placeholder="i.e. 44th President of the US"
             required
             value={this.state.formData.title}
@@ -83,9 +80,9 @@ export default class IntervieweeForm extends Component {
           </CharacterCount>
           <TextInput
             area
-            maxlength="280"
+            maxLength="280"
             name="bio"
-            onChange={(e) => this.handleInput(e)}
+            onChange={(e) => this.handleChange(e)}
             placeholder=""
             value={this.state.formData.bio}
           />
@@ -98,7 +95,7 @@ export default class IntervieweeForm extends Component {
               <TextInput
                 input
                 name="avatar"
-                onChange={(e) => this.handleInput(e)}
+                onChange={(e) => this.handleChange(e)}
                 place="left"
                 placeholder=""
                 type="file"
@@ -113,11 +110,11 @@ export default class IntervieweeForm extends Component {
               <Label>Color</Label>
               <TextInput
                 input
-                maxlength="7"
+                maxLength="7"
                 minlength="3"
                 name="color"
                 nooffset
-                onChange={(e) => this.handleInput(e)}
+                onChange={(e) => this.handleChange(e)}
                 place="right"
                 placeholder="#495abd"
                 value={this.state.formData.color}

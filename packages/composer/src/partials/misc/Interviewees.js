@@ -14,7 +14,7 @@ import {
   setSpace
 } from "interviewjs-styleguide";
 
-import IntervieweeForm from "../forms/IntervieweeForm";
+import { IntervieweeForm } from "../";
 
 const IntervieweesList = css.ul`
   display: block;
@@ -49,13 +49,9 @@ export default class Interviewees extends React.Component {
     };
     this.createInterviewee = this.createInterviewee.bind(this);
     this.deleteInterviewee = this.deleteInterviewee.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.toggleAddInterviewee = this.toggleAddInterviewee.bind(this);
     this.toggleEditInterviewee = this.toggleEditInterviewee.bind(this);
     this.updateInterviewee = this.updateInterviewee.bind(this);
-  }
-  handleSubmit() {
-    this.props.handleSubmit(this.state.formData);
   }
   createInterviewee(data) {
     this.props.createInterviewee(this.props.storyIndex, data);
@@ -120,7 +116,7 @@ export default class Interviewees extends React.Component {
                     </Interviewee>
                   ))}
                 </IntervieweesList>
-                <Container padded>
+                <Container padded align="center">
                   <Action onClick={this.toggleAddInterviewee}>
                     <Icon name="plus" size="s" /> Create new
                   </Action>
@@ -128,7 +124,7 @@ export default class Interviewees extends React.Component {
               </Container>
               <Separator size="m" silent />
               <Actionbar>
-                <Action fixed onClick={this.handleSubmit} primary>
+                <Action fixed onClick={this.props.handleSubmit} primary>
                   Done
                 </Action>
               </Actionbar>
@@ -155,13 +151,11 @@ Interviewees.propTypes = {
   createInterviewee: func.isRequired,
   deleteInterviewee: func.isRequired,
   handleSubmit: func.isRequired,
-  storyIndex: number.isRequired,
   interviewees: arrayOf(object),
+  storyIndex: number.isRequired,
   updateInterviewee: func.isRequired
 };
 
 Interviewees.defaultProps = {
   interviewees: []
 };
-
-Interviewees.defaultProps = {};

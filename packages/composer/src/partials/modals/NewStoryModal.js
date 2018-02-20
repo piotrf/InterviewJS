@@ -15,8 +15,7 @@ import {
   Separator
 } from "interviewjs-styleguide";
 
-import { StoryDetailsForm, StoryMetaForm } from "../forms";
-import { Interviewees } from "../partials";
+import { Interviewees, DetailsForm, MetaForm } from "../";
 
 const getStepState = (step, i) => {
   if (step === i) {
@@ -34,11 +33,11 @@ export default class NewStoryModal extends Component {
       step: 0, // TODO revert to 0
       storyCreated: false
     };
-    this.createStory = this.createStory.bind(this);
+    this.handleStep0 = this.handleStep0.bind(this);
     this.handleStep1 = this.handleStep1.bind(this);
     this.handleStep2 = this.handleStep2.bind(this);
   }
-  createStory(data) {
+  handleStep0(data) {
     return (
       this.state.storyCreated
         ? this.props.updateStory(data, 0)
@@ -60,14 +59,13 @@ export default class NewStoryModal extends Component {
       if (step === 0) {
         return (
           <Container limit="s" align="center">
-            <Separator size="m" silent />
             <PageSubtitle typo="h3">
               Start by adding a few details and meta info about your story. You
               can attach a cover photo and your organisation logo here too.
             </PageSubtitle>
             <Separator size="m" silent />
-            <StoryMetaForm
-              handleSubmit={this.createStory}
+            <MetaForm
+              handleSubmit={this.handleStep0}
               story={
                 this.state.storyCreated ? this.props.stories[0] : undefined
               }
@@ -77,13 +75,12 @@ export default class NewStoryModal extends Component {
       } else if (step === 1) {
         return (
           <Container limit="s" align="center">
-            <Separator size="m" silent />
             <PageSubtitle typo="h3">
               Give the readers a quest, tell them what they will learn about a
               topic when speaking to the interviewees.
             </PageSubtitle>
             <Separator size="m" silent />
-            <StoryDetailsForm
+            <DetailsForm
               handleSubmit={this.handleStep1}
               story={this.props.stories[0]}
             />
@@ -92,17 +89,19 @@ export default class NewStoryModal extends Component {
       } else if (step === 2) {
         return (
           <Container limit="s" align="center">
-            <Separator size="m" silent />
             <PageSubtitle typo="h3">
               Add interviewees for the user to chat to. You will be able to
               script separate chats for each interviewee later.
             </PageSubtitle>
             <Separator size="m" silent />
             <Interviewees
-              {...this.props}
+              createInterviewee={this.props.createInterviewee}
+              cta="Compose your story"
+              deleteInterviewee={this.props.deleteInterviewee}
               handleSubmit={this.handleStep2}
               interviewees={this.props.stories[0].interviewees}
               storyIndex={0}
+              updateInterviewee={this.props.updateInterviewee}
             />
           </Container>
         );
@@ -141,6 +140,7 @@ export default class NewStoryModal extends Component {
               </Breadcrumb>
             </Breadcrumbs>
           </ModalHead>
+          <Separator size="s" silent />
           <ModalBody>{getModalBody()}</ModalBody>
         </Modal>
       </ReactModal>
@@ -149,11 +149,14 @@ export default class NewStoryModal extends Component {
 }
 
 NewStoryModal.propTypes = {
+  createInterviewee: func.isRequired,
   createStory: func.isRequired,
+  deleteInterviewee: func.isRequired,
   handleClose: func.isRequired,
   isOpen: bool.isRequired,
   router: object.isRequired,
   stories: arrayOf(object),
+  updateInterviewee: func.isRequired,
   updateStory: func.isRequired
 };
 

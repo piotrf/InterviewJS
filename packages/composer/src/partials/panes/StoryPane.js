@@ -64,9 +64,9 @@ const Interviewee = css.li`
   text-align: center;
   transition: border ${time.m};
   & button {
+    border-width: 2px;
     min-height: auto;
     padding: 0;
-    border-width: 2px;
   }
   & button:active {
     transform: none !important;

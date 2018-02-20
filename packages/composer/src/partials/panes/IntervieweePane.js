@@ -15,6 +15,9 @@ const PaneEl = css(Container)`
   align-items: stretch;
   height: 100%;
   overflow: hidden;
+  ${PaneTabs} {
+    transform: translateY(-1px);
+  }
 `;
 
 const PaneBubbleEditor = css(Container)`

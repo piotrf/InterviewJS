@@ -17,7 +17,7 @@ import {
   PageParagraph
 } from "interviewjs-styleguide";
 
-import WelcomeImage from "./assets/welcome-image.png";
+import WelcomeImage from "../../assets/welcome-image.png";
 
 export default class WelcomeModal extends React.Component {
   constructor(props) {
