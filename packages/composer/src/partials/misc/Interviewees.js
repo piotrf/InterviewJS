@@ -1,4 +1,4 @@
-import { arrayOf, func, number, object } from "prop-types";
+import { arrayOf, func, number, object, string } from "prop-types";
 import css from "styled-components";
 import React from "react";
 
@@ -125,7 +125,7 @@ export default class Interviewees extends React.Component {
               <Separator size="m" silent />
               <Actionbar>
                 <Action fixed onClick={this.props.handleSubmit} primary>
-                  Done
+                  {this.props.cta}
                 </Action>
               </Actionbar>
             </Container>
@@ -148,6 +148,7 @@ export default class Interviewees extends React.Component {
 }
 
 Interviewees.propTypes = {
+  cta: string,
   createInterviewee: func.isRequired,
   deleteInterviewee: func.isRequired,
   handleSubmit: func.isRequired,
@@ -157,5 +158,6 @@ Interviewees.propTypes = {
 };
 
 Interviewees.defaultProps = {
+  cta: "Done",
   interviewees: []
 };
