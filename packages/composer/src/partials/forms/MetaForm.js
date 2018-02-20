@@ -49,7 +49,6 @@ export default class MetaForm extends React.Component {
         [name]: validateField(target)
       }
     });
-    console.log(this.props.handleSave && validateField(target));
     return this.props.handleSave && validateField(target)
       ? this.props.handleSave({ [name]: this.state.formData[name] })
       : null;

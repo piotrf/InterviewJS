@@ -14,6 +14,8 @@ import {
   TextInput
 } from "interviewjs-styleguide";
 
+import validateField from "./validateField";
+
 export default class IntervieweeForm extends Component {
   constructor(props) {
     super(props);
@@ -24,8 +26,13 @@ export default class IntervieweeForm extends Component {
         color: this.props.interviewee.color,
         name: this.props.interviewee.name,
         title: this.props.interviewee.title
+      },
+      formValidation: {
+        name: null,
+        title: null
       }
     };
+    this.handleBlur = this.handleBlur.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -38,6 +45,16 @@ export default class IntervieweeForm extends Component {
       formData: { ...this.state.formData, [e.target.name]: e.target.value }
     });
   }
+  handleBlur(e) {
+    const { target } = e;
+    const { name } = target;
+    this.setState({
+      formValidation: {
+        ...this.state.formValidation,
+        [name]: validateField(target)
+      }
+    });
+  }
   render() {
     return (
       <Form onSubmit={(e) => this.handleSubmit(e)}>
@@ -46,10 +63,13 @@ export default class IntervieweeForm extends Component {
           <TextInput
             input
             maxLength="50"
+            minLength="1"
             name="name"
+            onBlur={(e) => this.handleBlur(e)}
             onChange={(e) => this.handleChange(e)}
             placeholder="i.e. Barack Obama"
             required
+            valid={this.state.formValidation.name}
             value={this.state.formData.name}
           />
           <CharacterCount>
@@ -65,10 +85,13 @@ export default class IntervieweeForm extends Component {
           <TextInput
             input
             maxLength="50"
+            minLength="1"
             name="title"
+            onBlur={(e) => this.handleBlur(e)}
             onChange={(e) => this.handleChange(e)}
             placeholder="i.e. 44th President of the US"
             required
+            valid={this.state.formValidation.title}
             value={this.state.formData.title}
           />
         </FormItem>
