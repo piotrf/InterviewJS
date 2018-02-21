@@ -147,7 +147,13 @@ const stories = [
             role: "user"
           },
           {
-            content: "I've never met anyone new before. Only Nathan.",
+            content: "I've never met anyone new before.",
+            id: uuidv4(),
+            order: 18,
+            role: "interviewee"
+          },
+          {
+            content: " Only Nathan.",
             id: uuidv4(),
             order: 18,
             role: "interviewee"
