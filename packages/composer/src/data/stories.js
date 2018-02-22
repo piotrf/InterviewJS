@@ -207,7 +207,14 @@ const stories = [
         avatar:
           "https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/e35/12407344_1283694208323785_735653395_n.jpg",
         color: "blue",
-        storyline: []
+        storyline: [
+          {
+            content: "Hello, I’m Barack Obama.",
+            id: uuidv4(),
+            order: 0,
+            role: "interviewee"
+          }
+        ]
       },
       {
         name: "Donald Trump",
@@ -216,7 +223,14 @@ const stories = [
         avatar:
           "https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/e35/12407344_1283694208323785_735653395_n.jpg",
         color: "red",
-        storyline: []
+        storyline: [
+          {
+            content: "Hello, I’m Donald Trump.",
+            id: uuidv4(),
+            order: 0,
+            role: "interviewee"
+          }
+        ]
       }
     ]
   },
@@ -240,7 +254,14 @@ const stories = [
         avatar:
           "https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/e35/12407344_1283694208323785_735653395_n.jpg",
         color: "green",
-        storyline: []
+        storyline: [
+          {
+            content: "Hello, we’re Techcrunch.",
+            id: uuidv4(),
+            order: 0,
+            role: "interviewee"
+          }
+        ]
       },
       {
         name: "The Guardian",
@@ -249,7 +270,14 @@ const stories = [
         avatar:
           "https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/e35/12407344_1283694208323785_735653395_n.jpg",
         color: "blue",
-        storyline: []
+        storyline: [
+          {
+            content: "Hello, we’re The Guardian.",
+            id: uuidv4(),
+            order: 0,
+            role: "interviewee"
+          }
+        ]
       }
     ]
   },
@@ -273,7 +301,14 @@ const stories = [
         avatar:
           "https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/e35/12407344_1283694208323785_735653395_n.jpg",
         color: "green",
-        storyline: []
+        storyline: [
+          {
+            content: "Hello, we’re Techcrunch.",
+            id: uuidv4(),
+            order: 0,
+            role: "interviewee"
+          }
+        ]
       },
       {
         name: "The Guardian",
@@ -282,7 +317,14 @@ const stories = [
         avatar:
           "https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/e35/12407344_1283694208323785_735653395_n.jpg",
         color: "blue",
-        storyline: []
+        storyline: [
+          {
+            content: "Hello, we’re The Guardian.",
+            id: uuidv4(),
+            order: 0,
+            role: "interviewee"
+          }
+        ]
       }
     ]
   },
@@ -307,7 +349,14 @@ const stories = [
         avatar:
           "https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/e35/12407344_1283694208323785_735653395_n.jpg",
         color: "yellow",
-        storyline: []
+        storyline: [
+          {
+            content: "Hello, I’m Ali.",
+            id: uuidv4(),
+            order: 0,
+            role: "interviewee"
+          }
+        ]
       },
       {
         name: "Piotr F.",
@@ -316,7 +365,14 @@ const stories = [
         avatar:
           "https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/e35/12407344_1283694208323785_735653395_n.jpg",
         color: "purple",
-        storyline: []
+        storyline: [
+          {
+            content: "Hello, I’m Piotr.",
+            id: uuidv4(),
+            order: 0,
+            role: "interviewee"
+          }
+        ]
       },
       {
         name: "Techcrunch",
@@ -325,7 +381,14 @@ const stories = [
         avatar:
           "https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/e35/12407344_1283694208323785_735653395_n.jpg",
         color: "green",
-        storyline: []
+        storyline: [
+          {
+            content: "Hello, we’re Techcrunch.",
+            id: uuidv4(),
+            order: 0,
+            role: "interviewee"
+          }
+        ]
       },
       {
         name: "The Guardian",
@@ -334,7 +397,14 @@ const stories = [
         avatar:
           "https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/e35/12407344_1283694208323785_735653395_n.jpg",
         color: "blue",
-        storyline: []
+        storyline: [
+          {
+            content: "Hello, we’re The Guardian.",
+            id: uuidv4(),
+            order: 0,
+            role: "interviewee"
+          }
+        ]
       }
     ]
   }
