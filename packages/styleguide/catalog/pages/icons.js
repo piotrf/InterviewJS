@@ -51,7 +51,7 @@ export default () => markdown`
   )}
   ${(
     <ReactSpecimen span={1}>
-      <Icon name="play" />
+      <Icon name="media" />
     </ReactSpecimen>
   )}
   ${(
@@ -207,6 +207,11 @@ export default () => markdown`
   ${(
     <ReactSpecimen span={1}>
       <Icon name="google" />
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen span={1}>
+      <Icon name="remove-persona" />
     </ReactSpecimen>
   )}
 

@@ -133,9 +133,13 @@ export default class Interviewees extends React.Component {
         }
         return (
           <IntervieweeForm
+            allowDelete={interviewees.length > 1}
+            deleteInterviewee={() =>
+              this.deleteInterviewee(this.state.editItem)
+            }
             handleCancel={() => this.setState({ editItem: null })}
             handleSubmit={this.updateInterviewee}
-            interviewee={this.props.interviewees[this.state.editItem]}
+            interviewee={interviewees[this.state.editItem]}
           />
         );
       }

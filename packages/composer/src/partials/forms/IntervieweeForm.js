@@ -6,12 +6,17 @@ import {
   Actionbar,
   CharacterCount,
   Container,
+  Dropdown,
+  DropdownContent,
   Form,
   FormItem,
+  Icon,
   Label,
   Legend,
   Separator,
-  TextInput
+  Text,
+  TextInput,
+  Tip
 } from "interviewjs-styleguide";
 
 import validateField from "./validateField";
@@ -30,11 +35,14 @@ export default class IntervieweeForm extends Component {
       formValidation: {
         name: null,
         title: null
-      }
+      },
+      moreDropdown: false
     };
     this.handleBlur = this.handleBlur.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.deleteInterviewee = this.deleteInterviewee.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.toggleDropdown = this.toggleDropdown.bind(this);
   }
   handleSubmit(e) {
     if (e) e.preventDefault();
@@ -55,7 +63,51 @@ export default class IntervieweeForm extends Component {
       }
     });
   }
+  toggleDropdown(dropdown, e) {
+    if (e) e.preventDefault();
+    this.setState({ [dropdown]: !this.state[dropdown] });
+  }
+  deleteInterviewee() {
+    this.props.deleteInterviewee();
+    this.setState({ moreDropdown: false });
+    this.props.handleCancel(); // TODO used to close the parent modal, rename to something like `handleClose`, `handleCancel` is confusing.
+  }
   render() {
+    const deleteOption = (
+      <Dropdown
+        html={
+          <DropdownContent>
+            <Text typo="p4">Sure to delete this interviewee permanently?</Text>
+            <Separator silent size="n" />
+            <Text typo="p5">
+              All related data including transcript and storyline will be lost.
+            </Text>
+            <Actionbar>
+              <Action onClick={() => this.toggleDropdown("moreDropdown")}>
+                Cancel
+              </Action>
+              <Action tone="negative" onClick={this.deleteInterviewee}>
+                Delete
+              </Action>
+            </Actionbar>
+          </DropdownContent>
+        }
+        onRequestClose={() => this.toggleDropdown("moreDropdown")}
+        open={this.state.moreDropdown}
+        position="left"
+      >
+        <Tip position="bottom" title="Delete interviewee">
+          <Action
+            iconic
+            onClick={(e) => this.toggleDropdown("moreDropdown", e)}
+            secondary
+            tone="negative"
+          >
+            <Icon name="remove-persona" />
+          </Action>
+        </Tip>
+      </Dropdown>
+    );
     return (
       <Form onSubmit={(e) => this.handleSubmit(e)}>
         <FormItem>
@@ -149,7 +201,9 @@ export default class IntervieweeForm extends Component {
           </Container>
         </Container>
         <Separator size="m" silent />
-        <Actionbar>
+        <Actionbar
+          satellite={this.props.allowDelete ? "right" : null} // this goes inline with renderDeleteOption()
+        >
           {!this.props.persistent ? (
             <Action fixed secondary onClick={this.props.handleCancel}>
               Cancel
@@ -158,6 +212,9 @@ export default class IntervieweeForm extends Component {
           <Action fixed primary type="submit">
             Save
           </Action>
+          {this.props.allowDelete
+            ? deleteOption
+            : null /* this goes inline with satellite={this.props.deleteInterviewee === !null */}
         </Actionbar>
       </Form>
     );
@@ -165,7 +222,9 @@ export default class IntervieweeForm extends Component {
 }
 
 IntervieweeForm.propTypes = {
+  allowDelete: bool,
   handleCancel: func,
+  deleteInterviewee: func,
   handleSubmit: func.isRequired,
   persistent: bool,
   interviewee: shape({
@@ -178,7 +237,9 @@ IntervieweeForm.propTypes = {
 };
 
 IntervieweeForm.defaultProps = {
+  allowDelete: false,
   handleCancel: null,
+  deleteInterviewee: null,
   interviewee: {
     avatar: "",
     bio: "",
