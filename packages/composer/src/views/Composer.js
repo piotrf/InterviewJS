@@ -108,11 +108,11 @@ export default class Composer extends React.Component {
         <PageHead>
           <Container flex={[1, 1, `${100 / 3}%`]} padded>
             <Action onClick={() => this.props.router.push(`/`)}>
-              <Icon name="chevron-left" size="x" /> Back
+              <Icon name="arrow-left" size="x" /> Back
             </Action>
             <Separator dir="v" size="m" />
             <Action onClick={() => this.toggleModal("meta")}>
-              <Icon name="info-circle" size="x" /> Details
+              <Icon name="info" size="x" /> Details
             </Action>
           </Container>
           <Container flex={[1, 1, `${100 / 3}%`]} align="center">

@@ -4,9 +4,9 @@ import { Action, Icon } from "../../components";
 
 import {} from "../../../utils";
 
-const ModalClose = props => (
+const ModalClose = (props) => (
   <Action {...props}>
-    <Icon name="cross" size="l" />
+    <Icon name="cross" size="m" />
   </Action>
 );
 

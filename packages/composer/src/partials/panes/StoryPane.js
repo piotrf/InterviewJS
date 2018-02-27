@@ -132,7 +132,7 @@ export default class StoryPane extends React.Component {
             <IntervieweesAction>
               <Tip position="bottom" title="Manage interviewees">
                 <Action secondary iconic onClick={this.props.toggleModal}>
-                  <Icon name="pencil" size="x" />
+                  <Icon name="pen" size="x" />
                 </Action>
               </Tip>
             </IntervieweesAction>

@@ -110,7 +110,7 @@ export default class Interviewees extends React.Component {
                           secondary
                           onClick={() => this.toggleEditInterviewee(i)}
                         >
-                          <Icon name="pencil" />
+                          <Icon name="pen" size="s" />
                         </Action>
                       </Container>
                     </Interviewee>
