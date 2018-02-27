@@ -134,7 +134,7 @@ export default class ListingView extends Component {
                     deleteStory={() => this.props.deleteStory(i)}
                     key={story.id}
                     openStory={() =>
-                      this.props.router.push(`my/stories/${story.id}`)
+                      this.props.router.push(`/my/stories/${story.id}`)
                     }
                     story={story}
                     storyIndex={i}

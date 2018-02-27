@@ -107,7 +107,7 @@ export default class ComposerView extends React.Component {
       <Page key="Page">
         <PageHead>
           <Container flex={[1, 1, `${100 / 3}%`]} padded>
-            <Action onClick={() => this.props.router.push(`/`)}>
+            <Action onClick={() => this.props.router.push(`/my/stories`)}>
               <Icon name="arrow-left" size="x" /> Back
             </Action>
             <Separator dir="v" size="m" />
@@ -145,7 +145,11 @@ export default class ComposerView extends React.Component {
           <PageTitle typo="h2">This Page works only on desktop</PageTitle>
           <Separator silent size="m" />
           <Actionbar>
-            <Action primary fixed onClick={() => this.props.router.push(`/`)}>
+            <Action
+              primary
+              fixed
+              onClick={() => this.props.router.push(`/my/stories`)}
+            >
               Go back
             </Action>
           </Actionbar>

@@ -2,8 +2,6 @@
 import css from "styled-components";
 import React, { Component } from "react";
 
-import {} from "interviewjs-styleguide";
-
 import { AuthModal } from "../partials";
 
 const Page = css.div`
@@ -25,7 +23,7 @@ export default class AuthView extends Component {
     this.handleAuthentication = this.handleAuthentication.bind(this);
   }
   handleAuthentication() {
-    this.props.router.push(`/my`);
+    this.props.router.push(`/my/stories`);
   }
   render() {
     return [
@@ -35,6 +33,7 @@ export default class AuthView extends Component {
         handleAuthentication={this.handleAuthentication}
         isOpen
         key="AuthModal"
+        style={{ width: "400px" }}
       />
     ];
   }

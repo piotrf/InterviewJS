@@ -51,7 +51,7 @@ export default class NewStoryModal extends Component {
   }
   handleStep2() {
     this.props.handleClose();
-    this.props.router.push(`stories/${this.props.stories[0].id}`);
+    this.props.router.push(`/my/stories/${this.props.stories[0].id}`);
   }
   render() {
     const { step } = this.state;

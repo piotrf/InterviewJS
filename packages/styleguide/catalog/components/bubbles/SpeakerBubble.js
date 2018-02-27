@@ -1,8 +1,19 @@
-import css from "styled-components";
+import css, { keyframes } from "styled-components";
 import { shape, string } from "prop-types";
 
 import { radius, skin } from "../../../utils";
 import bubbleBase from "./bubbleBase";
+
+const fader = keyframes`
+  from {
+    opacity: 0;
+    transform: translate3d(0, 0.5rem, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+`;
 
 const SystemBubble = css.div`
   ${bubbleBase};
@@ -25,6 +36,22 @@ const SystemBubble = css.div`
   &:only-child {
     border-radius: ${radius.h};
   }
+  ${({ animate, delay }) =>
+    animate
+      ? `
+    animation-delay: ${delay}ms;
+    animation-direction: normal;
+    animation-duration: 400ms;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+    animation-name: ${fader};
+    animation-play-state: running;
+    animation-timing-function: ease-in;
+    opacity: 0;
+    perspective: 1000;
+    will-change: transform;
+  `
+      : ``}
 `;
 
 SystemBubble.propTypes = {

@@ -5,14 +5,15 @@ import { bool, func } from "prop-types";
 import {
   Action,
   Actionbar,
-  Container,
+  Animator,
+  Bubble,
+  BubbleGroup,
+  Bubbles,
   Icon,
   Modal,
   ModalBody,
   ModalFoot,
-  ModalHead,
-  PageTitle,
-  Text
+  color
 } from "interviewjs-styleguide";
 
 export default class AuthModal extends React.Component {
@@ -26,26 +27,52 @@ export default class AuthModal extends React.Component {
         ariaHideApp={false}
         isOpen={this.props.isOpen}
         onRequestClose={this.props.handleClose}
+        overlayClassName="ReactModal__HeroOverlay"
         role="dialog"
       >
-        <Modal {...this.props} persistent>
-          <ModalHead>
-            <PageTitle typo="h2">Welcome to InterviewJS</PageTitle>
-          </ModalHead>
+        <Modal {...this.props} persistent transparent compact>
           <ModalBody>
-            <Container align="center">
-              <Text typo="p2">Log in with you Google Account</Text>
-            </Container>
+            <BubbleGroup>
+              <Bubbles persona="interviewee">
+                <Bubble
+                  animate
+                  persona="interviewee"
+                  theme={{ backg: color.flareLLt, color: color.white }}
+                >
+                  Welcome to InterviewJS
+                </Bubble>
+                <Bubble
+                  animate
+                  delay={500}
+                  persona="interviewee"
+                  theme={{ backg: color.flareLLt, color: color.white }}
+                >
+                  An app that allows to compose scripted chats for a more
+                  immersive storytelling experience.
+                </Bubble>
+                <Bubble
+                  animate
+                  delay={1000}
+                  persona="interviewee"
+                  theme={{ backg: color.flareLLt, color: color.white }}
+                >
+                  To continue, sign in with your Google Account.
+                </Bubble>
+              </Bubbles>
+            </BubbleGroup>
           </ModalBody>
           <ModalFoot>
-            <Actionbar>
-              <Action fixed secondary href="http://interviewjs.io">
-                Return home
-              </Action>
-              <Action fixed primary onClick={this.props.handleAuthentication}>
-                <Icon name="google" /> Authenticate
-              </Action>
-            </Actionbar>
+            <Animator delay={1500}>
+              <Actionbar>
+                <Action
+                  fixed
+                  secondary
+                  onClick={this.props.handleAuthentication}
+                >
+                  <Icon name="google" />&nbsp;Sign in
+                </Action>
+              </Actionbar>
+            </Animator>
           </ModalFoot>
         </Modal>
       </ReactModal>

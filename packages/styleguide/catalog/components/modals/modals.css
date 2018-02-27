@@ -12,6 +12,9 @@
   width: 100%;
   z-index: 5;
 }
+.ReactModal__HeroOverlay {
+  background: #28336e;
+}
 .ReactModal__Content {
   background: none;
   border: none;

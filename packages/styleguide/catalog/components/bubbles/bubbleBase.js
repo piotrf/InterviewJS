@@ -7,7 +7,7 @@ const bubbleBase = `
   display: flex;
   flex-direction: column;
   justify-content: center;
-  max-width: 300px;
+  max-width: 320px;
   min-height: 40px;
   &:not(:last-child),
   &:not(:first-child) {

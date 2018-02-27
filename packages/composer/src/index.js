@@ -27,9 +27,9 @@ class Routes extends React.Component {
   render() {
     return (
       <Router key="Root" history={history}>
-        <Route path="my" component={App}>
-          <IndexRoute component={Listing} />
-          <Route path="/auth" component={Auth} />
+        <Route path="/my" component={App}>
+          <IndexRoute component={Auth} />
+          <Route path="/my/stories" component={Listing} />
           <Route path="/my/stories/:storyId" component={Composer} />
         </Route>
         <Redirect from="*" to="my" />
