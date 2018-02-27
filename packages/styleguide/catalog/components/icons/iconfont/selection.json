@@ -84,7 +84,7 @@
         "order": 28,
         "prevSize": 16,
         "ligatures": "play, video",
-        "name": "play",
+        "name": "media",
         "id": 87,
         "code": 59735
       },
@@ -902,6 +902,34 @@
       "setIdx": 0,
       "setId": 0,
       "iconIdx": 1226
+    },
+    {
+      "icon": {
+        "paths": [
+          "M64 0v320l128-192h256v832h-128l-64 64h512l-64-64h-128v-832h256l128 192v-320z"
+        ],
+        "attrs": [],
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "tags": [
+          "typography",
+          "wysiwyg"
+        ],
+        "defaultCode": 61074,
+        "grid": 16
+      },
+      "attrs": [],
+      "properties": {
+        "order": 38,
+        "prevSize": 16,
+        "ligatures": "typography3, wysiwyg2",
+        "name": "text",
+        "id": 1426,
+        "code": 61074
+      },
+      "setIdx": 0,
+      "setId": 0,
+      "iconIdx": 1426
     },
     {
       "icon": {

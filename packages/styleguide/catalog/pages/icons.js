@@ -36,6 +36,11 @@ export default () => markdown`
 
   ${(
     <ReactSpecimen span={1}>
+      <Icon name="text" />
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen span={1}>
       <Icon name="pen" />
     </ReactSpecimen>
   )}
