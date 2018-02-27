@@ -10,6 +10,7 @@ export { default as IntervieweeForm } from "./forms/IntervieweeForm";
 export { default as MetaForm } from "./forms/MetaForm";
 
 // modals
+export { default as AuthModal } from "./modals/AuthModal";
 export { default as DeleteModal } from "./modals/DeleteModal";
 export { default as DetailsModal } from "./modals/DetailsModal";
 export { default as NewStoryModal } from "./modals/NewStoryModal";

@@ -204,5 +204,10 @@ export default () => markdown`
       <Icon name="twitter" />
     </ReactSpecimen>
   )}
+  ${(
+    <ReactSpecimen span={1}>
+      <Icon name="google" />
+    </ReactSpecimen>
+  )}
 
 `;

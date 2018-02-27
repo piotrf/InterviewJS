@@ -81,7 +81,7 @@ const StoryNew = css(Container)`
 const PageBody = css.div`
 `;
 
-export default class Listing extends Component {
+export default class ListingView extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -134,7 +134,7 @@ export default class Listing extends Component {
                     deleteStory={() => this.props.deleteStory(i)}
                     key={story.id}
                     openStory={() =>
-                      this.props.router.push(`stories/${story.id}`)
+                      this.props.router.push(`my/stories/${story.id}`)
                     }
                     story={story}
                     storyIndex={i}
@@ -169,7 +169,7 @@ export default class Listing extends Component {
   }
 }
 
-Listing.propTypes = {
+ListingView.propTypes = {
   createStory: func,
   deleteStory: func,
   router: object,
@@ -182,7 +182,7 @@ Listing.propTypes = {
   })
 };
 
-Listing.defaultProps = {
+ListingView.defaultProps = {
   createStory: null,
   deleteStory: null,
   router: null,

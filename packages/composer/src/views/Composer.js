@@ -73,7 +73,7 @@ const MobilePage = css(Container)`
   }
 `;
 
-export default class Composer extends React.Component {
+export default class ComposerView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -167,14 +167,14 @@ export default class Composer extends React.Component {
   }
 }
 
-Composer.propTypes = {
+ComposerView.propTypes = {
   params: shape({ storyId: string.isRequired }).isRequired,
   router: object.isRequired,
   stories: arrayOf(object),
   updateStory: func
 };
 
-Composer.defaultProps = {
+ComposerView.defaultProps = {
   stories: [],
   updateStory: null
 };
