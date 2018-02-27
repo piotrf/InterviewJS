@@ -118,7 +118,7 @@ export default class Interviewees extends React.Component {
                 </IntervieweesList>
                 <Container padded align="center">
                   <Action onClick={this.toggleAddInterviewee}>
-                    <Icon name="plus" size="s" /> Create new
+                    <Icon name="plus" size="x" /> Create new
                   </Action>
                 </Container>
               </Container>
