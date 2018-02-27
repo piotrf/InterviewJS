@@ -1,4 +1,4 @@
-/* eslint react/forbid-prop-types: 0 */
+import { object } from "prop-types";
 import css from "styled-components";
 import React, { Component } from "react";
 
@@ -39,6 +39,8 @@ export default class AuthView extends Component {
   }
 }
 
-AuthView.propTypes = {};
+AuthView.propTypes = {
+  router: object.isRequired /* eslint react/forbid-prop-types: 0 */
+};
 
 AuthView.defaultProps = {};

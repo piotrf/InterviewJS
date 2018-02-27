@@ -173,7 +173,7 @@ export default class ComposerView extends React.Component {
 
 ComposerView.propTypes = {
   params: shape({ storyId: string.isRequired }).isRequired,
-  router: object.isRequired,
+  router: object.isRequired /* eslint react/forbid-prop-types: 0 */,
   stories: arrayOf(object),
   updateStory: func
 };
