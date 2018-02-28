@@ -196,7 +196,7 @@ export default class IntervieweeForm extends Component {
                 nooffset
                 onChange={(e) => this.handleChange(e)}
                 place="right"
-                placeholder="#495abd"
+                placeholder="i.e. #495abd, red…"
                 value={this.state.formData.color}
               />
               <Legend tip="Provide hex colour to customise interviewee’s speech bubbles.">
