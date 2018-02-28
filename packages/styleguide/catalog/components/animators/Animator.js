@@ -16,7 +16,7 @@ const fader = keyframes`
 const Animate = css.div`
   animation-delay: ${(props) => props.delay}ms;
   animation-direction: normal;
-  animation-duration: 400ms;
+  animation-duration: 350ms;
   animation-fill-mode: forwards;
   animation-iteration-count: 1;
   animation-name: ${fader};

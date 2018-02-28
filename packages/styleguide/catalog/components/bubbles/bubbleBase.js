@@ -5,11 +5,9 @@ import { setSpace, setType, time } from "../../../utils";
 const fader = keyframes`
   from {
     opacity: 0;
-    ${"" /* transform: translate3d(0, 0.5rem, 0); */}
   }
   to {
     opacity: 1;
-    ${"" /* transform: translate3d(0, 0, 0); */}
   }
 `;
 
@@ -19,7 +17,7 @@ const bubbleBase = `
   ${setType("x")};};
   animation-delay: 0ms;
   animation-direction: normal;
-  animation-duration: 400ms;
+  animation-duration: 350ms;
   animation-fill-mode: forwards;
   animation-iteration-count: 1;
   animation-name: ${fader};

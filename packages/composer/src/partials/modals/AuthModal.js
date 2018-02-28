@@ -39,7 +39,7 @@ export default class AuthModal extends React.Component {
                   persona="interviewee"
                   theme={{ backg: color.flareLLt, color: color.white }}
                 >
-                  Welcome to InterviewJS
+                  Welcome to InterviewJS…
                 </Bubble>
                 <Bubble
                   animate
@@ -47,7 +47,7 @@ export default class AuthModal extends React.Component {
                   persona="interviewee"
                   theme={{ backg: color.flareLLt, color: color.white }}
                 >
-                  An app that allows to compose scripted chats for a more
+                  …an app that allows to compose scripted chats for a more
                   immersive storytelling experience.
                 </Bubble>
                 <Bubble
