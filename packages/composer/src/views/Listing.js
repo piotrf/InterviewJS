@@ -5,18 +5,18 @@ import { arrayOf, func, object, shape, string } from "prop-types";
 
 import {
   Action,
-  color,
+  Avatar,
   Container,
-  PageTitle,
   PageSubtitle,
+  PageTitle,
   Separator,
   Text,
+  color,
   disselect,
   radius,
   setHeight,
   setSpace,
-  time,
-  UserMenu
+  time
 } from "interviewjs-styleguide";
 
 import { NewStoryModal, Stories, Story, WelcomeModal } from "../partials";
@@ -81,6 +81,22 @@ const StoryNew = css(Container)`
 const PageBody = css.div`
 `;
 
+const UserMenu = css.div`
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  ${Avatar} {
+    ${setSpace("mrs")};
+    border: 2px solid ${color.white};
+    float: left;
+    box-shadow: 0 2px 4px ${color.shadowHL};
+  }
+  ${Text} {
+    color: ${color.blueBlk};
+  }
+`;
+
 export default class ListingView extends Component {
   constructor(props) {
     super(props);
@@ -90,6 +106,9 @@ export default class ListingView extends Component {
     };
     this.toggleNewStoryModal = this.toggleNewStoryModal.bind(this);
     this.blockWelcomeModal = this.blockWelcomeModal.bind(this);
+  }
+  handleLogout() {
+    console.log("handleLogout"); // TODO
   }
   toggleNewStoryModal() {
     this.setState({ createStoryModal: !this.state.createStoryModal });
@@ -112,7 +131,14 @@ export default class ListingView extends Component {
       <Page key="Page">
         <PageHead>
           <Container flex={[1, 1, `${100 / 3}%`]} padded>
-            <UserMenu data={this.props.user} />
+            <UserMenu>
+              <Avatar image={this.props.user.avatar} size="m" />
+              <Text typo="p4">{this.props.user.name}</Text> — <Action
+                onClick={this.handleLogout}
+              >
+                Log out
+              </Action>
+            </UserMenu>
           </Container>
           <Container flex={[1, 1, `${100 / 3}%`]} align="center">
             <PageTitle typo="h1">Your Stories</PageTitle>
