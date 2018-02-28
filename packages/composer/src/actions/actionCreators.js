@@ -59,8 +59,6 @@ export function updateInterviewee(storyIndex, i, payload) {
   };
 }
 export function deleteInterviewee(storyIndex, i) {
-  console.log("storyIndex: ", storyIndex);
-  console.log("i: ", i);
   return {
     type: "DELETE_INTERVIEWEE",
     i,
