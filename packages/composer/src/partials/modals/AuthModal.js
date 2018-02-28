@@ -35,14 +35,14 @@ export default class AuthModal extends React.Component {
             <BubbleGroup>
               <Bubbles persona="interviewee">
                 <Bubble
-                  animate
+                  animated
                   persona="interviewee"
                   theme={{ backg: color.flareLLt, color: color.white }}
                 >
                   Welcome to InterviewJS…
                 </Bubble>
                 <Bubble
-                  animate
+                  animated
                   delay={1000}
                   persona="interviewee"
                   theme={{ backg: color.flareLLt, color: color.white }}
@@ -51,7 +51,7 @@ export default class AuthModal extends React.Component {
                   immersive storytelling experience.
                 </Bubble>
                 <Bubble
-                  animate
+                  animated
                   delay={2000}
                   persona="interviewee"
                   theme={{ backg: color.flareLLt, color: color.white }}

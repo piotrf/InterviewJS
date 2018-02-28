@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { number, string } from "prop-types";
+import { bool, number, string } from "prop-types";
 
 import { Preloader } from "../";
 import SpeakerBubble from "./SpeakerBubble";
@@ -25,13 +25,13 @@ export default class Bubble extends Component {
   }
   render() {
     const { loading, rendering } = this.state;
-    const { persona, children } = this.props;
+    const { animated, persona, children } = this.props;
     setTimeout(() => {}, 1000);
     if (persona === "user") {
       if (!rendering) {
         return (
           <UserBubble {...this.props}>
-            {loading ? <Preloader /> : children}
+            {animated && loading ? <Preloader /> : children}
           </UserBubble>
         );
       }
@@ -40,7 +40,7 @@ export default class Bubble extends Component {
       if (!rendering) {
         return (
           <SpeakerBubble {...this.props}>
-            {loading ? <Preloader /> : children}
+            {animated && loading ? <Preloader /> : children}
           </SpeakerBubble>
         );
       }
@@ -49,7 +49,7 @@ export default class Bubble extends Component {
     if (!rendering) {
       return (
         <SystemBubble {...this.props}>
-          {loading ? <Preloader /> : children}
+          {animated && loading ? <Preloader /> : children}
         </SystemBubble>
       );
     }
@@ -58,11 +58,13 @@ export default class Bubble extends Component {
 }
 
 Bubble.propTypes = {
+  animated: bool,
   persona: string,
   delay: number
 };
 
 Bubble.defaultProps = {
+  animated: false,
   persona: null,
   delay: 0
 };
