@@ -1,6 +1,8 @@
 import { createStore, compose } from "redux";
 import { syncHistoryWithStore } from "react-router-redux";
 import { browserHistory } from "react-router";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
 import rootReducer from "./reducers";
 import stories from "./data/stories";
@@ -11,11 +13,19 @@ const defaultState = {
   user
 };
 
+const persistConfig = {
+  key: 'root',
+  storage,
+}
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
 const enhancers = compose(
   window.devToolsExtension ? window.devToolsExtension() : (f) => f
 );
 
-const store = createStore(rootReducer, defaultState, enhancers);
+// const store = createStore(rootReducer, defaultState, enhancers);
+const store = createStore(persistedReducer, defaultState, enhancers);
 
 export const history = syncHistoryWithStore(browserHistory, store);
 export const configureStore = () => {
@@ -28,3 +38,5 @@ export const configureStore = () => {
   }
   return store;
 };
+
+export const persistor = persistStore(configureStore());
