@@ -15,9 +15,11 @@ const bouncedelay = keyframes`
 
 const PreloaderEl = css.div`
   display: inline-block;
+  line-height: 0;
+  height: 1em;
   & > div {
     animation: ${bouncedelay} 1.4s infinite ease-in-out both;
-    background-color: ${color.greyHD};
+    background-color: ${color.blueBlk};
     border-radius: ${radius.a};
     display: inline-block;
     height: 12px;
@@ -35,7 +37,7 @@ const PreloaderEl = css.div`
   }
 `;
 
-const Preloader = props => (
+const Preloader = (props) => (
   <PreloaderEl {...props}>
     <div />
     <div />

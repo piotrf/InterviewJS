@@ -43,7 +43,7 @@ export default class AuthModal extends React.Component {
                 </Bubble>
                 <Bubble
                   animate
-                  delay={500}
+                  delay={1000}
                   persona="interviewee"
                   theme={{ backg: color.flareLLt, color: color.white }}
                 >
@@ -52,7 +52,7 @@ export default class AuthModal extends React.Component {
                 </Bubble>
                 <Bubble
                   animate
-                  delay={1000}
+                  delay={2000}
                   persona="interviewee"
                   theme={{ backg: color.flareLLt, color: color.white }}
                 >
@@ -62,7 +62,7 @@ export default class AuthModal extends React.Component {
             </BubbleGroup>
           </ModalBody>
           <ModalFoot>
-            <Animator delay={1500}>
+            <Animator delay={3000}>
               <Actionbar>
                 <Action
                   fixed

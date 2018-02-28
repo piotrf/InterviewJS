@@ -33,7 +33,10 @@ export default class AuthView extends Component {
         handleAuthentication={this.handleAuthentication}
         isOpen
         key="AuthModal"
-        style={{ width: "400px" }}
+        style={{
+          width: "400px",
+          minHeight: "300px"
+        }}
       />
     ];
   }
