@@ -35,7 +35,7 @@ export default class AuthView extends Component {
         key="AuthModal"
         style={{
           width: "400px",
-          minHeight: "300px"
+          minHeight: "340px"
         }}
       />
     ];

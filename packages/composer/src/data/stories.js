@@ -415,7 +415,7 @@ const stories = [
       {
         name: "Techcrunch",
         bio: "",
-        title: "",
+        title: "Online Publication",
         avatar:
           "https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/e35/12407344_1283694208323785_735653395_n.jpg",
         color: "green",
@@ -431,7 +431,7 @@ const stories = [
       {
         name: "The Guardian",
         bio: "",
-        title: "",
+        title: "Online Publication",
         avatar:
           "https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/e35/12407344_1283694208323785_735653395_n.jpg",
         color: "blue",
@@ -462,7 +462,7 @@ const stories = [
       {
         name: "Techcrunch",
         bio: "",
-        title: "",
+        title: "Online Publication",
         avatar:
           "https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/e35/12407344_1283694208323785_735653395_n.jpg",
         color: "green",
@@ -478,7 +478,7 @@ const stories = [
       {
         name: "The Guardian",
         bio: "",
-        title: "",
+        title: "Online Publication",
         avatar:
           "https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/e35/12407344_1283694208323785_735653395_n.jpg",
         color: "blue",
@@ -542,7 +542,7 @@ const stories = [
       {
         name: "Techcrunch",
         bio: "",
-        title: "",
+        title: "Online Publication",
         avatar:
           "https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/e35/12407344_1283694208323785_735653395_n.jpg",
         color: "green",
@@ -558,7 +558,7 @@ const stories = [
       {
         name: "The Guardian",
         bio: "",
-        title: "",
+        title: "Online Publication",
         avatar:
           "https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/e35/12407344_1283694208323785_735653395_n.jpg",
         color: "blue",
