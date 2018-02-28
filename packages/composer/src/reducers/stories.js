@@ -47,7 +47,6 @@ function stories(state = [], action) {
     case "DELETE_INTERVIEWEE":
       console.log("deleting interviewee");
       const deleteStoryInterviewees = state[action.storyIndex].interviewees;
-      console.log("action", action);
       return [
         ...state.slice(0, action.storyIndex),
         {
