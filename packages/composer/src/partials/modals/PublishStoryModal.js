@@ -50,6 +50,9 @@ export default class PublishStoryModal extends Component {
     this.setState({ step: this.state.step + 1 });
   }
   handleStep2() {
+    this.setState({ step: this.state.step + 1 });
+  }
+  handleStep3() {
     this.props.handleClose();
   }
   render() {
@@ -90,6 +93,14 @@ export default class PublishStoryModal extends Component {
             <PollForm handleSubmit={this.handleStep2} cta="Publish Story" />
           </Container>
         );
+      } else if (step === 3) {
+        return (
+          <Container limit="s" align="center">
+            <PageSubtitle typo="h3">Success.</PageSubtitle>
+            <Separator size="m" silent />
+            Grab the link and share on social
+          </Container>
+        );
       }
       return null;
     };
@@ -116,13 +127,13 @@ export default class PublishStoryModal extends Component {
                 onClick={step >= 1 ? () => this.setState({ step: 1 }) : null}
                 state={getStepState(step, 1)}
               >
-                Review details
+                Revise context
               </Breadcrumb>
               <Breadcrumb
                 onClick={step >= 2 ? () => this.setState({ step: 2 }) : null}
                 state={getStepState(step, 2)}
               >
-                Add a conclusion
+                Add closing poll
               </Breadcrumb>
             </Breadcrumbs>
           </ModalHead>
