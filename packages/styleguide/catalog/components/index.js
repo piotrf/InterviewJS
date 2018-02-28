@@ -1,5 +1,6 @@
 export { default as Action } from "./actions/Action.js";
 export { default as Actionbar } from "./actionbars/Actionbar.js";
+export { default as Animator } from "./animators/Animator.js";
 export { default as Avatar } from "./avatars/Avatar.js";
 export { default as Breadcrumb } from "./breadcrumbs/Breadcrumb.js";
 export { default as Breadcrumbs } from "./breadcrumbs/Breadcrumbs.js";

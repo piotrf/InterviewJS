@@ -15,6 +15,7 @@ import {
 
 import {
   DetailsModal,
+  PublishStoryModal,
   IntervieweePane,
   StoryPane,
   UserPane
@@ -73,24 +74,29 @@ const MobilePage = css(Container)`
   }
 `;
 
-export default class Composer extends React.Component {
+export default class ComposerView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       detailsModal: "",
+      publishModal: false,
       currentInterviewee: 0
     };
     this.switchInterviewee = this.switchInterviewee.bind(this);
-    this.toggleModal = this.toggleModal.bind(this);
+    this.toggleDetailsModal = this.toggleDetailsModal.bind(this);
+    this.togglePublishModal = this.togglePublishModal.bind(this);
     this.updateStory = this.updateStory.bind(this);
   }
   switchInterviewee(interviewee) {
     this.setState({ currentInterviewee: interviewee });
   }
-  toggleModal(tab) {
+  toggleDetailsModal(tab) {
     return tab
       ? this.setState({ detailsModal: tab })
       : this.setState({ detailsModal: "" });
+  }
+  togglePublishModal() {
+    this.setState({ publishModal: !this.state.publishModal });
   }
   updateStory(data) {
     const { storyId } = this.props.params;
@@ -107,19 +113,21 @@ export default class Composer extends React.Component {
       <Page key="Page">
         <PageHead>
           <Container flex={[1, 1, `${100 / 3}%`]} padded>
-            <Action onClick={() => this.props.router.push(`/`)}>
-              <Icon name="chevron-left" size="x" /> Back
+            <Action onClick={() => this.props.router.push(`/my/stories`)}>
+              <Icon name="arrow-left" size="x" /> Back
             </Action>
             <Separator dir="v" size="m" />
-            <Action onClick={() => this.toggleModal("meta")}>
-              <Icon name="info-circle" size="x" /> Details
+            <Action onClick={() => this.toggleDetailsModal("meta")}>
+              <Icon name="info" size="x" /> Details
             </Action>
           </Container>
           <Container flex={[1, 1, `${100 / 3}%`]} align="center">
             <PageTitle typo="h2">{story.title}</PageTitle>
           </Container>
           <Container flex={[1, 1, `${100 / 3}%`]} align="right" padded>
-            <Action primary>Publish Story</Action>
+            <Action primary onClick={this.togglePublishModal}>
+              Publish Story
+            </Action>
           </Container>
         </PageHead>
         <PageBody>
@@ -132,7 +140,7 @@ export default class Composer extends React.Component {
               currentInterviewee={this.state.currentInterviewee}
               story={story}
               switchInterviewee={this.switchInterviewee}
-              toggleModal={() => this.toggleModal("interviewees")}
+              toggleDetailsModal={() => this.toggleDetailsModal("interviewees")}
             />
           </Container>
           <Container flex={[1, 1, `${100 / 3}%`]}>
@@ -145,7 +153,11 @@ export default class Composer extends React.Component {
           <PageTitle typo="h2">This Page works only on desktop</PageTitle>
           <Separator silent size="m" />
           <Actionbar>
-            <Action primary fixed onClick={() => this.props.router.push(`/`)}>
+            <Action
+              primary
+              fixed
+              onClick={() => this.props.router.push(`/my/stories`)}
+            >
               Go back
             </Action>
           </Actionbar>
@@ -154,9 +166,21 @@ export default class Composer extends React.Component {
       this.state.detailsModal !== "" ? (
         <DetailsModal
           {...this.props}
-          handleClose={() => this.toggleModal()}
+          handleClose={() => this.toggleDetailsModal()}
           isOpen
           key="DetailsModal"
+          story={story}
+          storyIndex={storyIndex}
+          tab={this.state.detailsModal}
+          updateStory={this.updateStory}
+        />
+      ) : null,
+      this.state.publishModal ? (
+        <PublishStoryModal
+          {...this.props}
+          handleClose={() => this.togglePublishModal()}
+          isOpen
+          key="PublishModal"
           story={story}
           storyIndex={storyIndex}
           tab={this.state.detailsModal}
@@ -167,14 +191,14 @@ export default class Composer extends React.Component {
   }
 }
 
-Composer.propTypes = {
+ComposerView.propTypes = {
   params: shape({ storyId: string.isRequired }).isRequired,
-  router: object.isRequired,
+  router: object.isRequired /* eslint react/forbid-prop-types: 0 */,
   stories: arrayOf(object),
   updateStory: func
 };
 
-Composer.defaultProps = {
+ComposerView.defaultProps = {
   stories: [],
   updateStory: null
 };

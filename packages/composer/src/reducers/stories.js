@@ -31,28 +31,29 @@ function stories(state = [], action) {
       ];
     case "UPDATE_INTERVIEWEE":
       console.log("updating interviewee");
-      const storyInterviewees = state[action.storyIndex].interviewees;
+      const updateStoryInterviewees = state[action.storyIndex].interviewees;
       return [
         ...state.slice(0, action.storyIndex),
         {
           ...state[action.storyIndex],
           interviewees: [
-            ...storyInterviewees.slice(0, action.i),
-            { ...storyInterviewees, ...action.payload },
-            ...storyInterviewees.slice(action.i + 1)
+            ...updateStoryInterviewees.slice(0, action.i),
+            { ...updateStoryInterviewees, ...action.payload },
+            ...updateStoryInterviewees.slice(action.i + 1)
           ]
         },
         ...state.slice(action.storyIndex + 1)
       ];
     case "DELETE_INTERVIEWEE":
       console.log("deleting interviewee");
+      const deleteStoryInterviewees = state[action.storyIndex].interviewees;
       return [
         ...state.slice(0, action.storyIndex),
         {
           ...state[action.storyIndex],
           interviewees: [
-            ...storyInterviewees.slice(0, action.i),
-            ...storyInterviewees.slice(action.i + 1)
+            ...deleteStoryInterviewees.slice(0, action.i),
+            ...deleteStoryInterviewees.slice(action.i + 1)
           ]
         },
         ...state.slice(action.storyIndex + 1)

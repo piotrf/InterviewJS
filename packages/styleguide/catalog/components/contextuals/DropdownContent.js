@@ -19,6 +19,12 @@ const DropdownContent = css.div`
     ${setSpace("phx")};
     width: 100%;
   }
+  & h1, & h2 {
+    color: ${color.blueBlk};
+  }
+  & p {
+    color: ${color.greyBlk};
+  }
 `;
 
 export default DropdownContent;

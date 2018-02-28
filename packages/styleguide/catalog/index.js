@@ -60,6 +60,11 @@ const pages = [
     title: "Actionbars"
   },
   {
+    content: require("./pages/animators.js"),
+    path: "/animators",
+    title: "Animators"
+  },
+  {
     content: require("./pages/avatars.js"),
     path: "/avatars",
     title: "Avatars"

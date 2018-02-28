@@ -6,6 +6,13 @@ import bubbleBase from "./bubbleBase";
 
 const SystemBubble = css.div`
   ${bubbleBase};
+  ${({ animated }) =>
+    !animated
+      ? `
+    opacity: 1;
+    animation: none;
+  `
+      : ``};
   background-color: ${({ theme }) =>
     theme.backg ? theme.backg : skin.userBackg};
   color: ${({ theme }) => (theme.color ? theme.color : skin.userColor)};

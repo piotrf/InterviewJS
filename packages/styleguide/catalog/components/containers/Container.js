@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import css from "styled-components";
 import { arrayOf, bool, number, oneOfType, string } from "prop-types";
 
@@ -122,7 +122,7 @@ export const ContainerEl = css.div`
     return null;
   }}`;
 
-export default class Container extends React.Component {
+export default class Container extends Component {
   constructor() {
     super();
     this.state = { pageHeight: null };

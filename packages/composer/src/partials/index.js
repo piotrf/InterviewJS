@@ -8,11 +8,14 @@ export { default as Storyline } from "./misc/Storyline";
 export { default as DetailsForm } from "./forms/DetailsForm";
 export { default as IntervieweeForm } from "./forms/IntervieweeForm";
 export { default as MetaForm } from "./forms/MetaForm";
+export { default as PollForm } from "./forms/PollForm";
 
 // modals
+export { default as AuthModal } from "./modals/AuthModal";
 export { default as DeleteModal } from "./modals/DeleteModal";
 export { default as DetailsModal } from "./modals/DetailsModal";
 export { default as NewStoryModal } from "./modals/NewStoryModal";
+export { default as PublishStoryModal } from "./modals/PublishStoryModal";
 export { default as WelcomeModal } from "./modals/WelcomeModal";
 
 // panes

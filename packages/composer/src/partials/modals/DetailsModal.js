@@ -92,12 +92,12 @@ export default class DetailsModal extends React.Component {
               >
                 Interviewees
               </PaneTab>
-              <PaneTab
+              {/* <PaneTab
                 active={tab === "styles"}
                 onClick={() => this.switchTab("styles")}
               >
                 Styles
-              </PaneTab>
+              </PaneTab> — TODO: enable custom styling */}
             </PaneTabs>
           </ModalHead>
           <Separator size="s" silent />

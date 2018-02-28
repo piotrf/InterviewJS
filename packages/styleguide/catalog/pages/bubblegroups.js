@@ -17,7 +17,7 @@ export default () => markdown`
   ## BubbleGroups w/ side bubbles
 
   ${(
-    <ReactSpecimen>
+    <ReactSpecimen dark>
       <BubbleGroup>
         <Bubbles persona="interviewee">
           <Bubble persona="interviewee">Bubble from the left</Bubble>

@@ -15,7 +15,7 @@ import {
   Separator
 } from "interviewjs-styleguide";
 
-import { Interviewees, DetailsForm, MetaForm } from "../";
+import { DetailsForm, MetaForm, PollForm } from "../";
 
 const getStepState = (step, i) => {
   if (step === i) {
@@ -26,7 +26,7 @@ const getStepState = (step, i) => {
   return null;
 };
 
-export default class NewStoryModal extends Component {
+export default class PublishStoryModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -50,8 +50,10 @@ export default class NewStoryModal extends Component {
     this.setState({ step: this.state.step + 1 });
   }
   handleStep2() {
+    this.setState({ step: this.state.step + 1 });
+  }
+  handleStep3() {
     this.props.handleClose();
-    this.props.router.push(`/my/stories/${this.props.stories[0].id}`);
   }
   render() {
     const { step } = this.state;
@@ -59,16 +61,11 @@ export default class NewStoryModal extends Component {
       if (step === 0) {
         return (
           <Container limit="s" align="center">
-            <PageSubtitle typo="h3">
-              Start by adding a few details and meta info about your story. You
-              can attach a cover photo and your organisation logo here too.
-            </PageSubtitle>
+            <PageSubtitle typo="h3">Review your story details…</PageSubtitle>
             <Separator size="m" silent />
             <MetaForm
               handleSubmit={this.handleStep0}
-              story={
-                this.state.storyCreated ? this.props.stories[0] : undefined
-              }
+              story={this.props.story}
             />
           </Container>
         );
@@ -82,7 +79,7 @@ export default class NewStoryModal extends Component {
             <Separator size="m" silent />
             <DetailsForm
               handleSubmit={this.handleStep1}
-              story={this.props.stories[0]}
+              story={this.props.story}
             />
           </Container>
         );
@@ -90,19 +87,18 @@ export default class NewStoryModal extends Component {
         return (
           <Container limit="s" align="center">
             <PageSubtitle typo="h3">
-              Add interviewees for the user to chat to. You will be able to
-              script separate chats for each interviewee later.
+              Engage your readers. Ask them to have their say…
             </PageSubtitle>
             <Separator size="m" silent />
-            <Interviewees
-              createInterviewee={this.props.createInterviewee}
-              cta="Compose your story"
-              deleteInterviewee={this.props.deleteInterviewee}
-              handleSubmit={this.handleStep2}
-              interviewees={this.props.stories[0].interviewees}
-              storyIndex={0}
-              updateInterviewee={this.props.updateInterviewee}
-            />
+            <PollForm handleSubmit={this.handleStep2} cta="Publish Story" />
+          </Container>
+        );
+      } else if (step === 3) {
+        return (
+          <Container limit="s" align="center">
+            <PageSubtitle typo="h3">Success.</PageSubtitle>
+            <Separator size="m" silent />
+            Grab the link and share on social
           </Container>
         );
       }
@@ -112,32 +108,32 @@ export default class NewStoryModal extends Component {
       <ReactModal
         ariaHideApp={false}
         isOpen={this.props.isOpen}
-        key="NewStoryModal"
+        key="PublishStoryModal"
         onRequestClose={this.props.handleClose}
         role="dialog"
       >
         <Modal {...this.props} wizard>
           <ModalHead>
-            <PageTitle typo="h1">Create New Story</PageTitle>
+            <PageTitle typo="h1">Publish Story</PageTitle>
             <Separator size="s" silent />
             <Breadcrumbs count={3}>
               <Breadcrumb
                 onClick={step >= 0 ? () => this.setState({ step: 0 }) : null}
                 state={getStepState(step, 0)}
               >
-                Basic info
+                Review basic info
               </Breadcrumb>
               <Breadcrumb
                 onClick={step >= 1 ? () => this.setState({ step: 1 }) : null}
                 state={getStepState(step, 1)}
               >
-                Intro
+                Revise context
               </Breadcrumb>
               <Breadcrumb
                 onClick={step >= 2 ? () => this.setState({ step: 2 }) : null}
                 state={getStepState(step, 2)}
               >
-                Interviewees
+                Add closing poll
               </Breadcrumb>
             </Breadcrumbs>
           </ModalHead>
@@ -149,7 +145,7 @@ export default class NewStoryModal extends Component {
   }
 }
 
-NewStoryModal.propTypes = {
+PublishStoryModal.propTypes = {
   createInterviewee: func.isRequired,
   createStory: func.isRequired,
   deleteInterviewee: func.isRequired,
@@ -161,6 +157,6 @@ NewStoryModal.propTypes = {
   updateStory: func.isRequired
 };
 
-NewStoryModal.defaultProps = {
+PublishStoryModal.defaultProps = {
   stories: []
 };

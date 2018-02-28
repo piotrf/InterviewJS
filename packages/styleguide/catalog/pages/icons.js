@@ -36,42 +36,27 @@ export default () => markdown`
 
   ${(
     <ReactSpecimen span={1}>
-      <Icon name="twitter" />
+      <Icon name="text" />
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen span={1}>
-      <Icon name="facebook" />
+      <Icon name="pen" />
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen span={1}>
-      <Icon name="pencil" />
+      <Icon name="image" />
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen span={1}>
-      <Icon name="palette" />
+      <Icon name="media" />
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen span={1}>
-      <Icon name="paperclip" />
-    </ReactSpecimen>
-  )}
-  ${(
-    <ReactSpecimen span={1}>
-      <Icon name="film" />
-    </ReactSpecimen>
-  )}
-  ${(
-    <ReactSpecimen span={1}>
-      <Icon name="camera" />
-    </ReactSpecimen>
-  )}
-  ${(
-    <ReactSpecimen span={1}>
-      <Icon name="picture" />
+      <Icon name="envelop" />
     </ReactSpecimen>
   )}
   ${(
@@ -81,17 +66,67 @@ export default () => markdown`
   )}
   ${(
     <ReactSpecimen span={1}>
+      <Icon name="bubbles" />
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen span={1}>
+      <Icon name="equalizer" />
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen span={1}>
+      <Icon name="power" />
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen span={1}>
+      <Icon name="vdots" />
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen span={1}>
+      <Icon name="hdots" />
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen span={1}>
       <Icon name="link" />
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen span={1}>
-      <Icon name="check" />
+      <Icon name="smile" />
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen span={1}>
-      <Icon name="cross" />
+      <Icon name="sad" />
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen span={1}>
+      <Icon name="wink" />
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen span={1}>
+      <Icon name="angry" />
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen span={1}>
+      <Icon name="shocked" />
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen span={1}>
+      <Icon name="neutral" />
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen span={1}>
+      <Icon name="wondering" />
     </ReactSpecimen>
   )}
   ${(
@@ -101,107 +136,83 @@ export default () => markdown`
   )}
   ${(
     <ReactSpecimen span={1}>
-      <Icon name="code" />
+      <Icon name="info" />
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen span={1}>
-      <Icon name="chevron-up" />
+      <Icon name="cross" />
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen span={1}>
-      <Icon name="chevron-down" />
+      <Icon name="checkmark" />
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen span={1}>
-      <Icon name="chevron-left" />
+      <Icon name="arrow-up" />
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen span={1}>
-      <Icon name="chevron-right" />
+      <Icon name="arrow-right" />
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen span={1}>
-      <Icon name="expand-vertical" />
+      <Icon name="arrow-down" />
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen span={1}>
-      <Icon name="question-circle" />
+      <Icon name="arrow-left" />
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen span={1}>
-      <Icon name="info-circle" />
+      <Icon name="sarrow-up" />
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen span={1}>
-      <Icon name="plus-circle" />
+      <Icon name="sarrow-right" />
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen span={1}>
-      <Icon name="minus-circle" />
+      <Icon name="sarrow-down" />
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen span={1}>
-      <Icon name="ellipsis" />
+      <Icon name="sarrow-left" />
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen span={1}>
-      <Icon name="menu" />
-    </ReactSpecimen>
-  )}
-
-  # Emojis
-
-  ${(
-    <ReactSpecimen span={1}>
-      <Icon name="emo-smiley" />
+      <Icon name="embed" />
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen span={1}>
-      <Icon name="emo-wink" />
+      <Icon name="facebook" />
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen span={1}>
-      <Icon name="emo-neutral" />
+      <Icon name="twitter" />
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen span={1}>
-      <Icon name="emo-pleased" />
+      <Icon name="google" />
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen span={1}>
-      <Icon name="emo-tongue" />
+      <Icon name="remove-persona" />
     </ReactSpecimen>
   )}
-  ${(
-    <ReactSpecimen span={1}>
-      <Icon name="emo-shocked" />
-    </ReactSpecimen>
-  )}
-  ${(
-    <ReactSpecimen span={1}>
-      <Icon name="emo-baffled" />
-    </ReactSpecimen>
-  )}
-  ${(
-    <ReactSpecimen span={1}>
-      <Icon name="emo-mad" />
-    </ReactSpecimen>
-  )}
-
 
 `;

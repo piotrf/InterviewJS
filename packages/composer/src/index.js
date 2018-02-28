@@ -6,6 +6,7 @@ import { Route, Router, IndexRoute, Redirect } from "react-router";
 import { configureStore, history } from "./configureStore";
 
 import App from "./App";
+import Auth from "./views/Auth";
 import Composer from "./views/Composer";
 import Listing from "./views/Listing";
 
@@ -26,11 +27,12 @@ class Routes extends React.Component {
   render() {
     return (
       <Router key="Root" history={history}>
-        <Route path="composer" component={App}>
-          <IndexRoute component={Listing} />
-          <Route path="/stories/:storyId" component={Composer} />
+        <Route path="/my" component={App}>
+          <IndexRoute component={Auth} />
+          <Route path="/my/stories" component={Listing} />
+          <Route path="/my/stories/:storyId" component={Composer} />
         </Route>
-        <Redirect from="*" to="composer" />
+        <Redirect from="*" to="my" />
       </Router>
     );
   }

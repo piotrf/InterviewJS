@@ -110,7 +110,7 @@ export default class Interviewees extends React.Component {
                           secondary
                           onClick={() => this.toggleEditInterviewee(i)}
                         >
-                          <Icon name="pencil" />
+                          <Icon name="pen" size="s" />
                         </Action>
                       </Container>
                     </Interviewee>
@@ -118,7 +118,7 @@ export default class Interviewees extends React.Component {
                 </IntervieweesList>
                 <Container padded align="center">
                   <Action onClick={this.toggleAddInterviewee}>
-                    <Icon name="plus" size="s" /> Create new
+                    <Icon name="plus" size="x" /> Create new
                   </Action>
                 </Container>
               </Container>
@@ -133,9 +133,13 @@ export default class Interviewees extends React.Component {
         }
         return (
           <IntervieweeForm
+            allowDelete={interviewees.length > 1}
+            deleteInterviewee={() =>
+              this.deleteInterviewee(this.state.editItem)
+            }
             handleCancel={() => this.setState({ editItem: null })}
             handleSubmit={this.updateInterviewee}
-            interviewee={this.props.interviewees[this.state.editItem]}
+            interviewee={interviewees[this.state.editItem]}
           />
         );
       }

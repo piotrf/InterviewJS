@@ -4,8 +4,9 @@ import {} from "prop-types";
 
 import {
   Container,
-  PaneTabs,
+  Icon,
   PaneTab,
+  PaneTabs,
   color,
   radius,
   setSpace
@@ -64,43 +65,37 @@ export default class IntervieweePane extends React.Component {
               active={this.state.tab === "text"}
               onClick={() => this.setState({ tab: "text" })}
             >
-              T
+              <Icon name="text" size="s" />
             </PaneTab>
             <PaneTab
               active={this.state.tab === "link"}
               onClick={() => this.setState({ tab: "link" })}
             >
-              L
+              <Icon name="link" size="s" />
             </PaneTab>
             <PaneTab
               active={this.state.tab === "image"}
               onClick={() => this.setState({ tab: "image" })}
             >
-              I
+              <Icon name="image" size="s" />
             </PaneTab>
             <PaneTab
               active={this.state.tab === "embed"}
               onClick={() => this.setState({ tab: "embed" })}
             >
-              E
+              <Icon name="embed" size="s" />
             </PaneTab>
             <PaneTab
               active={this.state.tab === "map"}
               onClick={() => this.setState({ tab: "map" })}
             >
-              M
-            </PaneTab>
-            <PaneTab
-              active={this.state.tab === "document"}
-              onClick={() => this.setState({ tab: "document" })}
-            >
-              D
+              <Icon name="map" size="s" />
             </PaneTab>
             <PaneTab
               active={this.state.tab === "media"}
               onClick={() => this.setState({ tab: "media" })}
             >
-              M
+              <Icon name="media" size="s" />
             </PaneTab>
           </PaneTabs>
         </Container>

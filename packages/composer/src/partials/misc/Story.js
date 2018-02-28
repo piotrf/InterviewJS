@@ -162,7 +162,7 @@ export default class Story extends React.Component {
               iconic
               onClick={() => this.toggleDropdown("settingsDropdown")}
             >
-              <Icon name="ellipsis" />
+              <Icon name="hdots" />
             </Action>
           </Dropdown>
         </StoryMenu>
