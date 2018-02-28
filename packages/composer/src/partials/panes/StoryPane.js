@@ -131,7 +131,11 @@ export default class StoryPane extends React.Component {
             </Interviewees>
             <IntervieweesAction>
               <Tip position="bottom" title="Manage interviewees">
-                <Action secondary iconic onClick={this.props.toggleModal}>
+                <Action
+                  iconic
+                  onClick={this.props.toggleDetailsModal}
+                  secondary
+                >
                   <Icon name="pen" size="x" />
                 </Action>
               </Tip>
@@ -149,12 +153,12 @@ export default class StoryPane extends React.Component {
 }
 
 StoryPane.propTypes = {
-  switchInterviewee: func.isRequired,
   currentInterviewee: number.isRequired,
-  toggleModal: func.isRequired,
   story: shape({
     interviewees: array.isRequired
-  }).isRequired
+  }).isRequired,
+  switchInterviewee: func.isRequired,
+  toggleDetailsModal: func.isRequired
 };
 
 StoryPane.defaultProps = {};

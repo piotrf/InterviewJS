@@ -15,6 +15,7 @@ import {
 
 import {
   DetailsModal,
+  PublishStoryModal,
   IntervieweePane,
   StoryPane,
   UserPane
@@ -78,19 +79,24 @@ export default class ComposerView extends React.Component {
     super(props);
     this.state = {
       detailsModal: "",
+      publishModal: false,
       currentInterviewee: 0
     };
     this.switchInterviewee = this.switchInterviewee.bind(this);
-    this.toggleModal = this.toggleModal.bind(this);
+    this.toggleDetailsModal = this.toggleDetailsModal.bind(this);
+    this.togglePublishModal = this.togglePublishModal.bind(this);
     this.updateStory = this.updateStory.bind(this);
   }
   switchInterviewee(interviewee) {
     this.setState({ currentInterviewee: interviewee });
   }
-  toggleModal(tab) {
+  toggleDetailsModal(tab) {
     return tab
       ? this.setState({ detailsModal: tab })
       : this.setState({ detailsModal: "" });
+  }
+  togglePublishModal() {
+    this.setState({ publishModal: !this.state.publishModal });
   }
   updateStory(data) {
     const { storyId } = this.props.params;
@@ -111,7 +117,7 @@ export default class ComposerView extends React.Component {
               <Icon name="arrow-left" size="x" /> Back
             </Action>
             <Separator dir="v" size="m" />
-            <Action onClick={() => this.toggleModal("meta")}>
+            <Action onClick={() => this.toggleDetailsModal("meta")}>
               <Icon name="info" size="x" /> Details
             </Action>
           </Container>
@@ -119,7 +125,9 @@ export default class ComposerView extends React.Component {
             <PageTitle typo="h2">{story.title}</PageTitle>
           </Container>
           <Container flex={[1, 1, `${100 / 3}%`]} align="right" padded>
-            <Action primary>Publish Story</Action>
+            <Action primary onClick={this.togglePublishModal}>
+              Publish Story
+            </Action>
           </Container>
         </PageHead>
         <PageBody>
@@ -132,7 +140,7 @@ export default class ComposerView extends React.Component {
               currentInterviewee={this.state.currentInterviewee}
               story={story}
               switchInterviewee={this.switchInterviewee}
-              toggleModal={() => this.toggleModal("interviewees")}
+              toggleDetailsModal={() => this.toggleDetailsModal("interviewees")}
             />
           </Container>
           <Container flex={[1, 1, `${100 / 3}%`]}>
@@ -158,9 +166,21 @@ export default class ComposerView extends React.Component {
       this.state.detailsModal !== "" ? (
         <DetailsModal
           {...this.props}
-          handleClose={() => this.toggleModal()}
+          handleClose={() => this.toggleDetailsModal()}
           isOpen
           key="DetailsModal"
+          story={story}
+          storyIndex={storyIndex}
+          tab={this.state.detailsModal}
+          updateStory={this.updateStory}
+        />
+      ) : null,
+      this.state.publishModal ? (
+        <PublishStoryModal
+          {...this.props}
+          handleClose={() => this.togglePublishModal()}
+          isOpen
+          key="PublishModal"
           story={story}
           storyIndex={storyIndex}
           tab={this.state.detailsModal}
