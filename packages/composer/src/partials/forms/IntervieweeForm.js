@@ -13,8 +13,9 @@ import {
   Icon,
   Label,
   Legend,
+  PageParagraph,
+  PageSubtitle,
   Separator,
-  Text,
   TextInput,
   Tip
 } from "interviewjs-styleguide";
@@ -77,11 +78,15 @@ export default class IntervieweeForm extends Component {
       <Dropdown
         html={
           <DropdownContent>
-            <Text typo="p4">Sure to delete this interviewee permanently?</Text>
-            <Separator silent size="n" />
-            <Text typo="p5">
-              All related data including transcript and storyline will be lost.
-            </Text>
+            <PageSubtitle typo="p4">
+              Sure to delete this interviewee permanently?
+            </PageSubtitle>
+            <Separator silent size="x" />
+            <PageParagraph typo="p5">
+              All related data including transcript and storyline will be
+              irreversibly lost.
+            </PageParagraph>
+            <Separator silent size="x" />
             <Actionbar>
               <Action onClick={() => this.toggleDropdown("moreDropdown")}>
                 Cancel
