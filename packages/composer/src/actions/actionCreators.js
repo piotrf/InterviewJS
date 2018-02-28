@@ -58,10 +58,24 @@ export function updateInterviewee(storyIndex, i, payload) {
     storyIndex
   };
 }
+
 export function deleteInterviewee(storyIndex, i) {
   return {
     type: "DELETE_INTERVIEWEE",
     i,
     storyIndex
+  };
+}
+
+export function signInUser(payload) {
+  return {
+    type: "SIGNIN_USER",
+    payload
+  };
+}
+
+export function signOutUser() {
+  return {
+    type: "SIGNOUT_USER"
   };
 }

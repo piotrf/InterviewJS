@@ -1,15 +1,14 @@
 import React from "react";
 import ReactModal from "react-modal";
 import { bool, func } from "prop-types";
+import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
+import firebase from "firebase";
 
 import {
-  Action,
-  Actionbar,
   Animator,
   Bubble,
   BubbleGroup,
   Bubbles,
-  Icon,
   Modal,
   ModalBody,
   ModalFoot,
@@ -20,7 +19,31 @@ export default class AuthModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
+
+    this.uiConfig = {
+      signInFlow: 'popup',
+      signInSuccessUrl: '/signedIn',
+      signInOptions: [
+        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+      ],
+      callbacks: {
+        signInSuccess: () => false
+      }
+    };
   }
+
+  componentDidMount(limit = 10) {
+    if (this.auth) {
+      firebase.auth().onAuthStateChanged(
+          (user) => {
+            if (user) this.props.handleAuthentication(user);
+          }
+      );
+    } else if (limit > 0) {
+      setTimeout(() => this.componentDidMount(limit - 1), 100);
+    }
+  }
+
   render() {
     return (
       <ReactModal
@@ -63,15 +86,7 @@ export default class AuthModal extends React.Component {
           </ModalBody>
           <ModalFoot>
             <Animator delay={3000}>
-              <Actionbar>
-                <Action
-                  fixed
-                  secondary
-                  onClick={this.props.handleAuthentication}
-                >
-                  <Icon name="google" />&nbsp;Sign in
-                </Action>
-              </Actionbar>
+              <StyledFirebaseAuth uiConfig={this.uiConfig} firebaseAuth={firebase.auth()} ref={(auth) => { this.auth = auth; }} />
             </Animator>
           </ModalFoot>
         </Modal>

@@ -2,6 +2,8 @@
 import css from "styled-components";
 import React, { Component } from "react";
 import { arrayOf, func, object, shape, string } from "prop-types";
+import firebase from "firebase";
+
 
 import {
   Action,
@@ -107,19 +109,25 @@ export default class ListingView extends Component {
     this.toggleNewStoryModal = this.toggleNewStoryModal.bind(this);
     this.blockWelcomeModal = this.blockWelcomeModal.bind(this);
   }
+
   handleLogout() {
-    console.log("handleLogout"); // TODO
+    firebase.auth().signOut();
+    this.props.router.push(`/my`);
   }
+
   toggleNewStoryModal() {
     this.setState({ createStoryModal: !this.state.createStoryModal });
   }
+
   blockWelcomeModal() {
     localStorage.setItem("welcomeModalBlocker", "active");
     this.setState({ welcomeModal: false, createStoryModal: true });
   }
+
   render() {
     const { createStoryModal, welcomeModal } = this.state;
     const welcomeModalBlocker = localStorage.getItem("welcomeModalBlocker");
+
     return [
       welcomeModalBlocker !== "active" ? (
         <WelcomeModal
@@ -134,7 +142,7 @@ export default class ListingView extends Component {
             <UserMenu>
               <Avatar image={this.props.user.avatar} size="m" />
               <Text typo="p4">{this.props.user.name}</Text> — <Action
-                onClick={this.handleLogout}
+                onClick={this.handleLogout.bind(this)}
               >
                 Log out
               </Action>
@@ -199,6 +207,7 @@ ListingView.propTypes = {
   createStory: func,
   deleteStory: func,
   router: object,
+  firebase: object,
   stories: arrayOf(object),
   updateStory: func,
   user: shape({
@@ -212,6 +221,7 @@ ListingView.defaultProps = {
   createStory: null,
   deleteStory: null,
   router: null,
+  firebase: null,
   stories: [],
   updateStory: null,
   user: {}
