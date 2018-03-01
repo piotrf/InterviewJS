@@ -64,8 +64,7 @@ export default class IntervieweePane extends React.Component {
   }
   render() {
     const { tab } = this.state;
-    const { currentInterviewee, story } = this.props;
-    const { srcText } = story.interviewees[currentInterviewee];
+    const { currentInterviewee } = this.props;
     const getPaneContent = () => {
       switch (tab) {
         case "link":
@@ -110,7 +109,9 @@ export default class IntervieweePane extends React.Component {
             <TabContentHolder>
               <TabContent>
                 <SrcTextEditor
-                  srcText={srcText}
+                  srcText={
+                    this.props.story.interviewees[currentInterviewee].srcText
+                  }
                   updateInterviewee={this.updateInterviewee}
                 />
               </TabContent>

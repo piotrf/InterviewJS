@@ -1,5 +1,4 @@
 import { func, string } from "prop-types";
-import { throttle } from "lodash";
 import css from "styled-components";
 import React from "react";
 
@@ -48,12 +47,16 @@ export default class SrcTextEditor extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.saveChanges = this.saveChanges.bind(this);
   }
-  onChange(e) {
-    this.setState({ srcText: e.target.value });
-    throttle(this.saveChanges, 500);
+  componentWillReceiveProps(nextProps) {
+    return nextProps.srcText !== this.props.srcText
+      ? this.setState({ srcText: nextProps.srcText })
+      : null;
   }
   onBlur() {
     this.saveChanges();
+  }
+  onChange(e) {
+    this.setState({ srcText: e.target.value });
   }
   saveChanges() {
     const { srcText } = this.state;
