@@ -24,17 +24,21 @@ const PaneEl = css(Container)`
 `;
 
 const PaneBubbleEditor = css(Container)`
-  box-shadow: 0 1px 3px ${color.shadowWt};
   ${setSpace("pas")};
   border-radius: ${radius.l};
   border: 1px solid ${color.greyHL};
+  box-shadow: 0 1px 3px ${color.shadowWt};
+  height: 100%;
   width: 100%;
+`;
+
+const TabContentHolder = css.div`
+  ${setSpace("ptm")};
   height: 100%;
 `;
 
 const TabContent = css.div`
   ${setSpace("mhm")};
-  ${setSpace("ptm")};
   height: 100%;
   position: relative;
 `;
@@ -65,26 +69,52 @@ export default class IntervieweePane extends React.Component {
     const getPaneContent = () => {
       switch (tab) {
         case "link":
-          return <TabContent>link</TabContent>;
+          return (
+            <TabContentHolder>
+              <TabContent>link</TabContent>
+            </TabContentHolder>
+          );
         case "image":
-          return <TabContent>image</TabContent>;
+          return (
+            <TabContentHolder>
+              <TabContent>image</TabContent>
+            </TabContentHolder>
+          );
         case "embed":
-          return <TabContent>embed</TabContent>;
+          return (
+            <TabContentHolder>
+              <TabContent>embed</TabContent>
+            </TabContentHolder>
+          );
         case "map":
-          return <TabContent>map</TabContent>;
+          return (
+            <TabContentHolder>
+              <TabContent>map</TabContent>
+            </TabContentHolder>
+          );
         case "document":
-          return <TabContent>document</TabContent>;
+          return (
+            <TabContentHolder>
+              <TabContent>document</TabContent>
+            </TabContentHolder>
+          );
         case "media":
-          return <TabContent>media</TabContent>;
+          return (
+            <TabContentHolder>
+              <TabContent>media</TabContent>
+            </TabContentHolder>
+          );
         case "text":
         default:
           return (
-            <TabContent>
-              <SrcTextEditor
-                srcText={srcText}
-                updateInterviewee={this.updateInterviewee}
-              />
-            </TabContent>
+            <TabContentHolder>
+              <TabContent>
+                <SrcTextEditor
+                  srcText={srcText}
+                  updateInterviewee={this.updateInterviewee}
+                />
+              </TabContent>
+            </TabContentHolder>
           );
       }
     };
