@@ -58,6 +58,7 @@ export function updateInterviewee(storyIndex, i, payload) {
     storyIndex
   };
 }
+
 export function deleteInterviewee(storyIndex, i) {
   return {
     type: "DELETE_INTERVIEWEE",

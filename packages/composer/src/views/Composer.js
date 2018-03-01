@@ -132,7 +132,12 @@ export default class ComposerView extends React.Component {
         </PageHead>
         <PageBody>
           <Container flex={[1, 1, `${100 / 3}%`]}>
-            <IntervieweePane {...this.props} story={story} />
+            <IntervieweePane
+              {...this.props}
+              currentInterviewee={this.state.currentInterviewee}
+              story={story}
+              storyIndex={storyIndex}
+            />
           </Container>
           <Container flex={[1, 1, `${100 / 3}%`]}>
             <StoryPane

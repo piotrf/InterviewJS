@@ -1,4 +1,4 @@
-import {} from "prop-types";
+import { func, number, object } from "prop-types";
 import css from "styled-components";
 import React from "react";
 
@@ -43,28 +43,47 @@ export default class IntervieweePane extends React.Component {
   constructor(props) {
     super(props);
     this.state = { tab: "text" };
+    this.updateInterviewee = this.updateInterviewee.bind(this);
+  }
+  updateInterviewee(data) {
+    const { storyIndex, currentInterviewee } = this.props;
+    const { interviewees } = this.props.story;
+    const intervieweeData = {
+      ...interviewees[currentInterviewee],
+      srcText: data
+    };
+    this.props.updateInterviewee(
+      storyIndex,
+      currentInterviewee,
+      intervieweeData
+    );
   }
   render() {
     const { tab } = this.state;
+    const { currentInterviewee, story } = this.props;
+    const { srcText } = story.interviewees[currentInterviewee];
     const getPaneContent = () => {
       switch (tab) {
         case "link":
-          return <span>link</span>;
+          return <TabContent>link</TabContent>;
         case "image":
-          return <span>image</span>;
+          return <TabContent>image</TabContent>;
         case "embed":
-          return <span>embed</span>;
+          return <TabContent>embed</TabContent>;
         case "map":
-          return <span>map</span>;
+          return <TabContent>map</TabContent>;
         case "document":
-          return <span>document</span>;
+          return <TabContent>document</TabContent>;
         case "media":
-          return <span>media</span>;
+          return <TabContent>media</TabContent>;
         case "text":
         default:
           return (
             <TabContent>
-              <SrcTextEditor />
+              <SrcTextEditor
+                srcText={srcText}
+                updateInterviewee={this.updateInterviewee}
+              />
             </TabContent>
           );
       }
@@ -120,6 +139,11 @@ export default class IntervieweePane extends React.Component {
   }
 }
 
-IntervieweePane.propTypes = {};
+IntervieweePane.propTypes = {
+  currentInterviewee: number.isRequired,
+  storyIndex: number.isRequired,
+  story: object.isRequired,
+  updateInterviewee: func.isRequired
+};
 
 IntervieweePane.defaultProps = {};
