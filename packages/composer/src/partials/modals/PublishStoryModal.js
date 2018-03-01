@@ -4,6 +4,8 @@ import ReactModal from "react-modal";
 import { arrayOf, bool, func, object } from "prop-types";
 
 import {
+  Actionbar,
+  Action,
   Breadcrumb,
   Breadcrumbs,
   Container,
@@ -36,6 +38,7 @@ export default class PublishStoryModal extends Component {
     this.handleStep0 = this.handleStep0.bind(this);
     this.handleStep1 = this.handleStep1.bind(this);
     this.handleStep2 = this.handleStep2.bind(this);
+    this.handleStep3 = this.handleStep3.bind(this);
   }
   handleStep0(data) {
     return (
@@ -99,6 +102,20 @@ export default class PublishStoryModal extends Component {
             <PageSubtitle typo="h3">Success.</PageSubtitle>
             <Separator size="m" silent />
             Grab the link and share on social
+            <Separator size="m" silent />
+            <Actionbar>
+              <Action fixed primary onClick={this.handleStep3}>
+                Close
+              </Action>
+              <Action
+                fixed
+                href={`http://interviewjs.io/viewer/${this.props.story.id}`} // TODO actual url
+                secondary
+                target="_blank"
+              >
+                Open your story
+              </Action>
+            </Actionbar>
           </Container>
         );
       }
@@ -116,7 +133,7 @@ export default class PublishStoryModal extends Component {
           <ModalHead>
             <PageTitle typo="h1">Publish Story</PageTitle>
             <Separator size="s" silent />
-            <Breadcrumbs count={3}>
+            <Breadcrumbs count={4}>
               <Breadcrumb
                 onClick={step >= 0 ? () => this.setState({ step: 0 }) : null}
                 state={getStepState(step, 0)}
@@ -127,13 +144,19 @@ export default class PublishStoryModal extends Component {
                 onClick={step >= 1 ? () => this.setState({ step: 1 }) : null}
                 state={getStepState(step, 1)}
               >
-                Revise context
+                Review context
               </Breadcrumb>
               <Breadcrumb
                 onClick={step >= 2 ? () => this.setState({ step: 2 }) : null}
                 state={getStepState(step, 2)}
               >
                 Add closing poll
+              </Breadcrumb>
+              <Breadcrumb
+                onClick={step >= 3 ? () => this.setState({ step: 3 }) : null}
+                state={getStepState(step, 3)}
+              >
+                Share your story
               </Breadcrumb>
             </Breadcrumbs>
           </ModalHead>
