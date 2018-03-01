@@ -25,6 +25,7 @@ const stories = [
         title: "Humanoid robot",
         avatar: AVA,
         color: "#88a3a0",
+        srcText: "",
         storyline: [
           {
             content: "Hello.",
@@ -190,6 +191,7 @@ const stories = [
         title: "A human",
         avatar: CALEB,
         color: "#88a3a0",
+        srcText: "",
         storyline: [
           {
             content: "Hello.",
@@ -372,6 +374,7 @@ const stories = [
         avatar:
           "https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/e35/12407344_1283694208323785_735653395_n.jpg",
         color: "blue",
+        srcText: "",
         storyline: [
           {
             content: "Hello, I’m Barack Obama.",
@@ -388,6 +391,7 @@ const stories = [
         avatar:
           "https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/e35/12407344_1283694208323785_735653395_n.jpg",
         color: "red",
+        srcText: "",
         storyline: [
           {
             content: "Hello, I’m Donald Trump.",
@@ -419,6 +423,7 @@ const stories = [
         avatar:
           "https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/e35/12407344_1283694208323785_735653395_n.jpg",
         color: "green",
+        srcText: "",
         storyline: [
           {
             content: "Hello, we’re Techcrunch.",
@@ -435,6 +440,7 @@ const stories = [
         avatar:
           "https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/e35/12407344_1283694208323785_735653395_n.jpg",
         color: "blue",
+        srcText: "",
         storyline: [
           {
             content: "Hello, we’re The Guardian.",
@@ -466,6 +472,7 @@ const stories = [
         avatar:
           "https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/e35/12407344_1283694208323785_735653395_n.jpg",
         color: "green",
+        srcText: "",
         storyline: [
           {
             content: "Hello, we’re Techcrunch.",
@@ -482,6 +489,7 @@ const stories = [
         avatar:
           "https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/e35/12407344_1283694208323785_735653395_n.jpg",
         color: "blue",
+        srcText: "",
         storyline: [
           {
             content: "Hello, we’re The Guardian.",
@@ -514,6 +522,7 @@ const stories = [
         avatar:
           "https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/e35/12407344_1283694208323785_735653395_n.jpg",
         color: "yellow",
+        srcText: "",
         storyline: [
           {
             content: "Hello, I’m Ali.",
@@ -530,6 +539,7 @@ const stories = [
         avatar:
           "https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/e35/12407344_1283694208323785_735653395_n.jpg",
         color: "purple",
+        srcText: "",
         storyline: [
           {
             content: "Hello, I’m Piotr.",
@@ -546,6 +556,7 @@ const stories = [
         avatar:
           "https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/e35/12407344_1283694208323785_735653395_n.jpg",
         color: "green",
+        srcText: "",
         storyline: [
           {
             content: "Hello, we’re Techcrunch.",
@@ -562,6 +573,7 @@ const stories = [
         avatar:
           "https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/e35/12407344_1283694208323785_735653395_n.jpg",
         color: "blue",
+        srcText: "",
         storyline: [
           {
             content: "Hello, we’re The Guardian.",

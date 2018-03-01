@@ -1,6 +1,6 @@
+import {} from "prop-types";
 import css from "styled-components";
 import React from "react";
-import {} from "prop-types";
 
 import {
   Container,
@@ -11,6 +11,8 @@ import {
   radius,
   setSpace
 } from "interviewjs-styleguide";
+
+import { SrcTextEditor } from "../";
 
 const PaneEl = css(Container)`
   align-items: stretch;
@@ -30,11 +32,17 @@ const PaneBubbleEditor = css(Container)`
   height: 100%;
 `;
 
+const TabContent = css.div`
+  ${setSpace("mhm")};
+  ${setSpace("ptm")};
+  height: 100%;
+  position: relative;
+`;
+
 export default class IntervieweePane extends React.Component {
   constructor(props) {
     super(props);
     this.state = { tab: "text" };
-    // this.toggleDropdown = this.toggleDropdown.bind(this);
   }
   render() {
     const { tab } = this.state;
@@ -54,7 +62,11 @@ export default class IntervieweePane extends React.Component {
           return <span>media</span>;
         case "text":
         default:
-          return <span>text</span>;
+          return (
+            <TabContent>
+              <SrcTextEditor />
+            </TabContent>
+          );
       }
     };
     return (
@@ -99,9 +111,7 @@ export default class IntervieweePane extends React.Component {
             </PaneTab>
           </PaneTabs>
         </Container>
-        <Container flex={[1, 1, "100%"]} padded>
-          {getPaneContent()}
-        </Container>
+        <Container flex={[1, 1, "100%"]}>{getPaneContent()}</Container>
         <Container flex={[0, 0, `200px`]} padded>
           <PaneBubbleEditor fill="grey">PaneBubbleEditor</PaneBubbleEditor>
         </Container>
