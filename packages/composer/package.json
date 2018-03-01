@@ -3,7 +3,7 @@
   "description": "",
   "version": "0.0.0",
   "author": "",
-  "homepage": "http://interviewjs.io/composer/",
+  "homepage": "http://interviewjs.io/my/",
   "dependencies": {
     "date-fns": "^1.29.0",
     "interviewjs-styleguide": "*",
@@ -58,7 +58,7 @@
     "lint": "eslint **/*.js --quiet",
     "lint-fix": "eslint --fix",
     "generate": "plop --plopfile generators/index.js",
-    "release": "npm run build && gh-pages -d build -e composer -a"
+    "release": "npm run build && gh-pages -d build -e my -a"
   },
   "lint-staged": {
     "{,!(build|generators)/**/}*.js": ["npm run prettier -- --write", "git add"]
