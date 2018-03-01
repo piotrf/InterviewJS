@@ -7,6 +7,7 @@ import {
   Action,
   Avatar,
   Container,
+  Icon,
   PageSubtitle,
   PageTitle,
   Separator,
@@ -104,11 +105,13 @@ export default class ListingView extends Component {
       createStoryModal: false,
       welcomeModal: true
     };
-    this.toggleNewStoryModal = this.toggleNewStoryModal.bind(this);
     this.blockWelcomeModal = this.blockWelcomeModal.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
+    this.toggleNewStoryModal = this.toggleNewStoryModal.bind(this);
   }
   handleLogout() {
     console.log("handleLogout"); // TODO
+    this.props.router.push(`/`);
   }
   toggleNewStoryModal() {
     this.setState({ createStoryModal: !this.state.createStoryModal });
@@ -136,7 +139,7 @@ export default class ListingView extends Component {
               <Text typo="p4">{this.props.user.name}</Text> — <Action
                 onClick={this.handleLogout}
               >
-                Log out
+                Sign out
               </Action>
             </UserMenu>
           </Container>
@@ -145,7 +148,7 @@ export default class ListingView extends Component {
           </Container>
           <Container flex={[1, 1, `${100 / 3}%`]} align="right" padded>
             <Action primary onClick={this.toggleNewStoryModal}>
-              Create new
+              <Icon name="plus" size="s" /> Create new
             </Action>
           </Container>
         </PageHead>
