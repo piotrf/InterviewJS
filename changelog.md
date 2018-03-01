@@ -6,6 +6,7 @@
 * documented Animator wrappers
 * integrated icons throughout
 * make composer fetch srctext on load, save back on blur
+* srctext is now dynamic based on active interviewee
 
 ## 22-02-2017
 
