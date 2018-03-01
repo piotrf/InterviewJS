@@ -62,12 +62,13 @@ export default class SrcTextEditor extends React.Component {
   render() {
     return [
       <SrcTextArea
+        key="area"
         onBlur={this.onBlur}
         onChange={this.onChange}
         value={this.state.srcText}
       />,
       this.state.srcText.length === 0 ? (
-        <SrcTextPlaceholder>
+        <SrcTextPlaceholder key="placeholder">
           Paste or type in your interview text here…
         </SrcTextPlaceholder>
       ) : null

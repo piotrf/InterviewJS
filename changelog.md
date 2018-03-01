@@ -5,7 +5,7 @@
 * extended bubble styles to support 'typing' animation
 * documented Animator wrappers
 * integrated icons throughout
-* integrated draftjs for the src text editor
+* make composer fetch srctext on load, save back on blur
 
 ## 22-02-2017
 
