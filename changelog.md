@@ -1,3 +1,12 @@
+## 02-03-2017
+
+* it is now possible to delete interviewees
+* added a simple google auth screen, working sign out cta in the listing
+* extended bubble styles to support 'typing' animation
+* documented Animator wrappers
+* integrated icons throughout
+* integrated draftjs for the src text editor
+
 ## 22-02-2017
 
 * integrated simple speech bubble groups in the storyline pane with react-stay-scrolled
