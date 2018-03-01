@@ -1,8 +1,10 @@
+import { func, number, object } from "prop-types";
 import css from "styled-components";
 import React from "react";
-import {} from "prop-types";
 
-import { Container, color, radius, setSpace } from "interviewjs-styleguide";
+import { Container } from "interviewjs-styleguide";
+
+import PaneFrame from "./PaneFrame";
 
 const PaneEl = css(Container)`
   align-items: stretch;
@@ -10,35 +12,34 @@ const PaneEl = css(Container)`
   overflow: hidden;
 `;
 
-const PaneBubbleEditor = css(Container)`
-  box-shadow: 0 1px 3px ${color.shadowWt};
-  ${setSpace("pas")};
-  border-radius: ${radius.l};
-  border: 1px solid ${color.greyHL};
-  width: 100%;
-  height: 100%;
-`;
-
 export default class UserPane extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
-    // this.toggleDropdown = this.toggleDropdown.bind(this);
+    this.updatePreview = this.updatePreview.bind(this);
+  }
+  updatePreview(preview) {
+    this.setState({ preview });
   }
   render() {
+    // const { currentInterviewee, story } = this.props;
     return (
       <PaneEl fill="white" rounded shift dir="column">
-        <Container flex={[1, 1, "100%"]} padded>
-          Body
-        </Container>
-        <Container flex={[0, 0, `200px`]} padded>
-          <PaneBubbleEditor fill="grey">PaneBubbleEditor</PaneBubbleEditor>
+        <Container flex={[1, 1, "100%"]}>
+          <PaneFrame {...this.props} preview={this.state.preview} active>
+            User pane goes here
+          </PaneFrame>
         </Container>
       </PaneEl>
     );
   }
 }
 
-UserPane.propTypes = {};
+UserPane.propTypes = {
+  // currentInterviewee: number.isRequired,
+  // story: object.isRequired /* eslint react/forbid-prop-types: 0 */,
+  // storyIndex: number.isRequired,
+  // updateInterviewee: func.isRequired
+};
 
 UserPane.defaultProps = {};

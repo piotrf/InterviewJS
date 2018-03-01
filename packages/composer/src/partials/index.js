@@ -21,5 +21,6 @@ export { default as WelcomeModal } from "./modals/WelcomeModal";
 
 // panes
 export { default as IntervieweePane } from "./panes/IntervieweePane";
+
 export { default as StoryPane } from "./panes/StoryPane";
 export { default as UserPane } from "./panes/UserPane";

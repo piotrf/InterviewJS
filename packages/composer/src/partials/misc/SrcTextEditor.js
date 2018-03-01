@@ -45,6 +45,7 @@ export default class SrcTextEditor extends React.Component {
 
     this.onBlur = this.onBlur.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.onSelect = this.onSelect.bind(this);
     this.saveChanges = this.saveChanges.bind(this);
   }
   componentWillReceiveProps(nextProps) {
@@ -52,11 +53,17 @@ export default class SrcTextEditor extends React.Component {
       ? this.setState({ srcText: nextProps.srcText })
       : null;
   }
-  onBlur() {
+  onBlur(e) {
     this.saveChanges();
   }
   onChange(e) {
     this.setState({ srcText: e.target.value });
+  }
+  onSelect(e) {
+    const { currentTarget } = e;
+    const { selectionStart, selectionEnd } = e.currentTarget;
+    const sel = currentTarget.value.substring(selectionStart, selectionEnd);
+    this.props.updateBubblePreview(sel, "text");
   }
   saveChanges() {
     const { srcText } = this.state;
@@ -68,6 +75,7 @@ export default class SrcTextEditor extends React.Component {
         key="area"
         onBlur={this.onBlur}
         onChange={this.onChange}
+        onSelect={this.onSelect}
         value={this.state.srcText}
       />,
       this.state.srcText.length === 0 ? (
@@ -80,8 +88,9 @@ export default class SrcTextEditor extends React.Component {
 }
 
 SrcTextEditor.propTypes = {
-  updateInterviewee: func.isRequired,
-  srcText: string
+  srcText: string,
+  updateBubblePreview: func.isRequired,
+  updateInterviewee: func.isRequired
 };
 
 SrcTextEditor.defaultProps = {
