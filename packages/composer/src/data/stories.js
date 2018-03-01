@@ -25,7 +25,172 @@ const stories = [
         title: "Humanoid robot",
         avatar: AVA,
         color: "#88a3a0",
-        srcText: "",
+        srcText: `CALEB
+          ... Hi.
+          AVA
+          Who are you?
+          CALEB
+          I’m Caleb.
+          AVA
+          Hello, Caleb.
+          CALEB
+          ... Do you have a name?
+          AVA
+          Yes. Ava.
+          CALEB
+          ... I’m pleased to meet you, Ava.
+          AVA
+          I’m pleased to meet you too.
+          CALEB sits opposite her.
+          He is alone on his half of the glass. Nathan is nowhere to
+          be seen.
+          But on the ceiling, and attached to the walls, on both sides
+          of the glass, there are several CCTV cameras. Trained
+          variously on CALEB and AVA. Lenses twitching.
+          CUT BACK to AVA.
+          She watches CALEB. Then cocks her head slightly to the side.
+          AVA (CONT’D)
+          Are you nervous?
+          CALEB frowns.
+          CALEB
+          ... Why do you ask that?
+          A beat.
+          Then AVA repeats her question.
+          AVA
+          Are you nervous?
+          20.
+          CALEB
+          ... Yes. A little.
+          AVA
+          Why?
+          CALEB
+          I’m not sure.
+          AVA
+          I feel nervous too.
+          CALEB
+          ... Do you?
+          AVA
+          Yes.
+          CALEB
+          Why do you feel nervous?
+          AVA
+          I’ve never met anyone new before.
+          Only Nathan.
+          CALEB
+          ... Then we’re both in quite a
+          similar position.
+          AVA
+          Haven’t you met lots of new people
+          before?
+          CALEB
+          None like you.
+          AVA
+          Oh.
+          Beat.
+          CALEB
+          So. Let’s break the ice.
+          He glances at her. Observing.
+          CALEB (CONT’D)
+          Do you know what I mean by that?
+          AVA
+          Yes.
+          CALEB
+          What do I mean?
+          AVA
+          Overcome initial social
+          awkwardness.
+          21.
+          Beat.
+          CALEB
+          So let’s have a conversation. If
+          we talk, we’ll both relax, and get
+          to know each other at the same
+          time.
+          AVA
+          Okay. What would you like to have
+          a conversation about?
+          CALEB
+          Why don’t we start with you telling
+          me something about yourself.
+          AVA
+          What would you like to know?
+          CALEB
+          Whatever comes into your head.
+          AVA pauses a moment.
+          AVA
+          Well. You already know my name.
+          And you can see that I’m a machine.
+          (beat)
+          Would you like to know how old I
+          am?
+          CALEB
+          Sure.
+          AVA
+          I’m one.
+          CALEB
+          One what? One year? Or one day?
+          AVA
+          One.
+          A beat on CALEB. Processing.
+          Her answer feels like the near non-sequitur that typically
+          betray AI responses.
+          AVA (CONT’D)
+          Does that seem young to you?
+          CALEB
+          Quite young.
+          (beat)
+          When did you learn how to speak?
+          AVA pauses, as if considering this question for the first
+          time.
+          22.
+          AVA
+          I don’t think I did learn. I
+          always knew how to speak - and
+          that’s strange, isn’t it?
+          CALEB
+          Why?
+          AVA
+          Because language is something that
+          people acquire.
+          CALEB
+          Some believe language exists in the
+          brain from birth, and what is
+          learned is the ability to attach
+          words and structure to the latent
+          ability.
+          Beat.
+          CALEB (CONT’D)
+          Would you agree?
+          AVA
+          ... I don’t know. I have no
+          opinion on that.
+          Beat.
+          AVA (CONT’D)
+          I like to draw.
+          CALEB says nothing.
+          Just watches AVA. Again, lets the non-sequitur sit.
+          AVA (CONT’D)
+          I don’t have any of my pictures
+          with me now, but I can show you
+          them tomorrow.
+          CALEB
+          That sounds good. I’d like to see
+          them.
+          AVA
+          Yes.
+          Beat.
+          AVA (CONT’D)
+          Will you come back tomorrow, Caleb?
+          CALEB smiles slightly.
+          CALEB
+          Yeah. Definitely.
+          23.
+          AVA also smiles.
+          And suddenly -
+          - there is a strong sense of something very human there. In
+          the way the smile lights up her face.
+          AVA
+          Good.`,
         storyline: [
           {
             content: "Hello.",
@@ -191,7 +356,172 @@ const stories = [
         title: "A human",
         avatar: CALEB,
         color: "#88a3a0",
-        srcText: "",
+        srcText: `CALEB
+          ... Hi.
+          AVA
+          Who are you?
+          CALEB
+          I’m Caleb.
+          AVA
+          Hello, Caleb.
+          CALEB
+          ... Do you have a name?
+          AVA
+          Yes. Ava.
+          CALEB
+          ... I’m pleased to meet you, Ava.
+          AVA
+          I’m pleased to meet you too.
+          CALEB sits opposite her.
+          He is alone on his half of the glass. Nathan is nowhere to
+          be seen.
+          But on the ceiling, and attached to the walls, on both sides
+          of the glass, there are several CCTV cameras. Trained
+          variously on CALEB and AVA. Lenses twitching.
+          CUT BACK to AVA.
+          She watches CALEB. Then cocks her head slightly to the side.
+          AVA (CONT’D)
+          Are you nervous?
+          CALEB frowns.
+          CALEB
+          ... Why do you ask that?
+          A beat.
+          Then AVA repeats her question.
+          AVA
+          Are you nervous?
+          20.
+          CALEB
+          ... Yes. A little.
+          AVA
+          Why?
+          CALEB
+          I’m not sure.
+          AVA
+          I feel nervous too.
+          CALEB
+          ... Do you?
+          AVA
+          Yes.
+          CALEB
+          Why do you feel nervous?
+          AVA
+          I’ve never met anyone new before.
+          Only Nathan.
+          CALEB
+          ... Then we’re both in quite a
+          similar position.
+          AVA
+          Haven’t you met lots of new people
+          before?
+          CALEB
+          None like you.
+          AVA
+          Oh.
+          Beat.
+          CALEB
+          So. Let’s break the ice.
+          He glances at her. Observing.
+          CALEB (CONT’D)
+          Do you know what I mean by that?
+          AVA
+          Yes.
+          CALEB
+          What do I mean?
+          AVA
+          Overcome initial social
+          awkwardness.
+          21.
+          Beat.
+          CALEB
+          So let’s have a conversation. If
+          we talk, we’ll both relax, and get
+          to know each other at the same
+          time.
+          AVA
+          Okay. What would you like to have
+          a conversation about?
+          CALEB
+          Why don’t we start with you telling
+          me something about yourself.
+          AVA
+          What would you like to know?
+          CALEB
+          Whatever comes into your head.
+          AVA pauses a moment.
+          AVA
+          Well. You already know my name.
+          And you can see that I’m a machine.
+          (beat)
+          Would you like to know how old I
+          am?
+          CALEB
+          Sure.
+          AVA
+          I’m one.
+          CALEB
+          One what? One year? Or one day?
+          AVA
+          One.
+          A beat on CALEB. Processing.
+          Her answer feels like the near non-sequitur that typically
+          betray AI responses.
+          AVA (CONT’D)
+          Does that seem young to you?
+          CALEB
+          Quite young.
+          (beat)
+          When did you learn how to speak?
+          AVA pauses, as if considering this question for the first
+          time.
+          22.
+          AVA
+          I don’t think I did learn. I
+          always knew how to speak - and
+          that’s strange, isn’t it?
+          CALEB
+          Why?
+          AVA
+          Because language is something that
+          people acquire.
+          CALEB
+          Some believe language exists in the
+          brain from birth, and what is
+          learned is the ability to attach
+          words and structure to the latent
+          ability.
+          Beat.
+          CALEB (CONT’D)
+          Would you agree?
+          AVA
+          ... I don’t know. I have no
+          opinion on that.
+          Beat.
+          AVA (CONT’D)
+          I like to draw.
+          CALEB says nothing.
+          Just watches AVA. Again, lets the non-sequitur sit.
+          AVA (CONT’D)
+          I don’t have any of my pictures
+          with me now, but I can show you
+          them tomorrow.
+          CALEB
+          That sounds good. I’d like to see
+          them.
+          AVA
+          Yes.
+          Beat.
+          AVA (CONT’D)
+          Will you come back tomorrow, Caleb?
+          CALEB smiles slightly.
+          CALEB
+          Yeah. Definitely.
+          23.
+          AVA also smiles.
+          And suddenly -
+          - there is a strong sense of something very human there. In
+          the way the smile lights up her face.
+          AVA
+          Good.`,
         storyline: [
           {
             content: "Hello.",
