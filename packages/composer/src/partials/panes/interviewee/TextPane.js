@@ -89,7 +89,7 @@ export default class TextPane extends Component {
   }
   onPreviewEdit(e) {
     const { value } = e.currentTarget;
-    this.setState({ preview: value });
+    this.props.updatePreview(value);
   }
   saveChanges() {
     const { srcText } = this.state;
