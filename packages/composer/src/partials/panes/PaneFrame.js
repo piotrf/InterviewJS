@@ -1,6 +1,6 @@
 import React from "react";
 import css from "styled-components";
-import { array, node, oneOfType, string } from "prop-types";
+import { array, bool, node, oneOfType, string } from "prop-types";
 
 import {
   Action,
@@ -60,52 +60,63 @@ const SubmitButton = css.span`
   transform: translateY(-50%);
   z-index: 5;
   & > button {
-    height: 44px;
-    line-height: 44px;
-    width: 44px;
+    height: 45px;
+    line-height: 45px;
+    width: 45px;
   }
   ${({ side }) =>
     side === "left"
       ? `
     background-image: url(${ShapeLeft});
-    padding: 8px 8px 8px 5px;
+    padding: 11px 11px 11px 7px;
     left: 100%;
     margin-left: -2px;
   `
       : `
     background-image: url(${ShapeRight});
-    padding: 8px 5px 8px 8px;
+    padding: 11px 7px 11px 11px;
     right: 100%;
     margin-right: -2px;
   `}
 
 `;
 
-const PaneFrame = (props) => (
-  <Frame {...props} dir="column" padded>
-    <Container flex={[1, 1, `auto`]}>{props.children}</Container>
-    <Separator silent size="s" />
-    <Container flex={[0, 0, `200px`]}>
-      <PreviewHolder>
-        <Preview fill="grey">{props.preview}</Preview>
-        <SubmitButton side={props.side}>
-          <Action iconic primary>
-            <Icon name="plus" size="l" />
-          </Action>
-        </SubmitButton>
-      </PreviewHolder>
-    </Container>
-  </Frame>
-);
+const PaneFrame = (props) => {
+  const { hasPreview } = props;
+  return (
+    <Frame {...props} dir="column" padded>
+      <Container flex={[1, 1, `auto`]}>{props.children}</Container>
+      <Separator silent size="s" />
+      <Container flex={[0, 0, `200px`]}>
+        <PreviewHolder>
+          <Preview fill="grey">{props.preview}</Preview>
+          <SubmitButton side={props.side}>
+            <Action
+              disabled={!hasPreview}
+              iconic
+              onClick={hasPreview ? () => console.log("hello") : null}
+              primary
+              tone="positive"
+            >
+              <Icon name="plus" size="l" />
+            </Action>
+          </SubmitButton>
+        </PreviewHolder>
+      </Container>
+    </Frame>
+  );
+};
 
 PaneFrame.propTypes = {
   children: oneOfType([array, string, node]).isRequired,
+  hasPreview: bool,
   preview: oneOfType([array, string, node]),
   side: string
 };
 
 PaneFrame.defaultProps = {
   preview: null,
+  hasPreview: false,
   side: "left"
 };
 

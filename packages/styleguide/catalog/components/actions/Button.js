@@ -264,6 +264,23 @@ const Button = css.button`
   `
       : ``};
 
+  /* disabled */
+
+  ${({ disabled }) =>
+    disabled
+      ? `
+    background: ${color.greyLt};
+    box-shadow: none;
+    cursor: default;
+    &:active {
+      background: ${color.greyLt};
+      box-shadow: none;
+      cursor: default;
+      transform: none;
+    }
+  `
+      : ``};
+
 `;
 
 Button.propTypes = {

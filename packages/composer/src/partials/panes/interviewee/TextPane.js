@@ -102,6 +102,7 @@ export default class TextPane extends Component {
         preview={
           <Preview onChange={this.onPreviewEdit} value={this.state.preview} />
         }
+        hasPreview={this.props.preview !== ""}
         side="left"
       >
         <SrcText

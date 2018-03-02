@@ -19,10 +19,11 @@ import {
 import { Storyline } from "../";
 
 const PaneEl = css(Container)`
-  height: 100%;
-  position: relative;
+  ${setSpace("phs")};
   display: flex;
   flex-direction: column;
+  height: 100%;
+  position: relative;
 `;
 
 const PaneHead = css.div`
