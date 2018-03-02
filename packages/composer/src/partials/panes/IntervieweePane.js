@@ -7,6 +7,7 @@ import {
   Icon,
   PaneTab,
   PaneTabs,
+  Tip,
   radius
 } from "interviewjs-styleguide";
 
@@ -86,37 +87,49 @@ export default class IntervieweePane extends React.Component {
               active={tab === "text"}
               onClick={() => this.setState({ tab: "text" })}
             >
-              <Icon name="text" size="s" />
+              <Tip title="Text bubble">
+                <Icon name="text" size="s" />
+              </Tip>
             </PaneTab>
             <PaneTab
               active={tab === "link"}
               onClick={() => this.setState({ tab: "link" })}
             >
-              <Icon name="link" size="s" />
+              <Tip title="Link bubble">
+                <Icon name="link" size="s" />
+              </Tip>
             </PaneTab>
             <PaneTab
               active={tab === "image"}
               onClick={() => this.setState({ tab: "image" })}
             >
-              <Icon name="image" size="s" />
+              <Tip title="Image bubble">
+                <Icon name="image" size="s" />
+              </Tip>
             </PaneTab>
             <PaneTab
               active={tab === "embed"}
               onClick={() => this.setState({ tab: "embed" })}
             >
-              <Icon name="embed" size="s" />
+              <Tip title="Embed bubble">
+                <Icon name="embed" size="s" />
+              </Tip>
             </PaneTab>
             <PaneTab
               active={tab === "map"}
               onClick={() => this.setState({ tab: "map" })}
             >
-              <Icon name="map" size="s" />
+              <Tip title="Map bubble">
+                <Icon name="map" size="s" />
+              </Tip>
             </PaneTab>
             <PaneTab
               active={tab === "media"}
               onClick={() => this.setState({ tab: "media" })}
             >
-              <Icon name="media" size="s" />
+              <Tip title="Media bubble">
+                <Icon name="media" size="s" />
+              </Tip>
             </PaneTab>
           </PaneTabs>
         </Container>
