@@ -1,12 +1,28 @@
 ## 02-03-2017
 
-* it is now possible to delete interviewees
-* added a simple google auth screen, working sign out cta in the listing
-* extended bubble styles to support 'typing' animation
-* documented Animator wrappers
-* integrated icons throughout
-* make composer fetch srctext on load, save back on blur
-* srctext is now dynamic based on active interviewee
+* It is now possible to delete interviewees.
+  You can do so in the modal dialog when editing a single interviewee. Bottom-right: there’s a red icon, it has a tooltip (on hover) and a dropdown (on click) asking to confirm deletion. Extra logic has been put in place to prevent removal of the only interviewee in a story.
+
+* Simple auth flow.
+  Added a simple Google sign-in screen ( http://interviewjs.io/my/ ) and a `sign out` CTA in the listing (next to the avatar).
+
+* Extended bubble styles to support 'typing’ animation.
+  You can see the result of that in the above link, where bubbles animate.
+
+* Documented Animator wrappers.
+  Above animations is just a subset of the possible treatments. We may not have time to add more, but there will be a space for open-source community to reference them: http://styleguide.interviewjs.io/#/animators
+
+* Integrated icons throughout.
+  All icons are now documented here: http://styleguide.interviewjs.io/#/icons and used throughout Composer. You’ll see them for example here: http://interviewjs.io/my/stories/0bf34b30-743b-46ab-weewe-c875326d86f6
+
+* Composer now accepts transcript text
+  In the Composer it is now possible to paste or type in transcript. That transcript is now being save per each interviewee separately (notice here: http://interviewjs.io/my/stories/0bf34b30-743b-46ab-weewe-c875326d86f6 how switching between interviewees displays different transcript). Any change to the transcript is being saved onBlur (when taking the focus from the textarea).
+
+* It is now possible to select piece of a transcript
+  The textarea holding the transcript has onSelect event hooked up, selecting text will automatically display it below in the grey bubble preview box. Note how you can edit text in that grey bubble box too — though those changes won’t be save just yet (WIP).
+
+* It is now possible to add bubbles to the story.
+  Only text bubbles for now, and it’s WIP—plenty to do there, but the + buttons turns green when the bubble preview grey area is populated with some data.
 
 ## 22-02-2017
 
