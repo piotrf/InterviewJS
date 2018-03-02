@@ -1,3 +1,8 @@
+##
+
+* There’s now a Publish Flow starting in the Composer
+  …
+
 ## 02-03-2017
 
 * It is now possible to delete interviewees.
