@@ -9,7 +9,7 @@ import PaneFrame from "./PaneFrame";
 const PaneEl = css(Container)`
   align-items: stretch;
   height: 100%;
-  overflow: hidden;
+  overflow: visible;
 `;
 
 export default class UserPane extends React.Component {
@@ -26,7 +26,12 @@ export default class UserPane extends React.Component {
     return (
       <PaneEl fill="white" rounded shift dir="column">
         <Container flex={[1, 1, "100%"]}>
-          <PaneFrame {...this.props} preview={this.state.preview} active>
+          <PaneFrame
+            {...this.props}
+            active
+            preview={this.state.preview}
+            side="right"
+          >
             User pane goes here
           </PaneFrame>
         </Container>

@@ -12,7 +12,7 @@ export default class MediaPane extends Component {
   }
   render() {
     return (
-      <PaneFrame {...this.props} preview={this.state.preview}>
+      <PaneFrame {...this.props} preview={this.state.preview} side="left">
         MediaPane
       </PaneFrame>
     );

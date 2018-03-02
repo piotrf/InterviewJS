@@ -12,7 +12,7 @@ export default class LinkPane extends Component {
   }
   render() {
     return (
-      <PaneFrame {...this.props} preview={this.state.preview}>
+      <PaneFrame {...this.props} preview={this.state.preview} side="left">
         LinkPane
       </PaneFrame>
     );

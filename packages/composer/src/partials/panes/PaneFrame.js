@@ -3,7 +3,9 @@ import css from "styled-components";
 import { array, node, oneOfType, string } from "prop-types";
 
 import {
+  Action,
   Container,
+  Icon,
   Separator,
   color,
   font,
@@ -11,6 +13,9 @@ import {
   setSpace,
   setType
 } from "interviewjs-styleguide";
+
+import ShapeLeft from "../../assets/ShapeAttachedLeft.svg";
+import ShapeRight from "../../assets/ShapeAttachedRight.svg";
 
 const Frame = css(Container)`
   display: ${({ active }) => (active ? "flex" : "none")};
@@ -25,6 +30,7 @@ const Frame = css(Container)`
 const PreviewHolder = css(Container)`
   ${setSpace("pam")}
   height: 100%;
+  overflow-x: visible;
 `;
 
 const Preview = css(Container)`
@@ -38,10 +44,41 @@ const Preview = css(Container)`
   font-family: ${font.serif};
   height: 100%;
   left: 0;
+  overflow-x: visible;
   position: absolute;
   right: 0;
   top: 0;
   width: 100%;
+`;
+
+const SubmitButton = css.span`
+  background-position: left center;
+  background-size: cover;
+  display: block;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  & > button {
+    height: 44px;
+    line-height: 44px;
+    width: 44px;
+  }
+  ${({ side }) =>
+    side === "left"
+      ? `
+    background-image: url(${ShapeLeft});
+    padding: 8px 8px 8px 5px;
+    left: 100%;
+    margin-left: -2px;
+  `
+      : `
+    background-image: url(${ShapeRight});
+    padding: 8px 5px 8px 8px;
+    right: 100%;
+    margin-right: -2px;
+  `}
+
 `;
 
 const PaneFrame = (props) => (
@@ -51,6 +88,11 @@ const PaneFrame = (props) => (
     <Container flex={[0, 0, `200px`]}>
       <PreviewHolder>
         <Preview fill="grey">{props.preview}</Preview>
+        <SubmitButton side={props.side}>
+          <Action iconic primary>
+            <Icon name="plus" size="l" />
+          </Action>
+        </SubmitButton>
       </PreviewHolder>
     </Container>
   </Frame>
@@ -58,11 +100,13 @@ const PaneFrame = (props) => (
 
 PaneFrame.propTypes = {
   children: oneOfType([array, string, node]).isRequired,
-  preview: oneOfType([array, string, node])
+  preview: oneOfType([array, string, node]),
+  side: string
 };
 
 PaneFrame.defaultProps = {
-  preview: null
+  preview: null,
+  side: "left"
 };
 
 export default PaneFrame;

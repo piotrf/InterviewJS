@@ -2,7 +2,13 @@ import { func, number, object } from "prop-types";
 import css from "styled-components";
 import React from "react";
 
-import { Container, Icon, PaneTab, PaneTabs } from "interviewjs-styleguide";
+import {
+  Container,
+  Icon,
+  PaneTab,
+  PaneTabs,
+  radius
+} from "interviewjs-styleguide";
 
 import {
   EmbedPane,
@@ -16,9 +22,16 @@ import {
 const PaneEl = css(Container)`
   align-items: stretch;
   height: 100%;
-  overflow: hidden;
+  overflow: visible;
   ${PaneTabs} {
+    border-radius: ${radius.h} 21px 0 0;
     transform: translateY(-1px);
+    & > *:first-child {
+      border-radius: ${radius.h} 0 0 0;
+    }
+    & > *:last-child {
+      border-radius: 0 ${radius.h} 0 0;
+    }
   }
 `;
 
