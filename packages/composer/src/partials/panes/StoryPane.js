@@ -6,6 +6,9 @@ import { array, func, shape, number } from "prop-types";
 import {
   Action,
   Avatar,
+  Bubble,
+  BubbleGroup,
+  Bubbles,
   Container,
   Icon,
   Tip,
@@ -16,10 +19,7 @@ import {
   time
 } from "interviewjs-styleguide";
 
-import { Storyline } from "../";
-
 const PaneEl = css(Container)`
-  ${setSpace("phs")};
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -39,7 +39,7 @@ const PaneBody = css.div`
   height: 100%;
   width: 100%;
   & > * {
-    ${setSpace("pam")};
+    ${setSpace("pal")};
     display: block;
     height: 100%;
     overflow: auto;
@@ -102,6 +102,22 @@ export default class StoryPane extends React.Component {
     super(props);
     this.state = {};
   }
+  componentDidMount() {
+    this.stayScrolled();
+  }
+  componentDidUpdate(prevProps) {
+    const { currentInterviewee } = this.props;
+    if (
+      prevProps.story.interviewees[currentInterviewee].storyline.length <
+      this.props.story.interviewees[currentInterviewee].storyline.length
+    )
+      this.stayScrolled(); // Or: this.scrollBottom
+    // this.scrollBottom(); // Or: this.stayScrolled
+  }
+  storeScrolledControllers = ({ stayScrolled, scrollBottom }) => {
+    this.stayScrolled = stayScrolled;
+    this.scrollBottom = scrollBottom;
+  };
   render() {
     const { interviewees } = this.props.story;
     const { currentInterviewee } = this.props;
@@ -144,8 +160,21 @@ export default class StoryPane extends React.Component {
           </IntervieweesWrapper>
         </PaneHead>
         <PaneBody>
-          <StayScrolled>
-            <Storyline storyline={storyline} />
+          <StayScrolled
+            provideControllers={this.storeScrolledControllers}
+            debug={(msg) => {
+              console.log(msg);
+            }}
+          >
+            {Object.keys(storyline).map((storyItem) => (
+              <BubbleGroup key={storyItem}>
+                <Bubbles persona={storyline[storyItem].role}>
+                  <Bubble persona={storyline[storyItem].role}>
+                    {storyline[storyItem].content}
+                  </Bubble>
+                </Bubbles>
+              </BubbleGroup>
+            ))}
           </StayScrolled>
         </PaneBody>
       </PaneEl>

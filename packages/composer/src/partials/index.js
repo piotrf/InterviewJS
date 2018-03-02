@@ -3,7 +3,6 @@ export { default as Interviewees } from "./misc/Interviewees";
 export { default as SrcTextEditor } from "./misc/SrcTextEditor";
 export { default as Stories } from "./misc/Stories";
 export { default as Story } from "./misc/Story";
-export { default as Storyline } from "./misc/Storyline";
 
 // forms
 export { default as DetailsForm } from "./forms/DetailsForm";
