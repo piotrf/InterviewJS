@@ -27,18 +27,18 @@ export function createStory({
   };
 }
 
-export function updateStory(payload, i) {
+export function updateStory(payload, storyIndex) {
   return {
     type: "UPDATE_STORY",
-    i,
+    storyIndex,
     payload
   };
 }
 
-export function deleteStory(i) {
+export function deleteStory(storyIndex) {
   return {
     type: "DELETE_STORY",
-    i
+    storyIndex
   };
 }
 
@@ -50,19 +50,43 @@ export function createInterviewee(storyIndex, payload) {
   };
 }
 
-export function updateInterviewee(storyIndex, i, payload) {
+export function updateInterviewee(storyIndex, intervieweeIndex, payload) {
   return {
     type: "UPDATE_INTERVIEWEE",
-    i,
+    intervieweeIndex,
     payload,
     storyIndex
   };
 }
 
-export function deleteInterviewee(storyIndex, i) {
+export function deleteInterviewee(storyIndex, intervieweeIndex) {
   return {
     type: "DELETE_INTERVIEWEE",
-    i,
+    intervieweeIndex,
     storyIndex
+  };
+}
+
+export function addStorylineItem(storyIndex, intervieweeIndex, content) {
+  return {
+    type: "ADD_STORYLINE_ITEM",
+    content,
+    intervieweeIndex,
+    storyIndex
+  };
+}
+
+export function updateStorylineItem(
+  content,
+  intervieweeIndex,
+  storyIndex,
+  storylineItemIndex
+) {
+  return {
+    type: "UPDATE_STORYLINE_ITEM",
+    content,
+    intervieweeIndex,
+    storyIndex,
+    storylineItemIndex
   };
 }

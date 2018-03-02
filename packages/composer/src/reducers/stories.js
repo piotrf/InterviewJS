@@ -2,66 +2,65 @@
 /* eslint no-console: 0 */
 
 function stories(state = [], action) {
-  switch (action.type) {
+  const { type, storyIndex, payload, intervieweeIndex } = action;
+
+  switch (type) {
     case "CREATE_STORY":
       console.log("creating a story");
-      return [action.payload, ...state];
+      return [payload, ...state];
 
     case "UPDATE_STORY":
       console.log("updating a story");
       return [
-        ...state.slice(0, action.i),
-        { ...state[action.i], ...action.payload },
-        ...state.slice(action.i + 1)
+        ...state.slice(0, storyIndex),
+        { ...state[storyIndex], ...payload },
+        ...state.slice(storyIndex + 1)
       ];
 
     case "DELETE_STORY":
       console.log("deleting a story");
-      return [...state.slice(0, action.i), ...state.slice(action.i + 1)];
+      return [...state.slice(0, storyIndex), ...state.slice(storyIndex + 1)];
 
     case "CREATE_INTERVIEWEE":
       console.log("creating interviewee");
       return [
-        ...state.slice(0, action.storyIndex),
+        ...state.slice(0, storyIndex),
         {
-          ...state[action.storyIndex],
-          interviewees: [
-            action.payload,
-            ...state[action.storyIndex].interviewees
-          ]
+          ...state[storyIndex],
+          interviewees: [payload, ...state[storyIndex].interviewees]
         },
-        ...state.slice(action.storyIndex + 1)
+        ...state.slice(storyIndex + 1)
       ];
 
     case "UPDATE_INTERVIEWEE":
       console.log("updating interviewee");
-      const updateStoryInterviewees = state[action.storyIndex].interviewees;
+      const updateStoryInterviewees = state[storyIndex].interviewees;
       return [
-        ...state.slice(0, action.storyIndex),
+        ...state.slice(0, storyIndex),
         {
-          ...state[action.storyIndex],
+          ...state[storyIndex],
           interviewees: [
-            ...updateStoryInterviewees.slice(0, action.i),
-            { ...updateStoryInterviewees, ...action.payload },
-            ...updateStoryInterviewees.slice(action.i + 1)
+            ...updateStoryInterviewees.slice(0, intervieweeIndex),
+            { ...updateStoryInterviewees[intervieweeIndex], ...payload },
+            ...updateStoryInterviewees.slice(intervieweeIndex + 1)
           ]
         },
-        ...state.slice(action.storyIndex + 1)
+        ...state.slice(storyIndex + 1)
       ];
 
     case "DELETE_INTERVIEWEE":
       console.log("deleting interviewee");
-      const deleteStoryInterviewees = state[action.storyIndex].interviewees;
+      const deleteStoryInterviewees = state[storyIndex].interviewees;
       return [
-        ...state.slice(0, action.storyIndex),
+        ...state.slice(0, storyIndex),
         {
-          ...state[action.storyIndex],
+          ...state[storyIndex],
           interviewees: [
-            ...deleteStoryInterviewees.slice(0, action.i),
-            ...deleteStoryInterviewees.slice(action.i + 1)
+            ...deleteStoryInterviewees.slice(0, intervieweeIndex),
+            ...deleteStoryInterviewees.slice(intervieweeIndex + 1)
           ]
         },
-        ...state.slice(action.storyIndex + 1)
+        ...state.slice(storyIndex + 1)
       ];
 
     default:
