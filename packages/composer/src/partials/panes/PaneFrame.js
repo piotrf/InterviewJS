@@ -1,6 +1,6 @@
 import React from "react";
 import css from "styled-components";
-import { array, bool, node, oneOfType, string } from "prop-types";
+import { array, bool, func, node, oneOfType, string } from "prop-types";
 
 import {
   Action,
@@ -94,7 +94,7 @@ const PaneFrame = (props) => {
             <Action
               disabled={!hasPreview}
               iconic
-              onClick={hasPreview ? () => console.log("hello") : null}
+              onClick={hasPreview ? props.addStorylineItem : null}
               primary
               tone="positive"
             >
@@ -108,6 +108,7 @@ const PaneFrame = (props) => {
 };
 
 PaneFrame.propTypes = {
+  addStorylineItem: func.isRequired,
   children: oneOfType([array, string, node]).isRequired,
   hasPreview: bool,
   preview: oneOfType([array, string, node]),

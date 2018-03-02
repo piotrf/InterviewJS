@@ -45,6 +45,7 @@ export default class IntervieweePane extends React.Component {
       },
       tab: "text"
     };
+    this.addStorylineItem = this.addStorylineItem.bind(this);
     this.updatePreview = this.updatePreview.bind(this);
     this.updateSrcText = this.updateSrcText.bind(this);
   }
@@ -63,6 +64,16 @@ export default class IntervieweePane extends React.Component {
   }
   updatePreview(data, type) {
     this.setState({ previews: { ...this.state.previews, [type]: data } });
+  }
+  addStorylineItem(source) {
+    const { storyIndex, currentInterviewee } = this.props;
+    const { previews } = this.state;
+    const nuItem = {
+      content: previews[source],
+      role: "interviewee"
+    };
+    this.props.addStorylineItem(storyIndex, currentInterviewee, nuItem);
+    this.setState({ previews: { ...previews, [source]: "" } });
   }
   render() {
     const { tab } = this.state;
@@ -113,6 +124,8 @@ export default class IntervieweePane extends React.Component {
           <TextPane
             {...this.props}
             active={tab === "text"}
+            addStorylineItem={() => this.addStorylineItem("text")}
+            interviewee={story.interviewees[currentInterviewee]}
             preview={this.state.previews.text}
             srcText={story.interviewees[currentInterviewee].srcText}
             updatePreview={(data) => this.updatePreview(data, "text")}
@@ -155,6 +168,7 @@ export default class IntervieweePane extends React.Component {
 }
 
 IntervieweePane.propTypes = {
+  addStorylineItem: func.isRequired,
   currentInterviewee: number.isRequired,
   story: object.isRequired /* eslint react/forbid-prop-types: 0 */,
   storyIndex: number.isRequired,

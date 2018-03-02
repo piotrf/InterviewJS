@@ -67,25 +67,27 @@ export function deleteInterviewee(storyIndex, intervieweeIndex) {
   };
 }
 
-export function addStorylineItem(storyIndex, intervieweeIndex, content) {
+export function addStorylineItem(storyIndex, intervieweeIndex, payload) {
   return {
     type: "ADD_STORYLINE_ITEM",
-    content,
+    id: uuidv4(),
     intervieweeIndex,
+    order: 0,
+    payload,
     storyIndex
   };
 }
 
 export function updateStorylineItem(
-  content,
-  intervieweeIndex,
   storyIndex,
-  storylineItemIndex
+  intervieweeIndex,
+  storylineItemIndex,
+  payload
 ) {
   return {
     type: "UPDATE_STORYLINE_ITEM",
-    content,
     intervieweeIndex,
+    payload,
     storyIndex,
     storylineItemIndex
   };

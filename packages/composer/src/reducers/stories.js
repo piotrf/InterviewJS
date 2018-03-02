@@ -63,6 +63,27 @@ function stories(state = [], action) {
         ...state.slice(storyIndex + 1)
       ];
 
+    case "ADD_STORYLINE_ITEM":
+      console.log("adding storyline item");
+      return [
+        ...state.slice(0, storyIndex),
+        {
+          ...state[storyIndex],
+          interviewees: [
+            ...state[storyIndex].interviewees.slice(0, intervieweeIndex),
+            {
+              ...state[storyIndex].interviewees[intervieweeIndex],
+              storyline: [
+                ...state[storyIndex].interviewees[intervieweeIndex].storyline,
+                payload
+              ]
+            },
+            ...state[storyIndex].interviewees.slice(intervieweeIndex + 1)
+          ]
+        },
+        ...state.slice(storyIndex + 1)
+      ];
+
     default:
       return state;
   }
