@@ -1,6 +1,6 @@
 import css from "styled-components";
 import React from "react";
-import { bool, string } from "prop-types";
+import { bool } from "prop-types";
 
 import { color, font, radius, setSpace, setType, time } from "../../../utils";
 

@@ -2,6 +2,8 @@ import uuidv4 from "uuid/v4";
 
 import AVA from "./media/ava.png";
 import CALEB from "./media/caleb.png";
+import OBAMA from "./media/obama.png";
+import TRUMP from "./media/trump.png";
 
 const stories = [
   {
@@ -536,8 +538,7 @@ Good.`,
         name: "Barack Obama",
         bio: "Has bio",
         title: "44th President of the US",
-        avatar:
-          "https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/e35/12407344_1283694208323785_735653395_n.jpg",
+        avatar: OBAMA,
         color: "blue",
         srcText: "",
         storyline: [
@@ -553,8 +554,7 @@ Good.`,
         name: "Donald Trump",
         bio: "",
         title: "45th President of the US",
-        avatar:
-          "https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/e35/12407344_1283694208323785_735653395_n.jpg",
+        avatar: TRUMP,
         color: "red",
         srcText: "",
         storyline: [
