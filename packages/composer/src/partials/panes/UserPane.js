@@ -114,6 +114,9 @@ export default class UserPane extends React.Component {
       <PaneEl fill="white" rounded shift dir="column">
         <PaneFrame
           {...this.props}
+          active
+          hasPreview={enableExplore || enableIgnore}
+          side="right"
           preview={
             <Preview>
               {enableIgnore ? (
@@ -128,8 +131,6 @@ export default class UserPane extends React.Component {
               ) : null}
             </Preview>
           }
-          active
-          side="right"
         >
           <UserActions dir="column">
             <Container flex={[1, 1, "50%"]}>

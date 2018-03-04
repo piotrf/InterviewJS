@@ -86,12 +86,8 @@ export default class PaneFrame extends Component {
   constructor(props) {
     super(props);
   }
-  componentWillUpdate(nextProps, nextState) {
-    // console.log("nextProps.preview: ", nextProps.preview);
-  }
-  componentDidUpdate(prevProps, prevState) {
-    // console.log("prevProps.preview: ", prevProps.preview);
-  }
+  componentWillUpdate() {}
+  componentDidUpdate() {}
   render() {
     const { hasPreview } = this.props;
     return (
