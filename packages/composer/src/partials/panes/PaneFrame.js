@@ -24,6 +24,7 @@ const Frame = css(Container)`
   width: 100%;
   & > div {
     width: 100%;
+    height: 100%;
   }
 `;
 
