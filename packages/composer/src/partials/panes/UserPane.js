@@ -84,6 +84,10 @@ const Preview = css.div`
   height: 100%;
   justify-content: center;
   width: 100%;
+  & > * {
+    ${setSpace("mhx")};
+    max-width: 40%;
+  }
 `;
 
 export default class UserPane extends React.Component {
@@ -96,12 +100,15 @@ export default class UserPane extends React.Component {
       ignoreVal: null
     };
     this.updatePreview = this.updatePreview.bind(this);
+    this.toggleAction = this.toggleAction.bind(this);
+  }
+  toggleAction(action, e) {
+    this.setState({ [action]: e.target.checked });
   }
   updatePreview() {
     console.log("updatePreview");
   }
   render() {
-    console.log(this.state);
     const { enableExplore, enableIgnore, ignoreVal, exploreVal } = this.state;
     return (
       <PaneEl fill="white" rounded shift dir="column">
@@ -109,14 +116,14 @@ export default class UserPane extends React.Component {
           {...this.props}
           preview={
             <Preview>
-              {enableExplore ? (
-                <Action primary fixed>
-                  {exploreVal || "Explore"}
-                </Action>
-              ) : null}
               {enableIgnore ? (
                 <Action primary fixed>
                   {ignoreVal || "Ignore"}
+                </Action>
+              ) : null}
+              {enableExplore ? (
+                <Action primary fixed>
+                  {exploreVal || "Explore"}
                 </Action>
               ) : null}
             </Preview>
@@ -129,10 +136,8 @@ export default class UserPane extends React.Component {
               <UserAction dir="row">
                 <Container flex={[0, 1, "150px"]} align="center" dir="column">
                   <Checkbox
-                    defaultChecked={enableIgnore}
-                    onChange={() =>
-                      this.setState({ enableIgnore: !this.state.enableIgnore })
-                    }
+                    checked={this.state.enableIgnore}
+                    onChange={(e) => this.toggleAction("enableIgnore", e)}
                   >
                     Ignore topic
                   </Checkbox>
@@ -147,12 +152,8 @@ export default class UserPane extends React.Component {
               <UserAction dir="row">
                 <Container flex={[0, 1, "150px"]} align="center" dir="column">
                   <Checkbox
-                    defaultChecked={enableExplore}
-                    onChange={() =>
-                      this.setState({
-                        enableExplore: !this.state.enableExplore
-                      })
-                    }
+                    checked={this.state.enableExplore}
+                    onChange={(e) => this.toggleAction("enableExplore", e)}
                   >
                     Explore topic
                   </Checkbox>

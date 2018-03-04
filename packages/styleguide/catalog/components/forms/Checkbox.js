@@ -1,6 +1,6 @@
 import css from "styled-components";
 import React from "react";
-import { bool } from "prop-types";
+import { array, bool, func, node, oneOfType, string } from "prop-types";
 
 import { color, font, radius, setSpace, setType, time } from "../../../utils";
 
@@ -66,14 +66,25 @@ const CheckboxInput = css.input`
 
 const Checkbox = (props) => (
   <CheckboxEl>
-    <CheckboxInput type="checkbox" checked={props.checked} onChac />
+    <CheckboxInput
+      type="checkbox"
+      checked={props.checked}
+      onChange={props.onChange}
+    />
     <CheckboxCheck />
     {props.children}
   </CheckboxEl>
 );
 
-Checkbox.propTypes = { checked: bool };
+Checkbox.propTypes = {
+  checked: bool,
+  children: oneOfType([array, string, node]).isRequired,
+  onChange: func
+};
 
-Checkbox.defaultProps = { checked: null };
+Checkbox.defaultProps = {
+  checked: null,
+  onChange: null
+};
 
 export default Checkbox;
