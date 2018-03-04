@@ -52,12 +52,14 @@ export default () => markdown`
 
   ${(
     <ReactSpecimen span={3}>
-      <Checkbox checked>Checkbox</Checkbox>
+      <Checkbox checked onChange={(e) => console.log(e)}>
+        Checkbox
+      </Checkbox>
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen span={3}>
-      <Checkbox>Checkbox</Checkbox>
+      <Checkbox onChange={(e) => console.log(e)}>Checkbox</Checkbox>
     </ReactSpecimen>
   )}
 
