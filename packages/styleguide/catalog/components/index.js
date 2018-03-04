@@ -8,6 +8,7 @@ export { default as Bubble } from "./bubbles/Bubble.js";
 export { default as BubbleGroup } from "./bubbles/BubbleGroup.js";
 export { default as Bubbles } from "./bubbles/Bubbles.js";
 export { default as CharacterCount } from "./forms/CharacterCount.js";
+export { default as Checkbox } from "./forms/Checkbox.js";
 export { default as Container } from "./containers/Container.js";
 export { default as Dropdown } from "./contextuals/Dropdown.js";
 export { default as DropdownContent } from "./contextuals/DropdownContent.js";

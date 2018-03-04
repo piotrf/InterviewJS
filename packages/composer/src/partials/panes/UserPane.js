@@ -2,7 +2,13 @@ import {} from "prop-types";
 import css from "styled-components";
 import React from "react";
 
-import { Container, Separator, color, radius } from "interviewjs-styleguide";
+import {
+  Container,
+  Checkbox,
+  Separator,
+  color,
+  radius
+} from "interviewjs-styleguide";
 
 import PaneFrame from "./PaneFrame";
 
@@ -16,21 +22,28 @@ const UserActions = css(Container)`
 `;
 
 const UserAction = css(Container)`
-  border-radius: ${radius.m};
+  align-items: stretch;
+  border-radius: ${radius.l};
   border: 1px solid ${color.greyHL};
   box-shadow: 0 1px 3px ${color.shadowWt};
   height: 100%;
   width: 100%;
+  & > div {
+    border-radius: 0 ${radius.l} ${radius.l} 0;
+  }
+  & > div:last-child {
+    border-left: 1px solid ${color.greyHL};
+  }
 `;
 
 export default class UserPane extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { explore: null, ignore: null };
     this.updatePreview = this.updatePreview.bind(this);
   }
-  updatePreview(preview) {
-    this.setState({ preview });
+  updatePreview() {
+    console.log("updatePreview");
   }
   render() {
     return (
@@ -43,11 +56,25 @@ export default class UserPane extends React.Component {
         >
           <UserActions dir="column">
             <Container flex={[1, 1, "50%"]}>
-              <UserAction>Ignore</UserAction>
+              <UserAction dir="row">
+                <Container flex={[0, 1, "140px"]} align="center" dir="column">
+                  <Checkbox>Ignore</Checkbox>
+                </Container>
+                <Container flex={[2, 2, "auto"]} fill="grey" dir="column">
+                  Stuff
+                </Container>
+              </UserAction>
             </Container>
             <Separator silent size="s" />
             <Container flex={[1, 1, "50%"]}>
-              <UserAction>Explore</UserAction>
+              <UserAction dir="row">
+                <Container flex={[0, 1, "140px"]} align="center" dir="column">
+                  <Checkbox>Explore</Checkbox>
+                </Container>
+                <Container flex={[2, 2, "auto"]} fill="grey" dir="column">
+                  Stuff
+                </Container>
+              </UserAction>
             </Container>
           </UserActions>
         </PaneFrame>
