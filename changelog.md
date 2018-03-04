@@ -3,6 +3,12 @@
 * There’s now a Publish Flow starting in the Composer
   …
 
+* Editing preview value now propagates changes to the added text bubble
+  Select a piece of text from the transcript, edit it in the preview and add the bubble — you’ll notice how the bubble will feature the edited text.
+
+* Composer Scroll-to-bottom
+  Composer storyline pane (the one in the center) will now scroll to bottom automatically on page load or addition of a new bubble.
+
 ## 02-03-2017
 
 * It is now possible to delete interviewees.

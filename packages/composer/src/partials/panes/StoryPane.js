@@ -1,7 +1,6 @@
+import { array, func, shape, number } from "prop-types";
 import css from "styled-components";
 import React from "react";
-import StayScrolled from "react-stay-scrolled";
-import { array, func, shape, number } from "prop-types";
 
 import {
   Action,
@@ -20,12 +19,8 @@ import {
 } from "interviewjs-styleguide";
 
 const PaneEl = css(Container)`
-  display: flex;
-  flex-direction: column;
   height: 100%;
-  position: relative;
 `;
-
 const PaneHead = css.div`
   bottom: 100%;
   left: 0;
@@ -39,11 +34,17 @@ const PaneBody = css.div`
   height: 100%;
   width: 100%;
   & > * {
-    ${setSpace("pal")};
-    display: block;
     height: 100%;
-    overflow: auto;
-    width: 100%;
+    overflow-y: auto;
+  }
+`;
+const Storyline = css.div`
+  ${setSpace("phl")};
+  ${setSpace("ptl")};
+  height: 100%;
+  overflow-y: auto;
+  & > *:last-child {
+    ${setSpace("pbl")};
   }
 `;
 
@@ -51,7 +52,6 @@ const IntervieweesWrapper = css.div`
   display: inline-block;
   position: relative;
 `;
-
 const IntervieweesAction = css.span`
   ${setSize("s")};
   ${setSpace("mlx")};
@@ -64,12 +64,10 @@ const IntervieweesAction = css.span`
     ${setSize("s")};
   }
 `;
-
 const Interviewees = css.ol`
   display: block;
   text-align: center;
 `;
-
 const Interviewee = css.li`
   border-color: transparent;
   border-radius: ${radius.a};
@@ -101,23 +99,21 @@ export default class StoryPane extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.scrollToBottom = this.scrollToBottom.bind(this);
   }
   componentDidMount() {
-    this.stayScrolled();
+    setTimeout(this.scrollToBottom, 300);
   }
-  componentDidUpdate(prevProps) {
-    const { currentInterviewee } = this.props;
-    if (
-      prevProps.story.interviewees[currentInterviewee].storyline.length <
-      this.props.story.interviewees[currentInterviewee].storyline.length
-    )
-      this.stayScrolled(); // Or: this.scrollBottom
-    // this.scrollBottom(); // Or: this.stayScrolled
+  componentDidUpdate() {
+    setTimeout(this.scrollToBottom, 150);
   }
-  storeScrolledControllers = ({ stayScrolled, scrollBottom }) => {
-    this.stayScrolled = stayScrolled;
-    this.scrollBottom = scrollBottom;
-  };
+  scrollToBottom() {
+    this.anchor.scrollIntoView({
+      behavior: "smooth",
+      block: "end",
+      inline: "end"
+    });
+  }
   render() {
     const { interviewees } = this.props.story;
     const { currentInterviewee } = this.props;
@@ -160,13 +156,8 @@ export default class StoryPane extends React.Component {
           </IntervieweesWrapper>
         </PaneHead>
         <PaneBody>
-          <StayScrolled
-            provideControllers={this.storeScrolledControllers}
-            debug={(msg) => {
-              console.log(msg);
-            }}
-          >
-            {Object.keys(storyline).map((storyItem) => (
+          <Storyline>
+            {Object.keys(storyline).map((storyItem, i) => (
               <BubbleGroup key={storyItem}>
                 <Bubbles persona={storyline[storyItem].role}>
                   <Bubble persona={storyline[storyItem].role}>
@@ -175,7 +166,12 @@ export default class StoryPane extends React.Component {
                 </Bubbles>
               </BubbleGroup>
             ))}
-          </StayScrolled>
+            <div
+              ref={(el) => {
+                this.anchor = el;
+              }}
+            />
+          </Storyline>
         </PaneBody>
       </PaneEl>
     );
