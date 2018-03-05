@@ -3,11 +3,17 @@
 * There’s now a Publish Flow starting in the Composer
   …
 
+* Composer storyline (central pane) can now accommodate user actionable bubbles
+  They differ from regular string bubbles (like interviewee’s bubbles) as need to carry more information (wether they’re skip/explore, custom text label if set, ecc.).
+
+* It is now possible to add user bubbles
+  Both explore/ignore are selectable, one can customise their text labels or select from a library of predefined bubbles.
+
 * Editing preview value now propagates changes to the added text bubble
   Select a piece of text from the transcript, edit it in the preview and add the bubble — you’ll notice how the bubble will feature the edited text.
 
 * Composer Scroll-to-bottom
-  Composer storyline pane (the one in the center) will now scroll to bottom automatically on page load or addition of a new bubble.
+  Composer storyline (central pane) will now scroll to bottom automatically on page load or addition of a new bubble.
 
 ## 02-03-2017
 
