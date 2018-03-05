@@ -5,13 +5,17 @@ import { arrayOf, func, object, shape, string } from "prop-types";
 
 import {
   Action,
+  Actionbar,
   Avatar,
   Container,
+  Dropdown,
+  DropdownContent,
   Icon,
   PageSubtitle,
   PageTitle,
   Separator,
   Text,
+  breakpoint,
   color,
   disselect,
   radius,
@@ -83,18 +87,30 @@ const PageBody = css.div`
 `;
 
 const UserMenu = css.div`
+`;
+const UserDdToggle = css.div`
+  align-content: center;
+  align-items: center;
+  color: ${color.blueM};
+  cursor: pointer;
   display: inline-flex;
   justify-content: center;
-  align-items: center;
-  align-content: center;
+  transition: transform ${time.m};
+  &:active {
+    transform: translateY(1px);
+  }
+  ${Text} {
+    ${setSpace("mrs")};
+    ${breakpoint.onlyphone} {
+      display: none;
+    }
+  }
   ${Avatar} {
     ${setSpace("mrs")};
     border: 2px solid ${color.white};
-    float: left;
     box-shadow: 0 2px 4px ${color.shadowHL};
-  }
-  ${Text} {
-    color: ${color.blueBlk};
+    display: inline-block;
+    float: left;
   }
 `;
 
@@ -135,12 +151,22 @@ export default class ListingView extends Component {
         <PageHead>
           <Container flex={[1, 1, `${100 / 3}%`]} padded>
             <UserMenu>
-              <Avatar image={this.props.user.avatar} size="m" />
-              <Text typo="p4">{this.props.user.name}</Text> — <Action
-                onClick={this.handleLogout}
+              <Dropdown
+                html={
+                  <DropdownContent>
+                    <Action onClick={this.handleLogout} tone="negative">
+                      Sign out
+                    </Action>
+                  </DropdownContent>
+                }
+                position="bottom"
               >
-                Sign out
-              </Action>
+                <UserDdToggle>
+                  <Avatar image={this.props.user.avatar} size="m" />
+                  <Text typo="p4">{this.props.user.name}</Text>
+                  <Icon name="arrow-down" size="x" />
+                </UserDdToggle>
+              </Dropdown>
             </UserMenu>
           </Container>
           <Container flex={[1, 1, `${100 / 3}%`]} align="center">

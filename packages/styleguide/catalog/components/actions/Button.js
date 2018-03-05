@@ -242,8 +242,11 @@ const Button = css.button`
     } else if (!iconic && (primary || secondary || inverted)) {
       return `
         min-height: 40px;
-        & > i {
+        & > i:first-child {
           ${setSpace("mrx")};
+        }
+        & > i:last-child {
+          ${setSpace("mlx")};
         }
       `;
     }
