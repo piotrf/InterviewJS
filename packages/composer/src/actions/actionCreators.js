@@ -46,7 +46,10 @@ export function createInterviewee(storyIndex, payload) {
   return {
     type: "CREATE_INTERVIEWEE",
     storyIndex,
-    payload
+    payload: {
+      ...payload,
+      storyline: []
+    }
   };
 }
 

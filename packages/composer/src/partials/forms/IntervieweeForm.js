@@ -26,13 +26,7 @@ export default class IntervieweeForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      formData: {
-        avatar: this.props.interviewee.avatar,
-        bio: this.props.interviewee.bio,
-        color: this.props.interviewee.color,
-        name: this.props.interviewee.name,
-        title: this.props.interviewee.title
-      },
+      formData: this.props.interviewee,
       formValidation: {
         name: null,
         title: null
