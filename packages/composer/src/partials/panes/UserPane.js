@@ -4,10 +4,12 @@ import React from "react";
 
 import {
   Action,
-  Container,
   Checkbox,
+  Container,
+  Icon,
   Separator,
   TextInput,
+  Tip,
   color,
   font,
   radius,
@@ -225,7 +227,21 @@ export default class UserPane extends React.Component {
                     checked={enableIgnore}
                     onChange={(e) => this.toggleAction("enableIgnore", e)}
                   >
-                    Ignore topic
+                    Ignore{" "}
+                    <Tip
+                      position="bottom"
+                      title="`Ignore` actions allow the reader to skip the closest next group of interviewee bubbles. Use when nesting chats."
+                    >
+                      <Icon
+                        name="info"
+                        style={{
+                          color: color.greyBlk,
+                          marginLeft: "5px",
+                          position: "relative",
+                          top: "2px"
+                        }}
+                      />
+                    </Tip>
                   </Checkbox>
                 </Container>
                 <Container flex={[2, 2, "auto"]} fill="grey" dir="column">
@@ -276,7 +292,21 @@ export default class UserPane extends React.Component {
                     checked={enableExplore}
                     onChange={(e) => this.toggleAction("enableExplore", e)}
                   >
-                    Explore topic
+                    Explore{" "}
+                    <Tip
+                      position="bottom"
+                      title="`Explore` actions allow the reader to move on to the next interviewee bubble, simply continue in the story."
+                    >
+                      <Icon
+                        name="info"
+                        style={{
+                          color: color.greyBlk,
+                          marginLeft: "5px",
+                          position: "relative",
+                          top: "2px"
+                        }}
+                      />
+                    </Tip>
                   </Checkbox>
                 </Container>
                 <Container flex={[2, 2, "auto"]} fill="grey" dir="column">
