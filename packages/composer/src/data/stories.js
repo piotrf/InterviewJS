@@ -414,7 +414,8 @@ Good.`,
     interviewees: [
       {
         name: "Barack Obama",
-        bio: "Has bio",
+        bio:
+          "Barack Hussein Obama II (/bəˈrɑːk huːˈseɪn oʊˈbɑːmə/ (About this sound listen);[1] born August 4, 1961) is an American politician who served as the 44th President of the United States from 2009 to 2017. The first African American to assume the presidency, he was previously the junior United States Senator from Illinois from 2005 to 2008. He served in the Illinois State Senate from 1997 until 2004.",
         title: "44th President of the US",
         avatar: OBAMA,
         color: "blue",
