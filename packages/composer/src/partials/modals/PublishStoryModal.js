@@ -32,8 +32,7 @@ export default class PublishStoryModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      step: 0, // TODO revert to 0
-      storyCreated: false
+      step: 0 // TODO revert to 0
     };
     this.handleStep0 = this.handleStep0.bind(this);
     this.handleStep1 = this.handleStep1.bind(this);
@@ -42,7 +41,7 @@ export default class PublishStoryModal extends Component {
   }
   handleStep0(data) {
     this.props.updateStory(data, this.props.storyIndex);
-    this.setState({ step: this.state.step + 1, storyCreated: true });
+    this.setState({ step: this.state.step + 1 });
   }
   handleStep1(data) {
     this.props.updateStory(data, this.props.storyIndex);
@@ -174,7 +173,8 @@ PublishStoryModal.propTypes = {
   stories: arrayOf(object),
   storyIndex: number.isRequired,
   updateInterviewee: func.isRequired,
-  updateStory: func.isRequired
+  updateStory: func.isRequired,
+  story: object.isRequired
 };
 
 PublishStoryModal.defaultProps = {
