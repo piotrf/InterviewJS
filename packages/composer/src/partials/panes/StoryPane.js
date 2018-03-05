@@ -12,7 +12,6 @@ import {
   Icon,
   Separator,
   Tip,
-  color,
   radius,
   setSize,
   setSpace,
@@ -100,36 +99,6 @@ const Interviewee = css.li`
   border-color: ${intervieweeColor || skin.speakerColor};
   `
       : ``}
-`;
-
-const BubbleActions = css.div`
-  ${({ binary }) =>
-    binary
-      ? `
-    display: flex;
-    jusitfy-content: flex-end;
-  `
-      : `
-    & > * {
-      max-width: none;
-      width: auto;
-    }
-    & > *:first-child {
-      border-rigth: 1px solid ${color.greyHL};
-    }
-  `};
-  & > * {
-      max-width: none;
-      width: auto;
-  }
-  & > *:first-child {
-    ${setSpace("mrx")};
-    margin-left: 0;
-  }
-  & > *:last-child {
-    ${setSpace("mlx")};
-    margin-right: 0;
-  }
 `;
 
 export default class StoryPane extends React.Component {

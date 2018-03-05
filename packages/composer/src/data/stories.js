@@ -399,15 +399,14 @@ Good.`,
     ]
   },
   {
-    title: "Obamacare — One Year In",
+    title: "Interviewing US Presidents",
     id: "0bf34b30-743b-46ab-9788-c875326d86f6",
-    author: "Piotr F",
-    authorLink: "https://twitter.com/presentday",
-    pubDate: "11-03-2017",
+    author: "George Stephanopoulos",
+    authorLink: "",
+    pubDate: "November 12, 2015",
     modDate: 1514949999478,
-    intro:
-      "Investigate whether Obamacare can make healthcare better for America’s poor",
-    context: "Context",
+    intro: "",
+    context: "",
     cover: "",
     logo: "",
     attachments: [{ url: "", id: "" }],
@@ -419,513 +418,161 @@ Good.`,
         title: "44th President of the US",
         avatar: OBAMA,
         color: "blue",
-        srcText: `OBAMA: All right, everybody. Good afternoon. This is the most wonderful press conference of the year. I have got a list of who has been naughty and nice to call on. But let me first make a couple of quick points and then I will take your questions.
+        srcText: `STEPHANOPOULOS: Okay, Mr. President, thank you for doing this.
 
-Typically I use this year-end press conference to review how far we have come over the course of the year. Today, understandably, I'm going to talk a little bit about how far we have come over the past eight years.
+PRESIDENT BARACK OBAMA: Great to be here, George.
 
-As I was preparing to take office, the unemployment rate was on its way to 10 percent. Today it is at 4.6 percent, the lowest in nearly a decade. We've seen the longest streak of job growth on record, and wages have grown faster over the past few years than at any time in the past 40.
+STEPHANOPOULOS: Let's talk about ISIS to begin with. Did they bring down that Russian plane?
 
-When I came into office, 44 million people were uninsured. Today we have covered more than 20 million of them. For the first time in our history, more than 90 percent of Americans are insured.
+OBAMA: Well, we don't know that yet. It is a possibility
 
-In fact, yesterday was the biggest day ever for health care.gov, more than 670,000 Americans signed up to get covered, and more are signing up by the day.
+STEPHANOPOULOS: Just a possibility?
 
-We've cut our dependence on foreign oil by more than half, doubled production of renewable energy, enacted the most sweeping reforms since FDR to protect consumers and prevent a crisis on Wall Street from punishing main street ever again.
+OBAMA: Well, we don't know. I think we're still looking at all the details. Any kind of aviation tragedy like this requires a lot of forensic work. It becomes more difficult when we're not actively involved on the ground. We are offering full cooperation with the Egyptians, with the Russians and others. But a lot of this is peace work. But there's a possibility that they may have taken place.
 
-None of these actions stifled growth as critics are predicted. Instead, the stock market has nearly tripled.
+STEPHANOPOULOS: A lot of the intelligence community seems to think it's more of a probability. Adam Schiff, the ranking Democrat on House Intelligence Committee thinks it is. And he told me last week that this would mean that ISIS has fully eclipsed Al Qaeda as the greatest terror threat in the world. Is that right?
 
-Since I signed Obamacare into law, our businesses have added more than 15 million new jobs, and the economy undoubtedly more durable than it was in the days when we relied on oil from unstable nations and banks took risky bets with your money.
+OBAMA: Well, number one, I think it's premature, but it is a possibility. Number two, what we've known for a long time, since the duration of my presidency and before that, is that a small network of people if they've got some skills and bomb making capabilities can carry out some big damage.
 
-Add it all up, and last year the poverty rate fell at the fastest rate in almost 50 years, while the median household income grew at the fastest rate on record. In fact, income gains were actually larger for households at the bottom and the middle than for those at the top.
+And this is why we have ramped up our aviation security not just here in the United States but overseas. If there's a carrier coming here, then we're working with that airlines and that airport to make sure that they've got certain procedures. Now, we don't fly directly over the Sinai to the United States, and as a consequence we don't have those same arrangements at those airports.
 
-And we have done all this while cutting our deficits by nearly two-thirds, and protecting vital investments that grow the middle class.
+But this is something that we have known is a consistent vulnerability in this modern era. And that's part of the reason why we invest so much in not only putting safeguards in place but also learning each time there's an incident like this to see how this might have happened.
 
-In foreign policy, when I came into office we were in the midst of two wars. Now nearly 180,000 troops are down to 15,000. Bin Laden, rather than being at large, has been taken off the battlefield, along with thousands of other terrorists.
+STEPHANOPOULOS: But if ISIS with affiliates in so many countries right now, even Afghanistan, if they decided now to go to international terror, that's a game changer, isn't it?
 
-Over the past eight years no foreign terrorist organization has successfully executed an attack on our homeland that was directed from overseas. Through diplomacy, we have ensured Iran cannot obtain a nuclear weapon without going to war with Iran.
+OBAMA: Well I have to tell you, George AQAP in Yemen Al Qaeda in Yemen we know has had plots consistently over the last several years to try to bring down an airliner. I think that one of the challenges of these international terrorist organizations is that they don't have to have a huge amount of personnel. If there's a crack in the system, then they potentially can exploit it. And they are looking for these cracks to exploit.
 
-We opened up a new chapter with the people of Cuba. And we have brought nearly 200 nations together around a climate agreement that could very well save this planet for our kids.
+What makes ISIL the challenge that it is right now is primarily the fact that they're occupying territory in two countries that aren't governed effectively in those spaces. All right, so in Iraq, when you get into the Sunni areas of Iraq there's not strong governance. In Syria, obvious in the midst of civil war, there is a total breakdown of order. And their ability to sustain themselves in those areas are the primary and principle concern we have.
 
-And almost every country on Earth sees America as stronger and more respected today than they did eight years ago. In other words, by so many measures our country is stronger and more prosperous than it was when we started. It is a situation that I'm proud to leave for my successor. And it's thanks to the American people, to the hard work that you have put in, the sacrifices you have made for your families and your communities, the businesses that you started or invested in, and the way you looked out for one another. And I could not be prouder to be your president.
+STEPHANOPOULOS: Do you think it means
 
-Of course, to tout this progress does not mean that we are not mindful of how much more there is to do. In this season in particular, we are reminded that there are people who are still hungry, people who are still homeless, people who still have trouble paying the bills or finding work after being laid off.
+OBAMA: with respect to ISIL.
 
-There are communities that are still mourning those who have been stolen from us by senseless gun violence, and parents who still are wondering how to protect their kids.
+STEPHANOPOULOS: that Vladimir Putin will start to take them on?
 
-OBAMA: And after I leave office I intend to continue to work with organizations and citizens doing good across the country on these and other pressing issues to build on the progress that we have made.
+OBAMA: Well Putin, I think, from the start has been sincere in seeing ISIL as a threat. The reason he went into Syria is not primarily because of ISIL, but to prop up Assad. And part of our goal is to underscore for him and for everyone in the region that ISIL is the primary threat and you can't solve the ISIL problem if, in fact, you've got a country that is governed by somebody who's illegitimate and that the majority of Syrians reject.
 
-Around the world as well, there are hotspots where disputes have been intractable, conflicts have flared up, and people, innocent people are suffering as result, and nowhere is this more terribly true than in the city of Aleppo. For years, we've worked to stop the civil war in Syria and alleviate human suffering. It has been one of the hardest issues that I've faced as president.
+STEPHANOPOULOS: Big meeting this weekend. Can you convince him?
 
-The world as we speak is united in horror at the savage assaults by the Syrian regime and its Russian and Iranian allies on the city of Aleppo. We have seen a deliberate strategy of surrounding, besieging and starving innocent civilians. We've seen relentless targeting of humanitarian workers and medical personnel, entire and neighbors reduced to rubble and dust. There are continuing reports of civilians being executed. These are all horrific violations of international law.
+OBAMA: What's interesting is we've already seen I think a growing awareness on the part of the Russians after several weeks now of fairly high paced bombing that they're not going to win this militarily. I think they understand that. They may not admit it publicly, but you're already starting to see indications of that.
 
-Responsibility for this brutality lies in one place alone, with the Assad regime and its allies, Russia and Iran, and this blood and these atrocities are on their hands. We all know what needs to happen. There needs to be an impartial international observer force in Aleppo that can help coordinate an orderly evacuation through say corridors. There has to be full access for humanitarian aid, even as the United States continues to be the world's largest donor of humanitarian aid to the Syrian people. And beyond that, there needs to be a broader cease-fire that can serve as the basis for a political rather than a military solution.
+And it is a modestly positive sign that they've engaged with us, the Saudis the Turks and others to try to broker a political transition plan. Now, they have not yet come to the conclusion that Assad can't be part of a new Syria. And I think it's going to take some time for them to get there. But our goal here, and John Kerry, I think's, done outstanding work in starting to create a platform and a set of principles whereby we agree that a political s solution is what's required, that it has to be inclusive, that there's going to be a transition phase.
 
-That's what the United States is gonna continue to push for, both with our partners and through multilateral institutions like the U.N.
+And, by bringing in the Iranians and the Russians, which is tough for us and tough for a number of our coalition allies they're now at the table. We're starting to shape who are the groups that could responsibly govern Syria. And if we can keep pushing on that diplomatic track even as we're squeezing ISIL in places like the Sinjar operation that's currently taking place then what you see over the course of the next year is I think the possibility that our 60-member coalition and the approach that we're taking is one that Russia determines
 
-Regretfully, but unsurprisingly, Russia has repeatedly blocked the Security Council from taking action on these issues, so we're gonna keep pressing the Security Council to help improve the delivery of humanitarian aid to those who are in such desperate need and ensure accountability, including continuing to monitor any potential use of chemical weapons in Syria.
+(OVERTALK)
 
-And we're gonna work in the U.N. General Assembly as well, both on accountability and to advance a political settlement because it should be clear that although you may achieve tactical victories, over the long-term, the Assad regime cannot slaughter its way to legitimacy. That's why we'll continue to press for a transition to a more representative government, and that's why the world must not avert our eyes to the terrible events that are unfolding.
+STEPHANOPOULOS: But the coalition hasn't all stepped up. And some of your critics say, even your friendly critics say, like Fareed Zakaria, that what you have on the ground now is not going to be enough. Every couple of months you're going to be faced with the same choice of back down or double down.
 
-The Syrian regime and its Russian and Iranian allies are trying to obfuscate the truth. The world should not be fooled and the world will not forget.
+OBAMA: I think what is true is that this has always been a multi-year project precisely because the governance structures in the Sunni areas of Iraq are weak, and there are none in Syria. And we don't have ground forces there in in sufficient numbers so simply march into Al-Raqqah in Syria and clean the whole place out. And as a consequence, we've always understood that our goal has to be militarily constraining ISIL's capabilities, cutting off their supply lines, cutting off their financing at the same time as we're putting a political track together in Syria and fortifying the best impulses in Baghdad so that we can, not just win militarily, but also win by improving governance
 
-So even in a season where the incredible blessings that we know as Americans are all around us, even as we enjoy family and friends and are reminded of how lucky we are, we should also be reminded that to be an American involves bearing burdens and meeting obligations to others. American values and American ideals are what will lead the way to a safer and more prosperous 2017, both here and abroad. And by the way, you (ph) embody those values and ideals like our brave men and women in uniform and their families.
+(OVERTALK)
 
-So I just want to close by wishing all of them a very merry Christmas and a happy new year.
+STEPHANOPOULOS: And that's the strategy you've been following. But ISIS is gaining strength, aren't they?
 
-With that, I will take some questions, and I'm gonna start with Josh Lederman of A.P.
+OBAMA: Well, no, I don't think they're gaining strength. What is true is that from the start our goal has been first to contain, and we have contained them. They have not gained ground in Iraq. And in Syria it they'll come in, they'll leave. But you don't see this systematic march by ISIL across the terrain.
 
-QUESTION: Thank you, Mr. President.
+What we have not yet been able to do is to completely decapitate their command and control structures. We've made some progress in trying to reduce the flow of foreign fighters. But one of the things that I'll be talking about when I see President Erdogan in Turkey and discuss this with the G20 is that we've still got to do more work in controlling the border so that the influx of foreign fighters is much more reduced.
 
-There's a perception that you're letting President Putin get away with interfering in the U.S. election and that a response that nobody knows about (inaudible) don't cut it. Are you prepared to call out President Putin by name for ordering (inaudible)? And do you agree with Hillary Clinton now says, that the hacking was actually partially responsible for her loss?
+And you know, what we also have to do is frankly work with the Iraqis to strengthen their capabilities. Because one of the big challenges throughout this campaign has been that the Iraqi military has proven itself to be effective in protecting Baghdad. But it's much harder for them, because they're primarily Shia, to move out into Sunni areas. And part of our goal has to be to recruit more effective Sunni partners in Iraq to really go on offense rather than simply engage in defense.
 
-And is your administration open to correlate with Trump and his team on this issues, tarnishing (ph) the smooth transition of power that you have promised?
+STEPHANOPOULOS: So what do you think when you hear someone like Ben Carson get up in a debate and say, "Hey, this would be easy. We can take ISIL out just by bombing their oil fields in Anbar," that's what a general told him.
 
-OBAMA: Well, first of all, with respect to the transition, I think they would be the first to acknowledge that we have done everything we can to make sure that they are successful, as I promised, and that will continue. And it's just been a few days since I last talked to the president-elect about a whole range of transition issues. That cooperation's gonna continue.
+OBAMA: Yeah. What I think is that he doesn't know much about it. And look George, I think it's fair to say that over the last several years I've had access to all the best military minds in the country and all the best foreign policy minds in the country. And I'm not running for office. And so my only interest is in success.
 
-OBAMA: There hasn't been a lot of squabbling. What we've simply said is the facts, which are that based on uniform intelligence assessments, the Russians were responsible for hacking the DNC and that as a consequence, it is important for us to review all elements of that and make sure that we are preventing that kind of interference through cyber attacks in the future. That should be a bipartisan issue, that shouldn't be a partisan issue.
+And if I'm down in the Situation Room talking with people who have worked in these regions and have run major military operations from the chairman of my joint chiefs of staff Joe Dunford to, you know, individuals like General Allen, who was involved in Iraqi operations back in 2007/2008, and they don't think it's easy, then it's probably not easy.
 
-And my hope is that the president-elect is going to similarly be concerned with making sure that we don't have a potential foreign influence in our election process. I don't think any American wants that. And that shouldn't be a source of an argument.
+And what we've been able to do is to shape a strategy that first and foremost contained the momentum that ISIL had gained. We are now in a position where slowly, incrementally we're pushing back against areas where we know we've got some solid partners like the Kurds and the Peshmerga. But until we get the Syria political situation resolved and until Assad is no longer a lightning rod for Sunnis in Syria and the that entire region is not longer a proxy war for Shia/Sunni conflict we're going to continue to have problems
 
-I think that part of the challenge is that it gets caught up in the carryover from election season. And I think it is very important for us to distinguish between the politics of the election and the need for us as a country, both from a national security perspective but also in terms of the integrity of our election system and our democracy to make sure that we don't create a political football here.
+STEPHANOPOULOS: That could take a generation.
 
-Now, with respect to how this thing unfolded last year, let's just go through the facts pretty quickly. At the beginning of the summer, were alerted to the possibility that the DNC has been hacked. And I made (ph) an order, law enforcement, as well as our intelligence teams to find out everything about it, investigate it thoroughly to brief the potential victims of this hacking, to brief on a bipartisan basis the leaders of both the House and the Senate and the relevant intelligence committees.
+OBAMA: Well I would distinguish between making sure that the place is perfect. That's not going to happen anytime soon with making sure that ISIL continues to shrink in its scope of operations until it no longer poses the kind of threat that it does, not just primarily to us, but to neighbors in the region like Jordan or Saudi Arabia and that the humanitarian crisis that's taking place with millions of people who are fleeing the country that that can be relieved.
 
-And once we had clarity and certainty around what in fact had happened, we publicly announced that in fact Russia had hacked into the DNC. And at that time, we did not attribute motives or you know any interpretations of why they had done so.
+STEPHANOPOULOS: You're not running for office. But as you know, the Republican candidates are putting your foreign policy on the ballot. They say the Obama/Clinton legacy is a more dangerous world because you're weak and America has failed to lead. If you were up on that stage, how would you respond?
 
-We didn't discuss what the effects of it might be. We simply let people know -- the public know just as we had let members of Congress know that this had happened.
+OBAMA: Well, what I would say is that America is not weaker; it's stronger around the world than when I came into office. And that can be measured by the influence that we have on a whole range of transnational issues, the cooperation that we get on not just counterterrorism, but on critical issues like climate change the work that we're doing in Asia that I'll be traveling to talk about in terms of creating the kinds of rule based systems that preserve our freedom of navigation and try to push back against Chinese efforts that may threaten the peace and prosperity of the region.
 
-And as a consequence, all of you wrote a lot of stories about both what had happened and then you interpreted why that might have happened and what effect it was going to have on the election outcomes. We did not -- and the reason we did not was because in this hyper-partisan atmosphere, at a time when my primary concern was making sure that the integrity of the election process was not in any way damaged, at a time when anything that was said by me or anybody in the White House would immediately be seen through a partisan lens. I wanted to make sure that everybody understood we were playing this thing straight, that we weren't trying to advantage one side or another. But what we were trying to do was let people know that this had taken place.
+You know, there was a lot of talk among these Republicans about the success of Putin's strategy in the Ukraine. But in fact, because we were able to mobilize the entire international community, we've been able to you know, not only reduce the fighting in Ukraine, but now we're still on track to potentially resolve that peacefully. So you know, one of the things that's striking to me, George, is that pub public opinion around the world about the United States is significantly higher than it was when I came into office.
 
-And so if you started seeing effects on the election, if you were trying to measure why this was happening and how you should consume the information that was being leaked, that you might want to take this into account. And that's exactly how we should have handled it.
+We have not seen the kinds of big threats against the United States that sadly we saw during something like 9/11. We've been able to take more than 180,000 troops or 150, 60, 70,000 troops out of harm's way while still maintaining coalition partnerships. And in everywhere from Latin America to Africa we helped to shape the agenda for a more peaceful, prosperous world. So when you hear rhetoric like this, George, about America's never been in greater danger that's rhetoric. That's campaign talk.
 
-Imagine if we had done the opposite, it would become immediately just one more political scrum. And part of the goal here was to make sure that we did not do the work of the leakers for them by raising more and more questions about the integrity of the election right before the election was taking place -- at a time, by the way, when the president-elect himself was raising questions about the integrity of the election.
+STEPHANOPOULOS: But when you think about it, when you reflect on it, where have you fallen short? You didn't expect to have several thousand troops in Afghanistan, more than 3,500 troops in Iraq.
 
-And finally, I think it's worth pointing out, that the information was already out. It was in the hands of Wikileaks, so that was going to come out no matter what.
+OBAMA: Well, I think actually in Afghanistan let's take Afghanistan as an example. I don't think any of us were ever under any illusion that we could withdraw every single troop out of Afghanistan and that country, which is one of the poorest in the world, that has gone through 30 or 40 year so fighting would be completely stable.
 
-What I was concerned about in particular was making sure that that wasn't compounded by potential hacking that could hamper vote counting, affect the actual election process itself.
+Our very premise, our strategy was always that we were going to have to provide the kinds of advice the kinds of training, the kinds of military support that would be required so that this nascent democracy began to work. And that's exactly what we're doing. I when I consider where we have fallen short, what is absolutely true is that in the Middle East and in Syria in particular the you know, enormous changes that took place post Arab Spring were ones that don't happen, you know, every ten years. They happen every 50, 60, 70 years. And we have not been able to get the kind of success on the ground with countries that were fragile to begin with that were governed by dictators to create the kind of civil society that would allow for a functioning, if not perfectly democratic, then at least civil society and government.
 
-And so in early September when I saw President Putin in China, I felt that the most effective way to ensure that that did not happen was to talk to him directly and tell him to cut it out, there were going to be some serious consequences if he did not.
+And you know, that's humbling. But it's hard. And when you hear the Republicans talk about well, you know, we'd go in and fix this right away. We're going to win in Middle East. What's clear is that you don't have any sense of how difficult it is. And they don't have a lot of sense of history, including the recent history of our efforts in places like Afghanistan and Iraq.
 
-And in fact, we did not see further tampering of the election process. But the leaks through Wikileaks had already occurred.
+STEPHANOPOULOS: Lot of talk about immigration as well. Donald Trump is speaking about history. He wants to bring back Operation Wetback from President Eisenhower and deportation force. What would that mean?
 
-So when I look back in terms of how we handled it, I think we handled it the way it should have been handled. We allowed law enforcement and the intelligence community to do its job without political influence.
+OBAMA: Well, I think the name of the operation tells you something about the dangers of looking backwards. And the notion that we're going to deport 11, 12 million people from this country, first of all I have no idea where Mr. Trump thinks the money's going to come from. It would cost us hundreds of billions of dollars to execute that. Imagine the images on the screen flashed around the world as we were dragging parents away from their children and putting them in what, detention centers and then systematically sending them out. Nobody thinks that that is realistic, but more importantly, that's not who we are as Americans.
 
-We briefed all relevant parties involved in terms of what was taking place. When we had a consensus around what had happened, we announced it, not through the White House, not through me, but rather through the intelligence communities that had actually carried out these investigations.
+STEPHANOPOULOS: What do you think when you hear people cheer for that?
 
-And then we allowed you and the American public to make an assessment as to how to weigh that going into the election.
+OBAMA: Well, what I think is that there's always been a strain of anti-immigrant sentiment in America, ironically from folks who themselves two generations back or even one generation back were immigrants themselves. And it's the job of leaders not to play into that sentiment. Now, those sentiments get stronger when people feel insecure.
 
-And the truth is, is that there was nobody here who did not have some sense of what kind of effect it might have. I am finding it a little curious that everybody is suddenly acting surprised that this looked like it was disadvantaging Hillary Clinton, because you guys wrote about it every day, every single leak about every little juicy tidbit of political gossip, including John Podesta's risotto recipe.
+And given what happened in 2007, 2008, given the fact that despite the recovery, I think people still have some post-traumatic stress and are still concerned about prospects for jobs and economic security in the future it's easy to play on those fears. But that's not that's not what you want from your president.
 
-This was an obsession that dominated the news coverage. So I do think it is worth us reflecting how it is that a presidential election of such importance, of such moment, with so many big issues at stake and such a contrast between the candidates came to be dominated by a bunch of these leaks.
+And to their credit Republican and as well as Democratic senators and or presidents in the past, including Ronald Reagan, including George H.W. Bush, including George W. Bush have understood that we are a nation of laws, but we're also a nation of immigrants and that proposing radical and necessarily cruel solutions to a problem that can be solved by some good, old-fashioned legislation of the sort that passed on a bipartisan basis in the Senate and I would've been able to sign two years ago if the House Republicans had allowed it to come to the floor 'cause there was a majority on that floor to vote for it we don't want I think, a president or any person in a position of leadership to play on those kinds of fears.
 
-What is it about our political system that made us vulnerable to these kinds of potential manipulations which, as I've said publicly before, were not particularly sophisticated. This was not some elaborate, complicated espionage scheme.
+STEPHANOPOULOS: You say we're a nation of laws. On the issue of Guantanamo, one of your big promises, closing Guantanamo Speaker Ryan says you can't close it on your own, don't have the authority. He says the law is the law. Do you have the authority to close it on your own?
 
-They hacked into some Democratic Party e-mails that contained pretty routine stuff, some of it embarrassing or uncomfortable because I suspect that if any of us got our emails hacked into there might be some things that we would not want suddenly appearing on the front page of a newspaper or a telecast, even if there was not anything particularly illegal or controversial about it.
+OBAMA: Well, here's what I know is that we need to close it. That's not just my opinion. If you take a survey of retired generals folks who are currently in uniform they will tell you that this is a consistent recruitment tool for jihadists. It is contrary to our values. It costs huge amounts of money. And it's not sustainable
 
-And then it just took off. And that concerns me, and it should concern all of us. But the truth of the matter is, is that everybody had the information. It was out there, and we handled it the way we should have.
+OBAMA: so it is my--
 
-Now, moving forward, I think there are a couple of issues that this raises. Number one is just the constant challenge that we are going to have with cyber security throughout our economy and throughout our society.
+STEPHANOPOULOS: did on your own.
 
-We are a digitalized culture. And there's hacking going on every single day. There is not a company, there is not a major organization, there is not a financial institution, there is not a branch of our government were somebody is not going to be fishing for something or trying to penetrate or put in a virus or malware.
+OBAMA: So it is my job to, first and foremost, work with Congress to try to find a solution. And what we've been able to do during the course of this administration is to systematically transfer and draw down the numbers who are there. My hope is that by the end of this year we are seeing close to under 100 prisoners remaining and detainees remaining. And then my intention is to present to Congress a sensible, plausible plan that will meet our national security needs and be consistent with who are
 
-And this is why for the last eight years I have been obsessed with how do we continually upgrade our cyber security systems. And this particular concern around Russian hacking is part of a broader set of concerns about how do we deal with cyber issues being used in ways that can affect our infrastructure, affect the stability of our financial systems, and affect the integrity of our institutions like our election process.
+STEPHANOPOULOS: And when they say no?
 
-I just received, a couple of weeks back, it wasn't widely reported on, a report from our cyber-security commission that outlines a whole range of strategies to do a better job on this. But it's difficult because it's not all housed -- the target of cyberattacks is not one entity, but it's widely dispersed and a lot of it is private, like the DNC. You know, it's not a branch of government. We can't tell people what to do.
+OBAMA: Well they I'm not going to one of the things that I've been consistently trying to do is to give Congress the chance to do the right thing before I then look at my next options. And Congress is going to have an opportunity, I think when they look at the numbers, when they look at how much it costs for us to detain these individuals, when they hear from both current and retired military officers who say this is not what we should be doing they're going to have the ability to make their own assumptions.
 
-What we can do is inform them, get best practices. What we can also do is to on a bilateral basis warn other countries against these kinds of attacks, and we've done that in the past. So just as I told Russia to stop it and indicated there will be consequences when they do it, the Chinese have in the past engaged in cyberattacks directed at our companies to steal trade secrets and proprietary technology, and I had to have the same conversation with President Xi. And what we've seen is some evidence that they have reduced but not completely eliminated these activities, partly because they can use cutouts. One of the problems with the internet and cyber issues is there's not always a return address, and by the time you catch up to it, you know, attributing what happened to a particular government can be difficult, not always provable in court, even tough our intelligence communities can make an assessment.
+STEPHANOPOULOS: So you're not ruling out doing it on your own?
 
-What we've also tried to do is to start creating some international norms about this to prevent some sort of cyber arms race because we obviously have offensive capabilities as well as defensive capabilities, and my approach is not a situation which everybody's worse off because folks are constantly attacking each other back and forth, but putting some guardrails around behavior of nation states, including our adversaries, just so that they understand that whatever they do to us, we can potentially do to them.
+OBAMA: My job right now is to make sure that Congress has a chance to look at a serious plan and look at all the facts and we'll take it from there.
 
-We do have some special challenges because oftentimes, our economy is more digitalized. It is more vulnerable partly because we're a wealthier nation and we're more wired than some of these other countries and we have a more open society and engage in less control and censorship over what happens over the internet, which is also part of what makes us special.
+STEPHANOPOULOS: Will you rule out executive action?
 
-Last point, and the reason I'm going on here is because I know that you guys have a lot of questions about this and I addressed all of you directly about this. With respect to response, my principal goal leading up to the election was making sure that the election itself went off without a hitch, that it was not tarnished and that it did not feed any sense in the public that somehow, tampering had taken place with the actual process of voting and we accomplished that. That does not mean that we are not going to respond, it simply meant that we had a set of priorities leading up to the election that were of the utmost importance.
+OBAMA: We'll take it from there.
 
-Our goal continues to be to send a clear message to Russia or others not to do this to us because we can do stuff to you, but it is also important for us to do that in a thoughtful, methodical way. Some of it, we do publicly. Some of it, we will do in a way that they know but not everybody will. And I know that there have been folks out there who suggests somehow that if we went out there and made big announcements and thumped our chests about a bunch of stuff, that somehow that would potentially spook the Russians.
+STEPHANOPOULOS: You've called Hillary Clinton a good friend, strong friend, one of America's finest secretaries of state and said she'd make a great president. So is it fair for Democrats to conclude she's your candidate?
 
-But keep in mind that we already have enormous numbers of sanctions against the Russians. The relationship between us and Russia has deteriorated, sadly, significantly over the last several years. And so how we approach an appropriate response that increases costs for them for behavior like this in the future but does not create problems for us is something that's worth taking the time to think through and figure out. And that's exactly what we've done.
+OBAMA: (LAUGH) George, I'm not going to make endorsements when, you know, I've said in the past it's important for the process to play itself out. I think Dem I think Hillary's doing great. I think, you know, Bernie Sanders is really adding to this debate--
 
-So, at a point in time where we've taken certain actions that we can divulge publicly, we will do so. There are times where the message will be directly received by the Russians and not publicized. And I should point out by the way, part of why the Russians have been effective on this is because they don't go around announcing what they're doing. It's not like Putin's gone around the world publicly saying, look what we did. Wasn't that clever? He denies it.
+STEPHANOPOULOS: Would he make a great president?
 
-So the idea that somehow public shaming is gonna be effective, I think doesn't read the -- the thought process in Russia very well. OK.
+OBAMA: -- in a very serious way. You know, I think Bernie is capturing a sense among the American people that they want to know the government's on their side, that it's not bought and paid for, that you know, our focus has to be on hard working, middle class Americans not getting' a raw deal. And I think that is in in incredibly important. I think Martin O'Malley has important things to say. So we'll let this process play out. I am confident that we're going to have a good, strong Democratic candidate, and that they'll be able to win in November.
 
-QUESTION: Did Clinton lose because of the hacking?
+STEPHANOPOULOS: Finally-- when you were a student, you spoke out, you protested apartheid in South Africa. If you were on the campus of University of Missouri today, would you be a protestor?
 
-OBAMA: I'm gonna let all the political pundits in this town have a long discussion about what happened in the election. It was a fascinating election. So, you know, I'm sure there are gonna be a lot of books written about it. I've said what I think is important for the Democratic Party going forward, rather than try to parse every aspect of the election.
+OBAMA: (SIGH) Without knowing all the facts I've read enough to know that there is clearly a problem at-- the University of Missouri. And, that's not just coming from students. That's coming from some faculty. And I think it is entirely appropriate for students in a thoughtful, peaceful way to protest-- what they see as injustices or inattention to serious problems in their midst. I want-- an activist student body just like I want an activist citizenry. And-- the issue is just making sure that-- even as these young people are getting engaged, getting involved, speaking out-- that they're also listening. And, you know I'd rather see them err on the side of activism than being passive. I think that what you saw with the University of Missouri football team, and the coach, you know, standing up for something that they think is right-- harkens back to a powerful tradition that helped to bring about great change in this country. But I also want to make sure that they understand that being a good citizen being an activist involves hearing the other side--
 
-And I -- I've said before, I couldn't be prouder of Secretary Clinton, her outstanding service and she's worked tirelessly on behalf of the American people and I don't think she was treated fairly during the election. I think the coverage of her and the issues was troubling, but having said that, what I've been most focused on -- appropriate for the fact I am not going to be a politician in about -- what is it, 32 days, 31, 34?
+STEPHANOPOULOS: See, that's what I wanted to ask you (CROSSTALK)
 
-(LAUGHTER)
+OBAMA: --and making sure that you are engaging in a dialogue, because that's also how change happens. The civil rights movement happened because there was civil disobedience, because people were willing to get to go to jail, because there were events like Bloody Sunday. But it was also because the leadership of the movement consistently stayed open to the possibility of reconciliation and sought to understand the views even views that were appalling to them of the other side.
 
-What I've said is that I can maybe give some counsel advice to the Democratic Party. And I think the -- the -- the thing we have to spend the most time on -- because it's the thing we have most control over -- is, how do we make sure that we're showing up in places where I think Democratic policies are needed, where they are helping, where they are making a difference, but where people feel as if they're not being heard?
+STEPHANOPOULOS: Because there does seem to be a strain on some of these campuses of a kind of militant political correctness where you shut down the other side.
 
-And where Democrats are characterized as coastal, liberal, latte- sipping, you know, politically correct, out-of-touch folks, we have to be in those communities. And I've seen that, when we are in those communities, it makes a difference. That's how I became president. I became a U.S. Senator not just because I had a strong base in Chicago, but because I was driving downstate Illinois and going to fish fries and sitting in V.F.W. Halls and talking to farmers.
+OBAMA: And I disagree with that. And, it's interesting. You know, I've now got, you know, daughters who-- one is about to go to college-- the other one's-- you know, going to be on her way in a few years. And then we talk about this at the dinner table.
 
-And I didn't win every one of their votes, but they got a sense of what I was talking about, what I cared about, that I was for working people, that I was for the middle class, that the reason I was interested in strengthening unions and raising the minimum wage and rebuilding our infrastructure and making sure that parents had decent childcare and family leave, was because my own family's history wasn't that different from theirs even if I looked a little bit different. Same thing in Iowa.
+And I say to them, "Listen, if you hear somebody using a racial epithet, if you hear somebody who's anti-Semitic, if you see an injustice, I want you to speak out. And I want you to be firm and clear and I want you to protect people who may not have voices themselves. I want you to be somebody who's strong and sees themselves as somebody who's looking out for the vulnerable."
 
-And so the question is, how do we rebuild that party as a whole, so that there's not a county in any state -- I don't care how red -- where we don't have a presence and we're not making the argument, because I think we have a better argument. But that requires a lot of work. You know, it's been something that I've been able to do successfully in my own campaigns.
+But I tell 'em-- "I want you also to be able to listen. I don't want you to think that a display of your strength is simply shutting other people up. And that part of your ability to bring about change is going to be by engagement and understanding the viewpoints and the arguments of the other side." And so when I hear, for example, you know, folks on college campuses saying, "We're not going to allow somebody to speak on our campus because we disagree with their ideas or we feel threatened by their ideas--" you know, I think that's a recipe for dogmatism. And I think you're not going to be as effective. And so, but I want to be clear here 'cause, and it's a tough issue because, you know, there are two values that I care about.
 
-OBAMA: It is not something I've been able to transfer to candidates in mid-terms and sort of build a sustaining organization around. That's something I would have liked to have done more of, but it's kind of hard to do when you're also dealing with a whole bunch of issues here in the White House. And that doesn't mean, though, that it can't be done, and I think there are gonna be a lot of talented folks out there, a lot of progressives who share my values, who are gonna be leading the charge in the years to come.
+I care about civil rights and I care about kids not being discriminated against or having swastikas painted on their doors or nooses hung-- thinking it's a joke. I think it's entirely appropriate for-- any institution, including universities, to say, "Don't walk around in black face. It offends people. Don't wear a headdress and beat your chest if Native American students have said, you know, 'This hurts us. This bothers us." There's nothing wrong with that.
 
-Michelle Kosinski (ph) of CNN.
+But we also have these values of free speech. And it's not free speech in the abstract. The purpose of that kind of free speech is to make sure that we are forced to use argument and reason and words in making our democracy work. And you know, the you don't have to be fearful of somebody spouting bad ideas. Just out-argue 'em, beat 'em.
 
-QUESTION: Thank you.
+Make the case as to why they're wrong. Win over adherents. That's how-- that's how things work in-- in-- in a democracy. And I do worry if young people start getting trained to think that if somebody says something I don't like if somebody says something that hurts my feelings that my only recourse is to shut them up, avoid them, push them away, call on a higher power to protect me from that. You know, and yes, does that put more of a burden on minority students or gay students or Jewish students or others in a majority that may be blind to history and blind to their hurt? It may put a slightly higher burden on them.
 
-This week we heard Hillary Clinton talk about how she thinks that the FBI director's most recent announcement made a difference in the outcome of the election. And we also just heard in an op-ed her campaign chairman talk about something being deeply broken within the FBI.
+But you're not going to make the kinds of deep changes in society-- that those students want, without taking it on, in a full and clear and courageous way. And you know, I tell you I trust Malia in an argument. If a knucklehead on a college campus starts talking about her, I guarantee you she will give as good as she gets.
 
-He talked about thinking that the investigation early on was lackadaisical, in his words. So what do you think about those comments? Do you think there's any truth to them? Do you think there's a danger there that they're calling into question the integrity of institutions in a similar way that Donald Trump's team has done?
+STEPHANOPOULOS: Sounds like you've been having some good dinner table conversations. Mr. President, thank you.
 
-And the second part to that is that Donald Trump's team repeatedly -- I guess, given the indication that the investigation of the Russian hack as well as retaliation might not be such a priority once he's in office.
-
-So what do you think the risk is there? And are you going to talk to him directly about some of those comments he made?
-
-OBAMA: Well, on the latter point, as I said before, the transition from election season to governance season is not always smooth. You know, it's bumpy. There are still feelings that are raw out there. There are people who are still thinking how things unfolded. And I get all that.
-
-But when Donald Trump takes the oath of office and is sworn in as the 45th president of the United States, then he has got a different set of responsibilities and considerations.
-
-And I've said this before. I think there is a sobering process when you walk into the Oval Office. And, you know, I haven't shared previously private conversations I've had with the president-elect. I will say that they have been cordial and in some cases have involved me making some pretty specific suggestions about how to ensure that regardless of our obvious deep disagreements about policy, maybe I can transmit some thoughts about maintaining the effectiveness, integrity, cohesion of the office, our various democratic institutions, and he has listened.
-
-I can't say that he will end up implementing, but the conversations themselves have been cordial as opposed to defensive in any way. And I will always make myself available to him just as previous presidents have made themselves available to me as issues come up.
-
-With respect to the FBI, I will tell you, I've had a chance to know a lot of FBI agents. I know Director Comey. They take their job seriously. They work really hard. They help keep us safe and save a lot of lives.
-
-And it is always a challenge for law enforcement when there's an intersection between the work that they are doing and the political system. It's one of the difficulties of democracy generally.
-
-We have a system where we want our law enforcement investigators and our prosecutors to be free from politics, to be independent, to play it straight. But sometimes that involves investigations that touch on politics and particularly in this hyper-partisan environment that we've been in, everything is suspect, everything you do one way or the other.
-
-One thing that I have done is to be pretty scrupulous about not wading into investigation decisions or prosecution decisions or decisions not to prosecute. I have tried to be really strict in my own behavior about preserving the independence of law enforcement, free from my own judgments and political assessments, in some cases. And I don't know why it would stop now.
-
-Mike Dorney (ph) of Bloomberg.
-
-QUESTION: Thank you, Mr. President.
-
-On Aleppo, your views of (ph) what happens there, the responsibility of the Russian government, the Iranian government, the Assad regime (inaudible), but do you, as president of the United States, leader of the free world, feel any personal moral responsibility now at the end of your presidency for the carnage we're all watching in Aleppo, which I'm sure disturbs you (inaudible)?
-
-Secondly, also on Aleppo, you've again made clear your practical disagreements with (inaudible) and President-elect Trump has throughout his campaign, and he said again last night, that he wants to create safe zones in Syria. Do you feel like in this transition, you need to help him toward implementing that or is that not something you need to be doing?
-
-OBAMA: Mike, I always feel responsible. I felt responsible when kids were being shot by snipers. I felt responsible when millions of people had been displaced. I feel responsible for murder and slaughter that's taken place in South Sudan that's not being reported on, partly because there's not as much social media being generated from there.
-
-There are places around the world where horrible things are happening and because of my office, because I'm president of the United States, I feel responsible. I ask myself every single day, is there something I could do that would save lives and make a difference and spare some child who doesn't deserve to suffer. So that's a starting point. There's not a moment during the course of this presidency where I haven't felt some responsibility.
-
-That's true, by the way, for our own country. When I came into office and people were losing their jobs and losing their homes and losing their pensions, I felt responsible and I would go home at night and I would ask myself, was there something better that I could do or smarter that I could be that would make a difference in their lives, that would relieve their suffering and relieve their hardship.
-
-So with respect to Syria, what I have consistently done is taken the best course that I can to try to end the civil war while having also to take into account the long-term national security interests of the United States. And throughout this process, based on hours of meetings -- if you tallied it up, days and weeks of meetings -- where we went through every option in painful detail with maps and we had our military and we had our aid agencies and we had our diplomatic teams, and sometimes, we'd bring in outsiders who were critics of ours.
-
-OBAMA: Whenever we went through it, the challenge was that short of putting large numbers of U.S. troops on the ground uninvited, without any international law mandate, without sufficient support from Congress, at a time when we still had troops in Afghanistan and we still had troops in Iraq and we had just gone through over a decade of war and spent trillions of dollars and when the opposition on the ground was not cohesive enough to necessarily govern a country and you had a military superpower in Russia prepared to do whatever it took to keep its (inaudible) involved and you had a regional military power in Iran that saw their own vital strategic interests at stake and were willing to maintain that territory in the absence of consent from the Syrian government and now the Russians or the Iranians.
-
-So it may be that with Aleppo's tragic situation unfolding that in the short term, if we can get more of the tens of thousands who are still trapped there out , that so long as the world's eyes are on them and they are feeling pressure, the regime in Russia concludes that they are willing to find some arrangement, perhaps in coordination with Turkey, whereby those people can be safe.
-
-Even that will probably be temporary, but at least it solves a short-term issue that's going to arise.
-
-Unfortunately we are not there yet because right now we have Russians and Assad claiming that basically all the innocent civilians who were trapped in Aleppo are out when international organizations, humanitarian organizations who know better and who are on the ground, have said unequivocally that there are still tens of thousands who are trapped and prepared to leave under pretty much any conditions.
-
-And so right now our biggest priority is to continue to put pressure wherever we can to try to get them out.
-
-(CROSSTALK)
-
-OBAMA: Mike, I can't have too much...
-
-QUESTION: (OFF-MIKE) but do you see, responsibility notwithstanding, moving in that direction or help President-elect Trump move in that direction?
-
-OBAMA: I will help President Trump -- President-elect Trump with any advice, counsel, information that we can provide so that he, once he's sworn in, can make a decision.
-
-Between now and then, these are decisions that I have to make based on the consultations that I have with our military and the people who have been working this every single day.
-
-Peter Alexander (ph).
-
-QUESTION: Mr. President, thank you very much.
-
-Can you, given all the intelligence that we have now heard, assure the public this was once and for all a free and fair election? And specifically on Russia, do you feel any obligation now as they have been insisting that this isn't the case to show the proof, as it were? They say, put your money where your mouth is and declassify some of the intelligence and the evidence that exists.
-
-And more broadly, as it relates to Donald Trump on this very topic, are you concerned about his relationship with Vladimir Putin, especially given some of the recent cabinet picks, including his selection for secretary of state, Rex Tillerson, who toasted Putin with champagne over oil deals together? Thank you.
-
-OBAMA: I may be getting older because these multipart questions, I start losing track.
-
-(LAUGHTER)
-
-OBAMA: I can assure the public that there was not the kind of tampering with the voting process that was our concern and will continue to be of concern going forward, that the votes that were cast were counted, they were counted appropriately.
-
-We have not seen evidence of machines being tampered with, so that assurance I can provide.
-
-That doesn't mean that we find every single, you know, potential probe of every single voting machine all across the country, but we paid a lot of attention to it. We worked with state officials, et cetera, and we feel confident that that didn't occur and that the votes were cast and they were counted.
-
-And so that's on that point. What was the second one?
-
-QUESTION: Say more about declassification.
-
-OBAMA: Declassification. Look, we will provide evidence that we can safely provide, that doesn't mean, though, that it can't be done, and I think there are going to be a lot of talented folks out there, a lot of progressives who share my values who are going to be leading the charge in the years to come.
-
-Michelle Kosinski (ph) of CNN.
-
-QUESTION: Thank you.
-
-This week we heard Hillary Clinton talk about how she thinks that the FBI director's most recent announcement made a difference in the outcome of the election. And we also just heard in an op-ed her campaign chairman talk about something being deeply broken within the FBI.
-
-He talked about thinking that the investigation early on was lackadaisical, in his words. So what do you think about those comments? Do you think there's any truth to them? Do you think there's a danger there that they're calling into question the integrity of institutions in a similar way that Donald Trump's team has done?
-
-And the second part to that is that Donald Trump's team repeatedly -- I guess, given the indication that the investigation of the Russian hack as well as retaliation might not be such a priority once he's in office.
-
-So what do you think the risk is there? And are you going to talk to him directly about some of those comments he made?
-
-OBAMA: Well, on the latter point, as I said before, the transition from election season to governance season is not always smooth. You know, it's bumpy. There are still feelings that are raw out there. There are people who are still thinking how things unfolded. And I get all that.
-
-But when Donald Trump takes the oath of office and is sworn in as the 45th president of the United States, then he has got a different set of responsibilities and considerations.
-
-And I've said this before. I think there is a sobering process when you walk into the Oval Office. And, you know, I haven't shared previously private conversations I've had with the president-elect. I will say that they have been cordial and in some cases have involved me making some pretty specific suggestions about how to ensure that regardless of our obvious deep disagreements about policy, maybe I can transmit some thoughts about maintaining the effectiveness, integrity, cohesion of the office, our various democratic institutions, and he has listened.
-
-I can't say that he will end up implementing, but the conversations themselves have been cordial as opposed to defensive in any way. And I will always make myself available to him just as previous presidents have made themselves available to me as issues come up.
-
-With respect to the FBI, I will tell you, I've had a chance to know a lot of FBI agents. I know Director Comey. They take their job seriously. They work really hard. They help keep us safe and save a lot of lives.
-
-And it is always a challenge for law enforcement when there's an intersection between the work that they are doing and the political system. It's one of the difficulties of democracy generally.
-
-We have a system where we want our law enforcement investigators and our prosecutors to be free from politics, to be independent, to play it straight. But sometimes that involves investigations that touch on politics and particularly in this hyper-partisan environment that we've been in, everything is suspect, everything you do one way or the other.
-
-One thing that I have done is to be pretty scrupulous about not wading into investigation decisions or prosecution decisions or decisions not to prosecute. I have tried to be really strict in my own behavior about preserving the independence of law enforcement, free from my own judgments and political assessments, in some cases. And I don't know why it would stop now.
-
-Mike Dorney (ph) of Bloomberg.
-
-QUESTION: Thank you, Mr. President.
-
-On Aleppo, your views of (ph) what happens there, the responsibility of the Russian government, the Iranian government, the Assad regime (inaudible), but do you, as president of the United States, leader of the free world, feel any personal moral responsibility now at the end of your presidency for the carnage we're all watching in Aleppo, which I'm sure disturbs you (inaudible)?
-
-Secondly, also on Aleppo, you've again made clear your practical disagreements with (inaudible) and President-elect Trump has throughout his campaign, and he said again last night, that he wants to create safe zones in Syria. Do you feel like in this transition, you need to help him toward implementing that or is that not something you need to be doing?
-
-OBAMA: Mike, I always feel responsible. I felt responsible when kids were being shot by snipers. I felt responsible when millions of people had been displaced. I feel responsible for murder and slaughter that's taken place in South Sudan that's not being reported on, partly because there's not as much social media being generated from there.
-
-There are places around the world where horrible things are happening and because of my office, because I'm president of the United States, I feel responsible. I ask myself every single day, is there something I could do that would save lives and make a difference and spare some child who doesn't deserve to suffer. So that's a starting point. There's not a moment during the course of this presidency where I haven't felt some responsibility.
-
-That's true, by the way, for our own country. When I came into office and people were losing their jobs and losing their homes and losing their pensions, I felt responsible and I would go home at night and I would ask myself, was there something better that I could do or smarter that I could be that would make a difference in their lives, that would relieve their suffering and relieve their hardship.
-
-So with respect to Syria, what I have consistently done is taken the best course that I can to try to end the civil war while having also to take into account the long-term national security interests of the United States. And throughout this process, based on hours of meetings -- if you tallied it up, days and weeks of meetings -- where we went through every option in painful detail with maps and we had our military and we had our aid agencies and we had our diplomatic teams, and sometimes, we'd bring in outsiders who were critics of ours.
-
-OBAMA: Whenever we went through it, the challenge was that short of putting large numbers of U.S. troops on the ground uninvited, without any international law mandate, without sufficient support from Congress, at a time when we still had troops in Afghanistan and we still had troops in Iraq and we had just gone through over a decade of war and spent trillions of dollars and when the opposition on the ground was not cohesive enough to necessarily govern a country and you had a military superpower in Russia prepared to do whatever it took to keep its (inaudible) involved and you had a regional military power in Iran that saw their own vital strategic interests at stake and were willing to send in as many of their people or proxies to support the regime.
-
-And in that circumstance, unless we were all in and willing to take over Syria, we were going to have problems. And everything else was tempting because we wanted to do something and it sounded like the right thing to do but it was going to be impossible to do this on the cheap. And in that circumstance, I have to make decision as president of the United States as to what is best -- I'm sorry.
-
-What's going on? Somebody's not feeling good. All right. Why don't we have -- we got -- we can get our doctors back there to help out. Somebody want to go to my doctor's office and just send them -- all right. Where was I? So we couldn't do it on the cheap. Now, it may be --
-
-QUESTION: Can we get a doctor in here? Can that be arranged?
-
-OBAMA: Can somebody help out, please, and get Doc Jackson in here? Somebody grabbing our doctor?
-
-QUESTION: Thank you, Mr. President.
-
-OBAMA: Of course. In the meantime, just give her a little room. Doctor will be here in a second. You guys know where the doctor's office is? So just go through the palm doors. Its right -- its right next to the map room. There he is. All right. There's Doc Jackson. He's all right. OK. The doctor -- the doctor's in the house.
-
-So -- And I don't mean that -- I mean that with all sincerity. I understand the impulse to want to do something, but ultimately what I've had to do is to think about, what can we sustain, what is realistic? And my first priority has to be, what's the right thing to do for America? And it has been our view that the best thing to do has been to provide some support to the moderate opposition so that they could sustain themselves. And that you wouldn't see anti-Assad regime sentiments just pouring into Al- Nusra and Al-Qaeda or ISIL that we engaged our international partners in order to put pressure on all the parties involved. And to try to resolve this through diplomatic and political means. I cannot claim that we've been successful. And so that's something that, as is true with a lot of issues and problems around the world, I have to go to bed with every night.
-
-But I continue to believe that it was the right approach given what realistically we could get done. Absent a decision, as I said, to go into much more significant way. And that, I think would not have been a sustainable or good for the American people because we had a whole host of other obligations that we also had to meet, wars we had already started and that were not yet finished.
-
-With respect to the issue of safe zones , it is a continued problem, a continued challenge with safe zones is if you are setting up those zones on Syrian territory, then that requires some force that is willing to maintain that territory in the absence of consent from the Syrian government and now the Russians or the Iranians.
-
-So it may be that with Aleppo's tragic situation unfolding that in the short term, if we can get more of the tens of thousands who are still trapped there out , that so long as the world's eyes are on them and they are feeling pressure, the regime in Russia concludes that they are willing to find some arrangement, perhaps in coordination with Turkey, whereby those people can be safe.
-
-Even that will probably be temporary, but at least it solves a short-term issue that's going to arise.
-
-Unfortunately we are not there yet because right now we have Russians and Assad claiming that basically all the innocent civilians who were trapped in Aleppo are out when international organizations, humanitarian organizations who know better and who are on the ground, have said unequivocally that there are still tens of thousands who are trapped and prepared to leave under pretty much any conditions.
-
-And so right now our biggest priority is to continue to put pressure wherever we can to try to get them out.
-
-(CROSSTALK)
-
-OBAMA: Mike, I can't have too much...
-
-QUESTION: (OFF-MIKE) but do you see, responsibility notwithstanding, moving in that direction or help President-elect Trump move in that direction?
-
-OBAMA: I will help President Trump -- President-elect Trump with any advice, counsel, information that we can provide so that he, once he's sworn in, can make a decision.
-
-Between now and then, these are decisions that I have to make based on the consultations that I have with our military and the people who have been working this every single day. Peter Alexander (ph).
-
-QUESTION: Mr. President, thank you very much.
-
-Can you, given all the intelligence that we have now heard, assure the public this was once and for all a free and fair election? And specifically on Russia, do you feel any obligation now as they have been insisting that this isn't the case to show the proof, as it were? They say, put your money where your mouth is and declassify some of the intelligence and the evidence that exists.
-
-And more broadly, as it relates to Donald Trump on this very topic, are you concerned about his relationship with Vladimir Putin, especially given some of the recent cabinet picks, including his selection for secretary of state, Rex Tillerson, who toasted Putin with champagne over oil deals together? Thank you.
-
-OBAMA: I may be getting older because these multipart questions, I start losing track.
-
-(LAUGHTER)
-
-OBAMA: I can assure the public that there was not the kind of tampering with the voting process that was our concern and will continue to be of concern going forward, that the votes that were cast were counted, they were counted appropriately.
-
-We have not seen evidence of machines being tampered with, so that assurance I can provide.
-
-That doesn't mean that we find every single, you know, potential probe of every single voting machine all across the country, but we paid a lot of attention to it. We worked with state officials, et cetera, and we feel confident that that didn't occur and that the votes were cast and they were counted.
-
-And so that's on that point. What was the second one?
-
-QUESTION: Say more about declassification.
-
-OBAMA: Declassification. Look, we will provide evidence that we can safely provide, that does not compromise sources and methods. But I'll be honest with you, when you are talking about cybersecurity, a lot of it is classified and we're not going to provide it, because the way we catch folks is by knowing certain things about them that they may not want us to know and if we're gonna monitor this stuff effectively going forward, we don't want them to know that we know.
-
-So, this is one of those situations where, unless the American people genuinely think that the professionals in the CIA, the FBI, our entire intelligence infrastructure, many of whom -- by the way, served in previous administrations and who are Republicans -- are less trustworthy than the Russians. Then people should pay attention to what our intelligence agencies say.
-
-This is part of what I meant when I said we've got to think what is happening to happening to our political culture here. The Russians can't change us or significantly weaken us. They are a smaller country, they are a weaker country, their economy doesn't produce anything that anybody wants to buy except oil and gas and arms. They don't innovate.
-
-But they can impact us if we lose track of who we are. They can impact us if we abandon our values. Mr. Putin can weaken us just like he's trying to weaken Europe if we start buying into notions that it's OK to intimidate the press, or lock up dissidents, or discriminate against people because of their faith or what they look like.
-
-And what I worry about -- more than anything -- is the degree to which because of the fierceness because of the partisan battle, you start to see certain folks in the Republican Party and Republican voters suddenly finding a government and individuals who stand contrary to everything that we stand for as being OK, because that's how much we dislike Democrats.
-
-I mean, think about it. Some of the people who historically have been very critical of me for engaging with the Russians and having conversations with them, also endorsed the president-elect, even as he was saying that we should stop sanctioning Russia and being tough on them and work together with them against our common enemies.
-
-It was very complimentary of Mr. Putin personally. Now that -- that wasn't news. The president-elect during the campaign said so. And some folks who had made a career out of being anti-Russian, didn't say anything about it. And then after the election, suddenly they're asking, oh, why didn't you tell us that maybe the Russians were trying to help our candidate? Well, come on.
-
-There was a survey some of you saw where -- not this just one poll, but pretty credible source, 37 percent of Republican voters approve of Putin. Over a third of Republican voters approve of Vladimir Putin, the former head of the KGB. Ronald Reagan would roll over in his grave. And how did that happen? It happened in part because for too long, everything that happens in this town, everything that's said is seen through the lens of does this help or hurt us relative to Democrats or relative to President Obama. And unless that changes, we're going to continue to be vulnerable to foreign influence because we've lost track of what it is that we're about and what we stand for.
-
-With respect to the president-elect's appointments, it is his prerogative, as I have always said, for him to appoint who he thinks can best carry out his foreign policy or his domestic policy. It is up to the Senate to advise and consent. There will be plenty of time for members of the Senate to go through the record of all his appointees and determine whether or not they're appropriate for the job.
-
-Martha (inaudible).
-
-QUESTION: Mr. President, I want to talk about Vladimir Putin again. Just to be clear, do you believe Vladimir Putin himself authorized the hack? And do you believe he authorized that to help Donald Trump?
-
-And on the intelligence, one of the things Donald Trump cites is Saddam Hussein and the weapons of mass destruction and that they were never found. Can you say unequivocally that this was not China, that this was not a 400-pound guy sitting on his bed as Donald Trump says? And do these types of tweets and kinds of statements from Donald Trump embolden the Russians?
-
-OBAMA: When the report comes out before I leave office, that will have drawn together all the threads, and so I don't want to step on their work ahead of time. What I can tell you is that the intelligence that I've seen gives me great confidence in their assessment that the Russians carried out this hack.
-
-QUESTION: Which hack?
-
-OBAMA: The hack of the DNC and the hack of John Podesta.
-
-Now, the -- but again, I think this is exactly why I want the report out, so that everybody can review it. And this has been briefed and the evidence in closed session has been provided on a bipartisan basis, not just to me, it's been provided to the leaders of the House and the Senate and the chairmen and ranking members of the relevant committees. And I think that what you've already seen is, at least some of the folks who've seen the evidence don't dispute I think the basic assessment that the Russians carried this out.
-
-QUESTION: But specifically, could (ph) you not say that...
-
-OBAMA: Well, Martha, I think what I want to make sure of is that I give the intelligence community a chance to gather all the information.
-
-But I'd make a larger point, which is, not much happens in Russia without Vladimir Putin. This is a pretty hierarchical operation. Last I checked, there's not a lot of debate and democratic deliberation, particularly when it comes to policies directed at the United States. We have said and I will confirm that this happened at the highest levels of the Russian government and I will let you make that determination as to whether there are high-level Russian officials who go off rogue and decide to tamper with the U.S. election process without Vladimir Putin knowing about it.
-
-QUESTION: So I wouldn't be wrong in saying the president thinks Vladimir Putin authorized the hack?
-
-OBAMA: Martha, I've given you what I've -- what I'm gonna give you.
-
-What was your second question?
-
-QUESTION: Do the tweets and do the statements by -- by Donald Trump embolden Russia?
-
-OBAMA: As I said before, I think that the president-elect, you know, is still in transition mode from campaign to governance. I think he hasn't gotten his whole team together yet. He still has campaign spokespersons sort of filling in and appearing on cable shows. And there is just a whole different attitude and vibe when you're not in power as when you are in power.
-
-So rather than me sort of characterize the appropriateness or inappropriateness of what he is doing at the moment, I think what we have to see is how will the president-elect operate and how will his team operate when they've been fully briefed on all these issues. They have their hands on all the levers of government. And they have got to start making decisions.
-
-One way I do believe that the president-elect can approach this that would be unifying is to say that we welcome a bipartisan independent process that gives the American people an assurance not only that votes are counted properly, that the elections are fair and free, but that we have learned lessons about how internet propaganda from foreign countries can be released into the political bloodstream and that we have got strategies to deal with it for the future.
-
-The more this can be non-partisan, the better served the American people are going to be, which is why I made the point earlier and I'm going to keep on repeating this point, our vulnerability to Russia or any other foreign power is directly related to how divided, partisan, dysfunctional our political process is. That's the thing that makes us vulnerable.
-
-If fake news that's being released by some foreign government is almost identical to reports that are being issued through partisan news venues, then it's not surprising that that foreign propaganda will have a greater effect. It doesn't seem that far-fetched compared to some of the other stuff that folks are hearing from domestic propagandists.
-
-To the extent that our political dialogue is such where everything is under suspicion, and everybody is corrupt, and everybody is doing things for partisan reasons, and all of our institutions are, you know, full of malevolent actors, if that's the story line that is being put out there by whatever party is out of power, then when a foreign government introduces that same argument, with facts that are made up, voters who have been listening to that stuff for years, who have been getting that stuff every day from talk radio or other venues, they're going to believe it.
-
-So if we want to really reduce foreign influence on our elections, then we had better think about how to make sure that our political process, our political dialogue is stronger than it has been.
-
-Mark Langley (ph).
-
-QUESTION: Thank you, Mr. President.
-
-I wonder whether I could move you from Russia to China for a moment.
-
-OBAMA: Absolutely.
-
-QUESTION: Your successor spoke by phone with the president of Taiwan the other day, and declared subsequently that he wasn't sure why the United States needed to be bound by the One China Policy.
-
-He suggested it could be used as a bargaining chip perhaps to get better terms on a trade deal or more cooperation on North Korea. There's already evidence that tensions between the two sides have increased a bit, and just today, the Chinese have seized an underwater drone in the South China Sea.
-
-Do you agree, as some do, that our China policy could use a fresh set of eyes and what's the big deal about having a short phone call with the president of Taiwan? Or do you worry that these types of unorthodox approaches are setting us on a collision course with perhaps our biggest geopolitical adversary?
-
-OBAMA: That's a great question.
-
-I'm somewhere in between. I think all of our foreign policy should be subject to fresh eyes. I think one of the -- I've said this before, I am very proud of the work I've done. I think I'm a better president now than when I started. But you know, if you're here for eight years in the bubble, you start seeing things a certain way and you benefit from -- the democracy benefits, America benefits from some new perspectives.
-
-And I think it should be not just the prerogative, but the obligation of a new president to examine everything that's been done and see what makes sense and what doesn't. That's what I have done when I came in and I'm assuming any new president's gonna undertake those same exercises.
-
-And given the importance of the relationship between United States and China, given how much is at stake in terms of the world economy, national security, our presence in the Asia-Pacific, China's increasing role in international affairs, there's probably no bilateral relationship that carries more significance and where there's also the potential if that relationship breaks down or goes into full conflict mode that everybody is worse off. So I think it's fine for him to take a look at it. What I have advised the president-elect is that across the board on foreign policy, you want to make sure that you're doing it in a systematic, deliberate, intentional way.
-
-And since there's only one president at a time, my advice to him has been that before he starts having a lot of interactions with foreign governments other than the usual courtesy calls, that he should want to have his full team in place, that he should want his team to be fully briefed on what's gone on in the past and where the potential pitfalls may be, where the opportunities are, what we've learned from eight years of experience so that as he's then maybe taking foreign policy in a new direction, he's got all the information to make good decisions, and by the way, that all of government is moving at the same time and singing from the same hymnal.
-
-And with respect to China -- and let's just take the example of Taiwan, there has been a longstanding agreement essentially between China and the United States, and to some agree the Taiwanese, which is to not change the status quo. Taiwan operates differently than mainland China does. China views Taiwan as part of China, but recognizes that it has to approach Taiwan as an entity that has its own ways of doing things.
-
-OBAMA: The Taiwanese have agreed that as long as they're able to continue to function with some agree of autonomy, that they won't charge forward and declare independence. And that status quo, although not completely satisfactory to any of the parties involved, has kept the peace and allowed the Taiwanese to be a pretty successful economy and -- of people who have a high agree of self-determination. What I understand for China, the issue of Taiwan is as important as anything on their docket.
-
-The idea of One China is at the heart of their conception as a nation. And so if you are going to upend this understanding, you have to have thought through what the consequences because the Chinese will not treat that the way they'll treat some other issues. They won't even treat it the way they issues around the South China Sea, where we've had a lot of tensions. This goes to the core of how they see themselves.
-
-And their reaction on this issue could end up being very significant. That doesn't mean that you have to adhere to everything that's been done in the past, but you have to think it through and have planned for potential reactions that they may engage in. All right. Isaac Dovere, Politico.
-
-QUESTION: Thank you Mr. President. Two questions on where this all leaves us.
-
-OBAMA: What leaves us? Where my presidency leaves us? It leaves us in a really good spot.
-
-(LAUGHTER)
-
-OBAMA: If we make some good decisions going forward.
-
-QUESTION: What do you say to the electors who are going to meet on Monday and are thinking of changing their votes? Do you think they should be given an intelligence briefing about the Russian activity or should they bear in mind everything you have said and have said already (ph)? Should they -- should votes be bound by the state votes as they've gone? And long-term, do you think that there is need for Electoral College reform that was tied to the popular vote?
-
-OBAMA: Sounded like two but really was one.
-
-(LAUGHTER)
-
-OBAMA: I love how these start. I've got two questions, but each one has four parts.
-
-(LAUGHTER)
-
-QUESTION: On the Democratic Party, your labor secretary is running for -- to be the chair of the Democratic National Committee. Is the vision that you've seen him putting forward what you think the party needs to be focused on? And what do you think about the complaint that say that the future democratic committee shouldn't be a continuation of some of your political approach? Part of that is complaints that decisions that you have made as president and leader of the party has structurally weakened the DNC and the Democratic Party and they think that that has led to or has help lead to some of the losses in elections around the country. Do you regret any of those decisions?
-
-OBAMA: I'll take the second one first and say that Tom Perez has been, I believe one of the best secretaries of labor in our history. He is tireless. He is wicked smart. He has been able to work across the spectrum of you know, labor, business, activists. He has produced. I mean, if you look at his body of work on behalf of working people, what he's pushed for in terms of making sure that workers get a fair deal, decent wages, better benefits, that their safety is protected on the job. He has been extraordinary.
-
-Now others who have declared are also my friends and fine people as well. And the great thing is, I don't have a vote in this. So - so - so we'll let the process unfold, I don't think it's going to happen any time soon. I described to you earlier what I think needs to happen, which is that the democratic party, whether that's entirely through the DNC or through rebuilding of state parties, or some other arrangement, has to work at the grassroots level, has to be present in all 50 states, has to have a presence in counties.
-
-Has to think about in that extension (ph) how are we speaking directly to voters.
-
-I will say this, and I'm not going to engage in too much punditry. But that I could not be prouder of the coalition that I put together in my -- each of my campaigns. Because it was inclusive and it drew in people who normally weren't interested in politics and didn't participate.
-
-But I'd like to think -- I think I can show that in those elections, I always cast a broad net. I always said first and foremost we're Americans, that we have a common creed, that there's more that we share than divides us. And I want to talk to everybody and get a chance to get everybody's vote.
-
-I still believe what I said in 2004 which is this red state-blue thing is a construct. Now it is a construct that has gotten more and more powerful for a whole lot of reasons from gerrymandering, to big money, to a way that the media is splintered.
-
-And so people are just watching what reinforces their existing biases as opposed to having to listen to different points of view. So there are all kinds of reasons for it. But outside the realm of electoral politics, I still see people the way I saw them when I made that speech, full of contradictions and some regional differences but basically, folks care about their families.
-
-They care about having meaningful work. They care about making sure their kids have more opportunity than they did. They want to be safe. They want to feel like things are fair.
-
-And whoever leads the DNC and any candidate with the Democratic brand going forward, I want them to feel as if they can reach out and find that common ground and speak to all of America. And that requires some organization.
-
-And you're right that -- and I said this in my earlier remarks, that what I was able to do during my campaigns, I wasn't able to do during midterms. It's not that we didn't put in time and effort into it. I spent time and effort into it. But the coalition I put together didn't always turn out to be transferable.
-
-And the challenge is that -- you know, some of that just has to do with the fact that when you are in the party in power and people are going through hard times like they were in 2010, they are going to punish to some degree the president's party regardless of what organizational work is done.
-
-Some of it has to do with just some deep standing traditional challenges for Democrats like during off-year elections the electorate is older and we do better with the younger electorate. But we know those things are true.
-
-And I didn't crack the code on that. And if other people have ideas about how to do that even better, I'm all for it.
-
-So with respect to the electors, I'm not going to wade into that issue. Because, again, it's the American people's job and now electors' job to decide my successor. It is not my job to decide my successor.
-
-And I have provided people with a lot of information about what happened during the course of the election, but more importantly, the candidates themselves I think talked about their beliefs and their vision for America.
-
-The president-elect I think has been very explicit what he cares about and what he believes in. And so it's not in my hands now, it's up to them.
-
-QUESTION: what about long term about the Electoral College?
-
-OBAMA: Long term with respect to the Electoral College, the Electoral College is a vestige, it's a carry-over from an earlier vision of how our federal government was going to work that put a lot of premium on states, and it used to be that the Senate was not elected directly, it was through state legislatures. And it's the same type of thinking that gives Wyoming two senators and -- with about half a million people and California with 33 million get the same two.
-
-So there's -- there are some structures in our political system as envisioned by the founders that sometimes are going to disadvantage Democrats, but the truth of the matter is is that if we have a strong message, if we're speaking to what the American people care about, typically, the popular vote and the electoral college vote will align.
-
-And I guess -- I guess part of my overall message here as I leave for the holidays is that if we look for one explanation or one silver bullet or one easy fix for our politics, then we're probably going to be disappointed. There are just a lot of factors in what's happened, not just over the last few months, but over the last decade that has made both politics and governance more challenging. And I think everybody's raised legitimate questions and legitimate concerns.
-
-I do hope that we all just take some time, take a breath, that's certainly what I'm going to advise Democrats, to just reflect a little bit more about how can we -- how can we get to a place where people are focused on working together based on at least some common set of facts? How can we have a conversation about policy that doesn't demonize each another? How can we channel what I think is the basic decency and goodness of the American people so it reflects itself in our politics, as opposed to it being so polarized and so nasty that in some cases, you have voters and unelected officials who have more confidence and faith in a foreign adversary than they have in their neighbors?
-
-And those go to some bigger issues. How is it that we have some voters or some elected officials who think that Michelle Obama's healthy eating initiative and school nutrition program is a greater threat to democracy than, you know, our government going after the press if they're issuing a story they don't like? I mean, that's -- that's an issue that I think, you know, we've got to -- we've got to wrestle with. And we will.
-
-People have asked me how you feel after the election and so forth and I say well, look, this is a clarifying moment. It's a useful reminder that voting counts, politics counts. What the president- elect is going to be doing is gonna be very different than what I was doing and I think people will be able to compare and contrast and make judgments about what worked for the American people. And I hope that building off the progress we've made, that what the president-elect is proposing works.
-
-What I can say with confidence is that what we've done works. That I can prove. I can show you where we were in 2008 and I can show you where we are now. And you can't argue that we are not better off, we are.
-
-And for that, I thank the American people and then more importantly I thank -- well, not importantly, as importantly -- I was going to say Josh Earnest...
-
-(LAUGHTER)
-
-OBAMA: ... for doing such a great job. For that, I thank the American people, I thank the men and women in uniform who serve. I haven't gotten to the point yet where I've been overly sentimental. I will tell you that when I was doing my last Christmas party photo -- I know many of you have participated in these, they're pretty long.
-
-Right at the end of the line, the President's Marine Corps Band comes in, those who have been performing. And I take a picture with them. And that was the last time that I was going to take a picture with my Marine Corps Band after an event. And I got a little choked up.
-
-Now I was in front of marines so I had to like tamp it down. But it was just one small example of all of the people who have contributed to our success. I am responsible for where we've screwed up, the successes are widely shared with all of the amazing people who have been part of this administration.
-
-OK? Thank you, everybody. Mele Kalikimaka!`,
+OBAMA: Thank you.`,
         storyline: []
       },
       {
