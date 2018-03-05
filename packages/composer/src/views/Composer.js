@@ -208,7 +208,7 @@ export default class ComposerView extends React.Component {
 }
 
 ComposerView.propTypes = {
-  deleteInterviewee: func.isRequired,
+  deleteInterviewee: func,
   params: shape({ storyId: string.isRequired }).isRequired,
   router: object.isRequired /* eslint react/forbid-prop-types: 0 */,
   stories: arrayOf(object),
@@ -216,6 +216,7 @@ ComposerView.propTypes = {
 };
 
 ComposerView.defaultProps = {
+  deleteInterviewee: null,
   stories: [],
   updateStory: null
 };
