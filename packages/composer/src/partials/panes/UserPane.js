@@ -109,24 +109,29 @@ const ActionLibAction = css.button`
   border-radius: ${radius.h};
   border: 1px solid transparent;
   box-shadow: none;
-  color: ${color.blueBlk};
-  cursor: pointer;
+  color: ${color.greyBlk};
   display: inline-block;
   font-family: ${font.serif};
   transition: color ${time.m}, border ${time.m}, text-decoration ${time.m};
-  ${({ active }) =>
-    active
-      ? `
-    border-color: ${color.blueM};
-    color: ${color.blueM};
-  `
-      : ``}
-  &:hover {
-    color: ${color.blueM};
-  }
   &:focus {
     outline: none;
   }
+  ${({ active, interactive }) =>
+    interactive && active
+      ? `
+    border-color: ${color.blueBlk};
+    color: ${color.blueBlk};
+  `
+      : ``}
+  ${({ interactive }) =>
+    interactive
+      ? `
+    cursor: pointer;
+    &:hover {
+      color: ${color.blueBlk};
+    }
+  `
+      : ``}
 `;
 
 const CustomActionHolder = css(Container)`
@@ -159,11 +164,14 @@ export default class UserPane extends React.Component {
     this.state = {
       enableExplore: false,
       enableIgnore: false,
-      exploreVal: null,
-      ignoreVal: null
+      exploreLibItem: null,
+      exploreVal: "",
+      ignoreLibItem: null,
+      ignoreVal: ""
     };
     this.updatePreview = this.updatePreview.bind(this);
-    this.selectLibActionLabel = this.selectLibActionLabel.bind(this);
+    this.selectIgnoreAction = this.selectIgnoreAction.bind(this);
+    this.selectExploreAction = this.selectExploreAction.bind(this);
     this.customiseActionLabel = this.customiseActionLabel.bind(this);
     this.toggleAction = this.toggleAction.bind(this);
   }
@@ -171,10 +179,15 @@ export default class UserPane extends React.Component {
     this.setState({ [action]: e.target.checked });
   }
   customiseActionLabel(action, e) {
-    this.setState({ [action]: e.target.value });
+    return action === "ignoreVal"
+      ? this.setState({ [action]: e.target.value, ignoreLibItem: null })
+      : this.setState({ [action]: e.target.value, exploreLibItem: null });
   }
-  selectLibActionLabel(action, e) {
-    this.setState({ [action]: e.target.innerHTML });
+  selectIgnoreAction(i, e) {
+    this.setState({ ignoreVal: e.target.innerHTML, ignoreLibItem: i });
+  }
+  selectExploreAction(i, e) {
+    this.setState({ exploreVal: e.target.innerHTML, exploreLibItem: i });
   }
   updatePreview() {
     console.log("updatePreview");
@@ -221,8 +234,16 @@ export default class UserPane extends React.Component {
                       {USER_ACTIONS.ignore.map((action, i) => (
                         <ActionLibItem key={i}>
                           <ActionLibAction
+                            active={
+                              enableIgnore
+                                ? i === this.state.ignoreLibItem
+                                : false
+                            }
+                            interactive={enableIgnore}
                             onClick={(e) =>
-                              this.selectLibActionLabel("ignoreVal", e)
+                              enableIgnore
+                                ? this.selectIgnoreAction(i, e)
+                                : null
                             }
                           >
                             {action}
@@ -238,6 +259,7 @@ export default class UserPane extends React.Component {
                       placeholder="Type your own text label…"
                       maxLength={34}
                       disabled={!enableIgnore}
+                      value={this.state.ignoreVal}
                       onChange={(e) =>
                         this.customiseActionLabel("ignoreVal", e)
                       }
@@ -263,8 +285,16 @@ export default class UserPane extends React.Component {
                       {USER_ACTIONS.explore.map((action, i) => (
                         <ActionLibItem key={i}>
                           <ActionLibAction
+                            interactive={enableExplore}
+                            active={
+                              enableExplore
+                                ? i === this.state.exploreLibItem
+                                : false
+                            }
                             onClick={(e) =>
-                              this.selectLibActionLabel("exploreVal", e)
+                              enableExplore
+                                ? this.selectExploreAction(i, e)
+                                : null
                             }
                           >
                             {action}
@@ -280,6 +310,7 @@ export default class UserPane extends React.Component {
                       placeholder="Type your own text label…"
                       maxLength={34}
                       disabled={!enableExplore}
+                      value={this.state.exploreVal}
                       onChange={(e) =>
                         this.customiseActionLabel("exploreVal", e)
                       }
