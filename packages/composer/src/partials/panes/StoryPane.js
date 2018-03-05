@@ -42,6 +42,11 @@ const Storyline = css.div`
   ${setSpace("phl")};
   ${setSpace("ptl")};
   height: 100%;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  position: absolute;
   overflow-y: auto;
   & > *:last-child {
     ${setSpace("pbl")};
