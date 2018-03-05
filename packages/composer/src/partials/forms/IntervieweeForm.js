@@ -207,7 +207,7 @@ export default class IntervieweeForm extends Component {
         </Container>
         <Separator size="m" silent />
         <Actionbar
-          satellite={this.props.allowDelete ? "right" : null} // this goes inline with renderDeleteOption()
+          satellite={this.props.allowDelete ? "right" : null} // this goes inline with deleteOption
         >
           {!this.props.persistent ? (
             <Action fixed secondary onClick={this.props.handleCancel}>

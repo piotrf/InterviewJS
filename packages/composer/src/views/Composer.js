@@ -83,12 +83,17 @@ export default class ComposerView extends React.Component {
       currentInterviewee: 0
     };
     this.switchInterviewee = this.switchInterviewee.bind(this);
+    this.deleteInterviewee = this.deleteInterviewee.bind(this);
     this.toggleDetailsModal = this.toggleDetailsModal.bind(this);
     this.togglePublishModal = this.togglePublishModal.bind(this);
     this.updateStory = this.updateStory.bind(this);
   }
   switchInterviewee(interviewee) {
     this.setState({ currentInterviewee: interviewee });
+  }
+  deleteInterviewee(story, interviewee) {
+    this.setState({ currentInterviewee: 0 });
+    this.props.deleteInterviewee(story, interviewee);
   }
   toggleDetailsModal(tab) {
     return tab
@@ -176,6 +181,7 @@ export default class ComposerView extends React.Component {
       this.state.detailsModal !== "" ? (
         <DetailsModal
           {...this.props}
+          deleteInterviewee={this.deleteInterviewee}
           handleClose={() => this.toggleDetailsModal()}
           isOpen
           key="DetailsModal"
@@ -202,6 +208,7 @@ export default class ComposerView extends React.Component {
 }
 
 ComposerView.propTypes = {
+  deleteInterviewee: func.isRequired,
   params: shape({ storyId: string.isRequired }).isRequired,
   router: object.isRequired /* eslint react/forbid-prop-types: 0 */,
   stories: arrayOf(object),
