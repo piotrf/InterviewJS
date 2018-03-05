@@ -1,7 +1,7 @@
 /* eslint react/forbid-prop-types: 0 */
 import React, { Component } from "react";
 import ReactModal from "react-modal";
-import { arrayOf, bool, func, object } from "prop-types";
+import { arrayOf, bool, func, number, object } from "prop-types";
 
 import {
   Actionbar,
@@ -41,15 +41,11 @@ export default class PublishStoryModal extends Component {
     this.handleStep3 = this.handleStep3.bind(this);
   }
   handleStep0(data) {
-    return (
-      this.state.storyCreated
-        ? this.props.updateStory(data, 0)
-        : this.props.createStory(data),
-      this.setState({ step: this.state.step + 1, storyCreated: true })
-    );
+    this.props.updateStory(data, this.props.storyIndex);
+    this.setState({ step: this.state.step + 1, storyCreated: true });
   }
   handleStep1(data) {
-    this.props.updateStory(data, 0);
+    this.props.updateStory(data, this.props.storyIndex);
     this.setState({ step: this.state.step + 1 });
   }
   handleStep2() {
@@ -176,6 +172,7 @@ PublishStoryModal.propTypes = {
   isOpen: bool.isRequired,
   router: object.isRequired,
   stories: arrayOf(object),
+  storyIndex: number.isRequired,
   updateInterviewee: func.isRequired,
   updateStory: func.isRequired
 };

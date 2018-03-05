@@ -21,6 +21,7 @@ export default class MetaForm extends React.Component {
     super(props);
     this.state = {
       formData: {
+        ...this.props.story,
         author: this.props.story.author,
         authorLink: this.props.story.authorLink,
         cover: this.props.story.cover,
