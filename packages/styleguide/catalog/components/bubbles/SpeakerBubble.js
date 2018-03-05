@@ -1,11 +1,12 @@
 import css from "styled-components";
 import { shape, string } from "prop-types";
 
-import { radius, skin } from "../../../utils";
+import { radius, skin, setSpace } from "../../../utils";
 import bubbleBase from "./bubbleBase";
 
 const SystemBubble = css.div`
   ${bubbleBase};
+  ${setSpace("mrm")};
   ${({ animated }) =>
     !animated
       ? `
@@ -27,10 +28,10 @@ const SystemBubble = css.div`
     border-radius: ${radius.h} ${radius.h} ${radius.h} ${radius.m};
   }
   &:last-child {
-    border-radius: ${radius.m} ${radius.h} ${radius.h} ${radius.h};
+    border-radius: ${radius.m} ${radius.h} ${radius.h} ${radius.s};
   }
   &:only-child {
-    border-radius: ${radius.h};
+    border-radius: ${radius.h} ${radius.h} ${radius.h} ${radius.s};
   }
 `;
 

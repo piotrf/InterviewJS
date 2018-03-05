@@ -69,11 +69,15 @@ export default class IntervieweePane extends React.Component {
   addStorylineItem(source) {
     const { storyIndex, currentInterviewee } = this.props;
     const { previews } = this.state;
-    const nuItem = {
+    const newIntervieweeBubble = {
       content: previews[source],
       role: "interviewee"
     };
-    this.props.addStorylineItem(storyIndex, currentInterviewee, nuItem);
+    this.props.addStorylineItem(
+      storyIndex,
+      currentInterviewee,
+      newIntervieweeBubble
+    );
     this.setState({ previews: { ...previews, [source]: "" } });
   }
   render() {

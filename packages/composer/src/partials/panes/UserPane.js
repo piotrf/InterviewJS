@@ -1,4 +1,4 @@
-import {} from "prop-types";
+import { func, number, string } from "prop-types";
 import css from "styled-components";
 import React from "react";
 
@@ -167,14 +167,14 @@ export default class UserPane extends React.Component {
       enableExplore: false,
       enableIgnore: false,
       exploreLibItem: null,
-      exploreVal: "",
+      exploreVal: "Explore",
       ignoreLibItem: null,
-      ignoreVal: ""
+      ignoreVal: "Ignore"
     };
-    this.updatePreview = this.updatePreview.bind(this);
-    this.selectIgnoreAction = this.selectIgnoreAction.bind(this);
-    this.selectExploreAction = this.selectExploreAction.bind(this);
+    this.addStorylineItem = this.addStorylineItem.bind(this);
     this.customiseActionLabel = this.customiseActionLabel.bind(this);
+    this.selectExploreAction = this.selectExploreAction.bind(this);
+    this.selectIgnoreAction = this.selectIgnoreAction.bind(this);
     this.toggleAction = this.toggleAction.bind(this);
   }
   toggleAction(action, e) {
@@ -191,8 +191,25 @@ export default class UserPane extends React.Component {
   selectExploreAction(i, e) {
     this.setState({ exploreVal: e.target.innerHTML, exploreLibItem: i });
   }
-  updatePreview() {
-    console.log("updatePreview");
+  addStorylineItem() {
+    const { storyIndex, currentInterviewee } = this.props;
+    const { enableExplore, enableIgnore, exploreVal, ignoreVal } = this.state;
+    const newUserBubble = {
+      content: [
+        { enabled: enableIgnore, value: ignoreVal, type: "ignore" },
+        { enabled: enableExplore, value: exploreVal, type: "explore" }
+      ],
+      role: "user"
+    };
+    this.props.addStorylineItem(storyIndex, currentInterviewee, newUserBubble);
+    this.setState({
+      enableExplore: false,
+      enableIgnore: false,
+      exploreLibItem: null,
+      exploreVal: this.props.exploreVal,
+      ignoreLibItem: null,
+      ignoreVal: this.props.ignoreVal
+    });
   }
   render() {
     const { enableExplore, enableIgnore, ignoreVal, exploreVal } = this.state;
@@ -201,19 +218,20 @@ export default class UserPane extends React.Component {
         <PaneFrame
           {...this.props}
           active
-          addStorylineItem={() => console.log("addStorylineItem")}
+          addStorylineItem={this.addStorylineItem}
           hasPreview={enableExplore || enableIgnore}
           side="right"
           preview={
             <Preview>
               {enableIgnore ? (
-                <Action primary fixed>
-                  {ignoreVal || "Ignore"}
+                <Action tone="negative" fixed>
+                  {ignoreVal}
                 </Action>
               ) : null}
+              {enableIgnore && enableExplore ? <Separator dir="v" /> : null}
               {enableExplore ? (
-                <Action primary fixed>
-                  {exploreVal || "Explore"}
+                <Action tone="positive" fixed>
+                  {exploreVal}
                 </Action>
               ) : null}
             </Preview>
@@ -356,6 +374,15 @@ export default class UserPane extends React.Component {
   }
 }
 
-UserPane.propTypes = {};
+UserPane.propTypes = {
+  addStorylineItem: func.isRequired,
+  currentInterviewee: number.isRequired,
+  exploreVal: string,
+  ignoreVal: string,
+  storyIndex: number.isRequired /* eslint react/forbid-prop-types: 0 */
+};
 
-UserPane.defaultProps = {};
+UserPane.defaultProps = {
+  ignoreVal: "Ignore",
+  exploreVal: "Explore"
+};

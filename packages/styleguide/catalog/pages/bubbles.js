@@ -31,50 +31,38 @@ export default () => markdown`
 
   ${(
     <ReactSpecimen span={3} dark>
-      <Bubble persona="speaker">Single bubble has no hard corner</Bubble>
+      <Bubble persona="interviewee">Single bubble</Bubble>
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen span={3}>
-      <Bubble persona="user">Single bubble has no hard corner</Bubble>
+      <Bubble persona="user">Single bubble</Bubble>
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen span={3} dark>
-      <Bubble persona="speaker">
-        First bubble in a group has one hard corner
-      </Bubble>
-      <Bubble persona="speaker">
-        Last bubble in a group has one hard corner
-      </Bubble>
+      <Bubble persona="interviewee">First bubble</Bubble>
+      <Bubble persona="interviewee">Last bubble</Bubble>
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen span={3}>
-      <Bubble persona="user">
-        First bubble in a group has one hard corner
-      </Bubble>
-      <Bubble persona="user">Last bubble in a group has one hard corner</Bubble>
+      <Bubble persona="user">First bubble</Bubble>
+      <Bubble persona="user">Last bubble</Bubble>
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen span={3} dark>
-      <Bubble persona="speaker">
-        First bubble in a group has one hard corner
-      </Bubble>
-      <Bubble persona="speaker">Middle bubbles have two hard corners</Bubble>
-      <Bubble persona="speaker">
-        Last bubble in a group has one hard corner
-      </Bubble>
+      <Bubble persona="interviewee">First bubble</Bubble>
+      <Bubble persona="interviewee">Middle bubble</Bubble>
+      <Bubble persona="interviewee">Last bubble</Bubble>
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen span={3}>
-      <Bubble persona="user">
-        First bubble in a group has one hard corner
-      </Bubble>
-      <Bubble persona="user">Middle bubbles have two hard corners</Bubble>
-      <Bubble persona="user">Last bubble in a group has one hard corner</Bubble>
+      <Bubble persona="user">First bubble</Bubble>
+      <Bubble persona="user">Middle bubble</Bubble>
+      <Bubble persona="user">Last bubble</Bubble>
     </ReactSpecimen>
   )}
 
@@ -103,7 +91,7 @@ export default () => markdown`
 
   ${(
     <ReactSpecimen span={2} dark>
-      <Bubble persona="speaker" theme={{ font: "sans-serif" }}>
+      <Bubble persona="interviewee" theme={{ font: "sans-serif" }}>
         Custom bubble font
       </Bubble>
     </ReactSpecimen>

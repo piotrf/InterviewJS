@@ -10,7 +10,9 @@ import {
   Bubbles,
   Container,
   Icon,
+  Separator,
   Tip,
+  color,
   radius,
   setSize,
   setSpace,
@@ -100,6 +102,36 @@ const Interviewee = css.li`
       : ``}
 `;
 
+const BubbleActions = css.div`
+  ${({ binary }) =>
+    binary
+      ? `
+    display: flex;
+    jusitfy-content: flex-end;
+  `
+      : `
+    & > * {
+      max-width: none;
+      width: auto;
+    }
+    & > *:first-child {
+      border-rigth: 1px solid ${color.greyHL};
+    }
+  `};
+  & > * {
+      max-width: none;
+      width: auto;
+  }
+  & > *:first-child {
+    ${setSpace("mrx")};
+    margin-left: 0;
+  }
+  & > *:last-child {
+    ${setSpace("mlx")};
+    margin-right: 0;
+  }
+`;
+
 export default class StoryPane extends React.Component {
   constructor(props) {
     super(props);
@@ -162,15 +194,32 @@ export default class StoryPane extends React.Component {
         </PaneHead>
         <PaneBody>
           <Storyline>
-            {Object.keys(storyline).map((storyItem, i) => (
-              <BubbleGroup key={storyItem}>
-                <Bubbles persona={storyline[storyItem].role}>
-                  <Bubble persona={storyline[storyItem].role}>
-                    {storyline[storyItem].content}
-                  </Bubble>
-                </Bubbles>
-              </BubbleGroup>
-            ))}
+            {Object.keys(storyline).map((storyItem, i) => {
+              const { role, content } = storyline[storyItem];
+              const getContent = () => {
+                if (role === "user") {
+                  return (
+                    <Bubble persona={role} theme={{ backg: skin.speakerBackg }}>
+                      {content[0].enabled ? (
+                        <Action tone="negative">{content[0].value}</Action>
+                      ) : null}
+                      {content[0].enabled && content[1].enabled ? (
+                        <Separator dir="v" size="m" />
+                      ) : null}
+                      {content[1].enabled ? (
+                        <Action tone="positive">{content[1].value}</Action>
+                      ) : null}
+                    </Bubble>
+                  );
+                }
+                return <Bubble persona={role}>{content}</Bubble>;
+              };
+              return (
+                <BubbleGroup key={storyItem}>
+                  <Bubbles persona={role}>{getContent()}</Bubbles>
+                </BubbleGroup>
+              );
+            })}
             <div
               ref={(el) => {
                 this.anchor = el;
