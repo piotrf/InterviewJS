@@ -3,7 +3,7 @@
   "description": "",
   "version": "0.0.0",
   "author": "",
-  "homepage": "http://interviewjs.io/composer/",
+  "homepage": "http://interviewjs.io/my/",
   "dependencies": {
     "date-fns": "^1.29.0",
     "firebase": "^4.10.1",
@@ -19,7 +19,6 @@
     "react-router-dom": "4.2.2",
     "react-router-redux": "4.0.8",
     "react-scripts": "1.1.1",
-    "react-stay-scrolled": "^2.1.1",
     "recompose": "0.26.0",
     "redux": "3.7.2",
     "redux-actions": "2.2.1",
@@ -32,7 +31,7 @@
   },
   "devDependencies": {
     "babel-eslint": "8.2.2",
-    "eslint": "4.18.1",
+    "eslint": "4.18.2",
     "eslint-config-airbnb": "16.1.0",
     "eslint-config-prettier": "2.9.0",
     "eslint-plugin-import": "2.9.0",
@@ -42,9 +41,9 @@
     "gh-pages": "1.1.0",
     "husky": "0.14.3",
     "lint-staged": "7.0.0",
-    "node-plop": "0.9.0",
-    "plop": "1.9.1",
-    "prettier": "1.11.0",
+    "node-plop": "0.13.0",
+    "plop": "2.0.0",
+    "prettier": "1.11.1",
     "react-app-rewired": "1.4.1"
   },
   "scripts": {
@@ -52,20 +51,19 @@
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-app-rewired eject",
-    "prettier": "prettier --single-quote --print-width=120 --trailing-comma es5",
+    "prettier":
+      "prettier --single-quote --print-width=120 --trailing-comma es5",
     "format": "npm run prettier -- --write '{,!(build|generators)/**/}*.js'",
     "precommit": "lint-staged",
-    "eslint-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
+    "eslint-check":
+      "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
     "lint": "eslint **/*.js --quiet",
     "lint-fix": "eslint --fix",
     "generate": "plop --plopfile generators/index.js",
-    "release": "npm run build && gh-pages -d build -e composer -a"
+    "release": "npm run build && gh-pages -d build -e my -a"
   },
   "lint-staged": {
-    "{,!(build|generators)/**/}*.js": [
-      "npm run prettier -- --write",
-      "git add"
-    ]
+    "{,!(build|generators)/**/}*.js": ["npm run prettier -- --write", "git add"]
   },
   "engines": {
     "npm": ">=4",

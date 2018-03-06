@@ -1,3 +1,52 @@
+## 06-03-2017
+
+* Firefox fixes
+  Composer has been browser tested—Chrome, Safari, Firefox is good to go.
+
+* Account menu is now a dropdown.
+  In the Listing, top left Account details are now a dropdown so they display better on mobile.
+
+* There’s now a Publish Flow starting in the Composer
+  `Publish` button in the Composer launches a wizard asking to: 1) review meta 2) review intro/context 3) create outro poll/questionnaire 4) display public link to the story (no. 4 is still WIP).
+
+* Composer storyline (central pane) can now accommodate user actionable bubbles
+  They differ from regular string bubbles (like interviewee’s bubbles) as they need to carry more information (wether they’re skip/explore, custom text label if set, ecc.).
+
+* It is now possible to add user bubbles
+  Both explore/ignore are selectable, one can customise their text labels or select from a library of predefined bubbles.
+
+* Editing preview value in the Interviewee Panel now propagates changes to the added text bubble
+  Select a piece of text from the transcript, edit it in the preview and add the bubble — you’ll notice how the bubble will feature the edited text.
+
+* Composer Scroll-to-bottom
+  Composer storyline (central pane) will now scroll to bottom automatically on page load or addition of a new bubble.
+
+## 02-03-2017
+
+* It is now possible to delete interviewees.
+  You can do so in the modal dialog when editing a single interviewee. Bottom-right: there’s a red icon, it has a tooltip (on hover) and a dropdown (on click) asking to confirm deletion. Extra logic has been put in place to prevent removal of the only interviewee in a story.
+
+* Simple auth flow.
+  Added a simple Google sign-in screen ( http://interviewjs.io/my/ ) and a `sign out` CTA in the listing (next to the avatar).
+
+* Extended bubble styles to support 'typing’ animation.
+  You can see the result of that in the above link, where bubbles animate.
+
+* Documented Animator wrappers.
+  Above animations is just a subset of the possible treatments. We may not have time to add more, but there will be a space for open-source community to reference them: http://styleguide.interviewjs.io/#/animators
+
+* Integrated icons throughout.
+  All icons are now documented here: http://styleguide.interviewjs.io/#/icons and used throughout Composer. You’ll see them for example here: http://interviewjs.io/my/stories/0bf34b30-743b-46ab-weewe-c875326d86f6
+
+* Composer now accepts transcript text
+  In the Composer it is now possible to paste or type in transcript. That transcript is now being save per each interviewee separately (notice here: http://interviewjs.io/my/stories/0bf34b30-743b-46ab-weewe-c875326d86f6 how switching between interviewees displays different transcript). Any change to the transcript is being saved onBlur (when taking the focus from the textarea).
+
+* It is now possible to select piece of a transcript
+  The textarea holding the transcript has onSelect event hooked up, selecting text will automatically display it below in the grey bubble preview box. Note how you can edit text in that grey bubble box too — though those changes won’t be save just yet (WIP).
+
+* It is now possible to add bubbles to the story.
+  Only text bubbles for now, and it’s WIP—plenty to do there, but the + buttons turns green when the bubble preview grey area is populated with some data.
+
 ## 22-02-2017
 
 * integrated simple speech bubble groups in the storyline pane with react-stay-scrolled

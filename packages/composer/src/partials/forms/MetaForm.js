@@ -21,6 +21,7 @@ export default class MetaForm extends React.Component {
     super(props);
     this.state = {
       formData: {
+        ...this.props.story,
         author: this.props.story.author,
         authorLink: this.props.story.authorLink,
         cover: this.props.story.cover,
@@ -129,10 +130,10 @@ export default class MetaForm extends React.Component {
           <Legend tip="tip">i</Legend>
         </FormItem>
         <Separator size="m" silent />
-        <FormItem>
-          <Label>Imagery</Label>
-          <Container dir="row">
-            <Container flex={[0, 0, `${100 / 2}%`]}>
+        <Container dir="row">
+          <Container flex={[1, 1, "50%"]}>
+            <FormItem>
+              <Label>Cover photo</Label>
               <TextInput
                 input
                 name="cover"
@@ -143,8 +144,12 @@ export default class MetaForm extends React.Component {
                 type="file"
                 value={this.state.formData.cover}
               />
-            </Container>
-            <Container flex={[0, 0, `${100 / 2}%`]}>
+              <Legend tip="tip">i</Legend>
+            </FormItem>
+          </Container>
+          <Container flex={[1, 1, "50%"]}>
+            <FormItem>
+              <Label>Your logo</Label>
               <TextInput
                 input
                 name="logo"
@@ -156,10 +161,10 @@ export default class MetaForm extends React.Component {
                 type="file"
                 value={this.state.formData.logo}
               />
-            </Container>
+              <Legend tip="tip">i</Legend>
+            </FormItem>
           </Container>
-          <Legend tip="tip">i</Legend>
-        </FormItem>
+        </Container>
         <Separator size="m" silent />
         <Actionbar>
           <Action fixed primary type="submit">

@@ -77,18 +77,21 @@ export default class DetailsModal extends React.Component {
               <PaneTab
                 active={tab === "meta"}
                 onClick={() => this.switchTab("meta")}
+                opinionated
               >
                 Meta
               </PaneTab>
               <PaneTab
                 active={tab === "details"}
                 onClick={() => this.switchTab("details")}
+                opinionated
               >
                 Details
               </PaneTab>
               <PaneTab
                 active={tab === "interviewees"}
                 onClick={() => this.switchTab("interviewees")}
+                opinionated
               >
                 Interviewees
               </PaneTab>

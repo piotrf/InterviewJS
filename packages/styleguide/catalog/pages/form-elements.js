@@ -1,7 +1,14 @@
 import React from "react";
 import { markdown, ReactSpecimen } from "catalog";
 
-import { CharacterCount, Form, Label, Legend, TextInput } from "../components";
+import {
+  CharacterCount,
+  Checkbox,
+  Form,
+  Label,
+  Legend,
+  TextInput
+} from "../components";
 
 export default () => markdown`
 
@@ -38,6 +45,21 @@ export default () => markdown`
   ${(
     <ReactSpecimen>
       <TextInput area placeholder="Placeholder text…" />
+    </ReactSpecimen>
+  )}
+
+  ## Checkboxes
+
+  ${(
+    <ReactSpecimen span={3}>
+      <Checkbox checked onChange={(e) => console.log(e)}>
+        Checkbox
+      </Checkbox>
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen span={3}>
+      <Checkbox onChange={(e) => console.log(e)}>Checkbox</Checkbox>
     </ReactSpecimen>
   )}
 

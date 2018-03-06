@@ -242,8 +242,11 @@ const Button = css.button`
     } else if (!iconic && (primary || secondary || inverted)) {
       return `
         min-height: 40px;
-        & > i {
+        & > i:first-child {
           ${setSpace("mrx")};
+        }
+        & > i:last-child {
+          ${setSpace("mlx")};
         }
       `;
     }
@@ -260,6 +263,23 @@ const Button = css.button`
     }
     ${breakpoint.desktop} {
       width: 190px;
+    }
+  `
+      : ``};
+
+  /* disabled */
+
+  ${({ disabled }) =>
+    disabled
+      ? `
+    background: ${color.greyLt};
+    box-shadow: none;
+    cursor: default;
+    &:active {
+      background: ${color.greyLt};
+      box-shadow: none;
+      cursor: default;
+      transform: none;
     }
   `
       : ``};

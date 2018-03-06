@@ -1,14 +1,15 @@
 // misc
 export { default as Interviewees } from "./misc/Interviewees";
+export { default as Poll } from "./misc/Poll";
+export { default as SrcTextEditor } from "./misc/SrcTextEditor";
 export { default as Stories } from "./misc/Stories";
 export { default as Story } from "./misc/Story";
-export { default as Storyline } from "./misc/Storyline";
 
 // forms
 export { default as DetailsForm } from "./forms/DetailsForm";
 export { default as IntervieweeForm } from "./forms/IntervieweeForm";
 export { default as MetaForm } from "./forms/MetaForm";
-export { default as PollForm } from "./forms/PollForm";
+export { default as QuestionForm } from "./forms/QuestionForm";
 
 // modals
 export { default as AuthModal } from "./modals/AuthModal";
@@ -20,5 +21,6 @@ export { default as WelcomeModal } from "./modals/WelcomeModal";
 
 // panes
 export { default as IntervieweePane } from "./panes/IntervieweePane";
+
 export { default as StoryPane } from "./panes/StoryPane";
 export { default as UserPane } from "./panes/UserPane";

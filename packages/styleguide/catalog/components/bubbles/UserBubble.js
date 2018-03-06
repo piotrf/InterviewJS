@@ -1,11 +1,12 @@
 import css from "styled-components";
 import { shape, string } from "prop-types";
 
-import { radius, skin } from "../../../utils";
+import { radius, skin, setSpace } from "../../../utils";
 import bubbleBase from "./bubbleBase";
 
 const SystemBubble = css.div`
   ${bubbleBase};
+  ${setSpace("mlm")};
   ${({ animated }) =>
     !animated
       ? `
@@ -13,11 +14,14 @@ const SystemBubble = css.div`
     animation: none;
   `
       : ``};
+  align-content: center;
+  align-items: center;
+  align-self: flex-end;
   background-color: ${({ theme }) =>
     theme.backg ? theme.backg : skin.userBackg};
   color: ${({ theme }) => (theme.color ? theme.color : skin.userColor)};
+  flex-direction: row;
   font-family: ${({ theme }) => (theme.font ? theme.font : skin.font)};
-  align-self: flex-end;
   text-align: right;
   &:not(:last-child),
   &:not(:first-child) {
@@ -27,10 +31,10 @@ const SystemBubble = css.div`
     border-radius: ${radius.h} ${radius.h} ${radius.m} ${radius.h};
   }
   &:last-child {
-    border-radius: ${radius.h} ${radius.m} ${radius.h} ${radius.h};
+    border-radius: ${radius.h} ${radius.m} ${radius.s} ${radius.h};
   }
   &:only-child {
-    border-radius: ${radius.h};
+    border-radius: ${radius.h} ${radius.h} ${radius.s} ${radius.h};
   }
 `;
 

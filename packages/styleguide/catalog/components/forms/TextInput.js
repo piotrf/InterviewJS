@@ -11,7 +11,7 @@ const Input = css.input`
   border-radius: ${radius.m};
   border: 1px solid ${color.greyHL};
   box-shadow: none;
-  color: ${color.blueBlk};
+  color: ${({ disabled }) => (disabled ? color.greyBlk : color.blueBlk)};
   font-family: ${font.serif};
   position: relative;
   transition: border-color ${time.m};
@@ -31,6 +31,7 @@ const Input = css.input`
     valid === false
       ? `
     border-color: ${color.redM} !important;
+    z-index: 50;
   `
       : ``};
   ${({ area }) =>

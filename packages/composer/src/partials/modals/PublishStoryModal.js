@@ -1,9 +1,11 @@
 /* eslint react/forbid-prop-types: 0 */
 import React, { Component } from "react";
 import ReactModal from "react-modal";
-import { arrayOf, bool, func, object } from "prop-types";
+import { arrayOf, bool, func, number, object } from "prop-types";
 
 import {
+  Actionbar,
+  Action,
   Breadcrumb,
   Breadcrumbs,
   Container,
@@ -15,7 +17,7 @@ import {
   Separator
 } from "interviewjs-styleguide";
 
-import { DetailsForm, MetaForm, PollForm } from "../";
+import { DetailsForm, MetaForm, Poll } from "../";
 
 const getStepState = (step, i) => {
   if (step === i) {
@@ -30,23 +32,19 @@ export default class PublishStoryModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      step: 0, // TODO revert to 0
-      storyCreated: false
+      step: 0 // TODO revert to 0
     };
     this.handleStep0 = this.handleStep0.bind(this);
     this.handleStep1 = this.handleStep1.bind(this);
     this.handleStep2 = this.handleStep2.bind(this);
+    this.handleStep3 = this.handleStep3.bind(this);
   }
   handleStep0(data) {
-    return (
-      this.state.storyCreated
-        ? this.props.updateStory(data, 0)
-        : this.props.createStory(data),
-      this.setState({ step: this.state.step + 1, storyCreated: true })
-    );
+    this.props.updateStory(data, this.props.storyIndex);
+    this.setState({ step: this.state.step + 1 });
   }
   handleStep1(data) {
-    this.props.updateStory(data, 0);
+    this.props.updateStory(data, this.props.storyIndex);
     this.setState({ step: this.state.step + 1 });
   }
   handleStep2() {
@@ -66,6 +64,7 @@ export default class PublishStoryModal extends Component {
             <MetaForm
               handleSubmit={this.handleStep0}
               story={this.props.story}
+              cta="Confirm"
             />
           </Container>
         );
@@ -80,6 +79,7 @@ export default class PublishStoryModal extends Component {
             <DetailsForm
               handleSubmit={this.handleStep1}
               story={this.props.story}
+              cta="Confirm"
             />
           </Container>
         );
@@ -90,7 +90,12 @@ export default class PublishStoryModal extends Component {
               Engage your readers. Ask them to have their say…
             </PageSubtitle>
             <Separator size="m" silent />
-            <PollForm handleSubmit={this.handleStep2} cta="Publish Story" />
+            <Poll
+              {...this.props}
+              cta="Publish Story"
+              handleSubmit={this.handleStep2}
+              story={this.props.story}
+            />
           </Container>
         );
       } else if (step === 3) {
@@ -99,6 +104,20 @@ export default class PublishStoryModal extends Component {
             <PageSubtitle typo="h3">Success.</PageSubtitle>
             <Separator size="m" silent />
             Grab the link and share on social
+            <Separator size="m" silent />
+            <Actionbar>
+              <Action fixed primary onClick={this.handleStep3}>
+                Close
+              </Action>
+              <Action
+                fixed
+                href={`http://interviewjs.io/viewer/${this.props.story.id}`} // TODO actual url
+                secondary
+                target="_blank"
+              >
+                Open your story
+              </Action>
+            </Actionbar>
           </Container>
         );
       }
@@ -107,7 +126,7 @@ export default class PublishStoryModal extends Component {
     return (
       <ReactModal
         ariaHideApp={false}
-        isOpen={this.props.isOpen}
+        isOpen={this.props.isOpen} // TODO
         key="PublishStoryModal"
         onRequestClose={this.props.handleClose}
         role="dialog"
@@ -116,7 +135,7 @@ export default class PublishStoryModal extends Component {
           <ModalHead>
             <PageTitle typo="h1">Publish Story</PageTitle>
             <Separator size="s" silent />
-            <Breadcrumbs count={3}>
+            <Breadcrumbs count={4}>
               <Breadcrumb
                 onClick={step >= 0 ? () => this.setState({ step: 0 }) : null}
                 state={getStepState(step, 0)}
@@ -127,13 +146,19 @@ export default class PublishStoryModal extends Component {
                 onClick={step >= 1 ? () => this.setState({ step: 1 }) : null}
                 state={getStepState(step, 1)}
               >
-                Revise context
+                Review context
               </Breadcrumb>
               <Breadcrumb
                 onClick={step >= 2 ? () => this.setState({ step: 2 }) : null}
                 state={getStepState(step, 2)}
               >
                 Add closing poll
+              </Breadcrumb>
+              <Breadcrumb
+                onClick={step >= 3 ? () => this.setState({ step: 3 }) : null}
+                state={getStepState(step, 3)}
+              >
+                Share your story
               </Breadcrumb>
             </Breadcrumbs>
           </ModalHead>
@@ -153,8 +178,10 @@ PublishStoryModal.propTypes = {
   isOpen: bool.isRequired,
   router: object.isRequired,
   stories: arrayOf(object),
+  storyIndex: number.isRequired,
   updateInterviewee: func.isRequired,
-  updateStory: func.isRequired
+  updateStory: func.isRequired,
+  story: object.isRequired
 };
 
 PublishStoryModal.defaultProps = {

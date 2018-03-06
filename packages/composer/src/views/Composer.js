@@ -83,12 +83,17 @@ export default class ComposerView extends React.Component {
       currentInterviewee: 0
     };
     this.switchInterviewee = this.switchInterviewee.bind(this);
+    this.deleteInterviewee = this.deleteInterviewee.bind(this);
     this.toggleDetailsModal = this.toggleDetailsModal.bind(this);
     this.togglePublishModal = this.togglePublishModal.bind(this);
     this.updateStory = this.updateStory.bind(this);
   }
   switchInterviewee(interviewee) {
     this.setState({ currentInterviewee: interviewee });
+  }
+  deleteInterviewee(story, interviewee) {
+    this.setState({ currentInterviewee: 0 });
+    this.props.deleteInterviewee(story, interviewee);
   }
   toggleDetailsModal(tab) {
     return tab
@@ -132,7 +137,12 @@ export default class ComposerView extends React.Component {
         </PageHead>
         <PageBody>
           <Container flex={[1, 1, `${100 / 3}%`]}>
-            <IntervieweePane {...this.props} story={story} />
+            <IntervieweePane
+              {...this.props}
+              currentInterviewee={this.state.currentInterviewee}
+              story={story}
+              storyIndex={storyIndex}
+            />
           </Container>
           <Container flex={[1, 1, `${100 / 3}%`]}>
             <StoryPane
@@ -144,7 +154,12 @@ export default class ComposerView extends React.Component {
             />
           </Container>
           <Container flex={[1, 1, `${100 / 3}%`]}>
-            <UserPane {...this.props} story={story} />
+            <UserPane
+              {...this.props}
+              currentInterviewee={this.state.currentInterviewee}
+              story={story}
+              storyIndex={storyIndex}
+            />
           </Container>
         </PageBody>
       </Page>,
@@ -166,6 +181,7 @@ export default class ComposerView extends React.Component {
       this.state.detailsModal !== "" ? (
         <DetailsModal
           {...this.props}
+          deleteInterviewee={this.deleteInterviewee}
           handleClose={() => this.toggleDetailsModal()}
           isOpen
           key="DetailsModal"
@@ -192,6 +208,7 @@ export default class ComposerView extends React.Component {
 }
 
 ComposerView.propTypes = {
+  deleteInterviewee: func,
   params: shape({ storyId: string.isRequired }).isRequired,
   router: object.isRequired /* eslint react/forbid-prop-types: 0 */,
   stories: arrayOf(object),
@@ -199,6 +216,7 @@ ComposerView.propTypes = {
 };
 
 ComposerView.defaultProps = {
+  deleteInterviewee: null,
   stories: [],
   updateStory: null
 };

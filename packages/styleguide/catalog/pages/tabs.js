@@ -27,6 +27,8 @@ export default () => markdown`
 
   ## Pane Tabs
 
+  ### Neutral (active transparent)
+
   ${(
     <ReactSpecimen>
       <PaneTabs>
@@ -36,11 +38,47 @@ export default () => markdown`
     </ReactSpecimen>
   )}
 
+  #### disabled
+
   ${(
     <ReactSpecimen>
       <PaneTabs>
-        <PaneTab active>Active tab</PaneTab>
-        <PaneTab onClick={(e) => console.log(e)}>A tab</PaneTab>
+        <PaneTab disabled active>
+          Active tab
+        </PaneTab>
+        <PaneTab disabled onClick={(e) => console.log(e)}>
+          A tab
+        </PaneTab>
+      </PaneTabs>
+    </ReactSpecimen>
+  )}
+
+  ### Opinionated (active highlighted)
+
+  ${(
+    <ReactSpecimen>
+      <PaneTabs>
+        <PaneTab opinionated onClick={(e) => console.log(e)}>
+          A tab
+        </PaneTab>
+        <PaneTab opinionated active>
+          Active tab
+        </PaneTab>
+      </PaneTabs>
+    </ReactSpecimen>
+  )}
+
+  #### disabled
+
+  ${(
+    <ReactSpecimen>
+      <PaneTabs>
+        <PaneTab disabled opinionated active>
+          Active tab
+        </PaneTab>
+        <PaneTab disabled opinionated onClick={(e) => console.log(e)}>
+          A tab
+        </PaneTab>
       </PaneTabs>
     </ReactSpecimen>
   )}

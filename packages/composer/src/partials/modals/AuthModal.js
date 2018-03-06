@@ -53,7 +53,7 @@ export default class AuthModal extends React.Component {
         overlayClassName="ReactModal__HeroOverlay"
         role="dialog"
       >
-        <Modal {...this.props} persistent transparent compact>
+        <Modal {...this.props} persistent transparent>
           <ModalBody>
             <BubbleGroup>
               <Bubbles persona="interviewee">

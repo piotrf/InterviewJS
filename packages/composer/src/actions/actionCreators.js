@@ -7,6 +7,7 @@ export function createStory({
   interviewees = [],
   intro = "",
   media = {},
+  poll = [],
   pubDate = "",
   title = ""
 }) {
@@ -19,6 +20,7 @@ export function createStory({
       interviewees,
       intro,
       media,
+      poll,
       pubDate,
       title,
       id: uuidv4(),
@@ -27,18 +29,18 @@ export function createStory({
   };
 }
 
-export function updateStory(payload, i) {
+export function updateStory(payload, storyIndex) {
   return {
     type: "UPDATE_STORY",
-    i,
+    storyIndex,
     payload
   };
 }
 
-export function deleteStory(i) {
+export function deleteStory(storyIndex) {
   return {
     type: "DELETE_STORY",
-    i
+    storyIndex
   };
 }
 
@@ -46,24 +48,53 @@ export function createInterviewee(storyIndex, payload) {
   return {
     type: "CREATE_INTERVIEWEE",
     storyIndex,
-    payload
+    payload: {
+      ...payload,
+      storyline: []
+    }
   };
 }
 
-export function updateInterviewee(storyIndex, i, payload) {
+export function updateInterviewee(storyIndex, intervieweeIndex, payload) {
   return {
     type: "UPDATE_INTERVIEWEE",
-    i,
+    intervieweeIndex,
     payload,
     storyIndex
   };
 }
 
-export function deleteInterviewee(storyIndex, i) {
+export function deleteInterviewee(storyIndex, intervieweeIndex) {
   return {
     type: "DELETE_INTERVIEWEE",
-    i,
+    intervieweeIndex,
     storyIndex
+  };
+}
+
+export function addStorylineItem(storyIndex, intervieweeIndex, payload) {
+  return {
+    type: "ADD_STORYLINE_ITEM",
+    id: uuidv4(),
+    intervieweeIndex,
+    order: 0,
+    payload,
+    storyIndex
+  };
+}
+
+export function updateStorylineItem(
+  storyIndex,
+  intervieweeIndex,
+  storylineItemIndex,
+  payload
+) {
+  return {
+    type: "UPDATE_STORYLINE_ITEM",
+    intervieweeIndex,
+    payload,
+    storyIndex,
+    storylineItemIndex
   };
 }
 

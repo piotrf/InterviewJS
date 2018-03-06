@@ -16,29 +16,35 @@ const PaneTabEl = css.li`
     background: none;
     border: none;
     box-shadow: none;
-    color: ${({ active }) => (active ? color.blueM : color.greyBlk)};
-    cursor: pointer;
+    color: ${({ active, disabled }) =>
+      active && !disabled ? color.blueM : color.greyBlk};
     display: block;
     font-family: ${font.serif};
     font-weight: normal;
     text-align: center;
     transition: color ${time.m};
     width: 100%;
-    &:hover {
-      color: ${color.blueM};
-    }
-    &:active {
-      color: ${color.blueM};
-    }
+    ${({ disabled }) =>
+      disabled
+        ? ``
+        : `
+      cursor: pointer;
+      &:hover {
+        color: ${color.blueM};
+      }
+      &:active {
+        color: ${color.blueM};
+      }
+    `};
     &:focus {
       outline: none;
     }
   }
-  ${({ active }) =>
+  ${({ active, opinionated }) =>
     active
       ? `
-    background: ${color.white};
-    border-bottom: 1px solid ${color.white};
+    background: ${opinionated ? color.white : `transparent`};
+    border-bottom: 1px solid ${opinionated ? color.white : `transparent`};
     border-top: 1px solid ${color.greyHL};
     &:not(:first-child) {
       border-left: 1px solid ${color.greyHL};
