@@ -5,6 +5,11 @@
 
 * Meta form updated to feature explicit labels for Cover/Logo file fields.
 
+* Integrated `explore` action dictionaries for all interviewee bubble types.
+
+* Tweaked UserPane logic to allow input placeholder different from value.
+  So now we have `Type custom label here…` and not `Ignore` value at all times.
+
 ## 06-03-2017
 
 * Firefox fixes
