@@ -8,9 +8,6 @@ const BubbleGroup = css.div`
   flex-direction: row;
   position: relative;
   width: 100%;
-  &:not(:first-child) {
-    ${setSpace("mtm")};
-  }
 `;
 
 export default BubbleGroup;

@@ -1,3 +1,10 @@
+## ……-03-2017
+
+* It is now possible to re-order bubble in the Composer
+  Drag an already existing bubble within the Storyline canvas.
+
+* Meta form updated to feature explicit labels for Cover/Logo file fields.
+
 ## 06-03-2017
 
 * Firefox fixes

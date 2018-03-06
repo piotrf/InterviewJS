@@ -97,3 +97,12 @@ export function updateStorylineItem(
     storylineItemIndex
   };
 }
+
+export function moveStorylineItem(storyIndex, intervieweeIndex, payload) {
+  return {
+    type: "MOVE_STORYLINE_ITEM",
+    intervieweeIndex,
+    payload,
+    storyIndex
+  };
+}

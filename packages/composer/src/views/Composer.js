@@ -149,6 +149,7 @@ export default class ComposerView extends React.Component {
               {...this.props}
               currentInterviewee={this.state.currentInterviewee}
               story={story}
+              storyIndex={storyIndex}
               switchInterviewee={this.switchInterviewee}
               toggleDetailsModal={() => this.toggleDetailsModal("interviewees")}
             />
