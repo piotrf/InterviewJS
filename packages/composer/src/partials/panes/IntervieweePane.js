@@ -90,6 +90,7 @@ export default class IntervieweePane extends React.Component {
             <PaneTab
               active={tab === "text"}
               onClick={() => this.setState({ tab: "text" })}
+              opinionated
             >
               <Tip title="Text bubble">
                 <Icon name="text" size="s" />
@@ -98,6 +99,7 @@ export default class IntervieweePane extends React.Component {
             <PaneTab
               active={tab === "link"}
               onClick={() => this.setState({ tab: "link" })}
+              opinionated
             >
               <Tip title="Link bubble">
                 <Icon name="link" size="s" />
@@ -106,6 +108,7 @@ export default class IntervieweePane extends React.Component {
             <PaneTab
               active={tab === "image"}
               onClick={() => this.setState({ tab: "image" })}
+              opinionated
             >
               <Tip title="Image bubble">
                 <Icon name="image" size="s" />
@@ -114,6 +117,7 @@ export default class IntervieweePane extends React.Component {
             <PaneTab
               active={tab === "embed"}
               onClick={() => this.setState({ tab: "embed" })}
+              opinionated
             >
               <Tip title="Embed bubble">
                 <Icon name="embed" size="s" />
@@ -122,6 +126,7 @@ export default class IntervieweePane extends React.Component {
             <PaneTab
               active={tab === "map"}
               onClick={() => this.setState({ tab: "map" })}
+              opinionated
             >
               <Tip title="Map bubble">
                 <Icon name="map" size="s" />
@@ -130,6 +135,7 @@ export default class IntervieweePane extends React.Component {
             <PaneTab
               active={tab === "media"}
               onClick={() => this.setState({ tab: "media" })}
+              opinionated
             >
               <Tip title="Media bubble">
                 <Icon name="media" size="s" />
