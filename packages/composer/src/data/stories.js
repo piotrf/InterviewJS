@@ -422,6 +422,7 @@ Good.`,
     cover: "",
     logo: "",
     attachments: [{ url: "", id: "" }],
+    poll: [],
     interviewees: [
       {
         name: "Barack Obama",
