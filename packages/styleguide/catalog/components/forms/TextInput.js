@@ -31,6 +31,7 @@ const Input = css.input`
     valid === false
       ? `
     border-color: ${color.redM} !important;
+    z-index: 50;
   `
       : ``};
   ${({ area }) =>

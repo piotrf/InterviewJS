@@ -7,6 +7,7 @@ export function createStory({
   interviewees = [],
   intro = "",
   media = {},
+  poll = [],
   pubDate = "",
   title = ""
 }) {
@@ -19,6 +20,7 @@ export function createStory({
       interviewees,
       intro,
       media,
+      poll,
       pubDate,
       title,
       id: uuidv4(),

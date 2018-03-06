@@ -19,6 +19,18 @@ const stories = [
     cover: "",
     logo: "",
     attachments: [{ url: "", id: "" }],
+    poll: [
+      {
+        question: "Do you think Ava is a real person?",
+        answer1: "Yes",
+        answer2: "No"
+      },
+      {
+        question: "Do you think Caleb is cool?",
+        answer1: "Yes",
+        answer2: "No"
+      }
+    ],
     interviewees: [
       {
         name: "Ava",

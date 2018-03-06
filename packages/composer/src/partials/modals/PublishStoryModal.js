@@ -17,7 +17,7 @@ import {
   Separator
 } from "interviewjs-styleguide";
 
-import { DetailsForm, MetaForm, PollForm } from "../";
+import { DetailsForm, MetaForm, Poll } from "../";
 
 const getStepState = (step, i) => {
   if (step === i) {
@@ -88,7 +88,12 @@ export default class PublishStoryModal extends Component {
               Engage your readers. Ask them to have their say…
             </PageSubtitle>
             <Separator size="m" silent />
-            <PollForm handleSubmit={this.handleStep2} cta="Publish Story" />
+            <Poll
+              {...this.props}
+              cta="Publish Story"
+              handleSubmit={this.handleStep2}
+              story={this.props.story}
+            />
           </Container>
         );
       } else if (step === 3) {
@@ -119,7 +124,7 @@ export default class PublishStoryModal extends Component {
     return (
       <ReactModal
         ariaHideApp={false}
-        isOpen={this.props.isOpen}
+        isOpen={this.props.isOpen} // TODO
         key="PublishStoryModal"
         onRequestClose={this.props.handleClose}
         role="dialog"
