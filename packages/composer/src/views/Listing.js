@@ -5,7 +5,6 @@ import { arrayOf, func, object, shape, string } from "prop-types";
 
 import {
   Action,
-  Actionbar,
   Avatar,
   Container,
   Dropdown,

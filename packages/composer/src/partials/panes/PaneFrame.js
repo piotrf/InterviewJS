@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import css from "styled-components";
 import { array, bool, func, node, oneOfType, string } from "prop-types";
 
@@ -82,38 +82,31 @@ const SubmitButton = css.span`
 
 `;
 
-export default class PaneFrame extends Component {
-  constructor(props) {
-    super(props);
-  }
-  componentWillUpdate() {}
-  componentDidUpdate() {}
-  render() {
-    const { hasPreview } = this.props;
-    return (
-      <Frame {...this.props} dir="column" padded>
-        <Container flex={[1, 1, `auto`]}>{this.props.children}</Container>
-        <Separator silent size="s" />
-        <Container flex={[0, 0, `200px`]}>
-          <PreviewHolder>
-            <Preview fill="grey">{this.props.preview}</Preview>
-            <SubmitButton side={this.props.side}>
-              <Action
-                disabled={!hasPreview}
-                iconic
-                onClick={hasPreview ? this.props.addStorylineItem : null}
-                primary
-                tone="positive"
-              >
-                <Icon name="plus" size="l" />
-              </Action>
-            </SubmitButton>
-          </PreviewHolder>
-        </Container>
-      </Frame>
-    );
-  }
-}
+const PaneFrame = (props) => {
+  const { hasPreview } = props;
+  return (
+    <Frame {...props} dir="column" padded>
+      <Container flex={[1, 1, `auto`]}>{props.children}</Container>
+      <Separator silent size="s" />
+      <Container flex={[0, 0, `200px`]}>
+        <PreviewHolder>
+          <Preview fill="grey">{props.preview}</Preview>
+          <SubmitButton side={props.side}>
+            <Action
+              disabled={!hasPreview}
+              iconic
+              onClick={hasPreview ? props.addStorylineItem : null}
+              primary
+              tone="positive"
+            >
+              <Icon name="plus" size="l" />
+            </Action>
+          </SubmitButton>
+        </PreviewHolder>
+      </Container>
+    </Frame>
+  );
+};
 
 PaneFrame.propTypes = {
   addStorylineItem: func.isRequired,
@@ -128,3 +121,5 @@ PaneFrame.defaultProps = {
   hasPreview: false,
   side: "left"
 };
+
+export default PaneFrame;
