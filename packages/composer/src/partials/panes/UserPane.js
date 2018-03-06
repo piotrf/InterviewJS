@@ -7,6 +7,8 @@ import {
   Checkbox,
   Container,
   Icon,
+  PaneTab,
+  PaneTabs,
   Separator,
   TextInput,
   Tip,
@@ -90,7 +92,6 @@ const UserAction = css(Container)`
 `;
 
 const ActionLibHolder = css(Container)`
-  ${setSpace("pvx")};
   overflow-y: auto;
   width: 100%;
   height: 100%;
@@ -98,6 +99,20 @@ const ActionLibHolder = css(Container)`
 const ActionLibList = css.ul`
   display: block;
   text-align: center;
+  ${PaneTabs} {
+    transform: translateY(-1px);
+    border-radius: 0 ${radius.l} 0 0;
+    & button {
+      ${setSpace("phn")};
+      ${setSpace("pvx")};
+    }
+    & > li:last-child {
+      border-radius: 0 ${radius.l} 0 0;
+      button {
+        border-radius: 0 ${radius.l} 0 0;
+      }
+    }
+  }
 `;
 const ActionLibItem = css.li`
   ${setSpace("phs")};
@@ -164,9 +179,12 @@ export default class UserPane extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      customExploreVal: "",
+      customIgnoreVal: "",
       enableExplore: false,
       enableIgnore: false,
       exploreLibItem: null,
+      exploreTab: "text",
       exploreVal: "Explore",
       ignoreLibItem: null,
       ignoreVal: "Ignore"
@@ -181,9 +199,18 @@ export default class UserPane extends React.Component {
     this.setState({ [action]: e.target.checked });
   }
   customiseActionLabel(action, e) {
-    return action === "ignoreVal"
-      ? this.setState({ [action]: e.target.value, ignoreLibItem: null })
-      : this.setState({ [action]: e.target.value, exploreLibItem: null });
+    const { value } = e.target;
+    return action === "customIgnoreVal"
+      ? this.setState({
+          [action]: value,
+          ignoreLibItem: null,
+          ignoreVal: value
+        })
+      : this.setState({
+          [action]: value,
+          exploreLibItem: null,
+          exploreVal: value
+        });
   }
   selectIgnoreAction(i, e) {
     this.setState({ ignoreVal: e.target.innerHTML, ignoreLibItem: i });
@@ -212,7 +239,13 @@ export default class UserPane extends React.Component {
     });
   }
   render() {
-    const { enableExplore, enableIgnore, ignoreVal, exploreVal } = this.state;
+    const {
+      enableExplore,
+      enableIgnore,
+      ignoreVal,
+      exploreVal,
+      exploreTab
+    } = this.state;
     return (
       <PaneEl fill="white" rounded shift dir="column">
         <PaneFrame
@@ -293,9 +326,9 @@ export default class UserPane extends React.Component {
                       placeholder="Type your own text label…"
                       maxLength={34}
                       disabled={!enableIgnore}
-                      value={this.state.ignoreVal}
+                      value={this.state.customIgnoreVal}
                       onChange={(e) =>
-                        this.customiseActionLabel("ignoreVal", e)
+                        this.customiseActionLabel("customIgnoreVal", e)
                       }
                     />
                   </CustomActionHolder>
@@ -330,7 +363,75 @@ export default class UserPane extends React.Component {
                 <Container flex={[2, 2, "auto"]} fill="grey" dir="column">
                   <ActionLibHolder flex={[1, 1, "auto"]}>
                     <ActionLibList>
-                      {USER_ACTIONS.explore.map((action, i) => (
+                      <PaneTabs>
+                        <PaneTab
+                          active={exploreTab === "text"}
+                          disabled={!enableExplore}
+                          onClick={
+                            enableExplore
+                              ? () => this.setState({ exploreTab: "text" })
+                              : null
+                          }
+                        >
+                          <Icon name="text" size="x" />
+                        </PaneTab>
+                        <PaneTab
+                          active={exploreTab === "link"}
+                          disabled={!enableExplore}
+                          onClick={
+                            enableExplore
+                              ? () => this.setState({ exploreTab: "link" })
+                              : null
+                          }
+                        >
+                          <Icon name="link" size="x" />
+                        </PaneTab>
+                        <PaneTab
+                          active={exploreTab === "image"}
+                          disabled={!enableExplore}
+                          onClick={
+                            enableExplore
+                              ? () => this.setState({ exploreTab: "image" })
+                              : null
+                          }
+                        >
+                          <Icon name="image" size="x" />
+                        </PaneTab>
+                        <PaneTab
+                          active={exploreTab === "embed"}
+                          disabled={!enableExplore}
+                          onClick={
+                            enableExplore
+                              ? () => this.setState({ exploreTab: "embed" })
+                              : null
+                          }
+                        >
+                          <Icon name="embed" size="x" />
+                        </PaneTab>
+                        <PaneTab
+                          active={exploreTab === "map"}
+                          disabled={!enableExplore}
+                          onClick={
+                            enableExplore
+                              ? () => this.setState({ exploreTab: "map" })
+                              : null
+                          }
+                        >
+                          <Icon name="map" size="x" />
+                        </PaneTab>
+                        <PaneTab
+                          active={exploreTab === "media"}
+                          disabled={!enableExplore}
+                          onClick={
+                            enableExplore
+                              ? () => this.setState({ exploreTab: "media" })
+                              : null
+                          }
+                        >
+                          <Icon name="media" size="x" />
+                        </PaneTab>
+                      </PaneTabs>
+                      {USER_ACTIONS.explore[exploreTab].map((action, i) => (
                         <ActionLibItem key={i}>
                           <ActionLibAction
                             interactive={enableExplore}
@@ -358,9 +459,9 @@ export default class UserPane extends React.Component {
                       placeholder="Type your own text label…"
                       maxLength={34}
                       disabled={!enableExplore}
-                      value={this.state.exploreVal}
+                      value={this.state.customExploreVal}
                       onChange={(e) =>
-                        this.customiseActionLabel("exploreVal", e)
+                        this.customiseActionLabel("customExploreVal", e)
                       }
                     />
                   </CustomActionHolder>
