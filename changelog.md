@@ -1,15 +1,21 @@
-##
+## 06-03-2017
+
+* Firefox fixes
+  Composer has been browser tested—Chrome, Safari, Firefox is good to go.
+
+* Account menu is now a dropdown.
+  In the Listing, top left Account details are now a dropdown so they display better on mobile.
 
 * There’s now a Publish Flow starting in the Composer
-  …
+  `Publish` button in the Composer launches a wizard asking to: 1) review meta 2) review intro/context 3) create outro poll/questionnaire 4) display public link to the story (no. 4 is still WIP).
 
 * Composer storyline (central pane) can now accommodate user actionable bubbles
-  They differ from regular string bubbles (like interviewee’s bubbles) as need to carry more information (wether they’re skip/explore, custom text label if set, ecc.).
+  They differ from regular string bubbles (like interviewee’s bubbles) as they need to carry more information (wether they’re skip/explore, custom text label if set, ecc.).
 
 * It is now possible to add user bubbles
   Both explore/ignore are selectable, one can customise their text labels or select from a library of predefined bubbles.
 
-* Editing preview value now propagates changes to the added text bubble
+* Editing preview value in the Interviewee Panel now propagates changes to the added text bubble
   Select a piece of text from the transcript, edit it in the preview and add the bubble — you’ll notice how the bubble will feature the edited text.
 
 * Composer Scroll-to-bottom
