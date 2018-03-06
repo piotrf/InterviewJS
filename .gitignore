@@ -63,5 +63,6 @@ typings/
 .DS_Store
 
 *.lock
+ideas.md
 
 packages/styleguide/package-lock.json
