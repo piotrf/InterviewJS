@@ -183,8 +183,9 @@ export default class UserPane extends React.Component {
       customIgnoreVal: "",
       enableExplore: false,
       enableIgnore: false,
+      exploreDict: "text",
+      exploreLibDict: "text",
       exploreLibItem: null,
-      exploreTab: "text",
       exploreVal: "Explore",
       ignoreLibItem: null,
       ignoreVal: "Ignore"
@@ -204,19 +205,28 @@ export default class UserPane extends React.Component {
       ? this.setState({
           [action]: value,
           ignoreLibItem: null,
-          ignoreVal: value
+          ignoreVal: value.length > 0 ? value : this.props.ignoreVal
         })
       : this.setState({
           [action]: value,
           exploreLibItem: null,
-          exploreVal: value
+          exploreVal: value.length > 0 ? value : this.props.exploreVal
         });
   }
   selectIgnoreAction(i, e) {
-    this.setState({ ignoreVal: e.target.innerHTML, ignoreLibItem: i });
+    this.setState({
+      customIgnoreVal: "",
+      ignoreLibItem: i,
+      ignoreVal: e.target.innerHTML
+    });
   }
-  selectExploreAction(i, e) {
-    this.setState({ exploreVal: e.target.innerHTML, exploreLibItem: i });
+  selectExploreAction(dict, i, e) {
+    this.setState({
+      customExploreVal: "",
+      exploreLibDict: dict,
+      exploreLibItem: i,
+      exploreVal: e.target.innerHTML
+    });
   }
   addStorylineItem() {
     const { storyIndex, currentInterviewee } = this.props;
@@ -242,9 +252,10 @@ export default class UserPane extends React.Component {
     const {
       enableExplore,
       enableIgnore,
-      ignoreVal,
+      exploreDict,
+      exploreLibDict,
       exploreVal,
-      exploreTab
+      ignoreVal
     } = this.state;
     return (
       <PaneEl fill="white" rounded shift dir="column">
@@ -365,84 +376,84 @@ export default class UserPane extends React.Component {
                     <ActionLibList>
                       <PaneTabs>
                         <PaneTab
-                          active={exploreTab === "text"}
+                          active={exploreDict === "text"}
                           disabled={!enableExplore}
                           onClick={
                             enableExplore
-                              ? () => this.setState({ exploreTab: "text" })
+                              ? () => this.setState({ exploreDict: "text" })
                               : null
                           }
                         >
                           <Icon name="text" size="x" />
                         </PaneTab>
                         <PaneTab
-                          active={exploreTab === "link"}
+                          active={exploreDict === "link"}
                           disabled={!enableExplore}
                           onClick={
                             enableExplore
-                              ? () => this.setState({ exploreTab: "link" })
+                              ? () => this.setState({ exploreDict: "link" })
                               : null
                           }
                         >
                           <Icon name="link" size="x" />
                         </PaneTab>
                         <PaneTab
-                          active={exploreTab === "image"}
+                          active={exploreDict === "image"}
                           disabled={!enableExplore}
                           onClick={
                             enableExplore
-                              ? () => this.setState({ exploreTab: "image" })
+                              ? () => this.setState({ exploreDict: "image" })
                               : null
                           }
                         >
                           <Icon name="image" size="x" />
                         </PaneTab>
                         <PaneTab
-                          active={exploreTab === "embed"}
+                          active={exploreDict === "embed"}
                           disabled={!enableExplore}
                           onClick={
                             enableExplore
-                              ? () => this.setState({ exploreTab: "embed" })
+                              ? () => this.setState({ exploreDict: "embed" })
                               : null
                           }
                         >
                           <Icon name="embed" size="x" />
                         </PaneTab>
                         <PaneTab
-                          active={exploreTab === "map"}
+                          active={exploreDict === "map"}
                           disabled={!enableExplore}
                           onClick={
                             enableExplore
-                              ? () => this.setState({ exploreTab: "map" })
+                              ? () => this.setState({ exploreDict: "map" })
                               : null
                           }
                         >
                           <Icon name="map" size="x" />
                         </PaneTab>
                         <PaneTab
-                          active={exploreTab === "media"}
+                          active={exploreDict === "media"}
                           disabled={!enableExplore}
                           onClick={
                             enableExplore
-                              ? () => this.setState({ exploreTab: "media" })
+                              ? () => this.setState({ exploreDict: "media" })
                               : null
                           }
                         >
                           <Icon name="media" size="x" />
                         </PaneTab>
                       </PaneTabs>
-                      {USER_ACTIONS.explore[exploreTab].map((action, i) => (
+                      {USER_ACTIONS.explore[exploreDict].map((action, i) => (
                         <ActionLibItem key={i}>
                           <ActionLibAction
                             interactive={enableExplore}
                             active={
-                              enableExplore
+                              enableExplore && exploreDict === exploreLibDict
                                 ? i === this.state.exploreLibItem
                                 : false
                             }
                             onClick={(e) =>
                               enableExplore
-                                ? this.selectExploreAction(i, e)
+                                ? this.selectExploreAction(exploreDict, i, e)
                                 : null
                             }
                           >
