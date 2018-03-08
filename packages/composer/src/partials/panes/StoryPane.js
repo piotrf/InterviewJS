@@ -40,6 +40,21 @@ const PaneBody = css.div`
     overflow-y: auto;
   }
 `;
+const BubbleEdit = css.div`
+  ${setSpace("pax")};
+  display: none;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  ${({ persona }) =>
+    persona === "user"
+      ? `
+    left: 100%;
+  `
+      : `
+    right: 100%;
+  `}
+`;
 const Storyline = css.div`
   ${setSpace("phl")};
   ${setSpace("ptm")};
@@ -53,6 +68,10 @@ const Storyline = css.div`
   & > * {
     ${setSpace("mvm")};
   }
+  & > * > *:first-child,
+  & > * > *:first-child * {
+    cursor: move !important;
+  }
   & > *:first-child {
     ${setSpace("mtm")};
   }
@@ -65,6 +84,11 @@ const Storyline = css.div`
     border-radius: ${radius.a};
     border: 1px dashed ${color.greyM};
     min-height: 40px;
+  }
+  & > *:hover {
+   ${BubbleEdit} {
+     display: block;
+   }
   }
 `;
 
@@ -126,6 +150,7 @@ export default class StoryPane extends React.Component {
     this.dragOver = this.dragOver.bind(this);
     this.dragStart = this.dragStart.bind(this);
     this.scrollToBottom = this.scrollToBottom.bind(this);
+    this.toggleEditBubble = this.toggleEditBubble.bind(this);
   }
   componentDidMount() {
     setTimeout(this.scrollToBottom, 300);
@@ -176,6 +201,9 @@ export default class StoryPane extends React.Component {
       block: "end",
       inline: "end"
     });
+  }
+  toggleEditBubble(storyItem) {
+    console.log("toggleEditBubble", storyItem);
   }
   render() {
     const { interviewees } = this.props.story;
@@ -250,6 +278,14 @@ export default class StoryPane extends React.Component {
                   onDragStart={(e) => this.dragStart(e)}
                 >
                   <Bubbles persona={role}>{getContent()}</Bubbles>
+                  <BubbleEdit persona={role}>
+                    <Action
+                      iconic
+                      onClick={() => this.toggleEditBubble(storyItem)}
+                    >
+                      <Icon name="pen" size="x" />
+                    </Action>
+                  </BubbleEdit>
                 </BubbleGroup>
               );
             })}

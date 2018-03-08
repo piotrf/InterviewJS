@@ -1,7 +1,5 @@
 import css from "styled-components";
 
-import { setSpace } from "../../../utils";
-
 const BubbleGroup = css.div`
   align-items: flex-end;
   display: flex;

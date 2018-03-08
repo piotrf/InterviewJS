@@ -33,6 +33,14 @@ const SystemBubble = css.div`
   &:only-child {
     border-radius: ${radius.h} ${radius.h} ${radius.h} ${radius.s};
   }
+  ${({ onDragStart }) =>
+    onDragStart
+      ? `
+    &,
+    & * {
+      cursor: move;
+    }`
+      : ``}
 `;
 
 SystemBubble.propTypes = {

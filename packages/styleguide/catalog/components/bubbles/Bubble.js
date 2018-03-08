@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { bool, number, string } from "prop-types";
+import { array, bool, number, object, oneOfType, string } from "prop-types";
 
 import { Preloader } from "../";
 import SpeakerBubble from "./SpeakerBubble";
@@ -59,12 +59,14 @@ export default class Bubble extends Component {
 
 Bubble.propTypes = {
   animated: bool,
-  persona: string,
-  delay: number
+  children: oneOfType([array, object, string]),
+  delay: number,
+  persona: string
 };
 
 Bubble.defaultProps = {
   animated: false,
-  persona: null,
-  delay: 0
+  children: null,
+  delay: 0,
+  persona: null
 };
