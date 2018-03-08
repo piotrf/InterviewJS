@@ -86,7 +86,6 @@ function stories(state = [], action) {
 
     case "MOVE_STORYLINE_ITEM":
       console.log("moving storyline item");
-      console.log(payload);
       const moveStorylineObj =
         state[storyIndex].interviewees[intervieweeIndex].storyline;
       return [
