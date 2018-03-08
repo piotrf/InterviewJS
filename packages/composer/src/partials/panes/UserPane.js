@@ -284,7 +284,7 @@ export default class UserPane extends React.Component {
           <UserActions>
             <Container>
               <UserAction dir="row">
-                <Container flex={[0, 1, "150px"]} align="center" dir="column">
+                <Container flex={[0, 0, "150px"]} align="center" dir="column">
                   <Checkbox
                     checked={enableIgnore}
                     onChange={(e) => this.toggleAction("enableIgnore", e)}
@@ -349,7 +349,7 @@ export default class UserPane extends React.Component {
             <Separator silent size="s" />
             <Container>
               <UserAction dir="row">
-                <Container flex={[0, 1, "150px"]} align="center" dir="column">
+                <Container flex={[0, 0, "150px"]} align="center" dir="column">
                   <Checkbox
                     checked={enableExplore}
                     onChange={(e) => this.toggleAction("enableExplore", e)}
