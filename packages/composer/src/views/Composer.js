@@ -4,7 +4,6 @@ import { arrayOf, func, object, shape, string } from "prop-types";
 
 import {
   Action,
-  Actionbar,
   Container,
   Icon,
   PageTitle,
@@ -15,8 +14,9 @@ import {
 
 import {
   DetailsModal,
-  PublishStoryModal,
   IntervieweePane,
+  MobileRedirect,
+  PublishStoryModal,
   StoryPane,
   UserPane
 } from "../partials";
@@ -59,18 +59,6 @@ const PageBody = css.div`
   }
   & > *:last-child {
     ${setSpace("mls")};
-  }
-`;
-
-const MobilePage = css(Container)`
-  display: none;
-  ${breakpoint.onlyphone} {
-    align-content: center;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100%;
   }
 `;
 
@@ -164,21 +152,7 @@ export default class ComposerView extends React.Component {
           </Container>
         </PageBody>
       </Page>,
-      <MobilePage key="Placeholder">
-        <Container>
-          <PageTitle typo="h2">This Page works only on desktop</PageTitle>
-          <Separator silent size="m" />
-          <Actionbar>
-            <Action
-              primary
-              fixed
-              onClick={() => this.props.router.push(`/my/stories`)}
-            >
-              Go back
-            </Action>
-          </Actionbar>
-        </Container>
-      </MobilePage>,
+      <MobileRedirect {...this.props} key="MobileRedirect" />,
       this.state.detailsModal !== "" ? (
         <DetailsModal
           {...this.props}
