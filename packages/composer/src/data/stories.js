@@ -209,7 +209,8 @@ Good.`,
             content: "Hello",
             id: uuidv4(),
             order: 0,
-            role: "interviewee"
+            role: "interviewee",
+            type: "text"
           },
           {
             content: [
@@ -224,7 +225,8 @@ Good.`,
             content: "Who are you?",
             id: uuidv4(),
             order: 2,
-            role: "interviewee"
+            role: "interviewee",
+            type: "text"
           },
           {
             content: [
@@ -239,7 +241,8 @@ Good.`,
             content: "Hello, Caleb",
             id: uuidv4(),
             order: 4,
-            role: "interviewee"
+            role: "interviewee",
+            type: "text"
           },
           {
             content: [
@@ -254,13 +257,15 @@ Good.`,
             content: "Yes",
             id: uuidv4(),
             order: 6,
-            role: "interviewee"
+            role: "interviewee",
+            type: "text"
           },
           {
             content: "Ava",
             id: uuidv4(),
             order: 6,
-            role: "interviewee"
+            role: "interviewee",
+            type: "text"
           },
           {
             content: [
@@ -279,13 +284,15 @@ Good.`,
             content: "I'm pleased to meet you too",
             order: 8,
             id: uuidv4(),
-            role: "interviewee"
+            role: "interviewee",
+            type: "text"
           },
           {
             content: "Are you nervous?",
             id: uuidv4(),
             order: 8,
-            role: "interviewee"
+            role: "interviewee",
+            type: "text"
           },
           {
             content: [
@@ -300,7 +307,8 @@ Good.`,
             content: "Are you nervous?",
             id: uuidv4(),
             order: 10,
-            role: "interviewee"
+            role: "interviewee",
+            type: "text"
           },
           {
             content: [
@@ -315,7 +323,8 @@ Good.`,
             content: "Why?",
             id: uuidv4(),
             order: 12,
-            role: "interviewee"
+            role: "interviewee",
+            type: "text"
           },
           {
             content: [
@@ -330,7 +339,8 @@ Good.`,
             content: "I feel nervous too",
             id: uuidv4(),
             order: 14,
-            role: "interviewee"
+            role: "interviewee",
+            type: "text"
           },
           {
             content: [
@@ -345,7 +355,8 @@ Good.`,
             content: "Yes",
             id: uuidv4(),
             order: 16,
-            role: "interviewee"
+            role: "interviewee",
+            type: "text"
           },
           {
             content: [
@@ -364,13 +375,15 @@ Good.`,
             content: "I've never met anyone new before",
             id: uuidv4(),
             order: 18,
-            role: "interviewee"
+            role: "interviewee",
+            type: "text"
           },
           {
             content: " Only Nathan",
             id: uuidv4(),
             order: 18,
-            role: "interviewee"
+            role: "interviewee",
+            type: "text"
           },
           {
             content: [
@@ -389,7 +402,8 @@ Good.`,
             content: "Haven't you met lots of new people before?",
             id: uuidv4(),
             order: 20,
-            role: "interviewee"
+            role: "interviewee",
+            type: "text"
           },
           {
             content: [
@@ -404,7 +418,8 @@ Good.`,
             content: "Oh",
             id: uuidv4(),
             order: 22,
-            role: "interviewee"
+            role: "interviewee",
+            type: "text"
           }
         ]
       }
@@ -586,7 +601,56 @@ But you're not going to make the kinds of deep changes in society-- that those s
 STEPHANOPOULOS: Sounds like you've been having some good dinner table conversations. Mr. President, thank you.
 
 OBAMA: Thank you.`,
-        storyline: []
+        storyline: [
+          {
+            content: {
+              value: "https://interviewjs.io",
+              title: "Here’s a link"
+            },
+            id: uuidv4(),
+            order: 0,
+            role: "interviewee",
+            type: "link"
+          },
+          {
+            content: {
+              value: "https://interviewjs.io"
+            },
+            id: uuidv4(),
+            order: 1,
+            role: "interviewee",
+            type: "link"
+          },
+          {
+            content: {
+              value: "Here’s my pic:"
+            },
+            id: uuidv4(),
+            order: 2,
+            role: "interviewee",
+            type: "text"
+          },
+          {
+            content: {
+              value: OBAMA,
+              title: "MY PIC"
+            },
+            id: uuidv4(),
+            order: 3,
+            role: "interviewee",
+            type: "image"
+          },
+          {
+            content: {
+              value: `<iframe width="560" height="315" src="https://www.youtube.com/embed/H6lE5pai9fw" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`,
+              title: "This is an embed"
+            },
+            id: uuidv4(),
+            order: 4,
+            role: "interviewee",
+            type: "embed"
+          }
+        ]
       },
       {
         name: "Donald Trump",
