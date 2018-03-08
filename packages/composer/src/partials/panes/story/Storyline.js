@@ -1,3 +1,4 @@
+/* eslint react/no-danger: 0 */
 import { arrayOf, func, object, number } from "prop-types";
 import css from "styled-components";
 import React from "react";
@@ -5,15 +6,18 @@ import React from "react";
 import {
   Action,
   Bubble,
+  BubbleHTMLContent,
   BubbleGroup,
   Bubbles,
-  Icon,
-  Separator,
   color,
+  Icon,
   radius,
+  Separator,
   setSpace,
   skin
 } from "interviewjs-styleguide";
+
+import Ratio from "./16x9.png";
 
 const BubbleEdit = css.div`
   ${setSpace("pax")};
@@ -33,13 +37,13 @@ const BubbleEdit = css.div`
 const StorylineEl = css.div`
   ${setSpace("phl")};
   ${setSpace("ptm")};
-  height: 100%;
-  top: 0;
-  right: 0;
-  left: 0;
   bottom: 0;
-  position: absolute;
+  height: 100%;
+  left: 0;
   overflow-y: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
   & > * {
     ${setSpace("mvm")};
   }
@@ -63,6 +67,7 @@ const StorylineEl = css.div`
   & > *:hover {
    ${BubbleEdit} {
      display: block;
+     z-index: 50;
    }
   }
 `;
@@ -131,41 +136,79 @@ export default class Storyline extends React.Component {
   }
   render() {
     const { storyline } = this.props;
+    const renderUserBubble = (data) => {
+      const { content, role } = data;
+      return (
+        <Bubble persona={role} theme={{ backg: skin.speakerBackg }}>
+          {content[0].enabled ? (
+            <Action tone="negative">{content[0].value}</Action>
+          ) : null}
+          {content[0].enabled && content[1].enabled ? (
+            <Separator dir="v" size="m" />
+          ) : null}
+          {content[1].enabled ? (
+            <Action tone="positive">{content[1].value}</Action>
+          ) : null}
+        </Bubble>
+      );
+    };
+    const renderIntervieweeBubble = (data) => {
+      const { content, type, role } = data;
+      if (type === "text") {
+        return (
+          <Bubble persona={role} type={type}>
+            {content.value}
+          </Bubble>
+        );
+      } else if (type === "link") {
+        return (
+          <Bubble persona={role} type={type}>
+            <BubbleHTMLContent>
+              <a href={content.value} target="_blank">
+                {content.title ? content.title : content.value}
+              </a>
+            </BubbleHTMLContent>
+          </Bubble>
+        );
+      } else if (type === "image") {
+        return (
+          <Bubble persona={role} type={type}>
+            <BubbleHTMLContent>
+              <img src={content.value} alt="" />
+            </BubbleHTMLContent>
+          </Bubble>
+        );
+      } else if (type === "embed") {
+        return (
+          <Bubble persona={role} type={type}>
+            <BubbleHTMLContent>
+              <div className="iframe">
+                <img className="ratio" alt="" src={Ratio} />
+                <div dangerouslySetInnerHTML={{ __html: content }} />
+              </div>
+            </BubbleHTMLContent>
+          </Bubble>
+        );
+      } else if (type === "map") {
+        return (
+          <Bubble persona={role} type={type}>
+            <BubbleHTMLContent>
+              <div className="iframe">
+                <img className="ratio" alt="" src={Ratio} />
+                <div dangerouslySetInnerHTML={{ __html: content }} />
+              </div>
+            </BubbleHTMLContent>
+          </Bubble>
+        );
+      }
+      return null;
+    };
+
     return (
       <StorylineEl onDragOver={(e) => this.dragOver(e)}>
         {Object.keys(storyline).map((storyItem, i) => {
-          const { role, content, type } = storyline[storyItem];
-          const getContent = () => {
-            if (role === "user") {
-              return (
-                <Bubble persona={role} theme={{ backg: skin.speakerBackg }}>
-                  {content[0].enabled ? (
-                    <Action tone="negative">{content[0].value}</Action>
-                  ) : null}
-                  {content[0].enabled && content[1].enabled ? (
-                    <Separator dir="v" size="m" />
-                  ) : null}
-                  {content[1].enabled ? (
-                    <Action tone="positive">{content[1].value}</Action>
-                  ) : null}
-                </Bubble>
-              );
-            }
-            if (role === "interviewee") {
-              if (type === "text") {
-                return <Bubble persona={role}>{content}</Bubble>;
-              } else if (type === "link") {
-                return (
-                  <Bubble persona={role}>
-                    <a href={content.value} target="_blank">
-                      {content.title ? content.title : content.value}
-                    </a>
-                  </Bubble>
-                );
-              }
-            }
-            return null;
-          };
+          const { role } = storyline[storyItem];
+          const item = storyline[storyItem];
           return (
             <BubbleGroup
               data-droppable
@@ -175,7 +218,11 @@ export default class Storyline extends React.Component {
               onDragEnd={(e) => this.dragEnd(e)}
               onDragStart={(e) => this.dragStart(e)}
             >
-              <Bubbles persona={role}>{getContent()}</Bubbles>
+              <Bubbles persona={role}>
+                {role === "user"
+                  ? renderUserBubble(item)
+                  : renderIntervieweeBubble(item)}
+              </Bubbles>
               <BubbleEdit persona={role}>
                 <Action iconic onClick={() => this.props.toggleBubbleEdit(i)}>
                   <Icon name="pen" size="x" />

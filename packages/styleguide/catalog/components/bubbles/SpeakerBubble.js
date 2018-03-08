@@ -41,6 +41,11 @@ const SystemBubble = css.div`
       cursor: move;
     }`
       : ``}
+   ${({ type }) =>
+     type === "embed" || type === "map"
+       ? `${setSpace("phs")}; width: 100%;`
+       : ``};
+
 `;
 
 SystemBubble.propTypes = {

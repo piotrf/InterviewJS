@@ -6,6 +6,7 @@ export { default as Breadcrumb } from "./breadcrumbs/Breadcrumb.js";
 export { default as Breadcrumbs } from "./breadcrumbs/Breadcrumbs.js";
 export { default as Bubble } from "./bubbles/Bubble.js";
 export { default as BubbleGroup } from "./bubbles/BubbleGroup.js";
+export { default as BubbleHTMLContent } from "./bubbles/BubbleHTMLContent.js";
 export { default as Bubbles } from "./bubbles/Bubbles.js";
 export { default as CharacterCount } from "./forms/CharacterCount.js";
 export { default as Checkbox } from "./forms/Checkbox.js";

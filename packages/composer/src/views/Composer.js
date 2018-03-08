@@ -66,12 +66,14 @@ export default class ComposerView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      currentBubble: null,
+      currentInterviewee: 0,
       detailsModal: "",
-      publishModal: false,
-      currentInterviewee: 0
+      publishModal: false
     };
-    this.switchInterviewee = this.switchInterviewee.bind(this);
     this.deleteInterviewee = this.deleteInterviewee.bind(this);
+    this.switchInterviewee = this.switchInterviewee.bind(this);
+    this.toggleBubbleEdit = this.toggleBubbleEdit.bind(this);
     this.toggleDetailsModal = this.toggleDetailsModal.bind(this);
     this.togglePublishModal = this.togglePublishModal.bind(this);
     this.updateStory = this.updateStory.bind(this);
@@ -90,6 +92,10 @@ export default class ComposerView extends React.Component {
   }
   togglePublishModal() {
     this.setState({ publishModal: !this.state.publishModal });
+  }
+  toggleBubbleEdit(target) {
+    console.log("toggleBubbleEdit :", target);
+    this.setState({ currentBubble: target });
   }
   updateStory(data) {
     const { storyId } = this.props.params;
@@ -127,6 +133,7 @@ export default class ComposerView extends React.Component {
           <Container flex={[1, 1, `${100 / 3}%`]}>
             <IntervieweePane
               {...this.props}
+              currentBubble={this.state.currentBubble}
               currentInterviewee={this.state.currentInterviewee}
               story={story}
               storyIndex={storyIndex}
@@ -139,12 +146,14 @@ export default class ComposerView extends React.Component {
               story={story}
               storyIndex={storyIndex}
               switchInterviewee={this.switchInterviewee}
+              toggleBubbleEdit={this.toggleBubbleEdit}
               toggleDetailsModal={() => this.toggleDetailsModal("interviewees")}
             />
           </Container>
           <Container flex={[1, 1, `${100 / 3}%`]}>
             <UserPane
               {...this.props}
+              currentBubble={this.state.currentBubble}
               currentInterviewee={this.state.currentInterviewee}
               story={story}
               storyIndex={storyIndex}

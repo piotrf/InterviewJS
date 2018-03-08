@@ -38,9 +38,12 @@ const PaneEl = css(Container)`
 
 export default class IntervieweePane extends React.Component {
   constructor(props) {
+    const { story, currentInterviewee, currentBubble } = props;
+    const editedItem =
+      story.interviewees[currentInterviewee].storyline[currentBubble];
     super(props);
     this.state = {
-      previews: {
+      draft: {
         text: "",
         link: ""
       },
@@ -64,21 +67,22 @@ export default class IntervieweePane extends React.Component {
     );
   }
   updatePreview(data, type) {
-    this.setState({ previews: { ...this.state.previews, [type]: data } });
+    this.setState({ draft: { ...this.state.draft, [type]: data } });
   }
   addStorylineItem(source) {
     const { storyIndex, currentInterviewee } = this.props;
-    const { previews } = this.state;
+    const { draft } = this.state;
     const newIntervieweeBubble = {
-      content: previews[source],
-      role: "interviewee"
+      content: { value: draft[source] },
+      role: "interviewee",
+      type: this.state.tab
     };
     this.props.addStorylineItem(
       storyIndex,
       currentInterviewee,
       newIntervieweeBubble
     );
-    this.setState({ previews: { ...previews, [source]: "" } });
+    this.setState({ draft: { ...draft, [source]: "" } });
   }
   render() {
     const { tab } = this.state;
@@ -149,7 +153,7 @@ export default class IntervieweePane extends React.Component {
             active={tab === "text"}
             addStorylineItem={() => this.addStorylineItem("text")}
             interviewee={story.interviewees[currentInterviewee]}
-            preview={this.state.previews.text}
+            preview={this.state.draft.text}
             srcText={story.interviewees[currentInterviewee].srcText}
             updatePreview={(data) => this.updatePreview(data, "text")}
             updateSrcText={this.updateSrcText}
@@ -157,31 +161,31 @@ export default class IntervieweePane extends React.Component {
           <LinkPane
             {...this.props}
             active={tab === "link"}
-            preview={this.state.previews.link}
+            preview={this.state.draft.link}
             updatePreview={(data) => this.updatePreview(data, "link")}
           />
           <ImagePane
             {...this.props}
             active={tab === "image"}
-            preview={this.state.previews.image}
+            preview={this.state.draft.image}
             updatePreview={(data) => this.updatePreview(data, "image")}
           />
           <EmbedPane
             {...this.props}
             active={tab === "embed"}
-            preview={this.state.previews.embed}
+            preview={this.state.draft.embed}
             updatePreview={(data) => this.updatePreview(data, "embed")}
           />
           <MapPane
             {...this.props}
             active={tab === "map"}
-            preview={this.state.previews.map}
+            preview={this.state.draft.map}
             updatePreview={(data) => this.updatePreview(data, "map")}
           />
           <MediaPane
             {...this.props}
             active={tab === "media"}
-            preview={this.state.previews.media}
+            preview={this.state.draft.media}
             updatePreview={(data) => this.updatePreview(data, "media")}
           />
         </Container>
@@ -192,10 +196,13 @@ export default class IntervieweePane extends React.Component {
 
 IntervieweePane.propTypes = {
   addStorylineItem: func.isRequired,
+  currentBubble: number,
   currentInterviewee: number.isRequired,
   story: object.isRequired /* eslint react/forbid-prop-types: 0 */,
   storyIndex: number.isRequired,
   updateInterviewee: func.isRequired
 };
 
-IntervieweePane.defaultProps = {};
+IntervieweePane.defaultProps = {
+  currentBubble: null
+};

@@ -142,6 +142,7 @@ export default class StoryPane extends React.Component {
 StoryPane.propTypes = {
   currentInterviewee: number.isRequired,
   moveStorylineItem: func.isRequired,
+  toggleBubbleEdit: func.isRequired,
   story: shape({
     interviewees: array.isRequired
   }).isRequired,
