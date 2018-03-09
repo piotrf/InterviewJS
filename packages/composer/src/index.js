@@ -24,6 +24,7 @@ class Routes extends React.Component {
   shouldComponentUpdate() {
     return false;
   }
+
   render() {
     return (
       <Router key="Root" history={history}>

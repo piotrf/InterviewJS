@@ -119,3 +119,16 @@ export function deleteStorylineItem(
     storyIndex
   };
 }
+
+export function signInUser(payload) {
+  return {
+    type: "SIGNIN_USER",
+    payload
+  };
+}
+
+export function signOutUser() {
+  return {
+    type: "SIGNOUT_USER"
+  };
+}

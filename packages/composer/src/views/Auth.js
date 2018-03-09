@@ -1,4 +1,5 @@
-import { object } from "prop-types";
+import { object, func } from "prop-types";
+
 import css from "styled-components";
 import React, { Component } from "react";
 
@@ -22,9 +23,22 @@ export default class AuthView extends Component {
     this.state = {};
     this.handleAuthentication = this.handleAuthentication.bind(this);
   }
-  handleAuthentication() {
+
+  handleAuthentication(user) {
+    console.log(user);
+
+    const data = {
+      id: user.uid,
+      name: user.displayName,
+      username: user.email,
+      avatar: user.photoURL,
+    };
+
+    this.props.signInUser(data);
+
     this.props.router.push(`/my/stories`);
   }
+
   render() {
     return [
       <Page key="Page" />,
@@ -43,7 +57,10 @@ export default class AuthView extends Component {
 }
 
 AuthView.propTypes = {
-  router: object.isRequired /* eslint react/forbid-prop-types: 0 */
+  router: object.isRequired, /* eslint react/forbid-prop-types: 0 */
+  signInUser: func.isRequired
 };
 
-AuthView.defaultProps = {};
+AuthView.defaultProps = {
+  signInUser: null
+};
