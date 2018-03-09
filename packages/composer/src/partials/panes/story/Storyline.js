@@ -6,7 +6,6 @@ import React from "react";
 import {
   Action,
   Bubble,
-  BubbleHTMLContent,
   BubbleGroup,
   Bubbles,
   color,
@@ -16,8 +15,6 @@ import {
   setSpace,
   skin
 } from "interviewjs-styleguide";
-
-import Ratio from "./16x9.png";
 
 const BubbleEdit = css.div`
   ${setSpace("pax")};
@@ -156,48 +153,34 @@ export default class Storyline extends React.Component {
       const { content, type, role } = data;
       if (type === "text") {
         return (
-          <Bubble persona={role} type={type}>
+          <Bubble persona={role} type="plain">
             {content.value}
           </Bubble>
         );
       } else if (type === "link") {
         return (
-          <Bubble persona={role} type={type}>
-            <BubbleHTMLContent>
-              <a href={content.value} target="_blank">
-                {content.title ? content.title : content.value}
-              </a>
-            </BubbleHTMLContent>
+          <Bubble persona={role} type="plain">
+            <a href={content.value} target="_blank">
+              {content.title ? content.title : content.value}
+            </a>
           </Bubble>
         );
       } else if (type === "image") {
         return (
-          <Bubble persona={role} type={type}>
-            <BubbleHTMLContent>
-              <img src={content.value} alt="" />
-            </BubbleHTMLContent>
+          <Bubble persona={role} type="rich">
+            <img src={content.value} alt="" />
           </Bubble>
         );
       } else if (type === "embed") {
         return (
-          <Bubble persona={role} type={type}>
-            <BubbleHTMLContent>
-              <div className="iframe">
-                <img className="ratio" alt="" src={Ratio} />
-                <div dangerouslySetInnerHTML={{ __html: content }} />
-              </div>
-            </BubbleHTMLContent>
+          <Bubble persona={role} type="embed">
+            <div dangerouslySetInnerHTML={{ __html: content }} />
           </Bubble>
         );
       } else if (type === "map") {
         return (
-          <Bubble persona={role} type={type}>
-            <BubbleHTMLContent>
-              <div className="iframe">
-                <img className="ratio" alt="" src={Ratio} />
-                <div dangerouslySetInnerHTML={{ __html: content }} />
-              </div>
-            </BubbleHTMLContent>
+          <Bubble persona={role} type="embed">
+            <div dangerouslySetInnerHTML={{ __html: content }} />
           </Bubble>
         );
       }

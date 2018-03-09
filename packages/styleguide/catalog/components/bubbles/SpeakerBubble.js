@@ -42,10 +42,11 @@ const SystemBubble = css.div`
     }`
       : ``}
    ${({ type }) =>
-     type === "embed" || type === "map"
-       ? `${setSpace("phs")}; width: 100%;`
+     type === "rich" || type === "embed"
+       ? `
+         ${setSpace("phs")};
+         width: 100%;`
        : ``};
-
 `;
 
 SystemBubble.propTypes = {

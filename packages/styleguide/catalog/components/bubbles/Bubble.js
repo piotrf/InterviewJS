@@ -5,6 +5,7 @@ import { Preloader } from "../";
 import SpeakerBubble from "./SpeakerBubble";
 import SystemBubble from "./SystemBubble";
 import UserBubble from "./UserBubble";
+import BubbleHTMLWrapper from "./BubbleHTMLWrapper";
 
 export default class Bubble extends Component {
   constructor(props) {
@@ -25,13 +26,17 @@ export default class Bubble extends Component {
   }
   render() {
     const { loading, rendering } = this.state;
-    const { animated, persona, children } = this.props;
+    const { animated, children, persona, type } = this.props;
     setTimeout(() => {}, 1000);
     if (persona === "user") {
       if (!rendering) {
         return (
           <UserBubble {...this.props}>
-            {animated && loading ? <Preloader /> : children}
+            {animated && loading ? (
+              <Preloader />
+            ) : (
+              <BubbleHTMLWrapper type={type}>{children}</BubbleHTMLWrapper>
+            )}
           </UserBubble>
         );
       }
@@ -40,7 +45,11 @@ export default class Bubble extends Component {
       if (!rendering) {
         return (
           <SpeakerBubble {...this.props}>
-            {animated && loading ? <Preloader /> : children}
+            {animated && loading ? (
+              <Preloader />
+            ) : (
+              <BubbleHTMLWrapper type={type}>{children}</BubbleHTMLWrapper>
+            )}
           </SpeakerBubble>
         );
       }
@@ -49,7 +58,11 @@ export default class Bubble extends Component {
     if (!rendering) {
       return (
         <SystemBubble {...this.props}>
-          {animated && loading ? <Preloader /> : children}
+          {animated && loading ? (
+            <Preloader />
+          ) : (
+            <BubbleHTMLWrapper type={type}>{children}</BubbleHTMLWrapper>
+          )}
         </SystemBubble>
       );
     }
@@ -61,12 +74,14 @@ Bubble.propTypes = {
   animated: bool,
   children: oneOfType([array, object, string]),
   delay: number,
-  persona: string
+  persona: string,
+  type: string
 };
 
 Bubble.defaultProps = {
   animated: false,
   children: null,
   delay: 0,
-  persona: null
+  persona: null,
+  type: "plain"
 };

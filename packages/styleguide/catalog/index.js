@@ -83,6 +83,11 @@ const pages = [
         title: "Bubbles"
       },
       {
+        content: require("./pages/bubble-types.js"),
+        path: "/bubbles-types",
+        title: "Interviewee bubble types"
+      },
+      {
         content: require("./pages/bubblegroups.js"),
         path: "/bubblegroups",
         title: "Bubble groups"

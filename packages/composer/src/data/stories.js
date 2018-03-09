@@ -610,7 +610,7 @@ STEPHANOPOULOS: Sounds like you've been having some good dinner table conversati
 OBAMA: Thank you.`,
         storyline: [
           {
-            content: { value: `https://interviewjs.io`, title: `InterviewJS` },
+            content: { value: "https://interviewjs.io", title: "InterviewJS" },
             id: uuidv4(),
             order: 0,
             role: "interviewee",
