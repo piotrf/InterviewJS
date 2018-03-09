@@ -96,9 +96,12 @@ export default class IntervieweePane extends React.Component {
       currentInterviewee,
       newIntervieweeBubble
     );
-    this.clearState();
+    this.setState({
+      draft: { ...this.state.draft, [source]: { value: "", title: "" } }
+    });
   }
   render() {
+    console.log(this.state);
     const { tab } = this.state;
     const { currentInterviewee, story } = this.props;
     return (
@@ -174,6 +177,7 @@ export default class IntervieweePane extends React.Component {
           <LinkPane
             {...this.props}
             active={tab === "link"}
+            addStorylineItem={() => this.addStorylineItem("link")}
             draft={this.state.draft.link}
             updateDraft={(data) => this.updateDraft(data, "link")}
           />

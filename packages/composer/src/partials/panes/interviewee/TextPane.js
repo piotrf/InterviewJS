@@ -85,8 +85,8 @@ export default class TextPane extends Component {
     const { currentTarget } = e;
     const { selectionStart, selectionEnd } = e.currentTarget;
     const sel = currentTarget.value.substring(selectionStart, selectionEnd);
-    const draft = { value: sel };
-    this.props.updateDraft(draft, "text");
+    const newDraft = { value: sel };
+    this.props.updateDraft(newDraft, "text");
   }
   onDraftEdit(e) {
     const { value } = e.currentTarget;
