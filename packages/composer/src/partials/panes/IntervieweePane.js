@@ -88,7 +88,6 @@ export default class IntervieweePane extends React.Component {
     });
   }
   render() {
-    console.log(this.props.story.interviewees[0].storyline);
     const { tab } = this.state;
     const { currentInterviewee, story } = this.props;
     return (

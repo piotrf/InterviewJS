@@ -161,7 +161,7 @@ const CustomActionHolder = css(Container)`
   }
 `;
 
-const Preview = css.div`
+const Draft = css.div`
   align-content: center;
   align-items: center;
   display: flex;
@@ -249,6 +249,7 @@ export default class UserPane extends React.Component {
     });
   }
   render() {
+    console.log(this.state);
     const {
       enableExplore,
       enableIgnore,
@@ -263,10 +264,10 @@ export default class UserPane extends React.Component {
           {...this.props}
           active
           addStorylineItem={this.addStorylineItem}
-          hasPreview={enableExplore || enableIgnore}
+          hasDraft={enableExplore || enableIgnore}
           side="right"
-          preview={
-            <Preview>
+          draft={
+            <Draft>
               {enableIgnore ? (
                 <Action tone="negative" fixed>
                   {ignoreVal}
@@ -278,7 +279,7 @@ export default class UserPane extends React.Component {
                   {exploreVal}
                 </Action>
               ) : null}
-            </Preview>
+            </Draft>
           }
         >
           <UserActions>
