@@ -38,20 +38,34 @@ const PaneEl = css(Container)`
 
 export default class IntervieweePane extends React.Component {
   constructor(props) {
-    const { story, currentInterviewee, currentBubble } = props;
-    const editedItem =
-      story.interviewees[currentInterviewee].storyline[currentBubble];
     super(props);
     this.state = {
       draft: {
-        text: "",
-        link: ""
+        text: { value: "" },
+        link: { value: "", title: "" },
+        image: { value: "", title: "" },
+        embed: { value: "", title: "" },
+        map: { value: "", title: "" },
+        media: { value: "", title: "" }
       },
       tab: "text"
     };
     this.addStorylineItem = this.addStorylineItem.bind(this);
-    this.updatePreview = this.updatePreview.bind(this);
+    this.clearState = this.clearState.bind(this);
+    this.updateDraft = this.updateDraft.bind(this);
     this.updateSrcText = this.updateSrcText.bind(this);
+  }
+  clearState() {
+    this.setState({
+      draft: {
+        text: { value: "" },
+        link: { value: "", title: "" },
+        image: { value: "", title: "" },
+        embed: { value: "", title: "" },
+        map: { value: "", title: "" },
+        media: { value: "", title: "" }
+      }
+    });
   }
   updateSrcText(data) {
     const { storyIndex, currentInterviewee, story } = this.props;
@@ -66,14 +80,14 @@ export default class IntervieweePane extends React.Component {
       intervieweeData
     );
   }
-  updatePreview(data, type) {
+  updateDraft(data, type) {
     this.setState({ draft: { ...this.state.draft, [type]: data } });
   }
   addStorylineItem(source) {
     const { storyIndex, currentInterviewee } = this.props;
     const { draft } = this.state;
     const newIntervieweeBubble = {
-      content: { value: draft[source] },
+      content: draft[source],
       role: "interviewee",
       type: this.state.tab
     };
@@ -82,7 +96,7 @@ export default class IntervieweePane extends React.Component {
       currentInterviewee,
       newIntervieweeBubble
     );
-    this.setState({ draft: { ...draft, [source]: "" } });
+    this.clearState();
   }
   render() {
     const { tab } = this.state;
@@ -152,41 +166,40 @@ export default class IntervieweePane extends React.Component {
             {...this.props}
             active={tab === "text"}
             addStorylineItem={() => this.addStorylineItem("text")}
-            interviewee={story.interviewees[currentInterviewee]}
-            preview={this.state.draft.text}
+            draft={this.state.draft.text}
             srcText={story.interviewees[currentInterviewee].srcText}
-            updatePreview={(data) => this.updatePreview(data, "text")}
+            updateDraft={(data) => this.updateDraft(data, "text")}
             updateSrcText={this.updateSrcText}
           />
           <LinkPane
             {...this.props}
             active={tab === "link"}
-            preview={this.state.draft.link}
-            updatePreview={(data) => this.updatePreview(data, "link")}
+            draft={this.state.draft.link}
+            updateDraft={(data) => this.updateDraft(data, "link")}
           />
           <ImagePane
             {...this.props}
             active={tab === "image"}
-            preview={this.state.draft.image}
-            updatePreview={(data) => this.updatePreview(data, "image")}
+            draft={this.state.draft.image}
+            updateDraft={(data) => this.updateDraft(data, "image")}
           />
           <EmbedPane
             {...this.props}
             active={tab === "embed"}
-            preview={this.state.draft.embed}
-            updatePreview={(data) => this.updatePreview(data, "embed")}
+            draft={this.state.draft.embed}
+            updateDraft={(data) => this.updateDraft(data, "embed")}
           />
           <MapPane
             {...this.props}
             active={tab === "map"}
-            preview={this.state.draft.map}
-            updatePreview={(data) => this.updatePreview(data, "map")}
+            draft={this.state.draft.map}
+            updateDraft={(data) => this.updateDraft(data, "map")}
           />
           <MediaPane
             {...this.props}
             active={tab === "media"}
-            preview={this.state.draft.media}
-            updatePreview={(data) => this.updatePreview(data, "media")}
+            draft={this.state.draft.media}
+            updateDraft={(data) => this.updateDraft(data, "media")}
           />
         </Container>
       </PaneEl>

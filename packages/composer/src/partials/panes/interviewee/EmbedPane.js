@@ -1,4 +1,4 @@
-import { array, node, oneOfType, string } from "prop-types";
+import { shape, string } from "prop-types";
 import React, { Component } from "react";
 
 import PaneFrame from "../PaneFrame";
@@ -7,12 +7,12 @@ export default class EmbedPane extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      preview: this.props.preview
+      draft: this.props.draft
     };
   }
   render() {
     return (
-      <PaneFrame {...this.props} preview={this.state.preview} side="left">
+      <PaneFrame {...this.props} draft={null} side="left">
         EmbedPane
       </PaneFrame>
     );
@@ -20,9 +20,12 @@ export default class EmbedPane extends Component {
 }
 
 EmbedPane.propTypes = {
-  preview: oneOfType([array, string, node])
+  draft: shape({ value: string, title: string })
 };
 
 EmbedPane.defaultProps = {
-  preview: ""
+  draft: {
+    value: "",
+    title: ""
+  }
 };

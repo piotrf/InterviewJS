@@ -1,4 +1,4 @@
-import { array, func, node, oneOfType, string } from "prop-types";
+import { func, shape, string } from "prop-types";
 import css from "styled-components";
 import React, { Component } from "react";
 
@@ -39,7 +39,7 @@ const SrcPlaceholder = css.p`
   z-index: 1;
 `;
 
-const Preview = css.textarea`
+const Draft = css.textarea`
   ${setSpace("pan")};
   ${setType("x")};
   background: none;
@@ -56,22 +56,22 @@ export default class TextPane extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      preview: this.props.preview,
+      draft: this.props.draft,
       srcText: this.props.srcText
     };
 
     this.onBlur = this.onBlur.bind(this);
     this.onChange = this.onChange.bind(this);
-    this.onPreviewEdit = this.onPreviewEdit.bind(this);
+    this.onDraftEdit = this.onDraftEdit.bind(this);
     this.onSelect = this.onSelect.bind(this);
     this.saveChanges = this.saveChanges.bind(this);
   }
   componentWillReceiveProps(nextProps) {
-    const { preview, srcText } = nextProps;
+    const { draft, srcText } = nextProps;
     if (srcText !== this.props.srcText) {
       this.setState({ srcText });
-    } else if (preview !== this.props.preview) {
-      this.setState({ preview });
+    } else if (draft !== this.props.draft) {
+      this.setState({ draft });
     }
     return null;
   }
@@ -85,11 +85,13 @@ export default class TextPane extends Component {
     const { currentTarget } = e;
     const { selectionStart, selectionEnd } = e.currentTarget;
     const sel = currentTarget.value.substring(selectionStart, selectionEnd);
-    this.props.updatePreview(sel, "text");
+    const draft = { value: sel };
+    this.props.updateDraft(draft, "text");
   }
-  onPreviewEdit(e) {
+  onDraftEdit(e) {
     const { value } = e.currentTarget;
-    this.props.updatePreview(value);
+    const draft = { value };
+    this.props.updateDraft(draft);
   }
   saveChanges() {
     const { srcText } = this.state;
@@ -99,10 +101,10 @@ export default class TextPane extends Component {
     return (
       <PaneFrame
         {...this.props}
-        preview={
-          <Preview onChange={this.onPreviewEdit} value={this.state.preview} />
+        draft={
+          <Draft onChange={this.onDraftEdit} value={this.state.draft.value} />
         }
-        hasPreview={this.props.preview !== ""}
+        hasDraft={this.props.draft.value !== ""}
         side="left"
       >
         <SrcText
@@ -122,13 +124,17 @@ export default class TextPane extends Component {
 }
 
 TextPane.propTypes = {
-  preview: oneOfType([array, string, node]),
+  draft: shape({
+    value: string
+  }),
   srcText: string,
-  updatePreview: func.isRequired,
+  updateDraft: func.isRequired,
   updateSrcText: func.isRequired
 };
 
 TextPane.defaultProps = {
-  preview: "",
+  draft: {
+    value: ""
+  },
   srcText: ""
 };

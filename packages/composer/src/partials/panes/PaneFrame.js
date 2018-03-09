@@ -28,13 +28,13 @@ const Frame = css(Container)`
   }
 `;
 
-const PreviewHolder = css(Container)`
+const DraftHolder = css(Container)`
   ${setSpace("pam")}
   height: 100%;
   overflow-x: visible;
 `;
 
-const Preview = css(Container)`
+const Draft = css(Container)`
   ${setSpace("pas")};
   ${setType("x")};
   border-radius: ${radius.l};
@@ -83,26 +83,26 @@ const SubmitButton = css.span`
 `;
 
 const PaneFrame = (props) => {
-  const { hasPreview } = props;
+  const { hasDraft } = props;
   return (
     <Frame {...props} dir="column" padded>
       <Container flex={[1, 1, `auto`]}>{props.children}</Container>
       <Separator silent size="s" />
       <Container flex={[0, 0, `200px`]}>
-        <PreviewHolder>
-          <Preview fill="grey">{props.preview}</Preview>
+        <DraftHolder>
+          <Draft fill="grey">{props.draft}</Draft>
           <SubmitButton side={props.side}>
             <Action
-              disabled={!hasPreview}
+              disabled={!hasDraft}
               iconic
-              onClick={hasPreview ? props.addStorylineItem : null}
+              onClick={hasDraft ? props.addStorylineItem : null}
               primary
               tone="positive"
             >
               <Icon name="plus" size="l" />
             </Action>
           </SubmitButton>
-        </PreviewHolder>
+        </DraftHolder>
       </Container>
     </Frame>
   );
@@ -111,14 +111,14 @@ const PaneFrame = (props) => {
 PaneFrame.propTypes = {
   addStorylineItem: func.isRequired,
   children: oneOfType([array, string, node]).isRequired,
-  hasPreview: bool,
-  preview: oneOfType([array, string, node]),
+  draft: oneOfType([array, string, node]),
+  hasDraft: bool,
   side: string
 };
 
 PaneFrame.defaultProps = {
-  preview: null,
-  hasPreview: false,
+  draft: null,
+  hasDraft: false,
   side: "left"
 };
 

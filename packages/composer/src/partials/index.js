@@ -2,7 +2,6 @@
 export { default as Interviewees } from "./misc/Interviewees";
 export { default as MobileRedirect } from "./misc/MobileRedirect";
 export { default as Poll } from "./misc/Poll";
-export { default as SrcTextEditor } from "./misc/SrcTextEditor";
 export { default as Stories } from "./misc/Stories";
 export { default as Story } from "./misc/Story";
 
