@@ -1,0 +1,25 @@
+.ReactModalPortal {
+}
+.ReactModal__Overlay {
+  background: rgba(220,220,220,0.75);
+  bottom: 0;
+  height: 100%;
+  left: 0;
+  overflow-y: auto;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  z-index: 5;
+}
+.ReactModal__HeroOverlay {
+  background: #28336e;
+}
+.ReactModal__Content {
+  background: none;
+  border: none;
+  outline: none;
+}
+.ReactModal__Content:focus {
+  outline: none;
+}
