@@ -174,13 +174,13 @@ export default class Storyline extends React.Component {
       } else if (type === "embed") {
         return (
           <Bubble persona={role} type="embed">
-            <div dangerouslySetInnerHTML={{ __html: content }} />
+            <div dangerouslySetInnerHTML={{ __html: content.value }} />
           </Bubble>
         );
       } else if (type === "map") {
         return (
           <Bubble persona={role} type="embed">
-            <div dangerouslySetInnerHTML={{ __html: content }} />
+            <div dangerouslySetInnerHTML={{ __html: content.value }} />
           </Bubble>
         );
       }

@@ -44,28 +44,15 @@ export default class IntervieweePane extends React.Component {
         text: { value: "" },
         link: { value: "", title: "" },
         image: { value: "", title: "" },
-        embed: { value: "", title: "" },
-        map: { value: "", title: "" },
-        media: { value: "", title: "" }
+        embed: { value: "" },
+        map: { value: "" },
+        media: { value: "" }
       },
       tab: "text"
     };
     this.addStorylineItem = this.addStorylineItem.bind(this);
-    this.clearState = this.clearState.bind(this);
     this.updateDraft = this.updateDraft.bind(this);
     this.updateSrcText = this.updateSrcText.bind(this);
-  }
-  clearState() {
-    this.setState({
-      draft: {
-        text: { value: "" },
-        link: { value: "", title: "" },
-        image: { value: "", title: "" },
-        embed: { value: "", title: "" },
-        map: { value: "", title: "" },
-        media: { value: "", title: "" }
-      }
-    });
   }
   updateSrcText(data) {
     const { storyIndex, currentInterviewee, story } = this.props;
@@ -101,7 +88,7 @@ export default class IntervieweePane extends React.Component {
     });
   }
   render() {
-    console.log(this.state);
+    console.log(this.props.story.interviewees[0].storyline);
     const { tab } = this.state;
     const { currentInterviewee, story } = this.props;
     return (
@@ -190,12 +177,14 @@ export default class IntervieweePane extends React.Component {
           <EmbedPane
             {...this.props}
             active={tab === "embed"}
+            addStorylineItem={() => this.addStorylineItem("embed")}
             draft={this.state.draft.embed}
             updateDraft={(data) => this.updateDraft(data, "embed")}
           />
           <MapPane
             {...this.props}
             active={tab === "map"}
+            addStorylineItem={() => this.addStorylineItem("map")}
             draft={this.state.draft.map}
             updateDraft={(data) => this.updateDraft(data, "map")}
           />

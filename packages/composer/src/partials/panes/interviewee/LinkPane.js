@@ -58,18 +58,18 @@ export default class LinkPane extends Component {
               placeholder="https://…, http://…, www.…, "
               required
               type="url"
-              value={this.state.draft.value}
+              value={value}
             />
           </FormItem>
           <Separator size="m" silent />
           <FormItem>
-            <Label>Link Title</Label>
+            <Label>Display text</Label>
             <TextInput
               input
               name="title"
               onChange={(e) => this.handleChange(e)}
               placeholder="My link"
-              value={this.state.draft.title}
+              value={title}
             />
           </FormItem>
         </Container>

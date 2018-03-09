@@ -14,6 +14,7 @@ const Input = css.input`
   color: ${({ disabled }) => (disabled ? color.greyBlk : color.blueBlk)};
   font-family: ${font.serif};
   position: relative;
+  resize: none;
   transition: border-color ${time.m};
   width: 100%;
   &:focus {

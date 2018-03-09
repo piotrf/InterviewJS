@@ -1,6 +1,14 @@
-import { shape, string } from "prop-types";
+import { func, shape, string } from "prop-types";
 import React, { Component } from "react";
 
+import {
+  BubbleHTMLWrapper,
+  Container,
+  FormItem,
+  Label,
+  Separator,
+  TextInput
+} from "interviewjs-styleguide";
 import PaneFrame from "../PaneFrame";
 
 export default class MapPane extends Component {
@@ -9,18 +17,62 @@ export default class MapPane extends Component {
     this.state = {
       draft: this.props.draft
     };
+    this.handleChange = this.handleChange.bind(this);
+  }
+  componentWillReceiveProps(nextProps) {
+    const { draft } = nextProps;
+    if (draft !== this.props.draft) {
+      this.setState({ draft });
+    }
+    return null;
+  }
+  handleChange(e) {
+    const { name, value } = e.target;
+    this.setState({ draft: { ...this.state.draft, [name]: value } }, () =>
+      this.props.updateDraft(this.state.draft)
+    );
   }
   render() {
+    const { value } = this.state.draft;
     return (
-      <PaneFrame {...this.props} draft={null} side="left">
-        MapPane
+      <PaneFrame
+        {...this.props}
+        draft={
+          <div>
+            <BubbleHTMLWrapper type="embed">
+              <div dangerouslySetInnerHTML={{ __html: value }} />
+            </BubbleHTMLWrapper>
+          </div>
+        }
+        hasDraft={this.props.draft.value !== ""}
+        side="left"
+      >
+        <Container>
+          <Separator size="x" silent />
+          <FormItem>
+            <Label>Google Maps embed code</Label>
+            <TextInput
+              area
+              name="value"
+              onChange={(e) => this.handleChange(e)}
+              placeholder={`<iframe src="https://www.google.com/maps/embed…`}
+              required
+              type="url"
+              value={this.state.draft.value}
+            />
+          </FormItem>
+        </Container>
       </PaneFrame>
     );
   }
 }
 
 MapPane.propTypes = {
-  draft: shape({ value: string, title: string })
+  updateDraft: func.isRequired,
+  draft: shape({
+    value: string,
+    title: string
+  })
 };
 
 MapPane.defaultProps = {

@@ -31,7 +31,6 @@ const Frame = css(Container)`
 const DraftHolder = css(Container)`
   ${setSpace("pam")}
   height: 100%;
-  overflow-x: visible;
 `;
 
 const Draft = css(Container)`
@@ -45,7 +44,7 @@ const Draft = css(Container)`
   font-family: ${font.serif};
   height: 100%;
   left: 0;
-  overflow-x: visible;
+  overflow-x: auto;
   position: absolute;
   right: 0;
   top: 0;
