@@ -44,6 +44,7 @@ const Draft = css(Container)`
   font-family: ${font.serif};
   height: 100%;
   left: 0;
+  line-height: 0;
   overflow-x: auto;
   position: absolute;
   right: 0;
