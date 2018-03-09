@@ -106,3 +106,16 @@ export function moveStorylineItem(storyIndex, intervieweeIndex, payload) {
     storyIndex
   };
 }
+
+export function deleteStorylineItem(
+  storyIndex,
+  intervieweeIndex,
+  storyItemIndex
+) {
+  return {
+    type: "DELETE_STORYLINE_ITEM",
+    intervieweeIndex,
+    storyItemIndex,
+    storyIndex
+  };
+}

@@ -89,6 +89,11 @@ export default class StoryPane extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.deleteStorylineItem = this.deleteStorylineItem.bind(this);
+  }
+  deleteStorylineItem(i) {
+    const { storyIndex, currentInterviewee } = this.props;
+    this.props.deleteStorylineItem(storyIndex, currentInterviewee, i);
   }
   render() {
     const { interviewees } = this.props.story;
@@ -132,7 +137,11 @@ export default class StoryPane extends React.Component {
           </IntervieweesWrapper>
         </PaneHead>
         <PaneBody>
-          <Storyline {...this.props} storyline={storyline} />
+          <Storyline
+            {...this.props}
+            deleteStorylineItem={this.deleteStorylineItem}
+            storyline={storyline}
+          />
         </PaneBody>
       </PaneEl>
     );
@@ -142,6 +151,7 @@ export default class StoryPane extends React.Component {
 StoryPane.propTypes = {
   currentInterviewee: number.isRequired,
   moveStorylineItem: func.isRequired,
+  deleteStorylineItem: func.isRequired,
   toggleBubbleEdit: func.isRequired,
   story: shape({
     interviewees: array.isRequired

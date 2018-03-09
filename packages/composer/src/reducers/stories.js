@@ -2,7 +2,15 @@
 /* eslint no-console: 0 */
 
 function stories(state = [], action) {
-  const { type, storyIndex, payload, intervieweeIndex } = action;
+  const {
+    type,
+    storyIndex,
+    payload,
+    intervieweeIndex,
+    storyItemIndex
+  } = action;
+
+  // console.log(action);
 
   switch (type) {
     case "CREATE_STORY":
@@ -102,6 +110,29 @@ function stories(state = [], action) {
                   0,
                   moveStorylineObj.splice(payload.from, 1)[0]
                 )
+              ]
+            },
+            ...state[storyIndex].interviewees.slice(intervieweeIndex + 1)
+          ]
+        },
+        ...state.slice(storyIndex + 1)
+      ];
+
+    case "DELETE_STORYLINE_ITEM":
+      console.log("deleting storyline item");
+      const deleteStorylineArr =
+        state[storyIndex].interviewees[intervieweeIndex].storyline;
+      return [
+        ...state.slice(0, storyIndex),
+        {
+          ...state[storyIndex],
+          interviewees: [
+            ...state[storyIndex].interviewees.slice(0, intervieweeIndex),
+            {
+              ...state[storyIndex].interviewees[intervieweeIndex],
+              storyline: [
+                ...deleteStorylineArr.slice(0, storyItemIndex),
+                ...deleteStorylineArr.slice(storyItemIndex + 1)
               ]
             },
             ...state[storyIndex].interviewees.slice(intervieweeIndex + 1)

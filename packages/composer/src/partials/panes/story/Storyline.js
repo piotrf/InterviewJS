@@ -17,11 +17,11 @@ import {
 } from "interviewjs-styleguide";
 
 const BubbleEdit = css.div`
-  ${setSpace("pax")};
   display: none;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  z-index: 50;
   ${({ persona }) =>
     persona === "user"
       ? `
@@ -62,10 +62,9 @@ const StorylineEl = css.div`
     min-height: 40px;
   }
   & > *:hover {
-   ${BubbleEdit} {
-     display: block;
-     z-index: 50;
-   }
+    ${BubbleEdit} {
+      display: block;
+    }
   }
 `;
 
@@ -84,8 +83,10 @@ export default class Storyline extends React.Component {
   componentDidMount() {
     setTimeout(this.scrollToBottom, 300);
   }
-  componentDidUpdate() {
-    setTimeout(this.scrollToBottom, 150);
+  componentDidUpdate(prevProps) {
+    return prevProps.storyline.length < this.props.storyline.length
+      ? setTimeout(this.scrollToBottom, 150)
+      : null;
   }
   dragStart(e) {
     this.dragged = e.currentTarget;
@@ -207,8 +208,15 @@ export default class Storyline extends React.Component {
                   : renderIntervieweeBubble(item)}
               </Bubbles>
               <BubbleEdit persona={role}>
-                <Action iconic onClick={() => this.props.toggleBubbleEdit(i)}>
+                {/* <Action iconic onClick={() => this.props.toggleBubbleEdit(i)}>
                   <Icon name="pen" size="x" />
+                </Action> */}
+                <Action
+                  tone="negative"
+                  iconic
+                  onClick={() => this.props.deleteStorylineItem(i)}
+                >
+                  <Icon name="cross" size="x" />
                 </Action>
               </BubbleEdit>
             </BubbleGroup>
@@ -226,6 +234,7 @@ export default class Storyline extends React.Component {
 
 Storyline.propTypes = {
   currentInterviewee: number.isRequired,
+  deleteStorylineItem: func.isRequired,
   moveStorylineItem: func.isRequired,
   storyIndex: number.isRequired,
   storyline: arrayOf(object),

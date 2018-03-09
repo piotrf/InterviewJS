@@ -249,7 +249,6 @@ export default class UserPane extends React.Component {
     });
   }
   render() {
-    console.log(this.state);
     const {
       enableExplore,
       enableIgnore,
