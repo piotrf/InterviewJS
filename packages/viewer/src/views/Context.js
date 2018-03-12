@@ -1,7 +1,7 @@
 /* eslint react/forbid-prop-types: 0 */
 import css from "styled-components";
 import React, { Component } from "react";
-import { shape, string } from "prop-types";
+import { object, shape, string } from "prop-types";
 
 import {
   Action,
@@ -12,11 +12,10 @@ import {
   PageTitle,
   Separator,
   color,
-  setSpace,
-  setType
+  setSpace
 } from "interviewjs-styleguide";
 
-import { Cover } from "../partials";
+import { Cover, Topbar } from "../partials";
 
 const Page = css.div`
   background: ${color.black};
@@ -55,8 +54,13 @@ export default class ContextView extends Component {
 
   render() {
     const { story } = this.props;
-    return (
-      <Page>
+    return [
+      <Topbar
+        handleDetails={() => this.props.router.push(`/details`)}
+        handleBack={() => this.props.router.push(`/intro`)}
+        key="topbar"
+      />,
+      <Page key="page">
         <PageHead limit="m" flex={[0, 1, `${100 / 2}%`]}>
           <Cover image={story.cover}>
             <PageTitle typo="h1">{story.title}</PageTitle>
@@ -84,16 +88,18 @@ export default class ContextView extends Component {
           </Actionbar>
         </PageFoot>
       </Page>
-    );
+    ];
   }
 }
 
 ContextView.propTypes = {
+  router: object,
   story: shape({
-    title: string.isRequired
+    title: string
   })
 };
 
 ContextView.defaultProps = {
+  router: null,
   story: {}
 };

@@ -11,6 +11,7 @@ import Intro from "./views/Intro";
 import Context from "./views/Context";
 import Listing from "./views/Listing";
 import Outro from "./views/Outro";
+import Details from "./views/Details";
 
 const store = configureStore();
 
@@ -36,6 +37,7 @@ class Routes extends React.Component {
           <Route path="/chat" component={Chat} />
           <Route path="/context" component={Context} />
           <Route path="/outro" component={Outro} />
+          <Route path="/details" component={Details} />
         </Route>
         <Redirect from="*" to="Intro" />
       </Router>
