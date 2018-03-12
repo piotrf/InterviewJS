@@ -8,6 +8,7 @@ import { configureStore, history } from "./configureStore";
 import App from "./App";
 import Chat from "./views/Chat";
 import Intro from "./views/Intro";
+import Context from "./views/Context";
 import Listing from "./views/Listing";
 import Outro from "./views/Outro";
 
@@ -33,6 +34,7 @@ class Routes extends React.Component {
           <IndexRoute component={Intro} />
           <Route path="/interviewees" component={Listing} />
           <Route path="/chat" component={Chat} />
+          <Route path="/context" component={Context} />
           <Route path="/outro" component={Outro} />
         </Route>
         <Redirect from="*" to="Intro" />

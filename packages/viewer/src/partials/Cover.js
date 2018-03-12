@@ -2,33 +2,31 @@ import React from "react";
 import css from "styled-components";
 import { array, bool, oneOfType, node, string } from "prop-types";
 
-import { Container, color, setSpace } from "interviewjs-styleguide";
+import { Container, breakpoint, color, setSpace } from "interviewjs-styleguide";
 
 const CoverEl = css(Container)`
   background-color: ${color.black};
   background-image: url(${({ image }) => image});
   background-position: center center;
   background-size: cover;
-  bottom: 0;
   color: ${color.white};
-  display: flex;
-  flex-direction: column;
-  left: 0;
-  min-height: 100px;
-  position: absolute;
-  right: 0;
   text-align: center;
   text-shadow: 0 1px 4px ${color.shadowD};
-  top: 0;
+  width: 100%;
 `;
 
 const CoverBody = css.div`
+  ${setSpace("phm")};
+  ${setSpace("ptl")};
   background-color: ${color.shadowM};
   display: flex;
   flex-direction: column;
-  flex: 1 0 0;
   justify-content: flex-end;
+  min-height: ${100 / 3}vh;
   position: relative;
+  ${breakpoint.tablet} {
+    min-height: ${100 / 2}vh;
+  }
   &:after {
     height: 50%;
     background: linear-gradient(rgba(0,0,0,0), ${color.black});
@@ -43,11 +41,7 @@ const CoverBody = css.div`
 `;
 
 const CoverSauce = css.div`
-  ${setSpace("mbl")};
-  display: flex;
-  flex-direction: column;
-  flex: 1 0 100px;
-  justify-content: flex-end;
+  ${setSpace("mbm")};
   position: relative;
   z-index: 200;
 `;
