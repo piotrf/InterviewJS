@@ -31,9 +31,6 @@ const Page = css.div`
 const PageHead = css(Container)`
   ${setSpace("pbl")};
   width: 100%;
-  ${PageTitle} {
-    ${setType("h")};
-  }
 `;
 
 const PageBody = css(Container)`
