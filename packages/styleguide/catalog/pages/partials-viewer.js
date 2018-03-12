@@ -1,25 +1,11 @@
 import React from "react";
 import { markdown, ReactSpecimen } from "catalog";
 
-import { Chart, Cover } from "../partials";
-
-import SampleImage from "../static/cover.jpg";
+import { Chart } from "../partials";
 
 export default () => markdown`
 
   ## Covers
-
-  ${(
-    <ReactSpecimen dark span={3}>
-      <Cover image={SampleImage}>Children</Cover>
-    </ReactSpecimen>
-  )}
-
-  ${(
-    <ReactSpecimen dark span={3}>
-      <Cover image={SampleImage} />
-    </ReactSpecimen>
-  )}
 
   ## Charts
 

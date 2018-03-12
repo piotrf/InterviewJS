@@ -1,6 +1,6 @@
 import css from "styled-components";
 
-import { Container } from "../../components";
+import { Container, PageTitle } from "../../components";
 import { color, setSpace } from "../../../utils";
 
 const ModalHead = css(Container)`
@@ -9,8 +9,11 @@ const ModalHead = css(Container)`
   flex: 0 2 auto;
   text-align: center;
   & h1,
-  & h2 { 
+  & h2 {
     ${setSpace("phl")};
+  }
+  ${PageTitle} {
+    color: ${color.blueBlk};
   }
 `;
 

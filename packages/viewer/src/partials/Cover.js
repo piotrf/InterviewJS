@@ -9,13 +9,17 @@ const CoverEl = css(Container)`
   background-image: url(${({ image }) => image});
   background-position: center center;
   background-size: cover;
+  bottom: 0;
   color: ${color.white};
   display: flex;
   flex-direction: column;
+  left: 0;
   min-height: 100px;
-  position: relative;
+  position: absolute;
+  right: 0;
   text-align: center;
   text-shadow: 0 1px 4px ${color.shadowD};
+  top: 0;
 `;
 
 const CoverBody = css.div`
