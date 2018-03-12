@@ -47,22 +47,20 @@ export default class MapPane extends Component {
         hasDraft={this.props.draft.value !== ""}
         side="left"
       >
-        <Container>
-          <Separator size="x" silent />
-          <FormItem>
-            <Label>Google Maps embed code</Label>
-            <TextInput
-              area
-              name="value"
-              onChange={(e) => this.handleChange(e)}
-              placeholder={`<iframe src="https://www.google.com/maps/embed…`}
-              required
-              rows={10}
-              type="url"
-              value={this.state.draft.value}
-            />
-          </FormItem>
-        </Container>
+        <Separator size="x" silent />
+        <FormItem>
+          <Label>Google Maps embed code</Label>
+          <TextInput
+            area
+            name="value"
+            onChange={(e) => this.handleChange(e)}
+            placeholder={`<iframe src="https://www.google.com/maps/embed…`}
+            required
+            rows={10}
+            type="url"
+            value={this.state.draft.value}
+          />
+        </FormItem>
       </PaneFrame>
     );
   }

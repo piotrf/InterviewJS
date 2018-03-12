@@ -41,6 +41,7 @@ export default class ImagePane extends Component {
         hasDraft={this.props.draft.value !== ""}
         side="left"
       >
+        <Separator size="x" silent />
         <Form>
           <FormItem>
             <Label>Upload image</Label>
