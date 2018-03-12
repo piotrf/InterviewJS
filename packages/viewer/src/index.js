@@ -6,7 +6,7 @@ import { Route, Router, IndexRoute, Redirect } from "react-router";
 import { configureStore, history } from "./configureStore";
 
 import App from "./App";
-import Index from "./views/Index";
+import Intro from "./views/Intro";
 
 const store = configureStore();
 
@@ -27,7 +27,7 @@ class Routes extends React.Component {
     return (
       <Router key="Root" history={history}>
         <Route path="/story" component={App}>
-          <IndexRoute component={Index} />
+          <IndexRoute component={Intro} />
           {/* <Route path="/story" component={Listing} /> */}
           {/* <Route path="/my/stories/:storyId" component={Composer} /> */}
         </Route>
