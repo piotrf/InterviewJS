@@ -6,12 +6,15 @@
   "homepage": "http://interviewjs.io/my/",
   "dependencies": {
     "date-fns": "^1.29.0",
+    "firebase": "^4.11.0",
     "interviewjs-styleguide": "*",
     "lodash": "^4.17.5",
+    "npm-check-updates": "^2.14.1",
     "prop-types": "15.6.1",
     "react": "16.2.0",
     "react-app-rewire-babel-loader": "0.1.1",
     "react-dom": "16.2.0",
+    "react-firebaseui": "^1.1.9",
     "react-modal": "3.3.1",
     "react-redux": "5.0.7",
     "react-router-dom": "4.2.2",
@@ -19,8 +22,9 @@
     "react-scripts": "1.1.1",
     "recompose": "0.26.0",
     "redux": "3.7.2",
-    "redux-actions": "2.2.1",
+    "redux-actions": "2.3.0",
     "redux-devtools-extension": "2.13.2",
+    "redux-persist": "^5.9.1",
     "redux-thunk": "2.2.0",
     "reselect": "3.0.1",
     "styled-components": "3.0.2",
@@ -41,26 +45,27 @@
     "node-plop": "0.13.0",
     "plop": "2.0.0",
     "prettier": "1.11.1",
-    "react-app-rewired": "1.4.1"
+    "react-app-rewired": "1.5.0"
   },
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-app-rewired eject",
-    "prettier":
-      "prettier --single-quote --print-width=120 --trailing-comma es5",
+    "prettier": "prettier --single-quote --print-width=120 --trailing-comma es5",
     "format": "npm run prettier -- --write '{,!(build|generators)/**/}*.js'",
     "precommit": "lint-staged",
-    "eslint-check":
-      "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
+    "eslint-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
     "lint": "eslint **/*.js --quiet",
     "lint-fix": "eslint --fix",
     "generate": "plop --plopfile generators/index.js",
     "release": "npm run build && gh-pages -d build -e my -a"
   },
   "lint-staged": {
-    "{,!(build|generators)/**/}*.js": ["npm run prettier -- --write", "git add"]
+    "{,!(build|generators)/**/}*.js": [
+      "npm run prettier -- --write",
+      "git add"
+    ]
   },
   "engines": {
     "npm": ">=4",

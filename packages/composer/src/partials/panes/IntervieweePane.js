@@ -43,7 +43,10 @@ export default class IntervieweePane extends React.Component {
       draft: {
         text: { value: "" },
         link: { value: "", title: "" },
-        image: { value: "", title: "" },
+        image: {
+          value: require("../../data/media/trump.png"), // TODO: this should come from the data model upon image upload @LAURIAN
+          title: ""
+        },
         embed: { value: "" },
         map: { value: "" },
         media: { value: "" }
@@ -170,6 +173,7 @@ export default class IntervieweePane extends React.Component {
           <ImagePane
             {...this.props}
             active={tab === "image"}
+            addStorylineItem={() => this.addStorylineItem("image")}
             draft={this.state.draft.image}
             updateDraft={(data) => this.updateDraft(data, "image")}
           />

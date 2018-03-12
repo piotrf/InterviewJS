@@ -66,3 +66,4 @@ typings/
 ideas.md
 
 packages/styleguide/package-lock.json
+packages/composer/package-lock.json

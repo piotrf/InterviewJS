@@ -3,7 +3,6 @@ import React, { Component } from "react";
 
 import {
   BubbleHTMLWrapper,
-  Container,
   FormItem,
   Label,
   Separator,
@@ -47,32 +46,30 @@ export default class LinkPane extends Component {
         hasDraft={this.props.draft.value !== ""}
         side="left"
       >
-        <Container>
-          <Separator size="x" silent />
-          <FormItem>
-            <Label>Link URL</Label>
-            <TextInput
-              input
-              name="value"
-              onChange={(e) => this.handleChange(e)}
-              placeholder="https://…, http://…, www.…, "
-              required
-              type="url"
-              value={value}
-            />
-          </FormItem>
-          <Separator size="m" silent />
-          <FormItem>
-            <Label>Display text</Label>
-            <TextInput
-              input
-              name="title"
-              onChange={(e) => this.handleChange(e)}
-              placeholder="My link"
-              value={title}
-            />
-          </FormItem>
-        </Container>
+        <Separator size="x" silent />
+        <FormItem>
+          <Label>Link URL</Label>
+          <TextInput
+            input
+            name="value"
+            onChange={(e) => this.handleChange(e)}
+            placeholder="https://…, http://…, www.…, "
+            required
+            type="url"
+            value={value}
+          />
+        </FormItem>
+        <Separator size="m" silent />
+        <FormItem>
+          <Label>Display text</Label>
+          <TextInput
+            input
+            name="title"
+            onChange={(e) => this.handleChange(e)}
+            placeholder="My link"
+            value={title}
+          />
+        </FormItem>
       </PaneFrame>
     );
   }

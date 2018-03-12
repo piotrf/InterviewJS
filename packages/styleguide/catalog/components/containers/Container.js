@@ -1,10 +1,9 @@
-import React, { Component } from "react";
 import css from "styled-components";
 import { arrayOf, bool, number, oneOfType, string } from "prop-types";
 
 import { breakpoint, color, radius, setSpace } from "../../../utils";
 
-export const ContainerEl = css.div`
+const Container = css.div`
   position: relative;
   ${({ bordered }) =>
     bordered
@@ -75,8 +74,28 @@ export const ContainerEl = css.div`
     text-align: ${align};
   `
       : ``};
+  ${({ cover }) =>
+    cover
+      ? `
+    min-height: 100vh;
+  `
+      : ``};
   ${({ limit }) => {
-    if (limit === "s") {
+    if (limit === "x") {
+      return `
+        ${breakpoint.tablet} {
+          margin-left: auto;
+          margin-right: auto;
+          max-width: 400;
+        }
+        ${breakpoint.desktop} {
+          max-width: 480px;
+        }
+        ${breakpoint.hdesktop} {
+          max-width: 560px;
+        }
+        `;
+    } else if (limit === "s") {
       return `
         ${breakpoint.tablet} {
           margin-left: auto;
@@ -122,41 +141,6 @@ export const ContainerEl = css.div`
     return null;
   }}`;
 
-export default class Container extends Component {
-  constructor() {
-    super();
-    this.state = { pageHeight: null };
-    this.updateDimensions = this.updateDimensions.bind(this);
-  }
-  componentDidMount() {
-    this.updateDimensions();
-    window.addEventListener("resize", this.updateDimensions);
-  }
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.updateDimensions);
-  }
-  updateDimensions() {
-    const windowHeight = window.innerHeight;
-    return this.setState({
-      pageHeight: windowHeight
-    });
-  }
-  render() {
-    return (
-      <ContainerEl
-        {...this.props}
-        style={
-          this.props.cover
-            ? {
-                minHeight: this.state.pageHeight
-              }
-            : null
-        }
-      />
-    );
-  }
-}
-
 Container.propTypes = {
   align: string,
   flex: arrayOf(oneOfType([number, string])),
@@ -182,3 +166,5 @@ Container.defaultProps = {
   rounded: null,
   shift: null
 };
+
+export default Container;

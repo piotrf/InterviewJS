@@ -3,7 +3,6 @@ import React, { Component } from "react";
 
 import {
   BubbleHTMLWrapper,
-  Container,
   FormItem,
   Label,
   Separator,
@@ -47,21 +46,20 @@ export default class MediaPane extends Component {
         hasDraft={this.props.draft.value !== ""}
         side="left"
       >
-        <Container>
-          <Separator size="x" silent />
-          <FormItem>
-            <Label>YouTube embed code</Label>
-            <TextInput
-              area
-              name="value"
-              onChange={(e) => this.handleChange(e)}
-              placeholder={`<iframe src="https://www.youtube.com/embed/…`}
-              required
-              type="url"
-              value={this.state.draft.value}
-            />
-          </FormItem>
-        </Container>
+        <Separator size="x" silent />
+        <FormItem>
+          <Label>YouTube embed code</Label>
+          <TextInput
+            area
+            name="value"
+            onChange={(e) => this.handleChange(e)}
+            placeholder={`<iframe src="https://www.youtube.com/embed/…`}
+            required
+            rows={10}
+            type="url"
+            value={this.state.draft.value}
+          />
+        </FormItem>
       </PaneFrame>
     );
   }

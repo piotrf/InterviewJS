@@ -1,11 +1,26 @@
-## ……-03-2017
+## xx-03-2017
 
-* It is now possible to re-order bubble in the Composer
-  Drag an already existing bubble within the Storyline canvas.
+* It is now possible to add image bubbles to your story.
 
-* Meta form updated to feature explicit labels for Cover/Logo file fields.
+* File-typed inputs now only accept images with a subset of file extensions.
 
-* Integrated `explore` action dictionaries for all interviewee bubble types.
+## 09-03-2017
+
+* It is now possible to add embed, map, media bubbles — WIP
+  Textareas in those tabs accept `<iframe…>`-like code. Example: https://twitter.com/interview_js/status/971948278089637888
+
+* It is now possible to add `link` bubbles.
+  The left-side tab now features a simple form asking for a URL and display link. If no display link provided, link URL will be used as link label.
+
+* It is possible to delete bubbles.
+  Hover over them in the storyline pane—an `x` will appear on the sides.
+
+* It is now possible to re-order bubbles in the Composer
+  Drag an already existing bubble within the Storyline canvas like this: https://twitter.com/interview_js/status/971755705719025666
+
+* Meta form updated to feature explicit labels for Cover/Logo file fields as per Haddad’s request.
+
+* Integrated `explore` action dictionaries for all interviewee bubble types (text, image, embed, ecc.)
 
 * Tweaked UserPane logic to allow input placeholder different from value.
   So now we have `Type custom label here…` and not `Ignore` value at all times.

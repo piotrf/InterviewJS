@@ -2,6 +2,7 @@
 import css from "styled-components";
 import React, { Component } from "react";
 import { arrayOf, func, object, shape, string } from "prop-types";
+import firebase from "firebase";
 
 import {
   Action,
@@ -124,20 +125,25 @@ export default class ListingView extends Component {
     this.handleLogout = this.handleLogout.bind(this);
     this.toggleNewStoryModal = this.toggleNewStoryModal.bind(this);
   }
+
   handleLogout() {
-    console.log("handleLogout"); // TODO
-    this.props.router.push(`/`);
+    firebase.auth().signOut();
+    this.props.router.push(`/my`);
   }
+
   toggleNewStoryModal() {
     this.setState({ createStoryModal: !this.state.createStoryModal });
   }
+
   blockWelcomeModal() {
     localStorage.setItem("welcomeModalBlocker", "active");
     this.setState({ welcomeModal: false, createStoryModal: true });
   }
+
   render() {
     const { createStoryModal, welcomeModal } = this.state;
     const welcomeModalBlocker = localStorage.getItem("welcomeModalBlocker");
+
     return [
       welcomeModalBlocker !== "active" ? (
         <WelcomeModal
@@ -227,6 +233,7 @@ ListingView.propTypes = {
   createStory: func,
   deleteStory: func,
   router: object,
+  firebase: object,
   stories: arrayOf(object),
   updateStory: func,
   user: shape({
@@ -240,6 +247,7 @@ ListingView.defaultProps = {
   createStory: null,
   deleteStory: null,
   router: null,
+  firebase: null,
   stories: [],
   updateStory: null,
   user: {}
