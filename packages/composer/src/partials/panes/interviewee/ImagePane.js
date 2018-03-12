@@ -51,7 +51,7 @@ export default class ImagePane extends Component {
               onChange={(e) => this.handleChange(e)}
               required
               type="file"
-              accept="image/gif, image/jpeg, image/jpg, image/svg, image/gif, image/png"
+              accept="image/jpeg, image/jpg, image/svg, image/gif, image/png"
             />
             <Legend tip="Select an image with extension of .png, .jpg, .jpeg, .svg or .gif">
               i

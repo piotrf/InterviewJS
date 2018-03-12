@@ -135,6 +135,7 @@ export default class MetaForm extends React.Component {
             <FormItem>
               <Label>Cover photo</Label>
               <TextInput
+                accept="image/jpeg, image/jpg, image/png"
                 input
                 name="cover"
                 onBlur={(e) => this.handleBlur(e)}
@@ -151,6 +152,7 @@ export default class MetaForm extends React.Component {
             <FormItem>
               <Label>Your logo</Label>
               <TextInput
+                accept="image/jpeg, image/jpg, image/png"
                 input
                 name="logo"
                 nooffset

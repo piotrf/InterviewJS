@@ -167,6 +167,7 @@ export default class IntervieweeForm extends Component {
             <FormItem>
               <Label>Avatar</Label>
               <TextInput
+                accept="image/jpeg, image/jpg, image/png"
                 input
                 name="avatar"
                 onChange={(e) => this.handleChange(e)}
@@ -174,7 +175,7 @@ export default class IntervieweeForm extends Component {
                 placeholder=""
                 type="file"
               />
-              <Legend tip="Small profile pic for you interviewee, best to upload a photo in square format.">
+              <Legend tip="Small profile pic for you interviewee, best to upload a photo in square format. JPG or PNG format.">
                 i
               </Legend>
             </FormItem>
