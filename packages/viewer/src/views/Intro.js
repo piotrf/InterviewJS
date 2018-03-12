@@ -87,7 +87,7 @@ export default class IntroView extends Component {
         key="topbar"
       />,
       <Page key="page">
-        <PageHead limit="m" flex={[0, 1, `${100 / 2}%`]}>
+        <PageHead flex={[0, 1, `${100 / 2}%`]}>
           <Cover image={story.cover}>
             <PageTitle typo="h1">{story.title}</PageTitle>
             <Separator size="s" silent />

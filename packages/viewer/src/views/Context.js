@@ -62,10 +62,8 @@ export default class ContextView extends Component {
         key="topbar"
       />,
       <Page key="page">
-        <PageHead limit="m" flex={[0, 1, `${100 / 2}%`]}>
-          <Cover image={story.cover}>
-            <PageTitle typo="h1">{story.title}</PageTitle>
-          </Cover>
+        <PageHead flex={[0, 1, `${100 / 2}%`]}>
+          <Cover image={story.cover} />
         </PageHead>
         <PageBody limit="m" flex={[1, 0, `${100 / 4}%`]}>
           <Container limit="x">

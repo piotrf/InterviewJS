@@ -18,7 +18,7 @@ const CoverEl = css(Container)`
 const CoverBody = css.div`
   ${setSpace("phm")};
   ${setSpace("ptl")};
-  background-color: ${color.shadowM};
+  background-color: ${color.shadowLt};
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
