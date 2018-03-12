@@ -35,6 +35,7 @@ const PageHead = css(Container)`
 const PageBody = css(Container)`
   ${setSpace("phl")};
   ${setSpace("pbl")};
+  width: 100%;
 `;
 
 const PageFoot = css(Container)`

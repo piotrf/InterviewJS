@@ -9,6 +9,7 @@ import App from "./App";
 import Chat from "./views/Chat";
 import Intro from "./views/Intro";
 import Context from "./views/Context";
+import Interviewees from "./views/Interviewees";
 import Listing from "./views/Listing";
 import Outro from "./views/Outro";
 import Details from "./views/Details";
@@ -33,11 +34,12 @@ class Routes extends React.Component {
       <Router key="Root" history={history}>
         <Route path="/intro" component={App}>
           <IndexRoute component={Intro} />
-          <Route path="/interviewees" component={Listing} />
-          <Route path="/chat" component={Chat} />
+          <Route path="/interviewees" component={Interviewees} />
           <Route path="/context" component={Context} />
+          <Route path="/listing" component={Listing} />
           <Route path="/outro" component={Outro} />
           <Route path="/details" component={Details} />
+          <Route path="/chat/:chatId" component={Chat} />
         </Route>
         <Redirect from="*" to="Intro" />
       </Router>
