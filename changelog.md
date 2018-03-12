@@ -1,3 +1,9 @@
+## xx-03-2017
+
+* It is now possible to add image bubbles to your story.
+
+* File-typed inputs now only accept images with a subset of file extensions.
+
 ## 09-03-2017
 
 * It is now possible to add embed, map, media bubbles — WIP
