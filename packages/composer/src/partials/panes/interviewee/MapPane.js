@@ -3,7 +3,6 @@ import React, { Component } from "react";
 
 import {
   BubbleHTMLWrapper,
-  Container,
   FormItem,
   Label,
   Separator,
