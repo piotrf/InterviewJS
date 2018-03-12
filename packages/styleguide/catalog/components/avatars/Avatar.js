@@ -10,6 +10,7 @@ const Avatar = css.div`
   background-position: center;
   background-size: cover;
   border-radius: ${radius.a};
+  display: inline-block;
 `;
 
 Avatar.propTypes = {

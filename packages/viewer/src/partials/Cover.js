@@ -36,14 +36,14 @@ const CoverBody = css.div`
     left: 0;
     position: absolute;
     right: 0;
-    z-index: 100;
+    z-index: 1;
   }
 `;
 
 const CoverSauce = css.div`
   ${setSpace("mbm")};
   position: relative;
-  z-index: 200;
+  z-index: 2;
 `;
 
 const Cover = (props) => (

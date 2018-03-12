@@ -15,7 +15,7 @@ import {
   setSpace
 } from "interviewjs-styleguide";
 
-import { Cover, Topbar } from "../partials";
+import { Cover, Topbar, IntervieweeModal } from "../partials";
 
 const Page = css.div`
   background: ${color.black};
@@ -63,11 +63,19 @@ const Interviewee = css.li`
 export default class ContextView extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { intervieweeModal: null };
+    this.toggleIntervieweeModal = this.toggleIntervieweeModal.bind(this);
   }
-
+  toggleIntervieweeModal(target) {
+    if (target !== null) {
+      this.setState({ intervieweeModal: target });
+    } else {
+      this.setState({ intervieweeModal: null });
+    }
+  }
   render() {
     const { story } = this.props;
+    console.log(this.state);
     return [
       <Topbar
         handleDetails={() => this.props.router.push(`/details`)}
@@ -100,7 +108,11 @@ export default class ContextView extends Component {
                     </Container>
                     <Container flex={[1, 0, "auto"]}>
                       <Tip title="Get info">
-                        <Action inverted iconic>
+                        <Action
+                          inverted
+                          iconic
+                          onClick={() => this.toggleIntervieweeModal(i)}
+                        >
                           <Icon name="info" />
                         </Action>
                       </Tip>
@@ -135,7 +147,16 @@ export default class ContextView extends Component {
             </Action>
           </Actionbar>
         </PageFoot>
-      </Page>
+      </Page>,
+      this.state.intervieweeModal !== null ? (
+        <IntervieweeModal
+          {...this.props}
+          handleClose={() => this.toggleIntervieweeModal(null)}
+          interviewee={story.interviewees[this.state.intervieweeModal]}
+          isOpen={this.state.intervieweeModal !== null}
+          key="intervieweeModal"
+        />
+      ) : null
     ];
   }
 }
