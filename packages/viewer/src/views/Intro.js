@@ -1,9 +1,32 @@
 /* eslint react/forbid-prop-types: 0 */
 import css from "styled-components";
 import React, { Component } from "react";
-import { arrayOf, func, object, shape, string } from "prop-types";
+import {} from "prop-types";
 
-import {} from "interviewjs-styleguide";
+import { Container, color } from "interviewjs-styleguide";
+
+import { Cover } from "../partials";
+
+const Page = css.div`
+  background: ${color.black};
+  color: ${color.white};
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+`;
+
+const PageCover = css(Container)`
+
+`;
+
+const PageBody = css(Container)`
+
+`;
+
+const PageFoot = css(Container)`
+
+`;
 
 export default class IntroView extends Component {
   constructor(props) {
@@ -12,7 +35,9 @@ export default class IntroView extends Component {
   }
 
   render() {
-    return <div>Jello</div>;
+    console.log("props: ", this.props);
+    console.log("state: ", this.state);
+    return <Page>Hey story!</Page>;
   }
 }
 
