@@ -32,7 +32,7 @@ export default class ImagePane extends Component {
         draft={
           <div>
             <BubbleHTMLWrapper>
-              <img src={this.state.draft.value} alt="" />
+              <img src={this.state.draft.value} alt="InterviewJSInsert" />
             </BubbleHTMLWrapper>
           </div>
         }
