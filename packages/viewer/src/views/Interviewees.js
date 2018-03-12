@@ -9,7 +9,6 @@ import {
   Avatar,
   Container,
   Icon,
-  PageTitle,
   Tip,
   color,
   setSpace
