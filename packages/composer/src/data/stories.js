@@ -33,6 +33,7 @@ const stories = [
     ],
     interviewees: [
       {
+        id: uuidv4(),
         name: "Ava",
         bio: "Ava has a robotic body but a human-looking face",
         title: "Humanoid robot",
@@ -449,6 +450,7 @@ Good.`,
     poll: [],
     interviewees: [
       {
+        id: uuidv4(),
         name: "Barack Obama",
         bio:
           "Barack Hussein Obama II (/bəˈrɑːk huːˈseɪn oʊˈbɑːmə/ (About this sound listen);[1] born August 4, 1961) is an American politician who served as the 44th President of the United States from 2009 to 2017. The first African American to assume the presidency, he was previously the junior United States Senator from Illinois from 2005 to 2008. He served in the Illinois State Senate from 1997 until 2004.",
@@ -660,6 +662,7 @@ OBAMA: Thank you.`,
         ]
       },
       {
+        id: uuidv4(),
         name: "Donald Trump",
         bio: "",
         title: "45th President of the US",

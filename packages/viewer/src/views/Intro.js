@@ -43,6 +43,7 @@ const PageHead = css(Container)`
 const PageBody = css(Container)`
   ${setSpace("phl")};
   ${setSpace("pbl")};
+  width: 100%;
 `;
 
 const PageFoot = css(Container)`
@@ -93,8 +94,8 @@ export default class IntroView extends Component {
             <Aside typo="p6">Featuring:</Aside>
             <Separator size="s" silent />
             <Interviewees>
-              {story.interviewees.map((interviewee, i) => (
-                <Tip title={interviewee.name} key={i}>
+              {story.interviewees.map((interviewee) => (
+                <Tip title={interviewee.name} key={interviewee.id}>
                   <Interviewee>
                     <Avatar image={interviewee.avatar} />
                   </Interviewee>

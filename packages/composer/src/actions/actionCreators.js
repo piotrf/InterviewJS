@@ -50,6 +50,7 @@ export function createInterviewee(storyIndex, payload) {
     storyIndex,
     payload: {
       ...payload,
+      id: uuidv4(),
       storyline: []
     }
   };
