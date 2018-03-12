@@ -76,7 +76,6 @@ export default class IntroView extends Component {
   }
 
   render() {
-    console.log("props: ", this.props);
     const { story } = this.props;
     return (
       <Page>
