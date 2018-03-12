@@ -57,6 +57,7 @@ export default class MapPane extends Component {
               onChange={(e) => this.handleChange(e)}
               placeholder={`<iframe src="https://www.google.com/maps/embed…`}
               required
+              rows={10}
               type="url"
               value={this.state.draft.value}
             />
