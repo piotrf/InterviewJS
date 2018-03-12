@@ -1,7 +1,7 @@
 /* eslint react/forbid-prop-types: 0 */
 import css from "styled-components";
 import React, { Component } from "react";
-import { shape, string } from "prop-types";
+import { object, shape, string } from "prop-types";
 
 import {
   Action,
@@ -20,7 +20,7 @@ import {
   setType
 } from "interviewjs-styleguide";
 
-import { Cover } from "../partials";
+import { Cover, Topbar } from "../partials";
 
 const Page = css.div`
   background: ${color.black};
@@ -80,8 +80,12 @@ export default class IntroView extends Component {
 
   render() {
     const { story } = this.props;
-    return (
-      <Page>
+    return [
+      <Topbar
+        handleDetails={() => this.props.router.push(`/details`)}
+        key="topbar"
+      />,
+      <Page key="page">
         <PageHead limit="m" flex={[0, 1, `${100 / 2}%`]}>
           <Cover image={story.cover}>
             <PageTitle typo="h1">{story.title}</PageTitle>
@@ -89,8 +93,8 @@ export default class IntroView extends Component {
             <Aside typo="p6">Featuring:</Aside>
             <Separator size="s" silent />
             <Interviewees>
-              {story.interviewees.map((interviewee) => (
-                <Tip title={interviewee.name} key={interviewee.name}>
+              {story.interviewees.map((interviewee, i) => (
+                <Tip title={interviewee.name} key={i}>
                   <Interviewee>
                     <Avatar image={interviewee.avatar} />
                   </Interviewee>
@@ -130,16 +134,18 @@ export default class IntroView extends Component {
           </Actionbar>
         </PageFoot>
       </Page>
-    );
+    ];
   }
 }
 
 IntroView.propTypes = {
+  router: object,
   story: shape({
-    title: string.isRequired
+    title: string
   })
 };
 
 IntroView.defaultProps = {
+  router: null,
   story: {}
 };
