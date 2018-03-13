@@ -19,14 +19,14 @@ const story = {
   attachments: [{ url: "", id: "" }],
   poll: [
     {
-      question: "Do you think Ava is a real person?",
+      question: "Did you enjoy this story?",
       answer1: "Yes",
       answer2: "No"
     },
     {
-      question: "Do you think Caleb is cool?",
-      answer1: "Yes",
-      answer2: "No"
+      question: "Whoose efforts to tackle slavery you find the most effective?",
+      answer1: "Hyland’s",
+      answer2: "Chandran’s"
     }
   ],
   interviewees: [

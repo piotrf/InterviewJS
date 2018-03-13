@@ -7,12 +7,14 @@ import { configureStore, history } from "./configureStore";
 
 import App from "./App";
 import Chat from "./views/Chat";
-import Intro from "./views/Intro";
 import Context from "./views/Context";
+import Details from "./views/Details";
 import Interviewees from "./views/Interviewees";
+import Intro from "./views/Intro";
 import Listing from "./views/Listing";
 import Outro from "./views/Outro";
-import Details from "./views/Details";
+import Poll from "./views/Poll";
+import Results from "./views/Results";
 
 const store = configureStore();
 
@@ -34,12 +36,14 @@ class Routes extends React.Component {
       <Router key="Root" history={history}>
         <Route path="/intro" component={App}>
           <IndexRoute component={Intro} />
-          <Route path="/listing" component={Listing} />
-          <Route path="/context" component={Context} />
-          <Route path="/interviewees" component={Interviewees} />
-          <Route path="/outro" component={Outro} />
-          <Route path="/details" component={Details} />
           <Route path="/chat/:chatId" component={Chat} />
+          <Route path="/context" component={Context} />
+          <Route path="/details" component={Details} />
+          <Route path="/interviewees" component={Interviewees} />
+          <Route path="/listing" component={Listing} />
+          <Route path="/outro" component={Outro} />
+          <Route path="/poll" component={Poll} />
+          <Route path="/results" component={Results} />
         </Route>
         <Redirect from="*" to="Intro" />
       </Router>

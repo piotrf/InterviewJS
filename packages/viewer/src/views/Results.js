@@ -9,7 +9,6 @@ import {
   Container,
   PageParagraph,
   PageSubtitle,
-  PageTitle,
   Separator,
   color,
   setSpace
@@ -47,7 +46,7 @@ const Aside = css(PageParagraph)`
   color: ${color.flareHD};
 `;
 
-export default class OutroView extends Component {
+export default class ResultsView extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -58,7 +57,7 @@ export default class OutroView extends Component {
     return [
       <Topbar
         handleDetails={() => this.props.router.push(`/details`)}
-        handleBack={() => this.props.router.push(`/listing`)}
+        handleBack={() => this.props.router.push(`/poll`)}
         key="topbar"
       />,
       <Page key="page">
@@ -67,28 +66,19 @@ export default class OutroView extends Component {
         </PageHead>
         <PageBody limit="m" flex={[1, 0, `${100 / 4}%`]}>
           <Container limit="x">
-            <PageSubtitle typo="h3">
-              Wow, you are truly curious! You have spoken to everyone and
-              collected 97% of the information. The world needs more people like
-              you and we can’t wait to hear what you have to say!
-            </PageSubtitle>
+            <PageSubtitle typo="h4">Results</PageSubtitle>
+            <Separator size="m" silent />
+            <Aside typo="p3">Aside</Aside>
           </Container>
         </PageBody>
         <PageFoot limit="m" flex={[1, 0, `${100 / 4}%`]}>
           <Actionbar>
             <Action
               fixed
-              onClick={() => this.props.router.push(`/listing`)}
+              onClick={() => this.props.router.push(`/interviewees`)}
               primary
             >
-              Revisit the interviews
-            </Action>
-            <Action
-              fixed
-              onClick={() => this.props.router.push(`/poll`)}
-              primary
-            >
-              Have your say
+              Meet your interviewees
             </Action>
           </Actionbar>
         </PageFoot>
@@ -97,14 +87,14 @@ export default class OutroView extends Component {
   }
 }
 
-OutroView.propTypes = {
+ResultsView.propTypes = {
   router: object,
   story: shape({
     title: string
   })
 };
 
-OutroView.defaultProps = {
+ResultsView.defaultProps = {
   router: null,
   story: {}
 };

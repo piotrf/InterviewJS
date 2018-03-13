@@ -11,6 +11,7 @@ import {
   Container,
   Tip,
   color,
+  radius,
   setSpace
 } from "interviewjs-styleguide";
 
@@ -36,10 +37,30 @@ const PageFoot = css(Container)`
   ${setSpace("pvm")};
 `;
 
+const ActionbarHelper = css(Container)`
+  ${setSpace("mhm")};
+  ${setSpace("mvx")};
+  background: ${color.white};
+  border-radius: ${radius.a};
+  bottom: 0;
+  left: 46px;
+  position: absolute;
+  right: 46px;
+  top: 0;
+  z-index: 5;
+  & > * {
+    ${setSpace("mhx")};
+  }
+`;
+
 export default class ChatView extends Component {
   constructor(props) {
     super(props);
-    this.state = { intervieweeModal: false };
+    this.state = {
+      intervieweeModal: false,
+      moreHelper: false,
+      emotHelper: false
+    };
     this.toggleIntervieweeModal = this.toggleIntervieweeModal.bind(this);
   }
   toggleIntervieweeModal() {
@@ -72,18 +93,52 @@ export default class ChatView extends Component {
             </Actionbar>
           </Container>
         </PageHead>
-        <PageBody flex={[1, 1, `100%`]} />
+        <PageBody flex={[1, 1, `100%`]}>Body</PageBody>
         <PageFoot flex={[0, 0, `auto`]}>
-          <Container limit="m" padded>
+          <Container limit="x" padded>
             <Actionbar satellite="both">
-              <Action iconic secondary>
-                …
+              <Action
+                iconic
+                onClick={() =>
+                  this.setState({ moreHelper: !this.state.moreHelper })
+                }
+                secondary
+              >
+                <Icon name="vdots" />
               </Action>
-              <Action primary>Move on</Action>
-              <Action iconic secondary>
-                :)
+              <Action primary fixed>
+                Move on
+              </Action>
+              <Action
+                iconic
+                onClick={() =>
+                  this.setState({ emotHelper: !this.state.emotHelper })
+                }
+                secondary
+              >
+                <Icon name="smile" />
               </Action>
             </Actionbar>
+            {this.state.moreHelper ? (
+              <ActionbarHelper shift dir="row">
+                <Action fixed primary>
+                  I want to talk to somebody else
+                </Action>
+                <Action
+                  fixed
+                  onClick={() => this.props.router.push("/outro")}
+                  primary
+                  tone="negative"
+                >
+                  I’m done chatting
+                </Action>
+              </ActionbarHelper>
+            ) : null}
+            {this.state.emotHelper ? (
+              <ActionbarHelper padded bordered shift>
+                Emot
+              </ActionbarHelper>
+            ) : null}
           </Container>
         </PageFoot>
       </Page>,
@@ -104,6 +159,7 @@ export default class ChatView extends Component {
 
 ChatView.propTypes = {
   router: object,
+  params: shape({ chatId: string }).isRequired,
   story: shape({
     title: string
   })
