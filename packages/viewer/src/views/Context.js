@@ -9,39 +9,11 @@ import {
   Container,
   PageParagraph,
   PageSubtitle,
-  PageTitle,
   Separator,
-  color,
-  setSpace
+  color
 } from "interviewjs-styleguide";
 
-import { Cover, Topbar } from "../partials";
-
-const Page = css.div`
-  background: ${color.black};
-  color: ${color.white};
-  min-height: 100vh;
-  min-width: 100vw;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-`;
-
-const PageHead = css(Container)`
-  ${setSpace("pbl")};
-  width: 100%;
-`;
-
-const PageBody = css(Container)`
-  ${setSpace("phl")};
-  ${setSpace("pbl")};
-  width: 100%;
-`;
-
-const PageFoot = css(Container)`
-  ${setSpace("phl")};
-  ${setSpace("pbl")};
-`;
+import { Cover, Topbar, Page, PageBody, PageHead } from "../partials";
 
 const Aside = css(PageParagraph)`
   color: ${color.flareHD};
@@ -63,9 +35,9 @@ export default class ContextView extends Component {
       />,
       <Page key="page">
         <PageHead flex={[0, 1, `${100 / 2}%`]}>
-          <Cover image={story.cover} />
+          <Cover image={story.cover} compact />
         </PageHead>
-        <PageBody limit="m" flex={[1, 0, `${100 / 4}%`]}>
+        <PageBody limit="m" flex={[1, 0, `${100 / 2}%`]}>
           <Container limit="x">
             <PageSubtitle typo="h4">{story.context}</PageSubtitle>
             <Separator size="m" silent />
@@ -74,8 +46,7 @@ export default class ContextView extends Component {
               the end you’ll get feedback on how well you’ve done.
             </Aside>
           </Container>
-        </PageBody>
-        <PageFoot limit="m" flex={[1, 0, `${100 / 4}%`]}>
+          <Separator size="l" silent />
           <Actionbar>
             <Action
               fixed
@@ -85,7 +56,7 @@ export default class ContextView extends Component {
               Meet your interviewees
             </Action>
           </Actionbar>
-        </PageFoot>
+        </PageBody>
       </Page>
     ];
   }

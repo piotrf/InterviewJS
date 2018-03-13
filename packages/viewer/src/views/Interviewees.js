@@ -16,33 +16,14 @@ import {
   setSpace
 } from "interviewjs-styleguide";
 
-import { Cover, Topbar, IntervieweeModal } from "../partials";
-
-const Page = css.div`
-  background: ${color.black};
-  color: ${color.white};
-  min-height: 100vh;
-  min-width: 100vw;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-`;
-
-const PageHead = css(Container)`
-  ${setSpace("pbl")};
-  width: 100%;
-`;
-
-const PageBody = css(Container)`
-  ${setSpace("phl")};
-  ${setSpace("pbl")};
-  width: 100%;
-`;
-
-const PageFoot = css(Container)`
-  ${setSpace("phl")};
-  ${setSpace("pbl")};
-`;
+import {
+  Cover,
+  IntervieweeModal,
+  Page,
+  PageBody,
+  PageHead,
+  Topbar
+} from "../partials";
 
 const Interviewees = css.ul`
   display: block;
@@ -94,10 +75,10 @@ export default class ContextView extends Component {
         key="topbar"
       />,
       <Page key="page">
-        <PageHead flex={[0, 1, `${100 / 3}%`]}>
-          <Cover image={story.cover} />
+        <PageHead flex={[0, 1, `${100 / 2}%`]}>
+          <Cover image={story.cover} compact />
         </PageHead>
-        <PageBody limit="m" flex={[1, 0, `100%`]}>
+        <PageBody limit="m" flex={[1, 0, `${100 / 2}%`]}>
           <Container limit="x">
             <Interviewees>
               {story.interviewees.map((interviewee, i) => (
@@ -147,8 +128,7 @@ export default class ContextView extends Component {
               ))}
             </Interviewees>
           </Container>
-        </PageBody>
-        <PageFoot limit="m" flex={[1, 0, `${100 / 4}%`]}>
+          <Separator size="l" silent />
           <Actionbar>
             <Action
               fixed
@@ -160,7 +140,7 @@ export default class ContextView extends Component {
               Start your first interview
             </Action>
           </Actionbar>
-        </PageFoot>
+        </PageBody>
       </Page>,
       this.state.intervieweeModal !== null ? (
         <IntervieweeModal

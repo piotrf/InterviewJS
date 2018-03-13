@@ -22,10 +22,10 @@ const CoverBody = css.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  min-height: ${100 / 3}vh;
+  min-height: ${({ compact }) => (compact ? `${100 / 4}vh` : `${100 / 3}vh`)};
   position: relative;
   ${breakpoint.tablet} {
-    min-height: ${100 / 2}vh;
+    min-height: ${({ compact }) => (compact ? `${100 / 3}vh` : `${100 / 2}vh`)};
   }
   &:after {
     height: 50%;
@@ -48,7 +48,7 @@ const CoverSauce = css.div`
 
 const Cover = (props) => (
   <CoverEl {...props}>
-    <CoverBody>
+    <CoverBody compact={props.compact}>
       <CoverSauce>{props.children}</CoverSauce>
     </CoverBody>
   </CoverEl>

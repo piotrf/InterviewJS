@@ -45,7 +45,7 @@ class Routes extends React.Component {
           <Route path="/poll" component={Poll} />
           <Route path="/results" component={Results} />
         </Route>
-        <Redirect from="*" to="Intro" />
+        <Redirect from="*" to="intro" />
       </Router>
     );
   }

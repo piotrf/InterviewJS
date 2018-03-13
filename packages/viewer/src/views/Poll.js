@@ -9,37 +9,10 @@ import {
   Container,
   PageSubtitle,
   Separator,
-  color,
   setSpace
 } from "interviewjs-styleguide";
 
-import { Cover, Topbar } from "../partials";
-
-const Page = css.div`
-  background: ${color.black};
-  color: ${color.white};
-  min-height: 100vh;
-  min-width: 100vw;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-`;
-
-const PageHead = css(Container)`
-  ${setSpace("pbl")};
-  width: 100%;
-`;
-
-const PageBody = css(Container)`
-  ${setSpace("phl")};
-  ${setSpace("pbl")};
-  width: 100%;
-`;
-
-const PageFoot = css(Container)`
-  ${setSpace("phl")};
-  ${setSpace("pbl")};
-`;
+import { Cover, Topbar, Page, PageBody, PageHead } from "../partials";
 
 const PollItem = css(Container)`
   &:not(:last-child) {
@@ -69,7 +42,7 @@ export default class OutroView extends Component {
       />,
       <Page key="page">
         <PageHead flex={[0, 1, `${100 / 2}%`]}>
-          <Cover image={story.cover} />
+          <Cover image={story.cover} compact />
         </PageHead>
         <PageBody limit="m" flex={[1, 0, `${100 / 4}%`]}>
           <Container limit="x">
@@ -111,15 +84,14 @@ export default class OutroView extends Component {
                 </Actionbar>
               </PollItem>
             ))}
+            <Separator size="l" silent />
+            <Actionbar>
+              <Action fixed onClick={this.submitPoll} primary>
+                Show me results
+              </Action>
+            </Actionbar>
           </Container>
         </PageBody>
-        <PageFoot limit="m" flex={[1, 0, `${100 / 4}%`]}>
-          <Actionbar>
-            <Action fixed onClick={this.submitPoll} primary>
-              Show me results
-            </Action>
-          </Actionbar>
-        </PageFoot>
       </Page>
     ];
   }

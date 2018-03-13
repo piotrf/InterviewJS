@@ -1,5 +1,4 @@
 /* eslint react/forbid-prop-types: 0 */
-import css from "styled-components";
 import React, { Component } from "react";
 import { object, shape, string } from "prop-types";
 
@@ -7,45 +6,11 @@ import {
   Action,
   Actionbar,
   Container,
-  PageParagraph,
   PageSubtitle,
-  PageTitle,
-  Separator,
-  color,
-  setSpace
+  Separator
 } from "interviewjs-styleguide";
 
-import { Cover, Topbar } from "../partials";
-
-const Page = css.div`
-  background: ${color.black};
-  color: ${color.white};
-  min-height: 100vh;
-  min-width: 100vw;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-`;
-
-const PageHead = css(Container)`
-  ${setSpace("pbl")};
-  width: 100%;
-`;
-
-const PageBody = css(Container)`
-  ${setSpace("phl")};
-  ${setSpace("pbl")};
-  width: 100%;
-`;
-
-const PageFoot = css(Container)`
-  ${setSpace("phl")};
-  ${setSpace("pbl")};
-`;
-
-const Aside = css(PageParagraph)`
-  color: ${color.flareHD};
-`;
+import { Cover, Topbar, Page, PageBody, PageHead } from "../partials";
 
 export default class OutroView extends Component {
   constructor(props) {
@@ -78,14 +43,13 @@ export default class OutroView extends Component {
       />,
       <Page key="page">
         <PageHead flex={[0, 1, `${100 / 2}%`]}>
-          <Cover image={story.cover} />
+          <Cover image={story.cover} compact />
         </PageHead>
-        <PageBody limit="m" flex={[1, 0, `${100 / 4}%`]}>
+        <PageBody limit="m" flex={[1, 0, `${100 / 2}%`]}>
           <Container limit="x">
             <PageSubtitle typo="h3">{getResultScore()}</PageSubtitle>
           </Container>
-        </PageBody>
-        <PageFoot limit="m" flex={[1, 0, `${100 / 4}%`]}>
+          <Separator size="l" silent />
           <Actionbar>
             <Action
               fixed
@@ -102,7 +66,7 @@ export default class OutroView extends Component {
               Have your say
             </Action>
           </Actionbar>
-        </PageFoot>
+        </PageBody>
       </Page>
     ];
   }

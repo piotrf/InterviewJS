@@ -16,40 +16,10 @@ import {
   color,
   radius,
   setHeight,
-  setSpace,
-  setType
+  setSpace
 } from "interviewjs-styleguide";
 
-import { Cover, Topbar } from "../partials";
-
-const Page = css.div`
-  background: ${color.black};
-  color: ${color.white};
-  min-height: 100vh;
-  min-width: 100vw;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-`;
-
-const PageHead = css(Container)`
-  ${setSpace("pbl")};
-  width: 100%;
-  ${PageTitle} {
-    ${setType("h")};
-  }
-`;
-
-const PageBody = css(Container)`
-  ${setSpace("phl")};
-  ${setSpace("pbl")};
-  width: 100%;
-`;
-
-const PageFoot = css(Container)`
-  ${setSpace("phl")};
-  ${setSpace("pbl")};
-`;
+import { Cover, Topbar, Page, PageBody, PageHead } from "../partials";
 
 const Interviewees = css.ul`
   text-align: center;
@@ -113,8 +83,7 @@ export default class IntroView extends Component {
               from them in their own words.
             </Aside>
           </Container>
-        </PageBody>
-        <PageFoot limit="m" flex={[1, 0, `${100 / 4}%`]}>
+          <Separator size="l" silent />
           {story.logo ? (
             <Logo src={story.logo} alt="Story author’s logo" />
           ) : null}
@@ -133,7 +102,7 @@ export default class IntroView extends Component {
               Continue
             </Action>
           </Actionbar>
-        </PageFoot>
+        </PageBody>
       </Page>
     ];
   }
