@@ -188,31 +188,6 @@ const pages = [
         content: require("./pages/text-extends.js")
       }
     ]
-  },
-  {
-    title: "Views",
-    pages: [
-      {
-        content: require("./pages/viewer-listing.js"),
-        path: "/views/viewer/listing",
-        title: "Viewer Listing"
-      },
-      {
-        content: require("./pages/viewer-chat.js"),
-        path: "/views/viewer/chat",
-        title: "Viewer Chat"
-      },
-      {
-        content: require("./pages/viewer-intro.js"),
-        path: "/views/viewer/intro",
-        title: "Viewer Intro"
-      },
-      {
-        content: require("./pages/viewer-outro.js"),
-        path: "/views/viewer/outro",
-        title: "Viewer Outro"
-      }
-    ]
   }
 ];
 
