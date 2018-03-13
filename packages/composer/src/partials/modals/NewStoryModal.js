@@ -30,7 +30,7 @@ export default class NewStoryModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      step: 0, // TODO revert to 0
+      step: 0,
       storyCreated: false
     };
     this.handleStep0 = this.handleStep0.bind(this);

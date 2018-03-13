@@ -44,7 +44,7 @@ export default class IntervieweePane extends React.Component {
         text: { value: "" },
         link: { value: "", title: "" },
         image: {
-          value: require("../../data/media/trump.png"), // TODO: this should come from the data model upon image upload @LAURIAN
+          value: require("../../data/media/trump.png"), // TODO @LAURIAN: this should come from the data model upon image upload
           title: ""
         },
         embed: { value: "" },

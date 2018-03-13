@@ -55,6 +55,21 @@ export default class OutroView extends Component {
 
   render() {
     const { story } = this.props;
+    const resultScore = 95; // TODO @LAURIAN: plug in real score
+    const getResultScore = () => {
+      if (resultScore >= 95) {
+        return `Wow, you are truly curious! You have spoken to everyone and
+        collected ${resultScore}% of the information. The world needs more people like
+        you and we can’t wait to hear what you have to say!`;
+      } else if (resultScore >= 70) {
+        return `Well done, you have spoken to all interviewees and collected ${resultScore}% of the information.  You’re pretty well informed now!`;
+      } else if (resultScore >= 50) {
+        return `You have spoken to all interviewees but left some of them early. You have collected over ${resultScore}% of the information and you’re still much better informed than the average person!`;
+      } else if (resultScore >= 25) {
+        return `You’ve spoken to most of the interviewees and collected ${resultScore}% of the information.  You can revisit the interviews or have your say now.`;
+      }
+      return `Did the interviewees bore you or are you in a rush? You have collected ${resultScore}% of the information.  Remember that you can always come back for more chat.`;
+    };
     return [
       <Topbar
         handleDetails={() => this.props.router.push(`/details`)}
@@ -67,11 +82,7 @@ export default class OutroView extends Component {
         </PageHead>
         <PageBody limit="m" flex={[1, 0, `${100 / 4}%`]}>
           <Container limit="x">
-            <PageSubtitle typo="h3">
-              Wow, you are truly curious! You have spoken to everyone and
-              collected 97% of the information. The world needs more people like
-              you and we can’t wait to hear what you have to say!
-            </PageSubtitle>
+            <PageSubtitle typo="h3">{getResultScore()}</PageSubtitle>
           </Container>
         </PageBody>
         <PageFoot limit="m" flex={[1, 0, `${100 / 4}%`]}>

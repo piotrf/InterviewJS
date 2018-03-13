@@ -32,7 +32,7 @@ export default class PublishStoryModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      step: 0 // TODO revert to 0
+      step: 0
     };
     this.handleStep0 = this.handleStep0.bind(this);
     this.handleStep1 = this.handleStep1.bind(this);
