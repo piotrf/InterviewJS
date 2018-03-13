@@ -23,7 +23,7 @@ const Topbar = (props) => (
           </Action>
         ) : null}
         <Action inverted iconic onClick={props.handleDetails}>
-          ?
+          <Icon name="info" />
         </Action>
       </Actionbar>
     </Container>

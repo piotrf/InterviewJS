@@ -102,7 +102,7 @@ export default class ChatView extends Component {
               </Action>
               <PageTitle typo="h2">Interviewees</PageTitle>
               <Action iconic onClick={this.toggleDetailsModal}>
-                i
+                <Icon name="info" />
               </Action>
             </Actionbar>
           </Container>

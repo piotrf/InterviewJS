@@ -93,7 +93,7 @@ export default class ChatView extends Component {
                 </Tip>
               </Action>
               <Action iconic onClick={this.toggleDetailsModal}>
-                i
+                <Icon name="info" />
               </Action>
             </Actionbar>
           </Container>

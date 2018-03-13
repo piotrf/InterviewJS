@@ -62,6 +62,9 @@ const PageHead = css.div`
     top: 100%;s
     width: 100%;
   }
+  ${PageTitle} {
+    color: ${color.blueBlk};
+  }
 `;
 
 const StoryNew = css(Container)`

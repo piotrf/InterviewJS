@@ -109,7 +109,7 @@ export default class ContextView extends Component {
                       </IntervieweeTitle>
                     </Container>
                     <Container flex={[1, 0, "auto"]}>
-                      <Tip title="Get info">
+                      <Tip title="About this interviewee">
                         <Action
                           iconic
                           inverted

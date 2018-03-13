@@ -9,6 +9,7 @@ import {
   PageTitle,
   Separator,
   breakpoint,
+  color,
   setSpace
 } from "interviewjs-styleguide";
 
@@ -41,6 +42,9 @@ const PageHead = css.div`
   display: flex;
   flex-direction: row;
   flex: 1 0 auto;
+  ${PageTitle} {
+    color: ${color.blueBlk};
+  }
 `;
 
 const PageBody = css.div`
@@ -117,7 +121,7 @@ export default class ComposerView extends React.Component {
             </Action>
             <Separator dir="v" size="m" />
             <Action onClick={() => this.toggleDetailsModal("meta")}>
-              <Icon name="info" size="x" /> Details
+              Story Details
             </Action>
           </Container>
           <Container flex={[1, 1, `${100 / 3}%`]} align="center">
