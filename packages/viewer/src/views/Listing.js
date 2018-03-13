@@ -71,9 +71,12 @@ export default class ChatView extends Component {
   constructor(props) {
     super(props);
     this.state = { intervieweeModal: null, storyDetailsModal: false };
-    this.toggleIntervieweeModal = this.toggleIntervieweeModal.bind(this);
     this.startChat = this.startChat.bind(this);
     this.toggleDetailsModal = this.toggleDetailsModal.bind(this);
+    this.toggleIntervieweeModal = this.toggleIntervieweeModal.bind(this);
+  }
+  toggleDetailsModal() {
+    this.setState({ storyDetailsModal: !this.state.storyDetailsModal });
   }
   toggleIntervieweeModal(e, target) {
     e.stopPropagation();
