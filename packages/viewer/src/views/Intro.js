@@ -61,7 +61,7 @@ const Aside = css(PageParagraph)`
 export default class IntroView extends Component {
   constructor(props) {
     super(props);
-    this.state = { storyDetailsModal: true };
+    this.state = { storyDetailsModal: false };
     this.toggleDetailsModal = this.toggleDetailsModal.bind(this);
   }
   toggleDetailsModal() {
