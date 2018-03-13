@@ -19,14 +19,21 @@ const story = {
   attachments: [{ url: "", id: "" }],
   poll: [
     {
-      question: "Did you enjoy this story?",
+      question:
+        "Should The National Crime Agency lialise with its Vietnamese counterparts to try to break the people-smuggling rings?",
       answer1: "Yes",
       answer2: "No"
     },
     {
-      question: "Whoose efforts to tackle slavery you find the most effective?",
-      answer1: "Hyland’s",
-      answer2: "Chandran’s"
+      question:
+        "Car companies will order their dealerships accross the UK to check suppliers and contractors to ensure they were not using workers who were being exploited as modern-day slaves.",
+      answer1: "Unlikely",
+      answer2: "Likely"
+    },
+    {
+      question: "Did you like this story?",
+      answer1: "Yes",
+      answer2: "No"
     }
   ],
   interviewees: [

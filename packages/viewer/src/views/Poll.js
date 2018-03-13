@@ -76,7 +76,7 @@ export default class OutroView extends Component {
             {poll.map((item, i) => (
               <PollItem>
                 <PageSubtitle typo="h3">{item.question}</PageSubtitle>
-                <Separator silent size="s" />
+                <Separator silent size="m" />
                 <Actionbar>
                   <Action
                     active={this.state.formData[`question${i}`] === 0}
