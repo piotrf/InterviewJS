@@ -45,11 +45,7 @@ export default class ResultsView extends Component {
           </Container>
           <Separator size="l" silent />
           <Actionbar>
-            <Action
-              fixed
-              onClick={() => this.props.router.push(`/interviewees`)}
-              primary
-            >
+            <Action fixed onClick={console.log("share")} primary>
               Meet your interviewees
             </Action>
           </Actionbar>
