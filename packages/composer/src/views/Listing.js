@@ -114,6 +114,17 @@ const UserDdToggle = css.div`
   }
 `;
 
+const MobileNewStoryToggle = css.span`
+  ${breakpoint.tablet} {
+    display: none;
+  }
+`;
+const DesktopNewStoryToggle = css.span`
+  ${breakpoint.onlyphone} {
+    display: none;
+  }
+`;
+
 export default class ListingView extends Component {
   constructor(props) {
     super(props);
@@ -178,9 +189,16 @@ export default class ListingView extends Component {
             <PageTitle typo="h1">Your Stories</PageTitle>
           </Container>
           <Container flex={[1, 1, `${100 / 3}%`]} align="right" padded>
-            <Action primary onClick={this.toggleNewStoryModal}>
-              <Icon name="plus" size="s" /> Create new
-            </Action>
+            <MobileNewStoryToggle>
+              <Action iconic primary onClick={this.toggleNewStoryModal}>
+                <Icon name="plus" size="s" />
+              </Action>
+            </MobileNewStoryToggle>
+            <DesktopNewStoryToggle>
+              <Action primary onClick={this.toggleNewStoryModal}>
+                <Icon name="plus" size="s" /> Create new
+              </Action>
+            </DesktopNewStoryToggle>
           </Container>
         </PageHead>
         <Separator silent size="h" />
