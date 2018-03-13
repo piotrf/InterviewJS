@@ -22,10 +22,10 @@ const CoverBody = css.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  min-height: ${({ compact }) => (compact ? `${100 / 4}vh` : `${100 / 3}vh`)};
+  min-height: ${({ compact }) => (compact ? `${100 / 5}vh` : `${100 / 3}vh`)};
   position: relative;
   ${breakpoint.tablet} {
-    min-height: ${({ compact }) => (compact ? `${100 / 3}vh` : `${100 / 2}vh`)};
+    min-height: ${({ compact }) => (compact ? `${100 / 4}vh` : `${100 / 2}vh`)};
   }
   &:after {
     height: 50%;

@@ -135,7 +135,7 @@ export default class ChatView extends Component {
               </ActionbarHelper>
             ) : null}
             {this.state.emotHelper ? (
-              <ActionbarHelper padded bordered shift>
+              <ActionbarHelper padded shift>
                 Emot
               </ActionbarHelper>
             ) : null}
