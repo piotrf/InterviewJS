@@ -18,7 +18,7 @@ import {
   time
 } from "interviewjs-styleguide";
 
-import { IntervieweeModal } from "../partials";
+import { IntervieweeModal, StoryDetailsModal } from "../partials";
 
 const Page = css.div`
   background: ${color.white};
@@ -70,9 +70,10 @@ const IntervieweeTitle = css(Text)`
 export default class ChatView extends Component {
   constructor(props) {
     super(props);
-    this.state = { intervieweeModal: null };
+    this.state = { intervieweeModal: null, storyDetailsModal: false };
     this.toggleIntervieweeModal = this.toggleIntervieweeModal.bind(this);
     this.startChat = this.startChat.bind(this);
+    this.toggleDetailsModal = this.toggleDetailsModal.bind(this);
   }
   toggleIntervieweeModal(e, target) {
     e.stopPropagation();
@@ -97,7 +98,7 @@ export default class ChatView extends Component {
                 <Icon name="arrow-left" />
               </Action>
               <PageTitle typo="h2">Interviewees</PageTitle>
-              <Action iconic onClick={() => this.props.router.push("/details")}>
+              <Action iconic onClick={this.toggleDetailsModal}>
                 i
               </Action>
             </Actionbar>
@@ -163,6 +164,14 @@ export default class ChatView extends Component {
           interviewee={story.interviewees[this.state.intervieweeModal]}
           isOpen={this.state.intervieweeModal !== null}
           key="intervieweeModal"
+        />
+      ) : null,
+      this.state.storyDetailsModal ? (
+        <StoryDetailsModal
+          handleClose={this.toggleDetailsModal}
+          isOpen={this.state.storyDetailsModal}
+          key="detailsModal"
+          story={story}
         />
       ) : null
     ];

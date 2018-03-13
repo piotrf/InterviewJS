@@ -22,6 +22,7 @@ import {
   Page,
   PageBody,
   PageHead,
+  StoryDetailsModal,
   Topbar
 } from "../partials";
 
@@ -50,9 +51,13 @@ const IntervieweeTitle = css(Text)`
 export default class ContextView extends Component {
   constructor(props) {
     super(props);
-    this.state = { intervieweeModal: null };
-    this.toggleIntervieweeModal = this.toggleIntervieweeModal.bind(this);
+    this.state = { intervieweeModal: null, storyDetailsModal: false };
     this.startChat = this.startChat.bind(this);
+    this.toggleDetailsModal = this.toggleDetailsModal.bind(this);
+    this.toggleIntervieweeModal = this.toggleIntervieweeModal.bind(this);
+  }
+  toggleDetailsModal() {
+    this.setState({ storyDetailsModal: !this.state.storyDetailsModal });
   }
   toggleIntervieweeModal(e, target) {
     e.stopPropagation();
@@ -70,7 +75,7 @@ export default class ContextView extends Component {
     const { story } = this.props;
     return [
       <Topbar
-        handleDetails={() => this.props.router.push(`/details`)}
+        handleDetails={this.toggleDetailsModal}
         handleBack={() => this.props.router.push(`/context`)}
         key="topbar"
       />,
@@ -154,6 +159,14 @@ export default class ContextView extends Component {
               `/chat/${story.interviewees[this.state.intervieweeModal].id}`
             )
           }
+        />
+      ) : null,
+      this.state.storyDetailsModal ? (
+        <StoryDetailsModal
+          handleClose={this.toggleDetailsModal}
+          isOpen={this.state.storyDetailsModal}
+          key="detailsModal"
+          story={story}
         />
       ) : null
     ];

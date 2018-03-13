@@ -12,7 +12,14 @@ import {
   setSpace
 } from "interviewjs-styleguide";
 
-import { Cover, Topbar, Page, PageBody, PageHead } from "../partials";
+import {
+  Cover,
+  Page,
+  PageBody,
+  PageHead,
+  StoryDetailsModal,
+  Topbar
+} from "../partials";
 
 const PollItem = css(Container)`
   &:not(:last-child) {
@@ -23,8 +30,12 @@ const PollItem = css(Container)`
 export default class OutroView extends Component {
   constructor(props) {
     super(props);
-    this.state = { formData: {} };
+    this.state = { formData: {}, storyDetailsModal: false };
     this.submitPoll = this.submitPoll.bind(this);
+    this.toggleDetailsModal = this.toggleDetailsModal.bind(this);
+  }
+  toggleDetailsModal() {
+    this.setState({ storyDetailsModal: !this.state.storyDetailsModal });
   }
   submitPoll() {
     // TODO @LAURIAN
@@ -36,7 +47,7 @@ export default class OutroView extends Component {
     const { poll } = story;
     return [
       <Topbar
-        handleDetails={() => this.props.router.push(`/details`)}
+        handleDetails={this.toggleDetailsModal}
         handleBack={() => this.props.router.push(`/outro`)}
         key="topbar"
       />,
@@ -92,7 +103,15 @@ export default class OutroView extends Component {
             </Actionbar>
           </Container>
         </PageBody>
-      </Page>
+      </Page>,
+      this.state.storyDetailsModal ? (
+        <StoryDetailsModal
+          handleClose={this.toggleDetailsModal}
+          isOpen={this.state.storyDetailsModal}
+          key="detailsModal"
+          story={story}
+        />
+      ) : null
     ];
   }
 }

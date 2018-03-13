@@ -19,7 +19,14 @@ import {
   setSpace
 } from "interviewjs-styleguide";
 
-import { Cover, Topbar, Page, PageBody, PageHead } from "../partials";
+import {
+  Cover,
+  Topbar,
+  Page,
+  PageBody,
+  PageHead,
+  StoryDetailsModal
+} from "../partials";
 
 const Interviewees = css.ul`
   text-align: center;
@@ -46,16 +53,16 @@ const Aside = css(PageParagraph)`
 export default class IntroView extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { storyDetailsModal: false };
+    this.toggleDetailsModal = this.toggleDetailsModal.bind(this);
   }
-
+  toggleDetailsModal() {
+    this.setState({ storyDetailsModal: !this.state.storyDetailsModal });
+  }
   render() {
     const { story } = this.props;
     return [
-      <Topbar
-        handleDetails={() => this.props.router.push(`/details`)}
-        key="topbar"
-      />,
+      <Topbar handleDetails={this.toggleDetailsModal} key="topbar" />,
       <Page key="page">
         <PageHead flex={[0, 1, `${100 / 2}%`]}>
           <Cover image={story.cover}>
@@ -103,7 +110,15 @@ export default class IntroView extends Component {
             </Action>
           </Actionbar>
         </PageBody>
-      </Page>
+      </Page>,
+      this.state.storyDetailsModal ? (
+        <StoryDetailsModal
+          handleClose={this.toggleDetailsModal}
+          isOpen={this.state.storyDetailsModal}
+          key="detailsModal"
+          story={story}
+        />
+      ) : null
     ];
   }
 }

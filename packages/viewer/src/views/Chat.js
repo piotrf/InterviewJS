@@ -15,7 +15,7 @@ import {
   setSpace
 } from "interviewjs-styleguide";
 
-import { IntervieweeModal } from "../partials";
+import { IntervieweeModal, StoryDetailsModal } from "../partials";
 
 const Page = css.div`
   background: ${color.white};
@@ -57,11 +57,16 @@ export default class ChatView extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      emotHelper: false,
       intervieweeModal: false,
       moreHelper: false,
-      emotHelper: false
+      storyDetailsModal: false
     };
     this.toggleIntervieweeModal = this.toggleIntervieweeModal.bind(this);
+    this.toggleDetailsModal = this.toggleDetailsModal.bind(this);
+  }
+  toggleDetailsModal() {
+    this.setState({ storyDetailsModal: !this.state.storyDetailsModal });
   }
   toggleIntervieweeModal() {
     this.setState({ intervieweeModal: !this.state.intervieweeModal });
@@ -87,7 +92,7 @@ export default class ChatView extends Component {
                   <Avatar image={interviewee.avatar} />
                 </Tip>
               </Action>
-              <Action iconic onClick={() => this.props.router.push("/details")}>
+              <Action iconic onClick={this.toggleDetailsModal}>
                 i
               </Action>
             </Actionbar>
@@ -151,6 +156,14 @@ export default class ChatView extends Component {
           interviewee={interviewee}
           isOpen={this.state.intervieweeModal !== null}
           key="intervieweeModal"
+        />
+      ) : null,
+      this.state.storyDetailsModal ? (
+        <StoryDetailsModal
+          handleClose={this.toggleDetailsModal}
+          isOpen={this.state.storyDetailsModal}
+          key="detailsModal"
+          story={story}
         />
       ) : null
     ];

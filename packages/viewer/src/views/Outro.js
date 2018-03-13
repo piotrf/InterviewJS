@@ -10,14 +10,24 @@ import {
   Separator
 } from "interviewjs-styleguide";
 
-import { Cover, Topbar, Page, PageBody, PageHead } from "../partials";
+import {
+  Cover,
+  Page,
+  PageBody,
+  PageHead,
+  StoryDetailsModal,
+  Topbar
+} from "../partials";
 
 export default class OutroView extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { storyDetailsModal: false };
+    this.toggleDetailsModal = this.toggleDetailsModal.bind(this);
   }
-
+  toggleDetailsModal() {
+    this.setState({ storyDetailsModal: !this.state.storyDetailsModal });
+  }
   render() {
     const { story } = this.props;
     const resultScore = 95; // TODO @LAURIAN: plug in real score
@@ -37,7 +47,7 @@ export default class OutroView extends Component {
     };
     return [
       <Topbar
-        handleDetails={() => this.props.router.push(`/details`)}
+        handleDetails={this.toggleDetailsModal}
         handleBack={() => this.props.router.push(`/listing`)}
         key="topbar"
       />,
@@ -67,7 +77,15 @@ export default class OutroView extends Component {
             </Action>
           </Actionbar>
         </PageBody>
-      </Page>
+      </Page>,
+      this.state.storyDetailsModal ? (
+        <StoryDetailsModal
+          handleClose={this.toggleDetailsModal}
+          isOpen={this.state.storyDetailsModal}
+          key="detailsModal"
+          story={story}
+        />
+      ) : null
     ];
   }
 }
