@@ -30,6 +30,14 @@ import {
 
 const Interviewees = css.ul`
   text-align: center;
+  ${({ offset }) =>
+    offset
+      ? `
+  & li:first-child {
+    transform: translateX(-15%);
+  }
+  `
+      : ``};
 `;
 
 const Interviewee = css.li`
@@ -53,7 +61,7 @@ const Aside = css(PageParagraph)`
 export default class IntroView extends Component {
   constructor(props) {
     super(props);
-    this.state = { storyDetailsModal: false };
+    this.state = { storyDetailsModal: true };
     this.toggleDetailsModal = this.toggleDetailsModal.bind(this);
   }
   toggleDetailsModal() {
@@ -70,11 +78,11 @@ export default class IntroView extends Component {
             <Separator size="s" silent />
             <Aside typo="p6">Featuring:</Aside>
             <Separator size="s" silent />
-            <Interviewees>
+            <Interviewees offset={story.interviewees.length > 1}>
               {story.interviewees.map((interviewee) => (
                 <Tip title={interviewee.name} key={interviewee.id}>
                   <Interviewee>
-                    <Avatar image={interviewee.avatar} />
+                    <Avatar image={interviewee.avatar} size="l" />
                   </Interviewee>
                 </Tip>
               ))}

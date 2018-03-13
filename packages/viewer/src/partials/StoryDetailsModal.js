@@ -1,7 +1,7 @@
 import css from "styled-components";
 import React from "react";
 import ReactModal from "react-modal";
-import { bool, func, shape, string } from "prop-types";
+import { bool, func, shape } from "prop-types";
 
 import {
   Action,
@@ -10,12 +10,11 @@ import {
   Icon,
   Modal,
   PageSubtitle,
-  PageTitle,
   Separator,
-  Text,
-  TextBlock,
   color,
-  setSpace
+  font,
+  setSpace,
+  setType
 } from "interviewjs-styleguide";
 
 import { Cover, PageBody, PageHead } from "../partials";
@@ -31,22 +30,46 @@ const ModalBody = css(Container)`
 `;
 
 const ModalHead = css(Container)`
-  position: absolute;
-  top: 0;
-  right: 0;
+  ${setSpace("mvs")};
+  ${setSpace("pax")};
   left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
   z-index: 500;
 `;
 
-const ModalCopy = css(Container)`
-  ${setSpace("mbm")};
-  color: ${color.greyBlk};
-  &,
-  & > * {
-    text-align: left;
+const DetailsCopy = css.div`
+  ${setType("s")};
+  text-align: left;
+  font-family: ${font.serif};
+  h2 {
+    ${setType("m")};
+    color: ${color.greyBlk};
+  }
+  h3 {
+    ${setType("s")};
+    font-weight: bold;
+    color: ${color.greyBlk};
   }
   p {
-    color: ${color.white};
+    ${setSpace("mbm")};
+    ${setType("s")};
+  }
+  dl {
+
+  }
+  dt {
+    color: ${color.greyBlk};
+    display: block;
+  }
+  dd {
+    ${setSpace("mbm")};
+    display: block;
+  }
+  a {
+    color: white;
+    text-decoration: underline;
   }
 `;
 
@@ -65,15 +88,15 @@ export default class StoryDetailsModal extends React.Component {
         role="dialog"
         style={{ overlay: { background: "none" } }}
       >
+        <ModalHead limit="m" align="right">
+          <Container limit="m" padded>
+            <Action inverted iconic onClick={this.props.handleClose}>
+              <Icon name="cross" />
+            </Action>
+          </Container>
+        </ModalHead>
         <Modal wizard persistent>
           <ModalBody cover>
-            <ModalHead limit="m" padded>
-              <Actionbar satellite="right">
-                <Action inverted iconic onClick={this.props.handleClose}>
-                  <Icon name="cross" />
-                </Action>
-              </Actionbar>
-            </ModalHead>
             <PageHead flex={[0, 1, `${100 / 2}%`]}>
               <Cover image={story.cover} compact />
             </PageHead>
@@ -81,64 +104,62 @@ export default class StoryDetailsModal extends React.Component {
               <Container limit="x">
                 <PageSubtitle typo="h3">Credits</PageSubtitle>
                 <Separator silent size="m" />
-                <ModalCopy>
-                  {story.title ? (
-                    <TextBlock>
-                      <h3>Full title</h3>
-                      <p>{story.title}</p>
-                      <br />
-                    </TextBlock>
-                  ) : null}
-                  {story.author ? (
-                    <TextBlock>
-                      <h3>Author</h3>
-                      <p>{story.author}</p>
-                      <br />
-                    </TextBlock>
-                  ) : null}
-                  {story.authorLink ? (
-                    <TextBlock>
-                      <h3>Author link</h3>
-                      <p>
-                        <a
-                          href={story.authorLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {story.authorLink}
-                        </a>
-                      </p>
-                      <br />
-                    </TextBlock>
-                  ) : null}
-                  {story.pubDate ? (
-                    <TextBlock>
-                      <h3>Published</h3>
-                      <p>{story.pubDate}</p>
-                      <br />
-                    </TextBlock>
-                  ) : null}
-                </ModalCopy>
+                <DetailsCopy>
+                  <dl>
+                    {story.title
+                      ? [<dt>Full title</dt>, <dd>{story.title}</dd>]
+                      : null}
+                    {story.author && story.authorLink
+                      ? [
+                          <dt>Author</dt>,
+                          <dd>
+                            <a
+                              href={story.authorLink}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {story.author}
+                            </a>
+                          </dd>
+                        ]
+                      : null}
+                    {!story.author && story.authorLink
+                      ? [
+                          <dt>Author link</dt>,
+                          <dd>
+                            <a
+                              href={story.authorLink}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {story.authorLink}
+                            </a>
+                          </dd>
+                        ]
+                      : null}
+                    {story.pubDate
+                      ? [<dt>Published</dt>, <dd>{story.pubDate}</dd>]
+                      : null}
+                  </dl>
+                </DetailsCopy>
                 <Separator silent size="m" />
                 <PageSubtitle typo="h5">About InterviewJS</PageSubtitle>
                 <Separator silent size="m" />
-                <ModalCopy>
-                  <TextBlock>
-                    <p>
-                      Turn interview transcripts to shareable and embeddable
-                      interactive chats—InterviewJS is an open-source Google DNI
-                      & Al Jazeera-backed app for journalists and newsrooms that
-                      allows to compose and manage scripted chats for a more
-                      immersive storytelling experience.
-                    </p>
-                    <br />
-                    <h3>Product lead</h3>
-                    <p>
+                <DetailsCopy>
+                  <p>
+                    Turn interview transcripts to shareable and embeddable
+                    interactive chats—InterviewJS is an open-source Google DNI &
+                    Al Jazeera-backed app for journalists and newsrooms that
+                    allows to compose and manage scripted chats for a more
+                    immersive storytelling experience.
+                  </p>
+                  <dl>
+                    <dt>Product lead</dt>
+                    <dd>
                       Juliana Ruhfus, Ali Rae, Mohammed El-Haddad, Alaa Batayneh
-                    </p>
-                    <br />
-                    <h3>Design & Development</h3>
-                    <p>
+                    </dd>
+                    <dt>Design & Development</dt>
+                    <dd>
                       <a
                         href="https://piotrf.pl"
                         target="_blank"
@@ -146,13 +167,49 @@ export default class StoryDetailsModal extends React.Component {
                       >
                         Piotr Fedorczyk
                       </a>
-                    </p>
-                    <br />
-                    <h3>Infrastructure</h3>
-                    <p>Laurian Gridinoc</p>
-                    <br />
-                  </TextBlock>
-                </ModalCopy>
+                    </dd>
+                    <dt>Infrastructure</dt>
+                    <dd>
+                      <a
+                        href="https://twitter.com/gridinoc"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Laurian Gridinoc
+                      </a>
+                    </dd>
+                    <dt>Brand Identity</dt>
+                    <dd>Joanna Bogusz</dd>
+                  </dl>
+                </DetailsCopy>
+                <Separator silent size="m" />
+                <PageSubtitle typo="h5">Connect with InterviewJS</PageSubtitle>
+                <Separator silent size="m" />
+                <DetailsCopy>
+                  <p>
+                    InterviewJS is an open-source software happily accepting
+                    stars, forks and PRs on Github and followers on Twitter:
+                  </p>
+                </DetailsCopy>
+                <Separator silent size="m" />
+                <Actionbar>
+                  <Action
+                    href="https://github.com/AJInteractive/InterviewJS"
+                    target="_blank"
+                    inverted
+                    fixed
+                  >
+                    <Icon name="github" /> Github
+                  </Action>
+                  <Action
+                    href="https://twitter.com/interview_js"
+                    target="_blank"
+                    inverted
+                    fixed
+                  >
+                    <Icon name="twitter" /> Twitter
+                  </Action>
+                </Actionbar>
               </Container>
             </PageBody>
           </ModalBody>
