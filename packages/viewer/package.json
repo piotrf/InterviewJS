@@ -61,7 +61,8 @@
     "lint": "eslint **/*.js --quiet",
     "lint-fix": "eslint --fix",
     "generate": "plop --plopfile generators/index.js",
-    "release": "npm run build && gh-pages -d build -e my -a"
+    "release":
+      "yarn run build && gh-pages -d build -e my -a -r https://github.com/AJInteractive/InterviewJS.git"
   },
   "lint-staged": {
     "{,!(build|generators)/**/}*.js": ["npm run prettier -- --write", "git add"]
