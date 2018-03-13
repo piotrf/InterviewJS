@@ -10,10 +10,12 @@ import {
   Icon,
   Container,
   Separator,
+  Text,
   PageTitle,
   Tip,
   color,
-  setSpace
+  setSpace,
+  time
 } from "interviewjs-styleguide";
 
 import { IntervieweeModal } from "../partials";
@@ -29,6 +31,9 @@ const Page = css.div`
 
 const PageHead = css(Container)`
   border-bottom: 1px solid ${color.greyHL};
+  ${PageTitle} {
+    color: ${color.blueBlk};
+  }
 `;
 
 const PageBody = css(Container)`
@@ -41,14 +46,25 @@ const Interviewees = css.ul`
 
 const Interviewee = css.li`
   border-bottom: 1px solid ${color.greyWt};
+  cursor: pointer;
   display: block;
+  transition: background ${time.m};
+  &:hover {
+    background: ${color.greyWt};
+  }
   & button {
     ${setSpace("mls")};
   }
   ${Avatar} {
     ${setSpace("mrm")};
-    cursor: pointer;
   }
+`;
+
+const IntervieweeName = css(Text)`
+  color: ${color.blueBlk};
+`;
+const IntervieweeTitle = css(Text)`
+  color: ${color.greyD};
 `;
 
 export default class ChatView extends Component {
@@ -56,13 +72,19 @@ export default class ChatView extends Component {
     super(props);
     this.state = { intervieweeModal: null };
     this.toggleIntervieweeModal = this.toggleIntervieweeModal.bind(this);
+    this.startChat = this.startChat.bind(this);
   }
-  toggleIntervieweeModal(target) {
+  toggleIntervieweeModal(e, target) {
+    e.stopPropagation();
     if (target !== null) {
       this.setState({ intervieweeModal: target });
     } else {
       this.setState({ intervieweeModal: null });
     }
+  }
+  startChat(e, target) {
+    e.stopPropagation();
+    this.props.router.push(`/chat/${target}`);
   }
   render() {
     const { story } = this.props;
@@ -84,7 +106,10 @@ export default class ChatView extends Component {
         <PageBody flex={[1, 1, `100%`]}>
           <Interviewees>
             {story.interviewees.map((interviewee, i) => (
-              <Interviewee key={interviewee.id}>
+              <Interviewee
+                key={interviewee.id}
+                onClick={(e) => this.startChat(e, interviewee.id)}
+              >
                 <Container limit="m" padded>
                   <Container dir="row">
                     <Container flex={[1, 0, "auto"]}>
@@ -97,14 +122,20 @@ export default class ChatView extends Component {
                       />
                     </Container>
                     <Container flex={[0, 1, "100%"]} align="left">
-                      {interviewee.name}
+                      <IntervieweeName typo="p1">
+                        {interviewee.name}
+                      </IntervieweeName>
+                      <Separator size="n" silent />
+                      <IntervieweeTitle typo="p5">
+                        {interviewee.title}
+                      </IntervieweeTitle>
                     </Container>
                     <Container flex={[1, 0, "auto"]}>
                       <Tip title="Get info">
                         <Action
                           secondary
                           iconic
-                          onClick={() => this.toggleIntervieweeModal(i)}
+                          onClick={(e) => this.toggleIntervieweeModal(e, i)}
                         >
                           <Icon name="info" />
                         </Action>
@@ -113,9 +144,7 @@ export default class ChatView extends Component {
                         <Action
                           primary
                           iconic
-                          onClick={() =>
-                            this.props.router.push(`/chat/${interviewee.id}`)
-                          }
+                          onClick={(e) => this.startChat(e, interviewee.id)}
                         >
                           <Icon name="bubbles" />
                         </Action>
@@ -131,7 +160,7 @@ export default class ChatView extends Component {
       this.state.intervieweeModal !== null ? (
         <IntervieweeModal
           {...this.props}
-          handleClose={() => this.toggleIntervieweeModal(null)}
+          handleClose={(e) => this.toggleIntervieweeModal(e, null)}
           interviewee={story.interviewees[this.state.intervieweeModal]}
           isOpen={this.state.intervieweeModal !== null}
           key="intervieweeModal"

@@ -33,6 +33,7 @@ const PageBody = css(Container)`
 `;
 
 const PageFoot = css(Container)`
+  ${setSpace("pvm")};
 `;
 
 export default class ChatView extends Component {
@@ -72,16 +73,18 @@ export default class ChatView extends Component {
           </Container>
         </PageHead>
         <PageBody flex={[1, 1, `100%`]} />
-        <PageFoot flex={[0, 0, `auto`]} padded>
-          <Actionbar satellite="both">
-            <Action iconic secondary>
-              …
-            </Action>
-            <Action primary>Move on</Action>
-            <Action iconic secondary>
-              :)
-            </Action>
-          </Actionbar>
+        <PageFoot flex={[0, 0, `auto`]}>
+          <Container limit="m" padded>
+            <Actionbar satellite="both">
+              <Action iconic secondary>
+                …
+              </Action>
+              <Action primary>Move on</Action>
+              <Action iconic secondary>
+                :)
+              </Action>
+            </Actionbar>
+          </Container>
         </PageFoot>
       </Page>,
       this.state.intervieweeModal ? (

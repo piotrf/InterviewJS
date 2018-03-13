@@ -52,13 +52,13 @@ const Interviewees = css.ul`
 const Interviewee = css.li`
   ${setSpace("pvm")};
   border-bottom: 1px solid ${color.flareHL};
+  cursor: pointer;
   display: block;
   & button {
     ${setSpace("mls")};
   }
   ${Avatar} {
     ${setSpace("mrm")};
-    cursor: pointer;
   }
 `;
 
@@ -71,13 +71,19 @@ export default class ContextView extends Component {
     super(props);
     this.state = { intervieweeModal: null };
     this.toggleIntervieweeModal = this.toggleIntervieweeModal.bind(this);
+    this.startChat = this.startChat.bind(this);
   }
-  toggleIntervieweeModal(target) {
+  toggleIntervieweeModal(e, target) {
+    e.stopPropagation();
     if (target !== null) {
       this.setState({ intervieweeModal: target });
     } else {
       this.setState({ intervieweeModal: null });
     }
+  }
+  startChat(e, target) {
+    e.stopPropagation();
+    this.props.router.push(`/chat/${target}`);
   }
   render() {
     const { story } = this.props;
@@ -95,7 +101,10 @@ export default class ContextView extends Component {
           <Container limit="x">
             <Interviewees>
               {story.interviewees.map((interviewee, i) => (
-                <Interviewee key={interviewee.id}>
+                <Interviewee
+                  key={interviewee.id}
+                  onClick={(e) => this.startChat(e, interviewee.id)}
+                >
                   <Container dir="row">
                     <Container flex={[1, 0, "auto"]}>
                       <Avatar
@@ -118,7 +127,7 @@ export default class ContextView extends Component {
                         <Action
                           inverted
                           iconic
-                          onClick={() => this.toggleIntervieweeModal(i)}
+                          onClick={(e) => this.toggleIntervieweeModal(e, i)}
                         >
                           <Icon name="info" />
                         </Action>
@@ -127,9 +136,7 @@ export default class ContextView extends Component {
                         <Action
                           primary
                           iconic
-                          onClick={() =>
-                            this.props.router.push(`/chat/${interviewee.id}`)
-                          }
+                          onClick={(e) => this.startChat(e, interviewee.id)}
                         >
                           <Icon name="bubbles" />
                         </Action>
@@ -158,7 +165,7 @@ export default class ContextView extends Component {
       this.state.intervieweeModal !== null ? (
         <IntervieweeModal
           {...this.props}
-          handleClose={() => this.toggleIntervieweeModal(null)}
+          handleClose={(e) => this.toggleIntervieweeModal(e, null)}
           interviewee={story.interviewees[this.state.intervieweeModal]}
           isOpen={this.state.intervieweeModal !== null}
           key="intervieweeModal"
