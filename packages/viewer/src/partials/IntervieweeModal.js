@@ -13,7 +13,8 @@ import {
   ModalHead,
   PageSubtitle,
   PageTitle,
-  Separator
+  Separator,
+  TextBlock
 } from "interviewjs-styleguide";
 
 export default class IntervieweeModal extends React.Component {
@@ -41,7 +42,9 @@ export default class IntervieweeModal extends React.Component {
             </Container>
           </ModalHead>
           <ModalBody>
-            <Container align="left">{interviewee.bio}</Container>
+            <Container align="left">
+              <TextBlock typo="p2">{interviewee.bio}</TextBlock>
+            </Container>
           </ModalBody>
           <ModalFoot>
             <Actionbar>
@@ -52,7 +55,7 @@ export default class IntervieweeModal extends React.Component {
                   this.props.router.push(`/chat/${interviewee.id}`)
                 }
               >
-                Chat to {interviewee.name}
+                Start chatting
               </Action>
             </Actionbar>
           </ModalFoot>

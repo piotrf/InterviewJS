@@ -1,20 +1,19 @@
 import uuidv4 from "uuid/v4";
 
-import AVA from "./media/ava.png";
-import COVER from "./media/cover.jpg";
+import COVER from "./media/cover.png";
 import LOGO from "./media/logo.png";
+import KYLAND from "./media/hyland.png";
+import CHANDRAN from "./media/chandran.png";
 
 const story = {
-  title: "Ex Machina",
+  title: "Britain’s modern slave trade",
   id: "0bf34b30-743b-46ab-weewe-c875326d86f6",
-  author: "Alex Garland",
+  author: "David Harrison",
   authorLink: "http://www.imdb.com/name/nm0307497/",
-  pubDate: "00-00-2014",
+  pubDate: "Apr 24, 2016",
   modDate: 1517999999478,
-  intro:
-    "Meet and interact with Ava. In the end, you’ll be asked to decide wether you’ve been chatting to a real person or a computer bot",
-  context:
-    "The Turing test, developed by Alan Turing in 1950, is a test of a machine's ability to exhibit intelligent behavior equivalent to, or indistinguishable from, that of a human. Turing proposed that a human evaluator would judge natural language conversations between a human and a machine designed to generate human-like responses. If the evaluator cannot reliably tell the machine from the human, the machine is said to have passed the test. The test does not check the ability to give correct answers to questions, only how closely answers resemble those a human would give",
+  intro: "Investigate the true scale of modern slavery in suburban Britain.",
+  context: `Al Jazeera's investigative unit has revealed that large companies in Britain may be failing to tackle slavery along their supply chains. The findings prompted a warning from Britain's anti-slavery commissioner that companies all over the United Kingdom could unwittingly be using modern-day slaves. But Kevin Hyland, the UK's independent anti-slavery commissioner, said that new laws mean that ignorance is no longer an excuse. Secret filming by Al Jazeera uncovered shocking conditions at a carwash in Kent, southeast England, used by dealerships for the auto giants, Volvo and Kia. Workers living in squalid containers at the carwash in Canterbury say they are paid $50 for 12-hour shifts, suffer verbal and physical abuse, and have wages withheld for causing minor damage.`,
   cover: COVER,
   logo: LOGO,
   attachments: [{ url: "", id: "" }],
@@ -33,177 +32,13 @@ const story = {
   interviewees: [
     {
       id: "c72de5ed-dc50-4590-a9f1-8d64a1577c4f",
-      name: "Ava",
-      bio: "Ava has a robotic body but a human-looking face",
-      title: "Humanoid robot",
-      avatar: AVA,
+      name: "Kevin Hyland",
+      bio:
+        "Kevin Hyland, OBE (born 1963) is the United Kingdom’s first Independent Anti-Slavery Commissioner, leading efforts to tackle slavery and human trafficking. He was formerly head of the London Metropolitan Police Service’s Human Trafficking Unit.",
+      title: "United Kingdom’s first Independent Anti-Slavery Commissioner",
+      avatar: KYLAND,
       color: "#88a3a0",
-      srcText: `CALEB
-... Hi.
-AVA
-Who are you?
-CALEB
-I’m Caleb.
-AVA
-Hello, Caleb.
-CALEB
-... Do you have a name?
-AVA
-Yes. Ava.
-CALEB
-... I’m pleased to meet you, Ava.
-AVA
-I’m pleased to meet you too.
-CALEB sits opposite her.
-He is alone on his half of the glass. Nathan is nowhere to
-be seen.
-But on the ceiling, and attached to the walls, on both sides
-of the glass, there are several CCTV cameras. Trained
-variously on CALEB and AVA. Lenses twitching.
-CUT BACK to AVA.
-She watches CALEB. Then cocks her head slightly to the side.
-AVA (CONT’D)
-Are you nervous?
-CALEB frowns.
-CALEB
-... Why do you ask that?
-A beat.
-Then AVA repeats her question.
-AVA
-Are you nervous?
-20.
-CALEB
-... Yes. A little.
-AVA
-Why?
-CALEB
-I’m not sure.
-AVA
-I feel nervous too.
-CALEB
-... Do you?
-AVA
-Yes.
-CALEB
-Why do you feel nervous?
-AVA
-I’ve never met anyone new before.
-Only Nathan.
-CALEB
-... Then we’re both in quite a
-similar position.
-AVA
-Haven’t you met lots of new people
-before?
-CALEB
-None like you.
-AVA
-Oh.
-Beat.
-CALEB
-So. Let’s break the ice.
-He glances at her. Observing.
-CALEB (CONT’D)
-Do you know what I mean by that?
-AVA
-Yes.
-CALEB
-What do I mean?
-AVA
-Overcome initial social
-awkwardness.
-21.
-Beat.
-CALEB
-So let’s have a conversation. If
-we talk, we’ll both relax, and get
-to know each other at the same
-time.
-AVA
-Okay. What would you like to have
-a conversation about?
-CALEB
-Why don’t we start with you telling
-me something about yourself.
-AVA
-What would you like to know?
-CALEB
-Whatever comes into your head.
-AVA pauses a moment.
-AVA
-Well. You already know my name.
-And you can see that I’m a machine.
-(beat)
-Would you like to know how old I
-am?
-CALEB
-Sure.
-AVA
-I’m one.
-CALEB
-One what? One year? Or one day?
-AVA
-One.
-A beat on CALEB. Processing.
-Her answer feels like the near non-sequitur that typically
-betray AI responses.
-AVA (CONT’D)
-Does that seem young to you?
-CALEB
-Quite young.
-(beat)
-When did you learn how to speak?
-AVA pauses, as if considering this question for the first
-time.
-22.
-AVA
-I don’t think I did learn. I
-always knew how to speak - and
-that’s strange, isn’t it?
-CALEB
-Why?
-AVA
-Because language is something that
-people acquire.
-CALEB
-Some believe language exists in the
-brain from birth, and what is
-learned is the ability to attach
-words and structure to the latent
-ability.
-Beat.
-CALEB (CONT’D)
-Would you agree?
-AVA
-... I don’t know. I have no
-opinion on that.
-Beat.
-AVA (CONT’D)
-I like to draw.
-CALEB says nothing.
-Just watches AVA. Again, lets the non-sequitur sit.
-AVA (CONT’D)
-I don’t have any of my pictures
-with me now, but I can show you
-them tomorrow.
-CALEB
-That sounds good. I’d like to see
-them.
-AVA
-Yes.
-Beat.
-AVA (CONT’D)
-Will you come back tomorrow, Caleb?
-CALEB smiles slightly.
-CALEB
-Yeah. Definitely.
-23.
-AVA also smiles.
-And suddenly -
-- there is a strong sense of something very human there. In
-the way the smile lights up her face.
-AVA
-Good.`,
+      srcText: ``,
       storyline: [
         {
           content: { value: `Hello` },
@@ -434,177 +269,13 @@ Good.`,
     },
     {
       id: "7778c964-571e-4a52-b434-6bee076f10bd",
-      name: "Ava",
-      bio: "Ava has a robotic body but a human-looking face",
-      title: "Humanoid robot",
-      avatar: AVA,
+      name: "Parosha Chandran",
+      bio:
+        "Parosha Chandran is the UK’s leading anti-slavery lawyer and she has been practicing at the Bar of England and Wales for 20 years. She is an award-winning human rights barrister and a leader at the Bar in the fields of human rights, human trafficking, forced labour and labour exploitation, immigration, trafficking-related criminal appeals and public law.",
+      title: "A leading human rights lawyer",
+      avatar: CHANDRAN,
       color: "#88a3a0",
-      srcText: `CALEB
-... Hi.
-AVA
-Who are you?
-CALEB
-I’m Caleb.
-AVA
-Hello, Caleb.
-CALEB
-... Do you have a name?
-AVA
-Yes. Ava.
-CALEB
-... I’m pleased to meet you, Ava.
-AVA
-I’m pleased to meet you too.
-CALEB sits opposite her.
-He is alone on his half of the glass. Nathan is nowhere to
-be seen.
-But on the ceiling, and attached to the walls, on both sides
-of the glass, there are several CCTV cameras. Trained
-variously on CALEB and AVA. Lenses twitching.
-CUT BACK to AVA.
-She watches CALEB. Then cocks her head slightly to the side.
-AVA (CONT’D)
-Are you nervous?
-CALEB frowns.
-CALEB
-... Why do you ask that?
-A beat.
-Then AVA repeats her question.
-AVA
-Are you nervous?
-20.
-CALEB
-... Yes. A little.
-AVA
-Why?
-CALEB
-I’m not sure.
-AVA
-I feel nervous too.
-CALEB
-... Do you?
-AVA
-Yes.
-CALEB
-Why do you feel nervous?
-AVA
-I’ve never met anyone new before.
-Only Nathan.
-CALEB
-... Then we’re both in quite a
-similar position.
-AVA
-Haven’t you met lots of new people
-before?
-CALEB
-None like you.
-AVA
-Oh.
-Beat.
-CALEB
-So. Let’s break the ice.
-He glances at her. Observing.
-CALEB (CONT’D)
-Do you know what I mean by that?
-AVA
-Yes.
-CALEB
-What do I mean?
-AVA
-Overcome initial social
-awkwardness.
-21.
-Beat.
-CALEB
-So let’s have a conversation. If
-we talk, we’ll both relax, and get
-to know each other at the same
-time.
-AVA
-Okay. What would you like to have
-a conversation about?
-CALEB
-Why don’t we start with you telling
-me something about yourself.
-AVA
-What would you like to know?
-CALEB
-Whatever comes into your head.
-AVA pauses a moment.
-AVA
-Well. You already know my name.
-And you can see that I’m a machine.
-(beat)
-Would you like to know how old I
-am?
-CALEB
-Sure.
-AVA
-I’m one.
-CALEB
-One what? One year? Or one day?
-AVA
-One.
-A beat on CALEB. Processing.
-Her answer feels like the near non-sequitur that typically
-betray AI responses.
-AVA (CONT’D)
-Does that seem young to you?
-CALEB
-Quite young.
-(beat)
-When did you learn how to speak?
-AVA pauses, as if considering this question for the first
-time.
-22.
-AVA
-I don’t think I did learn. I
-always knew how to speak - and
-that’s strange, isn’t it?
-CALEB
-Why?
-AVA
-Because language is something that
-people acquire.
-CALEB
-Some believe language exists in the
-brain from birth, and what is
-learned is the ability to attach
-words and structure to the latent
-ability.
-Beat.
-CALEB (CONT’D)
-Would you agree?
-AVA
-... I don’t know. I have no
-opinion on that.
-Beat.
-AVA (CONT’D)
-I like to draw.
-CALEB says nothing.
-Just watches AVA. Again, lets the non-sequitur sit.
-AVA (CONT’D)
-I don’t have any of my pictures
-with me now, but I can show you
-them tomorrow.
-CALEB
-That sounds good. I’d like to see
-them.
-AVA
-Yes.
-Beat.
-AVA (CONT’D)
-Will you come back tomorrow, Caleb?
-CALEB smiles slightly.
-CALEB
-Yeah. Definitely.
-23.
-AVA also smiles.
-And suddenly -
-- there is a strong sense of something very human there. In
-the way the smile lights up her face.
-AVA
-Good.`,
+      srcText: ``,
       storyline: [
         {
           content: { value: `Hello` },

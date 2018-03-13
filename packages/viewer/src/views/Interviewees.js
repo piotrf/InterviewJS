@@ -9,6 +9,8 @@ import {
   Avatar,
   Container,
   Icon,
+  Separator,
+  Text,
   Tip,
   color,
   setSpace
@@ -60,6 +62,10 @@ const Interviewee = css.li`
   }
 `;
 
+const IntervieweeTitle = css(Text)`
+  color: ${color.flareD};
+`;
+
 export default class ContextView extends Component {
   constructor(props) {
     super(props);
@@ -101,7 +107,11 @@ export default class ContextView extends Component {
                       />
                     </Container>
                     <Container flex={[0, 1, "100%"]} align="left">
-                      {interviewee.name}
+                      <Text typo="p1">{interviewee.name}</Text>
+                      <Separator silent size="n" />
+                      <IntervieweeTitle typo="p5">
+                        {interviewee.title}
+                      </IntervieweeTitle>
                     </Container>
                     <Container flex={[1, 0, "auto"]}>
                       <Tip title="Get info">
