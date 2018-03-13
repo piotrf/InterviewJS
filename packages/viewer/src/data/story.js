@@ -32,7 +32,7 @@ const story = {
   ],
   interviewees: [
     {
-      id: uuidv4(),
+      id: "c72de5ed-dc50-4590-a9f1-8d64a1577c4f",
       name: "Ava",
       bio: "Ava has a robotic body but a human-looking face",
       title: "Humanoid robot",
@@ -433,7 +433,7 @@ Good.`,
       ]
     },
     {
-      id: uuidv4(),
+      id: "7778c964-571e-4a52-b434-6bee076f10bd",
       name: "Ava",
       bio: "Ava has a robotic body but a human-looking face",
       title: "Humanoid robot",

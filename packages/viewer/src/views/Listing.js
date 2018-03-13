@@ -4,21 +4,22 @@ import React, { Component } from "react";
 import { object, shape, string } from "prop-types";
 
 import {
-  Action,
   Actionbar,
+  Action,
   Avatar,
-  Container,
   Icon,
+  Container,
+  Separator,
+  PageTitle,
   Tip,
   color,
   setSpace
 } from "interviewjs-styleguide";
 
-import { Cover, Topbar, IntervieweeModal } from "../partials";
+import { IntervieweeModal } from "../partials";
 
 const Page = css.div`
-  background: ${color.black};
-  color: ${color.white};
+  background: ${color.white};
   min-height: 100vh;
   min-width: 100vw;
   text-align: center;
@@ -27,19 +28,10 @@ const Page = css.div`
 `;
 
 const PageHead = css(Container)`
-  ${setSpace("pbl")};
-  width: 100%;
+  border-bottom: 1px solid ${color.greyHL};
 `;
 
 const PageBody = css(Container)`
-  ${setSpace("phl")};
-  ${setSpace("pbl")};
-  width: 100%;
-`;
-
-const PageFoot = css(Container)`
-  ${setSpace("phl")};
-  ${setSpace("pbl")};
 `;
 
 const Interviewees = css.ul`
@@ -48,18 +40,18 @@ const Interviewees = css.ul`
 `;
 
 const Interviewee = css.li`
-  ${setSpace("pvm")};
-  border-bottom: 1px solid ${color.flareHL};
+  border-bottom: 1px solid ${color.greyWt};
   display: block;
   & button {
     ${setSpace("mls")};
   }
   ${Avatar} {
     ${setSpace("mrm")};
+    cursor: pointer;
   }
 `;
 
-export default class ContextView extends Component {
+export default class ChatView extends Component {
   constructor(props) {
     super(props);
     this.state = { intervieweeModal: null };
@@ -74,22 +66,26 @@ export default class ContextView extends Component {
   }
   render() {
     const { story } = this.props;
-    console.log(this.state);
     return [
-      <Topbar
-        handleDetails={() => this.props.router.push(`/details`)}
-        handleBack={() => this.props.router.push(`/context`)}
-        key="topbar"
-      />,
       <Page key="page">
-        <PageHead flex={[0, 1, `${100 / 3}%`]}>
-          <Cover image={story.cover} />
+        <PageHead flex={[0, 0, `auto`]}>
+          <Container limit="m" padded>
+            <Actionbar satellite="both">
+              <Action iconic onClick={() => this.props.router.push("/context")}>
+                <Icon name="arrow-left" />
+              </Action>
+              <PageTitle typo="h2">Interviewees</PageTitle>
+              <Action iconic onClick={() => this.props.router.push("/details")}>
+                i
+              </Action>
+            </Actionbar>
+          </Container>
         </PageHead>
-        <PageBody limit="m" flex={[1, 0, `100%`]}>
-          <Container limit="x">
-            <Interviewees>
-              {story.interviewees.map((interviewee, i) => (
-                <Interviewee key={interviewee.id}>
+        <PageBody flex={[1, 1, `100%`]}>
+          <Interviewees>
+            {story.interviewees.map((interviewee, i) => (
+              <Interviewee key={interviewee.id}>
+                <Container limit="m" padded>
                   <Container dir="row">
                     <Container flex={[1, 0, "auto"]}>
                       <Avatar
@@ -106,7 +102,7 @@ export default class ContextView extends Component {
                     <Container flex={[1, 0, "auto"]}>
                       <Tip title="Get info">
                         <Action
-                          inverted
+                          secondary
                           iconic
                           onClick={() => this.toggleIntervieweeModal(i)}
                         >
@@ -126,24 +122,11 @@ export default class ContextView extends Component {
                       </Tip>
                     </Container>
                   </Container>
-                </Interviewee>
-              ))}
-            </Interviewees>
-          </Container>
+                </Container>
+              </Interviewee>
+            ))}
+          </Interviewees>
         </PageBody>
-        <PageFoot limit="m" flex={[1, 0, `${100 / 4}%`]}>
-          <Actionbar>
-            <Action
-              fixed
-              onClick={() =>
-                this.props.router.push(`/chat/${story.interviewees[0].id}`)
-              }
-              primary
-            >
-              Start your first interview
-            </Action>
-          </Actionbar>
-        </PageFoot>
       </Page>,
       this.state.intervieweeModal !== null ? (
         <IntervieweeModal
@@ -158,14 +141,14 @@ export default class ContextView extends Component {
   }
 }
 
-ContextView.propTypes = {
+ChatView.propTypes = {
   router: object,
   story: shape({
     title: string
   })
 };
 
-ContextView.defaultProps = {
+ChatView.defaultProps = {
   router: null,
   story: {}
 };

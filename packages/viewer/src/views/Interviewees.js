@@ -56,6 +56,7 @@ const Interviewee = css.li`
   }
   ${Avatar} {
     ${setSpace("mrm")};
+    cursor: pointer;
   }
 `;
 
@@ -74,7 +75,6 @@ export default class ContextView extends Component {
   }
   render() {
     const { story } = this.props;
-    console.log(this.state);
     return [
       <Topbar
         handleDetails={() => this.props.router.push(`/details`)}

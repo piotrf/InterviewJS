@@ -7,12 +7,14 @@ import {
   Actionbar,
   Action,
   Avatar,
+  Icon,
   Container,
+  Tip,
   color,
   setSpace
 } from "interviewjs-styleguide";
 
-import {} from "../partials";
+import { IntervieweeModal } from "../partials";
 
 const Page = css.div`
   background: ${color.white};
@@ -36,20 +38,38 @@ const PageFoot = css(Container)`
 export default class ChatView extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { intervieweeModal: false };
+    this.toggleIntervieweeModal = this.toggleIntervieweeModal.bind(this);
+  }
+  toggleIntervieweeModal() {
+    this.setState({ intervieweeModal: !this.state.intervieweeModal });
   }
   render() {
     const { story } = this.props;
-    return (
-      <Page>
-        <PageHead flex={[0, 0, `auto`]} padded>
-          <Actionbar satellite="both">
-            <Action iconic>…</Action>
-            <Action>
-              <Avatar image={story.avatar} />
-            </Action>
-            <Action iconic>:)</Action>
-          </Actionbar>
+    const { interviewees } = story;
+    const { chatId } = this.props.params;
+    const intervieweeIndex = interviewees.findIndex(
+      (interviewee) => interviewee.id === chatId
+    );
+    const interviewee = interviewees[intervieweeIndex];
+    return [
+      <Page key="page">
+        <PageHead flex={[0, 0, `auto`]}>
+          <Container limit="m" padded>
+            <Actionbar satellite="both">
+              <Action iconic onClick={() => this.props.router.push("/listing")}>
+                <Icon name="arrow-left" />
+              </Action>
+              <Action onClick={this.toggleIntervieweeModal}>
+                <Tip title={interviewee.name}>
+                  <Avatar image={interviewee.avatar} />
+                </Tip>
+              </Action>
+              <Action iconic onClick={() => this.props.router.push("/details")}>
+                i
+              </Action>
+            </Actionbar>
+          </Container>
         </PageHead>
         <PageBody flex={[1, 1, `100%`]} />
         <PageFoot flex={[0, 0, `auto`]} padded>
@@ -63,8 +83,17 @@ export default class ChatView extends Component {
             </Action>
           </Actionbar>
         </PageFoot>
-      </Page>
-    );
+      </Page>,
+      this.state.intervieweeModal ? (
+        <IntervieweeModal
+          {...this.props}
+          handleClose={this.toggleIntervieweeModal}
+          interviewee={interviewee}
+          isOpen={this.state.intervieweeModal !== null}
+          key="intervieweeModal"
+        />
+      ) : null
+    ];
   }
 }
 
