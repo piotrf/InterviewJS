@@ -20,6 +20,7 @@ import {
 import { Cover, PageBody, PageHead } from "../partials";
 
 const ModalBody = css(Container)`
+  ${setSpace("pbh")};
   background: ${color.black};
   color: ${color.white};
   min-height: 100vh;
