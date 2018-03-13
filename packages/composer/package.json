@@ -15,7 +15,7 @@
     "react-app-rewire-babel-loader": "0.1.1",
     "react-dom": "16.2.0",
     "react-firebaseui": "^1.1.9",
-    "react-modal": "3.3.1",
+    "react-modal": "3.3.2",
     "react-redux": "5.0.7",
     "react-router-dom": "4.2.2",
     "react-router-redux": "4.0.8",
@@ -52,20 +52,20 @@
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-app-rewired eject",
-    "prettier": "prettier --single-quote --print-width=120 --trailing-comma es5",
+    "prettier":
+      "prettier --single-quote --print-width=120 --trailing-comma es5",
     "format": "npm run prettier -- --write '{,!(build|generators)/**/}*.js'",
     "precommit": "lint-staged",
-    "eslint-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
+    "eslint-check":
+      "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
     "lint": "eslint **/*.js --quiet",
     "lint-fix": "eslint --fix",
     "generate": "plop --plopfile generators/index.js",
-    "release": "yarn run build && gh-pages -d build -e my -a -r https://github.com/AJInteractive/InterviewJS.git"
+    "release":
+      "yarn run build && gh-pages -d build -e my -a -r https://github.com/AJInteractive/InterviewJS.git"
   },
   "lint-staged": {
-    "{,!(build|generators)/**/}*.js": [
-      "npm run prettier -- --write",
-      "git add"
-    ]
+    "{,!(build|generators)/**/}*.js": ["npm run prettier -- --write", "git add"]
   },
   "engines": {
     "npm": ">=4",
