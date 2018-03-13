@@ -125,8 +125,8 @@ export default class ContextView extends Component {
                     <Container flex={[1, 0, "auto"]}>
                       <Tip title="Get info">
                         <Action
-                          inverted
                           iconic
+                          inverted
                           onClick={(e) => this.toggleIntervieweeModal(e, i)}
                         >
                           <Icon name="info" />
@@ -134,9 +134,9 @@ export default class ContextView extends Component {
                       </Tip>
                       <Tip title="Start chatting">
                         <Action
-                          primary
                           iconic
                           onClick={(e) => this.startChat(e, interviewee.id)}
+                          primary
                         >
                           <Icon name="bubbles" />
                         </Action>
@@ -169,6 +169,11 @@ export default class ContextView extends Component {
           interviewee={story.interviewees[this.state.intervieweeModal]}
           isOpen={this.state.intervieweeModal !== null}
           key="intervieweeModal"
+          handleSubmit={() =>
+            this.props.router.push(
+              `/chat/${story.interviewees[this.state.intervieweeModal].id}`
+            )
+          }
         />
       ) : null
     ];

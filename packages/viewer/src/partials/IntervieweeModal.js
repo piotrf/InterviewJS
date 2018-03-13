@@ -48,14 +48,8 @@ export default class IntervieweeModal extends React.Component {
           </ModalBody>
           <ModalFoot>
             <Actionbar>
-              <Action
-                primary
-                fixed
-                onClick={() =>
-                  this.props.router.push(`/chat/${interviewee.id}`)
-                }
-              >
-                Start chatting
+              <Action primary fixed onClick={this.props.handleSubmit}>
+                {this.props.cta}
               </Action>
             </Actionbar>
           </ModalFoot>
@@ -66,12 +60,16 @@ export default class IntervieweeModal extends React.Component {
 }
 
 IntervieweeModal.propTypes = {
+  handleSubmit: func.isRequired,
   handleClose: func.isRequired,
   isOpen: bool.isRequired,
   interviewee: shape({
     avatar: string,
     name: string
-  }).isRequired
+  }).isRequired,
+  cta: string
 };
 
-IntervieweeModal.defaultProps = {};
+IntervieweeModal.defaultProps = {
+  cta: "Start chatting"
+};

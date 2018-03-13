@@ -90,7 +90,9 @@ export default class ChatView extends Component {
       this.state.intervieweeModal ? (
         <IntervieweeModal
           {...this.props}
+          cta="Get back to chat"
           handleClose={this.toggleIntervieweeModal}
+          handleSubmit={this.toggleIntervieweeModal}
           interviewee={interviewee}
           isOpen={this.state.intervieweeModal !== null}
           key="intervieweeModal"
