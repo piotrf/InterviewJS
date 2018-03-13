@@ -131,11 +131,11 @@ export default class IntervieweeForm extends Component {
         <FormItem>
           <Label>Title</Label>
           <CharacterCount>
-            {50 - this.state.formData.title.length}
+            {60 - this.state.formData.title.length}
           </CharacterCount>
           <TextInput
             input
-            maxLength="50"
+            maxLength="60"
             minLength="1"
             name="title"
             onBlur={(e) => this.handleBlur(e)}
@@ -150,11 +150,11 @@ export default class IntervieweeForm extends Component {
         <FormItem>
           <Label>Bio</Label>
           <CharacterCount>
-            {280 - this.state.formData.bio.length}
+            {500 - this.state.formData.bio.length}
           </CharacterCount>
           <TextInput
             area
-            maxLength="280"
+            maxLength="500"
             name="bio"
             onChange={(e) => this.handleChange(e)}
             placeholder=""

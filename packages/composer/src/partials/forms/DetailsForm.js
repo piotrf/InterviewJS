@@ -67,11 +67,11 @@ export default class DetailsForm extends React.Component {
         <FormItem>
           <Label>Context</Label>
           <CharacterCount>
-            {600 - this.state.formData.context.length}
+            {1000 - this.state.formData.context.length}
           </CharacterCount>
           <TextInput
             area
-            maxLength="600"
+            maxLength="1000"
             name="context"
             onBlur={(e) => this.handleBlur(e)}
             onChange={(e) => this.handleChange(e)}

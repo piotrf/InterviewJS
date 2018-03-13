@@ -143,7 +143,6 @@ export default class MetaForm extends React.Component {
                 place="left"
                 placeholder="Cover photo"
                 type="file"
-                value={this.state.formData.cover}
               />
               <Legend tip="tip">i</Legend>
             </FormItem>
@@ -161,7 +160,6 @@ export default class MetaForm extends React.Component {
                 place="right"
                 placeholder="Custom logo"
                 type="file"
-                value={this.state.formData.logo}
               />
               <Legend tip="tip">i</Legend>
             </FormItem>
