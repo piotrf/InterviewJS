@@ -1,14 +1,28 @@
-import { createStore, compose } from "redux";
-import { syncHistoryWithStore } from "react-router-redux";
+import { createStore, compose, combineReducers } from "redux";
+import { syncHistoryWithStore, routerReducer } from "react-router-redux";
 import { browserHistory } from "react-router";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 import firebase from "firebase";
+import { reactReduxFirebase, firebaseReducer } from "react-redux-firebase";
 
 import rootReducer from "./reducers";
+import storiesReducer from "./reducers/stories";
+import userReducer from "./reducers/user";
+
 import stories from "./data/stories";
 import user from "./data/user";
+
+// Store type
+const STORE = 'persist';
+
+const defaultState = {
+  stories,
+  user
+};
+
+// FIREBASE
 
 export const firebaseApp = firebase.initializeApp({
   apiKey: "AIzaSyAzBGoszKOt1C_T4GV84hUBpjkK08H57KY",
@@ -19,10 +33,32 @@ export const firebaseApp = firebase.initializeApp({
   messagingSenderId: "126484254752"
 });
 
-const defaultState = {
-  stories,
-  user
-};
+// react-redux-firebase config
+const rrfConfig = {
+  userProfile: "users",
+  // useFirestoreForProfile: true // Firestore for Profile instead of Realtime DB
+}
+
+// initialize firestore
+// firebase.firestore() // <- needed if using firestore
+
+// Add reactReduxFirebase enhancer when making store creator
+const createStoreWithFirebase = compose(
+  reactReduxFirebase(firebase, rrfConfig), // firebase instance as first argument
+  // reduxFirestore(firebase) // <- needed if using firestore
+)(createStore);
+
+// Add firebase to reducers
+const fireReducer = combineReducers({
+  firebase: firebaseReducer,
+  stories: storiesReducer,
+  user: userReducer,
+  routing: routerReducer,
+  // firestore: firestoreReducer // <- needed if using firestore
+})
+
+
+// PERSIST
 
 const persistConfig = {
   key: 'root',
@@ -35,8 +71,20 @@ const enhancers = compose(
   window.devToolsExtension ? window.devToolsExtension() : (f) => f
 );
 
-const store = createStore(rootReducer, defaultState, enhancers);
-// const store = createStore(persistedReducer, defaultState, enhancers);
+let store;
+switch(STORE) {
+  case 'firebase':
+    store = createStoreWithFirebase(fireReducer, defaultState, enhancers)
+    break;
+  // case 'rebase':
+  //   // TODO
+  //   break;
+  case 'persist':
+    store = createStore(persistedReducer, defaultState, enhancers);
+    break;
+  default: // transient
+    store = createStore(rootReducer, defaultState, enhancers);
+}
 
 export const history = syncHistoryWithStore(browserHistory, store);
 export const configureStore = () => {
