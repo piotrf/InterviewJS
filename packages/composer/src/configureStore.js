@@ -11,8 +11,10 @@ import rootReducer from "./reducers";
 import storiesReducer from "./reducers/stories";
 import userReducer from "./reducers/user";
 
-import stories from "./data/stories";
-import user from "./data/user";
+// import stories from "./data/stories";
+// import user from "./data/user";
+const stories = [];
+const user = {};
 
 // Store type
 const STORE = 'persist';
