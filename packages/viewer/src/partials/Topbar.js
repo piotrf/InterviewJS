@@ -2,10 +2,13 @@ import React from "react";
 import css from "styled-components";
 import { func } from "prop-types";
 
-import { Action, Container, Icon, setSpace } from "interviewjs-styleguide";
+import { Action, Container, Icon } from "interviewjs-styleguide";
 
 const TopbarEl = css(Container)`
-  ${setSpace("mvs")};
+  display: flex;
+  flex-direction: column;
+  height: 80px;
+  justify-content: center;
   left: 0;
   position: fixed;
   right: 0;
@@ -14,10 +17,11 @@ const TopbarEl = css(Container)`
 `;
 
 const TopbarHolder = css(Container)`
-  display: flex;
   justify-content: ${({ spread }) => (spread ? `space-between` : `flex-end`)};
-  align-items: flex-end;
   align-content: flex-end;
+  align-items: flex-end;
+  display: flex;
+  width: 100%;
 `;
 
 const Topbar = (props) => (
