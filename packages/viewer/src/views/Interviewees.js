@@ -83,56 +83,54 @@ export default class ContextView extends Component {
         <PageHead flex={[0, 1, `${100 / 2}%`]}>
           <Cover image={story.cover} compact />
         </PageHead>
-        <PageBody limit="m" flex={[1, 0, `${100 / 2}%`]}>
-          <Container limit="x">
-            <Interviewees>
-              {story.interviewees.map((interviewee, i) => (
-                <Interviewee
-                  key={interviewee.id}
-                  onClick={(e) => this.startChat(e, interviewee.id)}
-                >
-                  <Container dir="row">
-                    <Container flex={[1, 0, "auto"]}>
-                      <Avatar
-                        size="l"
-                        image={interviewee.avatar}
-                        onClick={() =>
-                          this.props.router.push(`/chat/${interviewee.id}`)
-                        }
-                      />
-                    </Container>
-                    <Container flex={[0, 1, "100%"]} align="left">
-                      <Text typo="p1">{interviewee.name}</Text>
-                      <Separator silent size="n" />
-                      <IntervieweeTitle typo="p5">
-                        {interviewee.title}
-                      </IntervieweeTitle>
-                    </Container>
-                    <Container flex={[1, 0, "auto"]}>
-                      <Tip title="About this interviewee">
-                        <Action
-                          iconic
-                          inverted
-                          onClick={(e) => this.toggleIntervieweeModal(e, i)}
-                        >
-                          <Icon name="info" />
-                        </Action>
-                      </Tip>
-                      <Tip title="Start chatting">
-                        <Action
-                          iconic
-                          onClick={(e) => this.startChat(e, interviewee.id)}
-                          primary
-                        >
-                          <Icon name="bubbles" />
-                        </Action>
-                      </Tip>
-                    </Container>
+        <PageBody limit="x" flex={[1, 0, `${100 / 2}%`]}>
+          <Interviewees>
+            {story.interviewees.map((interviewee, i) => (
+              <Interviewee
+                key={interviewee.id}
+                onClick={(e) => this.startChat(e, interviewee.id)}
+              >
+                <Container dir="row">
+                  <Container flex={[1, 0, "auto"]}>
+                    <Avatar
+                      size="l"
+                      image={interviewee.avatar}
+                      onClick={() =>
+                        this.props.router.push(`/chat/${interviewee.id}`)
+                      }
+                    />
                   </Container>
-                </Interviewee>
-              ))}
-            </Interviewees>
-          </Container>
+                  <Container flex={[0, 1, "100%"]} align="left">
+                    <Text typo="p1">{interviewee.name}</Text>
+                    <Separator silent size="n" />
+                    <IntervieweeTitle typo="p5">
+                      {interviewee.title}
+                    </IntervieweeTitle>
+                  </Container>
+                  <Container flex={[1, 0, "auto"]}>
+                    <Tip title="About this interviewee">
+                      <Action
+                        iconic
+                        inverted
+                        onClick={(e) => this.toggleIntervieweeModal(e, i)}
+                      >
+                        <Icon name="info" />
+                      </Action>
+                    </Tip>
+                    <Tip title="Start chatting">
+                      <Action
+                        iconic
+                        onClick={(e) => this.startChat(e, interviewee.id)}
+                        primary
+                      >
+                        <Icon name="bubbles" />
+                      </Action>
+                    </Tip>
+                  </Container>
+                </Container>
+              </Interviewee>
+            ))}
+          </Interviewees>
           <Separator size="l" silent />
           <Actionbar>
             <Action

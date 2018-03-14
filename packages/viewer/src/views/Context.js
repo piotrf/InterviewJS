@@ -6,7 +6,6 @@ import { object, shape, string } from "prop-types";
 import {
   Action,
   Actionbar,
-  Container,
   PageParagraph,
   PageSubtitle,
   Separator,
@@ -47,15 +46,13 @@ export default class ContextView extends Component {
         <PageHead flex={[0, 1, `${100 / 2}%`]}>
           <Cover image={story.cover} compact />
         </PageHead>
-        <PageBody limit="m" flex={[1, 0, `${100 / 2}%`]}>
-          <Container limit="x">
-            <PageSubtitle typo="h4">{story.context}</PageSubtitle>
-            <Separator size="m" silent />
-            <Aside typo="p3">
-              The more people you interview the more information you gather. In
-              the end you’ll get feedback on how well you’ve done.
-            </Aside>
-          </Container>
+        <PageBody limit="x" flex={[1, 0, `${100 / 2}%`]}>
+          <PageSubtitle typo="h4">{story.context}</PageSubtitle>
+          <Separator size="m" silent />
+          <Aside typo="p3">
+            The more people you interview the more information you gather. In
+            the end you’ll get feedback on how well you’ve done.
+          </Aside>
           <Separator size="l" silent />
           <Actionbar>
             <Action

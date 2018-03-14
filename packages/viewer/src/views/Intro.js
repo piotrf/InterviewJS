@@ -89,15 +89,13 @@ export default class IntroView extends Component {
             </Interviewees>
           </Cover>
         </PageHead>
-        <PageBody limit="m" flex={[1, 0, `${100 / 4}%`]}>
-          <Container limit="x">
-            <PageSubtitle typo="h3">{story.intro}</PageSubtitle>
-            <Separator size="m" silent />
-            <Aside typo="p3">
-              InterviewJS lets you chat to people at the heart of a story. Hear
-              from them in their own words.
-            </Aside>
-          </Container>
+        <PageBody limit="x" flex={[1, 0, `${100 / 4}%`]}>
+          <PageSubtitle typo="h3">{story.intro}</PageSubtitle>
+          <Separator size="m" silent />
+          <Aside typo="p3">
+            InterviewJS lets you chat to people at the heart of a story. Hear
+            from them in their own words.
+          </Aside>
           <Separator size="l" silent />
           {story.logo ? (
             <Logo src={story.logo} alt="Story author’s logo" />

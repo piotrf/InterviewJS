@@ -101,117 +101,115 @@ export default class StoryDetailsModal extends React.Component {
             <PageHead flex={[0, 1, `${100 / 2}%`]}>
               <Cover image={story.cover} compact />
             </PageHead>
-            <PageBody limit="m" flex={[1, 0, `${100 / 2}%`]}>
-              <Container limit="x">
-                <PageSubtitle typo="h3">Credits</PageSubtitle>
-                <Separator silent size="m" />
-                <DetailsCopy>
-                  <dl>
-                    {story.title
-                      ? [<dt>Full title</dt>, <dd>{story.title}</dd>]
-                      : null}
-                    {story.author && story.authorLink
-                      ? [
-                          <dt>Author</dt>,
-                          <dd>
-                            <a
-                              href={story.authorLink}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              {story.author}
-                            </a>
-                          </dd>
-                        ]
-                      : null}
-                    {!story.author && story.authorLink
-                      ? [
-                          <dt>Author link</dt>,
-                          <dd>
-                            <a
-                              href={story.authorLink}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              {story.authorLink}
-                            </a>
-                          </dd>
-                        ]
-                      : null}
-                    {story.pubDate
-                      ? [<dt>Published</dt>, <dd>{story.pubDate}</dd>]
-                      : null}
-                  </dl>
-                </DetailsCopy>
-                <Separator silent size="m" />
-                <PageSubtitle typo="h5">About InterviewJS</PageSubtitle>
-                <Separator silent size="m" />
-                <DetailsCopy>
-                  <p>
-                    Turn interview transcripts to shareable and embeddable
-                    interactive chats—InterviewJS is an open-source Google DNI &
-                    Al Jazeera-backed app for journalists and newsrooms that
-                    allows to compose and manage scripted chats for a more
-                    immersive storytelling experience.
-                  </p>
-                  <dl>
-                    <dt>Product lead</dt>
-                    <dd>
-                      Juliana Ruhfus, Ali Rae, Mohammed El-Haddad, Alaa Batayneh
-                    </dd>
-                    <dt>Design & Development</dt>
-                    <dd>
-                      <a
-                        href="https://piotrf.pl"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Piotr Fedorczyk
-                      </a>
-                    </dd>
-                    <dt>Infrastructure</dt>
-                    <dd>
-                      <a
-                        href="https://twitter.com/gridinoc"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Laurian Gridinoc
-                      </a>
-                    </dd>
-                    <dt>Brand Identity</dt>
-                    <dd>Joanna Bogusz</dd>
-                  </dl>
-                </DetailsCopy>
-                <Separator silent size="m" />
-                <PageSubtitle typo="h5">Connect with InterviewJS</PageSubtitle>
-                <Separator silent size="m" />
-                <DetailsCopy>
-                  <p>
-                    InterviewJS is an open-source software happily accepting
-                    stars, forks and PRs on Github and followers on Twitter:
-                  </p>
-                </DetailsCopy>
-                <Separator silent size="m" />
-                <Actionbar>
-                  <Action
-                    href="https://github.com/AJInteractive/InterviewJS"
-                    target="_blank"
-                    inverted
-                    fixed
-                  >
-                    <Icon name="github" /> Github
-                  </Action>
-                  <Action
-                    href="https://twitter.com/interview_js"
-                    target="_blank"
-                    inverted
-                    fixed
-                  >
-                    <Icon name="twitter" /> Twitter
-                  </Action>
-                </Actionbar>
-              </Container>
+            <PageBody limit="x" flex={[1, 0, `${100 / 2}%`]}>
+              <PageSubtitle typo="h3">Credits</PageSubtitle>
+              <Separator silent size="m" />
+              <DetailsCopy>
+                <dl>
+                  {story.title
+                    ? [<dt>Full title</dt>, <dd>{story.title}</dd>]
+                    : null}
+                  {story.author && story.authorLink
+                    ? [
+                        <dt>Author</dt>,
+                        <dd>
+                          <a
+                            href={story.authorLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {story.author}
+                          </a>
+                        </dd>
+                      ]
+                    : null}
+                  {!story.author && story.authorLink
+                    ? [
+                        <dt>Author link</dt>,
+                        <dd>
+                          <a
+                            href={story.authorLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {story.authorLink}
+                          </a>
+                        </dd>
+                      ]
+                    : null}
+                  {story.pubDate
+                    ? [<dt>Published</dt>, <dd>{story.pubDate}</dd>]
+                    : null}
+                </dl>
+              </DetailsCopy>
+              <Separator silent size="m" />
+              <PageSubtitle typo="h5">About InterviewJS</PageSubtitle>
+              <Separator silent size="m" />
+              <DetailsCopy>
+                <p>
+                  Turn interview transcripts to shareable and embeddable
+                  interactive chats—InterviewJS is an open-source Google DNI &
+                  Al Jazeera-backed app for journalists and newsrooms that
+                  allows to compose and manage scripted chats for a more
+                  immersive storytelling experience.
+                </p>
+                <dl>
+                  <dt>Product lead</dt>
+                  <dd>
+                    Juliana Ruhfus, Ali Rae, Mohammed El-Haddad, Alaa Batayneh
+                  </dd>
+                  <dt>Design & Development</dt>
+                  <dd>
+                    <a
+                      href="https://piotrf.pl"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Piotr Fedorczyk
+                    </a>
+                  </dd>
+                  <dt>Infrastructure</dt>
+                  <dd>
+                    <a
+                      href="https://twitter.com/gridinoc"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Laurian Gridinoc
+                    </a>
+                  </dd>
+                  <dt>Brand Identity</dt>
+                  <dd>Joanna Bogusz</dd>
+                </dl>
+              </DetailsCopy>
+              <Separator silent size="m" />
+              <PageSubtitle typo="h5">Connect with InterviewJS</PageSubtitle>
+              <Separator silent size="m" />
+              <DetailsCopy>
+                <p>
+                  InterviewJS is an open-source software happily accepting
+                  stars, forks and PRs on Github and followers on Twitter:
+                </p>
+              </DetailsCopy>
+              <Separator silent size="m" />
+              <Actionbar>
+                <Action
+                  href="https://github.com/AJInteractive/InterviewJS"
+                  target="_blank"
+                  inverted
+                  fixed
+                >
+                  <Icon name="github" /> Github
+                </Action>
+                <Action
+                  href="https://twitter.com/interview_js"
+                  target="_blank"
+                  inverted
+                  fixed
+                >
+                  <Icon name="twitter" /> Twitter
+                </Action>
+              </Actionbar>
             </PageBody>
           </ModalBody>
         </Modal>

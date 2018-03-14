@@ -83,16 +83,19 @@ const Container = css.div`
   ${({ limit }) => {
     if (limit === "x") {
       return `
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 400px;
         ${breakpoint.tablet} {
           margin-left: auto;
           margin-right: auto;
-          max-width: 400;
-        }
-        ${breakpoint.desktop} {
           max-width: 480px;
         }
-        ${breakpoint.hdesktop} {
+        ${breakpoint.desktop} {
           max-width: 560px;
+        }
+        ${breakpoint.hdesktop} {
+          max-width: 640px;
         }
         `;
     } else if (limit === "s") {
