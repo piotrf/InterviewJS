@@ -178,7 +178,7 @@ export default class StoryDetailsModal extends React.Component {
                   <dd>
                     Juliana Ruhfus, Ali Rae, Mohammed El-Haddad, Alaa Batayneh
                   </dd>
-                  <dt>Design & Development</dt>
+                  <dt>Product Design & Development</dt>
                   <dd>
                     <a
                       href="https://piotrf.pl"
@@ -188,7 +188,7 @@ export default class StoryDetailsModal extends React.Component {
                       Piotr Fedorczyk
                     </a>
                   </dd>
-                  <dt>Infrastructure</dt>
+                  <dt>Back-end development & Infrastructure</dt>
                   <dd>
                     <a
                       href="https://twitter.com/gridinoc"
