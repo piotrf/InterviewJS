@@ -2,6 +2,16 @@
 import css from "styled-components";
 import React, { Component } from "react";
 import { object, shape, string } from "prop-types";
+import {
+  FacebookShareButton,
+  FacebookIcon,
+  LinkedinShareButton,
+  LinkedinIcon,
+  TwitterShareButton,
+  TwitterIcon,
+  EmailShareButton,
+  EmailIcon
+} from "react-share";
 
 import {
   Action,
@@ -10,7 +20,8 @@ import {
   PageParagraph,
   PageSubtitle,
   Separator,
-  color
+  color,
+  setSpace
 } from "interviewjs-styleguide";
 
 import {
@@ -26,6 +37,15 @@ const Aside = css(PageParagraph)`
   color: ${color.flareHD};
 `;
 
+const ShareButtons = css.div`
+  text-align: center;
+  & > * {
+    ${setSpace("mhs")};
+    cursor: pointer;
+    display: inline-block;
+  }
+`;
+
 export default class ResultsView extends Component {
   constructor(props) {
     super(props);
@@ -37,6 +57,7 @@ export default class ResultsView extends Component {
   }
   render() {
     const { story } = this.props;
+    const url = window.location.href.replace(/results/g, "");
     return [
       <Topbar
         handleDetails={this.toggleDetailsModal}
@@ -54,11 +75,33 @@ export default class ResultsView extends Component {
             <Aside typo="p3">Aside</Aside>
           </Container>
           <Separator size="l" silent />
-          <Actionbar>
-            <Action fixed onClick={console.log("share")} primary>
-              Meet your interviewees
-            </Action>
-          </Actionbar>
+          <PageSubtitle typo="h3">
+            Have your friends join the conversation. Share this story to your
+            network:
+          </PageSubtitle>
+          <Separator size="m" silent />
+          <ShareButtons>
+            <FacebookShareButton url={url} hashtag="interviewjs">
+              <FacebookIcon size={44} round />
+            </FacebookShareButton>
+            <TwitterShareButton
+              url={url}
+              hashtags={["interviewjs"]}
+              title={story.title}
+            >
+              <TwitterIcon size={44} round />
+            </TwitterShareButton>
+            <LinkedinShareButton url={url} title={story.title}>
+              <LinkedinIcon size={44} round />
+            </LinkedinShareButton>
+            <EmailShareButton
+              url={url}
+              subject={story.title}
+              body={`You have to see this: ${url} #interviewjs`}
+            >
+              <EmailIcon size={44} round />
+            </EmailShareButton>
+          </ShareButtons>
         </PageBody>
       </Page>,
       this.state.storyDetailsModal ? (
