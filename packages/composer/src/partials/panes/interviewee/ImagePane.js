@@ -1,5 +1,6 @@
 import { func, shape, string } from "prop-types";
 import React, { Component } from "react";
+import Dropzone from "react-dropzone";
 
 import {
   BubbleHTMLWrapper,
@@ -20,12 +21,26 @@ export default class ImagePane extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
   }
+
   handleChange(e) {
     const { name, value } = e.target;
     this.setState({ draft: { ...this.state.draft, [name]: value } }, () =>
       this.props.updateDraft(this.state.draft)
     );
   }
+
+  handleFile(f) {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const base64data = reader.result;
+      console.log(base64data);
+      this.setState({ draft: { ...this.state.draft, file: base64data } }, () =>
+        this.props.updateDraft(this.state.draft)
+      );
+    }
+    reader.readAsDataURL(f[0]);
+  }
+
   render() {
     return (
       <PaneFrame
@@ -45,14 +60,16 @@ export default class ImagePane extends Component {
         <Form>
           <FormItem>
             <Label>Upload image</Label>
-            <TextInput
-              text
-              name="value"
-              onChange={(e) => this.handleChange(e)}
-              required
-              type="file"
+            <Dropzone
               accept="image/jpeg, image/jpg, image/svg, image/gif, image/png"
-            />
+              ref={(node) => { this.dropzoneRef = node; }}
+              onDrop={(accepted, rejected) => { this.handleFile(accepted) }}
+              style={{display: 'none'}}>
+              <p>Drop file here</p>
+            </Dropzone>
+            <button type="button" onClick={() => { this.dropzoneRef.open() }}>
+              Open File Dialog
+            </button>
             <Legend tip="Select an image with extension of .png, .jpg, .jpeg, .svg or .gif">
               i
             </Legend>
