@@ -155,16 +155,6 @@ const pages = [
     title: "Separators"
   },
   {
-    title: "Partials",
-    pages: [
-      {
-        content: require("./pages/partials-viewer.js"),
-        path: "/partials/viewer",
-        title: "Viewer Partials"
-      }
-    ]
-  },
-  {
     content: require("./pages/tabs.js"),
     path: "/tabs",
     title: "Tabs"
