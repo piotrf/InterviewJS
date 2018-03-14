@@ -34,7 +34,7 @@ export default class ImagePane extends Component {
     reader.onloadend = () => {
       const base64data = reader.result;
       console.log(base64data);
-      this.setState({ draft: { ...this.state.draft, file: base64data } }, () =>
+      this.setState({ draft: { ...this.state.draft, value: base64data } }, () =>
         this.props.updateDraft(this.state.draft)
       );
     }
