@@ -44,7 +44,7 @@ const story = {
         "Kevin Hyland, OBE (born 1963) is the United Kingdom’s first Independent Anti-Slavery Commissioner, leading efforts to tackle slavery and human trafficking. He was formerly head of the London Metropolitan Police Service’s Human Trafficking Unit.",
       title: "United Kingdom’s first Independent Anti-Slavery Commissioner",
       avatar: KYLAND,
-      color: "#88a3a0",
+      color: "red",
       srcText: ``,
       storyline: [
         {
@@ -281,7 +281,7 @@ const story = {
         "Parosha Chandran is the UK’s leading anti-slavery lawyer and she has been practicing at the Bar of England and Wales for 20 years. She is an award-winning human rights barrister and a leader at the Bar in the fields of human rights, human trafficking, forced labour and labour exploitation, immigration, trafficking-related criminal appeals and public law.",
       title: "A leading human rights lawyer",
       avatar: CHANDRAN,
-      color: "#88a3a0",
+      color: "purple",
       srcText: ``,
       storyline: [
         {

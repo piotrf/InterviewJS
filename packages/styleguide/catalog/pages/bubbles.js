@@ -81,26 +81,27 @@ export default () => markdown`
 
   ${(
     <ReactSpecimen span={2} dark>
-      <Bubble persona="interviewee" theme={{ font: "sans-serif" }}>
+      <Bubble
+        persona="interviewee"
+        theme={{ font: "sans-serif", backg: "black" }}
+      >
         Custom bubble font
       </Bubble>
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen span={2} dark>
-      <Bubble persona="system" theme={{ color: "cyan" }}>
+      <Bubble
+        persona="interviewee"
+        theme={{ font: "sans-serif", backg: "cyan" }}
+      >
         Custom bubble text
       </Bubble>
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen span={2} dark>
-      <Bubble
-        persona="user"
-        theme={{ backg: "cyan", color: "red", font: "serif" }}
-      >
-        Custom bubble
-      </Bubble>
+      <Bubble persona="interviewee">Custom bubble</Bubble>
     </ReactSpecimen>
   )}
 `;

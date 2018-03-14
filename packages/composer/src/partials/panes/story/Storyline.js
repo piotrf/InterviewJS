@@ -134,6 +134,9 @@ export default class Storyline extends React.Component {
   }
   render() {
     const { storyline } = this.props;
+    const interviewee = this.props.story.interviewees[
+      this.props.currentInterviewee
+    ];
     const renderUserBubble = (data) => {
       const { content, role } = data;
       return (
@@ -154,13 +157,21 @@ export default class Storyline extends React.Component {
       const { content, type, role } = data;
       if (type === "text") {
         return (
-          <Bubble persona={role} type="plain">
+          <Bubble
+            persona={role}
+            type="plain"
+            theme={{ backg: interviewee.color }}
+          >
             {content.value}
           </Bubble>
         );
       } else if (type === "link") {
         return (
-          <Bubble persona={role} type="plain">
+          <Bubble
+            persona={role}
+            type="plain"
+            theme={{ backg: interviewee.color }}
+          >
             <a href={content.value} target="_blank">
               {content.title ? content.title : content.value}
             </a>
@@ -168,19 +179,31 @@ export default class Storyline extends React.Component {
         );
       } else if (type === "image") {
         return (
-          <Bubble persona={role} type="rich">
+          <Bubble
+            persona={role}
+            type="rich"
+            theme={{ backg: interviewee.color }}
+          >
             <img src={content.value} alt="" />
           </Bubble>
         );
       } else if (type === "embed") {
         return (
-          <Bubble persona={role} type="embed">
+          <Bubble
+            persona={role}
+            type="embed"
+            theme={{ backg: interviewee.color }}
+          >
             <div dangerouslySetInnerHTML={{ __html: content.value }} />
           </Bubble>
         );
       } else if (type === "map") {
         return (
-          <Bubble persona={role} type="embed">
+          <Bubble
+            persona={role}
+            type="embed"
+            theme={{ backg: interviewee.color }}
+          >
             <div dangerouslySetInnerHTML={{ __html: content.value }} />
           </Bubble>
         );

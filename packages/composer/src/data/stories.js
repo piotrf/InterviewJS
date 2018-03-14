@@ -11,7 +11,7 @@ import CHANDRAN from "./media/chandran.png";
 const stories = [
   {
     title: "Britain’s modern slave trade",
-    id: "0bf34b30-743b-46ab-weewe-c875326d86f6",
+    id: "0bf34b30-743b-46ab-wddwe-c875326d86f6",
     author: "David Harrison",
     authorLink: "http://www.imdb.com/name/nm0307497/",
     pubDate: "Apr 24, 2016",
@@ -48,7 +48,7 @@ const stories = [
           "Kevin Hyland, OBE (born 1963) is the United Kingdom’s first Independent Anti-Slavery Commissioner, leading efforts to tackle slavery and human trafficking. He was formerly head of the London Metropolitan Police Service’s Human Trafficking Unit.",
         title: "United Kingdom’s first Independent Anti-Slavery Commissioner",
         avatar: KYLAND,
-        color: "#88a3a0",
+        color: "#ccc",
         srcText: ``,
         storyline: [
           {
