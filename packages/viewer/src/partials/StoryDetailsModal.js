@@ -50,16 +50,6 @@ const ModalBody = css(Container)`
   flex-direction: column;
 `;
 
-const ModalHead = css(Container)`
-  ${setSpace("mvs")};
-  ${setSpace("pax")};
-  left: 0;
-  position: fixed;
-  right: 0;
-  top: 0;
-  z-index: 500;
-`;
-
 const DetailsCopy = css.div`
   ${setType("s")};
   text-align: left;

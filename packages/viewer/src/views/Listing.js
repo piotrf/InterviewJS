@@ -4,7 +4,6 @@ import React, { Component } from "react";
 import { object, shape, string } from "prop-types";
 
 import {
-  Actionbar,
   Action,
   Avatar,
   Icon,

@@ -7,7 +7,6 @@ import {
   Action,
   Actionbar,
   Avatar,
-  Container,
   PageParagraph,
   PageSubtitle,
   PageTitle,
