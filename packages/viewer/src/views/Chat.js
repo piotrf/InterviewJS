@@ -40,9 +40,13 @@ const PageFoot = css(Container)`
 const ActionbarHelper = css(Container)`
   ${setSpace("mhm")};
   ${setSpace("mvx")};
+  ${setSpace("phm")};
   background: ${color.white};
   border-radius: ${radius.a};
   bottom: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   left: 46px;
   position: absolute;
   right: 46px;
@@ -51,6 +55,14 @@ const ActionbarHelper = css(Container)`
   & > * {
     ${setSpace("mhx")};
   }
+  ${({ emo }) =>
+    !emo
+      ? `
+    & > * { flex-basis: 50%; width: auto; max-width: none; }
+  `
+      : `
+        justify-content: space-around;
+      `};
 `;
 
 export default class ChatView extends Component {
@@ -62,14 +74,32 @@ export default class ChatView extends Component {
       moreHelper: false,
       storyDetailsModal: false
     };
-    this.toggleIntervieweeModal = this.toggleIntervieweeModal.bind(this);
+    this.respondWithADiss = this.respondWithADiss.bind(this);
+    this.respondWithAnEmo = this.respondWithAnEmo.bind(this);
     this.toggleDetailsModal = this.toggleDetailsModal.bind(this);
+    this.toggleEmotHelper = this.toggleEmotHelper.bind(this);
+    this.toggleIntervieweeModal = this.toggleIntervieweeModal.bind(this);
+    this.toggleMoreHelper = this.toggleMoreHelper.bind(this);
   }
   toggleDetailsModal() {
     this.setState({ storyDetailsModal: !this.state.storyDetailsModal });
   }
   toggleIntervieweeModal() {
     this.setState({ intervieweeModal: !this.state.intervieweeModal });
+  }
+  toggleEmotHelper() {
+    this.setState({ emotHelper: !this.state.emotHelper, moreHelper: false });
+  }
+  toggleMoreHelper() {
+    this.setState({ moreHelper: !this.state.moreHelper, emotHelper: false });
+  }
+  respondWithAnEmo(emo) {
+    this.setState({ emotHelper: false });
+    console.log(emo);
+  }
+  respondWithADiss() {
+    this.setState({ moreHelper: false });
+    console.log("respondWithADiss");
   }
   render() {
     const { story } = this.props;
@@ -102,31 +132,19 @@ export default class ChatView extends Component {
         <PageFoot flex={[0, 0, `auto`]}>
           <Container limit="x" padded>
             <Actionbar satellite="both">
-              <Action
-                iconic
-                onClick={() =>
-                  this.setState({ moreHelper: !this.state.moreHelper })
-                }
-                secondary
-              >
+              <Action iconic onClick={this.toggleMoreHelper} secondary>
                 <Icon name="vdots" />
               </Action>
               <Action primary fixed>
                 Move on
               </Action>
-              <Action
-                iconic
-                onClick={() =>
-                  this.setState({ emotHelper: !this.state.emotHelper })
-                }
-                secondary
-              >
+              <Action iconic onClick={this.toggleEmotHelper} secondary>
                 <Icon name="smile" />
               </Action>
             </Actionbar>
             {this.state.moreHelper ? (
               <ActionbarHelper shift dir="row">
-                <Action fixed primary>
+                <Action fixed primary onClick={this.respondWithADiss}>
                   I want to talk to somebody else
                 </Action>
                 <Action
@@ -140,8 +158,28 @@ export default class ChatView extends Component {
               </ActionbarHelper>
             ) : null}
             {this.state.emotHelper ? (
-              <ActionbarHelper padded shift>
-                Emot
+              <ActionbarHelper padded shift emo>
+                <Action iconic onClick={() => this.respondWithAnEmo("smile")}>
+                  <Icon name="smile" size="l" />
+                </Action>
+                <Action iconic onClick={() => this.respondWithAnEmo("sad")}>
+                  <Icon name="sad" size="l" />
+                </Action>
+                <Action iconic onClick={() => this.respondWithAnEmo("angry")}>
+                  <Icon name="angry" size="l" />
+                </Action>
+                <Action iconic onClick={() => this.respondWithAnEmo("shocked")}>
+                  <Icon name="shocked" size="l" />
+                </Action>
+                <Action iconic onClick={() => this.respondWithAnEmo("neutral")}>
+                  <Icon name="neutral" size="l" />
+                </Action>
+                <Action
+                  iconic
+                  onClick={() => this.respondWithAnEmo("wondering")}
+                >
+                  <Icon name="wondering" size="l" />
+                </Action>
               </ActionbarHelper>
             ) : null}
           </Container>
