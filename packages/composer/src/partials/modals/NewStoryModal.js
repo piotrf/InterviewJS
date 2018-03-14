@@ -38,6 +38,7 @@ export default class NewStoryModal extends Component {
     this.handleStep2 = this.handleStep2.bind(this);
   }
   handleStep0(data) {
+    data.uid = this.props.user.id;
     return (
       this.state.storyCreated
         ? this.props.updateStory(data, 0)
@@ -158,7 +159,8 @@ NewStoryModal.propTypes = {
   router: object.isRequired,
   stories: arrayOf(object),
   updateInterviewee: func.isRequired,
-  updateStory: func.isRequired
+  updateStory: func.isRequired,
+  user:  object.isRequired,
 };
 
 NewStoryModal.defaultProps = {

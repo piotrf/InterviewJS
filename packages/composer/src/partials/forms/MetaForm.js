@@ -142,7 +142,6 @@ export default class MetaForm extends React.Component {
                 onChange={(e) => this.handleChange(e)}
                 place="left"
                 placeholder="Cover photo"
-                type="file"
               />
               <Legend tip="tip">i</Legend>
             </FormItem>
@@ -159,7 +158,6 @@ export default class MetaForm extends React.Component {
                 onChange={(e) => this.handleChange(e)}
                 place="right"
                 placeholder="Custom logo"
-                type="file"
               />
               <Legend tip="tip">i</Legend>
             </FormItem>
@@ -198,8 +196,8 @@ MetaForm.defaultProps = {
     authorLink: "",
     pubDate: "",
     media: {
-      cover: undefined,
-      logo: undefined
+      cover: 'undefined',
+      logo: 'undefined'
     }
   }
 };

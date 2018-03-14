@@ -3,6 +3,7 @@ import css from "styled-components";
 import React, { Component } from "react";
 import { arrayOf, func, object, shape, string } from "prop-types";
 import firebase from "firebase";
+// import { base } from "../configureStore";
 
 import {
   Action,
@@ -139,6 +140,14 @@ export default class ListingView extends Component {
     this.handleLogout = this.handleLogout.bind(this);
     this.toggleNewStoryModal = this.toggleNewStoryModal.bind(this);
   }
+
+  // componentDidMount(){
+  //   base.syncState("stories", {
+  //     context: this,
+  //     state: 'stories',
+  //     asArray: true
+  //   });
+  // }
 
   handleLogout() {
     firebase.auth().signOut();

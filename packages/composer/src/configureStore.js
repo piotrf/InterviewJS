@@ -7,6 +7,8 @@ import storage from "redux-persist/lib/storage";
 import firebase from "firebase";
 import { reactReduxFirebase, firebaseReducer } from "react-redux-firebase";
 
+import Rebase from "re-base";
+
 import rootReducer from "./reducers";
 import storiesReducer from "./reducers/stories";
 import userReducer from "./reducers/user";
@@ -59,6 +61,8 @@ const fireReducer = combineReducers({
   // firestore: firestoreReducer // <- needed if using firestore
 })
 
+// RE-BASE
+export const base = Rebase.createClass(firebaseApp.database());
 
 // PERSIST
 
@@ -87,6 +91,14 @@ switch(STORE) {
   default: // transient
     store = createStore(rootReducer, defaultState, enhancers);
 }
+
+// Store listener?
+// const handleChange = () => {
+//   console.log(store.getState())
+// }
+//
+// let unsubscribe = store.subscribe(handleChange);
+// // unsubscribe();
 
 export const history = syncHistoryWithStore(browserHistory, store);
 export const configureStore = () => {

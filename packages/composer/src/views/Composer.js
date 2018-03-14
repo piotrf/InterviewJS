@@ -112,6 +112,9 @@ export default class ComposerView extends React.Component {
       (story) => story.id === storyId
     );
     const story = this.props.stories[storyIndex];
+
+    if (! story) return null;
+
     return [
       <Page key="Page">
         <PageHead>
