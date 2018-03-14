@@ -295,7 +295,7 @@ export default class UserPane extends React.Component {
                       title="`Ignore` actions allow the reader to skip the closest next group of interviewee bubbles. Use when nesting chats."
                     >
                       <Icon
-                        name="info"
+                        name="info2"
                         style={{
                           color: color.greyBlk,
                           marginLeft: "5px",
@@ -360,7 +360,7 @@ export default class UserPane extends React.Component {
                       title="`Explore` actions allow the reader to move on to the next interviewee bubble, simply continue in the story."
                     >
                       <Icon
-                        name="info"
+                        name="info2"
                         style={{
                           color: color.greyBlk,
                           marginLeft: "5px",
