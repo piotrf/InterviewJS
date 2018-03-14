@@ -55,53 +55,51 @@ export default class OutroView extends Component {
         <PageHead flex={[0, 1, `${100 / 2}%`]}>
           <Cover image={story.cover} compact />
         </PageHead>
-        <PageBody limit="m" flex={[1, 0, `${100 / 4}%`]}>
-          <Container limit="x">
-            {poll.map((item, i) => (
-              <PollItem>
-                <PageSubtitle typo="h3">{item.question}</PageSubtitle>
-                <Separator silent size="m" />
-                <Actionbar>
-                  <Action
-                    active={this.state.formData[`question${i}`] === 0}
-                    fixed
-                    inverted
-                    onClick={() =>
-                      this.setState({
-                        formData: {
-                          ...this.state.formData,
-                          [`question${i}`]: 0
-                        }
-                      })
-                    }
-                  >
-                    {item.answer1}
-                  </Action>
-                  <Action
-                    active={this.state.formData[`question${i}`] === 1}
-                    fixed
-                    inverted
-                    onClick={() =>
-                      this.setState({
-                        formData: {
-                          ...this.state.formData,
-                          [`question${i}`]: 1
-                        }
-                      })
-                    }
-                  >
-                    {item.answer2}
-                  </Action>
-                </Actionbar>
-              </PollItem>
-            ))}
-            <Separator size="l" silent />
-            <Actionbar>
-              <Action fixed onClick={this.submitPoll} primary>
-                Show me results
-              </Action>
-            </Actionbar>
-          </Container>
+        <PageBody limit="x" flex={[1, 0, `${100 / 4}%`]}>
+          {poll.map((item, i) => (
+            <PollItem>
+              <PageSubtitle typo="h3">{item.question}</PageSubtitle>
+              <Separator silent size="m" />
+              <Actionbar>
+                <Action
+                  active={this.state.formData[`question${i}`] === 0}
+                  fixed
+                  inverted
+                  onClick={() =>
+                    this.setState({
+                      formData: {
+                        ...this.state.formData,
+                        [`question${i}`]: 0
+                      }
+                    })
+                  }
+                >
+                  {item.answer1}
+                </Action>
+                <Action
+                  active={this.state.formData[`question${i}`] === 1}
+                  fixed
+                  inverted
+                  onClick={() =>
+                    this.setState({
+                      formData: {
+                        ...this.state.formData,
+                        [`question${i}`]: 1
+                      }
+                    })
+                  }
+                >
+                  {item.answer2}
+                </Action>
+              </Actionbar>
+            </PollItem>
+          ))}
+          <Separator size="l" silent />
+          <Actionbar>
+            <Action fixed onClick={this.submitPoll} primary>
+              Show me results
+            </Action>
+          </Actionbar>
         </PageBody>
       </Page>,
       this.state.storyDetailsModal ? (
