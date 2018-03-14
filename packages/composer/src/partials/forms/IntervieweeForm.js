@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { bool, func, shape, string } from "prop-types";
+import Dropzone from "react-dropzone";
 
 import {
   Action,
@@ -39,15 +40,30 @@ export default class IntervieweeForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.toggleDropdown = this.toggleDropdown.bind(this);
   }
+
   handleSubmit(e) {
     if (e) e.preventDefault();
     this.props.handleSubmit(this.state.formData);
   }
+
   handleChange(e) {
     this.setState({
       formData: { ...this.state.formData, [e.target.name]: e.target.value }
     });
   }
+
+  handleFile(f) {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const base64data = reader.result;
+      console.log(base64data);
+      this.setState({
+        formData: { ...this.state.formData, avatar: base64data }
+      });
+    }
+    reader.readAsDataURL(f[0]);
+  }
+
   handleBlur(e) {
     const { target } = e;
     const { name } = target;
@@ -58,15 +74,18 @@ export default class IntervieweeForm extends Component {
       }
     });
   }
+
   toggleDropdown(dropdown, e) {
     if (e) e.preventDefault();
     this.setState({ [dropdown]: !this.state[dropdown] });
   }
+
   deleteInterviewee() {
     this.props.deleteInterviewee();
     this.setState({ moreDropdown: false });
     this.props.handleCancel(); // TODO used to close the parent modal, rename to something like `handleClose`, `handleCancel` is confusing.
   }
+
   render() {
     const deleteOption = (
       <Dropdown
@@ -166,15 +185,17 @@ export default class IntervieweeForm extends Component {
           <Container flex={[0, 0, "50%"]}>
             <FormItem>
               <Label>Avatar</Label>
-              <TextInput
-                accept="image/jpeg, image/jpg, image/png"
-                input
-                name="avatar"
-                onChange={(e) => this.handleChange(e)}
-                place="left"
-                placeholder=""
-                type="file"
-              />
+              <Dropzone
+                accept="image/jpeg, image/jpg, image/svg, image/gif, image/png"
+                ref={(node) => { this.dropzoneRef = node; }}
+                onDrop={(accepted, rejected) => { this.handleFile(accepted) }}
+                style={{display: 'none'}}>
+                <p>Drop file here</p>
+              </Dropzone>
+              <button type="button" onClick={() => { this.dropzoneRef.open() }}>
+                Open File Dialog
+              </button>
+
               <Legend tip="Small profile pic for you interviewee, best to upload a photo in square format. JPG or PNG format.">
                 i
               </Legend>

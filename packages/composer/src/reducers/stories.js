@@ -1,6 +1,9 @@
 /* eslint no-case-declarations: 0 */
 /* eslint no-console: 0 */
 
+import { base, firebaseApp } from "../configureStore";
+
+
 function stories(state = [], action) {
   const {
     type,
@@ -15,10 +18,22 @@ function stories(state = [], action) {
   switch (type) {
     case "CREATE_STORY":
       console.log("creating a story");
+      base.post(`stories/${payload.id}`, {
+        data: payload,
+        then(err){
+          console.log(err);
+        }
+      });
       return [payload, ...state];
 
     case "UPDATE_STORY":
       console.log("updating a story");
+      base.update(`stories/${state[storyIndex].id}`, {
+        data: payload,
+        then(err){
+          console.log(err);
+        }
+      });
       return [
         ...state.slice(0, storyIndex),
         { ...state[storyIndex], ...payload },
@@ -27,10 +42,20 @@ function stories(state = [], action) {
 
     case "DELETE_STORY":
       console.log("deleting a story");
+      base.remove(`stories/${state[storyIndex].id}`,
+        (err) => {
+          console.log(err);
+        });
       return [...state.slice(0, storyIndex), ...state.slice(storyIndex + 1)];
 
     case "CREATE_INTERVIEWEE":
       console.log("creating interviewee");
+      base.update(`stories/${state[storyIndex].id}/interviewees/${payload.id}`, {
+        data: payload,
+        then(err){
+          console.log(err);
+        }
+      });
       return [
         ...state.slice(0, storyIndex),
         {
@@ -43,6 +68,12 @@ function stories(state = [], action) {
     case "UPDATE_INTERVIEWEE":
       console.log("updating interviewee");
       const updateStoryInterviewees = state[storyIndex].interviewees;
+      base.update(`stories/${state[storyIndex].id}/interviewees/${updateStoryInterviewees[intervieweeIndex].id}`, {
+        data: payload,
+        then(err){
+          console.log(err);
+        }
+      });
       return [
         ...state.slice(0, storyIndex),
         {
@@ -59,6 +90,10 @@ function stories(state = [], action) {
     case "DELETE_INTERVIEWEE":
       console.log("deleting interviewee");
       const deleteStoryInterviewees = state[storyIndex].interviewees;
+      base.remove(`stories/${state[storyIndex].id}/interviewees/${deleteStoryInterviewees[intervieweeIndex].id}`,
+        (err) => {
+          console.log(err);
+        });
       return [
         ...state.slice(0, storyIndex),
         {
@@ -73,7 +108,8 @@ function stories(state = [], action) {
 
     case "ADD_STORYLINE_ITEM":
       console.log("adding storyline item");
-      return [
+
+      const ADD_STORYLINE_ITEM_STATE = [
         ...state.slice(0, storyIndex),
         {
           ...state[storyIndex],
@@ -92,11 +128,21 @@ function stories(state = [], action) {
         ...state.slice(storyIndex + 1)
       ];
 
+      base.update(`stories/${state[storyIndex].id}/interviewees/${state[storyIndex].interviewees[intervieweeIndex].id}/storyline`, {
+        data: ADD_STORYLINE_ITEM_STATE[storyIndex].interviewees[intervieweeIndex].storyline,
+        then(err){
+          console.log(err);
+        }
+      });
+
+      return ADD_STORYLINE_ITEM_STATE;
+
     case "MOVE_STORYLINE_ITEM":
       console.log("moving storyline item");
       const moveStorylineObj =
         state[storyIndex].interviewees[intervieweeIndex].storyline;
-      return [
+
+      const MOVE_STORYLINE_ITEM_STATE = [
         ...state.slice(0, storyIndex),
         {
           ...state[storyIndex],
@@ -118,11 +164,20 @@ function stories(state = [], action) {
         ...state.slice(storyIndex + 1)
       ];
 
+      base.update(`stories/${state[storyIndex].id}/interviewees/${state[storyIndex].interviewees[intervieweeIndex].id}/storyline`, {
+        data: MOVE_STORYLINE_ITEM_STATE[storyIndex].interviewees[intervieweeIndex].storyline,
+        then(err){
+          console.log(err);
+        }
+      });
+
+      return MOVE_STORYLINE_ITEM_STATE;
+
     case "DELETE_STORYLINE_ITEM":
       console.log("deleting storyline item");
       const deleteStorylineArr =
         state[storyIndex].interviewees[intervieweeIndex].storyline;
-      return [
+      const DELETE_STORYLINE_ITEM_STATE = [
         ...state.slice(0, storyIndex),
         {
           ...state[storyIndex],
@@ -140,6 +195,16 @@ function stories(state = [], action) {
         },
         ...state.slice(storyIndex + 1)
       ];
+
+      base.update(`stories/${state[storyIndex].id}/interviewees/${state[storyIndex].interviewees[intervieweeIndex].id}/storyline`, {
+        data: DELETE_STORYLINE_ITEM_STATE[storyIndex].interviewees[intervieweeIndex].storyline,
+        then(err){
+          console.log(err);
+        }
+      });
+
+      return DELETE_STORYLINE_ITEM_STATE;
+
 
     default:
       return state;

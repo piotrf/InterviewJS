@@ -1,6 +1,7 @@
 import uuidv4 from "uuid/v4";
 
 export function createStory({
+  uid = "anonymous",
   author = "",
   authorLink = "",
   context = "",
@@ -14,6 +15,7 @@ export function createStory({
   return {
     type: "CREATE_STORY",
     payload: {
+      uid,
       author,
       authorLink,
       context,

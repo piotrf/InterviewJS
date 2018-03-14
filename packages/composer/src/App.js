@@ -21,8 +21,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(Main);
 //     'stories' // { path: '/stories' } // object notation
 //   ]),
 //   connect((state) => ({
-//     stories: state.firebase.data.stories || state.stories,
+//     stories: state.firebase.data.stories,
 //     user: state.user,
 //     // profile: state.firebase.profile // load profile
-//   }))
+//   }), mapDispatchToProps)
 // )(Main)

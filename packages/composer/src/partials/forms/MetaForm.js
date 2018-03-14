@@ -1,5 +1,6 @@
 import React from "react";
 import { func, object, shape, string } from "prop-types";
+import Dropzone from "react-dropzone";
 
 import {
   Actionbar,
@@ -37,10 +38,12 @@ export default class MetaForm extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
   handleSubmit(e) {
     if (e) e.preventDefault();
     this.props.handleSubmit(this.state.formData);
   }
+
   handleBlur(e) {
     const { target } = e;
     const { name } = target;
@@ -54,11 +57,25 @@ export default class MetaForm extends React.Component {
       ? this.props.handleSave({ [name]: this.state.formData[name] })
       : null;
   }
+
   handleChange(e) {
     this.setState({
       formData: { ...this.state.formData, [e.target.name]: e.target.value }
     });
   }
+
+  handleFile(key, f) {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const base64data = reader.result;
+      console.log(base64data);
+      this.setState({
+        formData: { ...this.state.formData, [key]: base64data }
+      });
+    }
+    reader.readAsDataURL(f[0]);
+  }
+
   render() {
     return (
       <Form onSubmit={(e) => this.handleSubmit(e)}>
@@ -134,33 +151,32 @@ export default class MetaForm extends React.Component {
           <Container flex={[1, 1, "50%"]}>
             <FormItem>
               <Label>Cover photo</Label>
-              <TextInput
-                accept="image/jpeg, image/jpg, image/png"
-                input
-                name="cover"
-                onBlur={(e) => this.handleBlur(e)}
-                onChange={(e) => this.handleChange(e)}
-                place="left"
-                placeholder="Cover photo"
-                type="file"
-              />
+              <Dropzone
+                accept="image/jpeg, image/jpg, image/svg, image/gif, image/png"
+                ref={(node) => { this.dropzoneRef = node; }}
+                onDrop={(accepted, rejected) => { this.handleFile('cover', accepted) }}
+                style={{display: 'none'}}>
+                <p>Drop file here</p>
+              </Dropzone>
+              <button type="button" onClick={() => { this.dropzoneRef.open() }}>
+                Open File Dialog
+              </button>
               <Legend tip="tip">i</Legend>
             </FormItem>
           </Container>
           <Container flex={[1, 1, "50%"]}>
             <FormItem>
               <Label>Your logo</Label>
-              <TextInput
-                accept="image/jpeg, image/jpg, image/png"
-                input
-                name="logo"
-                nooffset
-                onBlur={(e) => this.handleBlur(e)}
-                onChange={(e) => this.handleChange(e)}
-                place="right"
-                placeholder="Custom logo"
-                type="file"
-              />
+              <Dropzone
+                accept="image/jpeg, image/jpg, image/svg, image/gif, image/png"
+                ref={(node) => { this.dropzoneRef = node; }}
+                onDrop={(accepted, rejected) => { this.handleFile('logo', accepted) }}
+                style={{display: 'none'}}>
+                <p>Drop file here</p>
+              </Dropzone>
+              <button type="button" onClick={() => { this.dropzoneRef.open() }}>
+                Open File Dialog
+              </button>
               <Legend tip="tip">i</Legend>
             </FormItem>
           </Container>
@@ -198,8 +214,8 @@ MetaForm.defaultProps = {
     authorLink: "",
     pubDate: "",
     media: {
-      cover: undefined,
-      logo: undefined
+      cover: 'undefined',
+      logo: 'undefined'
     }
   }
 };
