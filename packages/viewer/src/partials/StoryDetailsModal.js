@@ -19,6 +19,26 @@ import {
 
 import { Cover, PageBody, PageHead } from "../partials";
 
+const Topbar = css(Container)`
+  display: flex;
+  flex-direction: column;
+  height: 80px;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 5;
+`;
+
+const TopbarHolder = css(Container)`
+  align-content: flex-end;
+  align-items: flex-end;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+`;
+
 const ModalBody = css(Container)`
   ${setSpace("pbh")};
   background: ${color.black};
@@ -89,13 +109,13 @@ export default class StoryDetailsModal extends React.Component {
         role="dialog"
         style={{ overlay: { background: "none" } }}
       >
-        <ModalHead limit="m" align="right">
-          <Container limit="m" padded>
+        <Topbar>
+          <TopbarHolder limit="m" padded>
             <Action inverted iconic onClick={this.props.handleClose}>
               <Icon name="cross" />
             </Action>
-          </Container>
-        </ModalHead>
+          </TopbarHolder>
+        </Topbar>
         <Modal wizard persistent>
           <ModalBody cover>
             <PageHead flex={[0, 1, `${100 / 2}%`]}>

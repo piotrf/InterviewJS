@@ -2,9 +2,10 @@ import React from "react";
 import css from "styled-components";
 import { func } from "prop-types";
 
-import { Action, Icon, Actionbar, Container } from "interviewjs-styleguide";
+import { Action, Container, Icon, setSpace } from "interviewjs-styleguide";
 
 const TopbarEl = css(Container)`
+  ${setSpace("mvs")};
   left: 0;
   position: fixed;
   right: 0;
@@ -12,21 +13,25 @@ const TopbarEl = css(Container)`
   z-index: 5;
 `;
 
+const TopbarHolder = css(Container)`
+  display: flex;
+  justify-content: ${({ spread }) => (spread ? `space-between` : `flex-end`)};
+  align-items: flex-end;
+  align-content: flex-end;
+`;
+
 const Topbar = (props) => (
   <TopbarEl {...props}>
-    <Container limit="m" padded>
-      <Actionbar satellite={props.handleBack !== null ? "both" : "right"}>
-        &nbsp;
-        {props.handleBack ? (
-          <Action inverted iconic onClick={props.handleBack}>
-            <Icon name="arrow-left" size="x" />
-          </Action>
-        ) : null}
-        <Action inverted iconic onClick={props.handleDetails}>
-          <Icon name="info" />
+    <TopbarHolder limit="m" padded spread={!!props.handleBack}>
+      {props.handleBack ? (
+        <Action inverted iconic onClick={props.handleBack}>
+          <Icon name="arrow-left" size="x" />
         </Action>
-      </Actionbar>
-    </Container>
+      ) : null}
+      <Action inverted iconic onClick={props.handleDetails}>
+        <Icon name="info" />
+      </Action>
+    </TopbarHolder>
   </TopbarEl>
 );
 

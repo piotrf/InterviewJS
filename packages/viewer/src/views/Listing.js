@@ -29,14 +29,33 @@ const Page = css.div`
   flex-direction: column;
 `;
 
-const PageHead = css(Container)`
+const Topbar = css(Container)`
+  background: ${color.white};
   border-bottom: 1px solid ${color.greyHL};
+  display: flex;
+  flex-direction: column;
+  height: 80px;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 5;
   ${PageTitle} {
     color: ${color.blueBlk};
   }
 `;
 
+const TopbarHolder = css(Container)`
+  align-content: flex-end;
+  align-items: flex-end;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+`;
+
 const PageBody = css(Container)`
+  padding-top: 80px;
 `;
 
 const Interviewees = css.ul`
@@ -94,19 +113,17 @@ export default class ChatView extends Component {
     const { story } = this.props;
     return [
       <Page key="page">
-        <PageHead flex={[0, 0, `auto`]}>
-          <Container limit="m" padded>
-            <Actionbar satellite="both">
-              <Action iconic onClick={() => this.props.router.push("/context")}>
-                <Icon name="arrow-left" />
-              </Action>
-              <PageTitle typo="h2">Interviewees</PageTitle>
-              <Action iconic onClick={this.toggleDetailsModal}>
-                <Icon name="info" />
-              </Action>
-            </Actionbar>
-          </Container>
-        </PageHead>
+        <Topbar>
+          <TopbarHolder limit="m" padded>
+            <Action iconic onClick={() => this.props.router.push("/context")}>
+              <Icon name="arrow-left" />
+            </Action>
+            <PageTitle typo="h2">Interviewees</PageTitle>
+            <Action iconic onClick={this.toggleDetailsModal}>
+              <Icon name="info" />
+            </Action>
+          </TopbarHolder>
+        </Topbar>
         <PageBody flex={[1, 1, `100%`]}>
           <Interviewees>
             {story.interviewees.map((interviewee, i) => (

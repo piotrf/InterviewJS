@@ -102,7 +102,10 @@ export default class ShareModal extends React.Component {
 
 ShareModal.propTypes = {
   handleClose: func.isRequired,
-  isOpen: bool.isRequired
+  isOpen: bool.isRequired,
+  story: shape({
+    title: string.isRequired
+  }).isRequired
 };
 
 ShareModal.defaultProps = {};
