@@ -44,7 +44,7 @@ export default class IntervieweePane extends React.Component {
         text: { value: "" },
         link: { value: "", title: "" },
         image: {
-          value: require("../../data/media/trump.png"), // TODO @LAURIAN: this should come from the data model upon image upload
+          value: "",
           title: ""
         },
         embed: { value: "" },
@@ -92,6 +92,7 @@ export default class IntervieweePane extends React.Component {
   }
   render() {
     const { tab } = this.state;
+    console.log(this.state);
     const { currentInterviewee, story } = this.props;
     return (
       <PaneEl fill="white" rounded shift dir="column">
