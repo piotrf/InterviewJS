@@ -72,7 +72,7 @@ export default class MetaForm extends React.Component {
       this.setState({
         formData: { ...this.state.formData, [key]: base64data }
       });
-    }
+    };
     reader.readAsDataURL(f[0]);
   }
 
@@ -153,14 +153,23 @@ export default class MetaForm extends React.Component {
               <Label>Cover photo</Label>
               <Dropzone
                 accept="image/jpeg, image/jpg, image/svg, image/gif, image/png"
-                ref={(node) => { this.dropzoneRef = node; }}
-                onDrop={(accepted, rejected) => { this.handleFile('cover', accepted) }}
-                style={{display: 'none'}}>
+                ref={(node) => {
+                  this.dropzoneRef = node;
+                }}
+                onDrop={(accepted, rejected) => {
+                  this.handleFile("cover", accepted);
+                }}
+                style={{ display: "none" }}
+              >
                 <p>Drop file here</p>
               </Dropzone>
-              <button type="button" onClick={() => { this.dropzoneRef.open() }}>
-                Open File Dialog
-              </button>
+              <TextInput
+                file
+                place="left"
+                onClick={() => {
+                  this.dropzoneRef.open();
+                }}
+              />
               <Legend tip="tip">i</Legend>
             </FormItem>
           </Container>
@@ -169,14 +178,23 @@ export default class MetaForm extends React.Component {
               <Label>Your logo</Label>
               <Dropzone
                 accept="image/jpeg, image/jpg, image/svg, image/gif, image/png"
-                ref={(node) => { this.dropzoneRef = node; }}
-                onDrop={(accepted, rejected) => { this.handleFile('logo', accepted) }}
-                style={{display: 'none'}}>
+                ref={(node) => {
+                  this.dropzoneRef = node;
+                }}
+                onDrop={(accepted, rejected) => {
+                  this.handleFile("logo", accepted);
+                }}
+                style={{ display: "none" }}
+              >
                 <p>Drop file here</p>
               </Dropzone>
-              <button type="button" onClick={() => { this.dropzoneRef.open() }}>
-                Open File Dialog
-              </button>
+              <TextInput
+                file
+                place="right"
+                onClick={() => {
+                  this.dropzoneRef.open();
+                }}
+              />
               <Legend tip="tip">i</Legend>
             </FormItem>
           </Container>
@@ -214,8 +232,8 @@ MetaForm.defaultProps = {
     authorLink: "",
     pubDate: "",
     media: {
-      cover: 'undefined',
-      logo: 'undefined'
+      cover: "undefined",
+      logo: "undefined"
     }
   }
 };

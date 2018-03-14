@@ -1,6 +1,6 @@
 import css from "styled-components";
 import React from "react";
-import { bool, string } from "prop-types";
+import { bool, func, string } from "prop-types";
 
 import { color, font, radius, setSpace, setType, time } from "../../../utils";
 
@@ -55,13 +55,31 @@ const Input = css.input`
   ${({ nooffset }) => (nooffset ? `right: 0; left: 0;` : ``)};
 `;
 
+const Button = css(Input.withComponent("button"))`
+  text-align: left;
+  cursor: pointer;
+`;
+
 const Textarea = Input.withComponent("textarea");
 
-const TextInput = (props) =>
-  props.area ? <Textarea {...props} /> : <Input {...props} />;
+const TextInput = (props) => {
+  if (props.file) {
+    const handler = (e) => {
+      e.preventDefault();
+      props.onClick();
+    };
+    return (
+      <Button {...props} onClick={(e) => handler(e)}>
+        {props.selected ? "" : "Select file"}
+      </Button>
+    );
+  }
+  return props.area ? <Textarea {...props} /> : <Input {...props} />;
+};
 
 TextInput.propTypes = {
   area: bool,
+  file: bool,
   input: bool,
   nooffset: bool,
   place: string
@@ -69,6 +87,7 @@ TextInput.propTypes = {
 
 TextInput.defaultProps = {
   area: false,
+  file: false,
   input: false,
   nooffset: false,
   place: null

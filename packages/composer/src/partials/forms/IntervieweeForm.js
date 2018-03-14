@@ -60,7 +60,7 @@ export default class IntervieweeForm extends Component {
       this.setState({
         formData: { ...this.state.formData, avatar: base64data }
       });
-    }
+    };
     reader.readAsDataURL(f[0]);
   }
 
@@ -187,15 +187,23 @@ export default class IntervieweeForm extends Component {
               <Label>Avatar</Label>
               <Dropzone
                 accept="image/jpeg, image/jpg, image/svg, image/gif, image/png"
-                ref={(node) => { this.dropzoneRef = node; }}
-                onDrop={(accepted, rejected) => { this.handleFile(accepted) }}
-                style={{display: 'none'}}>
+                ref={(node) => {
+                  this.dropzoneRef = node;
+                }}
+                onDrop={(accepted, rejected) => {
+                  this.handleFile(accepted);
+                }}
+                style={{ display: "none" }}
+              >
                 <p>Drop file here</p>
               </Dropzone>
-              <button type="button" onClick={() => { this.dropzoneRef.open() }}>
-                Open File Dialog
-              </button>
-
+              <TextInput
+                file
+                place="left"
+                onClick={() => {
+                  this.dropzoneRef.open();
+                }}
+              />
               <Legend tip="Small profile pic for you interviewee, best to upload a photo in square format. JPG or PNG format.">
                 i
               </Legend>

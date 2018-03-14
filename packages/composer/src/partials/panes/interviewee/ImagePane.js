@@ -37,7 +37,7 @@ export default class ImagePane extends Component {
       this.setState({ draft: { ...this.state.draft, value: base64data } }, () =>
         this.props.updateDraft(this.state.draft)
       );
-    }
+    };
     reader.readAsDataURL(f[0]);
   }
 
@@ -62,14 +62,22 @@ export default class ImagePane extends Component {
             <Label>Upload image</Label>
             <Dropzone
               accept="image/jpeg, image/jpg, image/svg, image/gif, image/png"
-              ref={(node) => { this.dropzoneRef = node; }}
-              onDrop={(accepted, rejected) => { this.handleFile(accepted) }}
-              style={{display: 'none'}}>
+              ref={(node) => {
+                this.dropzoneRef = node;
+              }}
+              onDrop={(accepted, rejected) => {
+                this.handleFile(accepted);
+              }}
+              style={{ display: "none" }}
+            >
               <p>Drop file here</p>
             </Dropzone>
-            <button type="button" onClick={() => { this.dropzoneRef.open() }}>
-              Open File Dialog
-            </button>
+            <TextInput
+              file
+              onClick={() => {
+                this.dropzoneRef.open();
+              }}
+            />
             <Legend tip="Select an image with extension of .png, .jpg, .jpeg, .svg or .gif">
               i
             </Legend>
