@@ -98,13 +98,11 @@ export default class ChatView extends Component {
       storyDetailsModal: false,
       currentItem: 0
     };
-    this.respondWithScriptedAction = this.respondWithScriptedAction.bind(this);
     this.respondWithADiss = this.respondWithADiss.bind(this);
     this.respondWithAnEmo = this.respondWithAnEmo.bind(this);
-    this.toggleDetailsModal = this.toggleDetailsModal.bind(this);
-    this.toggleEmotHelper = this.toggleEmotHelper.bind(this);
-    this.toggleIntervieweeModal = this.toggleIntervieweeModal.bind(this);
-    this.toggleMoreHelper = this.toggleMoreHelper.bind(this);
+    this.respondWithScriptedAction = this.respondWithScriptedAction.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
+    this.toggleToolbar = this.toggleToolbar.bind(this);
   }
   componentDidUpdate() {
     const { interviewees } = this.props.story;
@@ -133,18 +131,15 @@ export default class ChatView extends Component {
     }
     return null;
   }
-  toggleDetailsModal() {
-    this.setState({ storyDetailsModal: !this.state.storyDetailsModal });
+  toggleModal(modal) {
+    this.setState({ [modal]: !this.state[modal] });
   }
-  toggleIntervieweeModal() {
-    this.setState({ intervieweeModal: !this.state.intervieweeModal });
+  toggleToolbar(toolbar) {
+    this.setState({ [toolbar]: !this.state[toolbar] });
   }
-  toggleEmotHelper() {
-    this.setState({ emotHelper: !this.state.emotHelper, moreHelper: false });
-  }
-  toggleMoreHelper() {
-    this.setState({ moreHelper: !this.state.moreHelper, emotHelper: false });
-  }
+
+  /* response handlers */
+
   respondWithScriptedAction() {
     const { interviewees } = this.props.story;
     const { chatId } = this.props.params;
@@ -165,6 +160,7 @@ export default class ChatView extends Component {
     this.setState({ emotHelper: false });
     console.log("respondWithAnEmo: ", emo);
   }
+
   render() {
     const { story } = this.props;
     const { interviewees } = story;
@@ -238,12 +234,15 @@ export default class ChatView extends Component {
             <Action iconic onClick={() => this.props.router.push("/listing")}>
               <Icon name="arrow-left" size="x" />
             </Action>
-            <Action onClick={this.toggleIntervieweeModal}>
+            <Action onClick={() => this.toggleModal("intervieweeModal")}>
               <Tip title={interviewee.name}>
                 <Avatar image={interviewee.avatar} />
               </Tip>
             </Action>
-            <Action iconic onClick={this.toggleDetailsModal}>
+            <Action
+              iconic
+              onClick={() => this.toggleModal("storyDetailsModal")}
+            >
               <Icon name="info" />
             </Action>
           </TopbarHolder>
@@ -259,11 +258,19 @@ export default class ChatView extends Component {
         <PageFoot flex={[0, 0, `80px`]}>
           <Container limit="x" style={{ width: "100%" }} padded>
             <Actionbar satellite="both">
-              <Action iconic onClick={this.toggleMoreHelper} secondary>
+              <Action
+                iconic
+                onClick={() => this.toggleToolbar("moreHelper")}
+                secondary
+              >
                 <Icon name="vdots" />
               </Action>
               {renderUserActions()}
-              <Action iconic onClick={this.toggleEmotHelper} secondary>
+              <Action
+                iconic
+                onClick={() => this.toggleToolbar("emotHelper")}
+                secondary
+              >
                 <Icon name="smile" />
               </Action>
             </Actionbar>
@@ -304,8 +311,8 @@ export default class ChatView extends Component {
         <IntervieweeModal
           {...this.props}
           cta="Get back to chat"
-          handleClose={this.toggleIntervieweeModal}
-          handleSubmit={this.toggleIntervieweeModal}
+          handleClose={() => this.toggleModal("intervieweeModal")}
+          handleSubmit={() => this.toggleModal("intervieweeModal")}
           interviewee={interviewee}
           isOpen={this.state.intervieweeModal !== null}
           key="intervieweeModal"
@@ -313,7 +320,7 @@ export default class ChatView extends Component {
       ) : null,
       this.state.storyDetailsModal ? (
         <StoryDetailsModal
-          handleClose={this.toggleDetailsModal}
+          handleClose={() => this.toggleModal("storyDetailsModal")}
           isOpen={this.state.storyDetailsModal}
           key="detailsModal"
           story={story}
