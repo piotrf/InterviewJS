@@ -12,6 +12,7 @@ export { default as MetaForm } from "./forms/MetaForm";
 export { default as QuestionForm } from "./forms/QuestionForm";
 
 // modals
+export { default as AboutModal } from "./modals/AboutModal";
 export { default as AuthModal } from "./modals/AuthModal";
 export { default as DeleteModal } from "./modals/DeleteModal";
 export { default as DetailsModal } from "./modals/DetailsModal";

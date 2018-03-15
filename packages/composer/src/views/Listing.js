@@ -25,7 +25,13 @@ import {
   time
 } from "interviewjs-styleguide";
 
-import { NewStoryModal, Stories, Story, WelcomeModal } from "../partials";
+import {
+  AboutModal,
+  NewStoryModal,
+  Stories,
+  Story,
+  WelcomeModal
+} from "../partials";
 
 const Page = css.div`
   align-content: stretch;
@@ -33,7 +39,7 @@ const Page = css.div`
   display: flex;
   flex-direction: column;
   height: 100%;
-  justify-content: flex-start;
+  justify-content: space-between;
   margin-left: auto;
   margin-right: auto;
   max-width: 1400px;
@@ -68,6 +74,20 @@ const PageHead = css.div`
   }
 `;
 
+const PageBody = css.div`
+  flex: 1 0 auto;
+`;
+
+const PageFoot = css.div`
+  ${setSpace("pvl")};
+  ${setSpace("phm")};
+  bottom: 0;
+  left: 0;
+  right: 0;
+  flex: 0 1 auto;
+  text-align: center;
+`;
+
 const StoryNew = css(Container)`
   ${disselect};
   ${setSpace("mhh")};
@@ -87,11 +107,9 @@ const StoryNew = css(Container)`
   }
 `;
 
-const PageBody = css.div`
-`;
-
 const UserMenu = css.div`
 `;
+
 const UserDdToggle = css.div`
   align-content: center;
   align-items: center;
@@ -133,12 +151,14 @@ export default class ListingView extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      aboutModal: false,
       createStoryModal: false,
       welcomeModal: true
     };
     this.blockWelcomeModal = this.blockWelcomeModal.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
     this.toggleNewStoryModal = this.toggleNewStoryModal.bind(this);
+    this.toggleAboutModal = this.toggleAboutModal.bind(this);
   }
 
   // componentDidMount(){
@@ -148,25 +168,23 @@ export default class ListingView extends Component {
   //     asArray: true
   //   });
   // }
-
   handleLogout() {
     firebase.auth().signOut();
     this.props.router.push(`/my`);
   }
-
   toggleNewStoryModal() {
     this.setState({ createStoryModal: !this.state.createStoryModal });
   }
-
+  toggleAboutModal() {
+    this.setState({ aboutModal: !this.state.aboutModal });
+  }
   blockWelcomeModal() {
     localStorage.setItem("welcomeModalBlocker", "active");
     this.setState({ welcomeModal: false, createStoryModal: true });
   }
-
   render() {
-    const { createStoryModal, welcomeModal } = this.state;
+    const { createStoryModal, welcomeModal, aboutModal } = this.state;
     const welcomeModalBlocker = localStorage.getItem("welcomeModalBlocker");
-
     return [
       welcomeModalBlocker !== "active" ? (
         <WelcomeModal
@@ -244,6 +262,9 @@ export default class ListingView extends Component {
             </Stories>
           </Container>
         </PageBody>
+        <PageFoot key="footer">
+          <Action onClick={this.toggleAboutModal}>About InterviewJS</Action>
+        </PageFoot>
       </Page>,
       createStoryModal ? (
         <NewStoryModal
@@ -253,6 +274,14 @@ export default class ListingView extends Component {
           isOpen={createStoryModal}
           key="NewStoryModal"
           updateStory={this.props.updateStory}
+        />
+      ) : null,
+      aboutModal ? (
+        <AboutModal
+          {...this.props}
+          handleClose={this.toggleAboutModal}
+          isOpen={aboutModal}
+          key="AboutModal"
         />
       ) : null
     ];
