@@ -55,10 +55,8 @@ export default class OutroView extends Component {
         <PageHead flex={[0, 1, `${100 / 2}%`]}>
           <Cover image={story.cover} compact />
         </PageHead>
-        <PageBody limit="m" flex={[1, 0, `${100 / 2}%`]}>
-          <Container limit="x">
-            <PageSubtitle typo="h3">{getResultScore()}</PageSubtitle>
-          </Container>
+        <PageBody limit="x" flex={[1, 0, `${100 / 2}%`]}>
+          <PageSubtitle typo="h3">{getResultScore()}</PageSubtitle>
           <Separator size="l" silent />
           <Actionbar>
             <Action

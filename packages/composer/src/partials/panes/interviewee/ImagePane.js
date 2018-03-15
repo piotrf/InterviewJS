@@ -21,14 +21,19 @@ export default class ImagePane extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
   }
-
+  componentWillReceiveProps(nextProps) {
+    const { draft } = nextProps;
+    if (draft !== this.props.draft) {
+      this.setState({ draft });
+    }
+    return null;
+  }
   handleChange(e) {
     const { name, value } = e.target;
     this.setState({ draft: { ...this.state.draft, [name]: value } }, () =>
       this.props.updateDraft(this.state.draft)
     );
   }
-
   handleFile(f) {
     const reader = new FileReader();
     reader.onloadend = () => {
