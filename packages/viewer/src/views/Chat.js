@@ -32,8 +32,10 @@ const PageBody = css(Container)`
 `;
 
 const PageFoot = css(Container)`
-  ${setSpace("pvm")};
   border-top: 1px solid ${color.greyHL};
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 
 const Topbar = css(Container)`
@@ -241,8 +243,8 @@ export default class ChatView extends Component {
             storyline={interviewee.storyline}
           />
         </PageBody>
-        <PageFoot flex={[0, 0, `auto`]}>
-          <Container limit="x" padded>
+        <PageFoot flex={[0, 0, `80px`]}>
+          <Container limit="x" style={{ width: "100%" }} padded>
             <Actionbar satellite="both">
               <Action iconic onClick={this.toggleMoreHelper} secondary>
                 <Icon name="vdots" />

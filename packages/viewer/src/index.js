@@ -32,7 +32,11 @@ class Routes extends React.Component {
 
   render() {
     return (
-      <Router key="Root" history={history}>
+      <Router
+        onUpdate={() => window.scrollTo(0, 0)}
+        key="Root"
+        history={history}
+      >
         <Route path="/intro" component={App}>
           <IndexRoute component={Intro} />
           <Route path="/chat/:chatId" component={Chat} />
