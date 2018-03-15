@@ -1,6 +1,8 @@
+import { func } from "prop-types";
 import css from "styled-components";
+import React, { Component } from "react";
 
-const BubbleGroup = css.div`
+const BubbleGroupEl = css.div`
   align-items: flex-end;
   display: flex;
   flex-direction: row;
@@ -8,4 +10,19 @@ const BubbleGroup = css.div`
   width: 100%;
 `;
 
-export default BubbleGroup;
+export default class BubbleGroup extends Component {
+  componentDidMount() {
+    this.props.callback();
+  }
+  render() {
+    return <BubbleGroupEl {...this.props} />;
+  }
+}
+
+BubbleGroup.propTypes = {
+  callback: func
+};
+
+BubbleGroup.defaultProps = {
+  callback: null
+};

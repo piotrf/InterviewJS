@@ -92,12 +92,13 @@ export default class ChatView extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      actionbar: "scripted",
       currentItem: 0,
-      emotHelper: false,
+      hideActionbar: true,
       intervieweeModal: false,
-      moreHelper: false,
       storyDetailsModal: false
     };
+    this.onBubbleRender = this.onBubbleRender.bind(this);
     this.respondWithADiss = this.respondWithADiss.bind(this);
     this.respondWithAnEmo = this.respondWithAnEmo.bind(this);
     this.respondWithScriptedAction = this.respondWithScriptedAction.bind(this);
@@ -113,20 +114,24 @@ export default class ChatView extends Component {
     this.story = this.props.story;
     this.storyline = interviewees[intervieweeIndex].storyline;
   }
-  componentDidUpdate() {
+  onBubbleRender() {
     const { currentItem } = this.state;
-    const thisBubbleRole = this.storyline[currentItem].role;
-    const nextBubbleRole = this.storyline[currentItem + 1].role;
-
-    if (currentItem < this.storyline.length - 1) {
-      if (thisBubbleRole === "user" && thisBubbleRole !== nextBubbleRole) {
+    const thisBubble = this.storyline[currentItem];
+    const nextBubble = this.storyline[currentItem + 1];
+    const lastBubble = this.storyline.length;
+    if (currentItem < lastBubble - 1) {
+      if (thisBubble.role === "user" && nextBubble.role === "interviewee") {
         this.setState({ currentItem: currentItem + 1 });
-      }
-      if (
-        thisBubbleRole === "interviewee" &&
-        thisBubbleRole === nextBubbleRole
+      } else if (
+        thisBubble.role === "interviewee" &&
+        nextBubble.role === "interviewee"
       ) {
         setTimeout(() => this.setState({ currentItem: currentItem + 1 }), 1050);
+      } else if (
+        thisBubble.role === "interviewee" &&
+        nextBubble.role === "user"
+      ) {
+        setTimeout(() => this.setState({ hideActionbar: false }), 1400);
       }
     }
     return null;
@@ -143,7 +148,10 @@ export default class ChatView extends Component {
   respondWithScriptedAction(type) {
     console.log("respondWithScriptedAction: ", type);
     if (this.state.currentItem < this.storyline.length - 1) {
-      this.setState({ currentItem: this.state.currentItem + 1 });
+      this.setState({
+        currentItem: this.state.currentItem + 1,
+        hideActionbar: true
+      });
     } else console.log("end of the story");
   }
   respondWithADiss() {
@@ -212,33 +220,38 @@ export default class ChatView extends Component {
     ];
 
     const renderUserActions = () => {
+      const thisBubble = this.storyline[currentItem];
       const nextBubble = this.storyline[currentItem + 1];
-      const isNotTheLastBubble = currentItem < this.storyline.length - 1;
-      const nextOneIsUserBubble = nextBubble.role === "user";
-      console.log("isNotTheLastBubble: ", isNotTheLastBubble);
-      console.log("nextOneIsUserBubble: ", nextOneIsUserBubble);
-
-      return isNotTheLastBubble && nextOneIsUserBubble
-        ? nextBubble.content.map(
+      const lastBubble = this.storyline.length;
+      const isActiveActionbarEmot = this.state.actionbar === "emot";
+      const isActiveActionbarRunaway = this.state.actionbar === "runaway";
+      const isActionbarHidden = this.state.hideActionbar;
+      if (thisBubble !== lastBubble && !isActionbarHidden) {
+        const nextOneIsUserBubble = nextBubble.role === "user";
+        if (nextOneIsUserBubble && !isActionbarHidden) {
+          if (isActiveActionbarRunaway) {
+            return runAwayActions;
+          } else if (isActiveActionbarEmot) {
+            return emoActions;
+          }
+          return nextBubble.content.map(
             (action) =>
               action.enabled ? (
                 <Action
-                  primary
                   fixed
+                  key={action.type}
                   onClick={() => this.respondWithScriptedAction(action.type)}
+                  primary
                 >
                   {action.value}
                 </Action>
               ) : null
-          )
-        : runAwayActions;
-
-      // if (isNotTheLastBubble && nextOneIsUserBubble) {
-      //   retun nextBubble.content.map(
-      //     (action) => (action.enabled ? <Action>{action.value}</Action> : null)
-      //   );
-      // }
-      // return runAwayActions;
+          );
+        }
+      } else if (thisBubble === lastBubble) {
+        return runAwayActions;
+      }
+      return null;
     };
 
     return [
@@ -266,6 +279,7 @@ export default class ChatView extends Component {
             carryOn={this.carryOn}
             currentItem={currentItem}
             interviewee={this.interviewee}
+            onBubbleRender={this.onBubbleRender}
             storyline={this.storyline}
           />
         </PageBody>

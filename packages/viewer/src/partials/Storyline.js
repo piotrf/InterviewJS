@@ -41,7 +41,7 @@ export default class Storyline extends Component {
     setTimeout(this.scrollToBottom, 300);
   }
   componentDidUpdate(prevProps) {
-    if (this.props.currentItem < this.props.storyline.length - 1) {
+    if (this.props.currentItem < this.props.storyline.length) {
       if (
         this.props.interviewee.storyline[this.props.currentItem].role === "user"
       ) {
@@ -162,7 +162,7 @@ export default class Storyline extends Component {
           const item = storyline[storyItem];
           if (i <= this.props.currentItem) {
             return (
-              <BubbleGroup key={storyItem}>
+              <BubbleGroup key={storyItem} callback={this.props.onBubbleRender}>
                 <Bubbles persona={role}>
                   {role === "user"
                     ? renderUserBubble(item)
