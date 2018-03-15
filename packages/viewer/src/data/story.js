@@ -3,7 +3,6 @@ import uuidv4 from "uuid/v4";
 import COVER from "./media/cover.png";
 import LOGO from "./media/logo.png";
 import KYLAND from "./media/hyland.png";
-import AVA from "./media/ava.png";
 import CHANDRAN from "./media/chandran.png";
 
 const story = {
@@ -44,7 +43,7 @@ const story = {
       bio:
         "Kevin Hyland, OBE (born 1963) is the United Kingdom’s first Independent Anti-Slavery Commissioner, leading efforts to tackle slavery and human trafficking. He was formerly head of the London Metropolitan Police Service’s Human Trafficking Unit.",
       title: "United Kingdom’s first Independent Anti-Slavery Commissioner",
-      avatar: AVA,
+      avatar: KYLAND,
       color: "#73d1fb",
       srcText: ``,
       storyline: [

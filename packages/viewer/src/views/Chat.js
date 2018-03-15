@@ -96,7 +96,6 @@ export default class ChatView extends Component {
       storyDetailsModal: false,
       currentItem: 0
     };
-    this.carryOn = this.carryOn.bind(this);
     this.respond = this.respond.bind(this);
     this.respondWithADiss = this.respondWithADiss.bind(this);
     this.respondWithAnEmo = this.respondWithAnEmo.bind(this);
@@ -105,7 +104,7 @@ export default class ChatView extends Component {
     this.toggleIntervieweeModal = this.toggleIntervieweeModal.bind(this);
     this.toggleMoreHelper = this.toggleMoreHelper.bind(this);
   }
-  componentDidUpdate(prevProps) {
+  componentDidUpdate() {
     const { interviewees } = this.props.story;
     const { chatId } = this.props.params;
     const intervieweeIndex = interviewees.findIndex(
@@ -164,9 +163,6 @@ export default class ChatView extends Component {
       this.setState({ currentItem: this.state.currentItem + 1 });
     } else console.log("end of the story");
     // setTimeout(this.carryOn, 350);
-  }
-  carryOn() {
-    console.log("carryOn");
   }
   render() {
     const { story } = this.props;

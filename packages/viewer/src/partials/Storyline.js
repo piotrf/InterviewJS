@@ -1,5 +1,5 @@
 /* eslint react/no-danger: 0 */
-import { arrayOf, func, object } from "prop-types";
+import { arrayOf, object } from "prop-types";
 import css from "styled-components";
 import React, { Component } from "react";
 
@@ -34,7 +34,7 @@ const Push = css.div`
 export default class Storyline extends Component {
   constructor(props) {
     super(props);
-    this.state = { currentItem: 0 };
+    this.state = {};
     this.scrollToBottom = this.scrollToBottom.bind(this);
   }
   componentDidMount() {
