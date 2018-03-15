@@ -92,41 +92,41 @@ export default class ChatView extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      currentItem: 0,
       emotHelper: false,
       intervieweeModal: false,
       moreHelper: false,
-      storyDetailsModal: false,
-      currentItem: 0
+      storyDetailsModal: false
     };
     this.respondWithADiss = this.respondWithADiss.bind(this);
     this.respondWithAnEmo = this.respondWithAnEmo.bind(this);
     this.respondWithScriptedAction = this.respondWithScriptedAction.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
     this.toggleToolbar = this.toggleToolbar.bind(this);
+
+    /* assign some globally necessary data */
+    const { interviewees } = this.props.story;
+    const intervieweeIndex = interviewees.findIndex(
+      (item) => item.id === this.props.params.chatId
+    );
+    this.interviewee = interviewees[intervieweeIndex];
+    this.story = this.props.story;
+    this.storyline = interviewees[intervieweeIndex].storyline;
   }
   componentDidUpdate() {
-    const { interviewees } = this.props.story;
-    const { chatId } = this.props.params;
-    const intervieweeIndex = interviewees.findIndex(
-      (interviewee) => interviewee.id === chatId
-    );
-    const { storyline } = interviewees[intervieweeIndex];
+    const { currentItem } = this.state;
+    const thisBubbleRole = this.storyline[currentItem].role;
+    const nextBubbleRole = this.storyline[currentItem + 1].role;
 
-    const thisBubble = storyline[this.state.currentItem];
-    const nextBubble = storyline[this.state.currentItem + 1];
-
-    if (this.state.currentItem < storyline.length - 1) {
-      if (thisBubble.role === "user" && thisBubble.role !== nextBubble.role) {
-        this.setState({ currentItem: this.state.currentItem + 1 });
+    if (currentItem < this.storyline.length - 1) {
+      if (thisBubbleRole === "user" && thisBubbleRole !== nextBubbleRole) {
+        this.setState({ currentItem: currentItem + 1 });
       }
       if (
-        thisBubble.role === "interviewee" &&
-        thisBubble.role === nextBubble.role
+        thisBubbleRole === "interviewee" &&
+        thisBubbleRole === nextBubbleRole
       ) {
-        setTimeout(
-          () => this.setState({ currentItem: this.state.currentItem + 1 }),
-          1050
-        );
+        setTimeout(() => this.setState({ currentItem: currentItem + 1 }), 1050);
       }
     }
     return null;
@@ -141,14 +141,7 @@ export default class ChatView extends Component {
   /* response handlers */
 
   respondWithScriptedAction() {
-    const { interviewees } = this.props.story;
-    const { chatId } = this.props.params;
-    const intervieweeIndex = interviewees.findIndex(
-      (interviewee) => interviewee.id === chatId
-    );
-    const { storyline } = interviewees[intervieweeIndex];
-
-    if (this.state.currentItem < storyline.length - 1) {
+    if (this.state.currentItem < this.storyline.length - 1) {
       this.setState({ currentItem: this.state.currentItem + 1 });
     } else console.log("end of the story");
   }
@@ -162,15 +155,9 @@ export default class ChatView extends Component {
   }
 
   render() {
-    const { story } = this.props;
-    const { interviewees } = story;
-    const { chatId } = this.props.params;
-    const intervieweeIndex = interviewees.findIndex(
-      (interviewee) => interviewee.id === chatId
-    );
-    const interviewee = interviewees[intervieweeIndex];
+    const { currentItem } = this.state;
 
-    /* gateway actions */
+    /* runAwayActions actions */
     const runAwayActions = [
       <Action
         fixed
@@ -191,14 +178,46 @@ export default class ChatView extends Component {
       </Action>
     ];
 
+    /* emoActions */
+    const emoActions = [
+      <Action iconic onClick={() => this.respondWithAnEmo("smile")} key="smile">
+        <Icon name="smile" size="l" />
+      </Action>,
+      <Action iconic onClick={() => this.respondWithAnEmo("sad")} key="sad">
+        <Icon name="sad" size="l" />
+      </Action>,
+      <Action iconic onClick={() => this.respondWithAnEmo("angry")} key="angry">
+        <Icon name="angry" size="l" />
+      </Action>,
+      <Action
+        iconic
+        onClick={() => this.respondWithAnEmo("shocked")}
+        key="shocked"
+      >
+        <Icon name="shocked" size="l" />
+      </Action>,
+      <Action
+        iconic
+        onClick={() => this.respondWithAnEmo("neutral")}
+        key="neutral"
+      >
+        <Icon name="neutral" size="l" />
+      </Action>,
+      <Action
+        iconic
+        onClick={() => this.respondWithAnEmo("wondering")}
+        key="wondering"
+      >
+        <Icon name="wondering" size="l" />
+      </Action>
+    ];
+
     const renderUserActions = () => {
-      const { storyline } = interviewee;
-      const { currentItem } = this.state;
-      if (currentItem < storyline.length - 1) {
-        const { content } = storyline[currentItem + 1];
+      if (currentItem < this.storyline.length - 1) {
+        const { content } = this.storyline[currentItem + 1];
         const action1 = content[0];
         const action2 = content[1];
-        if (storyline[currentItem + 1].role === "user") {
+        if (this.storyline[currentItem + 1].role === "user") {
           return [
             action1.enabled ? (
               <Action
@@ -235,8 +254,8 @@ export default class ChatView extends Component {
               <Icon name="arrow-left" size="x" />
             </Action>
             <Action onClick={() => this.toggleModal("intervieweeModal")}>
-              <Tip title={interviewee.name}>
-                <Avatar image={interviewee.avatar} />
+              <Tip title={this.interviewee.name}>
+                <Avatar image={this.interviewee.avatar} />
               </Tip>
             </Action>
             <Action
@@ -250,9 +269,9 @@ export default class ChatView extends Component {
         <PageBody flex={[1, 1, `100%`]}>
           <Storyline
             carryOn={this.carryOn}
-            currentItem={this.state.currentItem}
-            interviewee={interviewee}
-            storyline={interviewee.storyline}
+            currentItem={currentItem}
+            interviewee={this.interviewee}
+            storyline={this.storyline}
           />
         </PageBody>
         <PageFoot flex={[0, 0, `80px`]}>
@@ -265,7 +284,9 @@ export default class ChatView extends Component {
               >
                 <Icon name="vdots" />
               </Action>
+
               {renderUserActions()}
+
               <Action
                 iconic
                 onClick={() => this.toggleToolbar("emotHelper")}
@@ -281,27 +302,7 @@ export default class ChatView extends Component {
             ) : null}
             {this.state.emotHelper ? (
               <ActionbarHelper padded shift emo>
-                <Action iconic onClick={() => this.respondWithAnEmo("smile")}>
-                  <Icon name="smile" size="l" />
-                </Action>
-                <Action iconic onClick={() => this.respondWithAnEmo("sad")}>
-                  <Icon name="sad" size="l" />
-                </Action>
-                <Action iconic onClick={() => this.respondWithAnEmo("angry")}>
-                  <Icon name="angry" size="l" />
-                </Action>
-                <Action iconic onClick={() => this.respondWithAnEmo("shocked")}>
-                  <Icon name="shocked" size="l" />
-                </Action>
-                <Action iconic onClick={() => this.respondWithAnEmo("neutral")}>
-                  <Icon name="neutral" size="l" />
-                </Action>
-                <Action
-                  iconic
-                  onClick={() => this.respondWithAnEmo("wondering")}
-                >
-                  <Icon name="wondering" size="l" />
-                </Action>
+                {emoActions}
               </ActionbarHelper>
             ) : null}
           </Container>
@@ -313,7 +314,7 @@ export default class ChatView extends Component {
           cta="Get back to chat"
           handleClose={() => this.toggleModal("intervieweeModal")}
           handleSubmit={() => this.toggleModal("intervieweeModal")}
-          interviewee={interviewee}
+          interviewee={this.interviewee}
           isOpen={this.state.intervieweeModal !== null}
           key="intervieweeModal"
         />
@@ -323,7 +324,7 @@ export default class ChatView extends Component {
           handleClose={() => this.toggleModal("storyDetailsModal")}
           isOpen={this.state.storyDetailsModal}
           key="detailsModal"
-          story={story}
+          story={this.story}
         />
       ) : null
     ];
