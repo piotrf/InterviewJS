@@ -98,7 +98,7 @@ export default class ChatView extends Component {
       storyDetailsModal: false,
       currentItem: 0
     };
-    this.respond = this.respond.bind(this);
+    this.respondWithScriptedAction = this.respondWithScriptedAction.bind(this);
     this.respondWithADiss = this.respondWithADiss.bind(this);
     this.respondWithAnEmo = this.respondWithAnEmo.bind(this);
     this.toggleDetailsModal = this.toggleDetailsModal.bind(this);
@@ -145,15 +145,7 @@ export default class ChatView extends Component {
   toggleMoreHelper() {
     this.setState({ moreHelper: !this.state.moreHelper, emotHelper: false });
   }
-  respondWithAnEmo(emo) {
-    this.setState({ emotHelper: false });
-    console.log("respondWithAnEmo: ", emo);
-  }
-  respondWithADiss() {
-    this.setState({ moreHelper: false });
-    console.log("respondWithADiss");
-  }
-  respond() {
+  respondWithScriptedAction() {
     const { interviewees } = this.props.story;
     const { chatId } = this.props.params;
     const intervieweeIndex = interviewees.findIndex(
@@ -164,7 +156,14 @@ export default class ChatView extends Component {
     if (this.state.currentItem < storyline.length - 1) {
       this.setState({ currentItem: this.state.currentItem + 1 });
     } else console.log("end of the story");
-    // setTimeout(this.carryOn, 350);
+  }
+  respondWithADiss() {
+    this.setState({ moreHelper: false });
+    console.log("respondWithADiss");
+  }
+  respondWithAnEmo(emo) {
+    this.setState({ emotHelper: false });
+    console.log("respondWithAnEmo: ", emo);
   }
   render() {
     const { story } = this.props;
@@ -174,6 +173,28 @@ export default class ChatView extends Component {
       (interviewee) => interviewee.id === chatId
     );
     const interviewee = interviewees[intervieweeIndex];
+
+    /* gateway actions */
+    const runAwayActions = [
+      <Action
+        fixed
+        key="talkToSomebodyElse"
+        onClick={this.respondWithADiss}
+        primary
+      >
+        I want to talk to somebody else
+      </Action>,
+      <Action
+        fixed
+        key="doneChatting"
+        onClick={() => this.props.router.push("/outro")}
+        primary
+        tone="negative"
+      >
+        I’m done chatting
+      </Action>
+    ];
+
     const renderUserActions = () => {
       const { storyline } = interviewee;
       const { currentItem } = this.state;
@@ -184,37 +205,29 @@ export default class ChatView extends Component {
         if (storyline[currentItem + 1].role === "user") {
           return [
             action1.enabled ? (
-              <Action primary fixed onClick={this.respond} key="ignoreaction">
+              <Action
+                fixed
+                key="ignoreaction"
+                onClick={this.respondWithScriptedAction}
+                primary
+              >
                 {action1.value}
               </Action>
             ) : null,
             action2.enabled ? (
-              <Action primary fixed onClick={this.respond} key="forwardaction">
+              <Action
+                fixed
+                key="forwardaction"
+                onClick={this.respondWithScriptedAction}
+                primary
+              >
                 {action2.value}
               </Action>
             ) : null
           ];
         }
       } else {
-        return [
-          <Action
-            fixed
-            primary
-            onClick={this.respondWithADiss}
-            key="somebodyelse"
-          >
-            I want to talk to somebody else
-          </Action>,
-          <Action
-            fixed
-            onClick={() => this.props.router.push("/outro")}
-            primary
-            tone="negative"
-            key="donechatting"
-          >
-            I’m done chatting
-          </Action>
-        ];
+        return runAwayActions;
       }
       return null;
     };
@@ -256,17 +269,7 @@ export default class ChatView extends Component {
             </Actionbar>
             {this.state.moreHelper ? (
               <ActionbarHelper shift dir="row">
-                <Action fixed primary onClick={this.respondWithADiss}>
-                  I want to talk to somebody else
-                </Action>
-                <Action
-                  fixed
-                  onClick={() => this.props.router.push("/outro")}
-                  primary
-                  tone="negative"
-                >
-                  I’m done chatting
-                </Action>
+                {runAwayActions}
               </ActionbarHelper>
             ) : null}
             {this.state.emotHelper ? (
