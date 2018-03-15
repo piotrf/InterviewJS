@@ -238,6 +238,7 @@ export default class ChatView extends Component {
             carryOn={this.carryOn}
             currentItem={this.state.currentItem}
             interviewee={interviewee}
+            storyline={interviewee.storyline}
           />
         </PageBody>
         <PageFoot flex={[0, 0, `auto`]}>

@@ -41,15 +41,17 @@ export default class Storyline extends Component {
     setTimeout(this.scrollToBottom, 300);
   }
   componentDidUpdate(prevProps) {
-    if (
-      this.props.interviewee.storyline[this.props.currentItem].role === "user"
-    ) {
-      if (prevProps.currentItem < this.props.currentItem) {
-        setTimeout(this.scrollToBottom, 0);
+    if (this.props.currentItem < this.props.storyline.length - 1) {
+      if (
+        this.props.interviewee.storyline[this.props.currentItem].role === "user"
+      ) {
+        if (prevProps.currentItem < this.props.currentItem) {
+          setTimeout(this.scrollToBottom, 0);
+        }
       }
-    }
-    if (prevProps.currentItem < this.props.currentItem) {
-      setTimeout(this.scrollToBottom, 400);
+      if (prevProps.currentItem < this.props.currentItem) {
+        setTimeout(this.scrollToBottom, 400);
+      }
     }
   }
   scrollToBottom() {
