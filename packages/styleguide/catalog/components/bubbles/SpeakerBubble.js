@@ -26,7 +26,8 @@ const SystemBubble = css.div`
     theme.backg ? theme.backg : skin.speakerBackg};
     &,
     & * {
-      color: ${({ theme }) => calcColor(
+      color: ${({ theme }) =>
+        calcColor(
           theme.backg ? theme.backg : skin.speakerBackg,
           color.blueBlk
         )} !important;
@@ -47,6 +48,8 @@ const SystemBubble = css.div`
   &:only-child {
     border-radius: ${radius.h} ${radius.h} ${radius.h} ${radius.s};
   }
+
+
   ${({ onDragStart }) =>
     onDragStart
       ? `
@@ -61,6 +64,17 @@ const SystemBubble = css.div`
          ${setSpace("phs")};
          width: 100%;`
        : ``};
+       
+   /* this is for internal use only to customise auth screen bubbles */
+   &,
+   & * {
+     ${({ theme }) =>
+       theme.color
+         ? `
+     color: ${theme.color} !important;
+     `
+         : ``}
+   }
 `;
 
 SystemBubble.propTypes = {

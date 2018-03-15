@@ -21,11 +21,9 @@ export default class AuthModal extends React.Component {
     this.state = {};
 
     this.uiConfig = {
-      signInFlow: 'popup',
-      signInSuccessUrl: '/signedIn',
-      signInOptions: [
-        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-      ],
+      signInFlow: "popup",
+      signInSuccessUrl: "/signedIn",
+      signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
       callbacks: {
         signInSuccess: () => false
       }
@@ -34,11 +32,9 @@ export default class AuthModal extends React.Component {
 
   componentDidMount(limit = 10) {
     if (this.auth) {
-      firebase.auth().onAuthStateChanged(
-          (user) => {
-            if (user) this.props.handleAuthentication(user);
-          }
-      );
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) this.props.handleAuthentication(user);
+      });
     } else if (limit > 0) {
       setTimeout(() => this.componentDidMount(limit - 1), 100);
     }
@@ -86,7 +82,13 @@ export default class AuthModal extends React.Component {
           </ModalBody>
           <ModalFoot>
             <Animator delay={3000}>
-              <StyledFirebaseAuth uiConfig={this.uiConfig} firebaseAuth={firebase.auth()} ref={(auth) => { this.auth = auth; }} />
+              <StyledFirebaseAuth
+                uiConfig={this.uiConfig}
+                firebaseAuth={firebase.auth()}
+                ref={(auth) => {
+                  this.auth = auth;
+                }}
+              />
             </Animator>
           </ModalFoot>
         </Modal>
