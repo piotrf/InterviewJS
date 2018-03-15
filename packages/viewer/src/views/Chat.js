@@ -140,7 +140,8 @@ export default class ChatView extends Component {
 
   /* response handlers */
 
-  respondWithScriptedAction() {
+  respondWithScriptedAction(type) {
+    console.log("respondWithScriptedAction: ", type);
     if (this.state.currentItem < this.storyline.length - 1) {
       this.setState({ currentItem: this.state.currentItem + 1 });
     } else console.log("end of the story");
@@ -157,7 +158,6 @@ export default class ChatView extends Component {
   render() {
     const { currentItem } = this.state;
 
-    /* runAwayActions actions */
     const runAwayActions = [
       <Action
         fixed
@@ -178,7 +178,6 @@ export default class ChatView extends Component {
       </Action>
     ];
 
-    /* emoActions */
     const emoActions = [
       <Action iconic onClick={() => this.respondWithAnEmo("smile")} key="smile">
         <Icon name="smile" size="l" />
@@ -213,39 +212,35 @@ export default class ChatView extends Component {
     ];
 
     const renderUserActions = () => {
-      if (currentItem < this.storyline.length - 1) {
-        const { content } = this.storyline[currentItem + 1];
-        const action1 = content[0];
-        const action2 = content[1];
-        if (this.storyline[currentItem + 1].role === "user") {
-          return [
-            action1.enabled ? (
-              <Action
-                fixed
-                key="ignoreaction"
-                onClick={this.respondWithScriptedAction}
-                primary
-              >
-                {action1.value}
-              </Action>
-            ) : null,
-            action2.enabled ? (
-              <Action
-                fixed
-                key="forwardaction"
-                onClick={this.respondWithScriptedAction}
-                primary
-              >
-                {action2.value}
-              </Action>
-            ) : null
-          ];
-        }
-      } else {
-        return runAwayActions;
-      }
-      return null;
+      const nextBubble = this.storyline[currentItem + 1];
+      const isNotTheLastBubble = currentItem < this.storyline.length - 1;
+      const nextOneIsUserBubble = nextBubble.role === "user";
+      console.log("isNotTheLastBubble: ", isNotTheLastBubble);
+      console.log("nextOneIsUserBubble: ", nextOneIsUserBubble);
+
+      return isNotTheLastBubble && nextOneIsUserBubble
+        ? nextBubble.content.map(
+            (action) =>
+              action.enabled ? (
+                <Action
+                  primary
+                  fixed
+                  onClick={() => this.respondWithScriptedAction(action.type)}
+                >
+                  {action.value}
+                </Action>
+              ) : null
+          )
+        : runAwayActions;
+
+      // if (isNotTheLastBubble && nextOneIsUserBubble) {
+      //   retun nextBubble.content.map(
+      //     (action) => (action.enabled ? <Action>{action.value}</Action> : null)
+      //   );
+      // }
+      // return runAwayActions;
     };
+
     return [
       <Page key="page">
         <Topbar>
@@ -284,9 +279,7 @@ export default class ChatView extends Component {
               >
                 <Icon name="vdots" />
               </Action>
-
               {renderUserActions()}
-
               <Action
                 iconic
                 onClick={() => this.toggleToolbar("emotHelper")}
@@ -295,16 +288,6 @@ export default class ChatView extends Component {
                 <Icon name="smile" />
               </Action>
             </Actionbar>
-            {this.state.moreHelper ? (
-              <ActionbarHelper shift dir="row">
-                {runAwayActions}
-              </ActionbarHelper>
-            ) : null}
-            {this.state.emotHelper ? (
-              <ActionbarHelper padded shift emo>
-                {emoActions}
-              </ActionbarHelper>
-            ) : null}
           </Container>
         </PageFoot>
       </Page>,
