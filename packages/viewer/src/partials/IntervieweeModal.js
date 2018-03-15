@@ -14,7 +14,8 @@ import {
   PageSubtitle,
   PageTitle,
   Separator,
-  TextBlock
+  TextBlock,
+  color
 } from "interviewjs-styleguide";
 
 export default class IntervieweeModal extends React.Component {
@@ -30,6 +31,7 @@ export default class IntervieweeModal extends React.Component {
         isOpen={this.props.isOpen}
         onRequestClose={this.props.handleClose}
         role="dialog"
+        style={{ overlay: { background: color.shadowM } }}
       >
         <Modal {...this.props}>
           <ModalHead>
