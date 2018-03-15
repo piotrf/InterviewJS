@@ -7,4 +7,5 @@ export { default as PageBody } from "./PageBody";
 export { default as PageHead } from "./PageHead";
 export { default as ShareModal } from "./ShareModal";
 export { default as StoryDetailsModal } from "./StoryDetailsModal";
+export { default as Storyline } from "./Storyline";
 export { default as Topbar } from "./Topbar";

@@ -15,7 +15,7 @@ import {
   setSpace
 } from "interviewjs-styleguide";
 
-import { IntervieweeModal, StoryDetailsModal } from "../partials";
+import { IntervieweeModal, StoryDetailsModal, Storyline } from "../partials";
 
 const Page = css.div`
   background: ${color.white};
@@ -24,6 +24,16 @@ const Page = css.div`
   text-align: center;
   display: flex;
   flex-direction: column;
+`;
+
+const PageBody = css(Container)`
+  margin-top: 80px;
+  padding: 0;
+`;
+
+const PageFoot = css(Container)`
+  ${setSpace("pvm")};
+  border-top: 1px solid ${color.greyHL};
 `;
 
 const Topbar = css(Container)`
@@ -46,14 +56,6 @@ const TopbarHolder = css(Container)`
   display: flex;
   justify-content: space-between;
   width: 100%;
-`;
-
-const PageBody = css(Container)`
-  padding-top: 80px;
-`;
-
-const PageFoot = css(Container)`
-  ${setSpace("pvm")};
 `;
 
 const ActionbarHelper = css(Container)`
@@ -91,14 +93,44 @@ export default class ChatView extends Component {
       emotHelper: false,
       intervieweeModal: false,
       moreHelper: false,
-      storyDetailsModal: false
+      storyDetailsModal: false,
+      currentItem: 0
     };
+    this.carryOn = this.carryOn.bind(this);
+    this.respond = this.respond.bind(this);
     this.respondWithADiss = this.respondWithADiss.bind(this);
     this.respondWithAnEmo = this.respondWithAnEmo.bind(this);
     this.toggleDetailsModal = this.toggleDetailsModal.bind(this);
     this.toggleEmotHelper = this.toggleEmotHelper.bind(this);
     this.toggleIntervieweeModal = this.toggleIntervieweeModal.bind(this);
     this.toggleMoreHelper = this.toggleMoreHelper.bind(this);
+  }
+  componentDidUpdate(prevProps) {
+    const { interviewees } = this.props.story;
+    const { chatId } = this.props.params;
+    const intervieweeIndex = interviewees.findIndex(
+      (interviewee) => interviewee.id === chatId
+    );
+    const { storyline } = interviewees[intervieweeIndex];
+
+    const thisBubble = storyline[this.state.currentItem];
+    const nextBubble = storyline[this.state.currentItem + 1];
+
+    if (this.state.currentItem < storyline.length - 1) {
+      if (thisBubble.role === "user" && thisBubble.role !== nextBubble.role) {
+        this.setState({ currentItem: this.state.currentItem + 1 });
+      }
+      if (
+        thisBubble.role === "interviewee" &&
+        thisBubble.role === nextBubble.role
+      ) {
+        setTimeout(
+          () => this.setState({ currentItem: this.state.currentItem + 1 }),
+          1050
+        );
+      }
+    }
+    return null;
   }
   toggleDetailsModal() {
     this.setState({ storyDetailsModal: !this.state.storyDetailsModal });
@@ -114,11 +146,27 @@ export default class ChatView extends Component {
   }
   respondWithAnEmo(emo) {
     this.setState({ emotHelper: false });
-    console.log(emo);
+    console.log("respondWithAnEmo: ", emo);
   }
   respondWithADiss() {
     this.setState({ moreHelper: false });
     console.log("respondWithADiss");
+  }
+  respond() {
+    const { interviewees } = this.props.story;
+    const { chatId } = this.props.params;
+    const intervieweeIndex = interviewees.findIndex(
+      (interviewee) => interviewee.id === chatId
+    );
+    const { storyline } = interviewees[intervieweeIndex];
+
+    if (this.state.currentItem < storyline.length - 1) {
+      this.setState({ currentItem: this.state.currentItem + 1 });
+    } else console.log("end of the story");
+    // setTimeout(this.carryOn, 350);
+  }
+  carryOn() {
+    console.log("carryOn");
   }
   render() {
     const { story } = this.props;
@@ -128,6 +176,50 @@ export default class ChatView extends Component {
       (interviewee) => interviewee.id === chatId
     );
     const interviewee = interviewees[intervieweeIndex];
+    const renderUserActions = () => {
+      const { storyline } = interviewee;
+      const { currentItem } = this.state;
+      if (currentItem < storyline.length - 1) {
+        const { content } = storyline[currentItem + 1];
+        const action1 = content[0];
+        const action2 = content[1];
+        if (storyline[currentItem + 1].role === "user") {
+          return [
+            action1.enabled ? (
+              <Action primary fixed onClick={this.respond} key="ignoreaction">
+                {action1.value}
+              </Action>
+            ) : null,
+            action2.enabled ? (
+              <Action primary fixed onClick={this.respond} key="forwardaction">
+                {action2.value}
+              </Action>
+            ) : null
+          ];
+        }
+      } else {
+        return [
+          <Action
+            fixed
+            primary
+            onClick={this.respondWithADiss}
+            key="somebodyelse"
+          >
+            I want to talk to somebody else
+          </Action>,
+          <Action
+            fixed
+            onClick={() => this.props.router.push("/outro")}
+            primary
+            tone="negative"
+            key="donechatting"
+          >
+            I’m done chatting
+          </Action>
+        ];
+      }
+      return null;
+    };
     return [
       <Page key="page">
         <Topbar>
@@ -145,16 +237,20 @@ export default class ChatView extends Component {
             </Action>
           </TopbarHolder>
         </Topbar>
-        <PageBody flex={[1, 1, `100%`]}>Body</PageBody>
+        <PageBody flex={[1, 1, `100%`]}>
+          <Storyline
+            carryOn={this.carryOn}
+            currentItem={this.state.currentItem}
+            interviewee={interviewee}
+          />
+        </PageBody>
         <PageFoot flex={[0, 0, `auto`]}>
           <Container limit="x" padded>
             <Actionbar satellite="both">
               <Action iconic onClick={this.toggleMoreHelper} secondary>
                 <Icon name="vdots" />
               </Action>
-              <Action primary fixed>
-                Move on
-              </Action>
+              {renderUserActions()}
               <Action iconic onClick={this.toggleEmotHelper} secondary>
                 <Icon name="smile" />
               </Action>

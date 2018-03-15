@@ -64,7 +64,7 @@ const SystemBubble = css.div`
          ${setSpace("phs")};
          width: 100%;`
        : ``};
-       
+
    /* this is for internal use only to customise auth screen bubbles */
    &,
    & * {
@@ -74,6 +74,16 @@ const SystemBubble = css.div`
      color: ${theme.color} !important;
      `
          : ``}
+   }
+
+   /* fill preloader based on the bubble colour */
+
+   & .ivjs-preloader > div {
+     background: ${({ theme }) =>
+       calcColor(
+         theme.backg ? theme.backg : skin.speakerBackg,
+         color.blueBlk
+       )} !important;
    }
 `;
 

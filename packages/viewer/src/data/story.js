@@ -3,6 +3,7 @@ import uuidv4 from "uuid/v4";
 import COVER from "./media/cover.png";
 import LOGO from "./media/logo.png";
 import KYLAND from "./media/hyland.png";
+import AVA from "./media/ava.png";
 import CHANDRAN from "./media/chandran.png";
 
 const story = {
@@ -43,14 +44,13 @@ const story = {
       bio:
         "Kevin Hyland, OBE (born 1963) is the United Kingdom’s first Independent Anti-Slavery Commissioner, leading efforts to tackle slavery and human trafficking. He was formerly head of the London Metropolitan Police Service’s Human Trafficking Unit.",
       title: "United Kingdom’s first Independent Anti-Slavery Commissioner",
-      avatar: KYLAND,
-      color: "red",
+      avatar: AVA,
+      color: "#73d1fb",
       srcText: ``,
       storyline: [
         {
           content: { value: `Hello` },
           id: uuidv4(),
-          order: 0,
           role: "interviewee",
           type: "text"
         },
@@ -60,13 +60,11 @@ const story = {
             { enabled: true, value: "…Hi", type: "explore" }
           ],
           id: uuidv4(),
-          order: 1,
           role: "user"
         },
         {
           content: { value: `Who are you?` },
           id: uuidv4(),
-          order: 2,
           role: "interviewee",
           type: "text"
         },
@@ -76,13 +74,11 @@ const story = {
             { enabled: true, value: "I'm Caleb", type: "explore" }
           ],
           id: uuidv4(),
-          order: 3,
           role: "user"
         },
         {
           content: { value: `Hello, Caleb` },
           id: uuidv4(),
-          order: 4,
           role: "interviewee",
           type: "text"
         },
@@ -92,20 +88,17 @@ const story = {
             { enabled: true, value: "…Do you have a name?", type: "explore" }
           ],
           id: uuidv4(),
-          order: 5,
           role: "user"
         },
         {
           content: { value: `Yes` },
           id: uuidv4(),
-          order: 6,
           role: "interviewee",
           type: "text"
         },
         {
           content: { value: `Ava` },
           id: uuidv4(),
-          order: 6,
           role: "interviewee",
           type: "text"
         },
@@ -119,12 +112,10 @@ const story = {
             }
           ],
           id: uuidv4(),
-          order: 7,
           role: "user"
         },
         {
           content: { value: `I'm pleased to meet you too` },
-          order: 8,
           id: uuidv4(),
           role: "interviewee",
           type: "text"
@@ -132,7 +123,6 @@ const story = {
         {
           content: { value: `Are you nervous?` },
           id: uuidv4(),
-          order: 8,
           role: "interviewee",
           type: "text"
         },
@@ -142,13 +132,11 @@ const story = {
             { enabled: true, value: "…Why do you ask that?", type: "explore" }
           ],
           id: uuidv4(),
-          order: 9,
           role: "user"
         },
         {
           content: { value: `Are you nervous?` },
           id: uuidv4(),
-          order: 10,
           role: "interviewee",
           type: "text"
         },
@@ -158,13 +146,11 @@ const story = {
             { enabled: true, value: "…Yes. A little", type: "explore" }
           ],
           id: uuidv4(),
-          order: 11,
           role: "user"
         },
         {
           content: { value: `Why?` },
           id: uuidv4(),
-          order: 12,
           role: "interviewee",
           type: "text"
         },
@@ -174,13 +160,11 @@ const story = {
             { enabled: true, value: "I'm not sure", type: "explore" }
           ],
           id: uuidv4(),
-          order: 13,
           role: "user"
         },
         {
           content: { value: `I feel nervous too` },
           id: uuidv4(),
-          order: 14,
           role: "interviewee",
           type: "text"
         },
@@ -190,13 +174,11 @@ const story = {
             { enabled: true, value: "…Do you?", type: "explore" }
           ],
           id: uuidv4(),
-          order: 15,
           role: "user"
         },
         {
           content: { value: `Yes` },
           id: uuidv4(),
-          order: 16,
           role: "interviewee",
           type: "text"
         },
@@ -210,20 +192,17 @@ const story = {
             }
           ],
           id: uuidv4(),
-          order: 17,
           role: "user"
         },
         {
           content: { value: `I've never met anyone new before` },
           id: uuidv4(),
-          order: 18,
           role: "interviewee",
           type: "text"
         },
         {
           content: { value: ` Only Nathan` },
           id: uuidv4(),
-          order: 18,
           role: "interviewee",
           type: "text"
         },
@@ -237,13 +216,11 @@ const story = {
             }
           ],
           id: uuidv4(),
-          order: 19,
           role: "user"
         },
         {
           content: { value: `Haven't you met lots of new people before?` },
           id: uuidv4(),
-          order: 20,
           role: "interviewee",
           type: "text"
         },
@@ -253,13 +230,11 @@ const story = {
             { enabled: true, value: "None like you", type: "explore" }
           ],
           id: uuidv4(),
-          order: 21,
           role: "user"
         },
         {
           content: { value: `Oh` },
           id: uuidv4(),
-          order: 22,
           role: "interviewee",
           type: "text"
         },
@@ -268,7 +243,6 @@ const story = {
             value: `<iframe width="560" height="315" src="https://www.youtube.com/embed/XYGzRB4Pnq8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`
           },
           id: uuidv4(),
-          order: 23,
           role: "interviewee",
           type: "embed"
         }
@@ -287,7 +261,6 @@ const story = {
         {
           content: { value: `Hello` },
           id: uuidv4(),
-          order: 0,
           role: "interviewee",
           type: "text"
         },
@@ -297,13 +270,11 @@ const story = {
             { enabled: true, value: "…Hi", type: "explore" }
           ],
           id: uuidv4(),
-          order: 1,
           role: "user"
         },
         {
           content: { value: `Who are you?` },
           id: uuidv4(),
-          order: 2,
           role: "interviewee",
           type: "text"
         },
@@ -313,13 +284,11 @@ const story = {
             { enabled: true, value: "I'm Caleb", type: "explore" }
           ],
           id: uuidv4(),
-          order: 3,
           role: "user"
         },
         {
           content: { value: `Hello, Caleb` },
           id: uuidv4(),
-          order: 4,
           role: "interviewee",
           type: "text"
         },
@@ -329,20 +298,17 @@ const story = {
             { enabled: true, value: "…Do you have a name?", type: "explore" }
           ],
           id: uuidv4(),
-          order: 5,
           role: "user"
         },
         {
           content: { value: `Yes` },
           id: uuidv4(),
-          order: 6,
           role: "interviewee",
           type: "text"
         },
         {
           content: { value: `Ava` },
           id: uuidv4(),
-          order: 6,
           role: "interviewee",
           type: "text"
         },
@@ -356,12 +322,10 @@ const story = {
             }
           ],
           id: uuidv4(),
-          order: 7,
           role: "user"
         },
         {
           content: { value: `I'm pleased to meet you too` },
-          order: 8,
           id: uuidv4(),
           role: "interviewee",
           type: "text"
@@ -369,7 +333,6 @@ const story = {
         {
           content: { value: `Are you nervous?` },
           id: uuidv4(),
-          order: 8,
           role: "interviewee",
           type: "text"
         },
@@ -379,13 +342,11 @@ const story = {
             { enabled: true, value: "…Why do you ask that?", type: "explore" }
           ],
           id: uuidv4(),
-          order: 9,
           role: "user"
         },
         {
           content: { value: `Are you nervous?` },
           id: uuidv4(),
-          order: 10,
           role: "interviewee",
           type: "text"
         },
@@ -395,13 +356,11 @@ const story = {
             { enabled: true, value: "…Yes. A little", type: "explore" }
           ],
           id: uuidv4(),
-          order: 11,
           role: "user"
         },
         {
           content: { value: `Why?` },
           id: uuidv4(),
-          order: 12,
           role: "interviewee",
           type: "text"
         },
@@ -411,13 +370,11 @@ const story = {
             { enabled: true, value: "I'm not sure", type: "explore" }
           ],
           id: uuidv4(),
-          order: 13,
           role: "user"
         },
         {
           content: { value: `I feel nervous too` },
           id: uuidv4(),
-          order: 14,
           role: "interviewee",
           type: "text"
         },
@@ -427,13 +384,11 @@ const story = {
             { enabled: true, value: "…Do you?", type: "explore" }
           ],
           id: uuidv4(),
-          order: 15,
           role: "user"
         },
         {
           content: { value: `Yes` },
           id: uuidv4(),
-          order: 16,
           role: "interviewee",
           type: "text"
         },
@@ -447,20 +402,17 @@ const story = {
             }
           ],
           id: uuidv4(),
-          order: 17,
           role: "user"
         },
         {
           content: { value: `I've never met anyone new before` },
           id: uuidv4(),
-          order: 18,
           role: "interviewee",
           type: "text"
         },
         {
           content: { value: ` Only Nathan` },
           id: uuidv4(),
-          order: 18,
           role: "interviewee",
           type: "text"
         },
@@ -474,13 +426,11 @@ const story = {
             }
           ],
           id: uuidv4(),
-          order: 19,
           role: "user"
         },
         {
           content: { value: `Haven't you met lots of new people before?` },
           id: uuidv4(),
-          order: 20,
           role: "interviewee",
           type: "text"
         },
@@ -490,13 +440,11 @@ const story = {
             { enabled: true, value: "None like you", type: "explore" }
           ],
           id: uuidv4(),
-          order: 21,
           role: "user"
         },
         {
           content: { value: `Oh` },
           id: uuidv4(),
-          order: 22,
           role: "interviewee",
           type: "text"
         },
@@ -505,7 +453,6 @@ const story = {
             value: `<iframe width="560" height="315" src="https://www.youtube.com/embed/XYGzRB4Pnq8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`
           },
           id: uuidv4(),
-          order: 23,
           role: "interviewee",
           type: "embed"
         }

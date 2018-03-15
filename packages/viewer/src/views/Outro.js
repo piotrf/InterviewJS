@@ -5,7 +5,6 @@ import { object, shape, string } from "prop-types";
 import {
   Action,
   Actionbar,
-  Container,
   PageSubtitle,
   Separator
 } from "interviewjs-styleguide";

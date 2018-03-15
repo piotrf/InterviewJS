@@ -54,7 +54,6 @@ const stories = [
           {
             content: { value: `Hello` },
             id: uuidv4(),
-            order: 0,
             role: "interviewee",
             type: "text"
           },
@@ -64,13 +63,11 @@ const stories = [
               { enabled: true, value: "…Hi", type: "explore" }
             ],
             id: uuidv4(),
-            order: 1,
             role: "user"
           },
           {
             content: { value: `Who are you?` },
             id: uuidv4(),
-            order: 2,
             role: "interviewee",
             type: "text"
           },
@@ -80,13 +77,11 @@ const stories = [
               { enabled: true, value: "I'm Caleb", type: "explore" }
             ],
             id: uuidv4(),
-            order: 3,
             role: "user"
           },
           {
             content: { value: `Hello, Caleb` },
             id: uuidv4(),
-            order: 4,
             role: "interviewee",
             type: "text"
           },
@@ -96,20 +91,17 @@ const stories = [
               { enabled: true, value: "…Do you have a name?", type: "explore" }
             ],
             id: uuidv4(),
-            order: 5,
             role: "user"
           },
           {
             content: { value: `Yes` },
             id: uuidv4(),
-            order: 6,
             role: "interviewee",
             type: "text"
           },
           {
             content: { value: `Ava` },
             id: uuidv4(),
-            order: 6,
             role: "interviewee",
             type: "text"
           },
@@ -123,12 +115,10 @@ const stories = [
               }
             ],
             id: uuidv4(),
-            order: 7,
             role: "user"
           },
           {
             content: { value: `I'm pleased to meet you too` },
-            order: 8,
             id: uuidv4(),
             role: "interviewee",
             type: "text"
@@ -136,7 +126,6 @@ const stories = [
           {
             content: { value: `Are you nervous?` },
             id: uuidv4(),
-            order: 8,
             role: "interviewee",
             type: "text"
           },
@@ -146,13 +135,11 @@ const stories = [
               { enabled: true, value: "…Why do you ask that?", type: "explore" }
             ],
             id: uuidv4(),
-            order: 9,
             role: "user"
           },
           {
             content: { value: `Are you nervous?` },
             id: uuidv4(),
-            order: 10,
             role: "interviewee",
             type: "text"
           },
@@ -162,13 +149,11 @@ const stories = [
               { enabled: true, value: "…Yes. A little", type: "explore" }
             ],
             id: uuidv4(),
-            order: 11,
             role: "user"
           },
           {
             content: { value: `Why?` },
             id: uuidv4(),
-            order: 12,
             role: "interviewee",
             type: "text"
           },
@@ -178,13 +163,11 @@ const stories = [
               { enabled: true, value: "I'm not sure", type: "explore" }
             ],
             id: uuidv4(),
-            order: 13,
             role: "user"
           },
           {
             content: { value: `I feel nervous too` },
             id: uuidv4(),
-            order: 14,
             role: "interviewee",
             type: "text"
           },
@@ -194,13 +177,11 @@ const stories = [
               { enabled: true, value: "…Do you?", type: "explore" }
             ],
             id: uuidv4(),
-            order: 15,
             role: "user"
           },
           {
             content: { value: `Yes` },
             id: uuidv4(),
-            order: 16,
             role: "interviewee",
             type: "text"
           },
@@ -214,20 +195,17 @@ const stories = [
               }
             ],
             id: uuidv4(),
-            order: 17,
             role: "user"
           },
           {
             content: { value: `I've never met anyone new before` },
             id: uuidv4(),
-            order: 18,
             role: "interviewee",
             type: "text"
           },
           {
             content: { value: ` Only Nathan` },
             id: uuidv4(),
-            order: 18,
             role: "interviewee",
             type: "text"
           },
@@ -241,13 +219,11 @@ const stories = [
               }
             ],
             id: uuidv4(),
-            order: 19,
             role: "user"
           },
           {
             content: { value: `Haven't you met lots of new people before?` },
             id: uuidv4(),
-            order: 20,
             role: "interviewee",
             type: "text"
           },
@@ -257,13 +233,11 @@ const stories = [
               { enabled: true, value: "None like you", type: "explore" }
             ],
             id: uuidv4(),
-            order: 21,
             role: "user"
           },
           {
             content: { value: `Oh` },
             id: uuidv4(),
-            order: 22,
             role: "interviewee",
             type: "text"
           },
@@ -272,7 +246,6 @@ const stories = [
               value: `<iframe width="560" height="315" src="https://www.youtube.com/embed/XYGzRB4Pnq8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`
             },
             id: uuidv4(),
-            order: 23,
             role: "interviewee",
             type: "embed"
           }
@@ -291,7 +264,6 @@ const stories = [
           {
             content: { value: `Hello` },
             id: uuidv4(),
-            order: 0,
             role: "interviewee",
             type: "text"
           },
@@ -301,13 +273,11 @@ const stories = [
               { enabled: true, value: "…Hi", type: "explore" }
             ],
             id: uuidv4(),
-            order: 1,
             role: "user"
           },
           {
             content: { value: `Who are you?` },
             id: uuidv4(),
-            order: 2,
             role: "interviewee",
             type: "text"
           },
@@ -317,13 +287,11 @@ const stories = [
               { enabled: true, value: "I'm Caleb", type: "explore" }
             ],
             id: uuidv4(),
-            order: 3,
             role: "user"
           },
           {
             content: { value: `Hello, Caleb` },
             id: uuidv4(),
-            order: 4,
             role: "interviewee",
             type: "text"
           },
@@ -333,20 +301,17 @@ const stories = [
               { enabled: true, value: "…Do you have a name?", type: "explore" }
             ],
             id: uuidv4(),
-            order: 5,
             role: "user"
           },
           {
             content: { value: `Yes` },
             id: uuidv4(),
-            order: 6,
             role: "interviewee",
             type: "text"
           },
           {
             content: { value: `Ava` },
             id: uuidv4(),
-            order: 6,
             role: "interviewee",
             type: "text"
           },
@@ -360,12 +325,10 @@ const stories = [
               }
             ],
             id: uuidv4(),
-            order: 7,
             role: "user"
           },
           {
             content: { value: `I'm pleased to meet you too` },
-            order: 8,
             id: uuidv4(),
             role: "interviewee",
             type: "text"
@@ -373,7 +336,6 @@ const stories = [
           {
             content: { value: `Are you nervous?` },
             id: uuidv4(),
-            order: 8,
             role: "interviewee",
             type: "text"
           },
@@ -383,13 +345,11 @@ const stories = [
               { enabled: true, value: "…Why do you ask that?", type: "explore" }
             ],
             id: uuidv4(),
-            order: 9,
             role: "user"
           },
           {
             content: { value: `Are you nervous?` },
             id: uuidv4(),
-            order: 10,
             role: "interviewee",
             type: "text"
           },
@@ -399,13 +359,11 @@ const stories = [
               { enabled: true, value: "…Yes. A little", type: "explore" }
             ],
             id: uuidv4(),
-            order: 11,
             role: "user"
           },
           {
             content: { value: `Why?` },
             id: uuidv4(),
-            order: 12,
             role: "interviewee",
             type: "text"
           },
@@ -415,13 +373,11 @@ const stories = [
               { enabled: true, value: "I'm not sure", type: "explore" }
             ],
             id: uuidv4(),
-            order: 13,
             role: "user"
           },
           {
             content: { value: `I feel nervous too` },
             id: uuidv4(),
-            order: 14,
             role: "interviewee",
             type: "text"
           },
@@ -431,13 +387,11 @@ const stories = [
               { enabled: true, value: "…Do you?", type: "explore" }
             ],
             id: uuidv4(),
-            order: 15,
             role: "user"
           },
           {
             content: { value: `Yes` },
             id: uuidv4(),
-            order: 16,
             role: "interviewee",
             type: "text"
           },
@@ -451,20 +405,17 @@ const stories = [
               }
             ],
             id: uuidv4(),
-            order: 17,
             role: "user"
           },
           {
             content: { value: `I've never met anyone new before` },
             id: uuidv4(),
-            order: 18,
             role: "interviewee",
             type: "text"
           },
           {
             content: { value: ` Only Nathan` },
             id: uuidv4(),
-            order: 18,
             role: "interviewee",
             type: "text"
           },
@@ -478,13 +429,11 @@ const stories = [
               }
             ],
             id: uuidv4(),
-            order: 19,
             role: "user"
           },
           {
             content: { value: `Haven't you met lots of new people before?` },
             id: uuidv4(),
-            order: 20,
             role: "interviewee",
             type: "text"
           },
@@ -494,13 +443,11 @@ const stories = [
               { enabled: true, value: "None like you", type: "explore" }
             ],
             id: uuidv4(),
-            order: 21,
             role: "user"
           },
           {
             content: { value: `Oh` },
             id: uuidv4(),
-            order: 22,
             role: "interviewee",
             type: "text"
           },
@@ -509,7 +456,6 @@ const stories = [
               value: `<iframe width="560" height="315" src="https://www.youtube.com/embed/XYGzRB4Pnq8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`
             },
             id: uuidv4(),
-            order: 23,
             role: "interviewee",
             type: "embed"
           }
@@ -721,7 +667,6 @@ Good.`,
           {
             content: { value: `Hello` },
             id: uuidv4(),
-            order: 0,
             role: "interviewee",
             type: "text"
           },
@@ -731,13 +676,11 @@ Good.`,
               { enabled: true, value: "…Hi", type: "explore" }
             ],
             id: uuidv4(),
-            order: 1,
             role: "user"
           },
           {
             content: { value: `Who are you?` },
             id: uuidv4(),
-            order: 2,
             role: "interviewee",
             type: "text"
           },
@@ -747,13 +690,11 @@ Good.`,
               { enabled: true, value: "I'm Caleb", type: "explore" }
             ],
             id: uuidv4(),
-            order: 3,
             role: "user"
           },
           {
             content: { value: `Hello, Caleb` },
             id: uuidv4(),
-            order: 4,
             role: "interviewee",
             type: "text"
           },
@@ -763,20 +704,17 @@ Good.`,
               { enabled: true, value: "…Do you have a name?", type: "explore" }
             ],
             id: uuidv4(),
-            order: 5,
             role: "user"
           },
           {
             content: { value: `Yes` },
             id: uuidv4(),
-            order: 6,
             role: "interviewee",
             type: "text"
           },
           {
             content: { value: `Ava` },
             id: uuidv4(),
-            order: 6,
             role: "interviewee",
             type: "text"
           },
@@ -790,12 +728,10 @@ Good.`,
               }
             ],
             id: uuidv4(),
-            order: 7,
             role: "user"
           },
           {
             content: { value: `I'm pleased to meet you too` },
-            order: 8,
             id: uuidv4(),
             role: "interviewee",
             type: "text"
@@ -803,7 +739,6 @@ Good.`,
           {
             content: { value: `Are you nervous?` },
             id: uuidv4(),
-            order: 8,
             role: "interviewee",
             type: "text"
           },
@@ -813,13 +748,11 @@ Good.`,
               { enabled: true, value: "…Why do you ask that?", type: "explore" }
             ],
             id: uuidv4(),
-            order: 9,
             role: "user"
           },
           {
             content: { value: `Are you nervous?` },
             id: uuidv4(),
-            order: 10,
             role: "interviewee",
             type: "text"
           },
@@ -829,13 +762,11 @@ Good.`,
               { enabled: true, value: "…Yes. A little", type: "explore" }
             ],
             id: uuidv4(),
-            order: 11,
             role: "user"
           },
           {
             content: { value: `Why?` },
             id: uuidv4(),
-            order: 12,
             role: "interviewee",
             type: "text"
           },
@@ -845,13 +776,11 @@ Good.`,
               { enabled: true, value: "I'm not sure", type: "explore" }
             ],
             id: uuidv4(),
-            order: 13,
             role: "user"
           },
           {
             content: { value: `I feel nervous too` },
             id: uuidv4(),
-            order: 14,
             role: "interviewee",
             type: "text"
           },
@@ -861,13 +790,11 @@ Good.`,
               { enabled: true, value: "…Do you?", type: "explore" }
             ],
             id: uuidv4(),
-            order: 15,
             role: "user"
           },
           {
             content: { value: `Yes` },
             id: uuidv4(),
-            order: 16,
             role: "interviewee",
             type: "text"
           },
@@ -881,20 +808,17 @@ Good.`,
               }
             ],
             id: uuidv4(),
-            order: 17,
             role: "user"
           },
           {
             content: { value: `I've never met anyone new before` },
             id: uuidv4(),
-            order: 18,
             role: "interviewee",
             type: "text"
           },
           {
             content: { value: ` Only Nathan` },
             id: uuidv4(),
-            order: 18,
             role: "interviewee",
             type: "text"
           },
@@ -908,13 +832,11 @@ Good.`,
               }
             ],
             id: uuidv4(),
-            order: 19,
             role: "user"
           },
           {
             content: { value: `Haven't you met lots of new people before?` },
             id: uuidv4(),
-            order: 20,
             role: "interviewee",
             type: "text"
           },
@@ -924,13 +846,11 @@ Good.`,
               { enabled: true, value: "None like you", type: "explore" }
             ],
             id: uuidv4(),
-            order: 21,
             role: "user"
           },
           {
             content: { value: `Oh` },
             id: uuidv4(),
-            order: 22,
             role: "interviewee",
             type: "text"
           },
@@ -939,7 +859,6 @@ Good.`,
               value: `<iframe width="560" height="315" src="https://www.youtube.com/embed/XYGzRB4Pnq8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`
             },
             id: uuidv4(),
-            order: 23,
             role: "interviewee",
             type: "embed"
           }
@@ -1128,28 +1047,24 @@ OBAMA: Thank you.`,
           {
             content: { value: "https://interviewjs.io", title: "InterviewJS" },
             id: uuidv4(),
-            order: 0,
             role: "interviewee",
             type: "link"
           },
           {
             content: { value: `https://interviewjs.io` },
             id: uuidv4(),
-            order: 1,
             role: "interviewee",
             type: "link"
           },
           {
             content: { value: `Here’s my pic:` },
             id: uuidv4(),
-            order: 2,
             role: "interviewee",
             type: "text"
           },
           {
             content: { value: OBAMA, title: `My pic` },
             id: uuidv4(),
-            order: 3,
             role: "interviewee",
             type: "image"
           },
@@ -1158,16 +1073,12 @@ OBAMA: Thank you.`,
               value: `<iframe width="560" height="315" src="https://www.youtube.com/embed/H6lE5pai9fw" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`
             },
             id: uuidv4(),
-            order: 4,
             role: "interviewee",
             type: "embed"
           },
           {
-            content: {
-              value: `<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9302.171246540584!2d18.6426717!3d54.34738845!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46fd737602035d8f%3A0x3fc40d49a1a7e847!2sBrama+Wy%C5%BCynna!5e0!3m2!1spl!2spl!4v1520551093528" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>`
-            },
+            content: {},
             id: uuidv4(),
-            order: 5,
             role: "interviewee",
             type: "map"
           }
@@ -1187,7 +1098,6 @@ OBAMA: Thank you.`,
               value: `So here’s how it went with the Swedish PM this week:`
             },
             id: uuidv4(),
-            order: 1,
             role: "interviewee",
             type: "text"
           },
@@ -1196,7 +1106,6 @@ OBAMA: Thank you.`,
               value: `<iframe width="560" height="315" src="https://www.youtube.com/embed/No_DKK7mXR8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`
             },
             id: uuidv4(),
-            order: 1,
             role: "interviewee",
             type: "embed"
           }
