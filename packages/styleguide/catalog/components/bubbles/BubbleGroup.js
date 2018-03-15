@@ -12,7 +12,7 @@ const BubbleGroupEl = css.div`
 
 export default class BubbleGroup extends Component {
   componentDidMount() {
-    this.props.callback();
+    return this.props.callback ? this.props.callback() : null;
   }
   render() {
     return <BubbleGroupEl {...this.props} />;
