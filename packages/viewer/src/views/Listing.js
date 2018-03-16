@@ -29,28 +29,24 @@ const Page = css.div`
 `;
 
 const Topbar = css(Container)`
+  align-items: center;
   background: ${color.white};
   border-bottom: 1px solid ${color.greyHL};
+  border-left: 1px solid ${color.greyHL};
+  border-right: 1px solid ${color.greyHL};
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   height: 80px;
-  justify-content: center;
+  justify-content: space-between;
   left: 0;
   position: fixed;
   right: 0;
   top: 0;
+  width: 100%;
   z-index: 5;
   ${PageTitle} {
     color: ${color.blueBlk};
   }
-`;
-
-const TopbarHolder = css(Container)`
-  align-content: flex-end;
-  align-items: flex-end;
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
 `;
 
 const PageBody = css(Container)`
@@ -115,16 +111,14 @@ export default class ChatView extends Component {
     const { story } = this.props;
     return [
       <Page key="page">
-        <Topbar>
-          <TopbarHolder limit="m" padded>
-            <Action iconic onClick={() => this.props.router.push("/context")}>
-              <Icon name="arrow-left" />
-            </Action>
-            <PageTitle typo="h2">Interviewees</PageTitle>
-            <Action iconic onClick={this.toggleDetailsModal}>
-              <Icon name="info" />
-            </Action>
-          </TopbarHolder>
+        <Topbar limit="m" padded>
+          <Action iconic onClick={() => this.props.router.push("/context")}>
+            <Icon name="arrow-left" />
+          </Action>
+          <PageTitle typo="h2">Interviewees</PageTitle>
+          <Action iconic onClick={this.toggleDetailsModal}>
+            <Icon name="info" />
+          </Action>
         </Topbar>
         <PageBody limit="m" flex={[1, 1, `100%`]}>
           <Interviewees>
