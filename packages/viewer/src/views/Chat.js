@@ -32,10 +32,13 @@ const PageBody = css(Container)`
 `;
 
 const PageFoot = css(Container)`
+  border-left: 1px solid ${color.greyHL};
+  border-right: 1px solid ${color.greyHL};
   border-top: 1px solid ${color.greyHL};
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width: 100%;
 `;
 
 const Topbar = css(Container)`
@@ -259,7 +262,7 @@ export default class ChatView extends Component {
         <Topbar>
           <TopbarHolder limit="m" padded>
             <Action iconic onClick={() => this.props.router.push("/listing")}>
-              <Icon name="arrow-left" size="x" />
+              <Icon name="arrow-left" />
             </Action>
             <Action onClick={() => this.toggleModal("intervieweeModal")}>
               <Tip title={this.interviewee.name}>
@@ -283,26 +286,24 @@ export default class ChatView extends Component {
             storyline={this.storyline}
           />
         </PageBody>
-        <PageFoot flex={[0, 0, `80px`]}>
-          <Container limit="x" style={{ width: "100%" }} padded>
-            <Actionbar satellite="both">
-              <Action
-                iconic
-                onClick={() => this.toggleToolbar("moreHelper")}
-                secondary
-              >
-                <Icon name="vdots" />
-              </Action>
-              {renderUserActions()}
-              <Action
-                iconic
-                onClick={() => this.toggleToolbar("emotHelper")}
-                secondary
-              >
-                <Icon name="smile" />
-              </Action>
-            </Actionbar>
-          </Container>
+        <PageFoot limit="m" flex={[0, 0, `80px`]} padded>
+          <Actionbar satellite="both">
+            <Action
+              iconic
+              onClick={() => this.toggleToolbar("moreHelper")}
+              secondary
+            >
+              <Icon name="vdots" />
+            </Action>
+            {renderUserActions()}
+            <Action
+              iconic
+              onClick={() => this.toggleToolbar("emotHelper")}
+              secondary
+            >
+              <Icon name="smile" />
+            </Action>
+          </Actionbar>
         </PageFoot>
       </Page>,
       this.state.intervieweeModal ? (

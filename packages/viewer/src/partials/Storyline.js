@@ -7,17 +7,22 @@ import {
   Bubble,
   BubbleGroup,
   Bubbles,
+  Container,
   Separator,
+  color,
   setSpace
 } from "interviewjs-styleguide";
 
-const StorylineEl = css.div`
+const StorylineEl = css(Container)`
   ${setSpace("phl")};
+  border-left: 1px solid ${color.greyHL};
+  border-right: 1px solid ${color.greyHL};
   bottom: 0;
   height: 100%;
   left: 0;
   overflow-y: auto;
   position: absolute;
+
   right: 0;
   top: 0;
   & > * {
@@ -155,7 +160,7 @@ export default class Storyline extends Component {
     };
 
     return (
-      <StorylineEl>
+      <StorylineEl limit="m">
         <Push />
         {Object.keys(storyline).map((storyItem, i) => {
           const { role } = storyline[storyItem];

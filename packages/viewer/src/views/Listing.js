@@ -54,7 +54,10 @@ const TopbarHolder = css(Container)`
 `;
 
 const PageBody = css(Container)`
+  border-left: 1px solid ${color.greyHL};
+  border-right: 1px solid ${color.greyHL};
   padding-top: 80px;
+  width: 100%;
 `;
 
 const Interviewees = css.ul`
@@ -123,7 +126,7 @@ export default class ChatView extends Component {
             </Action>
           </TopbarHolder>
         </Topbar>
-        <PageBody flex={[1, 1, `100%`]}>
+        <PageBody limit="m" flex={[1, 1, `100%`]}>
           <Interviewees>
             {story.interviewees.map((interviewee, i) => (
               <Interviewee
