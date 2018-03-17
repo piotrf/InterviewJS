@@ -102,7 +102,7 @@ export default class Story extends React.Component {
           {...this.props}
           dir="row"
           fill="white"
-          onClick={this.props.openStory}
+          onClick={() => this.props.openStory()}
           padded
           shift
         >
