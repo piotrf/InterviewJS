@@ -22,7 +22,6 @@ const StorylineEl = css(Container)`
   left: 0;
   overflow-y: auto;
   position: absolute;
-
   right: 0;
   top: 0;
   & > * {
@@ -60,21 +59,26 @@ export default class Storyline extends Component {
     }
   }
   scrollToBottom() {
-    this.anchor.scrollIntoView({
-      behavior: "smooth",
-      block: "end",
-      inline: "end"
-    });
-    setTimeout(
-      // run second time to scroll to iframes that take time to load
-      () =>
-        this.anchor.scrollIntoView({
+    this.anchor
+      ? this.anchor.scrollIntoView({
           behavior: "smooth",
           block: "end",
           inline: "end"
-        }),
+        })
+      : null;
+    setTimeout(
+      // run second time to scroll to iframes that take time to load
+      () =>
+        this.anchor
+          ? this.anchor.scrollIntoView({
+              behavior: "smooth",
+              block: "end",
+              inline: "end"
+            })
+          : null,
       1000
     );
+    return null;
   }
   render() {
     const { storyline } = this.props.interviewee;
