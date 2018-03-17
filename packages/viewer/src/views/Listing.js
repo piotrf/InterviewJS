@@ -92,7 +92,8 @@ export default class ChatView extends Component {
     this.toggleDetailsModal = this.toggleDetailsModal.bind(this);
     this.toggleIntervieweeModal = this.toggleIntervieweeModal.bind(this);
   }
-  toggleDetailsModal() {
+  toggleDetailsModal(e) {
+    if (e) e.stopPropagation();
     this.setState({ storyDetailsModal: !this.state.storyDetailsModal });
   }
   toggleIntervieweeModal(e, target) {
@@ -112,11 +113,14 @@ export default class ChatView extends Component {
     return [
       <Page key="page">
         <Topbar limit="m" padded>
-          <Action iconic onClick={() => this.props.router.push("/story/context")}>
+          <Action
+            iconic
+            onClick={() => this.props.router.push("/story/context")}
+          >
             <Icon name="arrow-left" />
           </Action>
           <PageTitle typo="h2">Interviewees</PageTitle>
-          <Action iconic onClick={this.toggleDetailsModal}>
+          <Action iconic onClick={(e) => this.toggleDetailsModal(e)}>
             <Icon name="info" />
           </Action>
         </Topbar>
@@ -174,7 +178,9 @@ export default class ChatView extends Component {
           handleClose={(e) => this.toggleIntervieweeModal(e, null)}
           handleSubmit={() =>
             this.props.router.push(
-              `/story/chat/${story.interviewees[this.state.intervieweeModal].id}`
+              `/story/chat/${
+                story.interviewees[this.state.intervieweeModal].id
+              }`
             )
           }
           interviewee={story.interviewees[this.state.intervieweeModal]}

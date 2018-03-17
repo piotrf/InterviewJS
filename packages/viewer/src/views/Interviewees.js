@@ -56,7 +56,8 @@ export default class ContextView extends Component {
     this.toggleDetailsModal = this.toggleDetailsModal.bind(this);
     this.toggleIntervieweeModal = this.toggleIntervieweeModal.bind(this);
   }
-  toggleDetailsModal() {
+  toggleDetailsModal(e) {
+    if (e) e.stopPropagation();
     this.setState({ storyDetailsModal: !this.state.storyDetailsModal });
   }
   toggleIntervieweeModal(e, target) {
@@ -75,7 +76,7 @@ export default class ContextView extends Component {
     const { story } = this.props;
     return [
       <Topbar
-        handleDetails={this.toggleDetailsModal}
+        handleDetails={(e) => this.toggleDetailsModal(e)}
         handleBack={() => this.props.router.push(`/story/context`)}
         key="topbar"
       />,
@@ -136,7 +137,9 @@ export default class ContextView extends Component {
             <Action
               fixed
               onClick={() =>
-                this.props.router.push(`/story/chat/${story.interviewees[0].id}`)
+                this.props.router.push(
+                  `/story/chat/${story.interviewees[0].id}`
+                )
               }
               primary
             >
@@ -154,7 +157,9 @@ export default class ContextView extends Component {
           key="intervieweeModal"
           handleSubmit={() =>
             this.props.router.push(
-              `/story/chat/${story.interviewees[this.state.intervieweeModal].id}`
+              `/story/chat/${
+                story.interviewees[this.state.intervieweeModal].id
+              }`
             )
           }
         />
