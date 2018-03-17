@@ -454,6 +454,14 @@ const story = {
           id: uuidv4(),
           role: "interviewee",
           type: "embed"
+        },
+        {
+          content: [
+            { enabled: false, value: "", type: "ignore" },
+            { enabled: true, value: "None like you", type: "explore" }
+          ],
+          id: uuidv4(),
+          role: "user"
         }
       ]
     }

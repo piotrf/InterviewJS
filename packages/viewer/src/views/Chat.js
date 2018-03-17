@@ -185,18 +185,18 @@ export default class ChatView extends Component {
     ];
 
     const renderUserActions = () => {
+      const thisBubbleI = currentItem;
+      const lastBubbleI = this.storyline.length;
       const nextBubble = this.storyline[currentItem + 1];
-      const lastBubble = this.storyline.length;
       const isActiveActionbarEmot = this.state.actionbar === "emot";
       const isActiveActionbarRunaway = this.state.actionbar === "runaway";
       const isActionbarHidden = this.state.hideActionbar;
-      if (currentItem !== lastBubble && !isActionbarHidden) {
-        const nextOneIsUserBubble = nextBubble.role === "user";
-        if (nextOneIsUserBubble && !isActionbarHidden) {
-          if (isActiveActionbarRunaway) {
-            return runAwayActions;
-          } else if (isActiveActionbarEmot) {
+      if (thisBubbleI !== lastBubbleI && !isActionbarHidden) {
+        if (nextBubble.role === "user") {
+          if (isActiveActionbarEmot) {
             return emoActions;
+          } else if (isActiveActionbarRunaway) {
+            return runAwayActions;
           }
           return nextBubble.content.map(
             (action) =>
@@ -212,11 +212,13 @@ export default class ChatView extends Component {
               ) : null
           );
         }
-      } else if (currentItem === lastBubble) {
+      } else if (lastBubbleI - thisBubbleI === 1) {
         return runAwayActions;
       }
       return null;
     };
+
+    console.log(this.state);
 
     return [
       <Page key="page">
