@@ -32,9 +32,7 @@ const PageBody = css(Container)`
 `;
 
 const PageFoot = css(Container)`
-  border-left: 1px solid ${color.greyHL};
-  border-right: 1px solid ${color.greyHL};
-  border-top: 1px solid ${color.greyHL};
+  border: 1px solid ${color.greyHL};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -44,9 +42,7 @@ const PageFoot = css(Container)`
 const Topbar = css(Container)`
   align-items: center;
   background: ${color.white};
-  border-bottom: 1px solid ${color.greyHL};
-  border-left: 1px solid ${color.greyHL};
-  border-right: 1px solid ${color.greyHL};
+  border: 1px solid ${color.greyHL};
   display: flex;
   flex-direction: row;
   height: 80px;
@@ -256,7 +252,10 @@ export default class ChatView extends Component {
     return [
       <Page key="page">
         <Topbar limit="m" padded>
-          <Action iconic onClick={() => this.props.router.push("/story/listing")}>
+          <Action
+            iconic
+            onClick={() => this.props.router.push("/story/listing")}
+          >
             <Icon name="arrow-left" />
           </Action>
           <Action onClick={() => this.toggleModal("intervieweeModal")}>

@@ -31,9 +31,7 @@ const Page = css.div`
 const Topbar = css(Container)`
   align-items: center;
   background: ${color.white};
-  border-bottom: 1px solid ${color.greyHL};
-  border-left: 1px solid ${color.greyHL};
-  border-right: 1px solid ${color.greyHL};
+  border: 1px solid ${color.greyHL};
   display: flex;
   flex-direction: row;
   height: 80px;
@@ -50,6 +48,7 @@ const Topbar = css(Container)`
 `;
 
 const PageBody = css(Container)`
+  border-bottom: 1px solid ${color.greyHL};
   border-left: 1px solid ${color.greyHL};
   border-right: 1px solid ${color.greyHL};
   padding-top: 80px;
