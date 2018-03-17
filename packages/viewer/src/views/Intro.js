@@ -65,7 +65,7 @@ export default class IntroView extends Component {
   }
 
   componentDidMount() {
-    if (window.top === window && window.addEventListener) {
+    if (window.top !== window && window.addEventListener) {
       window.addEventListener("message", ({data, origin, source}) => {
         console.log(origin, data);
         if (data.interviewees) this.props.createStory(data);
