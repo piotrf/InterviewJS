@@ -39,20 +39,35 @@ export default class PublishStoryModal extends Component {
     this.handleStep2 = this.handleStep2.bind(this);
     this.handleStep3 = this.handleStep3.bind(this);
   }
+
+  componentDidUpdate() {
+    if (this.iframe) {
+      console.log(this.iframe);
+      this.iframe.addEventListener('load', () => {
+        console.log('iframe loaded');
+        setTimeout(() => this.iframe.contentWindow.postMessage(this.props.story, '*'), 5000);
+      });
+    }
+  }
+
   handleStep0(data) {
     this.props.updateStory(data, this.props.storyIndex);
     this.setState({ step: this.state.step + 1 });
   }
+
   handleStep1(data) {
     this.props.updateStory(data, this.props.storyIndex);
     this.setState({ step: this.state.step + 1 });
   }
+
   handleStep2() {
     this.setState({ step: this.state.step + 1 });
   }
+
   handleStep3() {
     this.props.handleClose();
   }
+
   render() {
     const { step } = this.state;
     const getModalBody = () => {
@@ -102,6 +117,15 @@ export default class PublishStoryModal extends Component {
         return (
           <Container limit="s" align="center">
             <PageSubtitle typo="h3">Success.</PageSubtitle>
+            <iframe
+              title="Preview"
+              src="http://interviewjs.io/story/"
+              ref={(iframe) => { this.iframe = iframe; }}
+              style={{
+                width: 600,
+                height: 800
+              }}
+              >{ }</iframe>
             <Separator size="m" silent />
             Grab the link and share on social
             <Separator size="m" silent />
@@ -109,14 +133,14 @@ export default class PublishStoryModal extends Component {
               <Action fixed primary onClick={this.handleStep3}>
                 Close
               </Action>
-              <Action
+              {/* <Action
                 fixed
-                href={`http://interviewjs.io/viewer/${this.props.story.id}`} // TODO actual url
+                href={`http://interviewjs.io/story/${this.props.story.id}`} // TODO actual url
                 secondary
                 target="_blank"
               >
                 Open your story
-              </Action>
+              </Action> */}
             </Actionbar>
           </Container>
         );
