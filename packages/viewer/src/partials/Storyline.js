@@ -1,5 +1,5 @@
 /* eslint react/no-danger: 0 */
-import { arrayOf, object } from "prop-types";
+import { array, arrayOf, func, number, object, shape } from "prop-types";
 import css from "styled-components";
 import React, { Component } from "react";
 
@@ -193,7 +193,12 @@ export default class Storyline extends Component {
 }
 
 Storyline.propTypes = {
-  storyline: arrayOf(object)
+  storyline: arrayOf(object),
+  onBubbleRender: func.isRequired,
+  currentItem: number.isRequired,
+  interviewee: shape({
+    storyline: array.isRequired
+  }).isRequired
 };
 
 Storyline.defaultProps = {
