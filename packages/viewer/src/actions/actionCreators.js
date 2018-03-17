@@ -4,3 +4,17 @@ export function createStory(payload) {
     payload
   };
 }
+
+export function savePoll(payload) {
+  return {
+    type: "SAVE_POLL",
+    payload
+  };
+}
+
+export function updateStoryline(payload) {
+  return {
+    type: "UPDATE_STORYLINE",
+    payload
+  };
+}
