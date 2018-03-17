@@ -130,6 +130,9 @@ export default class IntervieweeForm extends Component {
       <Form onSubmit={(e) => this.handleSubmit(e)}>
         <FormItem>
           <Label>Name</Label>
+          <CharacterCount>
+            {50 - this.state.formData.name.length}
+          </CharacterCount>
           <TextInput
             input
             maxLength="50"
@@ -142,9 +145,7 @@ export default class IntervieweeForm extends Component {
             valid={this.state.formValidation.name}
             value={this.state.formData.name}
           />
-          <CharacterCount>
-            {50 - this.state.formData.name.length}
-          </CharacterCount>
+          <Legend tip="A tip">i</Legend>
         </FormItem>
         <Separator size="m" silent />
         <FormItem>
@@ -164,6 +165,7 @@ export default class IntervieweeForm extends Component {
             valid={this.state.formValidation.title}
             value={this.state.formData.title}
           />
+          <Legend tip="A tip">i</Legend>
         </FormItem>
         <Separator size="m" silent />
         <FormItem>
@@ -179,6 +181,7 @@ export default class IntervieweeForm extends Component {
             placeholder=""
             value={this.state.formData.bio}
           />
+          <Legend tip="A tip">i</Legend>
         </FormItem>
         <Separator size="m" silent />
         <Container dir="row">

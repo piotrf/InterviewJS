@@ -281,18 +281,32 @@ export default class ChatView extends Component {
           <Actionbar satellite="both">
             <Action
               iconic
-              onClick={() => this.toggleToolbar("moreHelper")}
+              active={this.state.actionbar === "runaway"}
+              onClick={
+                this.state.actionbar !== "runaway"
+                  ? () => this.setState({ actionbar: "runaway" })
+                  : () => this.setState({ actionbar: "scripted" })
+              }
               secondary
             >
-              <Icon name="vdots" />
+              <Icon
+                name={this.state.actionbar === "runaway" ? `cross` : `vdots`}
+              />
             </Action>
             {renderUserActions()}
             <Action
               iconic
-              onClick={() => this.toggleToolbar("emotHelper")}
+              active={this.state.actionbar === "emot"}
+              onClick={
+                this.state.actionbar !== "emot"
+                  ? () => this.setState({ actionbar: "emot" })
+                  : () => this.setState({ actionbar: "scripted" })
+              }
               secondary
             >
-              <Icon name="smile" />
+              <Icon
+                name={this.state.actionbar === "emot" ? `cross` : `smile`}
+              />
             </Action>
           </Actionbar>
         </PageFoot>
