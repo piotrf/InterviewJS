@@ -40,9 +40,10 @@ const Interviewees = css.ul`
 `;
 
 const Interviewee = css.li`
-  display: inline-block;
-  border: 2px solid ${color.black};
   border-radius: ${radius.a};
+  border: 2px solid ${color.black};
+  display: inline-block;
+  line-height: 0;
   margin-right: -.5em;
 `;
 
@@ -66,10 +67,14 @@ export default class IntroView extends Component {
 
   componentDidMount() {
     if (window.top !== window && window.addEventListener) {
-      window.addEventListener("message", ({data, origin, source}) => {
-        console.log(origin, data);
-        if (data.interviewees) this.props.createStory(data);
-      }, false);
+      window.addEventListener(
+        "message",
+        ({ data, origin, source }) => {
+          console.log(origin, data);
+          if (data.interviewees) this.props.createStory(data);
+        },
+        false
+      );
     }
   }
 

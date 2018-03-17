@@ -57,9 +57,10 @@ const AvatarList = css.ul`
   white-space: nowrap;
 `;
 const AvatarListItem = css.li`
-  border: 2px solid ${color.white};
   border-radius: ${radius.a};
+  border: 2px solid ${color.white};
   display: inline-block;
+  line-height: 0;
   margin-left: -10px;
   position: relative;
 `;
