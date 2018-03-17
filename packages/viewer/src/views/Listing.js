@@ -105,14 +105,14 @@ export default class ChatView extends Component {
   }
   startChat(e, target) {
     e.stopPropagation();
-    this.props.router.push(`/chat/${target}`);
+    this.props.router.push(`/story/chat/${target}`);
   }
   render() {
     const { story } = this.props;
     return [
       <Page key="page">
         <Topbar limit="m" padded>
-          <Action iconic onClick={() => this.props.router.push("/context")}>
+          <Action iconic onClick={() => this.props.router.push("/story/context")}>
             <Icon name="arrow-left" />
           </Action>
           <PageTitle typo="h2">Interviewees</PageTitle>
@@ -174,7 +174,7 @@ export default class ChatView extends Component {
           handleClose={(e) => this.toggleIntervieweeModal(e, null)}
           handleSubmit={() =>
             this.props.router.push(
-              `/chat/${story.interviewees[this.state.intervieweeModal].id}`
+              `/story/chat/${story.interviewees[this.state.intervieweeModal].id}`
             )
           }
           interviewee={story.interviewees[this.state.intervieweeModal]}

@@ -37,17 +37,17 @@ class Routes extends React.Component {
         key="Root"
         history={history}
       >
-        <Route path="/intro" component={App}>
+        <Route path="/story" component={App}>
           <IndexRoute component={Intro} />
-          <Route path="/chat/:chatId" component={Chat} />
-          <Route path="/context" component={Context} />
-          <Route path="/interviewees" component={Interviewees} />
-          <Route path="/listing" component={Listing} />
-          <Route path="/outro" component={Outro} />
-          <Route path="/poll" component={Poll} />
-          <Route path="/results" component={Results} />
+          <Route path="/story/chat/:chatId" component={Chat} />
+          <Route path="/story/context" component={Context} />
+          <Route path="/story/interviewees" component={Interviewees} />
+          <Route path="/story/listing" component={Listing} />
+          <Route path="/story/outro" component={Outro} />
+          <Route path="/story/poll" component={Poll} />
+          <Route path="/story/results" component={Results} />
         </Route>
-        <Redirect from="*" to="intro" />
+        <Redirect from="*" to="story" />
       </Router>
     );
   }

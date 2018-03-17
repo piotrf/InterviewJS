@@ -6,7 +6,6 @@
   "homepage": "http://interviewjs.io/story/",
   "dependencies": {
     "date-fns": "^1.29.0",
-    "firebase": "^4.11.0",
     "interviewjs-styleguide": "*",
     "lodash": "^4.17.5",
     "npm-check-updates": "^2.14.1",
@@ -14,7 +13,6 @@
     "react": "16.2.0",
     "react-app-rewire-babel-loader": "0.1.1",
     "react-dom": "16.2.0",
-    "react-firebaseui": "^1.1.9",
     "react-modal": "3.3.2",
     "react-redux": "5.0.7",
     "react-router-dom": "4.2.2",
@@ -25,7 +23,6 @@
     "redux": "3.7.2",
     "redux-actions": "2.3.0",
     "redux-devtools-extension": "2.13.2",
-    "redux-persist": "^5.9.1",
     "redux-thunk": "2.2.0",
     "reselect": "3.0.1",
     "styled-components": "3.0.2",
@@ -60,7 +57,7 @@
     "lint": "eslint **/*.js --quiet",
     "lint-fix": "eslint --fix",
     "generate": "plop --plopfile generators/index.js",
-    "release": "yarn run build && gh-pages -d build -e my -a -r https://github.com/AJInteractive/InterviewJS.git"
+    "release": "yarn run build && gh-pages -d build -e story -a -r https://github.com/AJInteractive/InterviewJS.git"
   },
   "lint-staged": {
     "{,!(build|generators)/**/}*.js": [

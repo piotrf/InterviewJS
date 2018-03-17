@@ -69,14 +69,14 @@ export default class ContextView extends Component {
   }
   startChat(e, target) {
     e.stopPropagation();
-    this.props.router.push(`/chat/${target}`);
+    this.props.router.push(`/story/chat/${target}`);
   }
   render() {
     const { story } = this.props;
     return [
       <Topbar
         handleDetails={this.toggleDetailsModal}
-        handleBack={() => this.props.router.push(`/context`)}
+        handleBack={() => this.props.router.push(`/story/context`)}
         key="topbar"
       />,
       <Page key="page">
@@ -96,7 +96,7 @@ export default class ContextView extends Component {
                       size="l"
                       image={interviewee.avatar}
                       onClick={() =>
-                        this.props.router.push(`/chat/${interviewee.id}`)
+                        this.props.router.push(`/story/chat/${interviewee.id}`)
                       }
                     />
                   </Container>
@@ -136,7 +136,7 @@ export default class ContextView extends Component {
             <Action
               fixed
               onClick={() =>
-                this.props.router.push(`/chat/${story.interviewees[0].id}`)
+                this.props.router.push(`/story/chat/${story.interviewees[0].id}`)
               }
               primary
             >
@@ -154,7 +154,7 @@ export default class ContextView extends Component {
           key="intervieweeModal"
           handleSubmit={() =>
             this.props.router.push(
-              `/chat/${story.interviewees[this.state.intervieweeModal].id}`
+              `/story/chat/${story.interviewees[this.state.intervieweeModal].id}`
             )
           }
         />

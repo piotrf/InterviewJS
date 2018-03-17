@@ -1,7 +1,7 @@
 /* eslint react/forbid-prop-types: 0 */
 import css from "styled-components";
 import React, { Component } from "react";
-import { object, shape, string } from "prop-types";
+import { object, shape, string, func } from "prop-types";
 
 import {
   Action,
@@ -63,11 +63,24 @@ export default class IntroView extends Component {
     this.state = { storyDetailsModal: false };
     this.toggleDetailsModal = this.toggleDetailsModal.bind(this);
   }
+
+  componentDidMount() {
+    if (window.top === window && window.addEventListener) {
+      window.addEventListener("message", ({data, origin, source}) => {
+        console.log(origin, data);
+        if (data.interviewees) this.props.createStory(data);
+      }, false);
+    }
+  }
+
   toggleDetailsModal() {
     this.setState({ storyDetailsModal: !this.state.storyDetailsModal });
   }
+
   render() {
     const { story } = this.props;
+    if (!story || Object.keys(story).length === 0) return null; // FIXME show spinner
+    console.log(story);
     return [
       <Topbar handleDetails={this.toggleDetailsModal} key="topbar" />,
       <Page key="page">
@@ -108,7 +121,7 @@ export default class IntroView extends Component {
           <Actionbar>
             <Action
               fixed
-              onClick={() => this.props.router.push(`/context`)}
+              onClick={() => this.props.router.push(`/story/context`)}
               primary
             >
               Continue
@@ -129,6 +142,7 @@ export default class IntroView extends Component {
 }
 
 IntroView.propTypes = {
+  createStory: func.isRequired,
   router: object,
   story: shape({
     title: string

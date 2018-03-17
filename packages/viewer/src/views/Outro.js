@@ -47,7 +47,7 @@ export default class OutroView extends Component {
     return [
       <Topbar
         handleDetails={this.toggleDetailsModal}
-        handleBack={() => this.props.router.push(`/listing`)}
+        handleBack={() => this.props.router.push(`/story/listing`)}
         key="topbar"
       />,
       <Page key="page">
@@ -60,14 +60,14 @@ export default class OutroView extends Component {
           <Actionbar>
             <Action
               fixed
-              onClick={() => this.props.router.push(`/listing`)}
+              onClick={() => this.props.router.push(`/story/listing`)}
               primary
             >
               Revisit the interviews
             </Action>
             <Action
               fixed
-              onClick={() => this.props.router.push(`/poll`)}
+              onClick={() => this.props.router.push(`/story/poll`)}
               primary
             >
               Have your say

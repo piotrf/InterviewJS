@@ -48,7 +48,7 @@ export default class ResultsView extends Component {
     return [
       <Topbar
         handleDetails={this.toggleDetailsModal}
-        handleBack={() => this.props.router.push(`/poll`)}
+        handleBack={() => this.props.router.push(`/story/poll`)}
         key="topbar"
       />,
       <Page key="page">

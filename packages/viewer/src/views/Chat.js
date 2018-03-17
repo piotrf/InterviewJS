@@ -177,7 +177,7 @@ export default class ChatView extends Component {
       <Action
         fixed
         key="doneChatting"
-        onClick={() => this.props.router.push("/outro")}
+        onClick={() => this.props.router.push("/story/outro")}
         primary
         tone="negative"
       >
@@ -256,7 +256,7 @@ export default class ChatView extends Component {
     return [
       <Page key="page">
         <Topbar limit="m" padded>
-          <Action iconic onClick={() => this.props.router.push("/listing")}>
+          <Action iconic onClick={() => this.props.router.push("/story/listing")}>
             <Icon name="arrow-left" />
           </Action>
           <Action onClick={() => this.toggleModal("intervieweeModal")}>

@@ -40,7 +40,7 @@ export default class OutroView extends Component {
   submitPoll() {
     // TODO @LAURIAN
     console.log(`poll results: `, this.state.formData);
-    this.props.router.push(`/results`);
+    this.props.router.push(`/story/results`);
   }
   render() {
     const { story } = this.props;
@@ -48,7 +48,7 @@ export default class OutroView extends Component {
     return [
       <Topbar
         handleDetails={this.toggleDetailsModal}
-        handleBack={() => this.props.router.push(`/outro`)}
+        handleBack={() => this.props.router.push(`/story/outro`)}
         key="topbar"
       />,
       <Page key="page">
