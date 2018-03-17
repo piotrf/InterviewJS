@@ -15,7 +15,8 @@ import {
   ModalHead,
   PageTitle,
   PageSubtitle,
-  Separator
+  Separator,
+  radius
 } from "interviewjs-styleguide";
 
 import { DetailsForm, MetaForm, Poll } from "../";
@@ -32,10 +33,12 @@ const getStepState = (step, i) => {
 };
 
 const PreviewWrapper = css.div`
+  border-radius: ${radius.m};
   display: inline-block;
   margin-left: auto;
   margin-right: auto;
   max-width: 400px;
+  overflow: hidden;
   position: relative;
   width: 100%;
   img {
