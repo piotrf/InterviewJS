@@ -113,7 +113,7 @@ export default class ComposerView extends React.Component {
     );
     const story = this.props.stories[storyIndex];
 
-    if (! story) return null;
+    if (!story) return null;
 
     return [
       <Page key="Page">

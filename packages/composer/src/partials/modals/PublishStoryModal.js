@@ -1,4 +1,5 @@
 /* eslint react/forbid-prop-types: 0 */
+import css from "styled-components";
 import React, { Component } from "react";
 import ReactModal from "react-modal";
 import { arrayOf, bool, func, number, object } from "prop-types";
@@ -19,6 +20,8 @@ import {
 
 import { DetailsForm, MetaForm, Poll } from "../";
 
+import iframeRatioSpacer from "./iframeRatioSpacer.png";
+
 const getStepState = (step, i) => {
   if (step === i) {
     return "active";
@@ -27,6 +30,27 @@ const getStepState = (step, i) => {
   }
   return null;
 };
+
+const PreviewWrapper = css.div`
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 400px;
+  position: relative;
+  width: 100%;
+  img {
+    display: block;
+    width: 100%;
+  }
+  iframe {
+    height: 100%;
+    left: 0;
+    max-width: 100% !important;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+`;
 
 export default class PublishStoryModal extends Component {
   constructor(props) {
@@ -43,9 +67,12 @@ export default class PublishStoryModal extends Component {
   componentDidUpdate() {
     if (this.iframe) {
       console.log(this.iframe);
-      this.iframe.addEventListener('load', () => {
-        console.log('iframe loaded');
-        setTimeout(() => this.iframe.contentWindow.postMessage(this.props.story, '*'), 5000);
+      this.iframe.addEventListener("load", () => {
+        console.log("iframe loaded");
+        setTimeout(
+          () => this.iframe.contentWindow.postMessage(this.props.story, "*"),
+          5000
+        );
       });
     }
   }
@@ -116,16 +143,22 @@ export default class PublishStoryModal extends Component {
       } else if (step === 3) {
         return (
           <Container limit="s" align="center">
-            <PageSubtitle typo="h3">Success.</PageSubtitle>
-            <iframe
-              title="Preview"
-              src="http://interviewjs.io/story/"
-              ref={(iframe) => { this.iframe = iframe; }}
-              style={{
-                width: 600,
-                height: 800
-              }}
-              >{ }</iframe>
+            <PageSubtitle typo="h3">
+              Well done! Your story is now up running. Here’s a preview:
+            </PageSubtitle>
+            <Separator size="m" silent />
+            <PreviewWrapper>
+              <img src={iframeRatioSpacer} alt="" />
+              <iframe
+                title="Preview"
+                src="http://interviewjs.io/story/"
+                ref={(iframe) => {
+                  this.iframe = iframe;
+                }}
+              >
+                {" "}
+              </iframe>
+            </PreviewWrapper>
             <Separator size="m" silent />
             Grab the link and share on social
             <Separator size="m" silent />
