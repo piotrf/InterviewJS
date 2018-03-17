@@ -10,9 +10,7 @@ import {
   Icon,
   Container,
   Tip,
-  color,
-  radius,
-  setSpace
+  color
 } from "interviewjs-styleguide";
 
 import { IntervieweeModal, StoryDetailsModal, Storyline } from "../partials";
@@ -53,34 +51,6 @@ const Topbar = css(Container)`
   top: 0;
   width: 100%;
   z-index: 5;
-`;
-
-const ActionbarHelper = css(Container)`
-  ${setSpace("mhm")};
-  ${setSpace("mvx")};
-  ${setSpace("phm")};
-  background: ${color.white};
-  border-radius: ${radius.a};
-  bottom: 0;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  left: 46px;
-  position: absolute;
-  right: 46px;
-  top: 0;
-  z-index: 5;
-  & > * {
-    ${setSpace("mhx")};
-  }
-  ${({ emo }) =>
-    !emo
-      ? `
-    & > * { flex-basis: 50%; width: auto; max-width: none; }
-  `
-      : `
-        justify-content: space-around;
-      `};
 `;
 
 export default class ChatView extends Component {
@@ -215,13 +185,12 @@ export default class ChatView extends Component {
     ];
 
     const renderUserActions = () => {
-      const thisBubble = this.storyline[currentItem];
       const nextBubble = this.storyline[currentItem + 1];
       const lastBubble = this.storyline.length;
       const isActiveActionbarEmot = this.state.actionbar === "emot";
       const isActiveActionbarRunaway = this.state.actionbar === "runaway";
       const isActionbarHidden = this.state.hideActionbar;
-      if (thisBubble !== lastBubble && !isActionbarHidden) {
+      if (currentItem !== lastBubble && !isActionbarHidden) {
         const nextOneIsUserBubble = nextBubble.role === "user";
         if (nextOneIsUserBubble && !isActionbarHidden) {
           if (isActiveActionbarRunaway) {
@@ -243,7 +212,7 @@ export default class ChatView extends Component {
               ) : null
           );
         }
-      } else if (thisBubble === lastBubble) {
+      } else if (currentItem === lastBubble) {
         return runAwayActions;
       }
       return null;
