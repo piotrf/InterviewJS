@@ -2,7 +2,6 @@
 import css from "styled-components";
 import React, { Component } from "react";
 import { object, shape, string } from "prop-types";
-
 import {
   Actionbar,
   Action,
@@ -12,7 +11,6 @@ import {
   Tip,
   color
 } from "interviewjs-styleguide";
-
 import { IntervieweeModal, StoryDetailsModal, Storyline } from "../partials";
 
 const Page = css.div`
@@ -23,12 +21,10 @@ const Page = css.div`
   display: flex;
   flex-direction: column;
 `;
-
 const PageBody = css(Container)`
   margin-top: 80px;
   padding: 0;
 `;
-
 const PageFoot = css(Container)`
   border: 1px solid ${color.greyHL};
   display: flex;
@@ -36,7 +32,6 @@ const PageFoot = css(Container)`
   justify-content: center;
   width: 100%;
 `;
-
 const Topbar = css(Container)`
   align-items: center;
   background: ${color.white};
@@ -58,49 +53,30 @@ export default class ChatView extends Component {
     super(props);
     this.state = {
       actionbar: "scripted",
-      currentItem: 0,
       hideActionbar: true,
+      history: [],
       intervieweeModal: false,
       storyDetailsModal: false
     };
+    this.initHistory = this.initHistory.bind(this);
     this.onBubbleRender = this.onBubbleRender.bind(this);
-    this.respondWithADiss = this.respondWithADiss.bind(this);
-    this.respondWithAnEmo = this.respondWithAnEmo.bind(this);
-    this.respondWithScriptedAction = this.respondWithScriptedAction.bind(this);
-    this.toggleModal = this.toggleModal.bind(this);
     this.toggleToolbar = this.toggleToolbar.bind(this);
+    this.updateHistory = this.updateHistory.bind(this);
 
     /* assign some globally necessary data */
     const { interviewees } = this.props.story;
     const intervieweeIndex = interviewees.findIndex(
       (item) => item.id === this.props.params.chatId
     );
+
     this.interviewee = interviewees[intervieweeIndex];
     this.story = this.props.story;
     this.storyline = interviewees[intervieweeIndex].storyline;
   }
-  onBubbleRender() {
-    const { currentItem } = this.state;
-    const thisBubble = this.storyline[currentItem];
-    const nextBubble = this.storyline[currentItem + 1];
-    const lastBubble = this.storyline.length;
-    if (currentItem < lastBubble - 1) {
-      if (thisBubble.role === "user" && nextBubble.role === "interviewee") {
-        this.setState({ currentItem: currentItem + 1 });
-      } else if (
-        thisBubble.role === "interviewee" &&
-        nextBubble.role === "interviewee"
-      ) {
-        setTimeout(() => this.setState({ currentItem: currentItem + 1 }), 1050);
-      } else if (
-        thisBubble.role === "interviewee" &&
-        nextBubble.role === "user"
-      ) {
-        setTimeout(() => this.setState({ hideActionbar: false }), 1400);
-      }
-    }
-    return null;
+  componentDidMount() {
+    this.initHistory();
   }
+
   toggleModal(modal) {
     this.setState({ [modal]: !this.state[modal] });
   }
@@ -108,34 +84,121 @@ export default class ChatView extends Component {
     this.setState({ [toolbar]: !this.state[toolbar] });
   }
 
-  /* response handlers */
+  initHistory() {
+    const firstStorlineItem = this.storyline[0];
+    const noHistory = this.state.history.length === 0;
+    const startsWithInterviewee = firstStorlineItem.role === "interviewee";
+    if (noHistory && startsWithInterviewee) {
+      const firstBubbleRef = {
+        i: 0,
+        role: firstStorlineItem.role,
+        type: "init"
+      };
+      this.setState({ history: [firstBubbleRef] });
+    }
+  }
 
-  respondWithScriptedAction(type) {
-    console.log("respondWithScriptedAction: ", type);
-    if (this.state.currentItem < this.storyline.length - 1) {
-      this.setState({
-        currentItem: this.state.currentItem + 1,
-        hideActionbar: true
-      });
-    } else console.log("end of the story");
+  onBubbleRender() {
+    const { history } = this.state;
+    const thisHistoryItem = history[history.length - 1];
+
+    const thisBubbleI = thisHistoryItem.i;
+    const lastBubbleI = this.storyline.length;
+
+    if (thisBubbleI < lastBubbleI - 1) {
+      const { role, type } = thisHistoryItem;
+      if (type === "emoji") {
+        this.updateHistory("followup");
+      } else if (type === "action") {
+        const { value } = thisHistoryItem; // 1 is explore, 0 is ignore
+        if (value === 1) {
+          this.updateHistory("followup");
+        } else if (value === 0) {
+          this.updateHistory("followup"); // TODO but should skip to the next unnested
+        }
+        return null;
+      } else if (role === "interviewee") {
+        const { i } = thisHistoryItem;
+        const nextBubble = this.storyline[thisBubbleI + 1];
+        if (
+          i < this.storyline.length &&
+          this.storyline[i + 1].role === "interviewee" &&
+          nextBubble.role === "interviewee"
+        ) {
+          setTimeout(() => this.updateHistory("followup"), 1050);
+        } else if (nextBubble.role === "user") {
+          setTimeout(() => this.setState({ hideActionbar: false }), 1400);
+        }
+      }
+    }
   }
-  respondWithADiss() {
-    this.setState({ moreHelper: false });
-    console.log("respondWithADiss");
-  }
-  respondWithAnEmo(emo) {
-    this.setState({ emotHelper: false });
-    console.log("respondWithAnEmo: ", emo);
+
+  updateHistory(type, payload) {
+    this.setState({ hideActionbar: true });
+
+    const { history } = this.state;
+    const thisHistoryItem = history[history.length - 1];
+
+    if (type === "diss") {
+      const diss = {
+        role: "user",
+        type: "diss"
+      };
+      history.push(diss);
+    } else if (type === "emoji") {
+      this.setState({ actionbar: "scripted" });
+      const emoji = {
+        i: thisHistoryItem.i + 1,
+        role: "user",
+        type: "emoji",
+        value: payload
+      };
+      history.push(emoji);
+    } else if (type === "quit") {
+      const quit = {
+        role: "user",
+        type: "quit"
+      };
+      history.push(quit);
+    } else if (type === "ignore") {
+      console.log("ignore action does nothing for now");
+      // const ignore = {
+      //   i: thisHistoryItem.i + 1,
+      //   role: "user",
+      //   type: "action",
+      //   value: payload
+      // };
+      // history.push(ignore);
+    } else if (type === "explore") {
+      const explore = {
+        i: thisHistoryItem.i + 1,
+        role: "user",
+        type: "action",
+        value: payload
+      };
+      history.push(explore);
+    } else if (type === "followup") {
+      const followup = {
+        i: thisHistoryItem.i + 1,
+        role: "interviewee",
+        type: "followup"
+      };
+      history.push(followup);
+    }
+
+    return this.setState({ history });
   }
 
   render() {
-    const { currentItem } = this.state;
+    const { history } = this.state;
 
     const runAwayActions = [
       <Action
         fixed
         key="talkToSomebodyElse"
-        onClick={this.respondWithADiss}
+        onClick={() =>
+          this.updateHistory("diss", "I want to talk to somebody else")
+        }
         primary
       >
         I want to talk to somebody else
@@ -150,70 +213,85 @@ export default class ChatView extends Component {
         I’m done chatting
       </Action>
     ];
-
     const emoActions = [
-      <Action iconic onClick={() => this.respondWithAnEmo("smile")} key="smile">
+      <Action
+        iconic
+        onClick={() => this.updateHistory("emoji", "smile")}
+        key="smile"
+      >
         <Icon name="smile" size="l" />
       </Action>,
-      <Action iconic onClick={() => this.respondWithAnEmo("sad")} key="sad">
+      <Action
+        iconic
+        onClick={() => this.updateHistory("emoji", "sad")}
+        key="sad"
+      >
         <Icon name="sad" size="l" />
       </Action>,
-      <Action iconic onClick={() => this.respondWithAnEmo("angry")} key="angry">
+      <Action
+        iconic
+        onClick={() => this.updateHistory("emoji", "angry")}
+        key="angry"
+      >
         <Icon name="angry" size="l" />
       </Action>,
       <Action
         iconic
-        onClick={() => this.respondWithAnEmo("shocked")}
+        onClick={() => this.updateHistory("emoji", "shocked")}
         key="shocked"
       >
         <Icon name="shocked" size="l" />
       </Action>,
       <Action
         iconic
-        onClick={() => this.respondWithAnEmo("neutral")}
+        onClick={() => this.updateHistory("emoji", "neutral")}
         key="neutral"
       >
         <Icon name="neutral" size="l" />
       </Action>,
       <Action
         iconic
-        onClick={() => this.respondWithAnEmo("wondering")}
+        onClick={() => this.updateHistory("emoji", "wondering")}
         key="wondering"
       >
         <Icon name="wondering" size="l" />
       </Action>
     ];
-
     const renderUserActions = () => {
-      const thisBubbleI = currentItem;
-      const lastBubbleI = this.storyline.length;
-      const nextBubble = this.storyline[currentItem + 1];
-      const isActiveActionbarEmot = this.state.actionbar === "emot";
-      const isActiveActionbarRunaway = this.state.actionbar === "runaway";
-      const isActionbarHidden = this.state.hideActionbar;
-      if (thisBubbleI !== lastBubbleI && !isActionbarHidden) {
-        if (nextBubble.role === "user") {
-          if (isActiveActionbarEmot) {
-            return emoActions;
-          } else if (isActiveActionbarRunaway) {
-            return runAwayActions;
+      if (history.length > 0) {
+        const thisHistoryItem = history[history.length - 1];
+
+        const thisBubbleI = thisHistoryItem.i;
+        const lastBubbleI = this.storyline.length;
+
+        const isActiveActionbarEmot = this.state.actionbar === "emot";
+        const isActiveActionbarRunaway = this.state.actionbar === "runaway";
+
+        if (thisBubbleI === lastBubbleI - 1) {
+          return runAwayActions;
+        } else if (thisBubbleI < lastBubbleI - 1 && !this.state.hideActionbar) {
+          const nextBubble = this.storyline[thisBubbleI + 1];
+          if (nextBubble.role === "user") {
+            if (isActiveActionbarEmot) {
+              return emoActions;
+            } else if (isActiveActionbarRunaway) {
+              return runAwayActions;
+            }
+            return nextBubble.content.map(
+              (action, i) =>
+                action.enabled ? (
+                  <Action
+                    fixed
+                    key={action.type}
+                    onClick={() => this.updateHistory(action.type, i)}
+                    primary
+                  >
+                    {action.value}
+                  </Action>
+                ) : null
+            );
           }
-          return nextBubble.content.map(
-            (action) =>
-              action.enabled ? (
-                <Action
-                  fixed
-                  key={action.type}
-                  onClick={() => this.respondWithScriptedAction(action.type)}
-                  primary
-                >
-                  {action.value}
-                </Action>
-              ) : null
-          );
         }
-      } else if (lastBubbleI - thisBubbleI === 1) {
-        return runAwayActions;
       }
       return null;
     };
@@ -238,8 +316,7 @@ export default class ChatView extends Component {
         </Topbar>
         <PageBody flex={[1, 1, `100%`]}>
           <Storyline
-            carryOn={this.carryOn}
-            currentItem={currentItem}
+            history={this.state.history}
             interviewee={this.interviewee}
             onBubbleRender={this.onBubbleRender}
             storyline={this.storyline}

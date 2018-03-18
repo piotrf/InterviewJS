@@ -1,7 +1,7 @@
 import React from "react";
 import { markdown, ReactSpecimen } from "catalog";
 
-import { Bubble } from "../components";
+import { Bubble, Icon } from "../components";
 
 export default () => markdown`
 
@@ -16,6 +16,23 @@ export default () => markdown`
     <ReactSpecimen span={3} dark>
       <Bubble animated delay={2000}>
         Animated bubble with a delay in ms
+      </Bubble>
+    </ReactSpecimen>
+  )}
+  
+  ## Bubbles rendering other components
+
+  ${(
+    <ReactSpecimen span={3} dark>
+      <Bubble>
+        <Icon name="smile" />
+      </Bubble>
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen span={3} dark>
+      <Bubble>
+        <Icon name="shocked" />
       </Bubble>
     </ReactSpecimen>
   )}
