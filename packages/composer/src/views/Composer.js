@@ -120,7 +120,7 @@ export default class ComposerView extends React.Component {
         <PageHead>
           <Container flex={[1, 1, `${100 / 3}%`]} padded>
             <Action onClick={() => this.props.router.push(`/my/stories`)}>
-              <Icon name="arrow-left" size="x" /> Back
+              <Icon name="arrow-left" size="x" /> Story overview
             </Action>
             <Separator dir="v" size="m" />
             <Action onClick={() => this.toggleDetailsModal("meta")}>
@@ -129,7 +129,7 @@ export default class ComposerView extends React.Component {
                 size="s"
                 style={{ position: "relative", top: "1px", marginRight: "2px" }}
               />
-              {` `}Details
+              {` `}Story elements
             </Action>
           </Container>
           <Container flex={[1, 1, `${100 / 3}%`]} align="center">
