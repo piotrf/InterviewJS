@@ -131,63 +131,69 @@ export default class IntervieweeForm extends Component {
         <FormItem>
           <Label>Name</Label>
           <CharacterCount>
-            {50 - this.state.formData.name.length}
+            {35 - this.state.formData.name.length}
           </CharacterCount>
           <TextInput
             input
-            maxLength="50"
+            maxLength="35"
             minLength="1"
             name="name"
             onBlur={(e) => this.handleBlur(e)}
             onChange={(e) => this.handleChange(e)}
-            placeholder="i.e. Barack Obama"
+            placeholder="Name of interviewee"
             required
             valid={this.state.formValidation.name}
             value={this.state.formData.name}
           />
-          <Legend tip="A tip">i</Legend>
+          <Legend tip="Name of your interviewee">i</Legend>
         </FormItem>
         <Separator size="m" silent />
         <FormItem>
           <Label>Title</Label>
           <CharacterCount>
-            {60 - this.state.formData.title.length}
+            {35 - this.state.formData.title.length}
           </CharacterCount>
           <TextInput
             input
-            maxLength="60"
+            maxLength="35"
             minLength="1"
             name="title"
             onBlur={(e) => this.handleBlur(e)}
             onChange={(e) => this.handleChange(e)}
-            placeholder="i.e. 44th President of the US"
+            placeholder="Title e.g. President, Farmer, Mother"
             required
             valid={this.state.formValidation.title}
             value={this.state.formData.title}
           />
-          <Legend tip="A tip">i</Legend>
+          <Legend tip="Title e.g. President, Farmer, Mothe">i</Legend>
         </FormItem>
         <Separator size="m" silent />
         <FormItem>
           <Label>Bio</Label>
           <CharacterCount>
-            {500 - this.state.formData.bio.length}
+            {300 - this.state.formData.bio.length}
           </CharacterCount>
           <TextInput
             area
-            maxLength="500"
+            maxLength="300"
             name="bio"
             onChange={(e) => this.handleChange(e)}
-            placeholder=""
+            placeholder="Who is this person and why is s/he important in this story?"
             value={this.state.formData.bio}
           />
-          <Legend tip="A tip">i</Legend>
+          <Legend 
+            tip="Who is this and what role does this person have in your story? 
+            Does s/he have a particular view on the issues raised? 
+            Max. 300 characters."
+          >
+            i
+          </Legend>
         </FormItem>
         <Separator size="m" silent />
         <Container dir="row">
           <Container flex={[0, 0, "50%"]}>
             <FormItem>
-              <Label>Avatar</Label>
+              <Label>Profile image</Label>
               <Dropzone
                 accept="image/jpeg, image/jpg, image/svg, image/gif, image/png"
                 ref={(node) => {
@@ -207,14 +213,14 @@ export default class IntervieweeForm extends Component {
                   this.dropzoneRef.open();
                 }}
               />
-              <Legend tip="Small profile pic for you interviewee, best to upload a photo in square format. JPG or PNG format.">
+              <Legend tip="Is there a photo of the person and do you have permission to use it?">
                 i
               </Legend>
             </FormItem>
           </Container>
           <Container flex={[0, 0, "50%"]}>
             <FormItem>
-              <Label>Color</Label>
+              <Label>Colour</Label>
               <TextInput
                 input
                 maxLength="7"
@@ -226,7 +232,7 @@ export default class IntervieweeForm extends Component {
                 placeholder="i.e. #495abd, red…"
                 value={this.state.formData.color}
               />
-              <Legend tip="Provide hex colour to customise interviewee’s speech bubbles.">
+              <Legend tip="Chose the colour of this person’s chat text bubbles">
                 i
               </Legend>
             </FormItem>
@@ -242,7 +248,7 @@ export default class IntervieweeForm extends Component {
             </Action>
           ) : null}
           <Action fixed primary type="submit">
-            Save
+            Save interviewee
           </Action>
           {this.props.allowDelete
             ? deleteOption
