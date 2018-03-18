@@ -115,6 +115,10 @@ export default class ChatView extends Component {
       const { role, type } = thisHistoryItem;
       if (type === "emoji") {
         this.updateHistory("followup");
+      } else if (type === "diss") {
+        this.updateHistory("switchTo");
+      } else if (type === "nvm") {
+        this.updateHistory("followup");
       } else if (type === "action") {
         const { value } = thisHistoryItem; // 1 is explore, 0 is ignore
         if (value === 1) {
@@ -123,6 +127,7 @@ export default class ChatView extends Component {
           this.updateHistory("followup"); // TODO but should skip to the next unnested
         }
         return null;
+      } else if (type === "switchTo") {
       } else if (role === "interviewee") {
         const { i } = thisHistoryItem;
         const nextBubble = this.storyline[thisBubbleI + 1];
@@ -147,10 +152,20 @@ export default class ChatView extends Component {
 
     if (type === "diss") {
       const diss = {
+        i: thisHistoryItem.i,
         role: "user",
-        type: "diss"
+        type: "diss",
+        value: payload
       };
       history.push(diss);
+    } else if (type === "switchTo") {
+      this.setState({ actionbar: "switchTo" });
+      const switchTo = {
+        i: thisHistoryItem.i,
+        role: "system",
+        type: "switchTo"
+      };
+      history.push(switchTo);
     } else if (type === "emoji") {
       this.setState({ actionbar: "scripted" });
       const emoji = {
@@ -160,6 +175,15 @@ export default class ChatView extends Component {
         value: payload
       };
       history.push(emoji);
+    } else if (type === "nvm") {
+      this.setState({ actionbar: "scripted" });
+      const nvm = {
+        i: thisHistoryItem.i - 1,
+        role: "user",
+        type: "nvm",
+        value: payload
+      };
+      history.push(nvm);
     } else if (type === "quit") {
       const quit = {
         role: "user",
@@ -212,6 +236,13 @@ export default class ChatView extends Component {
       }
       return false;
     };
+    const isNvmBubble = () => {
+      if (history.length > 0) {
+        const thisHistoryItem = history[history.length - 1];
+        return thisHistoryItem.type === "switchTo";
+      }
+      return false;
+    };
 
     const runAwayActions = [
       <Action
@@ -232,6 +263,16 @@ export default class ChatView extends Component {
         tone="negative"
       >
         I’m done chatting
+      </Action>
+    ];
+    const nvmActions = [
+      <Action
+        fixed
+        key="neverMind"
+        onClick={() => this.updateHistory("nvm", "Nevermind")}
+        primary
+      >
+        Nevermind
       </Action>
     ];
     const emoActions = [
@@ -287,8 +328,11 @@ export default class ChatView extends Component {
 
         const isActiveActionbarEmot = this.state.actionbar === "emot";
         const isActiveActionbarRunaway = this.state.actionbar === "runaway";
+        const isLastBubbleSwitchTo = thisHistoryItem.type === "switchTo";
 
-        if (thisBubbleI === lastBubbleI - 1) {
+        if (isLastBubbleSwitchTo) {
+          return nvmActions;
+        } else if (thisBubbleI === lastBubbleI - 1) {
           return runAwayActions;
         } else if (thisBubbleI < lastBubbleI - 1 && !this.state.hideActionbar) {
           const nextBubble = this.storyline[thisBubbleI + 1];
@@ -337,15 +381,19 @@ export default class ChatView extends Component {
         </Topbar>
         <PageBody flex={[1, 1, `100%`]}>
           <Storyline
+            {...this.props}
             history={this.state.history}
             interviewee={this.interviewee}
             onBubbleRender={this.onBubbleRender}
+            story={this.story}
             storyline={this.storyline}
           />
         </PageBody>
         <PageFoot limit="m" flex={[0, 0, `80px`]} padded>
-          <Actionbar satellite={!isLastBubble() ? "both" : null}>
-            {!isLastBubble() ? (
+          <Actionbar
+            satellite={!isLastBubble() && !isNvmBubble() ? "both" : null}
+          >
+            {!isLastBubble() && !isNvmBubble() ? (
               <Action
                 iconic
                 active={this.state.actionbar === "runaway"}
@@ -362,7 +410,7 @@ export default class ChatView extends Component {
               </Action>
             ) : null}
             {renderUserActions()}
-            {!isLastBubble() ? (
+            {!isLastBubble() && !isNvmBubble() ? (
               <Action
                 iconic
                 active={this.state.actionbar === "emot"}
