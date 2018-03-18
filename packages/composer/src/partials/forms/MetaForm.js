@@ -82,21 +82,21 @@ export default class MetaForm extends React.Component {
         <FormItem>
           <Label>Title</Label>
           <CharacterCount>
-            {70 - this.state.formData.title.length}
+            {60 - this.state.formData.title.length}
           </CharacterCount>
           <TextInput
             input
-            maxLength="70"
+            maxLength="60"
             minLength="5"
             name="title"
             onBlur={(e) => this.handleBlur(e)}
             onChange={(e) => this.handleChange(e)}
-            placeholder="Placeholder…"
+            placeholder="Make it short and simple!"
             required
             valid={this.state.formValidation.title}
             value={this.state.formData.title}
           />
-          <Legend tip="This is a title">i</Legend>
+          <Legend tip="Short and simple titles work best.">i</Legend>
         </FormItem>
         <Separator size="m" silent />
         <FormItem>
@@ -124,14 +124,11 @@ export default class MetaForm extends React.Component {
                 onBlur={(e) => this.handleBlur(e)}
                 onChange={(e) => this.handleChange(e)}
                 place="middle"
-                placeholder="Link…"
+                placeholder="Link"
                 value={this.state.formData.authorLink}
               />
             </Container>
             <Container flex={[0, 0, `${100 / 3}%`]}>
-              <CharacterCount>
-                {35 - this.state.formData.pubDate.length}
-              </CharacterCount>
               <TextInput
                 input
                 maxLength="35"
@@ -139,12 +136,18 @@ export default class MetaForm extends React.Component {
                 onBlur={(e) => this.handleBlur(e)}
                 onChange={(e) => this.handleChange(e)}
                 place="right"
-                placeholder="Publication date…"
+                placeholder="Date of publication"
                 value={this.state.formData.pubDate}
               />
             </Container>
           </Container>
-          <Legend tip="tip">i</Legend>
+          <Legend
+            tip="- Add the author’s name.<br />
+            - Add a link e.g. to your website.<br />
+            - Add the publication date: Day/ Month/ Year"
+          >
+            i
+          </Legend>
         </FormItem>
         <Separator size="m" silent />
         <Container dir="row">
@@ -170,7 +173,12 @@ export default class MetaForm extends React.Component {
                   this.dropzoneRef.open();
                 }}
               />
-              <Legend tip="tip">i</Legend>
+              <Legend
+                tip="Choose a photo if you want a “front page” but make sure
+                you have the copyright!"
+              >
+                i
+              </Legend>
             </FormItem>
           </Container>
           <Container flex={[1, 1, "50%"]}>
@@ -195,7 +203,7 @@ export default class MetaForm extends React.Component {
                   this.dropzoneRef.open();
                 }}
               />
-              <Legend tip="tip">i</Legend>
+              <Legend tip="Add your organisation’s logo">i</Legend>
             </FormItem>
           </Container>
         </Container>

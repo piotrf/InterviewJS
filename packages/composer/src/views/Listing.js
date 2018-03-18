@@ -22,7 +22,8 @@ import {
   radius,
   setHeight,
   setSpace,
-  time
+  time,
+  PageParagraph
 } from "interviewjs-styleguide";
 
 import {
@@ -216,7 +217,7 @@ export default class ListingView extends Component {
             </UserMenu>
           </Container>
           <Container flex={[1, 1, `${100 / 3}%`]} align="center">
-            <PageTitle typo="h1">Your Stories</PageTitle>
+            <PageTitle typo="h1">Story overview</PageTitle>
           </Container>
           <Container flex={[1, 1, `${100 / 3}%`]} align="right" padded>
             <MobileNewStoryToggle>
@@ -233,6 +234,15 @@ export default class ListingView extends Component {
         </PageHead>
         <Separator silent size="h" />
         <PageBody>
+          {/* <Container align="center" limit="m">
+            <PageSubtitle typo="h3">
+                Here is a list of all the stories that you’ve created so far. 
+                Use it to access and edit the story elements of each story or 
+                to enter and edit the messaging exchanges with your 
+                interviewees via the chat dashboard.
+            </PageSubtitle>
+          </Container>
+          <Separator size="m" silent /> */}
           <Container limit="l">
             <Stories>
               {this.props.stories.length > 0 ? (

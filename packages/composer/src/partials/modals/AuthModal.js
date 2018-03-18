@@ -58,7 +58,7 @@ export default class AuthModal extends React.Component {
                   persona="interviewee"
                   theme={{ backg: color.flareLLt, color: color.white }}
                 >
-                  Welcome to InterviewJS…
+                  Welcome!
                 </Bubble>
                 <Bubble
                   animated
@@ -66,8 +66,8 @@ export default class AuthModal extends React.Component {
                   persona="interviewee"
                   theme={{ backg: color.flareLLt, color: color.white }}
                 >
-                  …an app that allows to compose scripted chats for a more
-                  immersive storytelling experience.
+                  InterviewJS will help you tell interactive stories by 
+                  converting your interviews into a chat experiences.
                 </Bubble>
                 <Bubble
                   animated
@@ -75,7 +75,7 @@ export default class AuthModal extends React.Component {
                   persona="interviewee"
                   theme={{ backg: color.flareLLt, color: color.white }}
                 >
-                  To continue, sign in with your Google Account.
+                  To continue, sign in with your Google account.
                 </Bubble>
               </Bubbles>
             </BubbleGroup>
