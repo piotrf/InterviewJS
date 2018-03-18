@@ -125,12 +125,12 @@ export default class Interviewees extends React.Component {
               </Container>
               <Separator size="m" silent />
               <Container align="center" limit="m">
-              <PageParagraph typo="p3">
-                Or proceed to the chat dashboard to convert your interviews into 
-                interactive messaging exchanges.  
-                In the chat dashboard you’ll get help from the InterviewJS bot.
-              </PageParagraph>
-            </Container>
+                <PageParagraph typo="p3">
+                  Or proceed to the chat dashboard to convert your interviews into 
+                  interactive messaging exchanges.  
+                  In the chat dashboard you’ll get help from the InterviewJS bot.
+                </PageParagraph>
+              </Container>
             <Separator size="m" silent />
               <Actionbar>
                 <Action fixed onClick={this.props.handleSubmit} primary>
