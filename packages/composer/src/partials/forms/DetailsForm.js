@@ -61,11 +61,10 @@ export default class DetailsForm extends React.Component {
             placeholder="Start with something like “Investigate...”, “Find out ... “, or “Learn ...”."
             value={this.state.formData.intro}
           />
-          <Legend 
-            tip="It’s ok if it sounds like a task: 
-              “Investigate how ...”, “Find out ... “, or “Learn ...” - 
-              messaging is interactive and the user will choose a response. 
-              <br />Max. 160 characters."
+          <Legend
+            tip="It’s ok if it sounds like a task:
+              “Investigate how ...”, “Find out ... “, or “Learn ...” -
+              messaging is interactive and the user will choose a response."
           >
             i
           </Legend>
@@ -85,10 +84,10 @@ export default class DetailsForm extends React.Component {
             placeholder="Give your user some background to the story, why does it matter?"
             value={this.state.formData.context}
           />
-          <Legend 
-            tip="Imagine the user finds your interviewees in mid-discussion. 
-            What key facts should they know? Any crucial points of agreement/ 
-            disagreement? <br />Max. 900 characters."
+          <Legend
+            tip="Imagine the user finds your interviewees in mid-discussion.
+            What key facts should they know? Any crucial points of agreement/
+            disagreement?"
           >
             i
           </Legend>

@@ -53,7 +53,6 @@ const Input = css.input`
     return null;
   }};
   ${({ nooffset }) => (nooffset ? `right: 0; left: 0;` : ``)};
-  ${({ file }) => (file ? `font-style: italic;` : ``)};
 `;
 
 const Button = css(Input.withComponent("button"))`

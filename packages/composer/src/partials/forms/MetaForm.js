@@ -96,11 +96,7 @@ export default class MetaForm extends React.Component {
             valid={this.state.formValidation.title}
             value={this.state.formData.title}
           />
-          <Legend 
-            tip="Short and simple titles work best, max. 60 characters."
-          >
-            i
-          </Legend>
+          <Legend tip="Short and simple titles work best.">i</Legend>
         </FormItem>
         <Separator size="m" silent />
         <FormItem>
@@ -145,8 +141,9 @@ export default class MetaForm extends React.Component {
               />
             </Container>
           </Container>
-          <Legend tip="- Add the author’s name, max. 35 characters. <br />
-            - Add a link e.g. to your website. <br />
+          <Legend
+            tip="- Add the author’s name.<br />
+            - Add a link e.g. to your website.<br />
             - Add the publication date: Day/ Month/ Year"
           >
             i
@@ -176,8 +173,8 @@ export default class MetaForm extends React.Component {
                   this.dropzoneRef.open();
                 }}
               />
-              <Legend 
-                tip="Choose a photo if you want a “front page” but make sure 
+              <Legend
+                tip="Choose a photo if you want a “front page” but make sure
                 you have the copyright!"
               >
                 i

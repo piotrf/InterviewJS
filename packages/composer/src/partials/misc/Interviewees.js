@@ -119,19 +119,19 @@ export default class Interviewees extends React.Component {
                 </IntervieweesList>
                 <Container padded align="center">
                   <Action onClick={this.toggleAddInterviewee}>
-                    <Icon name="plus" size="x" /> Add interviewee 
+                    <Icon name="plus" size="x" /> Add interviewee
                   </Action>
                 </Container>
               </Container>
-              <Separator size="m" silent />
+              {/* <Separator size="m" silent />
               <Container align="center" limit="m">
                 <PageParagraph typo="p3">
-                  Or proceed to the chat dashboard to convert your interviews into 
-                  interactive messaging exchanges.  
+                  Or proceed to the chat dashboard to convert your interviews into
+                  interactive messaging exchanges.
                   In the chat dashboard you’ll get help from the InterviewJS bot.
                 </PageParagraph>
-              </Container>
-            <Separator size="m" silent />
+              </Container> */}
+              <Separator size="m" silent />
               <Actionbar>
                 <Action fixed onClick={this.props.handleSubmit} primary>
                   {this.props.cta}

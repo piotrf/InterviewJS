@@ -165,7 +165,7 @@ export default class IntervieweeForm extends Component {
             valid={this.state.formValidation.title}
             value={this.state.formData.title}
           />
-          <Legend tip="Title e.g. President, Farmer, Mothe">i</Legend>
+          <Legend tip="Title e.g. President, Farmer, Mother">i</Legend>
         </FormItem>
         <Separator size="m" silent />
         <FormItem>
@@ -181,10 +181,9 @@ export default class IntervieweeForm extends Component {
             placeholder="Who is this person and why is s/he important in this story?"
             value={this.state.formData.bio}
           />
-          <Legend 
-            tip="Who is this and what role does this person have in your story? 
-            Does s/he have a particular view on the issues raised? 
-            Max. 300 characters."
+          <Legend
+            tip="Who is this and what role does this person have in your story?
+            Does s/he have a particular view on the issues raised?"
           >
             i
           </Legend>
@@ -232,7 +231,7 @@ export default class IntervieweeForm extends Component {
                 placeholder="i.e. #495abd, red…"
                 value={this.state.formData.color}
               />
-              <Legend tip="Chose the colour of this person’s chat text bubbles">
+              <Legend tip="Choose the colour of this person’s chat text bubbles">
                 i
               </Legend>
             </FormItem>

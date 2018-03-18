@@ -234,7 +234,7 @@ export default class ListingView extends Component {
         </PageHead>
         <Separator silent size="h" />
         <PageBody>
-         <Container align="center" limit="m">
+          {/* <Container align="center" limit="m">
             <PageSubtitle typo="h3">
                 Here is a list of all the stories that you’ve created so far. 
                 Use it to access and edit the story elements of each story or 
@@ -242,7 +242,7 @@ export default class ListingView extends Component {
                 interviewees via the chat dashboard.
             </PageSubtitle>
           </Container>
-          <Separator size="m" silent />
+          <Separator size="m" silent /> */}
           <Container limit="l">
             <Stories>
               {this.props.stories.length > 0 ? (
