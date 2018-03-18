@@ -51,17 +51,6 @@ const Topbar = css(Container)`
 export default class ChatView extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      actionbar: "scripted",
-      hideActionbar: true,
-      history: [],
-      intervieweeModal: false,
-      storyDetailsModal: false
-    };
-    this.initHistory = this.initHistory.bind(this);
-    this.onBubbleRender = this.onBubbleRender.bind(this);
-    this.toggleToolbar = this.toggleToolbar.bind(this);
-    this.updateHistory = this.updateHistory.bind(this);
 
     /* assign some globally necessary data */
     const { interviewees } = this.props.story;
@@ -72,6 +61,23 @@ export default class ChatView extends Component {
     this.interviewee = interviewees[intervieweeIndex];
     this.story = this.props.story;
     this.storyline = interviewees[intervieweeIndex].storyline;
+
+    const localHistory = JSON.parse(
+      localStorage.getItem(`history-${this.story.id}-${this.interviewee.id}`)
+    );
+
+    this.state = {
+      actionbar: "scripted",
+      hideActionbar: true,
+      history: localHistory || [],
+      intervieweeModal: false,
+      loaded: false,
+      storyDetailsModal: false
+    };
+    this.initHistory = this.initHistory.bind(this);
+    this.onBubbleRender = this.onBubbleRender.bind(this);
+    this.toggleToolbar = this.toggleToolbar.bind(this);
+    this.updateHistory = this.updateHistory.bind(this);
   }
   componentDidMount() {
     this.initHistory();
@@ -161,14 +167,14 @@ export default class ChatView extends Component {
       };
       history.push(quit);
     } else if (type === "ignore") {
-      console.log("ignore action does nothing for now");
-      // const ignore = {
-      //   i: thisHistoryItem.i + 1,
-      //   role: "user",
-      //   type: "action",
-      //   value: payload
-      // };
-      // history.push(ignore);
+      this.setState({ actionbar: "scripted" });
+      const ignore = {
+        i: thisHistoryItem.i + 1,
+        role: "user",
+        type: "action",
+        value: payload
+      };
+      history.push(ignore);
     } else if (type === "explore") {
       const explore = {
         i: thisHistoryItem.i + 1,
@@ -186,11 +192,26 @@ export default class ChatView extends Component {
       history.push(followup);
     }
 
+    localStorage.setItem(
+      `history-${this.story.id}-${this.interviewee.id}`,
+      JSON.stringify(history)
+    );
+
     return this.setState({ history });
   }
 
   render() {
     const { history } = this.state;
+
+    const isLastBubble = () => {
+      if (history.length > 0) {
+        const thisHistoryItem = history[history.length - 1];
+        const thisBubbleI = thisHistoryItem.i;
+        const lastBubbleI = this.storyline.length - 1;
+        return thisBubbleI === lastBubbleI;
+      }
+      return false;
+    };
 
     const runAwayActions = [
       <Action
@@ -323,36 +344,40 @@ export default class ChatView extends Component {
           />
         </PageBody>
         <PageFoot limit="m" flex={[0, 0, `80px`]} padded>
-          <Actionbar satellite="both">
-            <Action
-              iconic
-              active={this.state.actionbar === "runaway"}
-              onClick={
-                this.state.actionbar !== "runaway"
-                  ? () => this.setState({ actionbar: "runaway" })
-                  : () => this.setState({ actionbar: "scripted" })
-              }
-              secondary
-            >
-              <Icon
-                name={this.state.actionbar === "runaway" ? `cross` : `vdots`}
-              />
-            </Action>
+          <Actionbar satellite={!isLastBubble() ? "both" : null}>
+            {!isLastBubble() ? (
+              <Action
+                iconic
+                active={this.state.actionbar === "runaway"}
+                onClick={
+                  this.state.actionbar !== "runaway"
+                    ? () => this.setState({ actionbar: "runaway" })
+                    : () => this.setState({ actionbar: "scripted" })
+                }
+                secondary
+              >
+                <Icon
+                  name={this.state.actionbar === "runaway" ? `cross` : `vdots`}
+                />
+              </Action>
+            ) : null}
             {renderUserActions()}
-            <Action
-              iconic
-              active={this.state.actionbar === "emot"}
-              onClick={
-                this.state.actionbar !== "emot"
-                  ? () => this.setState({ actionbar: "emot" })
-                  : () => this.setState({ actionbar: "scripted" })
-              }
-              secondary
-            >
-              <Icon
-                name={this.state.actionbar === "emot" ? `cross` : `smile`}
-              />
-            </Action>
+            {!isLastBubble() ? (
+              <Action
+                iconic
+                active={this.state.actionbar === "emot"}
+                onClick={
+                  this.state.actionbar !== "emot"
+                    ? () => this.setState({ actionbar: "emot" })
+                    : () => this.setState({ actionbar: "scripted" })
+                }
+                secondary
+              >
+                <Icon
+                  name={this.state.actionbar === "emot" ? `cross` : `smile`}
+                />
+              </Action>
+            ) : null}
           </Actionbar>
         </PageFoot>
       </Page>,
