@@ -2,6 +2,7 @@
 import { array, arrayOf, func, object, shape } from "prop-types";
 import css from "styled-components";
 import React, { Component } from "react";
+import { withRouter } from "react-router";
 
 import {
   Action,
@@ -38,7 +39,7 @@ const Push = css.div`
   padding: 0;
 `;
 
-export default class Storyline extends Component {
+class Storyline extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -65,6 +66,7 @@ export default class Storyline extends Component {
   }
   render() {
     const { storyline, history, interviewee, story } = this.props;
+
     const renderIntervieweeBubble = (data) => {
       const { content, type } = data;
       if (type === "text") {
@@ -253,7 +255,6 @@ export default class Storyline extends Component {
               );
             })
           : null}
-
         <div
           ref={(el) => {
             this.anchor = el;
@@ -270,10 +271,16 @@ Storyline.propTypes = {
   interviewee: shape({
     storyline: array.isRequired
   }).isRequired,
-  storyline: arrayOf(object)
+  storyline: arrayOf(object),
+  story: shape({
+    interviewees: arrayOf(object)
+  })
 };
 
 Storyline.defaultProps = {
   history: [],
-  storyline: []
+  storyline: [],
+  story: {}
 };
+
+export default withRouter(Storyline);

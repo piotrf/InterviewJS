@@ -1,7 +1,8 @@
 /* eslint react/forbid-prop-types: 0 */
+import { object, shape, string } from "prop-types";
+import { withRouter } from "react-router";
 import css from "styled-components";
 import React, { Component } from "react";
-import { object, shape, string } from "prop-types";
 import {
   Actionbar,
   Action,
@@ -48,7 +49,7 @@ const Topbar = css(Container)`
   z-index: 5;
 `;
 
-export default class ChatView extends Component {
+class ChatView extends Component {
   constructor(props) {
     super(props);
 
@@ -81,6 +82,11 @@ export default class ChatView extends Component {
   }
   componentDidMount() {
     this.initHistory();
+  }
+  componentDidUpdate(prevProps) {
+    return prevProps.location.pathname !== this.props.location.pathname
+      ? this.render()
+      : null;
   }
 
   toggleModal(modal) {
@@ -384,6 +390,7 @@ export default class ChatView extends Component {
             {...this.props}
             history={this.state.history}
             interviewee={this.interviewee}
+            location={this.props.location}
             onBubbleRender={this.onBubbleRender}
             story={this.story}
             storyline={this.storyline}
@@ -464,3 +471,5 @@ ChatView.defaultProps = {
   router: null,
   story: {}
 };
+
+export default withRouter(ChatView);

@@ -1,6 +1,8 @@
-import React, { Component } from "react";
 import { bool, func, shape, string } from "prop-types";
+import { SketchPicker } from "react-color";
+import css from "styled-components";
 import Dropzone from "react-dropzone";
+import React, { Component } from "react";
 
 import {
   Action,
@@ -23,6 +25,13 @@ import {
 
 import validateField from "./validateField";
 
+const ColorPickerWrapper = css.span`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 1000;
+`;
+
 export default class IntervieweeForm extends Component {
   constructor(props) {
     super(props);
@@ -32,11 +41,13 @@ export default class IntervieweeForm extends Component {
         name: null,
         title: null
       },
-      moreDropdown: false
+      moreDropdown: false,
+      colorPicker: false
     };
+    this.deleteInterviewee = this.deleteInterviewee.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.deleteInterviewee = this.deleteInterviewee.bind(this);
+    this.handleChangeColor = this.handleChangeColor.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.toggleDropdown = this.toggleDropdown.bind(this);
   }
@@ -49,6 +60,13 @@ export default class IntervieweeForm extends Component {
   handleChange(e) {
     this.setState({
       formData: { ...this.state.formData, [e.target.name]: e.target.value }
+    });
+  }
+  handleChangeColor(color) {
+    console.log(color);
+    this.setState({
+      formData: { ...this.state.formData, color: color.hex },
+      colorPicker: false
     });
   }
 
@@ -222,15 +240,23 @@ export default class IntervieweeForm extends Component {
               <Label>Colour</Label>
               <TextInput
                 input
-                maxLength="7"
-                minlength="3"
-                name="color"
-                nooffset
-                onChange={(e) => this.handleChange(e)}
                 place="right"
                 placeholder="i.e. #495abd, red…"
+                name="color"
+                onFocus={() => this.setState({ colorPicker: true })}
                 value={this.state.formData.color}
+                nooffset
+                // onChange={(e) => this.handleChange(e)}
               />
+              {this.state.colorPicker ? (
+                <ColorPickerWrapper>
+                  <SketchPicker
+                    disableAlpha
+                    color={this.state.formData.color}
+                    onChangeComplete={this.handleChangeColor}
+                  />
+                </ColorPickerWrapper>
+              ) : null}
               <Legend tip="Choose the colour of this person’s chat text bubbles">
                 i
               </Legend>
