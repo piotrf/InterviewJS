@@ -63,7 +63,6 @@ export default class IntervieweeForm extends Component {
     });
   }
   handleChangeColor(color) {
-    console.log(color);
     this.setState({
       formData: { ...this.state.formData, color: color.hex },
       colorPicker: false
