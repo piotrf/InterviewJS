@@ -67,8 +67,8 @@ export default class MetaForm extends React.Component {
   handleFile(key, f) {
     const reader = new FileReader();
     reader.onloadend = () => {
-      const base64data = reader.result;
-      console.log(base64data);
+      const base64data = reader.result.length > 3e6 ? '' : reader.result;
+      // console.log(base64data);
       this.setState({
         formData: { ...this.state.formData, [key]: base64data }
       });

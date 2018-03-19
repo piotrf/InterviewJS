@@ -79,8 +79,8 @@ export default class IntervieweeForm extends Component {
   handleFile(f) {
     const reader = new FileReader();
     reader.onloadend = () => {
-      const base64data = reader.result;
-      console.log(base64data);
+      const base64data = reader.result.length > 3e6 ? '' : reader.result;
+      // console.log(base64data);
       this.setState({
         formData: { ...this.state.formData, avatar: base64data }
       });
