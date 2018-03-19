@@ -10,6 +10,7 @@ import CHANDRAN from "./media/chandran.png";
 
 const stories = [
   {
+    ignore: true, // don't save to Firebase, etc.
     title: "Britain’s modern slave trade",
     id: "0bf34b30-743b-46ab-wddwe-c875326d86f6",
     author: "David Harrison",
@@ -464,6 +465,7 @@ const stories = [
     ]
   },
   {
+    ignore: true, // don't save to Firebase, etc.
     title: "Ex Machina",
     id: "0bf34b30-743b-46ab-weewe-c875326d86f6",
     author: "Alex Garland",
@@ -867,6 +869,7 @@ Good.`,
     ]
   },
   {
+    ignore: true, // don't save to Firebase, etc.
     title: "Interviewing US Presidents",
     id: "0bf34b30-743b-46ab-9788-c875326d86f6",
     author: "George Stephanopoulos",
