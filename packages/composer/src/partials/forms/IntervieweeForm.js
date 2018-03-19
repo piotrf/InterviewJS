@@ -42,7 +42,8 @@ export default class IntervieweeForm extends Component {
         title: null
       },
       moreDropdown: false,
-      colorPicker: false
+      colorPicker: false,
+      colorPicking: false
     };
     this.deleteInterviewee = this.deleteInterviewee.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
@@ -64,9 +65,15 @@ export default class IntervieweeForm extends Component {
   }
   handleChangeColor(color) {
     this.setState({
-      formData: { ...this.state.formData, color: color.hex },
-      colorPicker: false
+      formData: { ...this.state.formData, color: color.hex }
     });
+    setTimeout(
+      () =>
+        this.setState({
+          colorPicking: false
+        }),
+      350
+    );
   }
 
   handleFile(f) {
@@ -242,10 +249,14 @@ export default class IntervieweeForm extends Component {
                 place="right"
                 placeholder="i.e. #495abd, red…"
                 name="color"
-                onFocus={() => this.setState({ colorPicker: true })}
+                onClick={() => this.setState({ colorPicker: true })}
+                onBlur={
+                  this.state.colorPicking
+                    ? null
+                    : () => this.setState({ colorPicker: false })
+                }
                 value={this.state.formData.color}
                 nooffset
-                // onChange={(e) => this.handleChange(e)}
               />
               {this.state.colorPicker ? (
                 <ColorPickerWrapper>
