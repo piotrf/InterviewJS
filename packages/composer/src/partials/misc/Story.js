@@ -118,7 +118,7 @@ export default class Story extends React.Component {
           </Container>
           <Container flex={[2, 1, "20%"]} align="right">
             <AvatarList>
-              {this.props.story.interviewees.map((el) => (
+              {this.props.story.interviewees ? this.props.story.interviewees.map((el) => (
                 <AvatarListItem key={el.name}>
                   <Tip
                     animation="fade"
@@ -134,7 +134,7 @@ export default class Story extends React.Component {
                     <Avatar size="m" image={el.avatar} />
                   </Tip>
                 </AvatarListItem>
-              ))}
+              )) : null}
             </AvatarList>
           </Container>
         </StoryEl>
