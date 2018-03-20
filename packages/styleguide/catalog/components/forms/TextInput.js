@@ -1,6 +1,6 @@
 import css from "styled-components";
 import React from "react";
-import { bool, func, string } from "prop-types";
+import { bool, string } from "prop-types";
 
 import { color, font, radius, setSpace, setType, time } from "../../../utils";
 
@@ -8,6 +8,7 @@ const Input = css.input`
   ${setSpace("phm")};
   ${setSpace("pvm")};
   ${setType("x")};
+  background: transparent;
   border-radius: ${radius.m};
   border: 1px solid ${color.greyHL};
   box-shadow: none;
