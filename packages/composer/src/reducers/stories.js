@@ -36,10 +36,11 @@ function stories(state = [], action) {
 
     case "SYNC_STORY":
       console.log("sync/update a story");
-      const prevStory = state.find(story => story.id === payload.id);
-      if (! prevStory) return [payload, ...state];
-      return state.map(story => {
-        if (story.id === payload.id && payload.version > story.version) return payload;
+      const prevStory = state.find((story) => story.id === payload.id);
+      if (!prevStory) return [payload, ...state];
+      return state.map((story) => {
+        if (story.id === payload.id && payload.version > story.version)
+          return payload;
         return story;
       });
 
@@ -110,24 +111,20 @@ function stories(state = [], action) {
 
     case "MOVE_STORYLINE_ITEM":
       console.log("moving storyline item");
-      const moveStorylineObj =
+      const { to, from } = payload;
+      const moveStorylineArr =
         state[storyIndex].interviewees[intervieweeIndex].storyline;
-
+      const newArr = moveStorylineArr.slice();
+      newArr.splice(to, 0, newArr.splice(from, 1)[0]);
       const MOVE_STORYLINE_ITEM_STATE = [
         ...state.slice(0, storyIndex),
         {
           ...state[storyIndex],
-          inteviewees: [
+          interviewees: [
             ...state[storyIndex].interviewees.slice(0, intervieweeIndex),
             {
               ...state[storyIndex].interviewees[intervieweeIndex],
-              storyline: [
-                moveStorylineObj.splice(
-                  payload.to,
-                  0,
-                  moveStorylineObj.splice(payload.from, 1)[0]
-                )
-              ]
+              storyline: newArr
             },
             ...state[storyIndex].interviewees.slice(intervieweeIndex + 1)
           ]
@@ -160,7 +157,6 @@ function stories(state = [], action) {
       ];
       return DELETE_STORYLINE_ITEM_STATE;
 
-
     default:
       return state;
   }
@@ -169,11 +165,7 @@ function stories(state = [], action) {
 function storiesWrapper(state = [], action) {
   const NAMESPACE = "alpha";
 
-  const {
-    type,
-    storyIndex,
-    payload,
-  } = action;
+  const { type, storyIndex, payload } = action;
 
   console.log(action);
 
@@ -184,33 +176,39 @@ function storiesWrapper(state = [], action) {
     return newState;
   }
 
-
   let storyId = null;
   let uid = "anon";
 
-  if (typeof storyIndex === "number" && state[storyIndex]) storyId = state[storyIndex].id;
+  if (typeof storyIndex === "number" && state[storyIndex])
+    storyId = state[storyIndex].id;
   if (type === "CREATE_STORY") storyId = payload.id;
 
-  if (! storyId) storyId = `temp-${uuidv4()}`;
+  if (!storyId) storyId = `temp-${uuidv4()}`;
 
   console.log(uid, storyId);
 
-  let currentStory = newState.find(story => story.id === storyId);
-  if (type === "DELETE_STORY") currentStory = state.find(story => story.id === storyId);
+  let currentStory = newState.find((story) => story.id === storyId);
+  if (type === "DELETE_STORY")
+    currentStory = state.find((story) => story.id === storyId);
   console.log(currentStory);
 
-  if (! currentStory) return newState;
+  if (!currentStory) return newState;
   if (currentStory.ignore) return newState;
 
-  if (! currentStory.created) currentStory.created = new Date();
+  if (!currentStory.created) currentStory.created = new Date();
   currentStory.lastUpdated = new Date();
-  if (! currentStory.version) currentStory.version = 0;
+  if (!currentStory.version) currentStory.version = 0;
   currentStory.version++;
 
   if (currentStory.uid) uid = currentStory.uid;
 
   // FIXES
-  if (!currentStory.cover || typeof currentStory.cover === 'undefined' || currentStory.cover === 'undefined') currentStory.cover = currentStory.media.cover;
+  if (
+    !currentStory.cover ||
+    typeof currentStory.cover === "undefined" ||
+    currentStory.cover === "undefined"
+  )
+    currentStory.cover = currentStory.media.cover;
 
   if (type === "CREATE_STORY") {
     base.post(`stories-${NAMESPACE}/${uid}/${storyId}`, {
@@ -228,10 +226,9 @@ function storiesWrapper(state = [], action) {
         if (err) {
           console.log(err);
         } else {
-          base.remove(`stories-${NAMESPACE}/${uid}/${storyId}`,
-            (err2) => {
-              if (err2) console.log(err2);
-            });
+          base.remove(`stories-${NAMESPACE}/${uid}/${storyId}`, (err2) => {
+            if (err2) console.log(err2);
+          });
         }
       }
     });
