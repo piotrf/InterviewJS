@@ -240,8 +240,8 @@ MetaForm.defaultProps = {
     authorLink: "",
     pubDate: "",
     media: {
-      cover: "undefined",
-      logo: "undefined"
+      cover: "",
+      logo: ""
     }
   }
 };
