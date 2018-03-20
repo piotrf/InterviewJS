@@ -117,7 +117,7 @@ function stories(state = [], action) {
         ...state.slice(0, storyIndex),
         {
           ...state[storyIndex],
-          interviewees: [
+          inteviewees: [
             ...state[storyIndex].interviewees.slice(0, intervieweeIndex),
             {
               ...state[storyIndex].interviewees[intervieweeIndex],
