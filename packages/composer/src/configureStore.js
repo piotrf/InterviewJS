@@ -70,6 +70,7 @@ export const base = Rebase.createClass(firebaseApp.database());
 const persistConfig = {
   key: 'root',
   storage,
+  blacklist: ['routing'],
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
