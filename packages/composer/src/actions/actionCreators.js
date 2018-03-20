@@ -154,24 +154,27 @@ export function noop() {
 export function syncFirebaseStories(uid) {
   const NAMESPACE = "alpha";
 
-  return dispatch => {
+  return (dispatch) => {
     dispatch(noop());
 
     console.log(`stories-${NAMESPACE}/${uid}`);
 
-    base.fetch(`stories-${NAMESPACE}/${uid}/`, {
-      asArray: true
-    }).then(data => {
-      console.log(data);
-      data.forEach(story => {
-        dispatch(syncStory(story));
+    base
+      .fetch(`stories-${NAMESPACE}/${uid}/`, {
+        asArray: true
+      })
+      .then((data) => {
+        console.log(data);
+        data.forEach((story) => {
+          dispatch(syncStory(story));
+        });
+      })
+      .catch((error) => {
+        console.log(error);
       });
-    }).catch(error => {
-      console.log(error);
-    });
     // return fetch(`https://www.reddit.com/r/${subreddit}.json`)
     //   .then(response => response.json())
     //   .then(json => dispatch(receivePosts(subreddit, json)))
     return null;
-  }
+  };
 }
