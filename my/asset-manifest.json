@@ -1,8 +1,8 @@
 {
   "main.css": "static/css/main.4bfc6513.css",
   "main.css.map": "static/css/main.4bfc6513.css.map",
-  "main.js": "static/js/main.e102e62f.js",
-  "main.js.map": "static/js/main.e102e62f.js.map",
+  "main.js": "static/js/main.10f0e552.js",
+  "main.js.map": "static/js/main.10f0e552.js.map",
   "static/media/ShapeAttachedLeft.svg": "static/media/ShapeAttachedLeft.3e6a1d35.svg",
   "static/media/ShapeAttachedRight.svg": "static/media/ShapeAttachedRight.2e234a75.svg",
   "static/media/ava.png": "static/media/ava.b1c05c82.png",
@@ -16,6 +16,5 @@
   "static/media/logo.png": "static/media/logo.8fb96054.png",
   "static/media/obama.png": "static/media/obama.7e3f94e2.png",
   "static/media/trump.png": "static/media/trump.007a82cd.png",
-  "static/media/welcome-image.png": "static/media/welcome-image.8b6c5213.png",
-  "static/media/zenger.jpg": "static/media/zenger.0c5c5c6f.jpg"
+  "static/media/welcome-image.png": "static/media/welcome-image.8b6c5213.png"
 }
