@@ -168,12 +168,12 @@ export default class ListingView extends Component {
   }
 
   componentDidMount() {
-    if (! this.props.user.ignore) store.dispatch(syncFirebaseStories(this.props.user.id));
+    if (! this.props.user.ignore) store.dispatch(syncFirebaseStories(this.props.user.id ? this.props.user.id : ""));
     if (! this.props.user || ! this.props.user.id || this.props.user.ignore) this.props.router.push(`/my`);
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.user.id !== nextProps.user.id && ! nextProps.user.ignore) store.dispatch(syncFirebaseStories(nextProps.user.id));
+    if (this.props.user.id !== nextProps.user.id && ! nextProps.user.ignore) store.dispatch(syncFirebaseStories(nextProps.user.id ? nextProps.user.id : ""));
   }
 
   handleLogout() {
