@@ -1,86 +1,10 @@
 /* eslint no-case-declarations: 0 */
 /* eslint no-console: 0 */
+/* eslint prefer-destructuring: 0 */
+/* eslint no-plusplus: 0 */
+
 import uuidv4 from "uuid/v4";
-
-import { base, firebaseApp } from "../configureStore";
-
-const NAMESPACE = "alpha";
-
-function storiesWrapper(state = [], action) {
-  const {
-    type,
-    storyIndex,
-    payload,
-    intervieweeIndex,
-    storyItemIndex
-  } = action;
-
-  console.log(action);
-
-  const newState = stories(state, action);
-
-  if (typeof storyIndex !== "number") {
-    console.log("no storyIndex");
-    return newState;
-  }
-
-
-  let storyId = null;
-  let uid = "anon";
-
-  if (typeof storyIndex === "number" && state[storyIndex]) storyId = state[storyIndex].id;
-  if (type === "CREATE_STORY") storyId = payload.id;
-
-  if (! storyId) storyId = `temp-${uuidv4()}`;
-
-  console.log(uid, storyId);
-
-  let currentStory = newState.find(story => story.id === storyId);
-  if (type === "DELETE_STORY") currentStory = state.find(story => story.id === storyId);
-  console.log(currentStory);
-
-  if (! currentStory) return newState;
-  if (currentStory.ignore) return newState;
-
-  if (! currentStory.created) currentStory.created = new Date();
-  currentStory.lastUpdated = new Date();
-  if (! currentStory.version) currentStory.version = 0;
-  currentStory.version++;
-
-  if (currentStory.uid) uid = currentStory.uid;
-
-  if (type === "CREATE_STORY") {
-    base.post(`stories-${NAMESPACE}/${uid}/${storyId}`, {
-      data: currentStory,
-      then(err) {
-        if (err) console.log(err);
-      }
-    });
-  } else if (type === "DELETE_STORY") {
-    base.post(`stories-${NAMESPACE}-deleted/${uid}/${storyId}`, {
-      data: currentStory,
-      then(err) {
-        if (err) {
-          console.log(err);
-        } else {
-          base.remove(`stories-${NAMESPACE}/${uid}/${storyId}`,
-            (err2) => {
-              if (err2) console.log(err2);
-            });
-        }
-      }
-    });
-  } else {
-    base.update(`stories-test0/${uid}/${storyId}`, {
-      data: currentStory,
-      then(err) {
-        if (err) console.log(err);
-      }
-    });
-  }
-
-  return newState;
-}
+import { base } from "../configureStore";
 
 function stories(state = [], action) {
   const {
@@ -109,6 +33,15 @@ function stories(state = [], action) {
     case "DELETE_STORY":
       console.log("deleting a story");
       return [...state.slice(0, storyIndex), ...state.slice(storyIndex + 1)];
+
+    case "SYNC_STORY":
+      console.log("sync/update a story");
+      const prevStory = state.find(story => story.id === payload.id);
+      if (! prevStory) return [payload, ...state];
+      return state.map(story => {
+        if (story.id === payload.id && payload.version > story.version) return payload;
+        return story;
+      });
 
     case "CREATE_INTERVIEWEE":
       console.log("creating interviewee");
@@ -231,6 +164,84 @@ function stories(state = [], action) {
     default:
       return state;
   }
+}
+
+function storiesWrapper(state = [], action) {
+  const NAMESPACE = "alpha";
+
+  const {
+    type,
+    storyIndex,
+    payload,
+  } = action;
+
+  console.log(action);
+
+  const newState = stories(state, action);
+
+  if (typeof storyIndex !== "number") {
+    console.log("no storyIndex");
+    return newState;
+  }
+
+
+  let storyId = null;
+  let uid = "anon";
+
+  if (typeof storyIndex === "number" && state[storyIndex]) storyId = state[storyIndex].id;
+  if (type === "CREATE_STORY") storyId = payload.id;
+
+  if (! storyId) storyId = `temp-${uuidv4()}`;
+
+  console.log(uid, storyId);
+
+  let currentStory = newState.find(story => story.id === storyId);
+  if (type === "DELETE_STORY") currentStory = state.find(story => story.id === storyId);
+  console.log(currentStory);
+
+  if (! currentStory) return newState;
+  if (currentStory.ignore) return newState;
+
+  if (! currentStory.created) currentStory.created = new Date();
+  currentStory.lastUpdated = new Date();
+  if (! currentStory.version) currentStory.version = 0;
+  currentStory.version++;
+
+  if (currentStory.uid) uid = currentStory.uid;
+
+  if (type === "CREATE_STORY") {
+    base.post(`stories-${NAMESPACE}/${uid}/${storyId}`, {
+      data: currentStory,
+      then(err) {
+        if (err) console.log(err);
+      }
+    });
+  } else if (type === "SYNC_STORY") {
+    // NOOP;
+  } else if (type === "DELETE_STORY") {
+    base.post(`stories-${NAMESPACE}-deleted/${uid}/${storyId}`, {
+      data: currentStory,
+      then(err) {
+        if (err) {
+          console.log(err);
+        } else {
+          base.remove(`stories-${NAMESPACE}/${uid}/${storyId}`,
+            (err2) => {
+              if (err2) console.log(err2);
+            });
+        }
+      }
+    });
+  } else {
+    base.update(`stories-${NAMESPACE}/${uid}/${storyId}`, {
+      data: currentStory,
+      then(err) {
+        if (err) console.log(err);
+      }
+    });
+  }
+
+  return newState;
 }
 
 export default storiesWrapper; // stories

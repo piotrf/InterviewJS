@@ -25,8 +25,6 @@ export default class AuthView extends Component {
   }
 
   handleAuthentication(user) {
-    console.log(user);
-
     const data = {
       id: user.uid,
       name: user.displayName,
@@ -62,5 +60,4 @@ AuthView.propTypes = {
 };
 
 AuthView.defaultProps = {
-  signInUser: null
 };

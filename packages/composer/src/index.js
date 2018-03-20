@@ -3,7 +3,7 @@ import { Provider } from "react-redux";
 import { render } from "react-dom";
 import { Route, Router, IndexRoute, Redirect } from "react-router";
 
-import { configureStore, history, base, firebaseApp } from "./configureStore";
+import { configureStore, history } from "./configureStore";
 
 import App from "./App";
 import Auth from "./views/Auth";

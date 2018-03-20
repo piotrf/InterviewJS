@@ -2,8 +2,8 @@
 import css from "styled-components";
 import React, { Component } from "react";
 import { arrayOf, func, object, shape, string } from "prop-types";
+
 import firebase from "firebase";
-// import { base } from "../configureStore";
 
 import {
   Action,
@@ -23,8 +23,11 @@ import {
   setHeight,
   setSpace,
   time,
-  PageParagraph
+  // PageParagraph
 } from "interviewjs-styleguide";
+
+import { configureStore } from "../configureStore";
+import { syncFirebaseStories } from "../actions/actionCreators";
 
 import {
   AboutModal,
@@ -33,6 +36,8 @@ import {
   Story,
   WelcomeModal
 } from "../partials";
+
+const store = configureStore();
 
 const Page = css.div`
   align-content: stretch;
@@ -162,13 +167,15 @@ export default class ListingView extends Component {
     this.toggleAboutModal = this.toggleAboutModal.bind(this);
   }
 
-  // componentDidMount(){
-  //   base.syncState("stories", {
-  //     context: this,
-  //     state: 'stories',
-  //     asArray: true
-  //   });
-  // }
+  componentDidMount() {
+    if (! this.props.user.ignore) store.dispatch(syncFirebaseStories(this.props.user.id));
+    if (! this.props.user || ! this.props.user.id || this.props.user.ignore) this.props.router.push(`/my`);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.user.id !== nextProps.user.id && ! nextProps.user.ignore) store.dispatch(syncFirebaseStories(nextProps.user.id));
+  }
+
   handleLogout() {
     firebase.auth().signOut();
     this.props.router.push(`/my`);
@@ -236,9 +243,9 @@ export default class ListingView extends Component {
         <PageBody>
           {/* <Container align="center" limit="m">
             <PageSubtitle typo="h3">
-                Here is a list of all the stories that you’ve created so far. 
-                Use it to access and edit the story elements of each story or 
-                to enter and edit the messaging exchanges with your 
+                Here is a list of all the stories that you’ve created so far.
+                Use it to access and edit the story elements of each story or
+                to enter and edit the messaging exchanges with your
                 interviewees via the chat dashboard.
             </PageSubtitle>
           </Container>

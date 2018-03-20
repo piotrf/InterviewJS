@@ -1,6 +1,7 @@
-import { createStore, compose, combineReducers } from "redux";
+import { createStore, compose, combineReducers, applyMiddleware } from "redux";
 import { syncHistoryWithStore, routerReducer } from "react-router-redux";
 import { browserHistory } from "react-router";
+import thunkMiddleware from "redux-thunk";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
@@ -14,9 +15,9 @@ import storiesReducer from "./reducers/stories";
 import userReducer from "./reducers/user";
 
 import stories from "./data/stories";
-import user from "./data/user";
+// import user from "./data/user";
 // const stories = [];
-// const user = {};
+const user = {};
 
 // Store type
 const STORE = 'persist';
@@ -74,7 +75,8 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const enhancers = compose(
-  window.devToolsExtension ? window.devToolsExtension() : (f) => f
+  window.devToolsExtension ? window.devToolsExtension() : (f) => f,
+  applyMiddleware(thunkMiddleware)
 );
 
 let store;

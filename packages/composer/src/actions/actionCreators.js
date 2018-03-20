@@ -1,4 +1,5 @@
 import uuidv4 from "uuid/v4";
+import { base } from "../configureStore";
 
 export function createStory({
   uid = "anonymous",
@@ -35,6 +36,13 @@ export function updateStory(payload, storyIndex) {
   return {
     type: "UPDATE_STORY",
     storyIndex,
+    payload
+  };
+}
+
+export function syncStory(payload) {
+  return {
+    type: "SYNC_STORY",
     payload
   };
 }
@@ -134,4 +142,36 @@ export function signOutUser() {
   return {
     type: "SIGNOUT_USER"
   };
+}
+
+export function noop() {
+  console.log("NOOP");
+  return {
+    type: "NOOP"
+  };
+}
+
+export function syncFirebaseStories(uid) {
+  const NAMESPACE = "alpha";
+
+  return dispatch => {
+    dispatch(noop());
+
+    console.log(`stories-${NAMESPACE}/${uid}`);
+
+    base.fetch(`stories-${NAMESPACE}/${uid}/`, {
+      asArray: true
+    }).then(data => {
+      console.log(data);
+      data.forEach(story => {
+        dispatch(syncStory(story));
+      });
+    }).catch(error => {
+      console.log(error);
+    });
+    // return fetch(`https://www.reddit.com/r/${subreddit}.json`)
+    //   .then(response => response.json())
+    //   .then(json => dispatch(receivePosts(subreddit, json)))
+    return null;
+  }
 }
