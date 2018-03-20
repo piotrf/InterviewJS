@@ -20,7 +20,7 @@ import stories from "./data/stories";
 const user = {};
 
 // Store type
-const STORE = 'persist';
+const STORE = "persist";
 
 const defaultState = {
   stories,
@@ -40,16 +40,16 @@ export const firebaseApp = firebase.initializeApp({
 
 // react-redux-firebase config
 const rrfConfig = {
-  userProfile: "users",
+  userProfile: "users"
   // useFirestoreForProfile: true // Firestore for Profile instead of Realtime DB
-}
+};
 
 // initialize firestore
 // firebase.firestore() // <- needed if using firestore
 
 // Add reactReduxFirebase enhancer when making store creator
 const createStoreWithFirebase = compose(
-  reactReduxFirebase(firebase, rrfConfig), // firebase instance as first argument
+  reactReduxFirebase(firebase, rrfConfig) // firebase instance as first argument
   // reduxFirestore(firebase) // <- needed if using firestore
 )(createStore);
 
@@ -58,9 +58,9 @@ const fireReducer = combineReducers({
   firebase: firebaseReducer,
   stories: storiesReducer,
   user: userReducer,
-  routing: routerReducer,
+  routing: routerReducer
   // firestore: firestoreReducer // <- needed if using firestore
-})
+});
 
 // RE-BASE
 export const base = Rebase.createClass(firebaseApp.database());
@@ -68,31 +68,44 @@ export const base = Rebase.createClass(firebaseApp.database());
 // PERSIST
 
 const persistConfig = {
-  key: 'root',
+  key: "root",
   storage,
-  blacklist: ['routing'],
-}
+  blacklist: ["routing"]
+};
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const enhancers = compose(
-  window.devToolsExtension ? window.devToolsExtension() : (f) => f,
-  applyMiddleware(thunkMiddleware)
-);
+// const enhancers = compose(
+//   window.devToolsExtension ? window.devToolsExtension() : (f) => f,
+//   applyMiddleware(thunkMiddleware)
+// );
 
 let store;
-switch(STORE) {
-  case 'firebase':
-    store = createStoreWithFirebase(fireReducer, defaultState, enhancers)
+switch (STORE) {
+  case "firebase":
+    store = createStoreWithFirebase(
+      fireReducer,
+      defaultState,
+      applyMiddleware(thunkMiddleware)
+    );
     break;
   // case 'rebase':
   //   // TODO
   //   break;
-  case 'persist':
-    store = createStore(persistedReducer, defaultState, enhancers);
+  case "persist":
+    store = createStore(
+      persistedReducer,
+      defaultState,
+      applyMiddleware(thunkMiddleware)
+    );
     break;
-  default: // transient
-    store = createStore(rootReducer, defaultState, enhancers);
+  default:
+    // transient
+    store = createStore(
+      rootReducer,
+      defaultState,
+      applyMiddleware(thunkMiddleware)
+    );
 }
 
 // Store listener?
@@ -108,7 +121,11 @@ export const configureStore = () => {
   if (process.env.NODE_ENV !== "production") {
     if (module.hot) {
       module.hot.accept("./reducers", () => {
-        store.replaceReducer(rootReducer, defaultState, enhancers);
+        store.replaceReducer(
+          rootReducer,
+          defaultState,
+          applyMiddleware(thunkMiddleware)
+        );
       });
     }
   }
