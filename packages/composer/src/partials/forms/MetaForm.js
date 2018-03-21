@@ -1,5 +1,5 @@
 import React from "react";
-import { func, object, shape, string } from "prop-types";
+import { func, shape, string } from "prop-types";
 import Dropzone from "react-dropzone";
 
 import {
@@ -224,11 +224,12 @@ MetaForm.propTypes = {
   handleSave: func,
   handleSubmit: func.isRequired,
   story: shape({
-    title: string,
     author: string,
     authorLink: string,
+    cover: string,
+    logo: string,
     pubDate: string,
-    media: object
+    title: string
   })
 };
 
@@ -236,13 +237,11 @@ MetaForm.defaultProps = {
   cta: "Save",
   handleSave: null,
   story: {
-    title: "",
     author: "",
     authorLink: "",
+    cover: "",
+    logo: "",
     pubDate: "",
-    media: {
-      cover: "",
-      logo: ""
-    }
+    title: ""
   }
 };

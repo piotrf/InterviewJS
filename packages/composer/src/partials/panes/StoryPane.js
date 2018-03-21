@@ -107,8 +107,10 @@ export default class StoryPane extends React.Component {
               {interviewees.map((interviewee, intervieweeIndex) => (
                 <Interviewee
                   active={this.props.currentInterviewee === intervieweeIndex}
-                  intervieweeColor={interviewee.color}
-                  key={interviewee.name}
+                  intervieweeColor={
+                    interviewee.color.length > 0 ? interviewee.color : null
+                  }
+                  key={intervieweeIndex}
                 >
                   <Tip position="bottom" title={interviewee.name}>
                     <Action

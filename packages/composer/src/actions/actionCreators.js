@@ -6,13 +6,15 @@ export function createStory({
   author = "",
   authorLink = "",
   context = "",
+  cover = null,
+  logo = null,
   interviewees = [
     {
-      avatar: null,
+      avatar: "",
       bio: "",
-      color: null,
+      color: "",
       id: uuidv4(),
-      name: "",
+      name: "Name of interviewee",
       srcText: "",
       storyline: [],
       title: ""
@@ -26,15 +28,17 @@ export function createStory({
   return {
     type: "CREATE_STORY",
     payload: {
-      uid,
       author,
       authorLink,
       context,
+      cover,
       interviewees,
       intro,
+      logo,
       poll,
       pubDate,
       title,
+      uid,
       id: uuidv4(),
       modDate: new Date()
     }
