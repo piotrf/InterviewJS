@@ -202,13 +202,6 @@ function storiesWrapper(state = [], action) {
 
   if (currentStory.uid) uid = currentStory.uid;
 
-  // FIXES
-  if (
-    !currentStory.cover ||
-    typeof currentStory.cover === "undefined" ||
-    currentStory.cover === "undefined"
-  )
-    currentStory.cover = currentStory.media.cover;
 
   if (type === "CREATE_STORY") {
     base.post(`stories-${NAMESPACE}/${uid}/${storyId}`, {
