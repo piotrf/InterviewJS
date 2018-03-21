@@ -89,7 +89,7 @@ export default class Interviewees extends React.Component {
               <Container bordered rounded>
                 <IntervieweesList>
                   {interviewees.map((interviewee, i) => (
-                    <Interviewee key={interviewee.name}>
+                    <Interviewee key={i}>
                       <Container flex={[1, 1, "auto"]}>
                         <Avatar image={interviewee.avatar} size="l" />
                       </Container>
