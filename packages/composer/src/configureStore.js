@@ -6,13 +6,16 @@ import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 import firebase from "firebase";
-import { reactReduxFirebase, firebaseReducer } from "react-redux-firebase";
+// import { reactReduxFirebase, firebaseReducer } from "react-redux-firebase";
 
 import Rebase from "re-base";
 
+import Raven from "raven-js";
+import createRavenMiddleware from "raven-for-redux";
+
 import rootReducer from "./reducers";
-import storiesReducer from "./reducers/stories";
-import userReducer from "./reducers/user";
+// import storiesReducer from "./reducers/stories";
+// import userReducer from "./reducers/user";
 
 import stories from "./data/stories";
 // import user from "./data/user";
@@ -27,8 +30,12 @@ const defaultState = {
   user
 };
 
-// FIREBASE
+// Sentry.io
+Raven.config("https://796f1032b1c74f15aba70d91dfcd14c5@sentry.io/360335", {
+  release: process.env.VERSION
+}).install();
 
+// FIREBASE
 export const firebaseApp = firebase.initializeApp({
   apiKey: "AIzaSyAzBGoszKOt1C_T4GV84hUBpjkK08H57KY",
   authDomain: "interviewjs-6c14d.firebaseapp.com",
@@ -47,20 +54,20 @@ const rrfConfig = {
 // initialize firestore
 // firebase.firestore() // <- needed if using firestore
 
-// Add reactReduxFirebase enhancer when making store creator
-const createStoreWithFirebase = compose(
-  reactReduxFirebase(firebase, rrfConfig) // firebase instance as first argument
-  // reduxFirestore(firebase) // <- needed if using firestore
-)(createStore);
+// // Add reactReduxFirebase enhancer when making store creator
+// const createStoreWithFirebase = compose(
+//   reactReduxFirebase(firebase, rrfConfig) // firebase instance as first argument
+//   // reduxFirestore(firebase) // <- needed if using firestore
+// )(createStore);
 
-// Add firebase to reducers
-const fireReducer = combineReducers({
-  firebase: firebaseReducer,
-  stories: storiesReducer,
-  user: userReducer,
-  routing: routerReducer
-  // firestore: firestoreReducer // <- needed if using firestore
-});
+// // Add firebase to reducers
+// const fireReducer = combineReducers({
+//   firebase: firebaseReducer,
+//   stories: storiesReducer,
+//   user: userReducer,
+//   routing: routerReducer
+//   // firestore: firestoreReducer // <- needed if using firestore
+// });
 
 // RE-BASE
 export const base = Rebase.createClass(firebaseApp.database());
@@ -75,20 +82,24 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-// const enhancers = compose(
-//   window.devToolsExtension ? window.devToolsExtension() : (f) => f,
-//   applyMiddleware(thunkMiddleware)
-// );
+const enhancers = compose(
+  // window.devToolsExtension ? window.devToolsExtension() : (f) => f,
+  applyMiddleware(
+    createRavenMiddleware(Raven, {
+    }),
+    thunkMiddleware
+  )
+);
 
 let store;
 switch (STORE) {
-  case "firebase":
-    store = createStoreWithFirebase(
-      fireReducer,
-      defaultState,
-      applyMiddleware(thunkMiddleware)
-    );
-    break;
+  // case "firebase":
+  //   store = createStoreWithFirebase(
+  //     fireReducer,
+  //     defaultState,
+  //     applyMiddleware(thunkMiddleware)
+  //   );
+  //   break;
   // case 'rebase':
   //   // TODO
   //   break;
@@ -96,7 +107,7 @@ switch (STORE) {
     store = createStore(
       persistedReducer,
       defaultState,
-      applyMiddleware(thunkMiddleware)
+      enhancers
     );
     break;
   default:
@@ -104,7 +115,7 @@ switch (STORE) {
     store = createStore(
       rootReducer,
       defaultState,
-      applyMiddleware(thunkMiddleware)
+      enhancers
     );
 }
 
