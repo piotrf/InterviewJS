@@ -79,7 +79,7 @@ export default class IntervieweeForm extends Component {
   handleFile(f) {
     const reader = new FileReader();
     reader.onloadend = () => {
-      const base64data = reader.result.length > 3e6 ? '' : reader.result;
+      const base64data = reader.result.length > 3e6 ? "" : reader.result;
       // console.log(base64data);
       this.setState({
         formData: { ...this.state.formData, avatar: base64data }
@@ -167,7 +167,11 @@ export default class IntervieweeForm extends Component {
             placeholder="Name of interviewee"
             required
             valid={this.state.formValidation.name}
-            value={this.state.formData.name}
+            value={
+              this.state.formData.name === "Name of interviewee"
+                ? ""
+                : this.state.formData.name
+            }
           />
           <Legend tip="Name of your interviewee">i</Legend>
         </FormItem>
