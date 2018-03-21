@@ -67,7 +67,7 @@ export default class AuthModal extends React.Component {
                   theme={{ backg: color.flareLLt, color: color.white }}
                 >
                   InterviewJS will help you tell interactive stories by 
-                  converting your interviews into a chat experiences.
+                  converting your interviews into a chat experience.
                 </Bubble>
                 <Bubble
                   animated
