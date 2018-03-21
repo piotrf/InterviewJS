@@ -27,22 +27,37 @@ export default class EmbedPane extends Component {
   }
   handleChange(e) {
     const { name, value } = e.target;
-    this.setState({ draft: { ...this.state.draft, [name]: value } }, () =>
-      this.props.updateDraft(this.state.draft)
-    );
+    this.setState({ draft: { ...this.state.draft, [name]: value } }, () => value.toLowerCase().startsWith("<iframe") &&
+        value.toLowerCase().includes("src=") &&
+        value.toLowerCase().endsWith("></iframe>")
+        ? this.props.updateDraft(this.state.draft)
+        : null);
   }
   render() {
     const { value } = this.state.draft;
+
+    const renderDraft = () => {
+      if (value.length > 0) {
+        return value.toLowerCase().startsWith("<iframe") &&
+          value.toLowerCase().includes("src=") &&
+          value.toLowerCase().endsWith("></iframe>") ? (
+          <BubbleHTMLWrapper type="embed">
+            <div dangerouslySetInnerHTML={{ __html: value }} />
+          </BubbleHTMLWrapper>
+        ) : (
+          <BubbleHTMLWrapper>
+            this is not an iframe, iframe code starts with {`<iframe`}, ends
+            with {`></iframe>`} and requires {`src=`} attribute
+          </BubbleHTMLWrapper>
+        );
+      }
+      return null;
+    };
+
     return (
       <PaneFrame
         {...this.props}
-        draft={
-          <div>
-            <BubbleHTMLWrapper type="embed">
-              <div dangerouslySetInnerHTML={{ __html: value }} />
-            </BubbleHTMLWrapper>
-          </div>
-        }
+        draft={<div>{renderDraft()}</div>}
         hasDraft={this.props.draft.value !== ""}
         side="left"
       >

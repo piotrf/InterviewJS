@@ -130,7 +130,7 @@ export default class IntervieweePane extends React.Component {
               onClick={() => this.setState({ tab: "embed" })}
               opinionated
             >
-              <Tip title="Embed bubble">
+              <Tip title="Generic embed bubble">
                 <Icon name="embed" size="s" />
               </Tip>
             </PaneTab>
@@ -139,7 +139,7 @@ export default class IntervieweePane extends React.Component {
               onClick={() => this.setState({ tab: "map" })}
               opinionated
             >
-              <Tip title="Map bubble">
+              <Tip title="Google Maps bubble">
                 <Icon name="map" size="s" />
               </Tip>
             </PaneTab>
@@ -148,7 +148,7 @@ export default class IntervieweePane extends React.Component {
               onClick={() => this.setState({ tab: "media" })}
               opinionated
             >
-              <Tip title="Media bubble">
+              <Tip title="Youtube bubble">
                 <Icon name="media" size="s" />
               </Tip>
             </PaneTab>
