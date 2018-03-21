@@ -115,6 +115,8 @@ export default class ComposerView extends React.Component {
 
     if (!story) return null;
 
+    console.log("COMPOSER PROPS: ", this.props);
+
     return [
       <Page key="Page">
         <PageHead>

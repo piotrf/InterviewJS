@@ -191,6 +191,7 @@ export default class ListingView extends Component {
     this.setState({ welcomeModal: false, createStoryModal: true });
   }
   render() {
+    console.log("LISTING PROPS: ", this.props);
     const { createStoryModal, welcomeModal, aboutModal } = this.state;
     const welcomeModalBlocker = localStorage.getItem("welcomeModalBlocker");
     return [
