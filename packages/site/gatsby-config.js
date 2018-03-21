@@ -1,7 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `InterviewJS`,
+    title: 'InterviewJS',
   },
-  plugins: [`gatsby-plugin-react-helmet`],
-  pathPrefix: `/InterviewJS`,
-}
+  plugins: ['gatsby-plugin-react-helmet'],
+};
