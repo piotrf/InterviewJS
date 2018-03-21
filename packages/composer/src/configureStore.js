@@ -1,12 +1,11 @@
-import { createStore, compose, combineReducers, applyMiddleware } from "redux";
-import { syncHistoryWithStore, routerReducer } from "react-router-redux";
+import { createStore, compose, applyMiddleware } from "redux";
+import { syncHistoryWithStore } from "react-router-redux";
 import { browserHistory } from "react-router";
 import thunkMiddleware from "redux-thunk";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 import firebase from "firebase";
-// import { reactReduxFirebase, firebaseReducer } from "react-redux-firebase";
 
 import Rebase from "re-base";
 
@@ -14,8 +13,6 @@ import Raven from "raven-js";
 import createRavenMiddleware from "raven-for-redux";
 
 import rootReducer from "./reducers";
-// import storiesReducer from "./reducers/stories";
-// import userReducer from "./reducers/user";
 
 import stories from "./data/stories";
 // import user from "./data/user";
@@ -45,35 +42,11 @@ export const firebaseApp = firebase.initializeApp({
   messagingSenderId: "126484254752"
 });
 
-// react-redux-firebase config
-const rrfConfig = {
-  userProfile: "users"
-  // useFirestoreForProfile: true // Firestore for Profile instead of Realtime DB
-};
-
-// initialize firestore
-// firebase.firestore() // <- needed if using firestore
-
-// // Add reactReduxFirebase enhancer when making store creator
-// const createStoreWithFirebase = compose(
-//   reactReduxFirebase(firebase, rrfConfig) // firebase instance as first argument
-//   // reduxFirestore(firebase) // <- needed if using firestore
-// )(createStore);
-
-// // Add firebase to reducers
-// const fireReducer = combineReducers({
-//   firebase: firebaseReducer,
-//   stories: storiesReducer,
-//   user: userReducer,
-//   routing: routerReducer
-//   // firestore: firestoreReducer // <- needed if using firestore
-// });
 
 // RE-BASE
 export const base = Rebase.createClass(firebaseApp.database());
 
 // PERSIST
-
 const persistConfig = {
   key: "root",
   storage,
@@ -93,16 +66,6 @@ const enhancers = compose(
 
 let store;
 switch (STORE) {
-  // case "firebase":
-  //   store = createStoreWithFirebase(
-  //     fireReducer,
-  //     defaultState,
-  //     applyMiddleware(thunkMiddleware)
-  //   );
-  //   break;
-  // case 'rebase':
-  //   // TODO
-  //   break;
   case "persist":
     store = createStore(
       persistedReducer,
@@ -118,14 +81,6 @@ switch (STORE) {
       enhancers
     );
 }
-
-// Store listener?
-// const handleChange = () => {
-//   console.log(store.getState())
-// }
-//
-// let unsubscribe = store.subscribe(handleChange);
-// // unsubscribe();
 
 export const history = syncHistoryWithStore(browserHistory, store);
 export const configureStore = () => {
