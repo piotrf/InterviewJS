@@ -100,6 +100,7 @@ export default class NewStoryModal extends Component {
               createInterviewee={this.props.createInterviewee}
               cta="Go to chat dashboard"
               deleteInterviewee={this.props.deleteInterviewee}
+              editItem={0}
               handleSubmit={this.handleStep2}
               interviewees={this.props.stories[0].interviewees}
               storyIndex={0}

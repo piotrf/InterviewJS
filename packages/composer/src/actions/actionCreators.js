@@ -6,9 +6,19 @@ export function createStory({
   author = "",
   authorLink = "",
   context = "",
-  interviewees = [],
+  interviewees = [
+    {
+      avatar: null,
+      bio: "",
+      color: null,
+      id: uuidv4(),
+      name: "",
+      srcText: "",
+      storyline: [],
+      title: ""
+    }
+  ],
   intro = "",
-  media = {},
   poll = [],
   pubDate = "",
   title = ""
@@ -22,7 +32,6 @@ export function createStory({
       context,
       interviewees,
       intro,
-      media,
       poll,
       pubDate,
       title,

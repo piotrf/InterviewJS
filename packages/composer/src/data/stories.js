@@ -21,7 +21,6 @@ const stories = [
     context: `Al Jazeera's investigative unit has revealed that large companies in Britain may be failing to tackle slavery along their supply chains. The findings prompted a warning from Britain's anti-slavery commissioner that companies all over the United Kingdom could unwittingly be using modern-day slaves. But Kevin Hyland, the UK's independent anti-slavery commissioner, said that new laws mean that ignorance is no longer an excuse. Secret filming by Al Jazeera uncovered shocking conditions at a carwash in Kent, southeast England, used by dealerships for the auto giants, Volvo and Kia. Workers living in squalid containers at the carwash in Canterbury say they are paid $50 for 12-hour shifts, suffer verbal and physical abuse, and have wages withheld for causing minor damage.`,
     cover: COVER,
     logo: LOGO,
-    attachments: [{ url: "", id: "" }],
     poll: [
       {
         question:
@@ -478,7 +477,6 @@ const stories = [
       "The Turing test, developed by Alan Turing in 1950, is a test of a machine's ability to exhibit intelligent behavior equivalent to, or indistinguishable from, that of a human. Turing proposed that a human evaluator would judge natural language conversations between a human and a machine designed to generate human-like responses. If the evaluator cannot reliably tell the machine from the human, the machine is said to have passed the test. The test does not check the ability to give correct answers to questions, only how closely answers resemble those a human would give",
     cover: "",
     logo: "",
-    attachments: [{ url: "", id: "" }],
     poll: [
       {
         question: "Do you think Ava is a real person?",
@@ -880,7 +878,6 @@ Good.`,
     context: "",
     cover: "",
     logo: "",
-    attachments: [{ url: "", id: "" }],
     poll: [],
     interviewees: [
       {
