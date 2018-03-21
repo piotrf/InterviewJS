@@ -11,8 +11,7 @@ import {
   Separator,
   Text,
   color,
-  setSpace,
-  PageParagraph
+  setSpace
 } from "interviewjs-styleguide";
 
 import { IntervieweeForm } from "../";
@@ -46,7 +45,7 @@ export default class Interviewees extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      editItem: null
+      editItem: this.props.editItem
     };
     this.createInterviewee = this.createInterviewee.bind(this);
     this.deleteInterviewee = this.deleteInterviewee.bind(this);
@@ -90,7 +89,7 @@ export default class Interviewees extends React.Component {
               <Container bordered rounded>
                 <IntervieweesList>
                   {interviewees.map((interviewee, i) => (
-                    <Interviewee key={interviewee.name}>
+                    <Interviewee key={i}>
                       <Container flex={[1, 1, "auto"]}>
                         <Avatar image={interviewee.avatar} size="l" />
                       </Container>
@@ -123,14 +122,6 @@ export default class Interviewees extends React.Component {
                   </Action>
                 </Container>
               </Container>
-              {/* <Separator size="m" silent />
-              <Container align="center" limit="m">
-                <PageParagraph typo="p3">
-                  Or proceed to the chat dashboard to convert your interviews into
-                  interactive messaging exchanges.
-                  In the chat dashboard you’ll get help from the InterviewJS bot.
-                </PageParagraph>
-              </Container> */}
               <Separator size="m" silent />
               <Actionbar>
                 <Action fixed onClick={this.props.handleSubmit} primary>
@@ -161,6 +152,7 @@ export default class Interviewees extends React.Component {
 }
 
 Interviewees.propTypes = {
+  editItem: number,
   cta: string,
   createInterviewee: func.isRequired,
   deleteInterviewee: func.isRequired,
@@ -171,6 +163,7 @@ Interviewees.propTypes = {
 };
 
 Interviewees.defaultProps = {
+  editItem: null,
   cta: "Done",
   interviewees: []
 };

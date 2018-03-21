@@ -118,23 +118,25 @@ export default class Story extends React.Component {
           </Container>
           <Container flex={[2, 1, "20%"]} align="right">
             <AvatarList>
-              {this.props.story.interviewees.map((el) => (
-                <AvatarListItem key={el.name}>
-                  <Tip
-                    animation="fade"
-                    arrow
-                    arrowSize="small"
-                    hideDelay={350}
-                    interactiveBorder={5}
-                    position="bottom"
-                    sticky
-                    theme="dark"
-                    title={el.name}
-                  >
-                    <Avatar size="m" image={el.avatar} />
-                  </Tip>
-                </AvatarListItem>
-              ))}
+              {this.props.story.interviewees
+                ? this.props.story.interviewees.map((el, i) => (
+                    <AvatarListItem key={i}>
+                      <Tip
+                        animation="fade"
+                        arrow
+                        arrowSize="small"
+                        hideDelay={350}
+                        interactiveBorder={5}
+                        position="bottom"
+                        sticky
+                        theme="dark"
+                        title={el.name ? el.name : ""}
+                      >
+                        <Avatar size="m" image={el.avatar} />
+                      </Tip>
+                    </AvatarListItem>
+                  ))
+                : null}
             </AvatarList>
           </Container>
         </StoryEl>

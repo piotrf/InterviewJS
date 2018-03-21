@@ -106,7 +106,7 @@ export default class AboutModal extends React.Component {
                       Laurian Gridinoc
                     </Action>
                   </dd>
-                  <dt>Brand Identity</dt>
+                  <dt>Design support</dt>
                   <dd>Joanna Bogusz</dd>
                 </dl>
                 <PageSubtitle typo="h2">Connect with InterviewJS</PageSubtitle>

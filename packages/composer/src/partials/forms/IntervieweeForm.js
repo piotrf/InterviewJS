@@ -1,6 +1,8 @@
-import React, { Component } from "react";
 import { bool, func, shape, string } from "prop-types";
+import { SketchPicker } from "react-color";
+import css from "styled-components";
 import Dropzone from "react-dropzone";
+import React, { Component } from "react";
 
 import {
   Action,
@@ -23,6 +25,13 @@ import {
 
 import validateField from "./validateField";
 
+const ColorPickerWrapper = css.span`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 1000;
+`;
+
 export default class IntervieweeForm extends Component {
   constructor(props) {
     super(props);
@@ -32,11 +41,14 @@ export default class IntervieweeForm extends Component {
         name: null,
         title: null
       },
-      moreDropdown: false
+      moreDropdown: false,
+      colorPicker: false,
+      colorPicking: false
     };
+    this.deleteInterviewee = this.deleteInterviewee.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.deleteInterviewee = this.deleteInterviewee.bind(this);
+    this.handleChangeColor = this.handleChangeColor.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.toggleDropdown = this.toggleDropdown.bind(this);
   }
@@ -51,12 +63,24 @@ export default class IntervieweeForm extends Component {
       formData: { ...this.state.formData, [e.target.name]: e.target.value }
     });
   }
+  handleChangeColor(color) {
+    this.setState({
+      formData: { ...this.state.formData, color: color.hex }
+    });
+    setTimeout(
+      () =>
+        this.setState({
+          colorPicking: false
+        }),
+      350
+    );
+  }
 
   handleFile(f) {
     const reader = new FileReader();
     reader.onloadend = () => {
-      const base64data = reader.result;
-      console.log(base64data);
+      const base64data = reader.result.length > 3e6 ? "" : reader.result;
+      // console.log(base64data);
       this.setState({
         formData: { ...this.state.formData, avatar: base64data }
       });
@@ -143,7 +167,11 @@ export default class IntervieweeForm extends Component {
             placeholder="Name of interviewee"
             required
             valid={this.state.formValidation.name}
-            value={this.state.formData.name}
+            value={
+              this.state.formData.name === "Name of interviewee"
+                ? ""
+                : this.state.formData.name
+            }
           />
           <Legend tip="Name of your interviewee">i</Legend>
         </FormItem>
@@ -151,11 +179,11 @@ export default class IntervieweeForm extends Component {
         <FormItem>
           <Label>Title</Label>
           <CharacterCount>
-            {35 - this.state.formData.title.length}
+            {80 - this.state.formData.title.length}
           </CharacterCount>
           <TextInput
             input
-            maxLength="35"
+            maxLength="80"
             minLength="1"
             name="title"
             onBlur={(e) => this.handleBlur(e)}
@@ -222,15 +250,27 @@ export default class IntervieweeForm extends Component {
               <Label>Colour</Label>
               <TextInput
                 input
-                maxLength="7"
-                minlength="3"
-                name="color"
-                nooffset
-                onChange={(e) => this.handleChange(e)}
                 place="right"
                 placeholder="i.e. #495abd, red…"
+                name="color"
+                onClick={() => this.setState({ colorPicker: true })}
+                onBlur={
+                  this.state.colorPicking
+                    ? null
+                    : () => this.setState({ colorPicker: false })
+                }
                 value={this.state.formData.color}
+                nooffset
               />
+              {this.state.colorPicker ? (
+                <ColorPickerWrapper>
+                  <SketchPicker
+                    disableAlpha
+                    color={this.state.formData.color}
+                    onChangeComplete={this.handleChangeColor}
+                  />
+                </ColorPickerWrapper>
+              ) : null}
               <Legend tip="Choose the colour of this person’s chat text bubbles">
                 i
               </Legend>

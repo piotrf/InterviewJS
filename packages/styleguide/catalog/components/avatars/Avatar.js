@@ -1,25 +1,31 @@
 import css from "styled-components";
-import { node, string } from "prop-types";
+import { node, oneOfType, string } from "prop-types";
 
 import { color, radius, setSize } from "../../../utils";
 
 const Avatar = css.div`
   ${({ size }) => setSize(size)};
   background-color: ${color.greyHL};
-  background-image: url(${({ image }) => image});
   background-position: center;
   background-size: cover;
   border-radius: ${radius.a};
   display: inline-block;
+  ${({ image }) =>
+    image !== null || image !== ""
+      ? `
+    background-image: url(${image});
+  `
+      : ``};
 `;
 
 Avatar.propTypes = {
   size: string,
-  image: node.isRequired
+  image: oneOfType([node, string])
 };
 
 Avatar.defaultProps = {
-  size: "m"
+  size: "m",
+  image: null
 };
 
 export default Avatar;

@@ -188,7 +188,7 @@ export default class StoryDetailsModal extends React.Component {
                       Laurian Gridinoc
                     </a>
                   </dd>
-                  <dt>Brand Identity</dt>
+                  <dt>Design support</dt>
                   <dd>Joanna Bogusz</dd>
                 </dl>
               </DetailsCopy>

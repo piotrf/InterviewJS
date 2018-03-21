@@ -2,12 +2,16 @@
 import { array, arrayOf, func, object, shape } from "prop-types";
 import css from "styled-components";
 import React, { Component } from "react";
+import { withRouter } from "react-router";
 
 import {
+  Action,
+  Avatar,
   Bubble,
   BubbleGroup,
   Bubbles,
   Container,
+  Separator,
   Icon,
   color,
   setSpace
@@ -35,7 +39,7 @@ const Push = css.div`
   padding: 0;
 `;
 
-export default class Storyline extends Component {
+class Storyline extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -61,7 +65,8 @@ export default class Storyline extends Component {
       : null;
   }
   render() {
-    const { storyline, history, interviewee } = this.props;
+    const { storyline, history, interviewee, story } = this.props;
+
     const renderIntervieweeBubble = (data) => {
       const { content, type } = data;
       if (type === "text") {
@@ -136,9 +141,68 @@ export default class Storyline extends Component {
         {history.length > 0
           ? history.map((item, index) => {
               const { role } = item;
-              if (role === "user") {
+              if (role === "system") {
                 const { type } = item;
-                if (type === "emoji") {
+                if (type === "switchTo") {
+                  return (
+                    <BubbleGroup
+                      key={index}
+                      callback={this.props.onBubbleRender}
+                    >
+                      <Bubbles persona="system">
+                        <Bubble
+                          animated
+                          delay={350}
+                          key="intro"
+                          persona="system"
+                        >
+                          Choose another interviewee to talk to:
+                        </Bubble>
+                        {story.interviewees.map((character, i) => (
+                          <Bubble
+                            animated
+                            delay={350 + 350 * (i + 1)}
+                            key={character.name}
+                            persona="system"
+                            onClick={() =>
+                              this.props.router.push(
+                                `/story/chat/${character.id}`
+                              )
+                            }
+                          >
+                            <Avatar image={character.avatar} size="s" />
+                            <Separator dir="v" size="x" silent />
+                            <Action
+                              onClick={() =>
+                                this.props.router.push(
+                                  `/story/chat/${character.id}`
+                                )
+                              }
+                            >
+                              {character.name}
+                            </Action>
+                          </Bubble>
+                        ))}
+                      </Bubbles>
+                    </BubbleGroup>
+                  );
+                }
+                return null;
+              } else if (role === "user") {
+                const { type } = item;
+                if (type === "nvm") {
+                  const { value } = item;
+                  return (
+                    <BubbleGroup
+                      key={index}
+                      callback={this.props.onBubbleRender}
+                    >
+                      <Bubbles persona="user">
+                        <Bubble persona="user">{value}</Bubble>
+                      </Bubbles>
+                    </BubbleGroup>
+                  );
+                } else if (type === "emoji") {
                   const { value } = item;
                   return (
                     <BubbleGroup
@@ -149,6 +213,18 @@ export default class Storyline extends Component {
                         <Bubble persona="user">
                           <Icon name={value} />
                         </Bubble>
+                      </Bubbles>
+                    </BubbleGroup>
+                  );
+                } else if (type === "diss") {
+                  const { value } = item;
+                  return (
+                    <BubbleGroup
+                      key={index}
+                      callback={this.props.onBubbleRender}
+                    >
+                      <Bubbles persona="user">
+                        <Bubble persona="user">{value}</Bubble>
                       </Bubbles>
                     </BubbleGroup>
                   );
@@ -179,7 +255,6 @@ export default class Storyline extends Component {
               );
             })
           : null}
-
         <div
           ref={(el) => {
             this.anchor = el;
@@ -196,10 +271,16 @@ Storyline.propTypes = {
   interviewee: shape({
     storyline: array.isRequired
   }).isRequired,
-  storyline: arrayOf(object)
+  storyline: arrayOf(object),
+  story: shape({
+    interviewees: arrayOf(object)
+  })
 };
 
 Storyline.defaultProps = {
   history: [],
-  storyline: []
+  storyline: [],
+  story: {}
 };
+
+export default withRouter(Storyline);

@@ -1,5 +1,5 @@
 import React from "react";
-import { func, object, shape, string } from "prop-types";
+import { func, shape, string } from "prop-types";
 import Dropzone from "react-dropzone";
 
 import {
@@ -67,8 +67,8 @@ export default class MetaForm extends React.Component {
   handleFile(key, f) {
     const reader = new FileReader();
     reader.onloadend = () => {
-      const base64data = reader.result;
-      console.log(base64data);
+      const base64data = reader.result.length > 3e6 ? "" : reader.result;
+      // console.log(base64data);
       this.setState({
         formData: { ...this.state.formData, [key]: base64data }
       });
@@ -99,10 +99,11 @@ export default class MetaForm extends React.Component {
           <Legend tip="Short and simple titles work best.">i</Legend>
         </FormItem>
         <Separator size="m" silent />
-        <FormItem>
-          <Label>Byline</Label>
-          <Container dir="row">
-            <Container flex={[0, 0, `${100 / 3}%`]}>
+
+        <Container dir="row">
+          <Container flex={[0, 0, `${100 / 3}%`]}>
+            <FormItem>
+              <Label>Byline</Label>
               <CharacterCount>
                 {35 - this.state.formData.author.length}
               </CharacterCount>
@@ -116,8 +117,11 @@ export default class MetaForm extends React.Component {
                 placeholder="Author’s name"
                 value={this.state.formData.author}
               />
-            </Container>
-            <Container flex={[0, 0, `${100 / 3}%`]}>
+              <Legend tip="Add the author’s name">i</Legend>
+            </FormItem>
+          </Container>
+          <Container flex={[0, 0, `${100 / 3}%`]}>
+            <FormItem>
               <TextInput
                 input
                 name="authorLink"
@@ -127,8 +131,11 @@ export default class MetaForm extends React.Component {
                 placeholder="Link"
                 value={this.state.formData.authorLink}
               />
-            </Container>
-            <Container flex={[0, 0, `${100 / 3}%`]}>
+              <Legend tip="Add a link e.g. to your website">i</Legend>
+            </FormItem>
+          </Container>
+          <Container flex={[0, 0, `${100 / 3}%`]}>
+            <FormItem>
               <TextInput
                 input
                 maxLength="35"
@@ -139,16 +146,10 @@ export default class MetaForm extends React.Component {
                 placeholder="Date of publication"
                 value={this.state.formData.pubDate}
               />
-            </Container>
+              <Legend tip="Add the publication date">i</Legend>
+            </FormItem>
           </Container>
-          <Legend
-            tip="- Add the author’s name.<br />
-            - Add a link e.g. to your website.<br />
-            - Add the publication date: Day/ Month/ Year"
-          >
-            i
-          </Legend>
-        </FormItem>
+        </Container>
         <Separator size="m" silent />
         <Container dir="row">
           <Container flex={[1, 1, "50%"]}>
@@ -223,11 +224,12 @@ MetaForm.propTypes = {
   handleSave: func,
   handleSubmit: func.isRequired,
   story: shape({
-    title: string,
     author: string,
     authorLink: string,
+    cover: string,
+    logo: string,
     pubDate: string,
-    media: object
+    title: string
   })
 };
 
@@ -235,13 +237,11 @@ MetaForm.defaultProps = {
   cta: "Save",
   handleSave: null,
   story: {
-    title: "",
     author: "",
     authorLink: "",
+    cover: "",
+    logo: "",
     pubDate: "",
-    media: {
-      cover: "undefined",
-      logo: "undefined"
-    }
+    title: ""
   }
 };

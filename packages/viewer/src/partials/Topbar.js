@@ -2,7 +2,13 @@ import React from "react";
 import css from "styled-components";
 import { func } from "prop-types";
 
-import { Action, Container, Icon } from "interviewjs-styleguide";
+import {
+  Action,
+  Container,
+  Icon,
+  PageTitle,
+  color
+} from "interviewjs-styleguide";
 
 const TopbarEl = css(Container)`
   display: flex;
@@ -17,24 +23,35 @@ const TopbarEl = css(Container)`
 `;
 
 const TopbarHolder = css(Container)`
-  justify-content: ${({ spread }) => (spread ? `space-between` : `flex-end`)};
   align-content: flex-end;
   align-items: flex-end;
   display: flex;
+  justify-content: space-between;
   width: 100%;
+`;
+
+const Brandmark = css(PageTitle)`
+  color: ${color.white};
 `;
 
 const Topbar = (props) => (
   <TopbarEl {...props}>
-    <TopbarHolder limit="m" padded spread={!!props.handleBack}>
-      {props.handleBack ? (
-        <Action inverted iconic onClick={props.handleBack}>
-          <Icon name="arrow-left" size="x" />
+    <TopbarHolder limit="m" padded>
+      <Container flex={[0, 0, `${100 / 3}%`]} align="left">
+        {props.handleBack ? (
+          <Action inverted iconic onClick={props.handleBack}>
+            <Icon name="arrow-left" size="x" />
+          </Action>
+        ) : null}
+      </Container>
+      <Container flex={[0, 0, `${100 / 3}%`]} align="center">
+        <Brandmark typo="h2">InterviewJS</Brandmark>
+      </Container>
+      <Container flex={[0, 0, `${100 / 3}%`]} align="right">
+        <Action inverted iconic onClick={props.handleDetails}>
+          <Icon name="info" />
         </Action>
-      ) : null}
-      <Action inverted iconic onClick={props.handleDetails}>
-        <Icon name="info" />
-      </Action>
+      </Container>
     </TopbarHolder>
   </TopbarEl>
 );

@@ -1,33 +1,38 @@
-import { createStore, compose, combineReducers } from "redux";
-import { syncHistoryWithStore, routerReducer } from "react-router-redux";
+import { createStore, compose, applyMiddleware } from "redux";
+import { syncHistoryWithStore } from "react-router-redux";
 import { browserHistory } from "react-router";
+import thunkMiddleware from "redux-thunk";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 import firebase from "firebase";
-import { reactReduxFirebase, firebaseReducer } from "react-redux-firebase";
 
 import Rebase from "re-base";
 
+import Raven from "raven-js";
+import createRavenMiddleware from "raven-for-redux";
+
 import rootReducer from "./reducers";
-import storiesReducer from "./reducers/stories";
-import userReducer from "./reducers/user";
 
 import stories from "./data/stories";
-import user from "./data/user";
+// import user from "./data/user";
 // const stories = [];
-// const user = {};
+const user = {};
 
 // Store type
-const STORE = 'persist';
+const STORE = "transient";
 
 const defaultState = {
   stories,
   user
 };
 
-// FIREBASE
+// Sentry.io
+Raven.config("https://796f1032b1c74f15aba70d91dfcd14c5@sentry.io/360335", {
+  release: process.env.VERSION
+}).install();
 
+// FIREBASE
 export const firebaseApp = firebase.initializeApp({
   apiKey: "AIzaSyAzBGoszKOt1C_T4GV84hUBpjkK08H57KY",
   authDomain: "interviewjs-6c14d.firebaseapp.com",
@@ -37,75 +42,56 @@ export const firebaseApp = firebase.initializeApp({
   messagingSenderId: "126484254752"
 });
 
-// react-redux-firebase config
-const rrfConfig = {
-  userProfile: "users",
-  // useFirestoreForProfile: true // Firestore for Profile instead of Realtime DB
-}
-
-// initialize firestore
-// firebase.firestore() // <- needed if using firestore
-
-// Add reactReduxFirebase enhancer when making store creator
-const createStoreWithFirebase = compose(
-  reactReduxFirebase(firebase, rrfConfig), // firebase instance as first argument
-  // reduxFirestore(firebase) // <- needed if using firestore
-)(createStore);
-
-// Add firebase to reducers
-const fireReducer = combineReducers({
-  firebase: firebaseReducer,
-  stories: storiesReducer,
-  user: userReducer,
-  routing: routerReducer,
-  // firestore: firestoreReducer // <- needed if using firestore
-})
 
 // RE-BASE
 export const base = Rebase.createClass(firebaseApp.database());
 
 // PERSIST
-
 const persistConfig = {
-  key: 'root',
+  key: "root",
   storage,
-}
+  blacklist: ["routing"]
+};
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const enhancers = compose(
-  window.devToolsExtension ? window.devToolsExtension() : (f) => f
+  // window.devToolsExtension ? window.devToolsExtension() : (f) => f,
+  applyMiddleware(
+    createRavenMiddleware(Raven, {
+    }),
+    thunkMiddleware
+  )
 );
 
 let store;
-switch(STORE) {
-  case 'firebase':
-    store = createStoreWithFirebase(fireReducer, defaultState, enhancers)
+switch (STORE) {
+  case "persist":
+    store = createStore(
+      persistedReducer,
+      defaultState,
+      enhancers
+    );
     break;
-  // case 'rebase':
-  //   // TODO
-  //   break;
-  case 'persist':
-    store = createStore(persistedReducer, defaultState, enhancers);
-    break;
-  default: // transient
-    store = createStore(rootReducer, defaultState, enhancers);
+  default:
+    // transient
+    store = createStore(
+      rootReducer,
+      defaultState,
+      enhancers
+    );
 }
-
-// Store listener?
-// const handleChange = () => {
-//   console.log(store.getState())
-// }
-//
-// let unsubscribe = store.subscribe(handleChange);
-// // unsubscribe();
 
 export const history = syncHistoryWithStore(browserHistory, store);
 export const configureStore = () => {
   if (process.env.NODE_ENV !== "production") {
     if (module.hot) {
       module.hot.accept("./reducers", () => {
-        store.replaceReducer(rootReducer, defaultState, enhancers);
+        store.replaceReducer(
+          rootReducer,
+          defaultState,
+          applyMiddleware(thunkMiddleware)
+        );
       });
     }
   }

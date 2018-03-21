@@ -61,9 +61,8 @@ export default class NewStoryModal extends Component {
         return (
           <Container limit="s" align="center">
             <PageSubtitle typo="h3">
-            Start by giving your story a title and add your credentials. 
-            You can select a cover photo - vertical works best for mobiles.  
-            Click “i” for extra tips and info! 
+              Start by giving your story a title and add your credentials. Click
+              “i” for extra tips and info!
             </PageSubtitle>
             <Separator size="m" silent />
             <MetaForm
@@ -78,10 +77,10 @@ export default class NewStoryModal extends Component {
         return (
           <Container limit="s" align="center">
             <PageSubtitle typo="h3">
-            Motivate your users by setting a quest: tell them what they will 
-            learn by speaking to your interviewees. Then give them some context 
-            to the story so that the interviews make sense. 
-            You’ll be able to change your text as you continue to build your story. 
+              Motivate your users by setting a quest: tell them what they will
+              learn by speaking to your interviewees. Then give them some
+              context to the story so that the interviews make sense. You’ll be
+              able to change your text as you continue to build your story.
             </PageSubtitle>
             <Separator size="m" silent />
             <DetailsForm
@@ -94,13 +93,14 @@ export default class NewStoryModal extends Component {
         return (
           <Container limit="s" align="center">
             <PageSubtitle typo="h3">
-              You can add profiles for more interviewees now or later. 
+              You can add profiles for more interviewees now or later.
             </PageSubtitle>
             <Separator size="m" silent />
             <Interviewees
               createInterviewee={this.props.createInterviewee}
               cta="Go to chat dashboard"
               deleteInterviewee={this.props.deleteInterviewee}
+              editItem={0}
               handleSubmit={this.handleStep2}
               interviewees={this.props.stories[0].interviewees}
               storyIndex={0}
@@ -162,7 +162,7 @@ NewStoryModal.propTypes = {
   stories: arrayOf(object),
   updateInterviewee: func.isRequired,
   updateStory: func.isRequired,
-  user:  object.isRequired,
+  user: object.isRequired
 };
 
 NewStoryModal.defaultProps = {
