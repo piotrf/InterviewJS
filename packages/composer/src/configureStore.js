@@ -20,7 +20,7 @@ import stories from "./data/stories";
 const user = {};
 
 // Store type
-const STORE = "persist";
+const STORE = "transient";
 
 const defaultState = {
   stories,

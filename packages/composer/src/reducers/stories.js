@@ -237,4 +237,4 @@ function storiesWrapper(state = [], action) {
   return newState;
 }
 
-export default storiesWrapper; // stories
+export default stories; // storiesWrapper

@@ -181,9 +181,7 @@ export function syncFirebaseStories(uid) {
       .catch((error) => {
         console.log(error);
       });
-    // return fetch(`https://www.reddit.com/r/${subreddit}.json`)
-    //   .then(response => response.json())
-    //   .then(json => dispatch(receivePosts(subreddit, json)))
+
     return null;
   };
 }
