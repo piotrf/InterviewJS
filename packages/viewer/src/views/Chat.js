@@ -72,6 +72,7 @@ class ChatView extends Component {
       hideActionbar: true,
       history: localHistory || [],
       intervieweeModal: false,
+      replayCachedHistory: true,
       storyDetailsModal: false
     };
     this.initHistory = this.initHistory.bind(this);
@@ -81,13 +82,13 @@ class ChatView extends Component {
   }
   componentDidMount() {
     this.initHistory();
+    this.setState({ replayCachedHistory: false });
   }
   componentDidUpdate(prevProps) {
     return prevProps.location.pathname !== this.props.location.pathname
       ? this.render()
       : null;
   }
-
   toggleModal(modal) {
     this.setState({ [modal]: !this.state[modal] });
   }
@@ -144,6 +145,7 @@ class ChatView extends Component {
         }
       }
     }
+    return null;
   }
 
   updateHistory(type, payload) {
@@ -388,6 +390,7 @@ class ChatView extends Component {
             interviewee={this.interviewee}
             location={this.props.location}
             onBubbleRender={this.onBubbleRender}
+            replayCachedHistory={this.state.replayCachedHistory}
             story={this.story}
             storyline={this.storyline}
           />

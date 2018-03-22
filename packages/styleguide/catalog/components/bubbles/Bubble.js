@@ -10,7 +10,7 @@ import BubbleHTMLWrapper from "./BubbleHTMLWrapper";
 export default class Bubble extends Component {
   constructor(props) {
     super(props);
-    this.state = { loading: true, rendering: true };
+    this.state = { loading: this.props.loading, rendering: true };
   }
   componentDidMount() {
     this.preloaderTimer = setTimeout(() => {
@@ -71,6 +71,7 @@ export default class Bubble extends Component {
 }
 
 Bubble.propTypes = {
+  loading: bool,
   animated: bool,
   children: oneOfType([array, object, string]),
   delay: number,
@@ -79,6 +80,7 @@ Bubble.propTypes = {
 };
 
 Bubble.defaultProps = {
+  loading: true,
   animated: false,
   children: null,
   delay: 0,
