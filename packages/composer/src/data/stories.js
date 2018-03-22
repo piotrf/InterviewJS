@@ -1075,12 +1075,6 @@ OBAMA: Thank you.`,
             id: uuidv4(),
             role: "interviewee",
             type: "embed"
-          },
-          {
-            content: {},
-            id: uuidv4(),
-            role: "interviewee",
-            type: "map"
           }
         ]
       },

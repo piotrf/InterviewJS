@@ -7,6 +7,7 @@ import {
   Action,
   Bubble,
   BubbleGroup,
+  BubbleHTMLWrapper,
   Bubbles,
   color,
   Icon,
@@ -172,9 +173,11 @@ export default class Storyline extends React.Component {
             type="plain"
             theme={{ backg: interviewee.color }}
           >
-            <a href={content.value} target="_blank">
-              {content.title ? content.title : content.value}
-            </a>
+            <BubbleHTMLWrapper>
+              <a href={content.value} target="_blank">
+                {content.title ? content.title : content.value}
+              </a>
+            </BubbleHTMLWrapper>
           </Bubble>
         );
       } else if (type === "image") {
@@ -184,7 +187,10 @@ export default class Storyline extends React.Component {
             type="rich"
             theme={{ backg: interviewee.color }}
           >
-            <img src={content.value} alt="" />
+            <BubbleHTMLWrapper>
+              <img src={content.value} alt="" />
+              {content.title ? <p>{content.title}</p> : null}
+            </BubbleHTMLWrapper>
           </Bubble>
         );
       } else if (type === "embed") {
@@ -194,7 +200,9 @@ export default class Storyline extends React.Component {
             type="embed"
             theme={{ backg: interviewee.color }}
           >
-            <div dangerouslySetInnerHTML={{ __html: content.value }} />
+            <BubbleHTMLWrapper>
+              <div dangerouslySetInnerHTML={{ __html: content.value }} />
+            </BubbleHTMLWrapper>
           </Bubble>
         );
       } else if (type === "map") {
@@ -204,7 +212,9 @@ export default class Storyline extends React.Component {
             type="embed"
             theme={{ backg: interviewee.color }}
           >
-            <div dangerouslySetInnerHTML={{ __html: content.value }} />
+            <BubbleHTMLWrapper>
+              <div dangerouslySetInnerHTML={{ __html: content.value }} />
+            </BubbleHTMLWrapper>
           </Bubble>
         );
       }
