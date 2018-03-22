@@ -56,12 +56,11 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const enhancers = compose(
-  // window.devToolsExtension ? window.devToolsExtension() : (f) => f,
   applyMiddleware(
-    createRavenMiddleware(Raven, {
-    }),
+    createRavenMiddleware(Raven, {}),
     thunkMiddleware
-  )
+  ),
+  window.devToolsExtension ? window.devToolsExtension() : (f) => f,
 );
 
 let store;
