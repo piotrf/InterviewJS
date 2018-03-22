@@ -12,7 +12,5 @@ cache:
   - packages/styleguide/node_modules
   - packages/site/node_modules
 
-install: true
-
 script:
   - yarn run build
