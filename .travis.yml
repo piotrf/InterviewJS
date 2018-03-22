@@ -22,7 +22,7 @@ deploy:
   bucket: interviewjs.io
   local-dir: packages/composer/build/
   upload-dir: "/my~develop/"
-  acl: ''
+  acl: public_read
   on:
     repo: AJInteractive/InterviewJS
     branch: develop
