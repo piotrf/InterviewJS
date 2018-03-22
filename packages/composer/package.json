@@ -55,7 +55,7 @@
   },
   "scripts": {
     "start": "react-app-rewired start",
-    "build": "printenv; if [ $TRAVIS_BRANCH == \"develop\" ]; then export PUBLIC_URL=\"/my~develop\"; fi; react-app-rewired build",
+    "build": "if [ $TRAVIS_BRANCH == \"develop\" ]; then PUBLIC_URL=\"/my~develop\" react-app-rewired build; else react-app-rewired build; fi;",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-app-rewired eject",
     "prettier": "prettier --single-quote --print-width=120 --trailing-comma es5",
