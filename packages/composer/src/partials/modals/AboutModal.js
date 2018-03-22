@@ -1,3 +1,6 @@
+/* eslint jsx-a11y/click-events-have-key-events: 0 */
+/* eslint jsx-a11y/no-static-element-interactions: 0 */
+
 import css from "styled-components";
 import React from "react";
 import ReactModal from "react-modal";
@@ -69,7 +72,7 @@ export default class AboutModal extends React.Component {
       >
         <Modal {...this.props}>
           <ModalHead>
-            <PageTitle typo="h1">About InterviewJS</PageTitle>
+            <PageTitle typo="h1">About <span title={`version ${process.env.VERSION.replace('-dirty', '')}`}>InterviewJS</span></PageTitle>
           </ModalHead>
           <ModalBody>
             <Container align="center" limit="m">

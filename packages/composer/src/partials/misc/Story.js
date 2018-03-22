@@ -19,7 +19,7 @@ import {
   disselect
 } from "interviewjs-styleguide";
 
-import { DeleteModal, DetailsModal } from "../";
+import { DeleteModal, DetailsModal, ErrorBoundary } from "../";
 
 const StoryEl = css(Container)`
   ${disselect};
@@ -98,80 +98,82 @@ export default class Story extends React.Component {
   render() {
     const { deleteModal, detailsModal } = this.state;
     return [
-      <Container key="body">
-        <StoryEl
-          {...this.props}
-          dir="row"
-          fill="white"
-          onClick={() => this.props.openStory()}
-          padded
-          shift
-        >
-          <Container flex={[1, 2, "60%"]}>
-            <StoryTitle typo="h2">{this.props.story.title}</StoryTitle>
-            <StorySummary typo="p5">{this.props.story.intro}</StorySummary>
-          </Container>
-          <Container flex={[2, 1, "20%"]} align="center" hide="phone">
-            <StoryDate typo="p5">
-              {format(this.props.story.modDate, "D MMM YYYY")}
-            </StoryDate>
-          </Container>
-          <Container flex={[2, 1, "20%"]} align="right">
-            <AvatarList>
-              {this.props.story.interviewees
-                ? this.props.story.interviewees.map((el, i) => (
-                    <AvatarListItem key={i}>
-                      <Tip
-                        animation="fade"
-                        arrow
-                        arrowSize="small"
-                        hideDelay={350}
-                        interactiveBorder={5}
-                        position="bottom"
-                        sticky
-                        theme="dark"
-                        title={el.name ? el.name : ""}
-                      >
-                        <Avatar size="m" image={el.avatar} />
-                      </Tip>
-                    </AvatarListItem>
-                  ))
-                : null}
-            </AvatarList>
-          </Container>
-        </StoryEl>
-        <StoryMenu>
-          <Dropdown
-            onRequestClose={() => this.toggleDropdown("settingsDropdown")}
-            open={this.state.settingsDropdown}
-            html={
-              <DropdownContent>
-                <ul>
-                  <li>
-                    <Action onClick={() => this.toggleDetailsModal("meta")}>
-                      Details
-                    </Action>
-                  </li>
-                  <li>
-                    <Action tone="negative" onClick={this.toggleDeleteModal}>
-                      Delete
-                    </Action>
-                  </li>
-                </ul>
-              </DropdownContent>
-            }
+      <ErrorBoundary key="boundary">
+        <Container key="body">
+          <StoryEl
+            {...this.props}
+            dir="row"
+            fill="white"
+            onClick={() => this.props.openStory()}
+            padded
+            shift
           >
-            <Action
-              iconic
-              onClick={() => this.toggleDropdown("settingsDropdown")}
+            <Container flex={[1, 2, "60%"]}>
+              <StoryTitle typo="h2">{this.props.story.title}</StoryTitle>
+              <StorySummary typo="p5">{this.props.story.intro}</StorySummary>
+            </Container>
+            <Container flex={[2, 1, "20%"]} align="center" hide="phone">
+              <StoryDate typo="p5">
+                {format(this.props.story.modDate, "D MMM YYYY")}
+              </StoryDate>
+            </Container>
+            <Container flex={[2, 1, "20%"]} align="right">
+              <AvatarList>
+                {this.props.story.interviewees
+                  ? this.props.story.interviewees.map((el, i) => (
+                      <AvatarListItem key={i}>
+                        <Tip
+                          animation="fade"
+                          arrow
+                          arrowSize="small"
+                          hideDelay={350}
+                          interactiveBorder={5}
+                          position="bottom"
+                          sticky
+                          theme="dark"
+                          title={el.name ? el.name : ""}
+                        >
+                          <Avatar size="m" image={el.avatar} />
+                        </Tip>
+                      </AvatarListItem>
+                    ))
+                  : null}
+              </AvatarList>
+            </Container>
+          </StoryEl>
+          <StoryMenu>
+            <Dropdown
+              onRequestClose={() => this.toggleDropdown("settingsDropdown")}
+              open={this.state.settingsDropdown}
+              html={
+                <DropdownContent>
+                  <ul>
+                    <li>
+                      <Action onClick={() => this.toggleDetailsModal("meta")}>
+                        Details
+                      </Action>
+                    </li>
+                    <li>
+                      <Action tone="negative" onClick={this.toggleDeleteModal}>
+                        Delete
+                      </Action>
+                    </li>
+                  </ul>
+                </DropdownContent>
+              }
             >
-              <Icon name="hdots" />
-            </Action>
-          </Dropdown>
-        </StoryMenu>
-      </Container>,
+              <Action
+                iconic
+                onClick={() => this.toggleDropdown("settingsDropdown")}
+              >
+                <Icon name="hdots" />
+              </Action>
+            </Dropdown>
+          </StoryMenu>
+        </Container>
+      </ErrorBoundary>,
       detailsModal !== "" ? (
-        <DetailsModal
+        <ErrorBoundary><DetailsModal
           {...this.props}
           handleClose={() => this.toggleDetailsModal()}
           isOpen
@@ -180,17 +182,17 @@ export default class Story extends React.Component {
           storyIndex={this.props.storyIndex}
           tab={this.state.detailsModal}
           updateStory={this.updateStory}
-        />
+        /></ErrorBoundary>
       ) : null,
       deleteModal ? (
-        <DeleteModal
+        <ErrorBoundary><DeleteModal
           {...this.props}
           deleteStory={() => this.props.deleteStory(this.props.storyIndex)}
           handleClose={() => this.toggleDeleteModal()}
           isOpen
           key="DeleteModal"
           story={this.props.story}
-        />
+        /></ErrorBoundary>
       ) : null
     ];
   }

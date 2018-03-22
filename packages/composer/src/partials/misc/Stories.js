@@ -3,6 +3,7 @@ import css from "styled-components";
 import { arrayOf, oneOfType, node } from "prop-types";
 
 import { Container, Text, color, setSpace } from "interviewjs-styleguide";
+import { ErrorBoundary } from "../";
 
 const StoriesListHead = css(Container)`
   ${setSpace("mhh")};
@@ -36,7 +37,9 @@ const Stories = (props) => (
         </Text>
       </Container>
     </StoriesListHead>
-    <StoriesList>{props.children}</StoriesList>
+    <ErrorBoundary>
+      <StoriesList>{props.children}</StoriesList>
+    </ErrorBoundary>
   </Container>
 );
 
