@@ -47,28 +47,24 @@ class Storyline extends Component {
     this.onBubbleRender = this.onBubbleRender.bind(this);
   }
   componentDidMount() {
+    this.scrollToBottom();
     setTimeout(this.scrollToBottom, 300);
   }
   componentDidUpdate() {
-    if (!this.props.replayCachedHistory) {
-      this.scrollToBottom();
-      setTimeout(this.scrollToBottom, 350);
-      setTimeout(this.scrollToBottom, 700);
-      setTimeout(this.scrollToBottom, 1050);
-      setTimeout(this.scrollToBottom, 1400);
-    }
+    this.scrollToBottom();
+    setTimeout(this.scrollToBottom, 350);
+    setTimeout(this.scrollToBottom, 700);
+    setTimeout(this.scrollToBottom, 1050);
+    setTimeout(this.scrollToBottom, 1400);
   }
   onBubbleRender() {
-    if (!this.props.replayCachedHistory) {
-      this.scrollToBottom();
-    }
     this.scrollToBottom();
     this.props.onBubbleRender();
   }
   scrollToBottom() {
     return this.anchor
       ? this.anchor.scrollIntoView({
-          behavior: "smooth",
+          behavior: "instant",
           block: "end",
           inline: "end"
         })
@@ -217,7 +213,9 @@ class Storyline extends Component {
                   return (
                     <BubbleGroup key={index} callback={this.onBubbleRender}>
                       <Bubbles persona="user">
-                        <Bubble persona="user">{value}</Bubble>
+                        <Bubble persona="user" animated={animateAndDelay}>
+                          {value}
+                        </Bubble>
                       </Bubbles>
                     </BubbleGroup>
                   );
@@ -226,7 +224,7 @@ class Storyline extends Component {
                   return (
                     <BubbleGroup key={index} callback={this.onBubbleRender}>
                       <Bubbles persona="user">
-                        <Bubble persona="user">
+                        <Bubble persona="user" animated={animateAndDelay}>
                           <Icon name={value} />
                         </Bubble>
                       </Bubbles>
@@ -236,7 +234,7 @@ class Storyline extends Component {
                   const { value } = item;
                   return (
                     <BubbleGroup key={index} callback={this.onBubbleRender}>
-                      <Bubbles persona="user">
+                      <Bubbles persona="user" animated={animateAndDelay}>
                         <Bubble persona="user">{value}</Bubble>
                       </Bubbles>
                     </BubbleGroup>
@@ -246,7 +244,7 @@ class Storyline extends Component {
                   return (
                     <BubbleGroup key={index} callback={this.onBubbleRender}>
                       <Bubbles persona="user">
-                        <Bubble persona="user">
+                        <Bubble persona="user" animated={animateAndDelay}>
                           {storyline[i].content[value].value}
                         </Bubble>
                       </Bubbles>
