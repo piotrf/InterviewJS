@@ -19,7 +19,8 @@ import {
   MobileRedirect,
   PublishStoryModal,
   StoryPane,
-  UserPane
+  UserPane,
+  ErrorBoundary
 } from "../partials";
 
 const Page = css.div`
@@ -119,61 +120,63 @@ export default class ComposerView extends React.Component {
 
     return [
       <Page key="Page">
-        <PageHead>
-          <Container flex={[1, 1, `${100 / 3}%`]} padded>
-            <Action onClick={() => this.props.router.push(`/my/stories`)}>
-              <Icon name="arrow-left" size="x" /> Story overview
-            </Action>
-            <Separator dir="v" size="m" />
-            <Action onClick={() => this.toggleDetailsModal("meta")}>
-              <Icon
-                name="info2"
-                size="s"
-                style={{ position: "relative", top: "1px", marginRight: "2px" }}
+        <ErrorBoundary>
+          <PageHead>
+            <Container flex={[1, 1, `${100 / 3}%`]} padded>
+              <Action onClick={() => this.props.router.push(`/my/stories`)}>
+                <Icon name="arrow-left" size="x" /> Story overview
+              </Action>
+              <Separator dir="v" size="m" />
+              <Action onClick={() => this.toggleDetailsModal("meta")}>
+                <Icon
+                  name="info2"
+                  size="s"
+                  style={{ position: "relative", top: "1px", marginRight: "2px" }}
+                />
+                {` `}Story elements
+              </Action>
+            </Container>
+            <Container flex={[1, 1, `${100 / 3}%`]} align="center">
+              <PageTitle typo="h2">{story.title}</PageTitle>
+            </Container>
+            <Container flex={[1, 1, `${100 / 3}%`]} align="right" padded>
+              <Action primary onClick={this.togglePublishModal}>
+                Publish Story
+              </Action>
+            </Container>
+          </PageHead>
+          <PageBody>
+            <Container flex={[1, 1, `${100 / 3}%`]}>
+              <IntervieweePane
+                {...this.props}
+                currentBubble={this.state.currentBubble}
+                currentInterviewee={this.state.currentInterviewee}
+                story={story}
+                storyIndex={storyIndex}
               />
-              {` `}Story elements
-            </Action>
-          </Container>
-          <Container flex={[1, 1, `${100 / 3}%`]} align="center">
-            <PageTitle typo="h2">{story.title}</PageTitle>
-          </Container>
-          <Container flex={[1, 1, `${100 / 3}%`]} align="right" padded>
-            <Action primary onClick={this.togglePublishModal}>
-              Publish Story
-            </Action>
-          </Container>
-        </PageHead>
-        <PageBody>
-          <Container flex={[1, 1, `${100 / 3}%`]}>
-            <IntervieweePane
-              {...this.props}
-              currentBubble={this.state.currentBubble}
-              currentInterviewee={this.state.currentInterviewee}
-              story={story}
-              storyIndex={storyIndex}
-            />
-          </Container>
-          <Container flex={[1, 1, `${100 / 3}%`]}>
-            <StoryPane
-              {...this.props}
-              currentInterviewee={this.state.currentInterviewee}
-              story={story}
-              storyIndex={storyIndex}
-              switchInterviewee={this.switchInterviewee}
-              toggleBubbleEdit={this.toggleBubbleEdit}
-              toggleDetailsModal={() => this.toggleDetailsModal("interviewees")}
-            />
-          </Container>
-          <Container flex={[1, 1, `${100 / 3}%`]}>
-            <UserPane
-              {...this.props}
-              currentBubble={this.state.currentBubble}
-              currentInterviewee={this.state.currentInterviewee}
-              story={story}
-              storyIndex={storyIndex}
-            />
-          </Container>
-        </PageBody>
+            </Container>
+            <Container flex={[1, 1, `${100 / 3}%`]}>
+              <StoryPane
+                {...this.props}
+                currentInterviewee={this.state.currentInterviewee}
+                story={story}
+                storyIndex={storyIndex}
+                switchInterviewee={this.switchInterviewee}
+                toggleBubbleEdit={this.toggleBubbleEdit}
+                toggleDetailsModal={() => this.toggleDetailsModal("interviewees")}
+              />
+            </Container>
+            <Container flex={[1, 1, `${100 / 3}%`]}>
+              <UserPane
+                {...this.props}
+                currentBubble={this.state.currentBubble}
+                currentInterviewee={this.state.currentInterviewee}
+                story={story}
+                storyIndex={storyIndex}
+              />
+            </Container>
+          </PageBody>
+        </ErrorBoundary>
       </Page>,
       <MobileRedirect {...this.props} key="MobileRedirect" />,
       this.state.detailsModal !== "" ? (

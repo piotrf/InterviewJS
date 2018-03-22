@@ -35,6 +35,7 @@ export default class AuthView extends Component {
 
     Raven.setUserContext({
       id: user.uid,
+      name: user.displayName,
       email: user.email,
     });
 
