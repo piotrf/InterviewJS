@@ -182,19 +182,13 @@ class Storyline extends Component {
                             delay={animateAndDelay ? 350 : null + 350 * (i + 1)}
                             key={character.name}
                             persona="system"
-                            onClick={() =>
-                              this.props.router.push(
-                                `/story/chat/${character.id}`
-                              )
-                            }
+                            onClick={() => this.props.switchChat(character.id)}
                           >
                             <Avatar image={character.avatar} size="s" />
                             <Separator dir="v" size="x" silent />
                             <Action
                               onClick={() =>
-                                this.props.router.push(
-                                  `/story/chat/${character.id}`
-                                )
+                                this.props.switchChat(character.id)
                               }
                             >
                               {character.name}

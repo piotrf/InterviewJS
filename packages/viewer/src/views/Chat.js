@@ -53,18 +53,15 @@ class ChatView extends Component {
   constructor(props) {
     super(props);
 
-    /* assign some globally necessary data */
     const { interviewees } = this.props.story;
     const intervieweeIndex = interviewees.findIndex(
       (item) => item.id === this.props.params.chatId
     );
-
-    this.interviewee = interviewees[intervieweeIndex];
-    this.story = this.props.story;
-    this.storyline = interviewees[intervieweeIndex].storyline;
+    const interviewee = interviewees[intervieweeIndex];
+    const { story } = this.props;
 
     const localHistory = JSON.parse(
-      localStorage.getItem(`history-${this.story.id}-${this.interviewee.id}`)
+      localStorage.getItem(`history-${story.id}-${interviewee.id}`)
     );
 
     this.state = {
@@ -76,6 +73,7 @@ class ChatView extends Component {
       storyDetailsModal: false
     };
     this.initHistory = this.initHistory.bind(this);
+    this.switchChat = this.switchChat.bind(this);
     this.onBubbleRender = this.onBubbleRender.bind(this);
     this.toggleToolbar = this.toggleToolbar.bind(this);
     this.updateHistory = this.updateHistory.bind(this);
@@ -84,38 +82,19 @@ class ChatView extends Component {
     this.initHistory();
     this.setState({ replayCachedHistory: false });
   }
-  componentDidUpdate(prevProps) {
-    return prevProps.location.pathname !== this.props.location.pathname
-      ? this.render()
-      : null;
-  }
-  toggleModal(modal) {
-    this.setState({ [modal]: !this.state[modal] });
-  }
-  toggleToolbar(toolbar) {
-    this.setState({ [toolbar]: !this.state[toolbar] });
-  }
-
-  initHistory() {
-    const firstStorlineItem = this.storyline[0];
-    const noHistory = this.state.history.length === 0;
-    const startsWithInterviewee = firstStorlineItem.role === "interviewee";
-    if (noHistory && startsWithInterviewee) {
-      const firstBubbleRef = {
-        i: 0,
-        role: firstStorlineItem.role,
-        type: "init"
-      };
-      this.setState({ history: [firstBubbleRef] });
-    }
-  }
 
   onBubbleRender() {
     const { history } = this.state;
     const thisHistoryItem = history[history.length - 1];
 
+    const { interviewees } = this.props.story;
+    const intervieweeIndex = interviewees.findIndex(
+      (item) => item.id === this.props.params.chatId
+    );
+    const { storyline } = interviewees[intervieweeIndex];
+
     const thisBubbleI = thisHistoryItem.i;
-    const lastBubbleI = this.storyline.length;
+    const lastBubbleI = storyline.length;
 
     if (thisBubbleI < lastBubbleI - 1) {
       const { role, type } = thisHistoryItem;
@@ -133,10 +112,10 @@ class ChatView extends Component {
         return null;
       } else if (role === "interviewee") {
         const { i } = thisHistoryItem;
-        const nextBubble = this.storyline[thisBubbleI + 1];
+        const nextBubble = storyline[thisBubbleI + 1];
         if (
-          i < this.storyline.length &&
-          this.storyline[i + 1].role === "interviewee" &&
+          i < storyline.length &&
+          storyline[i + 1].role === "interviewee" &&
           nextBubble.role === "interviewee"
         ) {
           setTimeout(() => this.updateHistory("followup"), 1050);
@@ -148,8 +127,45 @@ class ChatView extends Component {
     return null;
   }
 
+  initHistory() {
+    const { interviewees } = this.props.story;
+    const intervieweeIndex = interviewees.findIndex(
+      (item) => item.id === this.props.params.chatId
+    );
+    const { storyline } = interviewees[intervieweeIndex];
+    const firstStorlineItem = storyline[0];
+    const noHistory = this.state.history.length === 0;
+    const startsWithInterviewee = firstStorlineItem.role === "interviewee";
+    if (noHistory && startsWithInterviewee) {
+      const firstBubbleRef = {
+        i: 0,
+        role: firstStorlineItem.role,
+        type: "init"
+      };
+      this.setState({ history: [firstBubbleRef] });
+    }
+  }
+
+  switchChat(chatId) {
+    this.setState({ currentInterviewee: chatId });
+    this.props.router.push(`/story/chat/${chatId}`);
+  }
+  toggleToolbar(toolbar) {
+    this.setState({ [toolbar]: !this.state[toolbar] });
+  }
+  toggleModal(modal) {
+    this.setState({ [modal]: !this.state[modal] });
+  }
+
   updateHistory(type, payload) {
     this.setState({ hideActionbar: true });
+
+    const { interviewees } = this.props.story;
+    const intervieweeIndex = interviewees.findIndex(
+      (item) => item.id === this.props.params.chatId
+    );
+    const interviewee = interviewees[intervieweeIndex];
+    const { story } = this.props;
 
     const { history } = this.state;
     const thisHistoryItem = history[history.length - 1];
@@ -221,7 +237,7 @@ class ChatView extends Component {
     }
 
     localStorage.setItem(
-      `history-${this.story.id}-${this.interviewee.id}`,
+      `history-${story.id}-${interviewee.id}`,
       JSON.stringify(history)
     );
 
@@ -231,11 +247,19 @@ class ChatView extends Component {
   render() {
     const { history } = this.state;
 
+    const { interviewees } = this.props.story;
+    const intervieweeIndex = interviewees.findIndex(
+      (item) => item.id === this.props.params.chatId
+    );
+    const interviewee = interviewees[intervieweeIndex];
+    const { story } = this.props;
+    const { storyline } = interviewees[intervieweeIndex];
+
     const isLastBubble = () => {
       if (history.length > 0) {
         const thisHistoryItem = history[history.length - 1];
         const thisBubbleI = thisHistoryItem.i;
-        const lastBubbleI = this.storyline.length - 1;
+        const lastBubbleI = storyline.length - 1;
         return thisBubbleI === lastBubbleI;
       }
       return false;
@@ -328,7 +352,7 @@ class ChatView extends Component {
         const thisHistoryItem = history[history.length - 1];
 
         const thisBubbleI = thisHistoryItem.i;
-        const lastBubbleI = this.storyline.length;
+        const lastBubbleI = storyline.length;
 
         const isActiveActionbarEmot = this.state.actionbar === "emot";
         const isActiveActionbarRunaway = this.state.actionbar === "runaway";
@@ -340,7 +364,7 @@ class ChatView extends Component {
           return runAwayActions;
           // } else if (thisBubbleI < lastBubbleI - 1 && !this.state.hideActionbar) {
         }
-        const nextBubble = this.storyline[thisBubbleI + 1];
+        const nextBubble = storyline[thisBubbleI + 1];
         if (nextBubble.role === "user") {
           if (isActiveActionbarEmot) {
             return emoActions;
@@ -375,8 +399,8 @@ class ChatView extends Component {
             <Icon name="arrow-left" />
           </Action>
           <Action onClick={() => this.toggleModal("intervieweeModal")}>
-            <Tip title={this.interviewee.name}>
-              <Avatar image={this.interviewee.avatar} size="l" />
+            <Tip title={interviewee.name}>
+              <Avatar image={interviewee.avatar} size="l" />
             </Tip>
           </Action>
           <Action iconic onClick={() => this.toggleModal("storyDetailsModal")}>
@@ -387,12 +411,12 @@ class ChatView extends Component {
           <Storyline
             {...this.props}
             history={this.state.history}
-            interviewee={this.interviewee}
-            location={this.props.location}
+            interviewee={interviewee}
             onBubbleRender={this.onBubbleRender}
             replayCachedHistory={this.state.replayCachedHistory}
-            story={this.story}
-            storyline={this.storyline}
+            story={story}
+            storyline={storyline}
+            switchChat={this.switchChat}
           />
         </PageBody>
         <PageFoot limit="m" flex={[0, 0, `80px`]} padded>
@@ -441,7 +465,7 @@ class ChatView extends Component {
           cta="Get back to chat"
           handleClose={() => this.toggleModal("intervieweeModal")}
           handleSubmit={() => this.toggleModal("intervieweeModal")}
-          interviewee={this.interviewee}
+          interviewee={interviewee}
           isOpen={this.state.intervieweeModal !== null}
           key="intervieweeModal"
         />
@@ -451,7 +475,7 @@ class ChatView extends Component {
           handleClose={() => this.toggleModal("storyDetailsModal")}
           isOpen={this.state.storyDetailsModal}
           key="detailsModal"
-          story={this.story}
+          story={story}
         />
       ) : null
     ];
