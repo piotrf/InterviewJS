@@ -3,6 +3,7 @@
 /* eslint prefer-destructuring: 0 */
 /* eslint no-plusplus: 0 */
 /* eslint no-unused-vars: 0 */
+/* eslint no-param-reassign: 0 */
 
 import uuidv4 from "uuid/v4";
 import Raven from "raven-js";
@@ -90,7 +91,9 @@ function stories(state = [], action) {
 
     case "ADD_STORYLINE_ITEM":
       console.log("adding storyline item");
-
+      if (!state[storyIndex].interviewees[intervieweeIndex].storyline) {
+        state[storyIndex].interviewees[intervieweeIndex].storyline = [];
+      }
       const ADD_STORYLINE_ITEM_STATE = [
         ...state.slice(0, storyIndex),
         {
