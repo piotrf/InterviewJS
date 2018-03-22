@@ -31,6 +31,9 @@ const StorylineEl = css(Container)`
   & > * {
     ${setSpace("mvm")};
   }
+  & > *:last-child {
+    margin-bottom: 0;
+  }
 `;
 
 const Push = css.div`
@@ -47,24 +50,21 @@ class Storyline extends Component {
     this.onBubbleRender = this.onBubbleRender.bind(this);
   }
   componentDidMount() {
-    this.scrollToBottom();
-    setTimeout(this.scrollToBottom, 300);
+    this.scrollToBottom("instant");
+    setTimeout(() => this.scrollToBottom("instant"), 300);
   }
-  componentDidUpdate() {
-    this.scrollToBottom();
+  onBubbleRender() {
+    setTimeout(this.scrollToBottom, 0);
     setTimeout(this.scrollToBottom, 350);
     setTimeout(this.scrollToBottom, 700);
     setTimeout(this.scrollToBottom, 1050);
     setTimeout(this.scrollToBottom, 1400);
-  }
-  onBubbleRender() {
-    this.scrollToBottom();
     this.props.onBubbleRender();
   }
-  scrollToBottom() {
+  scrollToBottom(behaviour) {
     return this.anchor
       ? this.anchor.scrollIntoView({
-          behavior: "instant",
+          behavior: behaviour || "smooth",
           block: "end",
           inline: "end"
         })
