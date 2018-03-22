@@ -37,7 +37,6 @@
     "eslint-plugin-jsx-a11y": "6.0.3",
     "eslint-plugin-prettier": "2.6.0",
     "eslint-plugin-react": "7.7.0",
-    "gh-pages": "1.1.0",
     "git-revision-webpack-plugin": "^2.5.1",
     "husky": "0.14.3",
     "lint-staged": "7.0.0",
@@ -59,8 +58,7 @@
     "eslint-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
     "lint": "eslint **/*.js --quiet",
     "lint-fix": "eslint --fix",
-    "generate": "plop --plopfile generators/index.js",
-    "release": "yarn run build && gh-pages -d build -e story -a -r https://github.com/AJInteractive/InterviewJS.git"
+    "generate": "plop --plopfile generators/index.js"
   },
   "lint-staged": {
     "{,!(build|generators)/**/}*.js": [
