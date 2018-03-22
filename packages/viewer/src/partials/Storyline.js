@@ -175,26 +175,33 @@ class Storyline extends Component {
                         >
                           Choose another interviewee to talk to:
                         </Bubble>
-                        {story.interviewees.map((character, i) => (
-                          <Bubble
-                            animated={animateAndDelay}
-                            loading={animateAndDelay}
-                            delay={animateAndDelay ? 350 : null + 350 * (i + 1)}
-                            key={character.name}
-                            persona="system"
-                            onClick={() => this.props.switchChat(character.id)}
-                          >
-                            <Avatar image={character.avatar} size="s" />
-                            <Separator dir="v" size="x" silent />
-                            <Action
-                              onClick={() =>
-                                this.props.switchChat(character.id)
-                              }
-                            >
-                              {character.name}
-                            </Action>
-                          </Bubble>
-                        ))}
+                        {story.interviewees.map(
+                          (character, i) =>
+                            character.id !== this.props.currentIntervieweeId ? (
+                              <Bubble
+                                animated={animateAndDelay}
+                                loading={animateAndDelay}
+                                delay={
+                                  animateAndDelay ? 350 : null + 350 * (i + 1)
+                                }
+                                key={character.name}
+                                persona="system"
+                                onClick={() =>
+                                  this.props.switchChat(character.id)
+                                }
+                              >
+                                <Avatar image={character.avatar} size="s" />
+                                <Separator dir="v" size="x" silent />
+                                <Action
+                                  onClick={() =>
+                                    this.props.switchChat(character.id)
+                                  }
+                                >
+                                  {character.name}
+                                </Action>
+                              </Bubble>
+                            ) : null
+                        )}
                       </Bubbles>
                     </BubbleGroup>
                   );

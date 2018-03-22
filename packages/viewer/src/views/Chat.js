@@ -1,53 +1,18 @@
 /* eslint react/forbid-prop-types: 0 */
 import { object, shape, string } from "prop-types";
 import { withRouter } from "react-router";
-import css from "styled-components";
 import React, { Component } from "react";
+import { Actionbar, Action, Avatar, Icon, Tip } from "interviewjs-styleguide";
+import { IntervieweeModal, StoryDetailsModal, Storyline } from "../partials/";
 import {
-  Actionbar,
-  Action,
-  Avatar,
-  Icon,
-  Container,
-  Tip,
-  color
-} from "interviewjs-styleguide";
-import { IntervieweeModal, StoryDetailsModal, Storyline } from "../partials";
-
-const Page = css.div`
-  background: ${color.white};
-  min-height: 100vh;
-  min-width: 100vw;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-`;
-const PageBody = css(Container)`
-  margin-top: 80px;
-  padding: 0;
-`;
-const PageFoot = css(Container)`
-  border: 1px solid ${color.greyHL};
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 100%;
-`;
-const Topbar = css(Container)`
-  align-items: center;
-  background: ${color.white};
-  border: 1px solid ${color.greyHL};
-  display: flex;
-  flex-direction: row;
-  height: 80px;
-  justify-content: space-between;
-  left: 0;
-  position: fixed;
-  right: 0;
-  top: 0;
-  width: 100%;
-  z-index: 5;
-`;
+  EmoActions,
+  NvmActions,
+  Page,
+  PageBody,
+  PageFoot,
+  Topbar,
+  RunAwayActions
+} from "./chat/";
 
 class ChatView extends Component {
   constructor(props) {
@@ -66,6 +31,7 @@ class ChatView extends Component {
 
     this.state = {
       actionbar: "scripted",
+      currentIntervieweeId: this.props.params.chatId,
       hideActionbar: true,
       history: localHistory || [],
       intervieweeModal: false,
@@ -147,9 +113,10 @@ class ChatView extends Component {
   }
 
   switchChat(chatId) {
-    this.setState({ currentInterviewee: chatId });
+    this.setState({ currentIntervieweeId: chatId });
     this.props.router.push(`/story/chat/${chatId}`);
   }
+
   toggleToolbar(toolbar) {
     this.setState({ [toolbar]: !this.state[toolbar] });
   }
@@ -255,6 +222,7 @@ class ChatView extends Component {
     const { story } = this.props;
     const { storyline } = interviewees[intervieweeIndex];
 
+    // detect last bubble
     const isLastBubble = () => {
       if (history.length > 0) {
         const thisHistoryItem = history[history.length - 1];
@@ -264,6 +232,8 @@ class ChatView extends Component {
       }
       return false;
     };
+
+    // detect switch to system bubbles
     const isNvmBubble = () => {
       if (history.length > 0) {
         const thisHistoryItem = history[history.length - 1];
@@ -272,81 +242,6 @@ class ChatView extends Component {
       return false;
     };
 
-    const runAwayActions = [
-      <Action
-        fixed
-        key="talkToSomebodyElse"
-        onClick={() =>
-          this.updateHistory("diss", "I want to talk to somebody else")
-        }
-        primary
-      >
-        I want to talk to somebody else
-      </Action>,
-      <Action
-        fixed
-        key="doneChatting"
-        onClick={() => this.props.router.push("/story/outro")}
-        primary
-        tone="negative"
-      >
-        I’m done chatting
-      </Action>
-    ];
-    const nvmActions = [
-      <Action
-        fixed
-        key="neverMind"
-        onClick={() => this.updateHistory("nvm", "Nevermind")}
-        primary
-      >
-        Nevermind
-      </Action>
-    ];
-    const emoActions = [
-      <Action
-        iconic
-        onClick={() => this.updateHistory("emoji", "smile")}
-        key="smile"
-      >
-        <Icon name="smile" size="l" />
-      </Action>,
-      <Action
-        iconic
-        onClick={() => this.updateHistory("emoji", "sad")}
-        key="sad"
-      >
-        <Icon name="sad" size="l" />
-      </Action>,
-      <Action
-        iconic
-        onClick={() => this.updateHistory("emoji", "angry")}
-        key="angry"
-      >
-        <Icon name="angry" size="l" />
-      </Action>,
-      <Action
-        iconic
-        onClick={() => this.updateHistory("emoji", "shocked")}
-        key="shocked"
-      >
-        <Icon name="shocked" size="l" />
-      </Action>,
-      <Action
-        iconic
-        onClick={() => this.updateHistory("emoji", "neutral")}
-        key="neutral"
-      >
-        <Icon name="neutral" size="l" />
-      </Action>,
-      <Action
-        iconic
-        onClick={() => this.updateHistory("emoji", "wondering")}
-        key="wondering"
-      >
-        <Icon name="wondering" size="l" />
-      </Action>
-    ];
     const renderUserActions = () => {
       if (history.length > 0) {
         const thisHistoryItem = history[history.length - 1];
@@ -357,19 +252,30 @@ class ChatView extends Component {
         const isActiveActionbarEmot = this.state.actionbar === "emot";
         const isActiveActionbarRunaway = this.state.actionbar === "runaway";
         const isLastBubbleSwitchTo = thisHistoryItem.type === "switchTo";
+        const isTheVeryLastBubble = thisBubbleI === lastBubbleI - 1;
 
         if (isLastBubbleSwitchTo) {
-          return nvmActions;
-        } else if (thisBubbleI === lastBubbleI - 1) {
-          return runAwayActions;
+          return <NvmActions updateHistory={this.updateHistory} />;
+        } else if (isTheVeryLastBubble) {
+          return (
+            <RunAwayActions
+              navigateAway={this.props.router.push}
+              updateHistory={this.updateHistory}
+            />
+          );
           // } else if (thisBubbleI < lastBubbleI - 1 && !this.state.hideActionbar) {
         }
         const nextBubble = storyline[thisBubbleI + 1];
-        if (nextBubble.role === "user") {
+        if (nextBubble.role === "user" && !this.state.hideActionbar) {
           if (isActiveActionbarEmot) {
-            return emoActions;
+            return <EmoActions updateHistory={this.updateHistory} />;
           } else if (isActiveActionbarRunaway) {
-            return runAwayActions;
+            return (
+              <RunAwayActions
+                navigateAway={this.props.router.push}
+                updateHistory={this.updateHistory}
+              />
+            );
           }
           return nextBubble.content.map(
             (action, i) =>
@@ -410,6 +316,7 @@ class ChatView extends Component {
         <PageBody flex={[1, 1, `100%`]}>
           <Storyline
             {...this.props}
+            currentIntervieweeId={this.state.currentIntervieweeId}
             history={this.state.history}
             interviewee={interviewee}
             onBubbleRender={this.onBubbleRender}
