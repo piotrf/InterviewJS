@@ -99,6 +99,7 @@ export default class PublishStoryModal extends Component {
   }
 
   render() {
+    const iframeViewer = document.location.hostname.toLowerCase() === "www.interviewjs.io" ? "https://interviewjs.net/story/" : "https://beta.interviewjs.net/story/";
     const { step } = this.state;
     const getModalBody = () => {
       if (step === 0) {
@@ -154,7 +155,7 @@ export default class PublishStoryModal extends Component {
               <img src={iframeRatioSpacer} alt="" />
               <iframe
                 title="Preview"
-                src="http://interviewjs.io/story/"
+                src={iframeViewer}
                 ref={(iframe) => {
                   this.iframe = iframe;
                 }}
