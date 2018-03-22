@@ -104,26 +104,30 @@ export default class StoryPane extends React.Component {
         <PaneHead>
           <IntervieweesWrapper>
             <Interviewees>
-              {interviewees.map((interviewee, intervieweeIndex) => (
-                <Interviewee
-                  active={this.props.currentInterviewee === intervieweeIndex}
-                  intervieweeColor={
-                    interviewee.color.length > 0 ? interviewee.color : null
-                  }
-                  key={intervieweeIndex}
-                >
-                  <Tip position="bottom" title={interviewee.name}>
-                    <Action
-                      secondary
-                      onClick={() =>
-                        this.props.switchInterviewee(intervieweeIndex)
+              {interviewees.length > 0
+                ? interviewees.map((interviewee, intervieweeIndex) => (
+                    <Interviewee
+                      active={
+                        this.props.currentInterviewee === intervieweeIndex
                       }
+                      intervieweeColor={
+                        interviewee.color ? interviewee.color : null
+                      }
+                      key={intervieweeIndex}
                     >
-                      <Avatar image={interviewee.avatar} size="m" />
-                    </Action>
-                  </Tip>
-                </Interviewee>
-              ))}
+                      <Tip position="bottom" title={interviewee.name}>
+                        <Action
+                          secondary
+                          onClick={() =>
+                            this.props.switchInterviewee(intervieweeIndex)
+                          }
+                        >
+                          <Avatar image={interviewee.avatar} size="m" />
+                        </Action>
+                      </Tip>
+                    </Interviewee>
+                  ))
+                : null}
             </Interviewees>
             <IntervieweesAction>
               <Tip position="bottom" title="Manage interviewees">
