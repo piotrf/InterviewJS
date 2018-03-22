@@ -2,6 +2,7 @@
 /* eslint no-console: 0 */
 /* eslint prefer-destructuring: 0 */
 /* eslint no-plusplus: 0 */
+/* eslint no-unused-vars: 0 */
 
 import uuidv4 from "uuid/v4";
 import { base } from "../configureStore";

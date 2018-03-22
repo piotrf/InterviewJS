@@ -1,4 +1,6 @@
 /* eslint react/forbid-prop-types: 0 */
+/* eslint no-unused-vars: 0 */
+
 import css from "styled-components";
 import React, { Component } from "react";
 import { arrayOf, func, object, shape, string } from "prop-types";
