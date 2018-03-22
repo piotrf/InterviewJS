@@ -53,6 +53,11 @@ class Storyline extends Component {
     this.scrollToBottom("instant");
     setTimeout(() => this.scrollToBottom("instant"), 300);
   }
+  componentDidUpdate() {
+    return this.props.history && this.props.history.length === 0
+      ? this.props.initHistory()
+      : null;
+  }
   onBubbleRender() {
     setTimeout(this.scrollToBottom, 0);
     setTimeout(this.scrollToBottom, 350);
@@ -166,7 +171,7 @@ class Storyline extends Component {
                   return (
                     <BubbleGroup key={index} callback={this.onBubbleRender}>
                       <Bubbles persona="system">
-                        <Bubble key="intro" persona="system">
+                        <Bubble persona="system">
                           Choose another interviewee to talk to:
                         </Bubble>
                         {story.interviewees.map(
@@ -198,18 +203,7 @@ class Storyline extends Component {
                 return null;
               } else if (role === "user") {
                 const { type } = item;
-                if (type === "nvm") {
-                  const { value } = item;
-                  return (
-                    <BubbleGroup key={index} callback={this.onBubbleRender}>
-                      <Bubbles persona="user">
-                        <Bubble persona="user" animated={animateAndDelay}>
-                          {value}
-                        </Bubble>
-                      </Bubbles>
-                    </BubbleGroup>
-                  );
-                } else if (type === "emoji") {
+                if (type === "emoji") {
                   const { value } = item;
                   return (
                     <BubbleGroup key={index} callback={this.onBubbleRender}>
@@ -266,6 +260,7 @@ class Storyline extends Component {
 Storyline.propTypes = {
   replayCachedHistory: bool,
   history: arrayOf(object),
+  updateHistory: func.isRequired,
   onBubbleRender: func.isRequired,
   interviewee: shape({
     storyline: array.isRequired
