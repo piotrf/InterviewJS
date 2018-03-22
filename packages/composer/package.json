@@ -3,7 +3,7 @@
   "description": "",
   "version": "0.1.0",
   "author": "",
-  "homepage": "http://interviewjs.io/my/",
+  "homepage": "https://www.interviewjs.io/my/",
   "dependencies": {
     "date-fns": "^1.29.0",
     "firebase": "^4.11.0",
