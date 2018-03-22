@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "babel-loader": "7.1.1",
+    "gatsby-cli": "^1.1.47",
     "gh-pages": "^1.1.0",
     "prettier": "^1.11.1"
   }
