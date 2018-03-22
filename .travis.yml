@@ -13,4 +13,4 @@ cache:
   - packages/site/node_modules
 
 script:
-  - if [ $TRAVIS_BRANCH = 'develop' ]; SUFFIX='~develop' yarn run build; fi
+  - '[[ $TRAVIS_BRANCH != "master" ]] && SUFFIX="~$TRAVIS_BRANCH" yarn run build'
