@@ -37,10 +37,10 @@ class ChatView extends Component {
       replayCachedHistory: true,
       storyDetailsModal: false
     };
-    this.initHistory = this.initHistory.bind(this);
-    this.switchChat = this.switchChat.bind(this);
-    this.onBubbleRender = this.onBubbleRender.bind(this);
     this.findIntervieweeId = this.findIntervieweeId.bind(this);
+    this.initHistory = this.initHistory.bind(this);
+    this.onBubbleRender = this.onBubbleRender.bind(this);
+    this.switchChat = this.switchChat.bind(this);
     this.toggleToolbar = this.toggleToolbar.bind(this);
     this.updateHistory = this.updateHistory.bind(this);
   }
@@ -67,8 +67,6 @@ class ChatView extends Component {
         this.updateHistory("switchTo");
       } else if (type === "nvm") {
         this.updateHistory("followup");
-      } else if (type === "changeInterviewee") {
-        console.log("onBubbleRender if type changeInterviewee");
       } else if (type === "action") {
         const { value } = thisHistoryItem; // 1 is explore, 0 is ignore
         if (value === 1) {
@@ -127,6 +125,7 @@ class ChatView extends Component {
       replayCachedHistory: true
     });
     this.props.router.push(`/story/chat/${chatId}`);
+    this.setState({ replayCachedHistory: false });
   }
 
   toggleToolbar(toolbar) {
@@ -165,7 +164,7 @@ class ChatView extends Component {
       history.push(switchTo);
     } else if (type === "nvm") {
       // user decided not to switch to another interviewee
-      this.setState({ actionbar: "scripted" });
+      this.setState({ actionbar: null });
       history.splice(-1, 1);
     } else if (type === "emoji") {
       // user replied with an emoji
@@ -273,8 +272,6 @@ class ChatView extends Component {
         const isTheVeryLastBubble = thisBubbleI === lastBubbleI - 1;
         const isUserReturning = thisHistoryItem.type === "followup";
 
-        console.log("isUserReturning: ", isUserReturning);
-
         if (isLastBubbleSwitchTo) {
           return <NvmActions updateHistory={this.updateHistory} />;
         } else if (isTheVeryLastBubble) {
@@ -320,9 +317,6 @@ class ChatView extends Component {
       }
       return null;
     };
-
-    console.log(`chat.js history: `, this.state.history);
-    // console.log(`chat.js props: `, this.props);
 
     return [
       <Page key="page">
