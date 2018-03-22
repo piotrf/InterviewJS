@@ -171,7 +171,6 @@ export function syncFirebaseStories(uid) {
     dispatch(noop());
 
     console.log(`stories-${NAMESPACE}/${uid}`);
-
     base
       .fetch(`stories-${NAMESPACE}/${uid}/`, {
         asArray: true
@@ -186,6 +185,8 @@ export function syncFirebaseStories(uid) {
         console.log(error);
       });
 
-    return null;
+    return {
+      type: "NOOP"
+    };
   };
 }
