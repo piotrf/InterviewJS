@@ -24,6 +24,8 @@ import {
   setType
 } from "interviewjs-styleguide";
 
+import { ErrorBoundary } from "../";
+
 const DetailsCopy = css.div`
   ${setType("s")};
   text-align: left;
@@ -60,8 +62,20 @@ const DetailsCopy = css.div`
 export default class AboutModal extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { counter: 7 };
   }
+
+  getCount() {
+    if (this.state.counter < 3) throw new Error('Test Error');
+    return this.state.counter;
+  }
+
+  countDown() {
+    this.setState({
+      counter: this.state.counter - 1
+    });
+  }
+
   render() {
     return (
       <ReactModal
@@ -72,7 +86,9 @@ export default class AboutModal extends React.Component {
       >
         <Modal {...this.props}>
           <ModalHead>
-            <PageTitle typo="h1">About <span title={`version ${process.env.VERSION.replace('-dirty', '')}`}>InterviewJS</span></PageTitle>
+            <ErrorBoundary>
+              <PageTitle typo="h1"><span title={this.getCount()} onClick={() => this.countDown()}>About</span> <span title={`version ${process.env.VERSION.replace('-dirty', '')}`}>InterviewJS</span></PageTitle>
+            </ErrorBoundary>
           </ModalHead>
           <ModalBody>
             <Container align="center" limit="m">
