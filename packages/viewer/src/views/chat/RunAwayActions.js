@@ -1,18 +1,18 @@
 import React from "react";
-import { func } from "prop-types";
+import { bool, func } from "prop-types";
 import { Action } from "interviewjs-styleguide";
 
 const RunAwayActions = (props) => [
-  <Action
-    fixed
-    key="talkToSomebodyElse"
-    onClick={() =>
-      props.updateHistory("diss", "I want to talk to somebody else")
-    }
-    primary
-  >
-    I want to talk to somebody else
-  </Action>,
+  props.isSwitchPossible ? (
+    <Action
+      fixed
+      key="talkToSomebodyElse"
+      onClick={() => props.updateHistory("switchTo")}
+      primary
+    >
+      I want to talk to somebody else
+    </Action>
+  ) : null,
   <Action
     fixed
     key="doneChatting"
@@ -25,6 +25,7 @@ const RunAwayActions = (props) => [
 ];
 
 RunAwayActions.propTypes = {
+  isSwitchPossible: bool.isRequired,
   updateHistory: func.isRequired,
   navigateAway: func.isRequired
 };
