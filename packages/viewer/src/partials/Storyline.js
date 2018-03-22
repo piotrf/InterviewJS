@@ -166,24 +166,13 @@ class Storyline extends Component {
                   return (
                     <BubbleGroup key={index} callback={this.onBubbleRender}>
                       <Bubbles persona="system">
-                        <Bubble
-                          animated={animateAndDelay}
-                          loading={animateAndDelay}
-                          delay={animateAndDelay ? 350 : null}
-                          key="intro"
-                          persona="system"
-                        >
+                        <Bubble key="intro" persona="system">
                           Choose another interviewee to talk to:
                         </Bubble>
                         {story.interviewees.map(
                           (character, i) =>
                             character.id !== this.props.currentIntervieweeId ? (
                               <Bubble
-                                animated={animateAndDelay}
-                                loading={animateAndDelay}
-                                delay={
-                                  animateAndDelay ? 350 : null + 350 * (i + 1)
-                                }
                                 key={character.name}
                                 persona="system"
                                 onClick={() =>

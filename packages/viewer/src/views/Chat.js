@@ -30,9 +30,8 @@ class ChatView extends Component {
     );
 
     this.state = {
-      actionbar: "scripted",
+      actionbar: null,
       currentIntervieweeId: this.props.params.chatId,
-      hideActionbar: true,
       history: localHistory || [],
       intervieweeModal: false,
       replayCachedHistory: true,
@@ -86,7 +85,7 @@ class ChatView extends Component {
         ) {
           setTimeout(() => this.updateHistory("followup"), 1050);
         } else if (nextBubble.role === "user") {
-          setTimeout(() => this.setState({ hideActionbar: false }), 1400);
+          setTimeout(() => this.setState({ actionbar: "scripted" }), 1400);
         }
       }
     }
@@ -113,7 +112,15 @@ class ChatView extends Component {
   }
 
   switchChat(chatId) {
-    this.setState({ currentIntervieweeId: chatId });
+    const { story } = this.props;
+    const localHistory = JSON.parse(
+      localStorage.getItem(`history-${story.id}-${chatId}`)
+    );
+    this.setState({
+      currentIntervieweeId: chatId,
+      history: localHistory,
+      replayCachedHistory: true
+    });
     this.props.router.push(`/story/chat/${chatId}`);
   }
 
@@ -125,7 +132,7 @@ class ChatView extends Component {
   }
 
   updateHistory(type, payload) {
-    this.setState({ hideActionbar: true });
+    this.setState({ actionbar: null });
 
     const { interviewees } = this.props.story;
     const intervieweeIndex = interviewees.findIndex(
@@ -187,6 +194,7 @@ class ChatView extends Component {
       };
       history.push(ignore);
     } else if (type === "explore") {
+      this.setState({ actionbar: "scripted" });
       const explore = {
         i: thisHistoryItem.i + 1,
         role: "user",
@@ -266,7 +274,7 @@ class ChatView extends Component {
           // } else if (thisBubbleI < lastBubbleI - 1 && !this.state.hideActionbar) {
         }
         const nextBubble = storyline[thisBubbleI + 1];
-        if (nextBubble.role === "user" && !this.state.hideActionbar) {
+        if (nextBubble.role === "user" && this.state.actionbar) {
           if (isActiveActionbarEmot) {
             return <EmoActions updateHistory={this.updateHistory} />;
           } else if (isActiveActionbarRunaway) {
