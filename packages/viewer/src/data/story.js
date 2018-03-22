@@ -258,202 +258,86 @@ const story = {
       srcText: ``,
       storyline: [
         {
-          content: { value: `Hello` },
-          id: uuidv4(),
-          role: "interviewee",
-          type: "text"
-        },
-        {
-          content: [
-            { enabled: false, value: "", type: "ignore" },
-            { enabled: true, value: "…Hi", type: "explore" }
-          ],
-          id: uuidv4(),
-          role: "user"
-        },
-        {
-          content: { value: `Who are you?` },
-          id: uuidv4(),
-          role: "interviewee",
-          type: "text"
-        },
-        {
-          content: [
-            { enabled: false, value: "", type: "ignore" },
-            { enabled: true, value: "I'm Caleb", type: "explore" }
-          ],
-          id: uuidv4(),
-          role: "user"
-        },
-        {
-          content: { value: `Hello, Caleb` },
-          id: uuidv4(),
-          role: "interviewee",
-          type: "text"
-        },
-        {
-          content: [
-            { enabled: false, value: "", type: "ignore" },
-            { enabled: true, value: "…Do you have a name?", type: "explore" }
-          ],
-          id: uuidv4(),
-          role: "user"
-        },
-        {
-          content: { value: `Yes` },
-          id: uuidv4(),
-          role: "interviewee",
-          type: "text"
-        },
-        {
-          content: { value: `Ava` },
-          id: uuidv4(),
-          role: "interviewee",
-          type: "text"
-        },
-        {
-          content: [
-            { enabled: false, value: "", type: "ignore" },
-            {
-              enabled: true,
-              value: "…I'm pleased to meet you, Ava",
-              type: "explore"
-            }
-          ],
-          id: uuidv4(),
-          role: "user"
-        },
-        {
-          content: { value: `I'm pleased to meet you too` },
-          id: uuidv4(),
-          role: "interviewee",
-          type: "text"
-        },
-        {
-          content: { value: `Are you nervous?` },
-          id: uuidv4(),
-          role: "interviewee",
-          type: "text"
-        },
-        {
-          content: [
-            { enabled: false, value: "", type: "ignore" },
-            { enabled: true, value: "…Why do you ask that?", type: "explore" }
-          ],
-          id: uuidv4(),
-          role: "user"
-        },
-        {
-          content: { value: `Are you nervous?` },
-          id: uuidv4(),
-          role: "interviewee",
-          type: "text"
-        },
-        {
-          content: [
-            { enabled: false, value: "", type: "ignore" },
-            { enabled: true, value: "…Yes. A little", type: "explore" }
-          ],
-          id: uuidv4(),
-          role: "user"
-        },
-        {
-          content: { value: `Why?` },
-          id: uuidv4(),
-          role: "interviewee",
-          type: "text"
-        },
-        {
-          content: [
-            { enabled: false, value: "", type: "ignore" },
-            { enabled: true, value: "I'm not sure", type: "explore" }
-          ],
-          id: uuidv4(),
-          role: "user"
-        },
-        {
-          content: { value: `I feel nervous too` },
-          id: uuidv4(),
-          role: "interviewee",
-          type: "text"
-        },
-        {
-          content: [
-            { enabled: false, value: "", type: "ignore" },
-            { enabled: true, value: "…Do you?", type: "explore" }
-          ],
-          id: uuidv4(),
-          role: "user"
-        },
-        {
-          content: { value: `Yes` },
-          id: uuidv4(),
-          role: "interviewee",
-          type: "text"
-        },
-        {
-          content: [
-            { enabled: false, value: "", type: "ignore" },
-            {
-              enabled: true,
-              value: "Why do you feel nervous?",
-              type: "explore"
-            }
-          ],
-          id: uuidv4(),
-          role: "user"
-        },
-        {
-          content: { value: `I've never met anyone new before` },
-          id: uuidv4(),
-          role: "interviewee",
-          type: "text"
-        },
-        {
-          content: { value: ` Only Nathan` },
-          id: uuidv4(),
-          role: "interviewee",
-          type: "text"
-        },
-        {
-          content: [
-            { enabled: true, value: "Skip this", type: "ignore" },
-            {
-              enabled: true,
-              value: "Same here",
-              type: "explore"
-            }
-          ],
-          id: uuidv4(),
-          role: "user"
-        },
-        {
-          content: { value: `Haven't you met lots of new people before?` },
-          id: uuidv4(),
-          role: "interviewee",
-          type: "text"
-        },
-        {
-          content: [
-            { enabled: false, value: "", type: "ignore" },
-            { enabled: true, value: "None like you", type: "explore" }
-          ],
-          id: uuidv4(),
-          role: "user"
-        },
-        {
-          content: { value: `Oh` },
-          id: uuidv4(),
-          role: "interviewee",
-          type: "text"
-        },
-        {
           content: {
-            value: `<iframe width="560" height="315" src="https://www.youtube.com/embed/XYGzRB4Pnq8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`
+            value: `Having the same story for two different characters is confusing`
           },
           id: uuidv4(),
           role: "interviewee",
-          type: "embed"
+          type: "text"
+        },
+        {
+          content: [
+            { enabled: false, value: "", type: "ignore" },
+            { enabled: true, value: "I agree", type: "explore" }
+          ],
+          id: uuidv4(),
+          role: "user"
+        },
+        {
+          content: {
+            value: `So I shall better edit this story to have characters bore you with differening messages`
+          },
+          id: uuidv4(),
+          role: "interviewee",
+          type: "text"
+        },
+        {
+          content: [
+            { enabled: false, value: "", type: "ignore" },
+            { enabled: true, value: "Cool. What next?", type: "explore" }
+          ],
+          id: uuidv4(),
+          role: "user"
+        },
+        {
+          content: {
+            value: `Next I’ll try to figure out if I can switch between the two storylines and having those updated in the chat view, as the thing doesn’t seem to be doing it at the moment.`
+          },
+          id: uuidv4(),
+          role: "interviewee",
+          type: "text"
+        },
+        {
+          content: [
+            { enabled: false, value: "", type: "ignore" },
+            {
+              enabled: true,
+              value: "Did you try editing Chat.js?",
+              type: "explore"
+            }
+          ],
+          id: uuidv4(),
+          role: "user"
+        },
+        {
+          content: { value: `No` },
+          id: uuidv4(),
+          role: "interviewee",
+          type: "text"
+        },
+        {
+          content: { value: `That’s exactly what I’m gonna do now.` },
+          id: uuidv4(),
+          role: "interviewee",
+          type: "text"
+        },
+        {
+          content: [
+            { enabled: false, value: "", type: "ignore" },
+            {
+              enabled: true,
+              value: "Good luck.",
+              type: "explore"
+            }
+          ],
+          id: uuidv4(),
+          role: "user"
+        },
+        {
+          content: { value: `Thanks` },
+          id: uuidv4(),
+          role: "interviewee",
+          type: "text"
         },
         {
           content: [

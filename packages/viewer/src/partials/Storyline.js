@@ -1,5 +1,5 @@
 /* eslint react/no-danger: 0 */
-import { array, arrayOf, func, object, shape } from "prop-types";
+import { array, arrayOf, bool, func, object, shape } from "prop-types";
 import css from "styled-components";
 import React, { Component } from "react";
 import { withRouter } from "react-router";
@@ -31,6 +31,9 @@ const StorylineEl = css(Container)`
   & > * {
     ${setSpace("mvm")};
   }
+  & > *:last-child {
+    margin-bottom: 0;
+  }
 `;
 
 const Push = css.div`
@@ -44,39 +47,56 @@ class Storyline extends Component {
     super(props);
     this.state = {};
     this.scrollToBottom = this.scrollToBottom.bind(this);
+    this.onBubbleRender = this.onBubbleRender.bind(this);
   }
   componentDidMount() {
-    setTimeout(this.scrollToBottom, 300);
+    this.scrollToBottom("instant");
+    setTimeout(() => this.scrollToBottom("instant"), 300);
   }
   componentDidUpdate() {
+    return this.props.history && this.props.history.length === 0
+      ? this.props.initHistory()
+      : null;
+  }
+  onBubbleRender() {
     setTimeout(this.scrollToBottom, 0);
     setTimeout(this.scrollToBottom, 350);
     setTimeout(this.scrollToBottom, 700);
     setTimeout(this.scrollToBottom, 1050);
     setTimeout(this.scrollToBottom, 1400);
+    this.props.onBubbleRender();
   }
-  scrollToBottom() {
+  scrollToBottom(behaviour) {
     return this.anchor
       ? this.anchor.scrollIntoView({
-          behavior: "smooth",
+          behavior: behaviour || "smooth",
           block: "end",
           inline: "end"
         })
       : null;
   }
   render() {
-    const { storyline, history, interviewee, story } = this.props;
+    const {
+      replayCachedHistory,
+      storyline,
+      history,
+      interviewee,
+      story
+    } = this.props;
+
+    const animateAndDelay = !replayCachedHistory;
 
     const renderIntervieweeBubble = (data) => {
       const { content, type } = data;
       if (type === "text") {
         return (
           <Bubble
+            animated={animateAndDelay}
+            loading={animateAndDelay}
+            delay={animateAndDelay ? 350 : null}
             persona="interviewee"
-            type="plain"
             theme={{ backg: interviewee.color }}
-            animated
-            delay={350}
+            type="plain"
           >
             {content.value}
           </Bubble>
@@ -84,8 +104,9 @@ class Storyline extends Component {
       } else if (type === "link") {
         return (
           <Bubble
-            animated
-            delay={350}
+            animated={animateAndDelay}
+            loading={animateAndDelay}
+            delay={animateAndDelay ? 350 : null}
             persona="interviewee"
             theme={{ backg: interviewee.color }}
             type="plain"
@@ -98,8 +119,9 @@ class Storyline extends Component {
       } else if (type === "image") {
         return (
           <Bubble
-            animated
-            delay={350}
+            animated={animateAndDelay}
+            loading={animateAndDelay}
+            delay={animateAndDelay ? 350 : null}
             persona="interviewee"
             theme={{ backg: interviewee.color }}
             type="rich"
@@ -110,8 +132,9 @@ class Storyline extends Component {
       } else if (type === "embed") {
         return (
           <Bubble
-            animated
-            delay={350}
+            animated={animateAndDelay}
+            loading={animateAndDelay}
+            delay={animateAndDelay ? 350 : null}
             persona="interviewee"
             theme={{ backg: interviewee.color }}
             type="embed"
@@ -122,8 +145,9 @@ class Storyline extends Component {
       } else if (type === "map") {
         return (
           <Bubble
-            animated
-            delay={350}
+            animated={animateAndDelay}
+            loading={animateAndDelay}
+            delay={animateAndDelay ? 350 : null}
             persona="interviewee"
             theme={{ backg: interviewee.color }}
             type="embed"
@@ -145,44 +169,33 @@ class Storyline extends Component {
                 const { type } = item;
                 if (type === "switchTo") {
                   return (
-                    <BubbleGroup
-                      key={index}
-                      callback={this.props.onBubbleRender}
-                    >
+                    <BubbleGroup key={index} callback={this.onBubbleRender}>
                       <Bubbles persona="system">
-                        <Bubble
-                          animated
-                          delay={350}
-                          key="intro"
-                          persona="system"
-                        >
+                        <Bubble persona="system">
                           Choose another interviewee to talk to:
                         </Bubble>
-                        {story.interviewees.map((character, i) => (
-                          <Bubble
-                            animated
-                            delay={350 + 350 * (i + 1)}
-                            key={character.name}
-                            persona="system"
-                            onClick={() =>
-                              this.props.router.push(
-                                `/story/chat/${character.id}`
-                              )
-                            }
-                          >
-                            <Avatar image={character.avatar} size="s" />
-                            <Separator dir="v" size="x" silent />
-                            <Action
-                              onClick={() =>
-                                this.props.router.push(
-                                  `/story/chat/${character.id}`
-                                )
-                              }
-                            >
-                              {character.name}
-                            </Action>
-                          </Bubble>
-                        ))}
+                        {story.interviewees.map(
+                          (character, i) =>
+                            character.id !== this.props.currentIntervieweeId ? (
+                              <Bubble
+                                key={character.name}
+                                persona="system"
+                                onClick={() =>
+                                  this.props.switchChat(character.id)
+                                }
+                              >
+                                <Avatar image={character.avatar} size="s" />
+                                <Separator dir="v" size="x" silent />
+                                <Action
+                                  onClick={() =>
+                                    this.props.switchChat(character.id)
+                                  }
+                                >
+                                  {character.name}
+                                </Action>
+                              </Bubble>
+                            ) : null
+                        )}
                       </Bubbles>
                     </BubbleGroup>
                   );
@@ -190,27 +203,12 @@ class Storyline extends Component {
                 return null;
               } else if (role === "user") {
                 const { type } = item;
-                if (type === "nvm") {
+                if (type === "emoji") {
                   const { value } = item;
                   return (
-                    <BubbleGroup
-                      key={index}
-                      callback={this.props.onBubbleRender}
-                    >
+                    <BubbleGroup key={index} callback={this.onBubbleRender}>
                       <Bubbles persona="user">
-                        <Bubble persona="user">{value}</Bubble>
-                      </Bubbles>
-                    </BubbleGroup>
-                  );
-                } else if (type === "emoji") {
-                  const { value } = item;
-                  return (
-                    <BubbleGroup
-                      key={index}
-                      callback={this.props.onBubbleRender}
-                    >
-                      <Bubbles persona="user">
-                        <Bubble persona="user">
+                        <Bubble persona="user" animated={animateAndDelay}>
                           <Icon name={value} />
                         </Bubble>
                       </Bubbles>
@@ -219,11 +217,8 @@ class Storyline extends Component {
                 } else if (type === "diss") {
                   const { value } = item;
                   return (
-                    <BubbleGroup
-                      key={index}
-                      callback={this.props.onBubbleRender}
-                    >
-                      <Bubbles persona="user">
+                    <BubbleGroup key={index} callback={this.onBubbleRender}>
+                      <Bubbles persona="user" animated={animateAndDelay}>
                         <Bubble persona="user">{value}</Bubble>
                       </Bubbles>
                     </BubbleGroup>
@@ -231,12 +226,9 @@ class Storyline extends Component {
                 } else if (type === "action") {
                   const { i, value } = item;
                   return (
-                    <BubbleGroup
-                      key={index}
-                      callback={this.props.onBubbleRender}
-                    >
+                    <BubbleGroup key={index} callback={this.onBubbleRender}>
                       <Bubbles persona="user">
-                        <Bubble persona="user">
+                        <Bubble persona="user" animated={animateAndDelay}>
                           {storyline[i].content[value].value}
                         </Bubble>
                       </Bubbles>
@@ -247,7 +239,7 @@ class Storyline extends Component {
               }
               const { i } = item;
               return (
-                <BubbleGroup key={index} callback={this.props.onBubbleRender}>
+                <BubbleGroup key={index} callback={this.onBubbleRender}>
                   <Bubbles persona="interviewee">
                     {renderIntervieweeBubble(storyline[i])}
                   </Bubbles>
@@ -266,7 +258,9 @@ class Storyline extends Component {
 }
 
 Storyline.propTypes = {
+  replayCachedHistory: bool,
   history: arrayOf(object),
+  updateHistory: func.isRequired,
   onBubbleRender: func.isRequired,
   interviewee: shape({
     storyline: array.isRequired
@@ -278,6 +272,7 @@ Storyline.propTypes = {
 };
 
 Storyline.defaultProps = {
+  replayCachedHistory: true,
   history: [],
   storyline: [],
   story: {}
