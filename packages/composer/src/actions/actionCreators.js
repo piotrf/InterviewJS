@@ -1,4 +1,5 @@
 import uuidv4 from "uuid/v4";
+import Raven from "raven-js";
 import { base } from "../configureStore";
 
 export function createStory({
@@ -158,7 +159,6 @@ export function signOutUser() {
 }
 
 export function noop() {
-  console.log("NOOP");
   return {
     type: "NOOP"
   };
@@ -170,19 +170,17 @@ export function syncFirebaseStories(uid) {
   return (dispatch) => {
     dispatch(noop());
 
-    console.log(`stories-${NAMESPACE}/${uid}`);
     base
       .fetch(`stories-${NAMESPACE}/${uid}/`, {
         asArray: true
       })
       .then((data) => {
-        console.log(data);
         data.forEach((story) => {
           dispatch(syncStory(story));
         });
       })
       .catch((error) => {
-        console.log(error);
+        Raven.captureException(error);
       });
 
     return {

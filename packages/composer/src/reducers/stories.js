@@ -39,8 +39,10 @@ function stories(state = [], action) {
 
     case "SYNC_STORY":
       console.log("sync/update a story");
+      if (!payload.poll) payload.poll = [];
       const prevStory = state.find((story) => story.id === payload.id);
       if (!prevStory) return [payload, ...state];
+
       return state.map((story) => {
         if (story.id === payload.id && payload.version > story.version)
           return payload;
