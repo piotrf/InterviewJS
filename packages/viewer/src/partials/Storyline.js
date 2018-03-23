@@ -45,18 +45,22 @@ const Push = css.div`
 class Storyline extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      replayCachedHistory: true
+    };
     this.scrollToBottom = this.scrollToBottom.bind(this);
     this.onBubbleRender = this.onBubbleRender.bind(this);
   }
   componentDidMount() {
     this.scrollToBottom("instant");
     setTimeout(() => this.scrollToBottom("instant"), 300);
+    this.setState({ replayCachedHistory: false });
   }
-  componentDidUpdate() {
-    return this.props.history && this.props.history.length === 0
-      ? this.props.initHistory()
-      : null;
+  componentDidUpdate(prevProps) {
+    if (this.props.history && this.props.history.length === 0) {
+      this.props.initHistory();
+    }
+    return null;
   }
   onBubbleRender() {
     setTimeout(this.scrollToBottom, 0);
@@ -76,13 +80,10 @@ class Storyline extends Component {
       : null;
   }
   render() {
-    const {
-      replayCachedHistory,
-      storyline,
-      history,
-      interviewee,
-      story
-    } = this.props;
+    const { storyline, history, interviewee, story } = this.props;
+    const { replayCachedHistory } = this.state;
+
+    console.log(this.state);
 
     const animateAndDelay = !replayCachedHistory;
 
@@ -258,7 +259,7 @@ class Storyline extends Component {
 }
 
 Storyline.propTypes = {
-  replayCachedHistory: bool,
+  // replayCachedHistory: bool,
   history: arrayOf(object),
   updateHistory: func.isRequired,
   onBubbleRender: func.isRequired,
@@ -272,7 +273,7 @@ Storyline.propTypes = {
 };
 
 Storyline.defaultProps = {
-  replayCachedHistory: true,
+  // replayCachedHistory: true,
   history: [],
   storyline: [],
   story: {}
