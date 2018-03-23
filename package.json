@@ -12,7 +12,6 @@
     "lerna": "^2.9.0"
   },
   "workspaces": {
-    "packages": ["packages/*"],
-    "nohoist": []
+    "packages": ["packages/*"]
   }
 }
