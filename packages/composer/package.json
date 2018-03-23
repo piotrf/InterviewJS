@@ -5,6 +5,7 @@
   "author": "",
   "homepage": "https://www.interviewjs.io/my/",
   "dependencies": {
+    "clone": "^1.0.4",
     "date-fns": "^1.29.0",
     "firebase": "^4.11.0",
     "interviewjs-styleguide": "*",
