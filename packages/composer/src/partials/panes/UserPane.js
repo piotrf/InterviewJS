@@ -295,7 +295,6 @@ export default class UserPane extends React.Component {
               >
                 {continueVal}
               </Action>
-              {enableExplore && enableContinue ? <Separator dir="v" /> : null}
               {enableExplore ? (
                 <Action fixed primary>
                   {exploreVal}
