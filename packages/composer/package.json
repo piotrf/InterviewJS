@@ -9,6 +9,7 @@
     "firebase": "^4.11.0",
     "interviewjs-styleguide": "*",
     "lodash": "^4.17.5",
+    "pica": "^4.0.2",
     "prop-types": "15.6.1",
     "raven-for-redux": "^1.3.0",
     "raven-js": "^3.23.3",
