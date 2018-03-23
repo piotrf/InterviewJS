@@ -10,6 +10,9 @@ import {
 } from "interviewjs-styleguide";
 import PaneFrame from "../PaneFrame";
 
+import { filterIframe } from "../../../util/IframeSanitizer";
+
+
 export default class MediaPane extends Component {
   constructor(props) {
     super(props);
@@ -18,6 +21,7 @@ export default class MediaPane extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
   }
+
   componentWillReceiveProps(nextProps) {
     const { draft } = nextProps;
     if (draft !== this.props.draft) {
@@ -25,23 +29,29 @@ export default class MediaPane extends Component {
     }
     return null;
   }
+
   handleChange(e) {
     const { name, value } = e.target;
+    const clean = filterIframe(value);
+    console.log(clean);
+
     this.setState({ draft: { ...this.state.draft, [name]: value } }, () =>
-      this.props.updateDraft(this.state.draft)
+      this.props.updateDraft(this.state.draft, clean)
     );
   }
+
   render() {
     const { value } = this.state.draft;
+    const clean = filterIframe(value);
 
     const renderDraft = () => {
       if (value.length > 0) {
-        return value.toLowerCase().startsWith("<iframe") &&
-          value.toLowerCase().includes("src=") &&
-          value.toLowerCase().includes("youtube.com/embed/") &&
-          value.toLowerCase().endsWith("></iframe>") ? (
+        return clean.toLowerCase().startsWith("<iframe") &&
+          clean.toLowerCase().includes("src=") &&
+          clean.toLowerCase().includes("youtube.com/embed/") &&
+          clean.toLowerCase().endsWith("></iframe>") ? (
           <BubbleHTMLWrapper type="embed">
-            <div dangerouslySetInnerHTML={{ __html: value }} />
+            <div dangerouslySetInnerHTML={{ __html: clean }} />
           </BubbleHTMLWrapper>
         ) : (
           <BubbleHTMLWrapper>
