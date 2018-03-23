@@ -9,10 +9,10 @@ import {
   BubbleGroup,
   BubbleHTMLWrapper,
   Bubbles,
-  color,
+  Container,
   Icon,
+  color,
   radius,
-  Separator,
   setSpace,
   skin
 } from "interviewjs-styleguide";
@@ -33,6 +33,16 @@ const BubbleEdit = css.div`
       : `
     right: 100%;
   `}
+`;
+
+const UserButtons = css(Container)`
+  justify-content: flex-end;
+  align-items: flex-end;
+  align-content: flex-end;
+  width: 100%;
+  & > * {
+    ${setSpace("mlx")}
+  }
 `;
 const StorylineEl = css.div`
   ${setSpace("phl")};
@@ -143,16 +153,23 @@ export default class Storyline extends React.Component {
     const renderUserBubble = (data) => {
       const { content, role } = data;
       return (
-        <Bubble persona={role} theme={{ backg: skin.speakerBackg }}>
-          {content[0].enabled ? (
-            <Action tone="negative">{content[0].value}</Action>
-          ) : null}
-          {content[0].enabled && content[1].enabled ? (
-            <Separator dir="v" size="m" />
-          ) : null}
-          {content[1].enabled ? (
-            <Action tone="positive">{content[1].value}</Action>
-          ) : null}
+        <Bubble persona={role} theme={{ backg: skin.speakerBackg }} plain>
+          <UserButtons dir="row">
+            {content[0].enabled ? (
+              <Action
+                primary={!content[1].enabled}
+                secondary={!!content[1].enabled}
+                fixed
+              >
+                {content[0].value}
+              </Action>
+            ) : null}
+            {content[1].enabled ? (
+              <Action primary fixed>
+                {content[1].value}
+              </Action>
+            ) : null}
+          </UserButtons>
         </Bubble>
       );
     };
@@ -203,7 +220,11 @@ export default class Storyline extends React.Component {
             theme={{ backg: interviewee.color }}
           >
             <BubbleHTMLWrapper>
-              <div dangerouslySetInnerHTML={{ __html: filterIframe(content.value) }} />
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: filterIframe(content.value)
+                }}
+              />
             </BubbleHTMLWrapper>
           </Bubble>
         );
@@ -215,7 +236,11 @@ export default class Storyline extends React.Component {
             theme={{ backg: interviewee.color }}
           >
             <BubbleHTMLWrapper>
-              <div dangerouslySetInnerHTML={{ __html: filterIframe(content.value) }} />
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: filterIframe(content.value)
+                }}
+              />
             </BubbleHTMLWrapper>
           </Bubble>
         );

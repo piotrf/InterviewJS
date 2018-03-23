@@ -1,17 +1,4 @@
 const USER_ACTIONS = {
-  ignore: [
-    "Not interested",
-    "Next",
-    "I don’t care",
-    "Gimme something else",
-    "Ugh",
-    "tl;dr",
-    "Whatever",
-    "Skip this",
-    "I don’t want to hear about this",
-    "Unamused",
-    "Oh please"
-  ],
   explore: {
     text: [
       "Carry on",

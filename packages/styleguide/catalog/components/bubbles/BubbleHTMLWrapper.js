@@ -9,7 +9,6 @@ import ratioSpacer from "./ratioSpacer.png";
 const BubbleHTMLWrapperEl = css.div`
   ${setType("x")};
   border-radius: ${radius.m};
-  overflow: hidden;
   & > img {
     height: 100%;
     width: 100%;
