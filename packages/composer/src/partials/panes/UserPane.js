@@ -243,6 +243,8 @@ export default class UserPane extends React.Component {
     };
     this.props.addStorylineItem(storyIndex, currentInterviewee, newUserBubble);
     this.setState({
+      customContinueVal: "",
+      customSkipVal: "",
       enableSkip: false,
       continueLibItem: null,
       continueVal: this.props.continueVal,
