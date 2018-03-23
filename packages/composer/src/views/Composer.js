@@ -33,7 +33,7 @@ const Page = css.div`
   margin-left: auto;
   margin-right: auto;
   max-width: 1400px;
-  ${breakpoint.tablet} {
+  ${breakpoint.desktop} {
     display: flex;
   }
 `;
@@ -131,7 +131,11 @@ export default class ComposerView extends React.Component {
                 <Icon
                   name="info2"
                   size="s"
-                  style={{ position: "relative", top: "1px", marginRight: "2px" }}
+                  style={{
+                    position: "relative",
+                    top: "1px",
+                    marginRight: "2px"
+                  }}
                 />
                 {` `}Story elements
               </Action>
@@ -163,7 +167,9 @@ export default class ComposerView extends React.Component {
                 storyIndex={storyIndex}
                 switchInterviewee={this.switchInterviewee}
                 toggleBubbleEdit={this.toggleBubbleEdit}
-                toggleDetailsModal={() => this.toggleDetailsModal("interviewees")}
+                toggleDetailsModal={() =>
+                  this.toggleDetailsModal("interviewees")
+                }
               />
             </Container>
             <Container flex={[1, 1, `${100 / 3}%`]}>
