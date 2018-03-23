@@ -27,10 +27,8 @@ const defaultState = {
   user
 };
 
-const localhost = document.location.hostname === "localhost";
-
 // Sentry.io
-if (! localhost) Raven.config("https://796f1032b1c74f15aba70d91dfcd14c5@sentry.io/360335", {
+Raven.config("https://796f1032b1c74f15aba70d91dfcd14c5@sentry.io/360335", {
   release: process.env.VERSION
 }).install();
 
@@ -57,8 +55,13 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const enhancers = localhost ? compose(applyMiddleware(thunkMiddleware), window.devToolsExtension ? window.devToolsExtension() : (f) => f) : compose(
-  applyMiddleware(createRavenMiddleware(Raven, {}), thunkMiddleware), window.devToolsExtension ? window.devToolsExtension() : (f) => f);
+const enhancers = compose(
+  applyMiddleware(
+    createRavenMiddleware(Raven, {}),
+    thunkMiddleware
+  ),
+  window.devToolsExtension ? window.devToolsExtension() : (f) => f,
+);
 
 let store;
 switch (STORE) {
