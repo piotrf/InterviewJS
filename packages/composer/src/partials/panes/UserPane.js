@@ -6,15 +6,13 @@ import {
   Action,
   Checkbox,
   Container,
-  Form,
-  FormItem,
   Icon,
-  Legend,
   PageSubtitle,
   PaneTab,
   PaneTabs,
   Separator,
   TextInput,
+  Tip,
   color,
   font,
   radius,
@@ -53,33 +51,58 @@ const UserAction = css(Container)`
   right: 0;
   bottom: 0;
   width: 100%;
-  & > div:first-child {
+  & > div {
     border-radius: 0 ${radius.l} ${radius.l} 0;
   }
+  & > div:last-child {
+    border-left: 1px solid ${color.greyHL};
+  }
   & label {
+    align-content: center;
+    align-items: center;
+    bottom: 0;
+    display: flex;
+    flex-direction: row;
     font-weight: bold;
+    justify-content: center;
+    left: 0;
     padding: 0;
+    position: absolute;
+    top: 0;
+    width: 140px;
+    with: 100%;
     &:before {
-      ${setSpace("mts")};
-      background: ${color.white};
-      border-color: ${color.greyHL};
+      content: '';
+      border-width: 1px 0 1px 1px;
       border-radius: ${radius.s} 0 0 ${radius.s};
       border-style: solid;
-      border-width: 1px 0 1px 1px;
-      content: ' ';
+      border-color: ${color.greyHL};
+      background: ${color.white};
       height: 48px;
-      right: 100%;
-      position: absolute;
-      top: 0;
       width: 30px;
-      z-index: 2;
+      position: absolute;
+      left: -31px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 0;
     }
   };
   & label > span {
-    margin-left: -20px;
-    margin-top: 2px;
-    position: absolute;
-    z-index: 5;
+    left: -19px;
+  }
+  ${PaneTabs} {
+    width: 100%;
+    position: relative;
+    & li {
+      display: inline-block;
+    }
+    & button {
+      ${setSpace("phn")};
+      ${setSpace("pvx")};
+    }
+  }
+  ${PageSubtitle} {
+    color: ${({ active }) => (active ? color.blueBlk : color.greyBlk)};
   }
 `;
 
@@ -91,20 +114,6 @@ const ActionLibHolder = css(Container)`
 const ActionLibList = css.ul`
   display: block;
   text-align: center;
-  ${PaneTabs} {
-    transform: translateY(-1px);
-    border-radius: 0 ${radius.l} 0 0;
-    & button {
-      ${setSpace("phn")};
-      ${setSpace("pvx")};
-    }
-    & > li:last-child {
-      border-radius: 0 ${radius.l} 0 0;
-      button {
-        border-radius: 0 ${radius.l} 0 0;
-      }
-    }
-  }
 `;
 const ActionLibItem = css.li`
   ${setSpace("phs")};
@@ -143,6 +152,16 @@ const ActionLibAction = css.button`
       : ``}
 `;
 
+const CustomActionHolder = css(Container)`
+  ${setSpace("phs")};
+  width: 100%;
+  input {
+    ${setSpace("pvn")};
+    ${setSpace("phx")};
+    height: 34px;
+  }
+`;
+
 const Draft = css.div`
   align-content: center;
   align-items: center;
@@ -157,14 +176,6 @@ const Draft = css.div`
   }
 `;
 
-const Whatever = css.div`
-  ${setSpace("mhm")};
-  ${setSpace("mbm")};
-`;
-const SkipTitle = css(PageSubtitle)`
-  color: ${({ active }) => (active ? color.blueBlk : color.greyBlk)};
-`;
-
 export default class UserPane extends React.Component {
   constructor(props) {
     super(props);
@@ -172,7 +183,7 @@ export default class UserPane extends React.Component {
       continueDict: "text",
       continueLibDict: "text",
       continueLibItem: null,
-      continueVal: "Continue",
+      continueVal: "Explore",
       customContinueVal: "",
       customSkipVal: "",
       enableContinue: true,
@@ -182,8 +193,8 @@ export default class UserPane extends React.Component {
     };
     this.addStorylineItem = this.addStorylineItem.bind(this);
     this.customiseActionLabel = this.customiseActionLabel.bind(this);
-    this.selectExploreAction = this.selectExploreAction.bind(this);
-    this.selectIgnoreAction = this.selectIgnoreAction.bind(this);
+    this.selectContinueAction = this.selectContinueAction.bind(this);
+    this.selectSkipAction = this.selectSkipAction.bind(this);
     this.toggleAction = this.toggleAction.bind(this);
   }
   toggleAction(action, e) {
@@ -204,7 +215,7 @@ export default class UserPane extends React.Component {
           continueVal: value.length > 0 ? value : this.props.continueVal
         });
   }
-  selectIgnoreAction(i, e) {
+  selectSkipAction(i, e) {
     this.setState({
       customSkipVal: e.target.innerHTML,
       enableSkip: true,
@@ -212,7 +223,7 @@ export default class UserPane extends React.Component {
       skipVal: e.target.innerHTML
     });
   }
-  selectExploreAction(dict, i, e) {
+  selectContinueAction(dict, i, e) {
     this.setState({
       customContinueVal: e.target.innerHTML,
       continueLibDict: dict,
@@ -232,11 +243,11 @@ export default class UserPane extends React.Component {
     };
     this.props.addStorylineItem(storyIndex, currentInterviewee, newUserBubble);
     this.setState({
-      continueLibItem: null,
-      continueVal: this.props.continueVal,
       customContinueVal: "",
       customSkipVal: "",
       enableSkip: false,
+      continueLibItem: null,
+      continueVal: this.props.continueVal,
       skipLibItem: null,
       skipVal: this.props.skipVal
     });
@@ -276,101 +287,80 @@ export default class UserPane extends React.Component {
         >
           <UserActions>
             <Container>
-              <UserAction dir="column">
-                <Container flex={[1, 1, "auto"]} padded>
-                  <Container align="center">
-                    <PageSubtitle typo="p1">Continue Action</PageSubtitle>
-                  </Container>
-                  <Separator silent size="s" />
-                  <Form onSubmit={(e) => e.preventDefault()}>
-                    <FormItem>
-                      {/* <Label>Custom action text</Label> */}
-                      <TextInput
-                        type="text"
-                        placeholder="Type your own text label…"
-                        maxLength={34}
-                        disabled={!enableContinue}
-                        value={this.state.customContinueVal}
-                        onChange={(e) =>
-                          this.customiseActionLabel("customContinueVal", e)
-                        }
+              <UserAction dir="row" active>
+                <Container flex={[0, 0, "140px"]} align="center" dir="column">
+                  <PageSubtitle typo="p4">
+                    Continue
+                    <Tip
+                      position="bottom"
+                      title="`Explore` actions allow the reader to move on to the next interviewee bubble, simply continue in the story."
+                    >
+                      <Icon
+                        name="info2"
+                        style={{
+                          color: color.greyBlk,
+                          marginLeft: "5px",
+                          position: "relative",
+                          top: "2px"
+                        }}
                       />
-                      <Legend tip="`Continue` action will let the reader move on to the next interviewee bubble.">
-                        i
-                      </Legend>
-                    </FormItem>
-                  </Form>
+                    </Tip>
+                  </PageSubtitle>
                 </Container>
-                <Container flex={[0, 1, "100%"]} dir="column" fill="grey">
-                  <ActionLibHolder flex={[1, 1, "auto"]}>
+                <Container flex={[2, 2, "auto"]} fill="grey" dir="column">
+                  <CustomActionHolder flex={[0, 0, "50px"]} dir="column">
+                    <TextInput
+                      type="text"
+                      placeholder="Type your own text label…"
+                      maxLength={34}
+                      disabled={!enableContinue}
+                      value={this.state.customContinueVal}
+                      onChange={(e) =>
+                        this.customiseActionLabel("customContinueVal", e)
+                      }
+                    />
+                  </CustomActionHolder>
+                  <Container flex={[1, 0, "auto"]} style={{ width: "100%" }}>
                     <PaneTabs>
                       <PaneTab
                         active={continueDict === "text"}
-                        disabled={!enableContinue}
-                        onClick={
-                          enableContinue
-                            ? () => this.setState({ continueDict: "text" })
-                            : null
-                        }
+                        onClick={() => this.setState({ continueDict: "text" })}
                       >
                         <Icon name="text" size="x" />
                       </PaneTab>
                       <PaneTab
                         active={continueDict === "link"}
-                        disabled={!enableContinue}
-                        onClick={
-                          enableContinue
-                            ? () => this.setState({ continueDict: "link" })
-                            : null
-                        }
+                        onClick={() => this.setState({ continueDict: "link" })}
                       >
                         <Icon name="link" size="x" />
                       </PaneTab>
                       <PaneTab
                         active={continueDict === "image"}
-                        disabled={!enableContinue}
-                        onClick={
-                          enableContinue
-                            ? () => this.setState({ continueDict: "image" })
-                            : null
-                        }
+                        onClick={() => this.setState({ continueDict: "image" })}
                       >
                         <Icon name="image" size="x" />
                       </PaneTab>
                       <PaneTab
                         active={continueDict === "embed"}
-                        disabled={!enableContinue}
-                        onClick={
-                          enableContinue
-                            ? () => this.setState({ continueDict: "embed" })
-                            : null
-                        }
+                        onClick={() => this.setState({ continueDict: "embed" })}
                       >
                         <Icon name="embed" size="x" />
                       </PaneTab>
                       <PaneTab
                         active={continueDict === "map"}
-                        disabled={!enableContinue}
-                        onClick={
-                          enableContinue
-                            ? () => this.setState({ continueDict: "map" })
-                            : null
-                        }
+                        onClick={() => this.setState({ continueDict: "map" })}
                       >
                         <Icon name="map" size="x" />
                       </PaneTab>
                       <PaneTab
                         active={continueDict === "media"}
-                        disabled={!enableContinue}
-                        onClick={
-                          enableContinue
-                            ? () => this.setState({ continueDict: "media" })
-                            : null
-                        }
+                        onClick={() => this.setState({ continueDict: "media" })}
                       >
                         <Icon name="media" size="x" />
                       </PaneTab>
                     </PaneTabs>
+                  </Container>
+                  <ActionLibHolder flex={[1, 1, "auto"]}>
                     <ActionLibList>
                       {USER_ACTIONS.explore[continueDict].map((action, i) => (
                         <ActionLibItem key={i}>
@@ -383,7 +373,7 @@ export default class UserPane extends React.Component {
                             }
                             onClick={(e) =>
                               enableContinue
-                                ? this.selectExploreAction(continueDict, i, e)
+                                ? this.selectContinueAction(continueDict, i, e)
                                 : null
                             }
                           >
@@ -398,47 +388,52 @@ export default class UserPane extends React.Component {
             </Container>
             <Separator silent size="s" />
             <Container>
-              <UserAction dir="column">
-                <Checkbox
-                  checked={enableSkip}
-                  onChange={(e) => this.toggleAction("enableSkip", e)}
-                >
-                  <Container align="center" padded>
-                    <SkipTitle typo="p1" active={this.state.enableSkip}>
-                      Skip Action
-                    </SkipTitle>
-                  </Container>
-                </Checkbox>
-                <Whatever flex={[1, 1, "auto"]}>
-                  <Form onSubmit={(e) => e.preventDefault()}>
-                    <FormItem>
-                      <TextInput
-                        type="text"
-                        placeholder="Type your own text label…"
-                        maxLength={34}
-                        value={this.state.customSkipVal}
-                        onChange={(e) =>
-                          this.customiseActionLabel("customSkipVal", e)
-                        }
-                      />
-                      <Legend tip="`Skip` action will allow the reader to skip the next closest bubble.">
-                        i
-                      </Legend>
-                    </FormItem>
-                  </Form>
-                </Whatever>
-                <Separator size="n" />
-                <Container flex={[0, 1, "100%"]} dir="column" fill="grey">
+              <UserAction dir="row" active={enableSkip}>
+                <Container flex={[0, 0, "140px"]} align="center" dir="column">
+                  <Checkbox
+                    checked={enableSkip}
+                    onChange={(e) => this.toggleAction("enableSkip", e)}
+                  >
+                    <PageSubtitle typo="p4">
+                      Skip
+                      <Tip
+                        position="bottom"
+                        title="`Ignore` actions allow the reader to skip the closest next group of interviewee bubbles. Use when nesting chats."
+                      >
+                        <Icon
+                          name="info2"
+                          style={{
+                            color: color.greyBlk,
+                            marginLeft: "5px",
+                            position: "relative",
+                            top: "2px"
+                          }}
+                        />
+                      </Tip>
+                    </PageSubtitle>
+                  </Checkbox>
+                </Container>
+                <Container flex={[2, 2, "auto"]} fill="grey" dir="column">
+                  <CustomActionHolder flex={[0, 0, "50px"]} dir="column">
+                    <TextInput
+                      type="text"
+                      placeholder="Type your own text label…"
+                      maxLength={34}
+                      value={this.state.customSkipVal}
+                      onChange={(e) =>
+                        this.customiseActionLabel("customSkipVal", e)
+                      }
+                    />
+                  </CustomActionHolder>
+                  <Separator size="n" />
                   <ActionLibHolder flex={[1, 1, "auto"]}>
                     <ActionLibList>
                       {USER_ACTIONS.ignore.map((action, i) => (
                         <ActionLibItem key={i}>
                           <ActionLibAction
-                            active={
-                              enableSkip ? i === this.state.skipLibItem : false
-                            }
+                            active={i === this.state.skipLibItem}
                             interactive
-                            onClick={(e) => this.selectIgnoreAction(i, e)}
+                            onClick={(e) => this.selectSkipAction(i, e)}
                           >
                             {action}
                           </ActionLibAction>
@@ -446,7 +441,6 @@ export default class UserPane extends React.Component {
                       ))}
                     </ActionLibList>
                   </ActionLibHolder>
-                  <Separator size="n" />
                 </Container>
               </UserAction>
             </Container>
@@ -466,6 +460,6 @@ UserPane.propTypes = {
 };
 
 UserPane.defaultProps = {
-  skipVal: "Ignore",
-  continueVal: "Explore"
+  skipVal: "Skip",
+  continueVal: "Continue"
 };
