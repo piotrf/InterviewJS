@@ -206,7 +206,7 @@ export default class UserPane extends React.Component {
   }
   selectIgnoreAction(i, e) {
     this.setState({
-      customSkipVal: "",
+      customSkipVal: e.target.innerHTML,
       enableSkip: true,
       skipLibItem: i,
       skipVal: e.target.innerHTML
