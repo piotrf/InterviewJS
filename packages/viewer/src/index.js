@@ -7,11 +7,13 @@ import { configureStore, history } from "./configureStore";
 
 import App from "./App";
 import Chat from "./views/Chat";
-import Intro from "./views/Intro";
 import Context from "./views/Context";
+import Interviewees from "./views/Interviewees";
+import Intro from "./views/Intro";
 import Listing from "./views/Listing";
 import Outro from "./views/Outro";
-import Details from "./views/Details";
+import Poll from "./views/Poll";
+import Results from "./views/Results";
 
 const store = configureStore();
 
@@ -30,16 +32,22 @@ class Routes extends React.Component {
 
   render() {
     return (
-      <Router key="Root" history={history}>
-        <Route path="/intro" component={App}>
+      <Router
+        onUpdate={() => window.scrollTo(0, 0)}
+        key="Root"
+        history={history}
+      >
+        <Route path="/story" component={App}>
           <IndexRoute component={Intro} />
-          <Route path="/interviewees" component={Listing} />
-          <Route path="/chat" component={Chat} />
-          <Route path="/context" component={Context} />
-          <Route path="/outro" component={Outro} />
-          <Route path="/details" component={Details} />
+          <Route path="/story/chat/:chatId" component={Chat} />
+          <Route path="/story/context" component={Context} />
+          <Route path="/story/interviewees" component={Interviewees} />
+          <Route path="/story/listing" component={Listing} />
+          <Route path="/story/outro" component={Outro} />
+          <Route path="/story/poll" component={Poll} />
+          <Route path="/story/results" component={Results} />
         </Route>
-        <Redirect from="*" to="Intro" />
+        <Redirect from="*" to="story" />
       </Router>
     );
   }

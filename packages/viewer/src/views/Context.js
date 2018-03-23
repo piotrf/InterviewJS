@@ -6,41 +6,20 @@ import { object, shape, string } from "prop-types";
 import {
   Action,
   Actionbar,
-  Container,
   PageParagraph,
   PageSubtitle,
-  PageTitle,
   Separator,
-  color,
-  setSpace
+  color
 } from "interviewjs-styleguide";
 
-import { Cover, Topbar } from "../partials";
-
-const Page = css.div`
-  background: ${color.black};
-  color: ${color.white};
-  min-height: 100vh;
-  min-width: 100vw;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-`;
-
-const PageHead = css(Container)`
-  ${setSpace("pbl")};
-  width: 100%;
-`;
-
-const PageBody = css(Container)`
-  ${setSpace("phl")};
-  ${setSpace("pbl")};
-`;
-
-const PageFoot = css(Container)`
-  ${setSpace("phl")};
-  ${setSpace("pbl")};
-`;
+import {
+  Cover,
+  Page,
+  PageBody,
+  PageHead,
+  StoryDetailsModal,
+  Topbar
+} from "../partials";
 
 const Aside = css(PageParagraph)`
   color: ${color.flareHD};
@@ -49,45 +28,51 @@ const Aside = css(PageParagraph)`
 export default class ContextView extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { storyDetailsModal: false };
+    this.toggleDetailsModal = this.toggleDetailsModal.bind(this);
   }
-
+  toggleDetailsModal() {
+    this.setState({ storyDetailsModal: !this.state.storyDetailsModal });
+  }
   render() {
     const { story } = this.props;
     return [
       <Topbar
-        handleDetails={() => this.props.router.push(`/details`)}
-        handleBack={() => this.props.router.push(`/intro`)}
+        handleDetails={this.toggleDetailsModal}
+        handleBack={() => this.props.router.push(`/story`)}
         key="topbar"
       />,
       <Page key="page">
-        <PageHead limit="m" flex={[0, 1, `${100 / 2}%`]}>
-          <Cover image={story.cover}>
-            <PageTitle typo="h1">{story.title}</PageTitle>
-          </Cover>
+        <PageHead flex={[0, 1, `${100 / 2}%`]}>
+          <Cover image={story.cover} compact />
         </PageHead>
-        <PageBody limit="m" flex={[1, 0, `${100 / 4}%`]}>
-          <Container limit="x">
-            <PageSubtitle typo="h4">{story.context}</PageSubtitle>
-            <Separator size="m" silent />
-            <Aside typo="p3">
-              The more people you interview the more information you gather. In
-              the end you’ll get feedback on how well you’ve done.
-            </Aside>
-          </Container>
-        </PageBody>
-        <PageFoot limit="m" flex={[1, 0, `${100 / 4}%`]}>
+        <PageBody limit="x" flex={[1, 0, `${100 / 2}%`]}>
+          <PageSubtitle typo="h4">{story.context}</PageSubtitle>
+          <Separator size="m" silent />
+          <Aside typo="p3">
+            The more people you interview the more information you gather. In
+            the end you’ll get feedback on how well you’ve done.
+          </Aside>
+          <Separator size="l" silent />
           <Actionbar>
             <Action
               fixed
-              onClick={() => this.props.router.push(`/interviewees`)}
+              onClick={() => this.props.router.push(`/story/interviewees`)}
               primary
             >
               Meet your interviewees
             </Action>
           </Actionbar>
-        </PageFoot>
-      </Page>
+        </PageBody>
+      </Page>,
+      this.state.storyDetailsModal ? (
+        <StoryDetailsModal
+          handleClose={this.toggleDetailsModal}
+          isOpen={this.state.storyDetailsModal}
+          key="detailsModal"
+          story={story}
+        />
+      ) : null
     ];
   }
 }

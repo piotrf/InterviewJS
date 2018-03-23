@@ -21,11 +21,9 @@ export default class AuthModal extends React.Component {
     this.state = {};
 
     this.uiConfig = {
-      signInFlow: 'popup',
-      signInSuccessUrl: '/signedIn',
-      signInOptions: [
-        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-      ],
+      signInFlow: "popup",
+      signInSuccessUrl: "/signedIn",
+      signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
       callbacks: {
         signInSuccess: () => false
       }
@@ -34,11 +32,9 @@ export default class AuthModal extends React.Component {
 
   componentDidMount(limit = 10) {
     if (this.auth) {
-      firebase.auth().onAuthStateChanged(
-          (user) => {
-            if (user) this.props.handleAuthentication(user);
-          }
-      );
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) this.props.handleAuthentication(user);
+      });
     } else if (limit > 0) {
       setTimeout(() => this.componentDidMount(limit - 1), 100);
     }
@@ -62,7 +58,7 @@ export default class AuthModal extends React.Component {
                   persona="interviewee"
                   theme={{ backg: color.flareLLt, color: color.white }}
                 >
-                  Welcome to InterviewJS…
+                  Welcome!
                 </Bubble>
                 <Bubble
                   animated
@@ -70,8 +66,8 @@ export default class AuthModal extends React.Component {
                   persona="interviewee"
                   theme={{ backg: color.flareLLt, color: color.white }}
                 >
-                  …an app that allows to compose scripted chats for a more
-                  immersive storytelling experience.
+                  InterviewJS will help you tell interactive stories by 
+                  converting your interviews into a chat experiences.
                 </Bubble>
                 <Bubble
                   animated
@@ -79,14 +75,20 @@ export default class AuthModal extends React.Component {
                   persona="interviewee"
                   theme={{ backg: color.flareLLt, color: color.white }}
                 >
-                  To continue, sign in with your Google Account.
+                  To continue, sign in with your Google account.
                 </Bubble>
               </Bubbles>
             </BubbleGroup>
           </ModalBody>
           <ModalFoot>
             <Animator delay={3000}>
-              <StyledFirebaseAuth uiConfig={this.uiConfig} firebaseAuth={firebase.auth()} ref={(auth) => { this.auth = auth; }} />
+              <StyledFirebaseAuth
+                uiConfig={this.uiConfig}
+                firebaseAuth={firebase.auth()}
+                ref={(auth) => {
+                  this.auth = auth;
+                }}
+              />
             </Animator>
           </ModalFoot>
         </Modal>

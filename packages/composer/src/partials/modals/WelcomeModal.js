@@ -39,9 +39,10 @@ export default class WelcomeModal extends React.Component {
           <ModalBody>
             <Container align="center" limit="m">
               <PageSubtitle typo="h3">
-                InterviewJS allows you to present your interviews in form of a
-                messenger-like app where the reader interacts directly with your
-                interviewees. It puts people at the heart of the experience.
+                The InterviewJS app is designed for longform storytelling, 
+                features, and investigations.  Strong interviews with different 
+                points of view work well. You can also embed photos, video, and 
+                other multimedia links.
               </PageSubtitle>
               <Separator size="m" silent />
               <Container align="center" limit="s">
@@ -52,9 +53,10 @@ export default class WelcomeModal extends React.Component {
           <ModalFoot>
             <Container align="center" limit="m">
               <PageParagraph typo="p3">
-                The InterviewJS platform works for long-form storytelling,
-                features and investigations—stories with at least four different
-                longform interviewees and ideally with opposing points of views.
+              Users will interact with your story through a series of direct 
+              messaging exchanges based on your interviews. It’s a web app -
+              there’s no need to download anything - so users will need to be 
+              online!
               </PageParagraph>
               <Separator size="m" silent />
               <Actionbar>

@@ -1,8 +1,9 @@
-## xx-03-2017
+## 16-03-2017
 
 * It is now possible to add image bubbles to your story.
-
 * File-typed inputs now only accept images with a subset of file extensions.
+* Viewer is almost production ready.
+* About InterviewJS modal in the Composer.
 
 ## 09-03-2017
 

@@ -30,7 +30,7 @@ export default class NewStoryModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      step: 0, // TODO revert to 0
+      step: 0,
       storyCreated: false
     };
     this.handleStep0 = this.handleStep0.bind(this);
@@ -38,6 +38,7 @@ export default class NewStoryModal extends Component {
     this.handleStep2 = this.handleStep2.bind(this);
   }
   handleStep0(data) {
+    data.uid = this.props.user.id;
     return (
       this.state.storyCreated
         ? this.props.updateStory(data, 0)
@@ -60,8 +61,8 @@ export default class NewStoryModal extends Component {
         return (
           <Container limit="s" align="center">
             <PageSubtitle typo="h3">
-              Start by adding a few details and meta info about your story. You
-              can attach a cover photo and your organisation logo here too.
+              Start by giving your story a title and add your credentials. Click
+              “i” for extra tips and info!
             </PageSubtitle>
             <Separator size="m" silent />
             <MetaForm
@@ -76,8 +77,10 @@ export default class NewStoryModal extends Component {
         return (
           <Container limit="s" align="center">
             <PageSubtitle typo="h3">
-              Give the readers a quest, tell them what they will learn about a
-              topic when speaking to the interviewees.
+              Motivate your users by setting a quest: tell them what they will
+              learn by speaking to your interviewees. Then give them some
+              context to the story so that the interviews make sense. You’ll be
+              able to change your text as you continue to build your story.
             </PageSubtitle>
             <Separator size="m" silent />
             <DetailsForm
@@ -90,14 +93,14 @@ export default class NewStoryModal extends Component {
         return (
           <Container limit="s" align="center">
             <PageSubtitle typo="h3">
-              Add interviewees for the user to chat to. You will be able to
-              script separate chats for each interviewee later.
+              You can add profiles for more interviewees now or later.
             </PageSubtitle>
             <Separator size="m" silent />
             <Interviewees
               createInterviewee={this.props.createInterviewee}
-              cta="Compose your story"
+              cta="Go to chat dashboard"
               deleteInterviewee={this.props.deleteInterviewee}
+              editItem={0}
               handleSubmit={this.handleStep2}
               interviewees={this.props.stories[0].interviewees}
               storyIndex={0}
@@ -158,7 +161,8 @@ NewStoryModal.propTypes = {
   router: object.isRequired,
   stories: arrayOf(object),
   updateInterviewee: func.isRequired,
-  updateStory: func.isRequired
+  updateStory: func.isRequired,
+  user: object.isRequired
 };
 
 NewStoryModal.defaultProps = {

@@ -1,7 +1,7 @@
 import React from "react";
 import { markdown, ReactSpecimen } from "catalog";
 
-import { Bubble } from "../components";
+import { Bubble, Icon } from "../components";
 
 export default () => markdown`
 
@@ -16,6 +16,23 @@ export default () => markdown`
     <ReactSpecimen span={3} dark>
       <Bubble animated delay={2000}>
         Animated bubble with a delay in ms
+      </Bubble>
+    </ReactSpecimen>
+  )}
+  
+  ## Bubbles rendering other components
+
+  ${(
+    <ReactSpecimen span={3} dark>
+      <Bubble>
+        <Icon name="smile" />
+      </Bubble>
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen span={3} dark>
+      <Bubble>
+        <Icon name="shocked" />
       </Bubble>
     </ReactSpecimen>
   )}
@@ -81,26 +98,27 @@ export default () => markdown`
 
   ${(
     <ReactSpecimen span={2} dark>
-      <Bubble persona="interviewee" theme={{ font: "sans-serif" }}>
+      <Bubble
+        persona="interviewee"
+        theme={{ font: "sans-serif", backg: "black" }}
+      >
         Custom bubble font
       </Bubble>
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen span={2} dark>
-      <Bubble persona="system" theme={{ color: "cyan" }}>
+      <Bubble
+        persona="interviewee"
+        theme={{ font: "sans-serif", backg: "cyan" }}
+      >
         Custom bubble text
       </Bubble>
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen span={2} dark>
-      <Bubble
-        persona="user"
-        theme={{ backg: "cyan", color: "red", font: "serif" }}
-      >
-        Custom bubble
-      </Bubble>
+      <Bubble persona="interviewee">Custom bubble</Bubble>
     </ReactSpecimen>
   )}
 `;

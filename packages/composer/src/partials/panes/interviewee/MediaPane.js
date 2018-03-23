@@ -10,6 +10,9 @@ import {
 } from "interviewjs-styleguide";
 import PaneFrame from "../PaneFrame";
 
+import { filterIframe } from "../../../util/IframeSanitizer";
+
+
 export default class MediaPane extends Component {
   constructor(props) {
     super(props);
@@ -18,6 +21,7 @@ export default class MediaPane extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
   }
+
   componentWillReceiveProps(nextProps) {
     const { draft } = nextProps;
     if (draft !== this.props.draft) {
@@ -25,24 +29,45 @@ export default class MediaPane extends Component {
     }
     return null;
   }
+
   handleChange(e) {
     const { name, value } = e.target;
+    const clean = filterIframe(value);
+    console.log(clean);
+
     this.setState({ draft: { ...this.state.draft, [name]: value } }, () =>
-      this.props.updateDraft(this.state.draft)
+      this.props.updateDraft(this.state.draft, clean)
     );
   }
+
   render() {
     const { value } = this.state.draft;
+    const clean = filterIframe(value);
+
+    const renderDraft = () => {
+      if (value.length > 0) {
+        return clean.toLowerCase().startsWith("<iframe") &&
+          clean.toLowerCase().includes("src=") &&
+          clean.toLowerCase().includes("youtube.com/embed/") &&
+          clean.toLowerCase().endsWith("></iframe>") ? (
+          <BubbleHTMLWrapper type="embed">
+            <div dangerouslySetInnerHTML={{ __html: clean }} />
+          </BubbleHTMLWrapper>
+        ) : (
+          <BubbleHTMLWrapper>
+            this is not a youtube iframe, youtube iframe code starts with{" "}
+            {`<iframe`}, ends with {`></iframe>`} and requires {`src=`}{" "}
+            attribute pointing to youtube server
+          </BubbleHTMLWrapper>
+        );
+      }
+      return null;
+    };
+
     return (
       <PaneFrame
         {...this.props}
-        draft={
-          <div>
-            <BubbleHTMLWrapper type="embed">
-              <div dangerouslySetInnerHTML={{ __html: value }} />
-            </BubbleHTMLWrapper>
-          </div>
-        }
+        draft={<div>{renderDraft()}</div>}
         hasDraft={this.props.draft.value !== ""}
         side="left"
       >

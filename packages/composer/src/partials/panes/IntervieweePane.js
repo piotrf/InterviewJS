@@ -44,12 +44,17 @@ export default class IntervieweePane extends React.Component {
         text: { value: "" },
         link: { value: "", title: "" },
         image: {
-          value: require("../../data/media/trump.png"), // TODO: this should come from the data model upon image upload @LAURIAN
+          value: "",
           title: ""
         },
         embed: { value: "" },
         map: { value: "" },
         media: { value: "" }
+      },
+      clean: {
+        embed: "",
+        map: "",
+        media: ""
       },
       tab: "text"
     };
@@ -57,6 +62,7 @@ export default class IntervieweePane extends React.Component {
     this.updateDraft = this.updateDraft.bind(this);
     this.updateSrcText = this.updateSrcText.bind(this);
   }
+
   updateSrcText(data) {
     const { storyIndex, currentInterviewee, story } = this.props;
     const { interviewees } = story;
@@ -70,28 +76,42 @@ export default class IntervieweePane extends React.Component {
       intervieweeData
     );
   }
-  updateDraft(data, type) {
-    this.setState({ draft: { ...this.state.draft, [type]: data } });
+
+  updateDraft(data, type, clean) {
+    console.log(clean);
+    this.setState({
+      draft: { ...this.state.draft, [type]: data },
+      clean: { ...this.state.clean, [type]: clean }
+    });
   }
+
   addStorylineItem(source) {
     const { storyIndex, currentInterviewee } = this.props;
-    const { draft } = this.state;
+    const { draft, clean } = this.state;
+
+    let content = draft[source];
+    if (source === "embed" || source === "map" || source === "media") content = { value: clean[source], title: draft[source].title };
+
     const newIntervieweeBubble = {
-      content: draft[source],
+      content,
       role: "interviewee",
       type: this.state.tab
     };
+
     this.props.addStorylineItem(
       storyIndex,
       currentInterviewee,
       newIntervieweeBubble
     );
+
     this.setState({
       draft: { ...this.state.draft, [source]: { value: "", title: "" } }
     });
   }
+
   render() {
     const { tab } = this.state;
+    console.log(this.state);
     const { currentInterviewee, story } = this.props;
     return (
       <PaneEl fill="white" rounded shift dir="column">
@@ -129,7 +149,7 @@ export default class IntervieweePane extends React.Component {
               onClick={() => this.setState({ tab: "embed" })}
               opinionated
             >
-              <Tip title="Embed bubble">
+              <Tip title="Generic embed bubble">
                 <Icon name="embed" size="s" />
               </Tip>
             </PaneTab>
@@ -138,7 +158,7 @@ export default class IntervieweePane extends React.Component {
               onClick={() => this.setState({ tab: "map" })}
               opinionated
             >
-              <Tip title="Map bubble">
+              <Tip title="Google Maps bubble">
                 <Icon name="map" size="s" />
               </Tip>
             </PaneTab>
@@ -147,7 +167,7 @@ export default class IntervieweePane extends React.Component {
               onClick={() => this.setState({ tab: "media" })}
               opinionated
             >
-              <Tip title="Media bubble">
+              <Tip title="Youtube bubble">
                 <Icon name="media" size="s" />
               </Tip>
             </PaneTab>
@@ -182,20 +202,20 @@ export default class IntervieweePane extends React.Component {
             active={tab === "embed"}
             addStorylineItem={() => this.addStorylineItem("embed")}
             draft={this.state.draft.embed}
-            updateDraft={(data) => this.updateDraft(data, "embed")}
+            updateDraft={(data, clean) => this.updateDraft(data, "embed", clean)}
           />
           <MapPane
             {...this.props}
             active={tab === "map"}
             addStorylineItem={() => this.addStorylineItem("map")}
             draft={this.state.draft.map}
-            updateDraft={(data) => this.updateDraft(data, "map")}
+            updateDraft={(data, clean) => this.updateDraft(data, "map", clean)}
           />
           <MediaPane
             {...this.props}
             active={tab === "media"}
             draft={this.state.draft.media}
-            updateDraft={(data) => this.updateDraft(data, "media")}
+            updateDraft={(data, clean) => this.updateDraft(data, "media", clean)}
           />
         </Container>
       </PaneEl>

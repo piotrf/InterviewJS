@@ -2,6 +2,7 @@ import { object, func } from "prop-types";
 
 import css from "styled-components";
 import React, { Component } from "react";
+import Raven from "raven-js";
 
 import { AuthModal } from "../partials";
 
@@ -25,14 +26,18 @@ export default class AuthView extends Component {
   }
 
   handleAuthentication(user) {
-    console.log(user);
-
     const data = {
       id: user.uid,
       name: user.displayName,
       username: user.email,
       avatar: user.photoURL,
     };
+
+    Raven.setUserContext({
+      id: user.uid,
+      name: user.displayName,
+      email: user.email,
+    });
 
     this.props.signInUser(data);
 
@@ -62,5 +67,4 @@ AuthView.propTypes = {
 };
 
 AuthView.defaultProps = {
-  signInUser: null
 };

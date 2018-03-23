@@ -19,6 +19,9 @@ injectGlobal`
   }
   ::selection { background: ${color.blueWt}; }
   ::-moz-selection { background: ${color.blueWt}; }
+  * {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+  }
 `;
 
 ReactModal.defaultStyles = {};

@@ -1,16 +1,28 @@
+import { func } from "prop-types";
 import css from "styled-components";
-
+import React, { Component } from "react";
 import { color, setType } from "../../../utils";
 
-const Message = css.p`
+const MessageEl = css.p`
   ${setType("x")};
   color: ${color.greyLLt};
   font-style: italic;
   text-align: center;
 `;
 
-Message.propTypes = {};
+export default class Message extends Component {
+  componentDidMount() {
+    return this.props.callback ? this.props.callback() : null;
+  }
+  render() {
+    return <MessageEl {...this.props} />;
+  }
+}
 
-Message.defaultProps = {};
+Message.propTypes = {
+  callback: func
+};
 
-export default Message;
+Message.defaultProps = {
+  callback: null
+};

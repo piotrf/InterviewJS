@@ -4,6 +4,7 @@
 
 function stories(state = [], action) {
   const i = action.index ? action.index : -1;
+  // console.log(state, action);
 
   switch (action.type) {
     case "INCREMENT_LIKES":
@@ -14,7 +15,7 @@ function stories(state = [], action) {
       ];
 
     case "SIGNIN_USER":
-      console.log("SIGNIN_USER", action, state);
+      // console.log("SIGNIN_USER", action, state);
       return action.payload;
 
     default:

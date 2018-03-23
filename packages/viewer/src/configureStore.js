@@ -1,40 +1,33 @@
-import { createStore, compose } from "redux";
+import { createStore, compose, applyMiddleware } from "redux";
 import { syncHistoryWithStore } from "react-router-redux";
 import { browserHistory } from "react-router";
-import { persistStore, persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
 
-import firebase from "firebase";
+import Raven from "raven-js";
+import createRavenMiddleware from "raven-for-redux";
 
 import rootReducer from "./reducers";
 import story from "./data/story";
 
-export const firebaseApp = firebase.initializeApp({
-  // apiKey: "AIzaSyAzBGoszKOt1C_T4GV84hUBpjkK08H57KY",
-  // authDomain: "interviewjs-6c14d.firebaseapp.com",
-  // databaseURL: "https://interviewjs-6c14d.firebaseio.com",
-  // projectId: "interviewjs-6c14d",
-  // storageBucket: "interviewjs-6c14d.appspot.com",
-  // messagingSenderId: "126484254752"
-});
+window.STORY = story; // FIXME
+
+// Sentry.io
+Raven.config("https://5ead2dcac648436b93094e8a371bf1b1@sentry.io/365850", {
+  release: process.env.VERSION
+}).install();
+
 
 const defaultState = {
-  story
+  story: window.top !== window ? {} : story
 };
-
-const persistConfig = {
-  key: "root",
-  storage
-};
-
-const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const enhancers = compose(
-  window.devToolsExtension ? window.devToolsExtension() : (f) => f
+  window.devToolsExtension ? window.devToolsExtension() : (f) => f,
+  applyMiddleware(
+    createRavenMiddleware(Raven, {})
+  )
 );
 
 const store = createStore(rootReducer, defaultState, enhancers);
-// const store = createStore(persistedReducer, defaultState, enhancers);
 
 export const history = syncHistoryWithStore(browserHistory, store);
 export const configureStore = () => {
@@ -47,5 +40,3 @@ export const configureStore = () => {
   }
   return store;
 };
-
-export const persistor = persistStore(configureStore());

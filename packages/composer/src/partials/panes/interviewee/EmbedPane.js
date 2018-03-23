@@ -10,14 +10,18 @@ import {
 } from "interviewjs-styleguide";
 import PaneFrame from "../PaneFrame";
 
+import { filterIframe } from "../../../util/IframeSanitizer";
+
+
 export default class EmbedPane extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      draft: this.props.draft
+      draft: this.props.draft,
     };
     this.handleChange = this.handleChange.bind(this);
   }
+
   componentWillReceiveProps(nextProps) {
     const { draft } = nextProps;
     if (draft !== this.props.draft) {
@@ -25,24 +29,44 @@ export default class EmbedPane extends Component {
     }
     return null;
   }
+
   handleChange(e) {
     const { name, value } = e.target;
-    this.setState({ draft: { ...this.state.draft, [name]: value } }, () =>
-      this.props.updateDraft(this.state.draft)
-    );
+    const clean = filterIframe(value);
+    console.log(clean);
+    this.setState({ draft: { ...this.state.draft, [name]: value } }, () => clean.toLowerCase().startsWith("<iframe") &&
+        clean.toLowerCase().includes("src=") &&
+        clean.toLowerCase().endsWith("></iframe>")
+        ? this.props.updateDraft(this.state.draft, clean)
+        : null);
   }
+
   render() {
     const { value } = this.state.draft;
+    const clean = filterIframe(value);
+
+    const renderDraft = () => {
+      if (value.length > 0) {
+        return clean.toLowerCase().startsWith("<iframe") &&
+          clean.toLowerCase().includes("src=") &&
+          clean.toLowerCase().endsWith("></iframe>") ? (
+          <BubbleHTMLWrapper type="embed">
+            <div dangerouslySetInnerHTML={{ __html: clean }} />
+          </BubbleHTMLWrapper>
+        ) : (
+          <BubbleHTMLWrapper>
+            this is not an iframe, iframe code starts with {`<iframe`}, ends
+            with {`></iframe>`} and requires {`src=`} attribute
+          </BubbleHTMLWrapper>
+        );
+      }
+      return null;
+    };
+
     return (
       <PaneFrame
         {...this.props}
-        draft={
-          <div>
-            <BubbleHTMLWrapper type="embed">
-              <div dangerouslySetInnerHTML={{ __html: value }} />
-            </BubbleHTMLWrapper>
-          </div>
-        }
+        draft={<div>{renderDraft()}</div>}
         hasDraft={this.props.draft.value !== ""}
         side="left"
       >
@@ -65,6 +89,7 @@ export default class EmbedPane extends Component {
   }
 }
 
+
 EmbedPane.propTypes = {
   updateDraft: func.isRequired,
   draft: shape({
@@ -72,6 +97,7 @@ EmbedPane.propTypes = {
     title: string
   })
 };
+
 
 EmbedPane.defaultProps = {
   draft: {

@@ -12,6 +12,7 @@ export { default as MetaForm } from "./forms/MetaForm";
 export { default as QuestionForm } from "./forms/QuestionForm";
 
 // modals
+export { default as AboutModal } from "./modals/AboutModal";
 export { default as AuthModal } from "./modals/AuthModal";
 export { default as DeleteModal } from "./modals/DeleteModal";
 export { default as DetailsModal } from "./modals/DetailsModal";
@@ -24,3 +25,5 @@ export { default as IntervieweePane } from "./panes/IntervieweePane";
 
 export { default as StoryPane } from "./panes/StoryPane";
 export { default as UserPane } from "./panes/UserPane";
+
+export { default as ErrorBoundary } from "./util/ErrorBoundary";

@@ -26,6 +26,8 @@ const Actionbar = css.div`
   justify-content: center;
   margin-left: auto;
   margin-right: auto;
+  width: 100%;
+  min-height: 40px;
   position: relative;
   & > * {
     ${setSpace("mhx")};

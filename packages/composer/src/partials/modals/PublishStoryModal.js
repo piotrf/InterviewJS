@@ -1,4 +1,5 @@
 /* eslint react/forbid-prop-types: 0 */
+import css from "styled-components";
 import React, { Component } from "react";
 import ReactModal from "react-modal";
 import { arrayOf, bool, func, number, object } from "prop-types";
@@ -14,10 +15,13 @@ import {
   ModalHead,
   PageTitle,
   PageSubtitle,
-  Separator
+  Separator,
+  radius
 } from "interviewjs-styleguide";
 
 import { DetailsForm, MetaForm, Poll } from "../";
+
+import iframeRatioSpacer from "./iframeRatioSpacer.png";
 
 const getStepState = (step, i) => {
   if (step === i) {
@@ -28,32 +32,74 @@ const getStepState = (step, i) => {
   return null;
 };
 
+const PreviewWrapper = css.div`
+  border-radius: ${radius.m};
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 400px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  img {
+    display: block;
+    width: 100%;
+  }
+  iframe {
+    height: 100%;
+    left: 0;
+    max-width: 100% !important;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+`;
+
 export default class PublishStoryModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      step: 0 // TODO revert to 0
+      step: 0
     };
     this.handleStep0 = this.handleStep0.bind(this);
     this.handleStep1 = this.handleStep1.bind(this);
     this.handleStep2 = this.handleStep2.bind(this);
     this.handleStep3 = this.handleStep3.bind(this);
   }
+
+  componentDidUpdate() {
+    if (this.iframe) {
+      console.log(this.iframe);
+      this.iframe.addEventListener("load", () => {
+        console.log("iframe loaded");
+        setTimeout(
+          () => this.iframe.contentWindow.postMessage(this.props.story, "*"),
+          5000
+        );
+      });
+    }
+  }
+
   handleStep0(data) {
     this.props.updateStory(data, this.props.storyIndex);
     this.setState({ step: this.state.step + 1 });
   }
+
   handleStep1(data) {
     this.props.updateStory(data, this.props.storyIndex);
     this.setState({ step: this.state.step + 1 });
   }
+
   handleStep2() {
     this.setState({ step: this.state.step + 1 });
   }
+
   handleStep3() {
     this.props.handleClose();
   }
+
   render() {
+    const iframeViewer = document.location.hostname.toLowerCase() === "www.interviewjs.io" ? "https://interviewjs.net/story/" : "https://beta.interviewjs.net/story/";
     const { step } = this.state;
     const getModalBody = () => {
       if (step === 0) {
@@ -101,7 +147,22 @@ export default class PublishStoryModal extends Component {
       } else if (step === 3) {
         return (
           <Container limit="s" align="center">
-            <PageSubtitle typo="h3">Success.</PageSubtitle>
+            <PageSubtitle typo="h3">
+              Well done! Your story is now up running. Here’s a preview:
+            </PageSubtitle>
+            <Separator size="m" silent />
+            <PreviewWrapper>
+              <img src={iframeRatioSpacer} alt="" />
+              <iframe
+                title="Preview"
+                src={iframeViewer}
+                ref={(iframe) => {
+                  this.iframe = iframe;
+                }}
+              >
+                {" "}
+              </iframe>
+            </PreviewWrapper>
             <Separator size="m" silent />
             Grab the link and share on social
             <Separator size="m" silent />
@@ -109,14 +170,14 @@ export default class PublishStoryModal extends Component {
               <Action fixed primary onClick={this.handleStep3}>
                 Close
               </Action>
-              <Action
+              {/* <Action
                 fixed
-                href={`http://interviewjs.io/viewer/${this.props.story.id}`} // TODO actual url
+                href={`http://interviewjs.io/story/${this.props.story.id}`} // TODO actual url
                 secondary
                 target="_blank"
               >
                 Open your story
-              </Action>
+              </Action> */}
             </Actionbar>
           </Container>
         );

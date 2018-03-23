@@ -37,5 +37,6 @@ export { default as Separator } from "./separators/Separator";
 export { default as Tab } from "./tabs/Tab";
 export { default as Tabs } from "./tabs/Tabs";
 export { default as Text } from "./texts/Text";
+export { default as TextBlock } from "./texts/TextBlock";
 export { default as TextInput } from "./forms/TextInput";
 export { default as Tip } from "./contextuals/Tip";

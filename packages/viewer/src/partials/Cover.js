@@ -17,15 +17,15 @@ const CoverEl = css(Container)`
 
 const CoverBody = css.div`
   ${setSpace("phm")};
-  ${setSpace("ptl")};
-  background-color: ${color.shadowM};
+  ${setSpace("pth")};
+  background-color: ${color.shadowLt};
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  min-height: ${100 / 3}vh;
+  min-height: ${({ compact }) => (compact ? `${100 / 5}vh` : `${100 / 3}vh`)};
   position: relative;
   ${breakpoint.tablet} {
-    min-height: ${100 / 2}vh;
+    min-height: ${({ compact }) => (compact ? `${100 / 4}vh` : `${100 / 2}vh`)};
   }
   &:after {
     height: 50%;
@@ -36,19 +36,19 @@ const CoverBody = css.div`
     left: 0;
     position: absolute;
     right: 0;
-    z-index: 100;
+    z-index: 1;
   }
 `;
 
 const CoverSauce = css.div`
   ${setSpace("mbm")};
   position: relative;
-  z-index: 200;
+  z-index: 2;
 `;
 
 const Cover = (props) => (
   <CoverEl {...props}>
-    <CoverBody>
+    <CoverBody compact={props.compact}>
       <CoverSauce>{props.children}</CoverSauce>
     </CoverBody>
   </CoverEl>

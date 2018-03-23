@@ -50,35 +50,47 @@ export default class DetailsForm extends React.Component {
         <FormItem>
           <Label>Intro</Label>
           <CharacterCount>
-            {280 - this.state.formData.intro.length}
+            {160 - this.state.formData.intro.length}
           </CharacterCount>
           <TextInput
             area
-            maxLength="280"
+            maxLength="160"
             name="intro"
             onBlur={(e) => this.handleBlur(e)}
             onChange={(e) => this.handleChange(e)}
-            placeholder="Best to start with something like ‘Find out how…’, ‘Investigate…’, ‘Learn…’"
+            placeholder="Start with something like “Investigate...”, “Find out ... “, or “Learn ...”."
             value={this.state.formData.intro}
           />
-          <Legend tip="This is a tip">i</Legend>
+          <Legend
+            tip="It’s ok if it sounds like a task:
+              “Investigate how ...”, “Find out ... “, or “Learn ...” -
+              messaging is interactive and the user will choose a response."
+          >
+            i
+          </Legend>
         </FormItem>
         <Separator size="m" silent />
         <FormItem>
           <Label>Context</Label>
           <CharacterCount>
-            {600 - this.state.formData.context.length}
+            {900 - this.state.formData.context.length}
           </CharacterCount>
           <TextInput
             area
-            maxLength="600"
+            maxLength="900"
             name="context"
             onBlur={(e) => this.handleBlur(e)}
             onChange={(e) => this.handleChange(e)}
-            placeholder="This text helps the reader understand what the interviews are about…"
+            placeholder="Give your user some background to the story, why does it matter?"
             value={this.state.formData.context}
           />
-          <Legend tip="This is a tip">i</Legend>
+          <Legend
+            tip="Imagine the user finds your interviewees in mid-discussion.
+            What key facts should they know? Any crucial points of agreement/
+            disagreement?"
+          >
+            i
+          </Legend>
         </FormItem>
         <Separator size="m" silent />
         <Actionbar>

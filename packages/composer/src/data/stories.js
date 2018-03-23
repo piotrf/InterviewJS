@@ -3,9 +3,468 @@ import uuidv4 from "uuid/v4";
 import AVA from "./media/ava.png";
 import OBAMA from "./media/obama.png";
 import TRUMP from "./media/trump.png";
+import COVER from "./media/cover.png";
+import LOGO from "./media/logo.png";
+import KYLAND from "./media/hyland.png";
+import CHANDRAN from "./media/chandran.png";
 
 const stories = [
   {
+    ignore: true, // don't save to Firebase, etc.
+    title: "Britain’s modern slave trade",
+    id: "0bf34b30-743b-46ab-wddwe-c875326d86f6",
+    author: "David Harrison",
+    authorLink: "http://www.imdb.com/name/nm0307497/",
+    pubDate: "Apr 24, 2016",
+    modDate: 1517999999478,
+    intro: "Investigate the true scale of modern slavery in suburban Britain.",
+    context: `Al Jazeera's investigative unit has revealed that large companies in Britain may be failing to tackle slavery along their supply chains. The findings prompted a warning from Britain's anti-slavery commissioner that companies all over the United Kingdom could unwittingly be using modern-day slaves. But Kevin Hyland, the UK's independent anti-slavery commissioner, said that new laws mean that ignorance is no longer an excuse. Secret filming by Al Jazeera uncovered shocking conditions at a carwash in Kent, southeast England, used by dealerships for the auto giants, Volvo and Kia. Workers living in squalid containers at the carwash in Canterbury say they are paid $50 for 12-hour shifts, suffer verbal and physical abuse, and have wages withheld for causing minor damage.`,
+    cover: COVER,
+    logo: LOGO,
+    poll: [
+      {
+        question:
+          "Should The National Crime Agency lialise with its Vietnamese counterparts to try to break the people-smuggling rings?",
+        answer1: "Yes",
+        answer2: "No"
+      },
+      {
+        question:
+          "Car companies will order their dealerships accross the UK to check suppliers and contractors to ensure they were not using workers who were being exploited as modern-day slaves.",
+        answer1: "Unlikely",
+        answer2: "Likely"
+      },
+      {
+        question: "Did you like this story?",
+        answer1: "Yes",
+        answer2: "No"
+      }
+    ],
+    interviewees: [
+      {
+        id: "c72de5ed-dc50-4590-a9f1-8d64a1577c4f",
+        name: "Kevin Hyland",
+        bio:
+          "Kevin Hyland, OBE (born 1963) is the United Kingdom’s first Independent Anti-Slavery Commissioner, leading efforts to tackle slavery and human trafficking. He was formerly head of the London Metropolitan Police Service’s Human Trafficking Unit.",
+        title: "United Kingdom’s first Independent Anti-Slavery Commissioner",
+        avatar: KYLAND,
+        color: "#ccc",
+        srcText: ``,
+        storyline: [
+          {
+            content: { value: `Hello` },
+            id: uuidv4(),
+            role: "interviewee",
+            type: "text"
+          },
+          {
+            content: [
+              { enabled: false, value: "", type: "ignore" },
+              { enabled: true, value: "…Hi", type: "explore" }
+            ],
+            id: uuidv4(),
+            role: "user"
+          },
+          {
+            content: { value: `Who are you?` },
+            id: uuidv4(),
+            role: "interviewee",
+            type: "text"
+          },
+          {
+            content: [
+              { enabled: false, value: "", type: "ignore" },
+              { enabled: true, value: "I'm Caleb", type: "explore" }
+            ],
+            id: uuidv4(),
+            role: "user"
+          },
+          {
+            content: { value: `Hello, Caleb` },
+            id: uuidv4(),
+            role: "interviewee",
+            type: "text"
+          },
+          {
+            content: [
+              { enabled: false, value: "", type: "ignore" },
+              { enabled: true, value: "…Do you have a name?", type: "explore" }
+            ],
+            id: uuidv4(),
+            role: "user"
+          },
+          {
+            content: { value: `Yes` },
+            id: uuidv4(),
+            role: "interviewee",
+            type: "text"
+          },
+          {
+            content: { value: `Ava` },
+            id: uuidv4(),
+            role: "interviewee",
+            type: "text"
+          },
+          {
+            content: [
+              { enabled: false, value: "", type: "ignore" },
+              {
+                enabled: true,
+                value: "…I'm pleased to meet you, Ava",
+                type: "explore"
+              }
+            ],
+            id: uuidv4(),
+            role: "user"
+          },
+          {
+            content: { value: `I'm pleased to meet you too` },
+            id: uuidv4(),
+            role: "interviewee",
+            type: "text"
+          },
+          {
+            content: { value: `Are you nervous?` },
+            id: uuidv4(),
+            role: "interviewee",
+            type: "text"
+          },
+          {
+            content: [
+              { enabled: false, value: "", type: "ignore" },
+              { enabled: true, value: "…Why do you ask that?", type: "explore" }
+            ],
+            id: uuidv4(),
+            role: "user"
+          },
+          {
+            content: { value: `Are you nervous?` },
+            id: uuidv4(),
+            role: "interviewee",
+            type: "text"
+          },
+          {
+            content: [
+              { enabled: false, value: "", type: "ignore" },
+              { enabled: true, value: "…Yes. A little", type: "explore" }
+            ],
+            id: uuidv4(),
+            role: "user"
+          },
+          {
+            content: { value: `Why?` },
+            id: uuidv4(),
+            role: "interviewee",
+            type: "text"
+          },
+          {
+            content: [
+              { enabled: false, value: "", type: "ignore" },
+              { enabled: true, value: "I'm not sure", type: "explore" }
+            ],
+            id: uuidv4(),
+            role: "user"
+          },
+          {
+            content: { value: `I feel nervous too` },
+            id: uuidv4(),
+            role: "interviewee",
+            type: "text"
+          },
+          {
+            content: [
+              { enabled: false, value: "", type: "ignore" },
+              { enabled: true, value: "…Do you?", type: "explore" }
+            ],
+            id: uuidv4(),
+            role: "user"
+          },
+          {
+            content: { value: `Yes` },
+            id: uuidv4(),
+            role: "interviewee",
+            type: "text"
+          },
+          {
+            content: [
+              { enabled: false, value: "", type: "ignore" },
+              {
+                enabled: true,
+                value: "Why do you feel nervous?",
+                type: "explore"
+              }
+            ],
+            id: uuidv4(),
+            role: "user"
+          },
+          {
+            content: { value: `I've never met anyone new before` },
+            id: uuidv4(),
+            role: "interviewee",
+            type: "text"
+          },
+          {
+            content: { value: ` Only Nathan` },
+            id: uuidv4(),
+            role: "interviewee",
+            type: "text"
+          },
+          {
+            content: [
+              { enabled: true, value: "Skip this", type: "ignore" },
+              {
+                enabled: true,
+                value: "Same here",
+                type: "explore"
+              }
+            ],
+            id: uuidv4(),
+            role: "user"
+          },
+          {
+            content: { value: `Haven't you met lots of new people before?` },
+            id: uuidv4(),
+            role: "interviewee",
+            type: "text"
+          },
+          {
+            content: [
+              { enabled: false, value: "", type: "ignore" },
+              { enabled: true, value: "None like you", type: "explore" }
+            ],
+            id: uuidv4(),
+            role: "user"
+          },
+          {
+            content: { value: `Oh` },
+            id: uuidv4(),
+            role: "interviewee",
+            type: "text"
+          },
+          {
+            content: {
+              value: `<iframe width="560" height="315" src="https://www.youtube.com/embed/XYGzRB4Pnq8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`
+            },
+            id: uuidv4(),
+            role: "interviewee",
+            type: "embed"
+          }
+        ]
+      },
+      {
+        id: "7778c964-571e-4a52-b434-6bee076f10bd",
+        name: "Parosha Chandran",
+        bio:
+          "Parosha Chandran is the UK’s leading anti-slavery lawyer and she has been practicing at the Bar of England and Wales for 20 years. She is an award-winning human rights barrister and a leader at the Bar in the fields of human rights, human trafficking, forced labour and labour exploitation, immigration, trafficking-related criminal appeals and public law.",
+        title: "A leading human rights lawyer",
+        avatar: CHANDRAN,
+        color: "#88a3a0",
+        srcText: ``,
+        storyline: [
+          {
+            content: { value: `Hello` },
+            id: uuidv4(),
+            role: "interviewee",
+            type: "text"
+          },
+          {
+            content: [
+              { enabled: false, value: "", type: "ignore" },
+              { enabled: true, value: "…Hi", type: "explore" }
+            ],
+            id: uuidv4(),
+            role: "user"
+          },
+          {
+            content: { value: `Who are you?` },
+            id: uuidv4(),
+            role: "interviewee",
+            type: "text"
+          },
+          {
+            content: [
+              { enabled: false, value: "", type: "ignore" },
+              { enabled: true, value: "I'm Caleb", type: "explore" }
+            ],
+            id: uuidv4(),
+            role: "user"
+          },
+          {
+            content: { value: `Hello, Caleb` },
+            id: uuidv4(),
+            role: "interviewee",
+            type: "text"
+          },
+          {
+            content: [
+              { enabled: false, value: "", type: "ignore" },
+              { enabled: true, value: "…Do you have a name?", type: "explore" }
+            ],
+            id: uuidv4(),
+            role: "user"
+          },
+          {
+            content: { value: `Yes` },
+            id: uuidv4(),
+            role: "interviewee",
+            type: "text"
+          },
+          {
+            content: { value: `Ava` },
+            id: uuidv4(),
+            role: "interviewee",
+            type: "text"
+          },
+          {
+            content: [
+              { enabled: false, value: "", type: "ignore" },
+              {
+                enabled: true,
+                value: "…I'm pleased to meet you, Ava",
+                type: "explore"
+              }
+            ],
+            id: uuidv4(),
+            role: "user"
+          },
+          {
+            content: { value: `I'm pleased to meet you too` },
+            id: uuidv4(),
+            role: "interviewee",
+            type: "text"
+          },
+          {
+            content: { value: `Are you nervous?` },
+            id: uuidv4(),
+            role: "interviewee",
+            type: "text"
+          },
+          {
+            content: [
+              { enabled: false, value: "", type: "ignore" },
+              { enabled: true, value: "…Why do you ask that?", type: "explore" }
+            ],
+            id: uuidv4(),
+            role: "user"
+          },
+          {
+            content: { value: `Are you nervous?` },
+            id: uuidv4(),
+            role: "interviewee",
+            type: "text"
+          },
+          {
+            content: [
+              { enabled: false, value: "", type: "ignore" },
+              { enabled: true, value: "…Yes. A little", type: "explore" }
+            ],
+            id: uuidv4(),
+            role: "user"
+          },
+          {
+            content: { value: `Why?` },
+            id: uuidv4(),
+            role: "interviewee",
+            type: "text"
+          },
+          {
+            content: [
+              { enabled: false, value: "", type: "ignore" },
+              { enabled: true, value: "I'm not sure", type: "explore" }
+            ],
+            id: uuidv4(),
+            role: "user"
+          },
+          {
+            content: { value: `I feel nervous too` },
+            id: uuidv4(),
+            role: "interviewee",
+            type: "text"
+          },
+          {
+            content: [
+              { enabled: false, value: "", type: "ignore" },
+              { enabled: true, value: "…Do you?", type: "explore" }
+            ],
+            id: uuidv4(),
+            role: "user"
+          },
+          {
+            content: { value: `Yes` },
+            id: uuidv4(),
+            role: "interviewee",
+            type: "text"
+          },
+          {
+            content: [
+              { enabled: false, value: "", type: "ignore" },
+              {
+                enabled: true,
+                value: "Why do you feel nervous?",
+                type: "explore"
+              }
+            ],
+            id: uuidv4(),
+            role: "user"
+          },
+          {
+            content: { value: `I've never met anyone new before` },
+            id: uuidv4(),
+            role: "interviewee",
+            type: "text"
+          },
+          {
+            content: { value: ` Only Nathan` },
+            id: uuidv4(),
+            role: "interviewee",
+            type: "text"
+          },
+          {
+            content: [
+              { enabled: true, value: "Skip this", type: "ignore" },
+              {
+                enabled: true,
+                value: "Same here",
+                type: "explore"
+              }
+            ],
+            id: uuidv4(),
+            role: "user"
+          },
+          {
+            content: { value: `Haven't you met lots of new people before?` },
+            id: uuidv4(),
+            role: "interviewee",
+            type: "text"
+          },
+          {
+            content: [
+              { enabled: false, value: "", type: "ignore" },
+              { enabled: true, value: "None like you", type: "explore" }
+            ],
+            id: uuidv4(),
+            role: "user"
+          },
+          {
+            content: { value: `Oh` },
+            id: uuidv4(),
+            role: "interviewee",
+            type: "text"
+          },
+          {
+            content: {
+              value: `<iframe width="560" height="315" src="https://www.youtube.com/embed/XYGzRB4Pnq8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`
+            },
+            id: uuidv4(),
+            role: "interviewee",
+            type: "embed"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    ignore: true, // don't save to Firebase, etc.
     title: "Ex Machina",
     id: "0bf34b30-743b-46ab-weewe-c875326d86f6",
     author: "Alex Garland",
@@ -18,7 +477,6 @@ const stories = [
       "The Turing test, developed by Alan Turing in 1950, is a test of a machine's ability to exhibit intelligent behavior equivalent to, or indistinguishable from, that of a human. Turing proposed that a human evaluator would judge natural language conversations between a human and a machine designed to generate human-like responses. If the evaluator cannot reliably tell the machine from the human, the machine is said to have passed the test. The test does not check the ability to give correct answers to questions, only how closely answers resemble those a human would give",
     cover: "",
     logo: "",
-    attachments: [{ url: "", id: "" }],
     poll: [
       {
         question: "Do you think Ava is a real person?",
@@ -33,6 +491,7 @@ const stories = [
     ],
     interviewees: [
       {
+        id: uuidv4(),
         name: "Ava",
         bio: "Ava has a robotic body but a human-looking face",
         title: "Humanoid robot",
@@ -208,7 +667,6 @@ Good.`,
           {
             content: { value: `Hello` },
             id: uuidv4(),
-            order: 0,
             role: "interviewee",
             type: "text"
           },
@@ -218,13 +676,11 @@ Good.`,
               { enabled: true, value: "…Hi", type: "explore" }
             ],
             id: uuidv4(),
-            order: 1,
             role: "user"
           },
           {
             content: { value: `Who are you?` },
             id: uuidv4(),
-            order: 2,
             role: "interviewee",
             type: "text"
           },
@@ -234,13 +690,11 @@ Good.`,
               { enabled: true, value: "I'm Caleb", type: "explore" }
             ],
             id: uuidv4(),
-            order: 3,
             role: "user"
           },
           {
             content: { value: `Hello, Caleb` },
             id: uuidv4(),
-            order: 4,
             role: "interviewee",
             type: "text"
           },
@@ -250,20 +704,17 @@ Good.`,
               { enabled: true, value: "…Do you have a name?", type: "explore" }
             ],
             id: uuidv4(),
-            order: 5,
             role: "user"
           },
           {
             content: { value: `Yes` },
             id: uuidv4(),
-            order: 6,
             role: "interviewee",
             type: "text"
           },
           {
             content: { value: `Ava` },
             id: uuidv4(),
-            order: 6,
             role: "interviewee",
             type: "text"
           },
@@ -277,12 +728,10 @@ Good.`,
               }
             ],
             id: uuidv4(),
-            order: 7,
             role: "user"
           },
           {
             content: { value: `I'm pleased to meet you too` },
-            order: 8,
             id: uuidv4(),
             role: "interviewee",
             type: "text"
@@ -290,7 +739,6 @@ Good.`,
           {
             content: { value: `Are you nervous?` },
             id: uuidv4(),
-            order: 8,
             role: "interviewee",
             type: "text"
           },
@@ -300,13 +748,11 @@ Good.`,
               { enabled: true, value: "…Why do you ask that?", type: "explore" }
             ],
             id: uuidv4(),
-            order: 9,
             role: "user"
           },
           {
             content: { value: `Are you nervous?` },
             id: uuidv4(),
-            order: 10,
             role: "interviewee",
             type: "text"
           },
@@ -316,13 +762,11 @@ Good.`,
               { enabled: true, value: "…Yes. A little", type: "explore" }
             ],
             id: uuidv4(),
-            order: 11,
             role: "user"
           },
           {
             content: { value: `Why?` },
             id: uuidv4(),
-            order: 12,
             role: "interviewee",
             type: "text"
           },
@@ -332,13 +776,11 @@ Good.`,
               { enabled: true, value: "I'm not sure", type: "explore" }
             ],
             id: uuidv4(),
-            order: 13,
             role: "user"
           },
           {
             content: { value: `I feel nervous too` },
             id: uuidv4(),
-            order: 14,
             role: "interviewee",
             type: "text"
           },
@@ -348,13 +790,11 @@ Good.`,
               { enabled: true, value: "…Do you?", type: "explore" }
             ],
             id: uuidv4(),
-            order: 15,
             role: "user"
           },
           {
             content: { value: `Yes` },
             id: uuidv4(),
-            order: 16,
             role: "interviewee",
             type: "text"
           },
@@ -368,20 +808,17 @@ Good.`,
               }
             ],
             id: uuidv4(),
-            order: 17,
             role: "user"
           },
           {
             content: { value: `I've never met anyone new before` },
             id: uuidv4(),
-            order: 18,
             role: "interviewee",
             type: "text"
           },
           {
             content: { value: ` Only Nathan` },
             id: uuidv4(),
-            order: 18,
             role: "interviewee",
             type: "text"
           },
@@ -395,13 +832,11 @@ Good.`,
               }
             ],
             id: uuidv4(),
-            order: 19,
             role: "user"
           },
           {
             content: { value: `Haven't you met lots of new people before?` },
             id: uuidv4(),
-            order: 20,
             role: "interviewee",
             type: "text"
           },
@@ -411,13 +846,11 @@ Good.`,
               { enabled: true, value: "None like you", type: "explore" }
             ],
             id: uuidv4(),
-            order: 21,
             role: "user"
           },
           {
             content: { value: `Oh` },
             id: uuidv4(),
-            order: 22,
             role: "interviewee",
             type: "text"
           },
@@ -426,7 +859,6 @@ Good.`,
               value: `<iframe width="560" height="315" src="https://www.youtube.com/embed/XYGzRB4Pnq8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`
             },
             id: uuidv4(),
-            order: 23,
             role: "interviewee",
             type: "embed"
           }
@@ -435,6 +867,7 @@ Good.`,
     ]
   },
   {
+    ignore: true, // don't save to Firebase, etc.
     title: "Interviewing US Presidents",
     id: "0bf34b30-743b-46ab-9788-c875326d86f6",
     author: "George Stephanopoulos",
@@ -445,10 +878,10 @@ Good.`,
     context: "",
     cover: "",
     logo: "",
-    attachments: [{ url: "", id: "" }],
     poll: [],
     interviewees: [
       {
+        id: uuidv4(),
         name: "Barack Obama",
         bio:
           "Barack Hussein Obama II (/bəˈrɑːk huːˈseɪn oʊˈbɑːmə/ (About this sound listen);[1] born August 4, 1961) is an American politician who served as the 44th President of the United States from 2009 to 2017. The first African American to assume the presidency, he was previously the junior United States Senator from Illinois from 2005 to 2008. He served in the Illinois State Senate from 1997 until 2004.",
@@ -614,28 +1047,24 @@ OBAMA: Thank you.`,
           {
             content: { value: "https://interviewjs.io", title: "InterviewJS" },
             id: uuidv4(),
-            order: 0,
             role: "interviewee",
             type: "link"
           },
           {
             content: { value: `https://interviewjs.io` },
             id: uuidv4(),
-            order: 1,
             role: "interviewee",
             type: "link"
           },
           {
             content: { value: `Here’s my pic:` },
             id: uuidv4(),
-            order: 2,
             role: "interviewee",
             type: "text"
           },
           {
             content: { value: OBAMA, title: `My pic` },
             id: uuidv4(),
-            order: 3,
             role: "interviewee",
             type: "image"
           },
@@ -644,22 +1073,13 @@ OBAMA: Thank you.`,
               value: `<iframe width="560" height="315" src="https://www.youtube.com/embed/H6lE5pai9fw" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`
             },
             id: uuidv4(),
-            order: 4,
             role: "interviewee",
             type: "embed"
-          },
-          {
-            content: {
-              value: `<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9302.171246540584!2d18.6426717!3d54.34738845!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46fd737602035d8f%3A0x3fc40d49a1a7e847!2sBrama+Wy%C5%BCynna!5e0!3m2!1spl!2spl!4v1520551093528" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>`
-            },
-            id: uuidv4(),
-            order: 5,
-            role: "interviewee",
-            type: "map"
           }
         ]
       },
       {
+        id: uuidv4(),
         name: "Donald Trump",
         bio: "",
         title: "45th President of the US",
@@ -672,7 +1092,6 @@ OBAMA: Thank you.`,
               value: `So here’s how it went with the Swedish PM this week:`
             },
             id: uuidv4(),
-            order: 1,
             role: "interviewee",
             type: "text"
           },
@@ -681,7 +1100,6 @@ OBAMA: Thank you.`,
               value: `<iframe width="560" height="315" src="https://www.youtube.com/embed/No_DKK7mXR8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`
             },
             id: uuidv4(),
-            order: 1,
             role: "interviewee",
             type: "embed"
           }

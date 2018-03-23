@@ -1,7 +1,13 @@
 import React from "react";
 import { markdown, ReactSpecimen } from "catalog";
 
-import { Text, PageParagraph, PageSubtitle, PageTitle } from "../components";
+import {
+  Text,
+  TextBlock,
+  PageParagraph,
+  PageSubtitle,
+  PageTitle
+} from "../components";
 
 const TextExtend = Text.extend`
   color: red;
@@ -11,6 +17,14 @@ const TextWithComponent = Text.withComponent("h1");
 export default () => markdown`
 
   You can extend any Text style or use Text to render any type of HTML tag [as you’d normally do with styled-components](https://www.styled-components.com/docs/basics#extending-styles)
+
+  ## Text Blocks
+
+  ${(
+    <ReactSpecimen>
+      <TextBlock>Renders as h1</TextBlock>
+    </ReactSpecimen>
+  )}
 
   ## Page Title extends
 

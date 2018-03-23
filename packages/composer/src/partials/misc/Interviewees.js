@@ -45,7 +45,7 @@ export default class Interviewees extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      editItem: null
+      editItem: this.props.editItem
     };
     this.createInterviewee = this.createInterviewee.bind(this);
     this.deleteInterviewee = this.deleteInterviewee.bind(this);
@@ -89,7 +89,7 @@ export default class Interviewees extends React.Component {
               <Container bordered rounded>
                 <IntervieweesList>
                   {interviewees.map((interviewee, i) => (
-                    <Interviewee key={interviewee.name}>
+                    <Interviewee key={i}>
                       <Container flex={[1, 1, "auto"]}>
                         <Avatar image={interviewee.avatar} size="l" />
                       </Container>
@@ -118,7 +118,7 @@ export default class Interviewees extends React.Component {
                 </IntervieweesList>
                 <Container padded align="center">
                   <Action onClick={this.toggleAddInterviewee}>
-                    <Icon name="plus" size="x" /> Create new
+                    <Icon name="plus" size="x" /> Add interviewee
                   </Action>
                 </Container>
               </Container>
@@ -152,6 +152,7 @@ export default class Interviewees extends React.Component {
 }
 
 Interviewees.propTypes = {
+  editItem: number,
   cta: string,
   createInterviewee: func.isRequired,
   deleteInterviewee: func.isRequired,
@@ -162,6 +163,7 @@ Interviewees.propTypes = {
 };
 
 Interviewees.defaultProps = {
+  editItem: null,
   cta: "Done",
   interviewees: []
 };

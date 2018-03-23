@@ -17,15 +17,17 @@ const PreloaderEl = css.div`
   display: inline-block;
   line-height: 0;
   height: 1em;
+  padding-top: 2px;
+  padding-bottom: 2px;
   & > div {
     animation: ${bouncedelay} 1.4s infinite ease-in-out both;
     background-color: ${color.blueBlk};
     border-radius: ${radius.a};
     display: inline-block;
-    height: 12px;
+    height: 8px;
     margin-left: 2px;
     margin-right: 2px;
-    width: 12px;
+    width: 8px;
   }
   & > div:nth-child(1) {
     -webkit-animation-delay: -0.32s;
@@ -38,7 +40,7 @@ const PreloaderEl = css.div`
 `;
 
 const Preloader = (props) => (
-  <PreloaderEl {...props}>
+  <PreloaderEl {...props} className="ivjs-preloader">
     <div />
     <div />
     <div />

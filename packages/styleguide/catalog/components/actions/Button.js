@@ -80,7 +80,7 @@ const Button = css.button`
 
   /* secondary */
 
-  ${({ secondary, tone, theme }) => {
+  ${({ secondary, tone, theme, active }) => {
     if (secondary && tone === "negative") {
       return `
         ${actionBase.graphic};
@@ -130,6 +130,14 @@ const Button = css.button`
               ? paint(theme.mainColor, "HD")
               : paint(skin.mainColor, "HD")
           };
+        }
+        ${
+          active
+            ? `
+            box-shadow: 0 2px 4px ${color.blueM}, 0 0 0 1px ${color.blueM};
+            border-color: ${color.blueM};
+        `
+            : ``
         }
       `;
     }

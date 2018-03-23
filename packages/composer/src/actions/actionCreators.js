@@ -1,12 +1,26 @@
 import uuidv4 from "uuid/v4";
+import { base } from "../configureStore";
 
 export function createStory({
+  uid = "anonymous",
   author = "",
   authorLink = "",
   context = "",
-  interviewees = [],
+  cover = null,
+  logo = null,
+  interviewees = [
+    {
+      avatar: "",
+      bio: "",
+      color: "",
+      id: uuidv4(),
+      name: "Name of interviewee",
+      srcText: "",
+      storyline: [],
+      title: ""
+    }
+  ],
   intro = "",
-  media = {},
   poll = [],
   pubDate = "",
   title = ""
@@ -17,12 +31,14 @@ export function createStory({
       author,
       authorLink,
       context,
+      cover,
       interviewees,
       intro,
-      media,
+      logo,
       poll,
       pubDate,
       title,
+      uid,
       id: uuidv4(),
       modDate: new Date()
     }
@@ -33,6 +49,13 @@ export function updateStory(payload, storyIndex) {
   return {
     type: "UPDATE_STORY",
     storyIndex,
+    payload
+  };
+}
+
+export function syncStory(payload) {
+  return {
+    type: "SYNC_STORY",
     payload
   };
 }
@@ -50,6 +73,7 @@ export function createInterviewee(storyIndex, payload) {
     storyIndex,
     payload: {
       ...payload,
+      id: uuidv4(),
       storyline: []
     }
   };
@@ -130,5 +154,39 @@ export function signInUser(payload) {
 export function signOutUser() {
   return {
     type: "SIGNOUT_USER"
+  };
+}
+
+export function noop() {
+  console.log("NOOP");
+  return {
+    type: "NOOP"
+  };
+}
+
+export function syncFirebaseStories(uid) {
+  const NAMESPACE = "alpha";
+
+  return (dispatch) => {
+    dispatch(noop());
+
+    console.log(`stories-${NAMESPACE}/${uid}`);
+    base
+      .fetch(`stories-${NAMESPACE}/${uid}/`, {
+        asArray: true
+      })
+      .then((data) => {
+        console.log(data);
+        data.forEach((story) => {
+          dispatch(syncStory(story));
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    return {
+      type: "NOOP"
+    };
   };
 }

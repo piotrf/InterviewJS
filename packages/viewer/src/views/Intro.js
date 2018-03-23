@@ -1,13 +1,12 @@
 /* eslint react/forbid-prop-types: 0 */
 import css from "styled-components";
 import React, { Component } from "react";
-import { object, shape, string } from "prop-types";
+import { object, shape, string, func } from "prop-types";
 
 import {
   Action,
   Actionbar,
   Avatar,
-  Container,
   PageParagraph,
   PageSubtitle,
   PageTitle,
@@ -16,48 +15,35 @@ import {
   color,
   radius,
   setHeight,
-  setSpace,
-  setType
+  setSpace
 } from "interviewjs-styleguide";
 
-import { Cover, Topbar } from "../partials";
-
-const Page = css.div`
-  background: ${color.black};
-  color: ${color.white};
-  min-height: 100vh;
-  min-width: 100vw;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-`;
-
-const PageHead = css(Container)`
-  ${setSpace("pbl")};
-  width: 100%;
-  ${PageTitle} {
-    ${setType("h")};
-  }
-`;
-
-const PageBody = css(Container)`
-  ${setSpace("phl")};
-  ${setSpace("pbl")};
-`;
-
-const PageFoot = css(Container)`
-  ${setSpace("phl")};
-  ${setSpace("pbl")};
-`;
+import {
+  Cover,
+  Topbar,
+  Page,
+  PageBody,
+  PageHead,
+  StoryDetailsModal
+} from "../partials";
 
 const Interviewees = css.ul`
   text-align: center;
+  ${({ offset }) =>
+    offset
+      ? `
+  & li:first-child {
+    transform: translateX(-15%);
+  }
+  `
+      : ``};
 `;
 
 const Interviewee = css.li`
-  display: inline-block;
-  border: 2px solid ${color.black};
   border-radius: ${radius.a};
+  border: 2px solid ${color.black};
+  display: inline-block;
+  line-height: 0;
   margin-right: -.5em;
 `;
 
@@ -75,45 +61,59 @@ const Aside = css(PageParagraph)`
 export default class IntroView extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { storyDetailsModal: false };
+    this.toggleDetailsModal = this.toggleDetailsModal.bind(this);
+  }
+
+  componentDidMount() {
+    if (window.top !== window && window.addEventListener) {
+      window.addEventListener(
+        "message",
+        ({ data, origin, source }) => {
+          console.log(origin, data);
+          if (data.interviewees) this.props.createStory(data);
+        },
+        false
+      );
+    }
+  }
+
+  toggleDetailsModal() {
+    this.setState({ storyDetailsModal: !this.state.storyDetailsModal });
   }
 
   render() {
     const { story } = this.props;
+    if (!story || Object.keys(story).length === 0) return null; // FIXME show spinner
+    console.log(story);
     return [
-      <Topbar
-        handleDetails={() => this.props.router.push(`/details`)}
-        key="topbar"
-      />,
+      <Topbar handleDetails={this.toggleDetailsModal} key="topbar" />,
       <Page key="page">
-        <PageHead limit="m" flex={[0, 1, `${100 / 2}%`]}>
+        <PageHead flex={[0, 1, `${100 / 2}%`]}>
           <Cover image={story.cover}>
             <PageTitle typo="h1">{story.title}</PageTitle>
             <Separator size="s" silent />
             <Aside typo="p6">Featuring:</Aside>
             <Separator size="s" silent />
-            <Interviewees>
-              {story.interviewees.map((interviewee, i) => (
-                <Tip title={interviewee.name} key={i}>
+            <Interviewees offset={story.interviewees.length > 1}>
+              {story.interviewees.map((interviewee) => (
+                <Tip title={interviewee.name} key={interviewee.id}>
                   <Interviewee>
-                    <Avatar image={interviewee.avatar} />
+                    <Avatar image={interviewee.avatar} size="l" />
                   </Interviewee>
                 </Tip>
               ))}
             </Interviewees>
           </Cover>
         </PageHead>
-        <PageBody limit="m" flex={[1, 0, `${100 / 4}%`]}>
-          <Container limit="x">
-            <PageSubtitle typo="h3">{story.intro}</PageSubtitle>
-            <Separator size="m" silent />
-            <Aside typo="p3">
-              InterviewJS lets you chat to people at the heart of a story. Hear
-              from them in their own words.
-            </Aside>
-          </Container>
-        </PageBody>
-        <PageFoot limit="m" flex={[1, 0, `${100 / 4}%`]}>
+        <PageBody limit="x" flex={[1, 0, `${100 / 4}%`]}>
+          <PageSubtitle typo="h3">{story.intro}</PageSubtitle>
+          <Separator size="m" silent />
+          <Aside typo="p3">
+            InterviewJS lets you chat to people at the heart of a story. Hear
+            from them in their own words.
+          </Aside>
+          <Separator size="l" silent />
           {story.logo ? (
             <Logo src={story.logo} alt="Story author’s logo" />
           ) : null}
@@ -126,19 +126,28 @@ export default class IntroView extends Component {
           <Actionbar>
             <Action
               fixed
-              onClick={() => this.props.router.push(`/context`)}
+              onClick={() => this.props.router.push(`/story/context`)}
               primary
             >
               Continue
             </Action>
           </Actionbar>
-        </PageFoot>
-      </Page>
+        </PageBody>
+      </Page>,
+      this.state.storyDetailsModal ? (
+        <StoryDetailsModal
+          handleClose={this.toggleDetailsModal}
+          isOpen={this.state.storyDetailsModal}
+          key="detailsModal"
+          story={story}
+        />
+      ) : null
     ];
   }
 }
 
 IntroView.propTypes = {
+  createStory: func.isRequired,
   router: object,
   story: shape({
     title: string
