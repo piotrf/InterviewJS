@@ -23,7 +23,7 @@ const Header = () => (
             textDecoration: 'none',
           }}
         >
-          Gatsby
+          InterviewJS
         </Link>
       </h1>
     </div>

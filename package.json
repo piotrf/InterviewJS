@@ -11,7 +11,8 @@
   "devDependencies": {
     "lerna": "^2.9.0"
   },
-  "workspaces": [
-    "packages/*"
-  ]
+  "workspaces": {
+    "packages": ["packages/*"],
+    "nohoist": []
+  }
 }
