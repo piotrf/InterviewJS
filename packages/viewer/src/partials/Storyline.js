@@ -1,5 +1,5 @@
 /* eslint react/no-danger: 0 */
-import { array, arrayOf, bool, func, object, shape } from "prop-types";
+import { array, arrayOf, func, object, shape } from "prop-types";
 import css from "styled-components";
 import React, { Component } from "react";
 import { withRouter } from "react-router";
