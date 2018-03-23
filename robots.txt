@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /my/
+Disallow: /story/
+Disallow: /styleguide/
