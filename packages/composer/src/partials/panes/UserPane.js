@@ -312,7 +312,7 @@ export default class UserPane extends React.Component {
                     Continue
                     <Tip
                       position="bottom"
-                      title="`Explore` actions allow the reader to move on to the next interviewee bubble, simply continue in the story."
+                      title="Here’s where you add a user interaction that will lead into the interview text in the preview panel.  You can see and import our suggestions via the tabs or better still, write your own. It has to be the user’s voice!"
                     >
                       <Icon
                         name="info2"
@@ -381,7 +381,7 @@ export default class UserPane extends React.Component {
                   </Container>
                   <ActionLibHolder flex={[1, 1, "auto"]}>
                     <ActionLibList>
-                      {USER_ACTIONS.explore[continueDict].map((action, i) => (
+                      {USER_ACTIONS.continue[continueDict].map((action, i) => (
                         <ActionLibItem key={i}>
                           <ActionLibAction
                             interactive
@@ -417,7 +417,7 @@ export default class UserPane extends React.Component {
                       Explore
                       <Tip
                         position="bottom"
-                        title="`Ignore` actions allow the reader to skip the closest next group of interviewee bubbles. Use when nesting chats."
+                        title="Here’s where you create a second interaction. In combination with the question or user interaction above it creates a choice for the user."
                       >
                         <Icon
                           name="info2"
