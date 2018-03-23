@@ -47,7 +47,6 @@ const USER_ACTIONS = {
     ],
     map: ["Can you show this on a map?"],
     media: ["Is it on Youtube?"]
-    // map: [],
   }
 };
 
