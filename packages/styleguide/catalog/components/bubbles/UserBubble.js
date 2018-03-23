@@ -1,7 +1,7 @@
 import css from "styled-components";
 import { shape, string } from "prop-types";
 
-import { radius, skin, setSpace } from "../../../utils";
+import { color, radius, skin, setSpace } from "../../../utils";
 import bubbleBase from "./bubbleBase";
 
 const SystemBubble = css.div`
@@ -36,6 +36,14 @@ const SystemBubble = css.div`
   &:only-child {
     border-radius: ${radius.h} ${radius.h} ${radius.s} ${radius.h};
   }
+  ${({ plain }) =>
+    plain
+      ? `
+    background: none;
+    overflow: visible;
+    width: 100%;
+  `
+      : ``};
 `;
 
 SystemBubble.propTypes = {
