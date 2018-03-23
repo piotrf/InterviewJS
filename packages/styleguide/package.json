@@ -23,7 +23,7 @@
     "prettier-eslint": "8.8.1"
   },
   "scripts": {
-    "build": "catalog build",
+    "build": "catalog build --public-url=/styleguide/",
     "publish": "node scripts/publish.js",
     "start": "catalog start"
   }
