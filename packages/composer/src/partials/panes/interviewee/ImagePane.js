@@ -1,7 +1,7 @@
 import { func, shape, string } from "prop-types";
 import React, { Component } from "react";
 import Dropzone from "react-dropzone";
-import Pica from "pica";
+import Pica from "pica/dist/pica";
 
 import {
   BubbleHTMLWrapper,
