@@ -3,6 +3,7 @@ import { SketchPicker } from "react-color";
 import css from "styled-components";
 import Dropzone from "react-dropzone";
 import React, { Component } from "react";
+import Pica from "pica/dist/pica";
 
 import {
   Action,
@@ -31,6 +32,7 @@ const ColorPickerWrapper = css.span`
   right: 0;
   z-index: 1000;
 `;
+
 
 export default class IntervieweeForm extends Component {
   constructor(props) {
@@ -63,6 +65,7 @@ export default class IntervieweeForm extends Component {
       formData: { ...this.state.formData, [e.target.name]: e.target.value }
     });
   }
+
   handleChangeColor(color) {
     this.setState({
       formData: { ...this.state.formData, color: color.hex }
@@ -77,15 +80,37 @@ export default class IntervieweeForm extends Component {
   }
 
   handleFile(f) {
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      const base64data = reader.result.length > 3e6 ? "" : reader.result;
-      // console.log(base64data);
-      this.setState({
-        formData: { ...this.state.formData, avatar: base64data }
-      });
-    };
-    reader.readAsDataURL(f[0]);
+    const { preview } = f[0];
+    const offScreenImage = document.createElement('img');
+    offScreenImage.addEventListener('load', () => {
+      const targetWidth = offScreenImage.width > 300 ? 300 : offScreenImage.width;
+      const targetHeight = parseInt(targetWidth * offScreenImage.height / offScreenImage.width, 10);
+      console.log(`${offScreenImage.width} x ${offScreenImage.height} => ${targetWidth} x ${targetHeight}`);
+
+      const offScreenCanvas = document.createElement('canvas');
+      offScreenCanvas.width  = targetWidth;
+      offScreenCanvas.height = targetHeight;
+
+      const pica = Pica({ features: ['js', 'wasm', 'ww'] });
+      pica.resize(offScreenImage, offScreenCanvas, {
+        unsharpAmount: 80,
+        unsharpRadius: 0.6,
+        unsharpThreshold: 2,
+        transferable: true
+      }).then(result => pica.toBlob(result, 'image/jpeg', 0.90))
+        .then(blob => {
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            console.log("data url length", reader.result.length);
+            const base64data = reader.result.length > 3e6 ? '' : reader.result;
+            this.setState({
+              formData: { ...this.state.formData, avatar: base64data }
+            });
+          };
+          reader.readAsDataURL(blob);
+        }).catch(error => console.log(error));
+    });
+    offScreenImage.src = preview;
   }
 
   handleBlur(e) {
@@ -226,7 +251,7 @@ export default class IntervieweeForm extends Component {
                 ref={(node) => {
                   this.dropzoneRef = node;
                 }}
-                onDrop={(accepted, rejected) => {
+                onDrop={(accepted) => {
                   this.handleFile(accepted);
                 }}
                 style={{ display: "none" }}
