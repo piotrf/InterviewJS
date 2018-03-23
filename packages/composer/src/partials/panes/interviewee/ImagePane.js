@@ -13,6 +13,7 @@ import {
 } from "interviewjs-styleguide";
 import PaneFrame from "../PaneFrame";
 
+
 export default class ImagePane extends Component {
   constructor(props) {
     super(props);
@@ -21,6 +22,7 @@ export default class ImagePane extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
   }
+
   componentWillReceiveProps(nextProps) {
     const { draft } = nextProps;
     if (draft !== this.props.draft) {
@@ -28,17 +30,19 @@ export default class ImagePane extends Component {
     }
     return null;
   }
+
   handleChange(e) {
     const { name, value } = e.target;
     this.setState({ draft: { ...this.state.draft, [name]: value } }, () =>
       this.props.updateDraft(this.state.draft)
     );
   }
+
   handleFile(f) {
     const reader = new FileReader();
     reader.onloadend = () => {
       const base64data = reader.result.length > 3e6 ? '' : reader.result;
-      // console.log(base64data);
+      console.log(base64data);
       this.setState({ draft: { ...this.state.draft, value: base64data } }, () =>
         this.props.updateDraft(this.state.draft)
       );
@@ -103,6 +107,7 @@ export default class ImagePane extends Component {
     );
   }
 }
+
 
 ImagePane.propTypes = {
   draft: shape({

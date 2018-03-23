@@ -88,9 +88,12 @@ export default class IntervieweePane extends React.Component {
   addStorylineItem(source) {
     const { storyIndex, currentInterviewee } = this.props;
     const { draft, clean } = this.state;
+
+    let content = draft[source];
+    if (source === "embed" || source === "map" || source === "media") content = { value: clean[source], title: draft[source].title };
+
     const newIntervieweeBubble = {
-      // content: draft[source],
-      content: { value: clean[source], title: draft[source].title },
+      content,
       role: "interviewee",
       type: this.state.tab
     };
