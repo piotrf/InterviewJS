@@ -17,6 +17,8 @@ import {
   skin
 } from "interviewjs-styleguide";
 
+import { filterIframe } from "../../../util/IframeSanitizer";
+
 const BubbleEdit = css.div`
   display: none;
   position: absolute;
@@ -201,7 +203,7 @@ export default class Storyline extends React.Component {
             theme={{ backg: interviewee.color }}
           >
             <BubbleHTMLWrapper>
-              <div dangerouslySetInnerHTML={{ __html: content.value }} />
+              <div dangerouslySetInnerHTML={{ __html: filterIframe(content.value) }} />
             </BubbleHTMLWrapper>
           </Bubble>
         );
@@ -213,7 +215,7 @@ export default class Storyline extends React.Component {
             theme={{ backg: interviewee.color }}
           >
             <BubbleHTMLWrapper>
-              <div dangerouslySetInnerHTML={{ __html: content.value }} />
+              <div dangerouslySetInnerHTML={{ __html: filterIframe(content.value) }} />
             </BubbleHTMLWrapper>
           </Bubble>
         );
