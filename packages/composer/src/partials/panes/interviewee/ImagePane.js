@@ -20,8 +20,6 @@ export default class ImagePane extends Component {
     super(props);
     this.state = {
       draft: this.props.draft,
-      type: "image/*",
-      size: 0
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -34,39 +32,45 @@ export default class ImagePane extends Component {
     return null;
   }
 
-  onLoad() {
-    const targetWidth = this.img.width > 600 ? 600 : this.img.width;
-    const targetHeight = parseInt(targetWidth * this.img.height / this.img.width);
-    console.log(`${this.img.width} x ${this.img.height} => ${targetWidth} x ${targetHeight}`);
-    const offScreenCanvas = document.createElement('canvas');
-    offScreenCanvas.width  = targetWidth;
-    offScreenCanvas.height = targetHeight;
-
-    const pica = Pica({ features: ['js', 'wasm', 'ww'] });
-    pica.resize(this.img, offScreenCanvas, {
-      unsharpAmount: 80,
-      unsharpRadius: 0.6,
-      unsharpThreshold: 2,
-      transferable: true
-    }).then(result => pica.toBlob(result, 'image/jpeg', 0.90))
-      .then(blob => {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          const base64data = reader.result.length > 3e6 ? '' : reader.result;
-          console.log("data url length", base64data.length);
-          this.setState({ draft: { ...this.state.draft, value: base64data } }, () =>
-            this.props.updateDraft(this.state.draft)
-          );
-        };
-        reader.readAsDataURL(blob);
-      })
-      .catch(error => console.log(error));
+  handleBlob(blob) {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      console.log("data url length", reader.result.length);
+      const base64data = reader.result.length > 3e6 ? '' : reader.result;
+      this.setState({ draft: { ...this.state.draft, value: base64data } }, () =>
+        this.props.updateDraft(this.state.draft)
+      );
+    };
+    reader.readAsDataURL(blob);
   }
 
   handleFile(f) {
-    const { type, size, preview } = f[0];
-    this.img.src = preview;
-    this.setState({ type, size });
+    const { type, preview } = f[0];
+    if (type === "image/gif") {
+      this.handleBlob(f[0]);
+    } else {
+      // this.img.src = preview;
+      const offScreenImage = document.createElement('img');
+      offScreenImage.addEventListener('load', () => {
+        const targetWidth = offScreenImage.width > 600 ? 600 : offScreenImage.width;
+        const targetHeight = parseInt(targetWidth * offScreenImage.height / offScreenImage.width, 10);
+        console.log(`${offScreenImage.width} x ${offScreenImage.height} => ${targetWidth} x ${targetHeight}`);
+
+        const offScreenCanvas = document.createElement('canvas');
+        offScreenCanvas.width  = targetWidth;
+        offScreenCanvas.height = targetHeight;
+
+        const pica = Pica({ features: ['js', 'wasm', 'ww'] });
+        pica.resize(offScreenImage, offScreenCanvas, {
+          unsharpAmount: 80,
+          unsharpRadius: 0.6,
+          unsharpThreshold: 2,
+          transferable: true
+        }).then(result => pica.toBlob(result, 'image/jpeg', 0.90))
+          .then(this.handleBlob.bind(this)).catch(error => console.log(error));
+      });
+      offScreenImage.src = preview;
+    }
   }
 
   handleChange(e) {
@@ -95,9 +99,6 @@ export default class ImagePane extends Component {
         <Form>
           <FormItem>
             <Label>Upload image</Label>
-            <div style={{position: 'absolute', bottom: 0, left: 0, overflow: 'hidden', pointerEvents: 'none'}}>
-              <img ref={img => {this.img = img;}} onLoad={() => this.onLoad()} alt="original" src="http://via.placeholder.com/350x150" />
-            </div>
             <Dropzone
               accept="image/jpeg, image/jpg, image/svg, image/gif, image/png"
               ref={(node) => {
