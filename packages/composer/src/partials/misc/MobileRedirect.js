@@ -12,14 +12,14 @@ import {
 } from "interviewjs-styleguide";
 
 const MobileRedirectEl = css(Container)`
-  display: none;
-  ${breakpoint.onlyphone} {
-    align-content: center;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    justify-content: center;
+  align-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  ${breakpoint.desktop} {
+    display: none;
   }
 `;
 
