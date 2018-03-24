@@ -83,30 +83,37 @@ export default class ComposerView extends React.Component {
     this.togglePublishModal = this.togglePublishModal.bind(this);
     this.updateStory = this.updateStory.bind(this);
   }
+
   switchInterviewee(interviewee) {
     this.setState({ currentInterviewee: interviewee });
   }
+
   deleteInterviewee(story, interviewee) {
     this.setState({ currentInterviewee: 0 });
     this.props.deleteInterviewee(story, interviewee);
   }
+
   toggleDetailsModal(tab) {
     return tab
       ? this.setState({ detailsModal: tab })
       : this.setState({ detailsModal: "" });
   }
+
   togglePublishModal() {
     this.setState({ publishModal: !this.state.publishModal });
   }
+
   toggleBubbleEdit(target) {
     console.log("toggleBubbleEdit :", target);
     this.setState({ currentBubble: target });
   }
+
   updateStory(data) {
     const { storyId } = this.props.params;
     const i = this.props.stories.findIndex((story) => story.id === storyId);
     this.props.updateStory(data, i);
   }
+
   render() {
     const { storyId } = this.props.params;
     const storyIndex = this.props.stories.findIndex(
@@ -114,7 +121,10 @@ export default class ComposerView extends React.Component {
     );
     const story = this.props.stories[storyIndex];
 
-    if (!story) return null;
+    if (! story) {
+      this.props.router.push(`/my`);
+      return null;
+    }
 
     console.log("COMPOSER PROPS: ", this.props);
 

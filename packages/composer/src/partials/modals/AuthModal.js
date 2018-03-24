@@ -32,6 +32,7 @@ export default class AuthModal extends React.Component {
       code: "",
       newPassword: "",
       activeTab: "signIn",
+      forgotPassword: false,
       message: null,
     };
 
@@ -42,6 +43,13 @@ export default class AuthModal extends React.Component {
     this.handleForgotPassword = this.handleForgotPassword.bind(this);
     this.handleConfirmForgotPassword = this.handleConfirmForgotPassword.bind(this);
     this.handleTabActivation = this.handleTabActivation.bind(this);
+  }
+
+  async componentDidMount() {
+    const info = await Auth.currentUserInfo();
+    if (info) {
+      this.props.handleAuthentication(info);
+    }
   }
 
   handleTabActivation(activeTab) {
@@ -166,7 +174,6 @@ export default class AuthModal extends React.Component {
                 <PaneTabs>
                   <PaneTab opinionated active={this.state.activeTab === "signIn"} onClick={() => this.handleTabActivation("signIn")}>Sign In</PaneTab>
                   <PaneTab opinionated active={this.state.activeTab === "signUp"} onClick={() => this.handleTabActivation("signUp")}>Sign Up</PaneTab>
-                  <PaneTab opinionated active={this.state.activeTab === "forgotPassword"} onClick={() => this.handleTabActivation("forgotPassword")}>Reset Password</PaneTab>
                 </PaneTabs>
 
                 <Text typo="h3">{ this.state.message }</Text>
@@ -201,8 +208,9 @@ export default class AuthModal extends React.Component {
                   : null
                 }
 
-                { this.state.activeTab === "forgotPassword" ?
+                { this.state.forgotPassword  && this.state.activeTab === "signIn" ?
                   <div style={{ padding: "1em" }}>
+                    <Text typo="h3">Forgot Password?</Text>
                     <Text typo="h4">Step 1</Text>
                     <TextInput input type="text" name="username" placeholder="username" value={this.state.username} onChange={this.handleInputChange} />
                     <Actionbar>

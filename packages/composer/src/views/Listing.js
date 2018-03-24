@@ -1,11 +1,8 @@
 /* eslint react/forbid-prop-types: 0 */
-/* eslint no-unused-vars: 0 */
 
 import css from "styled-components";
 import React, { Component } from "react";
 import { arrayOf, func, object, shape, string } from "prop-types";
-
-import firebase from "firebase";
 import { Auth } from "aws-amplify";
 
 import {
@@ -180,16 +177,12 @@ export default class ListingView extends Component {
   }
 
   handleLogout() {
-    // firebase.auth().signOut();
-
     Auth.signOut()
       .then(data => {
         console.log(data);
         this.props.router.push(`/my`);
       })
       .catch(err => console.log(err));
-
-    // this.props.router.push(`/my`);
   }
   toggleNewStoryModal() {
     this.setState({ createStoryModal: !this.state.createStoryModal });
