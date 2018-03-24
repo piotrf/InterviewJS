@@ -1,5 +1,5 @@
 import React from "react";
-import { func, shape, string } from "prop-types";
+import { bool, func, shape, string } from "prop-types";
 
 import {
   Actionbar,
@@ -59,6 +59,7 @@ export default class DetailsForm extends React.Component {
             onBlur={(e) => this.handleBlur(e)}
             onChange={(e) => this.handleChange(e)}
             placeholder="Start with something like “Investigate...”, “Find out ... “, or “Learn ...”."
+            required={this.props.required}
             value={this.state.formData.intro}
           />
           <Legend
@@ -82,6 +83,7 @@ export default class DetailsForm extends React.Component {
             onBlur={(e) => this.handleBlur(e)}
             onChange={(e) => this.handleChange(e)}
             placeholder="Give your user some background to the story, why does it matter?"
+            required={this.props.required}
             value={this.state.formData.context}
           />
           <Legend
@@ -107,6 +109,7 @@ DetailsForm.propTypes = {
   cta: string,
   handleSave: func,
   handleSubmit: func.isRequired,
+  required: bool,
   story: shape({
     context: string,
     intro: string
@@ -115,6 +118,7 @@ DetailsForm.propTypes = {
 
 DetailsForm.defaultProps = {
   cta: "Save",
+  required: false,
   handleSave: null,
   story: {
     context: "",

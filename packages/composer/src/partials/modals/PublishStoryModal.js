@@ -114,6 +114,7 @@ export default class PublishStoryModal extends Component {
               handleSubmit={this.handleStep0}
               story={this.props.story}
               cta="Confirm"
+              required
             />
           </Container>
         );
@@ -129,6 +130,7 @@ export default class PublishStoryModal extends Component {
               handleSubmit={this.handleStep1}
               story={this.props.story}
               cta="Confirm"
+              required
             />
           </Container>
         );
