@@ -117,7 +117,7 @@ class ChatView extends Component {
       currentIntervieweeId: chatId,
       history: localHistory || []
     });
-    this.props.router.push(`/story/chat/${chatId}`);
+    this.props.router.push(`/${story.id}/chat/${chatId}`);
   }
 
   toggleToolbar(toolbar) {
@@ -261,6 +261,7 @@ class ChatView extends Component {
               isSwitchPossible={interviewees.length > 1}
               navigateAway={this.props.router.push}
               updateHistory={this.updateHistory}
+              story={this.props.story}
             />
           );
           // } else if (thisBubbleI < lastBubbleI - 1 && !this.state.hideActionbar) {
@@ -275,6 +276,7 @@ class ChatView extends Component {
                 isSwitchPossible={interviewees.length > 1}
                 navigateAway={this.props.router.push}
                 updateHistory={this.updateHistory}
+                story={this.props.story}
               />
             );
           }
@@ -315,7 +317,7 @@ class ChatView extends Component {
         <Topbar limit="m" padded>
           <Action
             iconic
-            onClick={() => this.props.router.push("/story/listing")}
+            onClick={() => this.props.router.push(`/${story.id}/listing`)}
           >
             <Icon name="arrow-left" />
           </Action>

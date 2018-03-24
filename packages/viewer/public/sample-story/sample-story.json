@@ -1,0 +1,491 @@
+{
+  "title": "Britain’s modern slave trade",
+  "id": "0bf34b30-743b-46ab-weewe-c875326d86f6",
+  "author": "David Harrison",
+  "authorLink": "http://www.imdb.com/name/nm0307497/",
+  "pubDate": "Apr 24, 2016",
+  "modDate": 1517999999478,
+  "intro": "Investigate the true scale of modern slavery in suburban Britain.",
+  "context": "Al Jazeera's investigative unit has revealed that large companies in Britain may be failing to tackle slavery along their supply chains. The findings prompted a warning from Britain's anti-slavery commissioner that companies all over the United Kingdom could unwittingly be using modern-day slaves. But Kevin Hyland, the UK's independent anti-slavery commissioner, said that new laws mean that ignorance is no longer an excuse. Secret filming by Al Jazeera uncovered shocking conditions at a carwash in Kent, southeast England, used by dealerships for the auto giants, Volvo and Kia. Workers living in squalid containers at the carwash in Canterbury say they are paid $50 for 12-hour shifts, suffer verbal and physical abuse, and have wages withheld for causing minor damage.",
+  "cover": "sample-story/media/cover.ddfb8adf.png",
+  "logo": "sample-story/media/logo.8fb96054.png",
+  "attachments": [
+    {
+      "url": "",
+      "id": ""
+    }
+  ],
+  "poll": [
+    {
+      "question": "Should The National Crime Agency lialise with its Vietnamese counterparts to try to break the people-smuggling rings?",
+      "answer1": "Yes",
+      "answer2": "No"
+    },
+    {
+      "question": "Car companies will order their dealerships accross the UK to check suppliers and contractors to ensure they were not using workers who were being exploited as modern-day slaves.",
+      "answer1": "Unlikely",
+      "answer2": "Likely"
+    },
+    {
+      "question": "Did you like this story?",
+      "answer1": "Yes",
+      "answer2": "No"
+    }
+  ],
+  "interviewees": [
+    {
+      "id": "c72de5ed-dc50-4590-a9f1-8d64a1577c4f",
+      "name": "Kevin Hyland",
+      "bio": "Kevin Hyland, OBE (born 1963) is the United Kingdom’s first Independent Anti-Slavery Commissioner, leading efforts to tackle slavery and human trafficking. He was formerly head of the London Metropolitan Police Service’s Human Trafficking Unit.",
+      "title": "United Kingdom’s first Independent Anti-Slavery Commissioner",
+      "avatar": "sample-story/media/hyland.0005619b.png",
+      "color": "#73d1fb",
+      "srcText": "",
+      "storyline": [
+        {
+          "content": {
+            "value": "Hello"
+          },
+          "id": "6114f8c7-0c9d-4679-bb98-1e5461fd9f09",
+          "role": "interviewee",
+          "type": "text"
+        },
+        {
+          "content": [
+            {
+              "enabled": false,
+              "value": "",
+              "type": "ignore"
+            },
+            {
+              "enabled": true,
+              "value": "…Hi",
+              "type": "explore"
+            }
+          ],
+          "id": "3b2fc37b-5c40-489c-9e9e-3850e9d7a65d",
+          "role": "user"
+        },
+        {
+          "content": {
+            "value": "Who are you?"
+          },
+          "id": "a087f4c8-38d8-43a8-8902-aa7de6fd8dda",
+          "role": "interviewee",
+          "type": "text"
+        },
+        {
+          "content": [
+            {
+              "enabled": false,
+              "value": "",
+              "type": "ignore"
+            },
+            {
+              "enabled": true,
+              "value": "I'm Caleb",
+              "type": "explore"
+            }
+          ],
+          "id": "76c4e762-01c7-4ff8-82ce-c158445479ac",
+          "role": "user"
+        },
+        {
+          "content": {
+            "value": "Hello, Caleb"
+          },
+          "id": "9d2afc35-912d-4224-8a01-22cddbfad1c3",
+          "role": "interviewee",
+          "type": "text"
+        },
+        {
+          "content": [
+            {
+              "enabled": false,
+              "value": "",
+              "type": "ignore"
+            },
+            {
+              "enabled": true,
+              "value": "…Do you have a name?",
+              "type": "explore"
+            }
+          ],
+          "id": "0d0bd5a7-ccb9-4b69-a882-6682fc19b398",
+          "role": "user"
+        },
+        {
+          "content": {
+            "value": "Yes"
+          },
+          "id": "60b673f5-3a3c-49c4-8bf5-243674b1c2ef",
+          "role": "interviewee",
+          "type": "text"
+        },
+        {
+          "content": {
+            "value": "Ava"
+          },
+          "id": "64796672-3f50-46a5-8bd6-11f83f6ec943",
+          "role": "interviewee",
+          "type": "text"
+        },
+        {
+          "content": [
+            {
+              "enabled": false,
+              "value": "",
+              "type": "ignore"
+            },
+            {
+              "enabled": true,
+              "value": "…I'm pleased to meet you, Ava",
+              "type": "explore"
+            }
+          ],
+          "id": "3637dd98-d53a-424d-ae44-eeb760f96e68",
+          "role": "user"
+        },
+        {
+          "content": {
+            "value": "I'm pleased to meet you too"
+          },
+          "id": "32eab7b5-a202-4c63-9aec-793130d9590f",
+          "role": "interviewee",
+          "type": "text"
+        },
+        {
+          "content": {
+            "value": "Are you nervous?"
+          },
+          "id": "ce76041d-c210-484a-a57d-11a032804d1d",
+          "role": "interviewee",
+          "type": "text"
+        },
+        {
+          "content": [
+            {
+              "enabled": false,
+              "value": "",
+              "type": "ignore"
+            },
+            {
+              "enabled": true,
+              "value": "…Why do you ask that?",
+              "type": "explore"
+            }
+          ],
+          "id": "7a9ca829-2581-4e4c-ad29-1c6eb28e7f6f",
+          "role": "user"
+        },
+        {
+          "content": {
+            "value": "Are you nervous?"
+          },
+          "id": "23d04956-e009-4f82-b030-ffe90b4ddba6",
+          "role": "interviewee",
+          "type": "text"
+        },
+        {
+          "content": [
+            {
+              "enabled": false,
+              "value": "",
+              "type": "ignore"
+            },
+            {
+              "enabled": true,
+              "value": "…Yes. A little",
+              "type": "explore"
+            }
+          ],
+          "id": "12fb2257-1328-4af0-a6ba-9a4b04928ac8",
+          "role": "user"
+        },
+        {
+          "content": {
+            "value": "Why?"
+          },
+          "id": "04a65c8a-7514-4804-8dbf-679bc4c9db12",
+          "role": "interviewee",
+          "type": "text"
+        },
+        {
+          "content": [
+            {
+              "enabled": false,
+              "value": "",
+              "type": "ignore"
+            },
+            {
+              "enabled": true,
+              "value": "I'm not sure",
+              "type": "explore"
+            }
+          ],
+          "id": "ee2cecba-f351-45e1-987e-1b40e169a205",
+          "role": "user"
+        },
+        {
+          "content": {
+            "value": "I feel nervous too"
+          },
+          "id": "07ecfdd6-6043-45f4-982c-61c669179307",
+          "role": "interviewee",
+          "type": "text"
+        },
+        {
+          "content": [
+            {
+              "enabled": false,
+              "value": "",
+              "type": "ignore"
+            },
+            {
+              "enabled": true,
+              "value": "…Do you?",
+              "type": "explore"
+            }
+          ],
+          "id": "d8ce89c7-c9e7-4ab9-89d9-886c9a1aa0dc",
+          "role": "user"
+        },
+        {
+          "content": {
+            "value": "Yes"
+          },
+          "id": "a7e376a6-626c-42b9-a5cb-f7023cebcba0",
+          "role": "interviewee",
+          "type": "text"
+        },
+        {
+          "content": [
+            {
+              "enabled": false,
+              "value": "",
+              "type": "ignore"
+            },
+            {
+              "enabled": true,
+              "value": "Why do you feel nervous?",
+              "type": "explore"
+            }
+          ],
+          "id": "224f1a90-fcc7-4f41-96c5-5c7ea4d68b0c",
+          "role": "user"
+        },
+        {
+          "content": {
+            "value": "I've never met anyone new before"
+          },
+          "id": "c0f8f83b-22fd-40fb-a8d7-83d88d55b209",
+          "role": "interviewee",
+          "type": "text"
+        },
+        {
+          "content": {
+            "value": " Only Nathan"
+          },
+          "id": "03dc68a4-0447-45e8-91b7-6fe162b1bddb",
+          "role": "interviewee",
+          "type": "text"
+        },
+        {
+          "content": [
+            {
+              "enabled": true,
+              "value": "Skip this",
+              "type": "ignore"
+            },
+            {
+              "enabled": true,
+              "value": "Same here",
+              "type": "explore"
+            }
+          ],
+          "id": "79f3bebf-92b0-4e26-9e73-74f849e6e380",
+          "role": "user"
+        },
+        {
+          "content": {
+            "value": "Haven't you met lots of new people before?"
+          },
+          "id": "58310464-0065-482e-8fbb-00482c425334",
+          "role": "interviewee",
+          "type": "text"
+        },
+        {
+          "content": [
+            {
+              "enabled": false,
+              "value": "",
+              "type": "ignore"
+            },
+            {
+              "enabled": true,
+              "value": "None like you",
+              "type": "explore"
+            }
+          ],
+          "id": "ba16d0a4-1ffc-41df-b65e-6927ba3290e2",
+          "role": "user"
+        },
+        {
+          "content": {
+            "value": "Oh"
+          },
+          "id": "fc018c19-3a59-4aae-89cc-7e5d3f132688",
+          "role": "interviewee",
+          "type": "text"
+        },
+        {
+          "content": {
+            "value": "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/XYGzRB4Pnq8\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>"
+          },
+          "id": "253fe990-2c2e-40f0-bfa7-06ee3f6b2628",
+          "role": "interviewee",
+          "type": "embed"
+        }
+      ]
+    },
+    {
+      "id": "7778c964-571e-4a52-b434-6bee076f10bd",
+      "name": "Parosha Chandran",
+      "bio": "Parosha Chandran is the UK’s leading anti-slavery lawyer and she has been practicing at the Bar of England and Wales for 20 years. She is an award-winning human rights barrister and a leader at the Bar in the fields of human rights, human trafficking, forced labour and labour exploitation, immigration, trafficking-related criminal appeals and public law.",
+      "title": "A leading human rights lawyer",
+      "avatar": "sample-story/media/chandran.3621629e.png",
+      "color": "purple",
+      "srcText": "",
+      "storyline": [
+        {
+          "content": {
+            "value": "Having the same story for two different characters is confusing"
+          },
+          "id": "9a378c94-2334-4d9a-a0f3-7cf8c7dcb6d7",
+          "role": "interviewee",
+          "type": "text"
+        },
+        {
+          "content": [
+            {
+              "enabled": false,
+              "value": "",
+              "type": "ignore"
+            },
+            {
+              "enabled": true,
+              "value": "I agree",
+              "type": "explore"
+            }
+          ],
+          "id": "3cf2b4f7-12ca-4102-97af-2419e1ddd241",
+          "role": "user"
+        },
+        {
+          "content": {
+            "value": "So I shall better edit this story to have characters bore you with differening messages"
+          },
+          "id": "74f7bd25-2fb5-44cd-a78f-92348736fd37",
+          "role": "interviewee",
+          "type": "text"
+        },
+        {
+          "content": [
+            {
+              "enabled": false,
+              "value": "",
+              "type": "ignore"
+            },
+            {
+              "enabled": true,
+              "value": "Cool. What next?",
+              "type": "explore"
+            }
+          ],
+          "id": "9f040589-0dee-4f9d-be6f-f48670bd8528",
+          "role": "user"
+        },
+        {
+          "content": {
+            "value": "Next I’ll try to figure out if I can switch between the two storylines and having those updated in the chat view, as the thing doesn’t seem to be doing it at the moment."
+          },
+          "id": "02b6a41f-ec0c-4cae-831f-7d5a647597b7",
+          "role": "interviewee",
+          "type": "text"
+        },
+        {
+          "content": [
+            {
+              "enabled": false,
+              "value": "",
+              "type": "ignore"
+            },
+            {
+              "enabled": true,
+              "value": "Did you try editing Chat.js?",
+              "type": "explore"
+            }
+          ],
+          "id": "8b45c676-57c2-47f5-b83a-1bcff1155a04",
+          "role": "user"
+        },
+        {
+          "content": {
+            "value": "No"
+          },
+          "id": "2eea1705-a96e-478e-ab7b-91469c82be06",
+          "role": "interviewee",
+          "type": "text"
+        },
+        {
+          "content": {
+            "value": "That’s exactly what I’m gonna do now."
+          },
+          "id": "a113aba7-2437-4aa0-a8d8-06822de4cda8",
+          "role": "interviewee",
+          "type": "text"
+        },
+        {
+          "content": [
+            {
+              "enabled": false,
+              "value": "",
+              "type": "ignore"
+            },
+            {
+              "enabled": true,
+              "value": "Good luck.",
+              "type": "explore"
+            }
+          ],
+          "id": "18b5ddb5-3db9-4964-bc60-be550cd93557",
+          "role": "user"
+        },
+        {
+          "content": {
+            "value": "Thanks"
+          },
+          "id": "4c12d8f4-baba-41b6-89bd-444ba06a7a17",
+          "role": "interviewee",
+          "type": "text"
+        },
+        {
+          "content": [
+            {
+              "enabled": false,
+              "value": "",
+              "type": "ignore"
+            },
+            {
+              "enabled": true,
+              "value": "None like you",
+              "type": "explore"
+            }
+          ],
+          "id": "ada3a0a0-8abc-4efd-9c1e-98cb64c82148",
+          "role": "user"
+        }
+      ]
+    }
+  ]
+}
