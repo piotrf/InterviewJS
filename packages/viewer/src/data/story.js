@@ -485,10 +485,10 @@ const story = {
         },
         {
           content: [
-            { enabled: true, value: "Continue", type: "explore" },
+            { enabled: false, value: "Continue", type: "ignore" },
             {
-              enabled: false,
-              value: "",
+              enabled: true,
+              value: "Explore",
               type: "explore"
             }
           ],
@@ -513,10 +513,10 @@ const story = {
         },
         {
           content: [
-            { enabled: true, value: "Thank you", type: "ignore" },
+            { enabled: false, value: "", type: "ignore" },
             {
-              enabled: false,
-              value: "",
+              enabled: true,
+              value: "Thank you",
               type: "explore"
             }
           ],
@@ -617,10 +617,10 @@ const story = {
         },
         {
           content: [
-            { enabled: true, value: "Continue", type: "explore" },
+            { enabled: false, value: "Continue", type: "ignore" },
             {
-              enabled: false,
-              value: "",
+              enabled: true,
+              value: "Continue",
               type: "explore"
             }
           ],
@@ -645,10 +645,10 @@ const story = {
         },
         {
           content: [
-            { enabled: true, value: "Thank you", type: "ignore" },
+            { enabled: false, value: "", type: "ignore" },
             {
-              enabled: false,
-              value: "",
+              enabled: true,
+              value: "Thank you",
               type: "explore"
             }
           ],

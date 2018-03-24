@@ -32,6 +32,7 @@ class ChatView extends Component {
       currentIntervieweeId: this.props.params.chatId,
       history: localHistory || [],
       intervieweeModal: false,
+      replayCachedHistory: true, // TODO
       storyDetailsModal: false
     };
     this.findIntervieweeIndex = this.findIntervieweeIndex.bind(this);
@@ -58,7 +59,6 @@ class ChatView extends Component {
       const nextHistoryItem = storyline[thisHistoryItemI + 1];
       const secondNextHistoryItem = storyline[thisHistoryItemI + 2];
       const nextItemRole = nextHistoryItem.role;
-      // console.log("nextItemRole: ", nextItemRole);
 
       const isItIntervieweesTurn = nextItemRole === "interviewee";
       const isItUsersTurn = nextItemRole === "user";
@@ -264,22 +264,41 @@ class ChatView extends Component {
     };
 
     // should actionbar side toggles be hidden
-    const hideActionbarSatellites = !isNvmBubble() && !isLastBubble();
+    const hideActionbarSatellites =
+      !isNvmBubble() && !isLastBubble() && hasHistory;
+
+    const getCurrentScriptActions = (arr) =>
+      arr.map((action, i) => {
+        if (action.enabled) {
+          return (
+            <Action
+              fixed
+              key={action.type}
+              onClick={() => this.updateHistory(action.type, i)}
+              primary={action.type === "explore"}
+              secondary={action.type === "ignore"}
+            >
+              {action.value}
+            </Action>
+          );
+        }
+      });
 
     const renderUserActions = () => {
+      const isActiveActionbarEmot = this.state.actionbar === "emot";
+      const isActiveActionbarRunaway = this.state.actionbar === "runaway";
+      const isActiveActionbarScripted = this.state.actionbar === "scripted";
+      const userStarts = !hasHistory && storyline[0].role === "user";
+
       if (hasHistory) {
         const thisHistoryItem = history[history.length - 1];
-        const thisBubbleI = thisHistoryItem.i;
-        const lastBubbleI = storyline.length;
+        const thisHistoryItemI = thisHistoryItem.i;
+        const nextHistoryItem = storyline[thisHistoryItemI + 1];
 
-        const isActiveActionbarEmot = this.state.actionbar === "emot";
-        const isActiveActionbarRunaway = this.state.actionbar === "runaway";
         const isLastBubbleSwitchTo = thisHistoryItem.type === "switchTo";
-        const isTheVeryLastBubble = thisBubbleI === lastBubbleI - 1;
+        const isTheVeryLastBubble = thisHistoryItemI === storyline.length - 1;
 
-        if (isLastBubbleSwitchTo) {
-          return <NvmActions updateHistory={this.updateHistory} />;
-        } else if (isTheVeryLastBubble) {
+        if (isTheVeryLastBubble || isActiveActionbarRunaway) {
           return (
             <RunAwayActions
               isSwitchPossible={interviewees.length > 1}
@@ -287,76 +306,33 @@ class ChatView extends Component {
               updateHistory={this.updateHistory}
             />
           );
-          // } else if (thisBubbleI < lastBubbleI - 1 && !this.state.hideActionbar) {
         }
-        const nextBubble = storyline[thisBubbleI + 1];
-        if (nextBubble.role === "user" && this.state.actionbar === "scripted") {
-          if (isActiveActionbarEmot) {
-            return <EmoActions updateHistory={this.updateHistory} />;
-          } else if (isActiveActionbarRunaway) {
-            return (
-              <RunAwayActions
-                isSwitchPossible={interviewees.length > 1}
-                navigateAway={this.props.router.push}
-                updateHistory={this.updateHistory}
-              />
-            );
-          }
-          return nextBubble.content.map(
-            (action, i) =>
-              action.enabled ? (
-                <Action
-                  fixed
-                  key={action.type}
-                  onClick={() => this.updateHistory(action.type, i)}
-                  primary={action.type === "explore"}
-                  secondary={action.type === "ignore"}
-                >
-                  {action.value}
-                </Action>
-              ) : null
-          );
-        } else if (
-          nextBubble.role === "user" &&
-          this.state.actionbar === "scripted"
-        ) {
-          return nextBubble.content.map(
-            (action, i) =>
-              action.enabled ? (
-                <Action
-                  fixed
-                  key={action.type}
-                  onClick={() => this.updateHistory(action.type, i)}
-                  primary={action.type === "explore"}
-                  secondary={action.type === "ignore"}
-                >
-                  {action.value}
-                </Action>
-              ) : null
-          );
+        const isNextHistoryItemUser = nextHistoryItem.role === "user";
+        if (isNextHistoryItemUser && isActiveActionbarEmot) {
+          return <EmoActions updateHistory={this.updateHistory} />;
+        } else if (isLastBubbleSwitchTo) {
+          return <NvmActions updateHistory={this.updateHistory} />;
+        } else if (isNextHistoryItemUser && isActiveActionbarScripted) {
+          return getCurrentScriptActions(nextHistoryItem.content);
         }
-      } else if (!hasHistory && storyline[0].role === "user") {
-        return storyline[0].content.map(
-          (action, i) =>
-            action.enabled ? (
-              <Action
-                fixed
-                key={action.type}
-                onClick={() => this.updateHistory(action.type, i)}
-                primary={action.type === "explore"}
-                secondary={action.type === "ignore"}
-              >
-                {action.value}
-              </Action>
-            ) : null
+        return null;
+      } else if (userStarts && isActiveActionbarScripted) {
+        return getCurrentScriptActions(storyline[0].content);
+      } else if (userStarts && isActiveActionbarRunaway) {
+        return (
+          <RunAwayActions
+            isSwitchPossible={interviewees.length > 1}
+            navigateAway={this.props.router.push}
+            updateHistory={this.updateHistory}
+          />
         );
+      } else if (userStarts && isActiveActionbarEmot) {
+        return <EmoActions updateHistory={this.updateHistory} />;
       }
       return null;
     };
 
-    console.log("history: ", history);
-    // console.log("storyline: ", storyline);
-    // console.log(this.state);
+    console.log(this.state);
 
     return [
       <Page key="page">

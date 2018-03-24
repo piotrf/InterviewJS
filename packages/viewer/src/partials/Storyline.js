@@ -45,23 +45,21 @@ class Storyline extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // replayCachedHistory: true
+      replayCachedHistory: true
     };
     this.scrollToBottom = this.scrollToBottom.bind(this);
   }
   componentDidMount() {
-    this.scrollToBottom("instant");
+    setTimeout(() => this.scrollToBottom("instant"), 0);
     setTimeout(() => this.scrollToBottom("instant"), 300);
-    // this.setState({ replayCachedHistory: false });
-  }
-  componentWillReceiveProps() {
-    this.scrollToBottom();
-  }
-  componentWillUpdate() {
-    this.scrollToBottom();
+    setTimeout(() => this.scrollToBottom("instant"), 400);
+    this.setState({ replayCachedHistory: false });
   }
   componentDidUpdate() {
-    this.scrollToBottom();
+    setTimeout(() => this.scrollToBottom(), 0);
+    setTimeout(() => this.scrollToBottom(), 350);
+    setTimeout(() => this.scrollToBottom(), 700);
+    setTimeout(() => this.scrollToBottom(), 1050);
   }
   scrollToBottom(behaviour) {
     return this.anchor
@@ -74,10 +72,10 @@ class Storyline extends Component {
   }
   render() {
     const { storyline, history, interviewee, story } = this.props;
-    // const { replayCachedHistory } = this.state;
+    const { replayCachedHistory } = this.state;
 
-    const animateAndDelay = true;
-    // const animateAndDelay = !replayCachedHistory;
+    // const animateAndDelay = true;
+    const animateAndDelay = !replayCachedHistory;
 
     const renderIntervieweeBubble = (item, index) => {
       const { content, type } = storyline[item.i];
@@ -120,10 +118,10 @@ class Storyline extends Component {
       return (
         <BubbleBlock key={index} persona="interviewee">
           <Bubble
-            // animated={animateAndDelay}
-            // delay={animateAndDelay ? 350 : null}
-            // loading={animateAndDelay}
+            animated={animateAndDelay}
+            delay={animateAndDelay ? 350 : null}
             displayType={getBubbleDisplayType()}
+            loading={animateAndDelay}
             persona="interviewee"
             theme={{ backg: interviewee.color }}
           >
