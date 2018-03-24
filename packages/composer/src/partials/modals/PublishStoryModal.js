@@ -99,7 +99,10 @@ export default class PublishStoryModal extends Component {
   }
 
   render() {
-    const iframeViewer = document.location.hostname.toLowerCase() === "www.interviewjs.io" ? "https://interviewjs.net/story/" : "https://beta.interviewjs.net/story/";
+    const iframeViewer =
+      document.location.hostname.toLowerCase() === "www.interviewjs.io"
+        ? "https://interviewjs.net/story/"
+        : "https://beta.interviewjs.net/story/";
     const { step } = this.state;
     const getModalBody = () => {
       if (step === 0) {
@@ -111,6 +114,7 @@ export default class PublishStoryModal extends Component {
               handleSubmit={this.handleStep0}
               story={this.props.story}
               cta="Confirm"
+              required
             />
           </Container>
         );
@@ -126,6 +130,7 @@ export default class PublishStoryModal extends Component {
               handleSubmit={this.handleStep1}
               story={this.props.story}
               cta="Confirm"
+              required
             />
           </Container>
         );
