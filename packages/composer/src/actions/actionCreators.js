@@ -1,6 +1,8 @@
 import uuidv4 from "uuid/v4";
-import Raven from "raven-js";
-import { base } from "../configureStore";
+// import Raven from "raven-js";
+import { Storage } from "aws-amplify";
+import axios from "axios";
+// import { base } from "../configureStore";
 
 export function createStory({
   uid = "anonymous",
@@ -164,24 +166,40 @@ export function noop() {
   };
 }
 
-export function syncFirebaseStories(uid) {
-  const NAMESPACE = "alpha";
+export function syncFirebaseStories() {
 
   return (dispatch) => {
     dispatch(noop());
 
-    base
-      .fetch(`stories-${NAMESPACE}/${uid}/`, {
-        asArray: true
-      })
-      .then((data) => {
-        data.forEach((story) => {
-          dispatch(syncStory(story));
+    Storage.vault.list('stories/')
+      .then(stories => {
+        console.log(stories);
+        stories.forEach(({key}) => {
+          Storage.vault.get(key)
+            .then(url => {
+              axios.get(url)
+                .then(response => dispatch(syncStory(response.data)))
+                .catch(err => console.log(err));
+            })
+            .catch(err => console.log(err));
         });
       })
-      .catch((error) => {
-        Raven.captureException(error);
-      });
+    .catch(err => console.log(err));
+
+    // uid = "anon"
+    // const NAMESPACE = "alpha";
+    // base
+    //   .fetch(`stories-${NAMESPACE}/${uid}/`, {
+    //     asArray: true
+    //   })
+    //   .then((data) => {
+    //     data.forEach((story) => {
+    //       dispatch(syncStory(story));
+    //     });
+    //   })
+    //   .catch((error) => {
+    //     Raven.captureException(error);
+    //   });
 
     return {
       type: "NOOP"

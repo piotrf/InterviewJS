@@ -6,6 +6,7 @@ import React, { Component } from "react";
 import { arrayOf, func, object, shape, string } from "prop-types";
 
 import firebase from "firebase";
+import { Auth } from "aws-amplify";
 
 import {
   Action,
@@ -179,8 +180,16 @@ export default class ListingView extends Component {
   }
 
   handleLogout() {
-    firebase.auth().signOut();
-    this.props.router.push(`/my`);
+    // firebase.auth().signOut();
+
+    Auth.signOut()
+      .then(data => {
+        console.log(data);
+        this.props.router.push(`/my`);
+      })
+      .catch(err => console.log(err));
+
+    // this.props.router.push(`/my`);
   }
   toggleNewStoryModal() {
     this.setState({ createStoryModal: !this.state.createStoryModal });
@@ -193,7 +202,7 @@ export default class ListingView extends Component {
     this.setState({ welcomeModal: false, createStoryModal: true });
   }
   render() {
-    console.log("LISTING PROPS: ", this.props);
+    // console.log("LISTING PROPS: ", this.props);
     const { createStoryModal, welcomeModal, aboutModal } = this.state;
     const welcomeModalBlocker = localStorage.getItem("welcomeModalBlocker");
     return [

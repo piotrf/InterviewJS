@@ -2,12 +2,12 @@
 /* eslint no-console: 0 */
 /* eslint prefer-destructuring: 0 */
 /* eslint no-plusplus: 0 */
-/* eslint no-unused-vars: 0 */
 /* eslint no-param-reassign: 0 */
 
 import uuidv4 from "uuid/v4";
 import Raven from "raven-js";
-import { base } from "../configureStore";
+import { Storage } from "aws-amplify";
+
 
 function stories(state = [], action) {
   const {
@@ -170,7 +170,6 @@ function stories(state = [], action) {
 }
 
 function storiesWrapper(state = [], action) {
-  const NAMESPACE = "alpha";
   const { type, storyIndex, payload } = action;
 
   console.log(action);
@@ -183,7 +182,6 @@ function storiesWrapper(state = [], action) {
     }
 
     let storyId = null;
-    let uid = "anon";
 
     if (typeof storyIndex === "number" && state[storyIndex])
       storyId = state[storyIndex].id;
@@ -191,7 +189,6 @@ function storiesWrapper(state = [], action) {
 
     if (!storyId) storyId = `temp-${uuidv4()}`;
 
-    console.log(uid, storyId);
 
     let currentStory = newState.find((story) => story.id === storyId);
     if (type === "DELETE_STORY")
@@ -206,38 +203,33 @@ function storiesWrapper(state = [], action) {
     if (!currentStory.version) currentStory.version = 0;
     currentStory.version++;
 
-    if (currentStory.uid) uid = currentStory.uid;
-
 
     if (type === "CREATE_STORY") {
-      base.post(`stories-${NAMESPACE}/${uid}/${storyId}`, {
-        data: currentStory,
-        then(err) {
-          if (err) console.log(err);
-        }
-      });
+      Storage.vault.put(`stories/${storyId}/story.json`, JSON.stringify(currentStory), {
+        contentType: 'application/json'
+      })
+      .then (result => console.log(result))
+      .catch(err => console.log(err));
     } else if (type === "SYNC_STORY") {
       // NOOP;
     } else if (type === "DELETE_STORY") {
-      base.post(`stories-${NAMESPACE}-deleted/${uid}/${storyId}`, {
-        data: currentStory,
-        then(err) {
-          if (err) {
-            console.log(err);
-          } else {
-            base.remove(`stories-${NAMESPACE}/${uid}/${storyId}`, (err2) => {
-              if (err2) console.log(err2);
-            });
-          }
-        }
-      });
+      Storage.vault.put(`stories-deleted/${storyId}/story.json`, JSON.stringify(currentStory), {
+        contentType: 'application/json'
+      })
+      .then (result => {
+        console.log(result);
+        // now delete
+        Storage.vault.remove(`stories/${storyId}/story.json`)
+        .then(result2 => console.log(result2))
+        .catch(err => console.log(err));
+      })
+      .catch(err => console.log(err));
     } else {
-      base.update(`stories-${NAMESPACE}/${uid}/${storyId}`, {
-        data: currentStory,
-        then(err) {
-          if (err) console.log(err);
-        }
-      });
+      Storage.vault.put(`stories/${storyId}/story.json`, JSON.stringify(currentStory), {
+        contentType: 'application/json'
+      })
+      .then (result => console.log(result))
+      .catch(err => console.log(err));
     }
   } catch (exception) {
     Raven.captureException(exception);
