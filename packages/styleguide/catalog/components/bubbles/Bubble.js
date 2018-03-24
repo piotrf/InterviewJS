@@ -26,13 +26,13 @@ export default class Bubble extends Component {
   }
   render() {
     const { loading, rendering } = this.state;
-    const { animated, children, persona, type } = this.props;
+    const { animated, children, persona, displayType } = this.props;
     setTimeout(() => {}, 1000);
     if (persona === "user") {
       if (!rendering) {
         return (
           <UserBubble {...this.props}>
-            <BubbleHTMLWrapper type={type}>{children}</BubbleHTMLWrapper>
+            <BubbleHTMLWrapper>{children}</BubbleHTMLWrapper>
           </UserBubble>
         );
       }
@@ -44,7 +44,9 @@ export default class Bubble extends Component {
             {animated && loading ? (
               <Preloader />
             ) : (
-              <BubbleHTMLWrapper type={type}>{children}</BubbleHTMLWrapper>
+              <BubbleHTMLWrapper displayType={displayType}>
+                {children}
+              </BubbleHTMLWrapper>
             )}
           </SpeakerBubble>
         );
@@ -57,7 +59,7 @@ export default class Bubble extends Component {
           {animated && loading ? (
             <Preloader />
           ) : (
-            <BubbleHTMLWrapper type={type}>{children}</BubbleHTMLWrapper>
+            <BubbleHTMLWrapper>{children}</BubbleHTMLWrapper>
           )}
         </SystemBubble>
       );
@@ -67,19 +69,19 @@ export default class Bubble extends Component {
 }
 
 Bubble.propTypes = {
-  loading: bool,
   animated: bool,
   children: oneOfType([array, object, string]),
   delay: number,
-  persona: string,
-  type: string
+  displayType: string,
+  loading: bool,
+  persona: string
 };
 
 Bubble.defaultProps = {
-  loading: true,
   animated: false,
   children: null,
   delay: 0,
-  persona: null,
-  type: "plain"
+  displayType: "plain",
+  loading: true,
+  persona: null
 };

@@ -15,6 +15,7 @@ const calcColor = (thisColor, thatColor) => {
 const SystemBubble = css.div`
   ${bubbleBase};
   ${setSpace("mrm")};
+  align-self: flex-start;
   ${({ animated }) =>
     !animated
       ? `
@@ -58,8 +59,11 @@ const SystemBubble = css.div`
       cursor: move;
     }`
       : ``}
-   ${({ type }) =>
-     type === "rich" || type === "embed"
+
+  /* tweak bubble styles depending on wether the content is iframe or image */
+
+   ${({ displayType }) =>
+     displayType === "embed" || displayType === "rich"
        ? `
          ${setSpace("phs")};
          width: 100%;`

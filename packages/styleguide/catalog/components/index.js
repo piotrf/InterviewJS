@@ -5,6 +5,7 @@ export { default as Avatar } from "./avatars/Avatar";
 export { default as Breadcrumb } from "./breadcrumbs/Breadcrumb";
 export { default as Breadcrumbs } from "./breadcrumbs/Breadcrumbs";
 export { default as Bubble } from "./bubbles/Bubble";
+export { default as BubbleBlock } from "./bubbles/BubbleBlock";
 export { default as BubbleGroup } from "./bubbles/BubbleGroup";
 export { default as BubbleHTMLWrapper } from "./bubbles/BubbleHTMLWrapper";
 export { default as Bubbles } from "./bubbles/Bubbles";

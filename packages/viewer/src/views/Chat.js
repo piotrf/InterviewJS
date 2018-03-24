@@ -19,10 +19,7 @@ class ChatView extends Component {
     super(props);
 
     const { interviewees } = this.props.story;
-    const intervieweeIndex = interviewees.findIndex(
-      (item) => item.id === this.props.params.chatId
-    );
-    const interviewee = interviewees[intervieweeIndex];
+    const interviewee = interviewees[this.findIntervieweeIndex()];
     const { story } = this.props;
 
     const localHistory = JSON.parse(
@@ -30,15 +27,15 @@ class ChatView extends Component {
     );
 
     this.state = {
-      actionbar: "scripted",
+      actionbar: null,
       currentIntervieweeId: this.props.params.chatId,
       history: localHistory || [],
       intervieweeModal: false,
       storyDetailsModal: false
     };
-    this.findIntervieweeId = this.findIntervieweeId.bind(this);
+    this.findIntervieweeIndex = this.findIntervieweeIndex.bind(this);
     this.initHistory = this.initHistory.bind(this);
-    this.onBubbleRender = this.onBubbleRender.bind(this);
+    this.onHistoryUpdate = this.onHistoryUpdate.bind(this);
     this.switchChat = this.switchChat.bind(this);
     this.toggleToolbar = this.toggleToolbar.bind(this);
     this.updateHistory = this.updateHistory.bind(this);
@@ -46,64 +43,89 @@ class ChatView extends Component {
   componentDidMount() {
     this.initHistory();
   }
-  onBubbleRender() {
+  onHistoryUpdate() {
     const { history } = this.state;
-    const thisHistoryItem = history[history.length - 1];
-
     const { interviewees } = this.props.story;
-    const intervieweeIndex = interviewees.findIndex(
-      (item) => item.id === this.props.params.chatId
-    );
-    const { storyline } = interviewees[intervieweeIndex];
+    const { storyline } = interviewees[this.findIntervieweeIndex()];
+    const thisHistoryItem = history[history.length - 1];
+    const thisItemType = thisHistoryItem.type;
+    // console.log("thisItemType: ", thisItemType);
 
-    const thisBubbleI = thisHistoryItem.i;
-    const lastBubbleI = storyline.length;
+    const isCurrentNotTheLastItem = thisHistoryItem.i < storyline.length - 1;
 
-    if (thisBubbleI < lastBubbleI - 1) {
-      const { role, type } = thisHistoryItem;
-      if (type === "action") {
-        const { value } = thisHistoryItem; // 1 is explore, 0 is ignore
-        if (value === 1) {
-          this.updateHistory("followup");
-        } else if (value === 0) {
-          this.updateHistory("followup"); // TODO but should skip to the next unnested
-        }
-        return null;
-      } else if (role === "interviewee") {
-        const { i } = thisHistoryItem;
-        const nextBubble = storyline[thisBubbleI + 1];
-        if (
-          i < storyline.length &&
-          storyline[i + 1].role === "interviewee" &&
-          nextBubble.role === "interviewee"
-        ) {
-          setTimeout(() => this.updateHistory("followup"), 1050);
-        } else if (nextBubble.role === "user") {
-          setTimeout(() => this.setState({ actionbar: "scripted" }), 1400);
-        }
+    // console.log("history: ", history);
+    // console.log("thisHistoryItem: ", thisHistoryItem);
+
+    if (isCurrentNotTheLastItem) {
+      const nextHistoryItem = storyline[thisHistoryItem.i + 1];
+      const nextItemRole = nextHistoryItem.role;
+      // console.log("nextItemRole: ", nextItemRole);
+
+      const isItIntervieweesTurn = nextItemRole === "interviewee";
+      const isItUsersTurn = nextItemRole === "user";
+
+      switch (thisItemType) {
+        case "init":
+          if (isItIntervieweesTurn) {
+            // wait 1050 for the prev bubble to end preloading
+            setTimeout(() => this.updateHistory("followup"), 1050);
+          }
+          return null;
+        case "followup":
+          if (isItIntervieweesTurn) {
+            // wait 1050 for the prev bubble to end preloading
+            setTimeout(() => this.updateHistory("followup"), 1050);
+          } else if (isItUsersTurn) {
+            setTimeout(() => this.setState({ actionbar: "scripted" }), 1400);
+          }
+          return null;
+        case "emoji":
+          console.log("onHistoryUpdate thisItemType: ", thisItemType);
+          return null;
+        case "ignore":
+          console.log("onHistoryUpdate thisItemType: ", thisItemType);
+          return null;
+        case "explore":
+          console.log("onHistoryUpdate thisItemType: ", thisItemType);
+          return null;
+        case "switchTo":
+          console.log("onHistoryUpdate thisItemType: ", thisItemType);
+          return null;
+        case "nvm":
+          console.log("onHistoryUpdate thisItemType: ", thisItemType);
+          return null;
+        case "quit":
+          console.log("onHistoryUpdate thisItemType: ", thisItemType);
+          return null;
+        default:
+          console.log("onHistoryUpdate thisItemType: ", thisItemType);
+          return null;
       }
     }
     return null;
   }
 
-  initHistory() {
-    const { interviewees } = this.props.story;
-    const intervieweeIndex = interviewees.findIndex(
-      (item) => item.id === this.props.params.chatId
-    );
-    const { storyline } = interviewees[intervieweeIndex];
-    const firstStorlineItem = storyline[0];
-    const noHistory = this.state.history.length === 0;
-    const startsWithInterviewee = firstStorlineItem.role === "interviewee";
-    if (noHistory && startsWithInterviewee) {
-      const firstBubbleRef = {
-        i: 0,
-        role: firstStorlineItem.role,
-        type: "init"
-      };
-      this.setState({ history: [firstBubbleRef] });
-    }
-  }
+  // const { role, type } = thisHistoryItem;
+  // if (type === "ignore" || type === "explore") {
+  //   const { value } = thisHistoryItem; // 1 is explore, 0 is ignore
+  //   if (value === 1) {
+  //     this.updateHistory("followup");
+  //   } else if (value === 0) {
+  //     this.updateHistory("followup"); // TODO but should skip to the next unnested
+  //   }
+  //   return null;
+  // } else if (role === "interviewee") {
+  //   const { i } = thisHistoryItem;
+  //   const nextBubble = storyline[thisBubbleI + 1];
+  //   if (
+  //     i < storyline.length &&
+  //     storyline[i + 1].role === "interviewee" &&
+  //     nextBubble.role === "interviewee"
+  //   ) {
+  //     setTimeout(() => this.updateHistory("followup"), 1050);
+  //   } else if (nextBubble.role === "user") {
+  //     setTimeout(() => this.setState({ actionbar: "scripted" }), 1400);
+  //   }
 
   switchChat(chatId) {
     const { story } = this.props;
@@ -127,22 +149,42 @@ class ChatView extends Component {
     this.setState({ [modal]: !this.state[modal] });
   }
 
-  findIntervieweeId(id) {
+  findIntervieweeIndex() {
     const { interviewees } = this.props.story;
-    const loopThrough = (loopId) =>
-      interviewees.findIndex((item) => item.id === loopId);
-    return id ? loopThrough(id) : loopThrough(this.props.params.chatId);
+    const { chatId } = this.props.params;
+    return interviewees.findIndex((item) => item.id === chatId);
+  }
+
+  initHistory() {
+    const { interviewees } = this.props.story;
+    const { storyline } = interviewees[this.findIntervieweeIndex()];
+    const firsStorylineItem = storyline[0];
+
+    const isHistoryEmpty = this.state.history.length === 0;
+    const doesIntervieweeStart = firsStorylineItem.role === "interviewee";
+
+    if (isHistoryEmpty && doesIntervieweeStart) {
+      const initHistoryItem = {
+        i: 0,
+        role: "interviewee",
+        type: "init"
+      };
+      this.setState({ history: [initHistoryItem] }, () =>
+        this.onHistoryUpdate("init")
+      );
+    }
+    return null;
   }
 
   updateHistory(type, payload) {
-    // hide actionbar till onBubbleRender will trigger another updateHistory loop that will enable it
+    // hide actionbar till onHistoryUpdate will trigger another updateHistory loop that will enable it
     this.setState({ actionbar: null });
 
     // grab necessary information
     const { history } = this.state;
     const { story } = this.props;
     const { interviewees } = story;
-    const interviewee = interviewees[this.findIntervieweeId()];
+    const interviewee = interviewees[this.findIntervieweeIndex()];
     const thisHistoryItem = history[history.length - 1];
 
     // local redux-y way of handling updateHistory logic
@@ -177,7 +219,7 @@ class ChatView extends Component {
       const ignore = {
         i: thisHistoryItem.i + 1,
         role: "user",
-        type: "action",
+        type,
         value: payload
       };
       history.push(ignore);
@@ -186,7 +228,7 @@ class ChatView extends Component {
       const explore = {
         i: thisHistoryItem.i + 1,
         role: "user",
-        type: "action",
+        type,
         value: payload
       };
       history.push(explore);
@@ -196,6 +238,7 @@ class ChatView extends Component {
         role: "interviewee",
         type: "followup"
       };
+      // delay follow-ups till prev bubble ends animating
       history.push(followup);
     }
 
@@ -208,15 +251,16 @@ class ChatView extends Component {
     }
 
     // update history state to re-render storyline
-    this.setState({ history });
+    // assume history is up-to-date, fire this.onHistoryUpdate()
+    this.setState({ history }, () => this.onHistoryUpdate());
   }
 
   render() {
     const { history } = this.state;
     const { story } = this.props;
     const { interviewees } = story;
-    const { storyline } = interviewees[this.findIntervieweeId()];
-    const interviewee = interviewees[this.findIntervieweeId()];
+    const { storyline } = interviewees[this.findIntervieweeIndex()];
+    const interviewee = interviewees[this.findIntervieweeIndex()];
 
     // if current bubble is the last one
     const isLastBubble = () => {
@@ -310,6 +354,9 @@ class ChatView extends Component {
       return null;
     };
 
+    // console.log("history: ", history);
+    // console.log("storyline: ", storyline);
+
     return [
       <Page key="page">
         <Topbar limit="m" padded>
@@ -336,7 +383,6 @@ class ChatView extends Component {
               history={this.state.history}
               initHistory={this.initHistory}
               interviewee={interviewee}
-              onBubbleRender={this.onBubbleRender}
               story={story}
               storyline={storyline}
               switchChat={this.switchChat}
