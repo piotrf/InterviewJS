@@ -252,8 +252,12 @@ export default class UserPane extends React.Component {
     } = this.state;
     const newUserBubble = {
       content: [
-        { enabled: enableExplore, value: exploreVal, type: "ignore" },
-        { enabled: enableContinue, value: continueVal, type: "explore" }
+        {
+          enabled: enableContinue,
+          value: continueVal,
+          type: enableExplore ? "ignore" : "explore"
+        },
+        { enabled: enableExplore, value: exploreVal, type: "explore" }
       ],
       role: "user"
     };
