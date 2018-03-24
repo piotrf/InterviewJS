@@ -1,10 +1,10 @@
-import { bool, func, shape, string, object } from "prop-types";
+import { bool, func, shape, string } from "prop-types";
 import { SketchPicker } from "react-color";
 import css from "styled-components";
 import Dropzone from "react-dropzone";
 import React, { Component } from "react";
 import Pica from "pica/dist/pica";
-import { PhotoPicker, S3Image } from "aws-amplify-react";
+import { S3Image } from "aws-amplify-react";
 
 import {
   Action,
@@ -34,6 +34,11 @@ const ColorPickerWrapper = css.span`
   z-index: 1000;
 `;
 
+const fileToKey = data => {
+  const { name, size, type } = data;
+  console.log(name, size, type);
+  return `test_${name}`;
+};
 
 export default class IntervieweeForm extends Component {
   constructor(props) {
@@ -78,11 +83,6 @@ export default class IntervieweeForm extends Component {
         }),
       350
     );
-  }
-
-  fileToKey(data) {
-    const { name, size, type } = data;
-    return 'test_' + name;
   }
 
   handleFile(f) {
@@ -253,7 +253,7 @@ export default class IntervieweeForm extends Component {
             <FormItem>
               <Label>Profile image</Label>
 
-              <S3Image level="private" title="Select file" path={`files/interviewees/${this.props.interviewee.id}`} picker fileToKey={this.fileToKey} />
+              <S3Image level="private" title="Select file" path={`files/interviewees/${this.props.interviewee.id}`} picker fileToKey={fileToKey} />
 
               <Dropzone
                 accept="image/jpeg, image/jpg, image/svg, image/gif, image/png"

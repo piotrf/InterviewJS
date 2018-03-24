@@ -1,6 +1,6 @@
 /* eslint func-names: 0 */
 
-import Amplify, { Auth } from "aws-amplify";
+import Amplify from "aws-amplify";
 import { createStore, compose, applyMiddleware } from "redux";
 import { syncHistoryWithStore } from "react-router-redux";
 import { browserHistory } from "react-router";
