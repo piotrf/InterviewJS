@@ -40,7 +40,11 @@ const SystemBubble = css.div`
     plain
       ? `
     background: none;
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
     overflow: visible;
+    padding-bottom: 0 !important;
+    padding-top: 0 !important;
     width: 100%;
   `
       : ``};
