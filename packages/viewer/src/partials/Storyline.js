@@ -54,9 +54,15 @@ class Storyline extends Component {
     setTimeout(() => this.scrollToBottom("instant"), 300);
     // this.setState({ replayCachedHistory: false });
   }
-  // shouldComponentUpdate(nextProps) {
-  //   return this.props.history.length < nextProps.history.length;
-  // }
+  componentWillReceiveProps() {
+    this.scrollToBottom();
+  }
+  componentWillUpdate() {
+    this.scrollToBottom();
+  }
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
   scrollToBottom(behaviour) {
     return this.anchor
       ? this.anchor.scrollIntoView({
@@ -73,8 +79,8 @@ class Storyline extends Component {
     const animateAndDelay = true;
     // const animateAndDelay = !replayCachedHistory;
 
-    const renderIntervieweeBubble = (data) => {
-      const { content, type } = data;
+    const renderIntervieweeBubble = (item, index) => {
+      const { content, type } = storyline[item.i];
 
       const getBubbleContent = () => {
         switch (type) {
@@ -112,7 +118,7 @@ class Storyline extends Component {
       };
 
       return (
-        <BubbleBlock>
+        <BubbleBlock key={index} persona="interviewee">
           <Bubble
             // animated={animateAndDelay}
             // delay={animateAndDelay ? 350 : null}
@@ -127,8 +133,30 @@ class Storyline extends Component {
       );
     };
 
-    console.log("—— RENDER STORYLINE ——");
-    console.log(history);
+    const renderUserBubble = (item, index) => {
+      const { type } = item;
+
+      const getBubbleContent = () => {
+        if (type === "ignore" || type === "explore") {
+          const { i } = item;
+          const { content } = storyline[i];
+          const filterByType = () =>
+            content.findIndex((contentEl) => contentEl.type === type);
+          return content[filterByType()].value;
+        } else if (type === "diss") {
+          return item.value;
+        } else if (type === "emoji") {
+          return <Icon name={item.value} />;
+        }
+        return null;
+      };
+
+      return (
+        <BubbleBlock key={index} persona="user">
+          <Bubble persona="user">{getBubbleContent()}</Bubble>
+        </BubbleBlock>
+      );
+    };
 
     return (
       <StorylineEl limit="m">
@@ -137,9 +165,9 @@ class Storyline extends Component {
           ? history.map((item, index) => {
               const { role } = item;
               if (role === "interviewee") {
-                return renderIntervieweeBubble(storyline[item.i]);
+                return renderIntervieweeBubble(item, index);
               } else if (role === "user") {
-                return <div>user</div>;
+                return renderUserBubble(item, index);
               } else if (role === "system") {
                 return <div>system</div>;
               }
@@ -183,55 +211,7 @@ class Storyline extends Component {
             //         );
             //       }
             //       return null;
-            //     } else if (role === "user") {
-            //       const { type } = item;
-            //       if (type === "emoji") {
-            //         const { value } = item;
-            //         return (
-            //           <BubbleGroup key={index}>
-            //             <Bubbles persona="user">
-            //               <Bubble persona="user" animated={animateAndDelay}>
-            //                 <Icon name={value} />
-            //               </Bubble>
-            //             </Bubbles>
-            //           </BubbleGroup>
-            //         );
-            //       } else if (type === "diss") {
-            //         const { value } = item;
-            //         return (
-            //           <BubbleGroup key={index}>
-            //             <Bubbles persona="user" animated={animateAndDelay}>
-            //               <Bubble persona="user">{value}</Bubble>
-            //             </Bubbles>
-            //           </BubbleGroup>
-            //         );
-            //       } else if (type === "ignore" || type === "explore") {
-            //         const { i } = item;
-            //         const { content } = storyline[i];
-            //         const filterByType = () =>
-            //           content.findIndex((contentEl) => contentEl.type === type);
-            //         const thisContent = content[filterByType()];
-            //         return (
-            //           <BubbleGroup key={index}>
-            //             <Bubbles persona="user">
-            //               <Bubble persona="user" animated={animateAndDelay}>
-            //                 {thisContent.value}
-            //               </Bubble>
-            //             </Bubbles>
-            //           </BubbleGroup>
-            //         );
-            //       }
-            //       return null;
             //     }
-            //     const { i } = item;
-            //     return (
-            //       <BubbleGroup key={index}>
-            //         <Bubbles persona="interviewee">
-            //           {renderIntervieweeBubble(storyline[i])}
-            //         </Bubbles>
-            //       </BubbleGroup>
-            //     );
-            //   })
             null}
         <div
           ref={(el) => {

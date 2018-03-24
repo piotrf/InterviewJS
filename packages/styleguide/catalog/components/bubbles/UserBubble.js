@@ -15,7 +15,6 @@ const SystemBubble = css.div`
   `
       : ``};
   align-content: center;
-  align-self: flex-end;
   align-items: center;
   align-self: flex-end;
   background-color: ${({ theme }) =>

@@ -1,4 +1,4 @@
-import { func } from "prop-types";
+import { string } from "prop-types";
 import css from "styled-components";
 
 const BubbleBlock = css.div`
@@ -7,14 +7,27 @@ const BubbleBlock = css.div`
   flex-direction: row;
   position: relative;
   width: 100%;
+  min-width: 100%;
+
+  /* align bubbles depending on the persona */
+
+  justify-content: ${({ persona }) => {
+    if (persona === "user") {
+      return `flex-end`;
+    } else if (persona === "interviewee") {
+      return `flex-start`;
+    }
+    return `center`;
+  }};
+  
 `;
 
 BubbleBlock.propTypes = {
-  callback: func
+  persona: string
 };
 
 BubbleBlock.defaultProps = {
-  callback: null
+  persona: null
 };
 
 export default BubbleBlock;

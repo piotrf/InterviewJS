@@ -585,8 +585,16 @@ const story = {
         },
         {
           content: [
-            { enabled: true, value: "Continue", type: "ignore" },
-            { enabled: true, value: "Explore", type: "explore" }
+            { enabled: true, value: "Gate 1 Ignore", type: "ignore" },
+            { enabled: true, value: "Gate 1 Explore", type: "explore" }
+          ],
+          id: uuidv4(),
+          role: "user"
+        },
+        {
+          content: [
+            { enabled: true, value: "Gate 2 Ignore", type: "ignore" },
+            { enabled: true, value: "Gate 2 Explore", type: "explore" }
           ],
           id: uuidv4(),
           role: "user"

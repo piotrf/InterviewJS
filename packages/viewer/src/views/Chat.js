@@ -1,4 +1,5 @@
 /* eslint react/forbid-prop-types: 0 */
+/* eslint no-case-declarations: 0 */
 import { object, shape, string } from "prop-types";
 import { withRouter } from "react-router";
 import React, { Component } from "react";
@@ -27,7 +28,7 @@ class ChatView extends Component {
     );
 
     this.state = {
-      actionbar: null,
+      actionbar: "scripted",
       currentIntervieweeId: this.props.params.chatId,
       history: localHistory || [],
       intervieweeModal: false,
@@ -48,84 +49,67 @@ class ChatView extends Component {
     const { interviewees } = this.props.story;
     const { storyline } = interviewees[this.findIntervieweeIndex()];
     const thisHistoryItem = history[history.length - 1];
+    const thisHistoryItemI = thisHistoryItem ? thisHistoryItem.i : 0;
     const thisItemType = thisHistoryItem.type;
-    // console.log("thisItemType: ", thisItemType);
 
-    const isCurrentNotTheLastItem = thisHistoryItem.i < storyline.length - 1;
-
-    // console.log("history: ", history);
-    // console.log("thisHistoryItem: ", thisHistoryItem);
+    const isCurrentNotTheLastItem = thisHistoryItemI < storyline.length - 1;
 
     if (isCurrentNotTheLastItem) {
-      const nextHistoryItem = storyline[thisHistoryItem.i + 1];
+      const nextHistoryItem = storyline[thisHistoryItemI + 1];
+      const secondNextHistoryItem = storyline[thisHistoryItemI + 2];
       const nextItemRole = nextHistoryItem.role;
       // console.log("nextItemRole: ", nextItemRole);
 
       const isItIntervieweesTurn = nextItemRole === "interviewee";
       const isItUsersTurn = nextItemRole === "user";
 
-      switch (thisItemType) {
-        case "init":
-          if (isItIntervieweesTurn) {
-            // wait 1050 for the prev bubble to end preloading
-            setTimeout(() => this.updateHistory("followup"), 1050);
-          }
-          return null;
-        case "followup":
-          if (isItIntervieweesTurn) {
-            // wait 1050 for the prev bubble to end preloading
-            setTimeout(() => this.updateHistory("followup"), 1050);
-          } else if (isItUsersTurn) {
-            setTimeout(() => this.setState({ actionbar: "scripted" }), 1400);
-          }
-          return null;
-        case "emoji":
-          console.log("onHistoryUpdate thisItemType: ", thisItemType);
-          return null;
-        case "ignore":
-          console.log("onHistoryUpdate thisItemType: ", thisItemType);
-          return null;
-        case "explore":
-          console.log("onHistoryUpdate thisItemType: ", thisItemType);
-          return null;
-        case "switchTo":
-          console.log("onHistoryUpdate thisItemType: ", thisItemType);
-          return null;
-        case "nvm":
-          console.log("onHistoryUpdate thisItemType: ", thisItemType);
-          return null;
-        case "quit":
-          console.log("onHistoryUpdate thisItemType: ", thisItemType);
-          return null;
-        default:
-          console.log("onHistoryUpdate thisItemType: ", thisItemType);
-          return null;
+      if (thisItemType === "init") {
+        if (isItIntervieweesTurn) {
+          // wait 1050 for the prev bubble to end preloading
+          setTimeout(() => this.updateHistory("followup"), 1050);
+        }
+        return null;
+      } else if (thisItemType === "followup") {
+        if (isItIntervieweesTurn) {
+          // wait 1050 for the prev bubble to end preloading
+          setTimeout(() => this.updateHistory("followup"), 1050);
+        } else if (isItUsersTurn) {
+          setTimeout(() => this.setState({ actionbar: "scripted" }), 1400);
+        }
+        return null;
+      } else if (thisItemType === "emoji") {
+        return null;
+      } else if (thisItemType === "ignore") {
+        const areNextTwoByInterviewee =
+          isItIntervieweesTurn && secondNextHistoryItem.role === "interviewee";
+        const isNextScriptedItemByUser = nextHistoryItem.role === "user";
+        if (areNextTwoByInterviewee) {
+          this.updateHistory("skip");
+        } else if (isNextScriptedItemByUser) {
+          this.setState({ actionbar: "scripted" });
+        } else {
+          this.updateHistory("followup");
+        }
+        return null;
+      } else if (thisItemType === "explore") {
+        const isNextScriptedItemByUser = nextHistoryItem.role === "user";
+        if (isNextScriptedItemByUser) {
+          this.setState({ actionbar: "scripted" });
+        } else {
+          this.updateHistory("followup");
+        }
+        return null;
+      } else if (thisItemType === "switchTo") {
+        return null;
+      } else if (thisItemType === "nvm") {
+        return null;
+      } else if (thisItemType === "quit") {
+        return null;
       }
+      return null;
     }
     return null;
   }
-
-  // const { role, type } = thisHistoryItem;
-  // if (type === "ignore" || type === "explore") {
-  //   const { value } = thisHistoryItem; // 1 is explore, 0 is ignore
-  //   if (value === 1) {
-  //     this.updateHistory("followup");
-  //   } else if (value === 0) {
-  //     this.updateHistory("followup"); // TODO but should skip to the next unnested
-  //   }
-  //   return null;
-  // } else if (role === "interviewee") {
-  //   const { i } = thisHistoryItem;
-  //   const nextBubble = storyline[thisBubbleI + 1];
-  //   if (
-  //     i < storyline.length &&
-  //     storyline[i + 1].role === "interviewee" &&
-  //     nextBubble.role === "interviewee"
-  //   ) {
-  //     setTimeout(() => this.updateHistory("followup"), 1050);
-  //   } else if (nextBubble.role === "user") {
-  //     setTimeout(() => this.setState({ actionbar: "scripted" }), 1400);
-  //   }
 
   switchChat(chatId) {
     const { story } = this.props;
@@ -158,11 +142,9 @@ class ChatView extends Component {
   initHistory() {
     const { interviewees } = this.props.story;
     const { storyline } = interviewees[this.findIntervieweeIndex()];
-    const firsStorylineItem = storyline[0];
-
     const isHistoryEmpty = this.state.history.length === 0;
+    const firsStorylineItem = storyline[0];
     const doesIntervieweeStart = firsStorylineItem.role === "interviewee";
-
     if (isHistoryEmpty && doesIntervieweeStart) {
       const initHistoryItem = {
         i: 0,
@@ -214,31 +196,29 @@ class ChatView extends Component {
         type: "quit"
       };
       history.push(quit);
-    } else if (type === "ignore") {
+    } else if (type === "skip") {
       this.setState({ actionbar: null });
-      const ignore = {
-        i: thisHistoryItem.i + 1,
+      const skip = {
+        i: thisHistoryItem.i + 2,
+        role: "interviewee",
+        type: "followup"
+      };
+      history.push(skip);
+    } else if (type === "ignore" || type === "explore") {
+      this.setState({ actionbar: null });
+      const action = {
+        i: history.length > 0 ? thisHistoryItem.i + 1 : 0,
         role: "user",
         type,
         value: payload
       };
-      history.push(ignore);
-    } else if (type === "explore") {
-      this.setState({ actionbar: null });
-      const explore = {
-        i: thisHistoryItem.i + 1,
-        role: "user",
-        type,
-        value: payload
-      };
-      history.push(explore);
+      history.push(action);
     } else if (type === "followup") {
       const followup = {
         i: thisHistoryItem.i + 1,
         role: "interviewee",
         type: "followup"
       };
-      // delay follow-ups till prev bubble ends animating
       history.push(followup);
     }
 
@@ -261,10 +241,11 @@ class ChatView extends Component {
     const { interviewees } = story;
     const { storyline } = interviewees[this.findIntervieweeIndex()];
     const interviewee = interviewees[this.findIntervieweeIndex()];
+    const hasHistory = history.length > 0;
 
     // if current bubble is the last one
     const isLastBubble = () => {
-      if (history.length > 0) {
+      if (hasHistory) {
         const thisHistoryItem = history[history.length - 1];
         const thisBubbleI = thisHistoryItem.i;
         const lastBubbleI = storyline.length - 1;
@@ -275,7 +256,7 @@ class ChatView extends Component {
 
     // if current action should be `nevermind`
     const isNvmBubble = () => {
-      if (history.length > 0) {
+      if (hasHistory) {
         const thisHistoryItem = history[history.length - 1];
         return thisHistoryItem.type === "switchTo";
       }
@@ -286,9 +267,8 @@ class ChatView extends Component {
     const hideActionbarSatellites = !isNvmBubble() && !isLastBubble();
 
     const renderUserActions = () => {
-      if (history.length > 0) {
+      if (hasHistory) {
         const thisHistoryItem = history[history.length - 1];
-
         const thisBubbleI = thisHistoryItem.i;
         const lastBubbleI = storyline.length;
 
@@ -310,7 +290,7 @@ class ChatView extends Component {
           // } else if (thisBubbleI < lastBubbleI - 1 && !this.state.hideActionbar) {
         }
         const nextBubble = storyline[thisBubbleI + 1];
-        if (nextBubble.role === "user" && this.state.actionbar) {
+        if (nextBubble.role === "user" && this.state.actionbar === "scripted") {
           if (isActiveActionbarEmot) {
             return <EmoActions updateHistory={this.updateHistory} />;
           } else if (isActiveActionbarRunaway) {
@@ -329,13 +309,17 @@ class ChatView extends Component {
                   fixed
                   key={action.type}
                   onClick={() => this.updateHistory(action.type, i)}
-                  primary
+                  primary={action.type === "explore"}
+                  secondary={action.type === "ignore"}
                 >
                   {action.value}
                 </Action>
               ) : null
           );
-        } else if (nextBubble.role === "user" && this.state.actionbar) {
+        } else if (
+          nextBubble.role === "user" &&
+          this.state.actionbar === "scripted"
+        ) {
           return nextBubble.content.map(
             (action, i) =>
               action.enabled ? (
@@ -343,19 +327,36 @@ class ChatView extends Component {
                   fixed
                   key={action.type}
                   onClick={() => this.updateHistory(action.type, i)}
-                  primary
+                  primary={action.type === "explore"}
+                  secondary={action.type === "ignore"}
                 >
                   {action.value}
                 </Action>
               ) : null
           );
         }
+      } else if (!hasHistory && storyline[0].role === "user") {
+        return storyline[0].content.map(
+          (action, i) =>
+            action.enabled ? (
+              <Action
+                fixed
+                key={action.type}
+                onClick={() => this.updateHistory(action.type, i)}
+                primary={action.type === "explore"}
+                secondary={action.type === "ignore"}
+              >
+                {action.value}
+              </Action>
+            ) : null
+        );
       }
       return null;
     };
 
-    // console.log("history: ", history);
+    console.log("history: ", history);
     // console.log("storyline: ", storyline);
+    // console.log(this.state);
 
     return [
       <Page key="page">

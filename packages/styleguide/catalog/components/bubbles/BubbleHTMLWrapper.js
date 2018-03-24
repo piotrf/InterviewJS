@@ -55,7 +55,9 @@ export default BubbleHTMLWrapper;
 
 BubbleHTMLWrapper.propTypes = {
   children: oneOfType([array, object, string]).isRequired,
-  displayType: string.isRequired
+  displayType: string
 };
 
-BubbleHTMLWrapper.defaultProps = {};
+BubbleHTMLWrapper.defaultProps = {
+  displayType: "plain"
+};
