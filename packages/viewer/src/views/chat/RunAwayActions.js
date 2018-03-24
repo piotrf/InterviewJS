@@ -1,5 +1,6 @@
+/* eslint react/forbid-prop-types: 0 */
 import React from "react";
-import { bool, func } from "prop-types";
+import { bool, func, object } from "prop-types";
 import { Action } from "interviewjs-styleguide";
 
 const RunAwayActions = (props) => [
@@ -16,7 +17,7 @@ const RunAwayActions = (props) => [
   <Action
     fixed
     key="doneChatting"
-    onClick={() => props.navigateAway("/story/outro")}
+    onClick={() => props.navigateAway(`/${props.story.id}/outro`)}
     primary
     tone="negative"
   >
@@ -27,7 +28,8 @@ const RunAwayActions = (props) => [
 RunAwayActions.propTypes = {
   isSwitchPossible: bool.isRequired,
   updateHistory: func.isRequired,
-  navigateAway: func.isRequired
+  navigateAway: func.isRequired,
+  story: object
 };
 
 export default RunAwayActions;

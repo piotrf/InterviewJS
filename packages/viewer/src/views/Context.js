@@ -39,7 +39,7 @@ export default class ContextView extends Component {
     return [
       <Topbar
         handleDetails={this.toggleDetailsModal}
-        handleBack={() => this.props.router.push(`/story`)}
+        handleBack={() => this.props.router.push(`/${story.id}`)}
         key="topbar"
       />,
       <Page key="page">
@@ -57,7 +57,7 @@ export default class ContextView extends Component {
           <Actionbar>
             <Action
               fixed
-              onClick={() => this.props.router.push(`/story/interviewees`)}
+              onClick={() => this.props.router.push(`/${story.id}/interviewees`)}
               primary
             >
               Meet your interviewees

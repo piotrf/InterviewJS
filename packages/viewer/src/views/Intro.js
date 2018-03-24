@@ -1,7 +1,8 @@
 /* eslint react/forbid-prop-types: 0 */
 import css from "styled-components";
 import React, { Component } from "react";
-import { object, shape, string, func } from "prop-types";
+import { object, func } from "prop-types";
+import axios from "axios";
 
 import {
   Action,
@@ -70,12 +71,19 @@ export default class IntroView extends Component {
       window.addEventListener(
         "message",
         ({ data, origin, source }) => {
-          console.log(origin, data);
+          console.log(origin, data, source);
           if (data.interviewees) this.props.createStory(data);
         },
         false
       );
     }
+
+    if ((!this.props.story || Object.keys(this.props.story).length === 0) && this.props.params.storyId) {
+      axios.get(window.InterviewJS.getStoryURL(this.props.params.storyId))
+        .then(response => this.props.createStory(response.data));
+    }
+
+    console.log(this.props);
   }
 
   toggleDetailsModal() {
@@ -86,6 +94,7 @@ export default class IntroView extends Component {
     const { story } = this.props;
     if (!story || Object.keys(story).length === 0) return null; // FIXME show spinner
     console.log(story);
+
     return [
       <Topbar handleDetails={this.toggleDetailsModal} key="topbar" />,
       <Page key="page">
@@ -126,7 +135,7 @@ export default class IntroView extends Component {
           <Actionbar>
             <Action
               fixed
-              onClick={() => this.props.router.push(`/story/context`)}
+              onClick={() => this.props.router.push(`/${story.id}/context`)}
               primary
             >
               Continue
@@ -149,12 +158,12 @@ export default class IntroView extends Component {
 IntroView.propTypes = {
   createStory: func.isRequired,
   router: object,
-  story: shape({
-    title: string
-  })
+  story: object,
+  params: object,
 };
 
 IntroView.defaultProps = {
   router: null,
-  story: {}
+  story: null,
+  params: {}
 };
