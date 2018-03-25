@@ -288,6 +288,7 @@ class ChatView extends Component {
             </Action>
           );
         }
+        return null;
       });
 
     const renderUserActions = () => {
