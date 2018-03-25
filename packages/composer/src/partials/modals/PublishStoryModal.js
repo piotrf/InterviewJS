@@ -117,7 +117,7 @@ export default class PublishStoryModal extends Component {
     if (document.location.hostname.toLowerCase() === "beta.interviewjs.io") iframeViewer = "https://beta.interviewjs.net/";
     if (document.location.hostname.toLowerCase() === "localhost") iframeViewer = "https://alpha.interviewjs.net/";
     if (document.location.hostname.toLowerCase() === "alpha.interviewjs.io") iframeViewer = "https://alpha.interviewjs.net/";
-    if (this.state.storyKey) iframeViewer += this.state.storyKey;
+    if (this.state.storyKey) iframeViewer += this.props.story.id;
 
     const { step } = this.state;
     const getModalBody = () => {
