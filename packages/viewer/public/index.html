@@ -26,8 +26,8 @@
           getStoryURL: function(storyId) {
             // sample story, resolving only if un-framed
             if (window.top === window && storyId === "0bf34b30-743b-46ab-weewe-c875326d86f6") return "/sample-story/sample-story.json";
-
-            return null;
+            return "https://s3.amazonaws.com/interviewjs-userfiles-mobilehub-1138514045/public/stories/" + storyId + "/story.json";
+            // return null;
           }
         };
       </script>
