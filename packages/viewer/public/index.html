@@ -24,8 +24,10 @@
       <script>
         window.InterviewJS = {
           getStoryURL: function(storyId) {
-            if (storyId === "0bf34b30-743b-46ab-weewe-c875326d86f6") return "./sample-story/sample-story.json";
-            // else return service?
+            // sample story, resolving only if un-framed
+            if (window.top === window && storyId === "0bf34b30-743b-46ab-weewe-c875326d86f6") return "./sample-story/sample-story.json";
+
+            return null;
           }
         };
       </script>

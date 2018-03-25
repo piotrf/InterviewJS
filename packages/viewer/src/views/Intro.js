@@ -67,6 +67,7 @@ export default class IntroView extends Component {
   }
 
   componentDidMount() {
+    // I'm framed, wait for message with JSON that looks like a story -- FIXME
     if (window.top !== window && window.addEventListener) {
       window.addEventListener(
         "message",
@@ -78,12 +79,11 @@ export default class IntroView extends Component {
       );
     }
 
+    // Load story via storyId -> getStoryURL
     if ((!this.props.story || Object.keys(this.props.story).length === 0) && this.props.params.storyId) {
-      axios.get(window.InterviewJS.getStoryURL(this.props.params.storyId))
-        .then(response => this.props.createStory(response.data));
+      const storyURL = window.InterviewJS.getStoryURL(this.props.params.storyId);
+      if (storyURL) axios.get(storyURL).then(response => this.props.createStory(response.data));
     }
-
-    console.log(this.props);
   }
 
   toggleDetailsModal() {
