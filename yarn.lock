@@ -439,6 +439,10 @@ ansi@^0.3.0, ansi@~0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/ansi/-/ansi-0.3.1.tgz#0c42d4fb17160d5a9af1e484bace1c66922c1b21"
 
+any-base@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/any-base/-/any-base-1.1.0.tgz#ae101a62bc08a597b4c9ab5b7089d456630549fe"
+
 any-observable@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/any-observable/-/any-observable-0.2.0.tgz#c67870058003579009083f54ac0abafb5c33d242"
@@ -10894,6 +10898,13 @@ shelljs@0.7.0:
 shellwords@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/shellwords/-/shellwords-0.1.1.tgz#d6b9181c1a48d397324c84871efbcfc73fc0654b"
+
+short-uuid@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/short-uuid/-/short-uuid-3.0.0.tgz#024db8b2077eada981902d00b047ea9003482921"
+  dependencies:
+    any-base "^1.1.0"
+    uuid "^3.2.1"
 
 shortid@^2.2.6:
   version "2.2.8"
