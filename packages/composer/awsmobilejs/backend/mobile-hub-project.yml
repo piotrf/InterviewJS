@@ -2,6 +2,94 @@
 apps:
   web: !com.amazonaws.mobilehub.v0.AppDO {}
 features:
+  cloudlogic: !com.amazonaws.mobilehub.v0.CloudLogic 
+    components:
+      Poll: !com.amazonaws.mobilehub.v0.API 
+        attributes:
+          disable-aws-auth: true
+          name: Poll
+          requires-signin: false
+          sdk-generation-stage-name: Development
+        paths:
+          /poll: !com.amazonaws.mobilehub.v0.Function 
+            codeFilename: uploads/pollHandler-20180325164035.zip
+            description: 'Handler for calls to resource path : /poll/{proxy+}'
+            environment: {}
+            handler: index.handler
+            hashcode: QyYGXhtU4ggpKRxauccGZB9KmdUSt3/bGrknaz6ACPU=
+            memorySize: '128'
+            modified: '2018-03-25T09:41:56.608+0000'
+            name: pollHandler
+            runtime: nodejs6.10
+            timeout: '3'
+            version: XZKkmPpcpCxYuJE1m1crfogsB0mWCFU7
+          '/poll/{proxy+}': !com.amazonaws.mobilehub.v0.Function 
+            codeFilename: uploads/pollHandler-20180325164035.zip
+            description: 'Handler for calls to resource path : /poll/{proxy+}'
+            environment: {}
+            handler: index.handler
+            hashcode: QyYGXhtU4ggpKRxauccGZB9KmdUSt3/bGrknaz6ACPU=
+            memorySize: '128'
+            modified: '2018-03-25T09:41:56.608+0000'
+            name: pollHandler
+            runtime: nodejs6.10
+            timeout: '3'
+            version: .uLy5F0kQgcmJUn9a0ZpGJGZAKzRoldx
+      Story: !com.amazonaws.mobilehub.v0.API 
+        attributes:
+          disable-aws-auth: false
+          name: Story
+          requires-signin: true
+          sdk-generation-stage-name: Development
+        paths:
+          /export: !com.amazonaws.mobilehub.v0.Function 
+            codeFilename: uploads/exportHandler-20180325164035.zip
+            description: 'Handler for calls to resource path : /export/{proxy+}'
+            environment: {}
+            handler: index.handler
+            hashcode: +stvSMUoJ44ubveB4Kmq2N7lmI0vW73y260dV209z4c=
+            memorySize: '128'
+            modified: '2018-03-25T09:41:56.285+0000'
+            name: exportHandler
+            runtime: nodejs6.10
+            timeout: '3'
+            version: 4.O.Xg3RvcWBnH8xGSiCKx9QreZIFcq7
+          '/export/{proxy+}': !com.amazonaws.mobilehub.v0.Function 
+            codeFilename: uploads/exportHandler-20180325164035.zip
+            description: 'Handler for calls to resource path : /export/{proxy+}'
+            environment: {}
+            handler: index.handler
+            hashcode: +stvSMUoJ44ubveB4Kmq2N7lmI0vW73y260dV209z4c=
+            memorySize: '128'
+            modified: '2018-03-25T09:41:56.285+0000'
+            name: exportHandler
+            runtime: nodejs6.10
+            timeout: '3'
+            version: FZKMrVO9fBx4XU2cMYPvMExsHmH2ezVJ
+          /publish: !com.amazonaws.mobilehub.v0.Function 
+            codeFilename: uploads/publishHandler-20180325164035.zip
+            description: 'Handler for calls to resource path : /publish/{proxy+}'
+            environment: {}
+            handler: index.handler
+            hashcode: ns9gLw8TnPXCWuhLHG0HZRnoyHWMkVvV/aQ2wyEUeM8=
+            memorySize: '128'
+            modified: '2018-03-25T09:41:56.087+0000'
+            name: publishHandler
+            runtime: nodejs6.10
+            timeout: '3'
+            version: RDab4rA09.QMrX82Swabls3jnujrb_BI
+          '/publish/{proxy+}': !com.amazonaws.mobilehub.v0.Function 
+            codeFilename: uploads/publishHandler-20180325164035.zip
+            description: 'Handler for calls to resource path : /publish/{proxy+}'
+            environment: {}
+            handler: index.handler
+            hashcode: ns9gLw8TnPXCWuhLHG0HZRnoyHWMkVvV/aQ2wyEUeM8=
+            memorySize: '128'
+            modified: '2018-03-25T09:41:56.087+0000'
+            name: publishHandler
+            runtime: nodejs6.10
+            timeout: '3'
+            version: _trCMf9ew06wpMPKrH1SU0A_d1ztBeee
   sign-in: !com.amazonaws.mobilehub.v0.SignIn 
     attributes:
       enabled: true
