@@ -3,7 +3,7 @@
   "description": "",
   "version": "0.1.0",
   "author": "",
-  "homepage": "https://www.interviewjs.io/",
+  "homepage": "https://www.interviewjs.io/my/",
   "dependencies": {
     "amazon-cognito-auth-js": "^1.1.4",
     "aws-amplify": "^0.2.11",
