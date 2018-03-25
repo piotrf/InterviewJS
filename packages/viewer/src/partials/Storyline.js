@@ -11,7 +11,6 @@ import {
   BubbleBlock,
   Message,
   Container,
-  Separator,
   Icon,
   color,
   setSpace
@@ -40,6 +39,10 @@ const Push = css.div`
   height: calc(100% - 80px);
   margin: 0;
   padding: 0;
+`;
+
+const AvatarHolder = css(Container)`
+  ${setSpace("prs")};
 `;
 
 class Storyline extends Component {
@@ -173,11 +176,18 @@ class Storyline extends Component {
                     persona="system"
                     onClick={() => this.props.switchChat(character.id)}
                   >
-                    <Avatar image={character.avatar} size="s" />
-                    <Separator dir="v" size="x" silent />
-                    <Action onClick={() => this.props.switchChat(character.id)}>
-                      {character.name}
-                    </Action>
+                    <Container dir="row">
+                      <AvatarHolder flex={[1, 0, "auto"]}>
+                        <Avatar image={character.avatar} size="s" />
+                      </AvatarHolder>
+                      <Container flex={[1, 1, "100%"]}>
+                        <Action
+                          onClick={() => this.props.switchChat(character.id)}
+                        >
+                          {character.name}
+                        </Action>
+                      </Container>
+                    </Container>
                   </Bubble>
                 ) : null
             )}
