@@ -1,4 +1,4 @@
-import uuidv4 from "uuid/v4";
+import shortUuid from "short-uuid";
 
 import AVA from "./media/ava.png";
 import OBAMA from "./media/obama.png";
@@ -7,6 +7,9 @@ import TRUMP from "./media/trump.png";
 // import LOGO from "./media/logo.png";
 // import KYLAND from "./media/hyland.png";
 // import CHANDRAN from "./media/chandran.png";
+
+
+const uuidv4 = () => shortUuid().fromUUID(shortUuid.uuid());
 
 const stories = [
   {

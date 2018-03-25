@@ -1,6 +1,8 @@
-import uuidv4 from "uuid/v4";
+import shortUuid from "short-uuid";
 import Raven from "raven-js";
 import { base } from "../configureStore";
+
+const uuidv4 = () => shortUuid().fromUUID(shortUuid.uuid());
 
 export function createStory({
   uid = "anonymous",
@@ -14,7 +16,7 @@ export function createStory({
       avatar: "",
       bio: "",
       color: "",
-      id: uuidv4(),
+      id: `iv_${uuidv4()}`,
       name: "Name of interviewee",
       srcText: "",
       storyline: [],
@@ -40,7 +42,7 @@ export function createStory({
       pubDate,
       title,
       uid,
-      id: uuidv4(),
+      id: `s0_${uuidv4()}`,
       modDate: new Date()
     }
   };

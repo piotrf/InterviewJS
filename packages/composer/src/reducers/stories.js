@@ -5,9 +5,11 @@
 /* eslint no-unused-vars: 0 */
 /* eslint no-param-reassign: 0 */
 
-import uuidv4 from "uuid/v4";
+import shortUuid from "short-uuid";
 import Raven from "raven-js";
 import { base } from "../configureStore";
+
+const uuidv4 = () => shortUuid().fromUUID(shortUuid.uuid());
 
 function stories(state = [], action) {
   const {
@@ -189,7 +191,7 @@ function storiesWrapper(state = [], action) {
       storyId = state[storyIndex].id;
     if (type === "CREATE_STORY") storyId = payload.id;
 
-    if (!storyId) storyId = `temp-${uuidv4()}`;
+    if (!storyId) storyId = `s0_tmp_${uuidv4()}`;
 
     console.log(uid, storyId);
 
