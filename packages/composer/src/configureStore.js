@@ -72,7 +72,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 
 const defaultState = {
-  stories, //: [],
+  stories, // : [],
   user: {}
 };
 

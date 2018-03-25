@@ -3,6 +3,7 @@ import css from "styled-components";
 import React, { Component } from "react";
 import ReactModal from "react-modal";
 import { arrayOf, bool, func, number, object } from "prop-types";
+import { Storage } from "aws-amplify";
 
 import {
   Actionbar,
@@ -59,7 +60,8 @@ export default class PublishStoryModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      step: 0
+      step: 0,
+      storyKey: null,
     };
     this.handleStep0 = this.handleStep0.bind(this);
     this.handleStep1 = this.handleStep1.bind(this);
@@ -69,10 +71,9 @@ export default class PublishStoryModal extends Component {
 
   componentDidUpdate() {
     if (this.iframe) {
-      console.log(this.iframe);
       this.iframe.addEventListener("load", () => {
-        console.log("iframe loaded");
-        setTimeout(
+        // console.log("iframe loaded");
+        if (!this.state.storyKey) setTimeout(
           () => this.iframe.contentWindow.postMessage(this.props.story, "*"),
           5000
         );
@@ -91,7 +92,20 @@ export default class PublishStoryModal extends Component {
   }
 
   handleStep2() {
-    this.setState({ step: this.state.step + 1 });
+    // Publish
+    // FIXME: security
+    Storage.put(`stories/${this.props.story.id}/story.json`, JSON.stringify(this.props.story), {
+      level: "public",
+      contentType: "application/json"
+    })
+    .then (result => {
+      console.log(result);
+      this.setState({
+        step: this.state.step + 1,
+        storyKey: result.key,
+      });
+    })
+    .catch(err => console.log(err));
   }
 
   handleStep3() {
@@ -101,8 +115,9 @@ export default class PublishStoryModal extends Component {
   render() {
     let iframeViewer = "https://interviewjs.net/";
     if (document.location.hostname.toLowerCase() === "beta.interviewjs.io") iframeViewer = "https://beta.interviewjs.net/";
-    if (document.location.hostname.toLowerCase() === "localhost") iframeViewer = "https://beta.interviewjs.net/";
+    if (document.location.hostname.toLowerCase() === "localhost") iframeViewer = "https://alpha.interviewjs.net/";
     if (document.location.hostname.toLowerCase() === "alpha.interviewjs.io") iframeViewer = "https://alpha.interviewjs.net/";
+    if (this.state.storyKey) iframeViewer += this.state.storyKey;
 
     const { step } = this.state;
     const getModalBody = () => {
@@ -176,14 +191,14 @@ export default class PublishStoryModal extends Component {
               <Action fixed primary onClick={this.handleStep3}>
                 Close
               </Action>
-              {/* <Action
+              <Action
                 fixed
-                href={`http://interviewjs.io/story/${this.props.story.id}`} // TODO actual url
+                href={`${iframeViewer}`} // TODO actual url
                 secondary
                 target="_blank"
               >
                 Open your story
-              </Action> */}
+              </Action>
             </Actionbar>
           </Container>
         );
