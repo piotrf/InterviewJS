@@ -255,7 +255,7 @@ class ChatView extends Component {
         const thisHistoryItem = history[history.length - 1];
         const thisBubbleI = thisHistoryItem.i;
         const lastBubbleI = storyline.length - 1;
-        return thisBubbleI === lastBubbleI;
+        return thisBubbleI === lastBubbleI || thisHistoryItem.type === "quit";
       }
       return false;
     };
@@ -302,7 +302,9 @@ class ChatView extends Component {
         const nextHistoryItem = storyline[thisHistoryItemI + 1];
 
         const isLastBubbleSwitchTo = thisHistoryItem.type === "switchTo";
-        const isTheVeryLastBubble = thisHistoryItemI === storyline.length - 1;
+        const isTheVeryLastBubble =
+          thisHistoryItemI === storyline.length - 1 ||
+          thisHistoryItem.type === "quit";
 
         if (isTheVeryLastBubble || isActiveActionbarRunaway) {
           return (
