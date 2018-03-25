@@ -59,11 +59,23 @@ class Storyline extends Component {
     setTimeout(() => this.scrollToBottom("instant"), 400);
     this.setState({ replayCachedHistory: false });
   }
-  componentDidUpdate() {
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.currentIntervieweeId !== this.props.currentIntervieweeId) {
+      this.setState({ replayCachedHistory: true });
+    }
+  }
+  componentDidUpdate(prevProps) {
+    if (prevProps.currentIntervieweeId !== this.props.currentIntervieweeId) {
+      this.setState({ replayCachedHistory: false });
+      setTimeout(() => this.scrollToBottom("instant"), 0);
+      setTimeout(() => this.scrollToBottom("instant"), 350);
+    }
     setTimeout(() => this.scrollToBottom(), 0);
     setTimeout(() => this.scrollToBottom(), 350);
     setTimeout(() => this.scrollToBottom(), 700);
     setTimeout(() => this.scrollToBottom(), 1050);
+    setTimeout(() => this.scrollToBottom(), 1400);
+    setTimeout(() => this.scrollToBottom(), 1750);
   }
   scrollToBottom(behaviour) {
     return this.anchor
@@ -155,7 +167,9 @@ class Storyline extends Component {
 
       return (
         <BubbleBlock key={index} persona="user">
-          <Bubble persona="user">{getBubbleContent()}</Bubble>
+          <Bubble persona="user" animated={animateAndDelay}>
+            {getBubbleContent()}
+          </Bubble>
         </BubbleBlock>
       );
     };
