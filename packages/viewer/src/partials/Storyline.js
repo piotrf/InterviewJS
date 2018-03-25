@@ -24,6 +24,8 @@ const StorylineEl = css(Container)`
   height: 100%;
   left: 0;
   overflow-y: auto;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
   position: absolute;
   right: 0;
   top: 0;
