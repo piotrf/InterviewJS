@@ -6,17 +6,11 @@
 
 // AWS Mobile Hub Project Constants
 const awsmobile = {
-    'aws_app_analytics': 'enable',
-    'aws_cloud_logic': 'enable',
-    'aws_cloud_logic_custom': [{"id":"fgw5ay553l","name":"Story Operations","description":"","endpoint":"https://fgw5ay553l.execute-api.us-east-1.amazonaws.com/Development","region":"us-east-1","paths":["/publish","/publish/123"]}],
     'aws_cognito_identity_pool_id': 'us-east-1:b664e90d-e934-440d-ad16-97399db45ac3',
     'aws_cognito_region': 'us-east-1',
-    'aws_mobile_analytics_app_id': '161c3cf6a0a54646bb0426b48e222592',
-    'aws_mobile_analytics_app_region': 'us-east-1',
     'aws_project_id': 'b3a8c824-850b-4b98-9df5-66bd666c3cef',
     'aws_project_name': 'InterviewJS',
     'aws_project_region': 'us-east-1',
-    'aws_resource_bucket_name': 'interviewjs-deployments-mobilehub-1138514045',
     'aws_resource_name_prefix': 'interviewjs-mobilehub-1138514045',
     'aws_sign_in_enabled': 'enable',
     'aws_user_files': 'enable',

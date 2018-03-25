@@ -2,44 +2,6 @@
 apps:
   web: !com.amazonaws.mobilehub.v0.AppDO {}
 features:
-  cloudlogic: !com.amazonaws.mobilehub.v0.CloudLogic 
-    attributes:
-      no-lock: true
-    components:
-      Story Operations: !com.amazonaws.mobilehub.v0.API 
-        attributes:
-          disable-aws-auth: true
-          name: Story Operations
-          requires-signin: false
-          sdk-generation-stage-name: Development
-        paths:
-          /publish: !com.amazonaws.mobilehub.v0.Function 
-            codeFilename: uploads/publishStory-20180325143639.zip
-            description: 'Handler for calls to resource path : /publish/{proxy+}'
-            environment: {}
-            handler: index.handler
-            hashcode: Hlhjua8PYINAO6H/eGpbNgbz5/q1HBVuluec7qzfWI8=
-            memorySize: '128'
-            modified: '2018-03-25T07:37:17.259+0000'
-            name: publishStory
-            runtime: nodejs6.10
-            timeout: '3'
-            version: 8lAoEAPkG_b7uI2tGhJw0WA2fRpmEQ57
-          '/publish/{proxy+}': !com.amazonaws.mobilehub.v0.Function 
-            codeFilename: uploads/publishStory-20180325143639.zip
-            description: 'Handler for calls to resource path : /publish/{proxy+}'
-            environment: {}
-            handler: index.handler
-            hashcode: Hlhjua8PYINAO6H/eGpbNgbz5/q1HBVuluec7qzfWI8=
-            memorySize: '128'
-            modified: '2018-03-25T07:37:17.259+0000'
-            name: publishStory
-            runtime: nodejs6.10
-            timeout: '3'
-            version: RsXtWNAxVimL3LOyxMtqRbkfBBaifll3
-  mobile-analytics: !com.amazonaws.mobilehub.v0.Pinpoint 
-    components:
-      analytics: !com.amazonaws.mobilehub.v0.PinpointAnalytics {}
   sign-in: !com.amazonaws.mobilehub.v0.SignIn 
     attributes:
       enabled: true

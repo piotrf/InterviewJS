@@ -100,15 +100,7 @@ export default class PublishStoryModal extends Component {
     .then (async result => {
       console.log(result);
 
-      const { result2 } = await API.get("Story Operations", `/publish/${this.props.story.id}`, {
-        // headers: {
-        //   "Access-Control-Allow-Headers": "Access-Control-Allow-Methods, Origin, X-Requested-With, Content-Type, Accept, Authorization",
-        //   "Access-Control-Allow-Origin": "*",
-        //   "Access-Control-Allow-Credentials": "true",
-        //   "Access-Control-Allow-Methods": "GET,HEAD,OPTIONS,POST,PUT"
-        // },
-        response: true
-      });
+      const { result2 } = await API.get("Story Operations", `/publish/${this.props.story.id}`, { response: true });
       console.log(result2);
 
       this.setState({
