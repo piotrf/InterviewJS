@@ -4,6 +4,9 @@ import { bool, func } from "prop-types";
 import { Auth } from "aws-amplify";
 
 import {
+  Separator,
+  FormItem,
+  Label,
   Text,
   Actionbar,
   Action,
@@ -43,6 +46,7 @@ export default class AuthModal extends React.Component {
     this.handleForgotPassword = this.handleForgotPassword.bind(this);
     this.handleConfirmForgotPassword = this.handleConfirmForgotPassword.bind(this);
     this.handleTabActivation = this.handleTabActivation.bind(this);
+    this.toggleForgotPassword = this.toggleForgotPassword.bind(this);
   }
 
   async componentDidMount() {
@@ -52,8 +56,12 @@ export default class AuthModal extends React.Component {
     }
   }
 
+  toggleForgotPassword() {
+    this.setState({ forgotPassword: true });
+  }
+
   handleTabActivation(activeTab) {
-    this.setState({ activeTab });
+    this.setState({ activeTab, forgotPassword: false });
   }
 
   handleInputChange({ target }) {
@@ -176,31 +184,64 @@ export default class AuthModal extends React.Component {
                   <PaneTab opinionated active={this.state.activeTab === "signUp"} onClick={() => this.handleTabActivation("signUp")}>Sign Up</PaneTab>
                 </PaneTabs>
 
-                <Text typo="h3">{ this.state.message }</Text>
+                <Separator dir="h" size="s" silent />
+                <Text typo="h3">{ this.state.message ? this.state.message : "\xa0" }</Text>
 
-                { this.state.activeTab === "signIn" ?
+                { !this.state.forgotPassword && this.state.activeTab === "signIn" ?
                   <div style={{ padding: "1em" }}>
-                    <TextInput input type="text" name="username" placeholder="username" value={this.state.username} onChange={this.handleInputChange} />
-                    <TextInput input type="password" name="password" placeholder="password" onChange={this.handleInputChange} />
+                    <FormItem>
+                      <Label>Username</Label>
+                      <TextInput input type="text" name="username" value={this.state.username} onChange={this.handleInputChange} />
+                    </FormItem>
+                    <Separator dir="h" size="s" silent />
+                    <FormItem>
+                      <Label>Password</Label>
+                      <TextInput input type="password" name="password" onChange={this.handleInputChange} />
+                    </FormItem>
+                    <Separator dir="h" silent />
                     <Actionbar>
                       <Action fixed primary onClick={this.handleSignIn}>Sign in</Action>
+                      <Action fixed onClick={this.toggleForgotPassword}>Forgot password?</Action>
                     </Actionbar>
                   </div>
                  : null
                 }
 
                 { this.state.activeTab === "signUp" ?
-                  <div style={{ padding: "1em" }}>
-                    <Text typo="h4">Step 1</Text>
-                    <TextInput input type="text" name="username" placeholder="username" value={this.state.username} onChange={this.handleInputChange} />
-                    <TextInput input type="password" name="password" placeholder="password" value={this.state.password} onChange={this.handleInputChange} />
-                    <TextInput input type="text" name="email" placeholder="email" value={this.state.email} onChange={this.handleInputChange} />
+                  <div style={{ padding: "0em 1em 1em 1em" }}>
+                    <Text typo="h5">Step 1</Text>
+                    <Separator dir="h" size="s" silent />
+                    <FormItem>
+                      <Label>Username</Label>
+                      <TextInput input type="text" name="username" value={this.state.username} onChange={this.handleInputChange} />
+                    </FormItem>
+                    <Separator dir="h" size="s" silent />
+                    <FormItem>
+                      <Label>Password</Label>
+                      <TextInput input type="password" name="password" value={this.state.password} onChange={this.handleInputChange} />
+                    </FormItem>
+                    <Separator dir="h" size="s" silent />
+                    <FormItem>
+                      <Label>Email</Label>
+                      <TextInput input type="email" name="email" value={this.state.email} onChange={this.handleInputChange} />
+                    </FormItem>
+                    <Separator dir="h" silent />
                     <Actionbar>
                       <Action fixed primary onClick={this.handleSignUp}>Sign up</Action>
                     </Actionbar>
-                    <Text typo="h4">Step 2</Text>
-                    <TextInput input type="text" name="username" placeholder="username" value={this.state.username} onChange={this.handleInputChange} />
-                    <TextInput input type="text" name="code" placeholder="confirmation code" value={this.state.code} onChange={this.handleInputChange} />
+                    <Separator dir="h" silent />
+                    <Text typo="h5">Step 2</Text>
+                    <Separator dir="h" size="s" silent />
+                    <FormItem>
+                      <Label>Username</Label>
+                      <TextInput input type="text" name="username" value={this.state.username} onChange={this.handleInputChange} />
+                    </FormItem>
+                    <Separator dir="h" size="s" silent />
+                    <FormItem>
+                      <Label>Confirmation code</Label>
+                      <TextInput input type="text" name="code" value={this.state.code} onChange={this.handleInputChange} />
+                    </FormItem>
+                    <Separator dir="h" silent />
                     <Actionbar>
                       <Action fixed primary onClick={this.handleConfirmSignUp}>Confirm sign up</Action>
                     </Actionbar>
@@ -209,23 +250,43 @@ export default class AuthModal extends React.Component {
                 }
 
                 { this.state.forgotPassword  && this.state.activeTab === "signIn" ?
-                  <div style={{ padding: "1em" }}>
-                    <Text typo="h3">Forgot Password?</Text>
-                    <Text typo="h4">Step 1</Text>
-                    <TextInput input type="text" name="username" placeholder="username" value={this.state.username} onChange={this.handleInputChange} />
+                  <div style={{ padding: "0em 1em 1em 1em" }}>
+                    <Text typo="h5">Forgot Password<br /> Step 1</Text>
+                    <Separator dir="h" size="s" silent />
+                    <FormItem>
+                      <Label>Username</Label>
+                      <TextInput input type="text" name="username" value={this.state.username} onChange={this.handleInputChange} />
+                    </FormItem>
+                    <Separator dir="h" silent />
                     <Actionbar>
                       <Action fixed primary onClick={this.handleForgotPassword}>Forgot password</Action>
                     </Actionbar>
+                    <Separator dir="h" silent />
                     <Text typo="h4">Step 2</Text>
-                    <TextInput input type="text" name="username" placeholder="username" value={this.state.username} onChange={this.handleInputChange} />
-                    <TextInput input type="text" name="code" placeholder="confirmation code" value={this.state.code} onChange={this.handleInputChange} />
-                    <TextInput input type="password" name="newPassword" placeholder="new password" value={this.state.newPassword} onChange={this.handleInputChange} />
+                    <Separator dir="h" size="s" silent />
+                    <FormItem>
+                      <Label>Username</Label>
+                      <TextInput input type="text" name="username" value={this.state.username} onChange={this.handleInputChange} />
+                    </FormItem>
+                    <Separator dir="h" size="s" silent />
+                    <FormItem>
+                      <Label>Confimation Code</Label>
+                      <TextInput input type="text" name="code" value={this.state.code} onChange={this.handleInputChange} />
+                    </FormItem>
+                    <Separator dir="h" size="s" silent />
+                    <FormItem>
+                      <Label>New password</Label>
+                      <TextInput input type="password" name="newPassword" value={this.state.newPassword} onChange={this.handleInputChange} />
+                    </FormItem>
+                    <Separator dir="h" silent />
                     <Actionbar>
                       <Action fixed primary onClick={this.handleConfirmForgotPassword}>Confirm forgot password</Action>
                     </Actionbar>
                   </div>
                   : null
                 }
+
+                <Separator dir="h" size="s" silent />
               </Container>
             </Animator>
           </ModalFoot>
