@@ -66,7 +66,9 @@ const SystemBubble = css.div`
      displayType === "embed" || displayType === "rich"
        ? `
          ${setSpace("phs")};
-         width: 100%;`
+         min-height: 100px;
+         width: 100%;
+         `
        : ``};
 
    /* this is for internal use only to customise auth screen bubbles */

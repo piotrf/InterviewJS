@@ -1,5 +1,5 @@
 /* eslint react/no-danger: 0 */
-import { arrayOf, string, object, shape } from "prop-types";
+import { arrayOf, func, string, object, shape } from "prop-types";
 import css from "styled-components";
 import React, { Component } from "react";
 import { withRouter } from "react-router";
@@ -9,6 +9,7 @@ import {
   Avatar,
   Bubble,
   BubbleBlock,
+  Message,
   Container,
   Separator,
   Icon,
@@ -156,6 +157,38 @@ class Storyline extends Component {
       );
     };
 
+    const renderSystemBubble = (item, index) => {
+      const { type } = item;
+      if (type === "switchTo") {
+        return (
+          <BubbleBlock key={index}>
+            <Bubble persona="system">
+              Choose another interviewee to talk to:
+            </Bubble>
+            {story.interviewees.map(
+              (character, i) =>
+                character.id !== this.props.currentIntervieweeId ? (
+                  <Bubble
+                    key={character.name}
+                    persona="system"
+                    onClick={() => this.props.switchChat(character.id)}
+                  >
+                    <Avatar image={character.avatar} size="s" />
+                    <Separator dir="v" size="x" silent />
+                    <Action onClick={() => this.props.switchChat(character.id)}>
+                      {character.name}
+                    </Action>
+                  </Bubble>
+                ) : null
+            )}
+          </BubbleBlock>
+        );
+      } else if (type === "quit") {
+        return <Message delay={350}>{interviewee.name} left the chat</Message>;
+      }
+      return null;
+    };
+
     return (
       <StorylineEl limit="m">
         <Push />
@@ -167,50 +200,11 @@ class Storyline extends Component {
               } else if (role === "user") {
                 return renderUserBubble(item, index);
               } else if (role === "system") {
-                return <div>system</div>;
+                return renderSystemBubble(item, index);
               }
               return null;
             })
-          : // history.map((item, index) => {
-            //     const { role } = item;
-            //     if (role === "system") {
-            //       const { type } = item;
-            //       if (type === "switchTo") {
-            //         return (
-            //           <BubbleGroup key={index}>
-            //             <Bubbles persona="system">
-            //               <Bubble persona="system">
-            //                 Choose another interviewee to talk to:
-            //               </Bubble>
-            //               {story.interviewees.map(
-            //                 (character, i) =>
-            //                   character.id !== this.props.currentIntervieweeId ? (
-            //                     <Bubble
-            //                       key={character.name}
-            //                       persona="system"
-            //                       onClick={() =>
-            //                         this.props.switchChat(character.id)
-            //                       }
-            //                     >
-            //                       <Avatar image={character.avatar} size="s" />
-            //                       <Separator dir="v" size="x" silent />
-            //                       <Action
-            //                         onClick={() =>
-            //                           this.props.switchChat(character.id)
-            //                         }
-            //                       >
-            //                         {character.name}
-            //                       </Action>
-            //                     </Bubble>
-            //                   ) : null
-            //               )}
-            //             </Bubbles>
-            //           </BubbleGroup>
-            //         );
-            //       }
-            //       return null;
-            //     }
-            null}
+          : null}
         <div
           ref={(el) => {
             this.anchor = el;
@@ -223,6 +217,8 @@ class Storyline extends Component {
 
 Storyline.propTypes = {
   history: arrayOf(object),
+  currentIntervieweeId: string.isRequired,
+  switchChat: func.isRequired,
   interviewee: shape({
     color: string.isRequired
   }).isRequired,

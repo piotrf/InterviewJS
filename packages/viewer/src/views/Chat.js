@@ -54,6 +54,7 @@ class ChatView extends Component {
     const thisItemType = thisHistoryItem.type;
 
     const isCurrentNotTheLastItem = thisHistoryItemI < storyline.length - 1;
+    const isCurrentTheLastItem = thisHistoryItemI === storyline.length - 1;
 
     if (isCurrentNotTheLastItem) {
       const nextHistoryItem = storyline[thisHistoryItemI + 1];
@@ -107,6 +108,8 @@ class ChatView extends Component {
         return null;
       }
       return null;
+    } else if (isCurrentTheLastItem) {
+      this.updateHistory("quit");
     }
     return null;
   }
@@ -192,7 +195,7 @@ class ChatView extends Component {
       history.push(emoji);
     } else if (type === "quit") {
       const quit = {
-        role: "user",
+        role: "system",
         type: "quit"
       };
       history.push(quit);
@@ -308,7 +311,9 @@ class ChatView extends Component {
             />
           );
         }
-        const isNextHistoryItemUser = nextHistoryItem.role === "user";
+        const isNextHistoryItemUser = nextHistoryItem
+          ? nextHistoryItem.role === "user"
+          : false;
         if (isNextHistoryItemUser && isActiveActionbarEmot) {
           return <EmoActions updateHistory={this.updateHistory} />;
         } else if (isLastBubbleSwitchTo) {

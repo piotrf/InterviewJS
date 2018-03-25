@@ -4,10 +4,10 @@ import css from "styled-components";
 const BubbleBlock = css.div`
   align-items: flex-end;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  min-width: 100%;
   position: relative;
   width: 100%;
-  min-width: 100%;
 
   /* align bubbles depending on the persona */
 
@@ -19,7 +19,7 @@ const BubbleBlock = css.div`
     }
     return `center`;
   }};
-  
+
 `;
 
 BubbleBlock.propTypes = {
