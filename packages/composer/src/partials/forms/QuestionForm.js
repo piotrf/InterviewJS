@@ -28,6 +28,7 @@ export default class PollForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.removeQuestion = this.removeQuestion.bind(this);
   }
+
   handleSubmit(e) {
     const { isNew } = this.props;
     const { formData, formValidation } = this.state;
@@ -48,6 +49,7 @@ export default class PollForm extends React.Component {
     }
     return this.props.handleSubmit(this.state.formData);
   }
+
   handleBlur(e) {
     const { name } = e.target;
     this.setState({
@@ -60,14 +62,17 @@ export default class PollForm extends React.Component {
     //   ? this.props.handleSave({ [name]: this.state.formData[name] })
     //   : null;
   }
+
   handleChange(e) {
     const { name, value } = e.target;
     this.setState({ formData: { ...this.state.formData, [name]: value } });
   }
+
   removeQuestion(e) {
     if (e) e.preventDefault();
     this.props.removeQuestion();
   }
+
   render() {
     const { isNew } = this.props;
     return (

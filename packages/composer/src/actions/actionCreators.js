@@ -76,7 +76,7 @@ export function createInterviewee(storyIndex, payload) {
     storyIndex,
     payload: {
       ...payload,
-      id: uuidv4(),
+      id: `iv_${uuidv4()}`,
       storyline: []
     }
   };
@@ -102,7 +102,7 @@ export function deleteInterviewee(storyIndex, intervieweeIndex) {
 export function addStorylineItem(storyIndex, intervieweeIndex, payload) {
   return {
     type: "ADD_STORYLINE_ITEM",
-    id: uuidv4(),
+    id: `sl_${uuidv4()}`,
     intervieweeIndex,
     order: 0,
     payload,
