@@ -1,4 +1,4 @@
-import { func } from "prop-types";
+import { array, number, object, oneOfType, string } from "prop-types";
 import css from "styled-components";
 import React, { Component } from "react";
 import { color, setType } from "../../../utils";
@@ -11,18 +11,36 @@ const MessageEl = css.p`
 `;
 
 export default class Message extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { rendering: true };
+  }
   componentDidMount() {
-    return this.props.callback ? this.props.callback() : null;
+    this.renderTimeout = setTimeout(() => {
+      this.setState({ rendering: false });
+    }, this.props.delay);
+  }
+  componentWillUnmount() {
+    clearTimeout(this.renderTimeout);
   }
   render() {
-    return <MessageEl {...this.props} />;
+    const { rendering } = this.state;
+    const { children } = this.props;
+    if (!rendering) {
+      return <MessageEl {...this.props}>{children}</MessageEl>;
+    }
+    return null;
   }
 }
 
 Message.propTypes = {
-  callback: func
+  children: oneOfType([array, object, string]),
+  delay: number,
+  persona: string
 };
 
 Message.defaultProps = {
-  callback: null
+  children: null,
+  delay: 0,
+  persona: null
 };

@@ -14,6 +14,7 @@ const SystemBubble = css.div`
   `
       : ``};
   cursor: ${(props) => (props.onClick ? `pointer` : `default`)};
+  align-self: center;
   background-color: ${({ theme }) =>
     theme.backg ? theme.backg : skin.sysBackg};
   color: ${({ theme }) => (theme.color ? theme.color : skin.sysColor)};

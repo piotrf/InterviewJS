@@ -1,5 +1,7 @@
+/* eslint no-param-reassign: 0 */
 import React from "react";
 import { array, func, number, shape, string } from "prop-types";
+import shortUuid from "short-uuid";
 
 import {
   Action,
@@ -11,6 +13,9 @@ import {
 
 import { QuestionForm } from "../";
 
+const uuidv4 = () => shortUuid().fromUUID(shortUuid.uuid());
+
+
 export default class PollForm extends React.Component {
   constructor(props) {
     super(props);
@@ -18,6 +23,7 @@ export default class PollForm extends React.Component {
     this.addQuestion = this.addQuestion.bind(this);
     this.removeQuestion = this.removeQuestion.bind(this);
   }
+
   saveQuestion(data, i) {
     console.log("data: ", data);
     console.log("i: ", i);
@@ -26,17 +32,21 @@ export default class PollForm extends React.Component {
     // const obj = { poll: arr };
     // this.props.updateStory(obj, this.props.storyIndex);
   }
+
   removeQuestion(i) {
     const { poll } = this.props.story;
     const obj = { poll: [...poll.slice(0, i), ...poll.slice(i + 1)] };
     this.props.updateStory(obj, this.props.storyIndex);
   }
+
   addQuestion(data) {
+    data.id = `p0_${uuidv4()}`;
     const { poll } = this.props.story;
     const arr = [...poll, data];
     const obj = { poll: arr };
     this.props.updateStory(obj, this.props.storyIndex);
   }
+
   render() {
     const { poll } = this.props.story;
     return (

@@ -1,8 +1,11 @@
-import uuidv4 from "uuid/v4";
 // import Raven from "raven-js";
 import { Storage } from "aws-amplify";
 import axios from "axios";
 // import { base } from "../configureStore";
+import shortUuid from "short-uuid";
+// import Raven from "raven-js";
+
+const uuidv4 = () => shortUuid().fromUUID(shortUuid.uuid());
 
 export function createStory({
   uid = "anonymous",
@@ -16,7 +19,7 @@ export function createStory({
       avatar: "",
       bio: "",
       color: "",
-      id: uuidv4(),
+      id: `iv_${uuidv4()}`,
       name: "Name of interviewee",
       srcText: "",
       storyline: [],
@@ -42,7 +45,7 @@ export function createStory({
       pubDate,
       title,
       uid,
-      id: uuidv4(),
+      id: `s0_${uuidv4()}`,
       modDate: new Date()
     }
   };
@@ -76,7 +79,7 @@ export function createInterviewee(storyIndex, payload) {
     storyIndex,
     payload: {
       ...payload,
-      id: uuidv4(),
+      id: `iv_${uuidv4()}`,
       storyline: []
     }
   };
@@ -102,7 +105,7 @@ export function deleteInterviewee(storyIndex, intervieweeIndex) {
 export function addStorylineItem(storyIndex, intervieweeIndex, payload) {
   return {
     type: "ADD_STORYLINE_ITEM",
-    id: uuidv4(),
+    id: `sl_${uuidv4()}`,
     intervieweeIndex,
     order: 0,
     payload,

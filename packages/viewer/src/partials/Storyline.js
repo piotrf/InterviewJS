@@ -1,5 +1,5 @@
 /* eslint react/no-danger: 0 */
-import { array, arrayOf, func, object, shape } from "prop-types";
+import { arrayOf, func, string, object, shape } from "prop-types";
 import css from "styled-components";
 import React, { Component } from "react";
 import { withRouter } from "react-router";
@@ -8,10 +8,9 @@ import {
   Action,
   Avatar,
   Bubble,
-  BubbleGroup,
-  Bubbles,
+  BubbleBlock,
+  Message,
   Container,
-  Separator,
   Icon,
   color,
   setSpace
@@ -42,6 +41,10 @@ const Push = css.div`
   padding: 0;
 `;
 
+const AvatarHolder = css(Container)`
+  ${setSpace("prs")};
+`;
+
 class Storyline extends Component {
   constructor(props) {
     super(props);
@@ -49,26 +52,30 @@ class Storyline extends Component {
       replayCachedHistory: true
     };
     this.scrollToBottom = this.scrollToBottom.bind(this);
-    this.onBubbleRender = this.onBubbleRender.bind(this);
   }
   componentDidMount() {
-    this.scrollToBottom("instant");
+    setTimeout(() => this.scrollToBottom("instant"), 0);
     setTimeout(() => this.scrollToBottom("instant"), 300);
+    setTimeout(() => this.scrollToBottom("instant"), 400);
     this.setState({ replayCachedHistory: false });
   }
-  componentDidUpdate(prevProps) {
-    if (this.props.history && this.props.history.length === 0) {
-      this.props.initHistory();
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.currentIntervieweeId !== this.props.currentIntervieweeId) {
+      this.setState({ replayCachedHistory: true });
     }
-    return null;
   }
-  onBubbleRender() {
-    setTimeout(this.scrollToBottom, 0);
-    setTimeout(this.scrollToBottom, 350);
-    setTimeout(this.scrollToBottom, 700);
-    setTimeout(this.scrollToBottom, 1050);
-    setTimeout(this.scrollToBottom, 1400);
-    this.props.onBubbleRender();
+  componentDidUpdate(prevProps) {
+    if (prevProps.currentIntervieweeId !== this.props.currentIntervieweeId) {
+      this.setState({ replayCachedHistory: false });
+      setTimeout(() => this.scrollToBottom("instant"), 0);
+      setTimeout(() => this.scrollToBottom("instant"), 350);
+    }
+    setTimeout(() => this.scrollToBottom(), 0);
+    setTimeout(() => this.scrollToBottom(), 350);
+    setTimeout(() => this.scrollToBottom(), 700);
+    setTimeout(() => this.scrollToBottom(), 1050);
+    setTimeout(() => this.scrollToBottom(), 1400);
+    setTimeout(() => this.scrollToBottom(), 1750);
   }
   scrollToBottom(behaviour) {
     return this.anchor
@@ -83,79 +90,125 @@ class Storyline extends Component {
     const { storyline, history, interviewee, story } = this.props;
     const { replayCachedHistory } = this.state;
 
-    console.log(this.state);
-
+    // const animateAndDelay = true;
     const animateAndDelay = !replayCachedHistory;
 
-    const renderIntervieweeBubble = (data) => {
-      const { content, type } = data;
-      if (type === "text") {
-        return (
+    const renderIntervieweeBubble = (item, index) => {
+      const { content, type } = storyline[item.i];
+
+      const getBubbleContent = () => {
+        switch (type) {
+          case "text":
+            return <p>{content.value}</p>;
+          case "image":
+            return [
+              <img src={content.value} alt={content.title} key="image" />,
+              content.title ? <p key="caption">{content.title}</p> : null
+            ];
+          case "link":
+            return (
+              <a href={content.value} target="_blank">
+                {content.title ? content.title : content.value}
+              </a>
+            );
+          case "embed":
+          case "map":
+          case "media":
+            return <div dangerouslySetInnerHTML={{ __html: content.value }} />;
+          default:
+            return null;
+        }
+      };
+
+      const getBubbleDisplayType = () => {
+        const isEmbed = ["embed", "media", "map"].includes(type);
+        const isImage = type === "image";
+        if (isEmbed) {
+          return "embed";
+        } else if (isImage) {
+          return "rich";
+        }
+        return "plain";
+      };
+
+      return (
+        <BubbleBlock key={index} persona="interviewee">
           <Bubble
             animated={animateAndDelay}
-            loading={animateAndDelay}
             delay={animateAndDelay ? 350 : null}
+            displayType={getBubbleDisplayType()}
+            loading={animateAndDelay}
             persona="interviewee"
             theme={{ backg: interviewee.color }}
-            type="plain"
           >
-            {content.value}
+            {getBubbleContent()}
           </Bubble>
-        );
-      } else if (type === "link") {
+        </BubbleBlock>
+      );
+    };
+
+    const renderUserBubble = (item, index) => {
+      const { type } = item;
+
+      const getBubbleContent = () => {
+        if (type === "ignore" || type === "explore") {
+          const { i } = item;
+          const { content } = storyline[i];
+          const filterByType = () =>
+            content.findIndex((contentEl) => contentEl.type === type);
+          return content[filterByType()].value;
+        } else if (type === "diss") {
+          return item.value;
+        } else if (type === "emoji") {
+          return <Icon name={item.value} />;
+        }
+        return null;
+      };
+
+      return (
+        <BubbleBlock key={index} persona="user">
+          <Bubble persona="user" animated={animateAndDelay}>
+            {getBubbleContent()}
+          </Bubble>
+        </BubbleBlock>
+      );
+    };
+
+    const renderSystemBubble = (item, index) => {
+      const { type } = item;
+      if (type === "switchTo") {
         return (
-          <Bubble
-            animated={animateAndDelay}
-            loading={animateAndDelay}
-            delay={animateAndDelay ? 350 : null}
-            persona="interviewee"
-            theme={{ backg: interviewee.color }}
-            type="plain"
-          >
-            <a href={content.value} target="_blank">
-              {content.title ? content.title : content.value}
-            </a>
-          </Bubble>
+          <BubbleBlock key={index}>
+            <Bubble persona="system">
+              Choose another interviewee to talk to:
+            </Bubble>
+            {story.interviewees.map(
+              (character, i) =>
+                character.id !== this.props.currentIntervieweeId ? (
+                  <Bubble
+                    key={character.name}
+                    persona="system"
+                    onClick={() => this.props.switchChat(character.id)}
+                  >
+                    <Container dir="row">
+                      <AvatarHolder flex={[1, 0, "auto"]}>
+                        <Avatar image={character.avatar} size="s" />
+                      </AvatarHolder>
+                      <Container flex={[1, 1, "100%"]}>
+                        <Action
+                          onClick={() => this.props.switchChat(character.id)}
+                        >
+                          {character.name}
+                        </Action>
+                      </Container>
+                    </Container>
+                  </Bubble>
+                ) : null
+            )}
+          </BubbleBlock>
         );
-      } else if (type === "image") {
-        return (
-          <Bubble
-            animated={animateAndDelay}
-            loading={animateAndDelay}
-            delay={animateAndDelay ? 350 : null}
-            persona="interviewee"
-            theme={{ backg: interviewee.color }}
-            type="rich"
-          >
-            <img src={content.value} alt="" />
-          </Bubble>
-        );
-      } else if (type === "embed") {
-        return (
-          <Bubble
-            animated={animateAndDelay}
-            loading={animateAndDelay}
-            delay={animateAndDelay ? 350 : null}
-            persona="interviewee"
-            theme={{ backg: interviewee.color }}
-            type="embed"
-          >
-            <div dangerouslySetInnerHTML={{ __html: content.value }} />
-          </Bubble>
-        );
-      } else if (type === "map") {
-        return (
-          <Bubble
-            animated={animateAndDelay}
-            loading={animateAndDelay}
-            delay={animateAndDelay ? 350 : null}
-            persona="interviewee"
-            theme={{ backg: interviewee.color }}
-            type="embed"
-          >
-            <div dangerouslySetInnerHTML={{ __html: content.value }} />
-          </Bubble>
-        );
+      } else if (type === "quit") {
+        return <Message delay={350}>{interviewee.name} left the chat</Message>;
       }
       return null;
     };
@@ -166,86 +219,14 @@ class Storyline extends Component {
         {history.length > 0
           ? history.map((item, index) => {
               const { role } = item;
-              if (role === "system") {
-                const { type } = item;
-                if (type === "switchTo") {
-                  return (
-                    <BubbleGroup key={index} callback={this.onBubbleRender}>
-                      <Bubbles persona="system">
-                        <Bubble persona="system">
-                          Choose another interviewee to talk to:
-                        </Bubble>
-                        {story.interviewees.map(
-                          (character, i) =>
-                            character.id !== this.props.currentIntervieweeId ? (
-                              <Bubble
-                                key={character.name}
-                                persona="system"
-                                onClick={() =>
-                                  this.props.switchChat(character.id)
-                                }
-                              >
-                                <Avatar image={character.avatar} size="s" />
-                                <Separator dir="v" size="x" silent />
-                                <Action
-                                  onClick={() =>
-                                    this.props.switchChat(character.id)
-                                  }
-                                >
-                                  {character.name}
-                                </Action>
-                              </Bubble>
-                            ) : null
-                        )}
-                      </Bubbles>
-                    </BubbleGroup>
-                  );
-                }
-                return null;
+              if (role === "interviewee") {
+                return renderIntervieweeBubble(item, index);
               } else if (role === "user") {
-                const { type } = item;
-                if (type === "emoji") {
-                  const { value } = item;
-                  return (
-                    <BubbleGroup key={index} callback={this.onBubbleRender}>
-                      <Bubbles persona="user">
-                        <Bubble persona="user" animated={animateAndDelay}>
-                          <Icon name={value} />
-                        </Bubble>
-                      </Bubbles>
-                    </BubbleGroup>
-                  );
-                } else if (type === "diss") {
-                  const { value } = item;
-                  return (
-                    <BubbleGroup key={index} callback={this.onBubbleRender}>
-                      <Bubbles persona="user" animated={animateAndDelay}>
-                        <Bubble persona="user">{value}</Bubble>
-                      </Bubbles>
-                    </BubbleGroup>
-                  );
-                } else if (type === "action") {
-                  const { i, value } = item;
-                  return (
-                    <BubbleGroup key={index} callback={this.onBubbleRender}>
-                      <Bubbles persona="user">
-                        <Bubble persona="user" animated={animateAndDelay}>
-                          {storyline[i].content[value].value}
-                        </Bubble>
-                      </Bubbles>
-                    </BubbleGroup>
-                  );
-                }
-                return null;
+                return renderUserBubble(item, index);
+              } else if (role === "system") {
+                return renderSystemBubble(item, index);
               }
-              const { i } = item;
-              return (
-                <BubbleGroup key={index} callback={this.onBubbleRender}>
-                  <Bubbles persona="interviewee">
-                    {renderIntervieweeBubble(storyline[i])}
-                  </Bubbles>
-                </BubbleGroup>
-              );
+              return null;
             })
           : null}
         <div
@@ -259,12 +240,11 @@ class Storyline extends Component {
 }
 
 Storyline.propTypes = {
-  // replayCachedHistory: bool,
   history: arrayOf(object),
-  updateHistory: func.isRequired,
-  onBubbleRender: func.isRequired,
+  currentIntervieweeId: string.isRequired,
+  switchChat: func.isRequired,
   interviewee: shape({
-    storyline: array.isRequired
+    color: string.isRequired
   }).isRequired,
   storyline: arrayOf(object),
   story: shape({
@@ -273,7 +253,6 @@ Storyline.propTypes = {
 };
 
 Storyline.defaultProps = {
-  // replayCachedHistory: true,
   history: [],
   storyline: [],
   story: {}
