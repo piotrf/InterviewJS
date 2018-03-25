@@ -180,27 +180,34 @@ export default class UserPane extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      continueDict: "text",
-      continueLibDict: "text",
-      continueLibItem: null,
-      continueVal: "Continue",
+      enableContinue: false,
+      enableExplore: false,
+
       customContinueVal: "",
       customExploreVal: "",
-      enableContinue: true,
-      enableExplore: false,
-      exploreDict: "text",
+
+      continueLibDict: "text",
+      continueLibItem: null,
+
+      exploreLibDict: "text",
       exploreLibItem: null,
+
+      continueVal: "Continue",
       exploreVal: "Explore"
     };
     this.addStorylineItem = this.addStorylineItem.bind(this);
     this.customiseActionLabel = this.customiseActionLabel.bind(this);
     this.selectContinueAction = this.selectContinueAction.bind(this);
     this.selectExploreAction = this.selectExploreAction.bind(this);
-    this.selectSkipAction = this.selectSkipAction.bind(this);
     this.toggleAction = this.toggleAction.bind(this);
   }
   toggleAction(action, e) {
-    this.setState({ [action]: e.target.checked });
+    // this.setState({ enableExplore: e.target.checked });
+    const { enableExplore, enableIgnore } = this.state;
+    if (!enableExplore && !enableIgnore) {
+      this.setState({ enableContinue: true, enableExplore: e.target.checked });
+    }
+    this.setState({ enableExplore: e.target.checked });
   }
   customiseActionLabel(action, e) {
     const { value } = e.target;
@@ -208,34 +215,30 @@ export default class UserPane extends React.Component {
       ? this.setState({
           [action]: value,
           enableExplore: value.length > 0,
+          enableContinue: !this.state.enableContinue ? value.length > 0 : true,
           exploreLibItem: null,
           exploreVal: value.length > 0 ? value : this.props.exploreVal
         })
       : this.setState({
           [action]: value,
+          enableContinue: value.length > 0,
           continueLibItem: null,
           continueVal: value.length > 0 ? value : this.props.continueVal
         });
   }
-  selectSkipAction(i, e) {
-    this.setState({
-      customExploreVal: e.target.innerHTML,
-      enableExplore: true,
-      exploreLibItem: i,
-      exploreVal: e.target.innerHTML
-    });
-  }
   selectContinueAction(dict, i, e) {
     this.setState({
-      customContinueVal: e.target.innerHTML,
       continueLibDict: dict,
       continueLibItem: i,
-      continueVal: e.target.innerHTML
+      continueVal: e.target.innerHTML,
+      customContinueVal: e.target.innerHTML,
+      enableContinue: true
     });
   }
   selectExploreAction(dict, i, e) {
     this.setState({
       customExploreVal: e.target.innerHTML,
+      enableContinue: true,
       enableExplore: true,
       exploreLibDict: dict,
       exploreLibItem: i,
@@ -265,6 +268,7 @@ export default class UserPane extends React.Component {
     this.setState({
       customContinueVal: "",
       customExploreVal: "",
+      enableContinue: false,
       enableExplore: false,
       continueLibItem: null,
       continueVal: this.props.continueVal,
@@ -274,12 +278,11 @@ export default class UserPane extends React.Component {
   }
   render() {
     const {
-      continueDict,
       continueLibDict,
       continueVal,
       enableContinue,
       enableExplore,
-      exploreDict,
+      exploreLibDict,
       exploreVal
     } = this.state;
     return (
@@ -292,13 +295,15 @@ export default class UserPane extends React.Component {
           side="right"
           draft={
             <Draft>
-              <Action
-                fixed
-                primary={!enableExplore}
-                secondary={!!enableExplore}
-              >
-                {continueVal}
-              </Action>
+              {enableContinue ? (
+                <Action
+                  fixed
+                  primary={!enableExplore}
+                  secondary={!!enableExplore}
+                >
+                  {continueVal}
+                </Action>
+              ) : null}
               {enableExplore ? (
                 <Action fixed primary>
                   {exploreVal}
@@ -335,7 +340,6 @@ export default class UserPane extends React.Component {
                       type="text"
                       placeholder="Type your own text label…"
                       maxLength={34}
-                      disabled={!enableContinue}
                       value={this.state.customContinueVal}
                       onChange={(e) =>
                         this.customiseActionLabel("customContinueVal", e)
@@ -345,38 +349,50 @@ export default class UserPane extends React.Component {
                   <Container flex={[1, 0, "auto"]} style={{ width: "100%" }}>
                     <PaneTabs>
                       <PaneTab
-                        active={continueDict === "text"}
-                        onClick={() => this.setState({ continueDict: "text" })}
+                        active={continueLibDict === "text"}
+                        onClick={() =>
+                          this.setState({ continueLibDict: "text" })
+                        }
                       >
                         <Icon name="text" size="x" />
                       </PaneTab>
                       <PaneTab
-                        active={continueDict === "link"}
-                        onClick={() => this.setState({ continueDict: "link" })}
+                        active={continueLibDict === "link"}
+                        onClick={() =>
+                          this.setState({ continueLibDict: "link" })
+                        }
                       >
                         <Icon name="link" size="x" />
                       </PaneTab>
                       <PaneTab
-                        active={continueDict === "image"}
-                        onClick={() => this.setState({ continueDict: "image" })}
+                        active={continueLibDict === "image"}
+                        onClick={() =>
+                          this.setState({ continueLibDict: "image" })
+                        }
                       >
                         <Icon name="image" size="x" />
                       </PaneTab>
                       <PaneTab
-                        active={continueDict === "embed"}
-                        onClick={() => this.setState({ continueDict: "embed" })}
+                        active={continueLibDict === "embed"}
+                        onClick={() =>
+                          this.setState({ continueLibDict: "embed" })
+                        }
                       >
                         <Icon name="embed" size="x" />
                       </PaneTab>
                       <PaneTab
-                        active={continueDict === "map"}
-                        onClick={() => this.setState({ continueDict: "map" })}
+                        active={continueLibDict === "map"}
+                        onClick={() =>
+                          this.setState({ continueLibDict: "map" })
+                        }
                       >
                         <Icon name="map" size="x" />
                       </PaneTab>
                       <PaneTab
-                        active={continueDict === "media"}
-                        onClick={() => this.setState({ continueDict: "media" })}
+                        active={continueLibDict === "media"}
+                        onClick={() =>
+                          this.setState({ continueLibDict: "media" })
+                        }
                       >
                         <Icon name="media" size="x" />
                       </PaneTab>
@@ -384,25 +400,21 @@ export default class UserPane extends React.Component {
                   </Container>
                   <ActionLibHolder flex={[1, 1, "auto"]}>
                     <ActionLibList>
-                      {USER_ACTIONS.continue[continueDict].map((action, i) => (
-                        <ActionLibItem key={i}>
-                          <ActionLibAction
-                            interactive
-                            active={
-                              enableContinue && continueDict === continueLibDict
-                                ? i === this.state.continueLibItem
-                                : false
-                            }
-                            onClick={(e) =>
-                              enableContinue
-                                ? this.selectContinueAction(continueDict, i, e)
-                                : null
-                            }
-                          >
-                            {action}
-                          </ActionLibAction>
-                        </ActionLibItem>
-                      ))}
+                      {USER_ACTIONS.continue[continueLibDict].map(
+                        (action, i) => (
+                          <ActionLibItem key={i}>
+                            <ActionLibAction
+                              interactive
+                              active={i === this.state.continueLibItem}
+                              onClick={(e) =>
+                                this.selectContinueAction(continueLibDict, i, e)
+                              }
+                            >
+                              {action}
+                            </ActionLibAction>
+                          </ActionLibItem>
+                        )
+                      )}
                     </ActionLibList>
                   </ActionLibHolder>
                 </Container>
@@ -450,38 +462,48 @@ export default class UserPane extends React.Component {
                   <Container flex={[1, 0, "auto"]} style={{ width: "100%" }}>
                     <PaneTabs>
                       <PaneTab
-                        active={exploreDict === "text"}
-                        onClick={() => this.setState({ exploreDict: "text" })}
+                        active={exploreLibDict === "text"}
+                        onClick={() =>
+                          this.setState({ exploreLibDict: "text" })
+                        }
                       >
                         <Icon name="text" size="x" />
                       </PaneTab>
                       <PaneTab
-                        active={exploreDict === "link"}
-                        onClick={() => this.setState({ exploreDict: "link" })}
+                        active={exploreLibDict === "link"}
+                        onClick={() =>
+                          this.setState({ exploreLibDict: "link" })
+                        }
                       >
                         <Icon name="link" size="x" />
                       </PaneTab>
                       <PaneTab
-                        active={exploreDict === "image"}
-                        onClick={() => this.setState({ exploreDict: "image" })}
+                        active={exploreLibDict === "image"}
+                        onClick={() =>
+                          this.setState({ exploreLibDict: "image" })
+                        }
                       >
                         <Icon name="image" size="x" />
                       </PaneTab>
                       <PaneTab
-                        active={exploreDict === "embed"}
-                        onClick={() => this.setState({ exploreDict: "embed" })}
+                        active={exploreLibDict === "embed"}
+                        onClick={() =>
+                          this.setState({ exploreLibDict: "embed" })
+                        }
                       >
                         <Icon name="embed" size="x" />
                       </PaneTab>
                       <PaneTab
-                        active={exploreDict === "map"}
-                        onClick={() => this.setState({ exploreDict: "map" })}
+                        active={exploreLibDict === "map"}
+                        onClick={() => this.setState({ exploreLibDict: "map" })}
                       >
                         <Icon name="map" size="x" />
                       </PaneTab>
                       <PaneTab
-                        active={exploreDict === "media"}
-                        onClick={() => this.setState({ exploreDict: "media" })}
+                        active={exploreLibDict === "media"}
+                        onClick={() =>
+                          this.setState({ exploreLibDict: "media" })
+                        }
                       >
                         <Icon name="media" size="x" />
                       </PaneTab>
@@ -489,13 +511,13 @@ export default class UserPane extends React.Component {
                   </Container>
                   <ActionLibHolder flex={[1, 1, "auto"]}>
                     <ActionLibList>
-                      {USER_ACTIONS.explore[exploreDict].map((action, i) => (
+                      {USER_ACTIONS.explore[exploreLibDict].map((action, i) => (
                         <ActionLibItem key={i}>
                           <ActionLibAction
                             active={i === this.state.exploreLibItem}
                             interactive
                             onClick={(e) =>
-                              this.selectExploreAction(exploreDict, i, e)
+                              this.selectExploreAction(exploreLibDict, i, e)
                             }
                           >
                             {action}
