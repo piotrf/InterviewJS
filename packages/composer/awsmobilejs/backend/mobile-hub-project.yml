@@ -2,6 +2,43 @@
 apps:
   web: !com.amazonaws.mobilehub.v0.AppDO {}
 features:
+  cloudlogic: !com.amazonaws.mobilehub.v0.CloudLogic 
+    components:
+      Story Operations: !com.amazonaws.mobilehub.v0.API 
+        attributes:
+          disable-aws-auth: false
+          name: Story Operations
+          requires-signin: true
+          sdk-generation-stage-name: Development
+        paths:
+          /publish: !com.amazonaws.mobilehub.v0.Function 
+            description: 'Handler for calls to resource path : /publish/{proxy+}'
+            environment: {}
+            handler: index.handler
+            hashcode: VlCQ+u499H6f5r5qBHDS2TsoGC5w2aiWqPnNdXJ7sSc=
+            memorySize: '128'
+            modified: '2018-03-25T06:19:29.320+0000'
+            name: publish
+            runtime: nodejs6.10
+            securityGroups: sg-ce5db5b4
+            subnetIds: 'subnet-da858182,subnet-22a62e47,subnet-0eefeb24,subnet-3303f77a,subnet-5a2f2567,subnet-e16fd2ed'
+            timeout: '3'
+            version: zYmNF3IVl0QENJcraVgoBQFrDoXfVRex
+            vpcId: vpc-ef503388
+          '/publish/{proxy+}': !com.amazonaws.mobilehub.v0.Function 
+            description: 'Handler for calls to resource path : /publish/{proxy+}'
+            environment: {}
+            handler: index.handler
+            hashcode: VlCQ+u499H6f5r5qBHDS2TsoGC5w2aiWqPnNdXJ7sSc=
+            memorySize: '128'
+            modified: '2018-03-25T06:19:29.320+0000'
+            name: publish
+            runtime: nodejs6.10
+            securityGroups: sg-ce5db5b4
+            subnetIds: 'subnet-da858182,subnet-22a62e47,subnet-0eefeb24,subnet-3303f77a,subnet-5a2f2567,subnet-e16fd2ed'
+            timeout: '3'
+            version: 3Iaa4dI_eGmV2KkPByhbXu32q.JaPNyK
+            vpcId: vpc-ef503388
   mobile-analytics: !com.amazonaws.mobilehub.v0.Pinpoint 
     components:
       analytics: !com.amazonaws.mobilehub.v0.PinpointAnalytics {}
