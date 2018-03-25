@@ -1,6 +1,7 @@
 /* eslint react/forbid-prop-types: 0 */
 import React, { Component } from "react";
-import { object, shape, string } from "prop-types";
+import { object, shape, string, func } from "prop-types";
+import axios from "axios";
 
 import {
   Action,
@@ -24,11 +25,35 @@ export default class OutroView extends Component {
     this.state = { storyDetailsModal: false };
     this.toggleDetailsModal = this.toggleDetailsModal.bind(this);
   }
+
+  componentDidMount() {
+    // I'm framed, wait for message with JSON that looks like a story -- FIXME
+    if (window.top !== window && window.addEventListener) {
+      window.addEventListener(
+        "message",
+        ({ data, origin, source }) => {
+          console.log(origin, data, source);
+          if (data.interviewees) this.props.createStory(data);
+        },
+        false
+      );
+    }
+
+    // Load story via storyId -> getStoryURL
+    if ((!this.props.story || Object.keys(this.props.story).length === 0) && this.props.params.storyId) {
+      const storyURL = window.InterviewJS.getStoryURL(this.props.params.storyId);
+      if (storyURL) axios.get(storyURL).then(response => this.props.createStory(response.data));
+    }
+  }
+
   toggleDetailsModal() {
     this.setState({ storyDetailsModal: !this.state.storyDetailsModal });
   }
+
   render() {
     const { story } = this.props;
+    if (!story || Object.keys(story).length === 0) return null; // FIXME show spinner
+
     const resultScore = 95; // TODO @LAURIAN: plug in real score
     const getResultScore = () => {
       if (resultScore >= 95) {
@@ -47,7 +72,7 @@ export default class OutroView extends Component {
     return [
       <Topbar
         handleDetails={this.toggleDetailsModal}
-        handleBack={() => this.props.router.push(`/story/listing`)}
+        handleBack={() => this.props.router.push(`/${story.id}/listing`)}
         key="topbar"
       />,
       <Page key="page">
@@ -60,14 +85,14 @@ export default class OutroView extends Component {
           <Actionbar>
             <Action
               fixed
-              onClick={() => this.props.router.push(`/story/listing`)}
+              onClick={() => this.props.router.push(`/${story.id}/listing`)}
               primary
             >
               Revisit the interviews
             </Action>
             <Action
               fixed
-              onClick={() => this.props.router.push(`/story/poll`)}
+              onClick={() => this.props.router.push(`/${story.id}/poll`)}
               primary
             >
               Have your say
@@ -88,7 +113,9 @@ export default class OutroView extends Component {
 }
 
 OutroView.propTypes = {
+  createStory: func.isRequired,
   router: object,
+  params: object,
   story: shape({
     title: string
   })
@@ -96,5 +123,6 @@ OutroView.propTypes = {
 
 OutroView.defaultProps = {
   router: null,
+  params: {},
   story: {}
 };

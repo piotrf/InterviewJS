@@ -99,10 +99,11 @@ export default class PublishStoryModal extends Component {
   }
 
   render() {
-    const iframeViewer =
-      document.location.hostname.toLowerCase() === "www.interviewjs.io"
-        ? "https://interviewjs.net/story/"
-        : "https://beta.interviewjs.net/story/";
+    let iframeViewer = "https://interviewjs.net/";
+    if (document.location.hostname.toLowerCase() === "beta.interviewjs.io") iframeViewer = "https://beta.interviewjs.net/";
+    if (document.location.hostname.toLowerCase() === "localhost") iframeViewer = "https://beta.interviewjs.net/";
+    if (document.location.hostname.toLowerCase() === "alpha.interviewjs.io") iframeViewer = "https://alpha.interviewjs.net/";
+
     const { step } = this.state;
     const getModalBody = () => {
       if (step === 0) {
