@@ -1,3 +1,19 @@
+## 25-03-2017
+
+* composer: embed/map/youtube tabs now have input validation
+* composer: fixed a bug allowing to create stories without interviewees which would crash the app
+* composer: history is now initiated correctly no matter who’s the starting character of a chat
+* composer: skip/continue user choices are now reflected in the story flow
+* composer: user panel redesigned
+* viewer: bug fixes
+* viewer: chat history is now being saved and replayed per each interviewee
+* viewer: chat with a person now ends with `xyz left the chat`
+* viewer: fixed onBubbleRender logic bubbling up
+* viewer: it is now possible to chat to another character via ‘i want to chat to somebody else'
+* viewer: the reader can now respond with one of the scripted chat options
+* viewer: the user can now respond with emojis
+* viewer: user gets to either chat to somebody else or quit chatting at end of a chat
+
 ## 16-03-2017
 
 * It is now possible to add image bubbles to your story.
