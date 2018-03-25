@@ -45,6 +45,9 @@ class ChatView extends Component {
   componentDidMount() {
     this.initHistory();
   }
+  componentDidUpdate() {
+    this.initHistory(); // Init history also when switching between interviewees
+  }
   onHistoryUpdate() {
     const { history } = this.state;
     const { interviewees } = this.props.story;
