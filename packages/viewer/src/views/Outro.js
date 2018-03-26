@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import { object, shape, string, func } from "prop-types";
 import axios from "axios";
+import { flatten, filter } from "lodash";
 
 import {
   Action,
@@ -23,6 +24,7 @@ export default class OutroView extends Component {
   constructor(props) {
     super(props);
     this.state = { storyDetailsModal: false };
+    this.getScore = this.getScore.bind(this);
     this.toggleDetailsModal = this.toggleDetailsModal.bind(this);
   }
 
@@ -40,10 +42,49 @@ export default class OutroView extends Component {
     }
 
     // Load story via storyId -> getStoryURL
-    if ((!this.props.story || Object.keys(this.props.story).length === 0) && this.props.params.storyId) {
-      const storyURL = window.InterviewJS.getStoryURL(this.props.params.storyId);
-      if (storyURL) axios.get(storyURL).then(response => this.props.createStory(response.data));
+    if (
+      (!this.props.story || Object.keys(this.props.story).length === 0) &&
+      this.props.params.storyId
+    ) {
+      const storyURL = window.InterviewJS.getStoryURL(
+        this.props.params.storyId
+      );
+      if (storyURL)
+        axios
+          .get(storyURL)
+          .then((response) => this.props.createStory(response.data));
     }
+  }
+
+  getScore() {
+    const { story } = this.props;
+    const { interviewees } = story;
+
+    // construct array out of scripted storylines
+    const storylines = [];
+    interviewees.forEach((interviewee) =>
+      storylines.push(interviewee.storyline)
+    );
+
+    // construct array out of localstorage histories
+    const histories = [];
+    interviewees.forEach((interviewee) => {
+      const localHistory = JSON.parse(
+        localStorage.getItem(`history-${story.id}-${interviewee.id}`)
+      );
+      return localHistory ? histories.push(localHistory) : null;
+    });
+
+    // count only interviewees’ items
+    const getScoreItemsCount = (arr) =>
+      filter(flatten(arr), (o) => o.role === "interviewee").length;
+
+    // start counting
+    const total = getScoreItemsCount(storylines);
+    const local = getScoreItemsCount(histories);
+    const score = Math.round(local * 100 / total);
+
+    return score;
   }
 
   toggleDetailsModal() {
@@ -51,10 +92,11 @@ export default class OutroView extends Component {
   }
 
   render() {
+    this.getScore();
     const { story } = this.props;
     if (!story || Object.keys(story).length === 0) return null; // FIXME show spinner
 
-    const resultScore = 95; // TODO @LAURIAN: plug in real score
+    const resultScore = this.getScore();
     const getResultScore = () => {
       if (resultScore >= 95) {
         return `Wow, you are truly curious! You have spoken to everyone and
