@@ -57,7 +57,7 @@ function stories(state = [], action) {
         ...state.slice(0, storyIndex),
         {
           ...state[storyIndex],
-          interviewees: [payload, ...state[storyIndex].interviewees]
+          interviewees: [...state[storyIndex].interviewees, payload]
         },
         ...state.slice(storyIndex + 1)
       ];
@@ -209,7 +209,6 @@ function storiesWrapper(state = [], action) {
     currentStory.version++;
 
     if (currentStory.uid) uid = currentStory.uid;
-
 
     if (type === "CREATE_STORY") {
       base.post(`stories-${NAMESPACE}/${uid}/${storyId}`, {
