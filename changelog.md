@@ -1,5 +1,6 @@
 ## 28-03-2018
 
+* viewer: poll choices are now being stored in localstorage, readers are no longer able to re-submit poll
 * it is no longer publish a story without a poll
 * viewer: opening chat with another person with history loads immediately without animation
 * viewer: story consumption score is now dynamic
