@@ -4,7 +4,7 @@ import { Tooltip } from "react-tippy";
 
 require("./contextuals.css");
 
-const Tip = props => (
+const Tip = (props) => (
   <Tooltip
     animation="fade"
     arrow
@@ -15,6 +15,7 @@ const Tip = props => (
     sticky
     theme="dark"
     title={props.title}
+    touchHold
     {...props}
   />
 );
