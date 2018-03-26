@@ -19,8 +19,8 @@ const actionBase = {
     flex-wrap: wrap;
     justify-content: center;
     line-height: 1.2em;
-    max-height: 40px;
     max-width: 160px;
+    max-height: 160px;
     outline: none;
     overflow: hidden;
     text-align: center;
