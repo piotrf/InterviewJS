@@ -15,14 +15,14 @@ export default () => markdown`
 
   ${(
     <ReactSpecimen dark span={3}>
-      <Bubble persona="interviewee" type="plain">
+      <Bubble persona="interviewee" displayType="plain">
         Text bubble
       </Bubble>
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen dark span={3}>
-      <Bubble persona="interviewee" type="plain">
+      <Bubble persona="interviewee" displayType="plain">
         <a href="">Link bubble</a>
       </Bubble>
     </ReactSpecimen>
@@ -32,7 +32,7 @@ export default () => markdown`
 
   ${(
     <ReactSpecimen dark>
-      <Bubble persona="interviewee" type="rich">
+      <Bubble persona="interviewee" displayType="rich">
         <img src={SampleImage} alt="" />
       </Bubble>
     </ReactSpecimen>
@@ -42,14 +42,14 @@ export default () => markdown`
 
   ${(
     <ReactSpecimen dark span={3}>
-      <Bubble persona="interviewee" type="embed">
+      <Bubble persona="interviewee" displayType="embed">
         <div dangerouslySetInnerHTML={{ __html: ytFrame }} />
       </Bubble>
     </ReactSpecimen>
   )}
   ${(
     <ReactSpecimen dark span={3}>
-      <Bubble persona="interviewee" type="embed">
+      <Bubble persona="interviewee" displayType="embed">
         <div dangerouslySetInnerHTML={{ __html: gmFrame }} />
       </Bubble>
     </ReactSpecimen>
