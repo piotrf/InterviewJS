@@ -16,8 +16,7 @@ import {
   Container,
   Animator,
   Bubble,
-  BubbleGroup,
-  Bubbles,
+  BubbleBlock,
   Modal,
   ModalBody,
   ModalFoot,
@@ -147,34 +146,32 @@ export default class AuthModal extends React.Component {
       >
         <Modal {...this.props} persistent transparent>
           <ModalBody>
-            <BubbleGroup>
-              <Bubbles persona="interviewee">
-                <Bubble
-                  animated
-                  persona="interviewee"
-                  theme={{ backg: color.flareLLt, color: color.white }}
-                >
-                  Welcome!
-                </Bubble>
-                <Bubble
-                  animated
-                  delay={1000}
-                  persona="interviewee"
-                  theme={{ backg: color.flareLLt, color: color.white }}
-                >
-                  InterviewJS will help you tell interactive stories by
-                  converting your interviews into a chat experiences.
-                </Bubble>
-                <Bubble
-                  animated
-                  delay={2000}
-                  persona="interviewee"
-                  theme={{ backg: color.flareLLt, color: color.white }}
-                >
-                  To continue, please sign in.
-                </Bubble>
-              </Bubbles>
-            </BubbleGroup>
+            <BubbleBlock>
+              <Bubble
+                animated
+                persona="interviewee"
+                theme={{ backg: color.flareLLt, color: color.white }}
+              >
+                Welcome!
+              </Bubble>
+              <Bubble
+                animated
+                delay={1000}
+                persona="interviewee"
+                theme={{ backg: color.flareLLt, color: color.white }}
+              >
+                InterviewJS will help you tell interactive stories by converting
+                your interviews into a chat experiences.
+              </Bubble>
+              <Bubble
+                animated
+                delay={2000}
+                persona="interviewee"
+                theme={{ backg: color.flareLLt, color: color.white }}
+              >
+                To continue, sign in with your Google account.
+              </Bubble>
+            </BubbleBlock>
           </ModalBody>
           <ModalFoot>
             <Animator delay={3000}>

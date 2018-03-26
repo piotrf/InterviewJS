@@ -26,12 +26,22 @@ const PollItem = css(Container)`
   &:not(:last-child) {
     ${setSpace("mbl")};
   }
+  ${Actionbar} {
+    ${setSpace("phn")};
+  }
 `;
 
-export default class OutroView extends Component {
+export default class PollView extends Component {
   constructor(props) {
     super(props);
-    this.state = { formData: {}, storyDetailsModal: false };
+    const { story } = this.props;
+    const localPoll = JSON.parse(localStorage.getItem(`poll-${story.id}`));
+    this.state = {
+      formData: localPoll || {},
+      hasLocalPoll: !!localPoll,
+      storyDetailsModal: false
+    };
+    this.moveOn = this.moveOn.bind(this);
     this.submitPoll = this.submitPoll.bind(this);
     this.toggleDetailsModal = this.toggleDetailsModal.bind(this);
   }
@@ -50,9 +60,17 @@ export default class OutroView extends Component {
     }
 
     // Load story via storyId -> getStoryURL
-    if ((!this.props.story || Object.keys(this.props.story).length === 0) && this.props.params.storyId) {
-      const storyURL = window.InterviewJS.getStoryURL(this.props.params.storyId);
-      if (storyURL) axios.get(storyURL).then(response => this.props.createStory(response.data));
+    if (
+      (!this.props.story || Object.keys(this.props.story).length === 0) &&
+      this.props.params.storyId
+    ) {
+      const storyURL = window.InterviewJS.getStoryURL(
+        this.props.params.storyId
+      );
+      if (storyURL)
+        axios
+          .get(storyURL)
+          .then((response) => this.props.createStory(response.data));
     }
   }
 
@@ -61,12 +79,19 @@ export default class OutroView extends Component {
   }
 
   submitPoll() {
-    // TODO @LAURIAN
-    console.log(`poll results: `, this.state.formData);
+    const { story } = this.props;
+    localStorage.setItem(
+      `poll-${story.id}`,
+      JSON.stringify(this.state.formData)
+    );
+    this.moveOn();
+  }
+  moveOn() {
     this.props.router.push(`/${this.props.story.id}/results`);
   }
 
   render() {
+    const { hasLocalPoll } = this.state;
     const { story } = this.props;
     if (!story || Object.keys(story).length === 0) return null; // FIXME show spinner
 
@@ -83,36 +108,44 @@ export default class OutroView extends Component {
         </PageHead>
         <PageBody limit="x" flex={[1, 0, `${100 / 4}%`]}>
           {poll.map((item, i) => (
-            <PollItem>
+            <PollItem key={i}>
               <PageSubtitle typo="h3">{item.question}</PageSubtitle>
               <Separator silent size="m" />
               <Actionbar>
                 <Action
                   active={this.state.formData[`question${i}`] === 0}
+                  disabled={hasLocalPoll}
                   fixed
                   inverted
-                  onClick={() =>
-                    this.setState({
-                      formData: {
-                        ...this.state.formData,
-                        [`question${i}`]: 0
-                      }
-                    })
+                  onClick={
+                    !hasLocalPoll
+                      ? () =>
+                          this.setState({
+                            formData: {
+                              ...this.state.formData,
+                              [`question${i}`]: 0
+                            }
+                          })
+                      : null
                   }
                 >
                   {item.answer1}
                 </Action>
                 <Action
                   active={this.state.formData[`question${i}`] === 1}
+                  disabled={hasLocalPoll}
                   fixed
                   inverted
-                  onClick={() =>
-                    this.setState({
-                      formData: {
-                        ...this.state.formData,
-                        [`question${i}`]: 1
-                      }
-                    })
+                  onClick={
+                    !hasLocalPoll
+                      ? () =>
+                          this.setState({
+                            formData: {
+                              ...this.state.formData,
+                              [`question${i}`]: 1
+                            }
+                          })
+                      : null
                   }
                 >
                   {item.answer2}
@@ -122,7 +155,11 @@ export default class OutroView extends Component {
           ))}
           <Separator size="l" silent />
           <Actionbar>
-            <Action fixed onClick={this.submitPoll} primary>
+            <Action
+              fixed
+              onClick={hasLocalPoll ? this.moveOn : this.submitPoll}
+              primary
+            >
               Show me results
             </Action>
           </Actionbar>
@@ -140,7 +177,7 @@ export default class OutroView extends Component {
   }
 }
 
-OutroView.propTypes = {
+PollView.propTypes = {
   createStory: func.isRequired,
   router: object,
   story: shape({
@@ -148,7 +185,7 @@ OutroView.propTypes = {
   })
 };
 
-OutroView.defaultProps = {
+PollView.defaultProps = {
   router: null,
   story: {}
 };

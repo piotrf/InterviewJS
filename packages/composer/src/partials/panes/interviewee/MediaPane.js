@@ -12,7 +12,6 @@ import PaneFrame from "../PaneFrame";
 
 import { filterIframe } from "../../../util/IframeSanitizer";
 
-
 export default class MediaPane extends Component {
   constructor(props) {
     super(props);
@@ -35,8 +34,15 @@ export default class MediaPane extends Component {
     const clean = filterIframe(value);
     console.log(clean);
 
-    this.setState({ draft: { ...this.state.draft, [name]: value } }, () =>
-      this.props.updateDraft(this.state.draft, clean)
+    this.setState(
+      { draft: { ...this.state.draft, [name]: value } },
+      () =>
+        clean.toLowerCase().startsWith("<iframe") &&
+        clean.toLowerCase().includes("src=") &&
+        clean.toLowerCase().includes("youtube.com/embed/") &&
+        clean.toLowerCase().endsWith("></iframe>")
+          ? this.props.updateDraft(this.state.draft, clean)
+          : null
     );
   }
 

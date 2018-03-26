@@ -80,9 +80,17 @@ export default class IntroView extends Component {
     }
 
     // Load story via storyId -> getStoryURL
-    if ((!this.props.story || Object.keys(this.props.story).length === 0) && this.props.params.storyId) {
-      const storyURL = window.InterviewJS.getStoryURL(this.props.params.storyId);
-      if (storyURL) axios.get(storyURL).then(response => this.props.createStory(response.data));
+    if (
+      (!this.props.story || Object.keys(this.props.story).length === 0) &&
+      this.props.params.storyId
+    ) {
+      const storyURL = window.InterviewJS.getStoryURL(
+        this.props.params.storyId
+      );
+      if (storyURL)
+        axios
+          .get(storyURL)
+          .then((response) => this.props.createStory(response.data));
     }
   }
 
@@ -93,7 +101,6 @@ export default class IntroView extends Component {
   render() {
     const { story } = this.props;
     if (!story || Object.keys(story).length === 0) return null; // FIXME show spinner
-    console.log(story);
 
     return [
       <Topbar handleDetails={this.toggleDetailsModal} key="topbar" />,
@@ -159,7 +166,7 @@ IntroView.propTypes = {
   createStory: func.isRequired,
   router: object,
   story: object,
-  params: object,
+  params: object
 };
 
 IntroView.defaultProps = {

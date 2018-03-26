@@ -23,7 +23,7 @@ import {
 
 import PaneFrame from "./PaneFrame";
 
-import { USER_ACTIONS } from "../../options";
+import { GLOBALS, USER_ACTIONS } from "../../options";
 
 const PaneEl = css(Container)`
   height: 100%;
@@ -339,7 +339,7 @@ export default class UserPane extends React.Component {
                     <TextInput
                       type="text"
                       placeholder="Type your own text label…"
-                      maxLength={34}
+                      maxLength={GLOBALS.fixedButtonCharLimit}
                       value={this.state.customContinueVal}
                       onChange={(e) =>
                         this.customiseActionLabel("customContinueVal", e)
@@ -452,7 +452,7 @@ export default class UserPane extends React.Component {
                     <TextInput
                       type="text"
                       placeholder="Type your own text label…"
-                      maxLength={34}
+                      maxLength={GLOBALS.fixedButtonCharLimit}
                       value={this.state.customExploreVal}
                       onChange={(e) =>
                         this.customiseActionLabel("customExploreVal", e)

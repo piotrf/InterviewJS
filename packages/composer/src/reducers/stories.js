@@ -57,7 +57,7 @@ function stories(state = [], action) {
         ...state.slice(0, storyIndex),
         {
           ...state[storyIndex],
-          interviewees: [payload, ...state[storyIndex].interviewees]
+          interviewees: [...state[storyIndex].interviewees, payload]
         },
         ...state.slice(storyIndex + 1)
       ];
@@ -205,6 +205,7 @@ function storiesWrapper(state = [], action) {
     if (!currentStory.version) currentStory.version = 0;
     currentStory.version++;
 
+    // if (currentStory.uid) uid = currentStory.uid;
 
     if (type === "CREATE_STORY") {
       Storage.vault.put(`stories/${storyId}/story.json`, JSON.stringify(currentStory), {

@@ -15,7 +15,6 @@ import { QuestionForm } from "../";
 
 const uuidv4 = () => shortUuid().fromUUID(shortUuid.uuid());
 
-
 export default class PollForm extends React.Component {
   constructor(props) {
     super(props);
@@ -49,6 +48,7 @@ export default class PollForm extends React.Component {
 
   render() {
     const { poll } = this.props.story;
+    const isPollEmpty = poll.length === 0;
     return (
       <Container>
         {poll.map((item, i) => [
@@ -81,7 +81,13 @@ export default class PollForm extends React.Component {
         </Container>
         <Separator size="m" silent />
         <Actionbar>
-          <Action fixed primary type="submit" onClick={this.props.handleSubmit}>
+          <Action
+            fixed
+            onClick={!isPollEmpty ? this.props.handleSubmit : null}
+            primary
+            disabled={isPollEmpty}
+            type="submit"
+          >
             {this.props.cta}
           </Action>
         </Actionbar>

@@ -2,7 +2,7 @@ import { color, radius, setSpace, setType, time } from "../../../utils";
 
 const actionBase = {
   graphic: `
-    ${setSpace("phs")};
+    ${setSpace("phx")};
     ${setType("x")};
     align-content: center;
     align-items: center;
@@ -20,6 +20,7 @@ const actionBase = {
     justify-content: center;
     line-height: 1.2em;
     max-width: 160px;
+    max-height: 160px;
     outline: none;
     overflow: hidden;
     text-align: center;

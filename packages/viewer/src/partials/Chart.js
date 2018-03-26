@@ -34,6 +34,16 @@ const ChartAnswer = css.div`
   color: ${color.white};
   letter-spacing: ${track.s};
   text-transform: uppercase;
+  &:first-child {
+    ${setSpace("prx")};
+    text-align: left;
+    color: ${color.greenM};
+  }
+  &:last-child {
+    ${setSpace("plx")};
+    text-align: right;
+    color: ${color.redM};
+  }
 `;
 
 const ChartNo = css.div`

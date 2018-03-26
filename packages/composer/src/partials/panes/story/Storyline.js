@@ -6,9 +6,7 @@ import React from "react";
 import {
   Action,
   Bubble,
-  BubbleGroup,
-  BubbleHTMLWrapper,
-  Bubbles,
+  BubbleBlock,
   Container,
   Icon,
   color,
@@ -178,8 +176,8 @@ export default class Storyline extends React.Component {
       if (type === "text") {
         return (
           <Bubble
+            displayType="plain"
             persona={role}
-            type="plain"
             theme={{ backg: interviewee.color }}
           >
             {content.value}
@@ -188,60 +186,52 @@ export default class Storyline extends React.Component {
       } else if (type === "link") {
         return (
           <Bubble
+            displayType="plain"
             persona={role}
-            type="plain"
             theme={{ backg: interviewee.color }}
           >
-            <BubbleHTMLWrapper>
-              <a href={content.value} target="_blank">
-                {content.title ? content.title : content.value}
-              </a>
-            </BubbleHTMLWrapper>
+            <a href={content.value} target="_blank">
+              {content.title ? content.title : content.value}
+            </a>
           </Bubble>
         );
       } else if (type === "image") {
         return (
           <Bubble
+            displayType="rich"
             persona={role}
-            type="rich"
             theme={{ backg: interviewee.color }}
           >
-            <BubbleHTMLWrapper>
-              <img src={content.value} alt="" />
-              {content.title ? <p>{content.title}</p> : null}
-            </BubbleHTMLWrapper>
+            <img src={content.value} alt="" />
+            {content.title ? <p>{content.title}</p> : null}
           </Bubble>
         );
       } else if (type === "embed") {
         return (
           <Bubble
             persona={role}
-            type="embed"
+            displayType="embed"
             theme={{ backg: interviewee.color }}
           >
-            <BubbleHTMLWrapper>
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: filterIframe(content.value)
-                }}
-              />
-            </BubbleHTMLWrapper>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: filterIframe(content.value)
+              }}
+            />
           </Bubble>
         );
       } else if (type === "map") {
         return (
           <Bubble
+            displayType="embed"
             persona={role}
-            type="embed"
             theme={{ backg: interviewee.color }}
           >
-            <BubbleHTMLWrapper>
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: filterIframe(content.value)
-                }}
-              />
-            </BubbleHTMLWrapper>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: filterIframe(content.value)
+              }}
+            />
           </Bubble>
         );
       }
@@ -254,7 +244,7 @@ export default class Storyline extends React.Component {
           const { role } = storyline[storyItem];
           const item = storyline[storyItem];
           return (
-            <BubbleGroup
+            <BubbleBlock
               data-droppable
               data-id={i}
               draggable
@@ -262,11 +252,9 @@ export default class Storyline extends React.Component {
               onDragEnd={(e) => this.dragEnd(e)}
               onDragStart={(e) => this.dragStart(e)}
             >
-              <Bubbles persona={role}>
-                {role === "user"
-                  ? renderUserBubble(item)
-                  : renderIntervieweeBubble(item)}
-              </Bubbles>
+              {role === "user"
+                ? renderUserBubble(item)
+                : renderIntervieweeBubble(item)}
               <BubbleEdit persona={role}>
                 {/* <Action iconic onClick={() => this.props.toggleBubbleEdit(i)}>
                   <Icon name="pen" size="x" />
@@ -279,7 +267,7 @@ export default class Storyline extends React.Component {
                   <Icon name="cross" size="x" />
                 </Action>
               </BubbleEdit>
-            </BubbleGroup>
+            </BubbleBlock>
           );
         })}
         <div

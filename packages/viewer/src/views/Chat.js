@@ -344,8 +344,6 @@ class ChatView extends Component {
       return null;
     };
 
-    console.log(this.state);
-
     return [
       <Page key="page">
         <Topbar limit="m" padded>
