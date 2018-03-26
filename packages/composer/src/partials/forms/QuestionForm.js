@@ -14,6 +14,8 @@ import {
   TextInput
 } from "interviewjs-styleguide";
 
+import { GLOBALS } from "../../options";
+
 import validateField from "./validateField";
 
 export default class PollForm extends React.Component {
@@ -91,7 +93,7 @@ export default class PollForm extends React.Component {
                 name="question"
                 onBlur={(e) => this.handleBlur(e)}
                 onChange={(e) => this.handleChange(e)}
-                placeholder="Did you enjoy chatting to…?"
+                placeholder="Did you enjoy this story?"
                 required
                 valid={this.state.formValidation.question}
                 value={this.state.formData.question}
@@ -110,11 +112,12 @@ export default class PollForm extends React.Component {
               <Container dir="row">
                 <Container flex={[1, 0, `${100 / 2}%`]}>
                   <CharacterCount>
-                    {10 - this.state.formData.answer1.length}
+                    {GLOBALS.fixedButtonCharLimit -
+                      this.state.formData.answer1.length}
                   </CharacterCount>
                   <TextInput
                     input
-                    maxLength="10"
+                    maxLength={GLOBALS.fixedButtonCharLimit}
                     minLength="1"
                     name="answer1"
                     onBlur={(e) => this.handleBlur(e)}
@@ -128,11 +131,12 @@ export default class PollForm extends React.Component {
                 </Container>
                 <Container flex={[1, 0, `${100 / 2}%`]}>
                   <CharacterCount>
-                    {10 - this.state.formData.answer2.length}
+                    {GLOBALS.fixedButtonCharLimit -
+                      this.state.formData.answer2.length}
                   </CharacterCount>
                   <TextInput
                     input
-                    maxLength="10"
+                    maxLength={GLOBALS.fixedButtonCharLimit}
                     minLength="1"
                     name="answer2"
                     onBlur={(e) => this.handleBlur(e)}

@@ -26,6 +26,9 @@ const PollItem = css(Container)`
   &:not(:last-child) {
     ${setSpace("mbl")};
   }
+  ${Actionbar} {
+    ${setSpace("phn")};
+  }
 `;
 
 export default class OutroView extends Component {
@@ -50,9 +53,17 @@ export default class OutroView extends Component {
     }
 
     // Load story via storyId -> getStoryURL
-    if ((!this.props.story || Object.keys(this.props.story).length === 0) && this.props.params.storyId) {
-      const storyURL = window.InterviewJS.getStoryURL(this.props.params.storyId);
-      if (storyURL) axios.get(storyURL).then(response => this.props.createStory(response.data));
+    if (
+      (!this.props.story || Object.keys(this.props.story).length === 0) &&
+      this.props.params.storyId
+    ) {
+      const storyURL = window.InterviewJS.getStoryURL(
+        this.props.params.storyId
+      );
+      if (storyURL)
+        axios
+          .get(storyURL)
+          .then((response) => this.props.createStory(response.data));
     }
   }
 
