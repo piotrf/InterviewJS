@@ -1,5 +1,6 @@
 ## 28-03-2018
 
+* composer: new interviewee will now be added as the last and not the first
 * composer: fixed color picker in IntervieweeForm.js
 * composer: it is no longer publish a story without a poll
 * viewer: opening chat with another person with history loads immediately without animation
