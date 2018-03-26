@@ -1,8 +1,9 @@
 ## 28-03-2018
 
-* viewer: poll choices are now being stored in localstorage, readers are no longer able to re-submit poll
-* it is no longer publish a story without a poll
+* composer: fixed color picker in IntervieweeForm.js
+* composer: it is no longer publish a story without a poll
 * viewer: opening chat with another person with history loads immediately without animation
+* viewer: poll choices are now being stored in localstorage, readers are no longer able to re-submit poll
 * viewer: story consumption score is now dynamic
 
 ## 25-03-2018
