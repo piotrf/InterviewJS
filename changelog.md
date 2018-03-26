@@ -1,4 +1,9 @@
-## 25-03-2017
+## 28-03-2018
+
+* it is no longer publish a story without a poll
+* viewer: opening chat with another person with history loads immediately without animation
+
+## 25-03-2018
 
 * composer: embed/map/youtube tabs now have input validation
 * composer: fixed a bug allowing to create stories without interviewees which would crash the app
@@ -14,14 +19,14 @@
 * viewer: the user can now respond with emojis
 * viewer: user gets to either chat to somebody else or quit chatting at end of a chat
 
-## 16-03-2017
+## 16-03-2018
 
 * It is now possible to add image bubbles to your story.
 * File-typed inputs now only accept images with a subset of file extensions.
 * Viewer is almost production ready.
 * About InterviewJS modal in the Composer.
 
-## 09-03-2017
+## 09-03-2018
 
 * It is now possible to add embed, map, media bubbles — WIP
   Textareas in those tabs accept `<iframe…>`-like code. Example: https://twitter.com/interview_js/status/971948278089637888
@@ -42,7 +47,7 @@
 * Tweaked UserPane logic to allow input placeholder different from value.
   So now we have `Type custom label here…` and not `Ignore` value at all times.
 
-## 06-03-2017
+## 06-03-2018
 
 * Firefox fixes
   Composer has been browser tested—Chrome, Safari, Firefox is good to go.
@@ -65,7 +70,7 @@
 * Composer Scroll-to-bottom
   Composer storyline (central pane) will now scroll to bottom automatically on page load or addition of a new bubble.
 
-## 02-03-2017
+## 02-03-2018
 
 * It is now possible to delete interviewees.
   You can do so in the modal dialog when editing a single interviewee. Bottom-right: there’s a red icon, it has a tooltip (on hover) and a dropdown (on click) asking to confirm deletion. Extra logic has been put in place to prevent removal of the only interviewee in a story.
@@ -91,7 +96,7 @@
 * It is now possible to add bubbles to the story.
   Only text bubbles for now, and it’s WIP—plenty to do there, but the + buttons turns green when the bubble preview grey area is populated with some data.
 
-## 22-02-2017
+## 22-02-2018
 
 * integrated simple speech bubble groups in the storyline pane with react-stay-scrolled
 * stories dataset has been remodelled, added a simple chat `Meeting Ava` to test this dataset model against display logic
@@ -106,7 +111,3 @@
 * it is now possible to add and edit interviewees both in the `create story` flow as well as listing and the composer itself
 * new stories are assigned formatted creation date automatically
 * story delete confirmation modal
-
-## 15-02-2017
-
-…

@@ -5,7 +5,7 @@ import { color, setType } from "../../../utils";
 
 const MessageEl = css.p`
   ${setType("x")};
-  color: ${color.greyLLt};
+  color: ${color.greyM};
   font-style: italic;
   text-align: center;
 `;
