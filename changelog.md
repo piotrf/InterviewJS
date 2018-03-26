@@ -2,6 +2,7 @@
 
 * it is no longer publish a story without a poll
 * viewer: opening chat with another person with history loads immediately without animation
+* viewer: story consumption score is now dynamic
 
 ## 25-03-2018
 
