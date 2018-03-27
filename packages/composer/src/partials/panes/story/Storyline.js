@@ -114,7 +114,7 @@ export default class Storyline extends React.Component {
       Number.isInteger(to) &&
       this.over.dataset.droppable !== undefined
     ) {
-      this.dragged.style.display = "block";
+      this.dragged.style.display = "flex";
       this.dragged.parentNode.removeChild(placeholder);
       const payload = { from, to };
       this.props.moveStorylineItem(storyIndex, currentInterviewee, payload);
