@@ -1,3 +1,6 @@
+/* eslint no-await-in-loop: 0 */
+/* eslint no-plusplus: 0 */
+
 import Raven from "raven-js";
 import { Storage } from "aws-amplify";
 import axios from "axios";
@@ -175,27 +178,43 @@ export function noop() {
   };
 }
 
-export function syncFirebaseStories() {
+export function syncFirebaseStories(uid, email) {
+  console.log("sync", uid, email);
 
   return (dispatch) => {
     dispatch(noop());
+    // window.LOG_LEVEL = 'DEBUG';
 
     Storage.vault.list('stories/')
-      .then(stories => {
-        console.log(stories);
+      .then(async stories => {
+        console.log("AWS", stories);
+        // const meta = {};
 
-        stories.forEach(({key}) => {
-          Storage.vault.get(key)
-            .then(url => {
-              axios.get(url)
-                .then(response => {
-                  console.log('AWS', response.data);
-                  dispatch(syncStory(response.data));
-                })
-                .catch(error => Raven.captureException(error));
-            })
-            .catch(error => Raven.captureException(error));
-        });
+        // for (let i = 0; i < stories.length; i++) {
+        //   const key = stories[i];
+        //   const url = await Storage.vault.get(key, { expires: 120 });
+        //
+        //   console.log(key, url);
+        //   // const { data } = axios.get(url);
+        //   //
+        //   // const { version, imported } = data;
+        //   // meta[key] = { version, imported };
+        //   //
+        //   // dispatch(syncStory(data));
+        // }
+
+        // stories.forEach(({key}) => {
+        //   Storage.vault.get(key)
+        //     .then(url => {
+        //       axios.get(url)
+        //         .then(response => {
+        //           console.log('AWS', response.data);
+        //           dispatch(syncStory(response.data));
+        //         })
+        //         .catch(error => Raven.captureException(error));
+        //     })
+        //     .catch(error => Raven.captureException(error));
+        // });
 
         // migrate
         const migrationMap = {
@@ -215,20 +234,72 @@ export function syncFirebaseStories() {
           "laurian@gmail.com": "ui8Ju9ZE6NTeXSmgYYbba70axKn1",
           "alilouiserae@gmail.com": "yBIVwQEF1xdUewTa1CwM3bmWalU2"
         };
-        const uid = migrationMap["laurian@gmail.com"];
-        if (uid) {
+        const fbuid = migrationMap[email];
+        if (fbuid) {
           base
-            .fetch(`stories-alpha/${uid}/`, {
+            .fetch(`stories-alpha/${fbuid}/`, {
               asArray: true
             })
             .then((data) => {
               // console.log(data);
-              data.forEach((story) => {
-                console.log('FIREBASE', story);
-                dispatch(syncAndSaveStory(story));
+              //
+              const firebaseStories = {};
+              for (let i = 0; i < data.length; i++) {
+                firebaseStories[data[i].id] = data[i];
+              }
+
+              stories.forEach(({key}) => {
+                Storage.vault.get(key)
+                  .then(url => {
+                    axios.get(url)
+                      .then(response => {
+                        console.log('AWS', response.data);
+
+                        if (firebaseStories[response.data.id] && firebaseStories[response.data.id].version > response.data.version) {
+                          console.log("import updated firebase story");
+                          dispatch(syncAndSaveStory(firebaseStories[response.data.id]));
+                        } else {
+                          dispatch(syncStory(response.data));
+                        }
+                      })
+                      .catch(error => Raven.captureException(error));
+                  })
+                  .catch(error => Raven.captureException(error));
               });
+
+              const awsStoriesIds = stories.map(story => story.key.replace("stories/", "").replace("/story.json", ""));
+              for (let i = 0; i < data.length; i++) {
+                if ( !awsStoriesIds.includes(data[i].id) ) {
+                  console.log("import firebase story");
+                  dispatch(syncAndSaveStory(data[i]));
+                }
+              }
+
+              //
+              // data.forEach((story) => {
+              //   console.log('FIREBASE', story);
+              //
+              //   if (story.version > meta[story.id].version) {
+              //     console.log("import", story.id);
+              //     // dispatch(syncAndSaveStory(story));
+              //   }
+              // });
             })
             .catch(error => Raven.captureException(error));
+          } else {
+            // AWS LOAD
+            stories.forEach(({key}) => {
+              Storage.vault.get(key)
+                .then(url => {
+                  axios.get(url)
+                    .then(response => {
+                      console.log('AWS', response.data);
+                      dispatch(syncStory(response.data));
+                    })
+                    .catch(error => Raven.captureException(error));
+                })
+                .catch(error => Raven.captureException(error));
+            });
           }
         // migrate
       })

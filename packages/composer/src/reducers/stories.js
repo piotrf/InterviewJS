@@ -56,6 +56,8 @@ function stories(state = [], action) {
       if (!payload.poll) payload.poll = [];
       // if (!payload.version) payload.version = 0;
       // payload.version++;
+      payload.imported = true;
+      payload.importedVersion = payload.version;
 
       const prevStory2 = state.find((story) => story.id === payload.id);
       if (!prevStory2) return [payload, ...state];

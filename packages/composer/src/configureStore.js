@@ -24,17 +24,18 @@ import stories from "./data/stories";
 Amplify.configure(awsmobile);
 
 // Sentry.io
-Raven.config("https://796f1032b1c74f15aba70d91dfcd14c5@sentry.io/360335", {
-  release: process.env.VERSION,
-  autoBreadcrumbs: {
-    xhr: false,
-    console: false,
-    dom: false,
-  },
-  maxBreadcrumbs: 32,
-  sanitizeKeys: ['logo', 'cover', 'avatar'],
-}).install();
-
+if (document.location.hostname !== "localhost") {
+  Raven.config("https://796f1032b1c74f15aba70d91dfcd14c5@sentry.io/360335", {
+    release: process.env.VERSION,
+    autoBreadcrumbs: {
+      xhr: false,
+      console: false,
+      dom: false,
+    },
+    maxBreadcrumbs: 32,
+    sanitizeKeys: ['logo', 'cover', 'avatar'],
+  }).install();
+}
 
 // FIREBASE
 export const firebaseApp = firebase.initializeApp({
