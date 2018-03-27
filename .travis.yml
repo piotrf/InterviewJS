@@ -7,14 +7,14 @@ before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.5.1
   - export PATH=$HOME/.yarn/bin:$PATH
 
-cache:
-  yarn: true
-  directories:
-  - node_modules
-  - packages/composer/node_modules
-  - packages/viewer/node_modules
-  - packages/styleguide/node_modules
-  - packages/site/node_modules
+# cache:
+#   yarn: true
+#   directories:
+#   - node_modules
+#   - packages/composer/node_modules
+#   - packages/viewer/node_modules
+#   - packages/styleguide/node_modules
+#   - packages/site/node_modules
 
 script:
 - 'yarn run build'
@@ -32,6 +32,7 @@ deploy:
     on:
       repo: AJInteractive/InterviewJS
       branch: develop
+
   - provider: s3
     skip_cleanup: true
     access_key_id: AKIAIZT2LU3JYJK66ENA
@@ -56,6 +57,7 @@ deploy:
     on:
       repo: AJInteractive/InterviewJS
       branch: develop
+
   - provider: s3
     skip_cleanup: true
     access_key_id: AKIAIZT2LU3JYJK66ENA
@@ -93,15 +95,15 @@ deploy:
       repo: AJInteractive/InterviewJS
       branch: master
 
-  - provider: s3
-    skip_cleanup: true
-    access_key_id: AKIAIZT2LU3JYJK66ENA
-    secret_access_key:
-      secure: rAtDOSOOnIucrqXHcqsDSYUApS8Zz8lGS3lWImAPKOmwf/NtmiP9LsmnQV4iEmCP6x4LkEqnKH2mLoKItJPrQE21efx9EryajF0NDCc5g3NfI2rhIyY3ujK0SRx87R1ysHjTkPX3aFk2zCo13PLgQmTNYHjtGZ106nh56iIiqOV/QQ0kCp5z27v20cJ2d4W4qAY0RrDxdnEeYXLeGwj8VMr9vGGRd8MeeJeWmQJ4ek1lOeBSJ+Z75Q3PCWko2BWzUD58/jZsiUgf8qIu349OA6UVzBJoVQ301wp+4R/Qm9rvvbf3XqO6WY3UQj91VoI6BQ0z+LOcDhoWuRkqwr7QVCgwS9CQ+H5TPJ2GVewX2NWOtg45EuyzDXY0rM0a93NdFNTM9HNDelkV0S7JBHo1FR1EASDDstP8wz54e/oX+3AE5B3t21jJqKJ5IET1u+qs7ls8vKR7tzekQfPbHNu0GJeWxGg1xOSNDGbRkEkAsHEy0OKV7QDvdM1w2RtTHQoRamsk0a2p0FmsTAhC9kyPeoLMBorVzIFpUeO6m2IT6YmwaToeKaquKelmA3Wc/yQVQdRb6ahFy8A4YRy54KnTEpGstuyo9uYjpbHNKbNpAiroP9EsImMCQj0Z3ZSbYvVwkRqQGFdklRXQIiEutV8PAlW5XglllJZhGaB136dnISs=
-    bucket: interviewjs.io
-    local-dir: packages/styleguide/catalog/build/
-    upload-dir: 'styleguide'
-    acl: public_read
-    on:
-      repo: AJInteractive/InterviewJS
-      branch: master
+  # - provider: s3
+  #   skip_cleanup: true
+  #   access_key_id: AKIAIZT2LU3JYJK66ENA
+  #   secret_access_key:
+  #     secure: rAtDOSOOnIucrqXHcqsDSYUApS8Zz8lGS3lWImAPKOmwf/NtmiP9LsmnQV4iEmCP6x4LkEqnKH2mLoKItJPrQE21efx9EryajF0NDCc5g3NfI2rhIyY3ujK0SRx87R1ysHjTkPX3aFk2zCo13PLgQmTNYHjtGZ106nh56iIiqOV/QQ0kCp5z27v20cJ2d4W4qAY0RrDxdnEeYXLeGwj8VMr9vGGRd8MeeJeWmQJ4ek1lOeBSJ+Z75Q3PCWko2BWzUD58/jZsiUgf8qIu349OA6UVzBJoVQ301wp+4R/Qm9rvvbf3XqO6WY3UQj91VoI6BQ0z+LOcDhoWuRkqwr7QVCgwS9CQ+H5TPJ2GVewX2NWOtg45EuyzDXY0rM0a93NdFNTM9HNDelkV0S7JBHo1FR1EASDDstP8wz54e/oX+3AE5B3t21jJqKJ5IET1u+qs7ls8vKR7tzekQfPbHNu0GJeWxGg1xOSNDGbRkEkAsHEy0OKV7QDvdM1w2RtTHQoRamsk0a2p0FmsTAhC9kyPeoLMBorVzIFpUeO6m2IT6YmwaToeKaquKelmA3Wc/yQVQdRb6ahFy8A4YRy54KnTEpGstuyo9uYjpbHNKbNpAiroP9EsImMCQj0Z3ZSbYvVwkRqQGFdklRXQIiEutV8PAlW5XglllJZhGaB136dnISs=
+  #   bucket: interviewjs.io
+  #   local-dir: packages/styleguide/catalog/build/
+  #   upload-dir: 'styleguide'
+  #   acl: public_read
+  #   on:
+  #     repo: AJInteractive/InterviewJS
+  #     branch: master
