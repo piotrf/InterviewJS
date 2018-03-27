@@ -6,7 +6,7 @@
   position: absolute;
   right: 0;
   top: 0;
-  z-index: 1500;
+  z-index: 100;
 }
 
 /* —— HOLE —— */
@@ -36,7 +36,7 @@
   -webkit-transform: translate3d(0, 0, 0);
           transform: translate3d(0, 0, 0);
   width: 290px;
-  z-index: 1510;
+  z-index: 110;
 }
 .joyride-tooltip--animate {
   -webkit-animation: joyride-tooltip 0.5s forwards;
@@ -240,7 +240,7 @@
   height: 36px;
   position: relative;
   width: 36px;
-  z-index: 1500; }
+  z-index: 100; }
   .joyride-beacon:active, .joyride-beacon:focus, .joyride-beacon:hover {
     outline: none; }
   .joyride-beacon__inner {
