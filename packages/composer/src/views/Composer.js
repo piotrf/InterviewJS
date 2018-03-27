@@ -106,8 +106,8 @@ export default class ComposerView extends React.Component {
       padding: 0,
       arrow: {},
       beacon: {
-        inner: color.greenM,
-        outer: color.greenM
+        inner: "#bb11de",
+        outer: "#bb11de"
       },
       header: {
         border: "none",
