@@ -35,7 +35,9 @@ const IntervieweeName = css(Text.withComponent("h2"))`
   color: ${color.blueBlk};
 `;
 const IntervieweeTitle = css(Text)`
-
+  ${setSpace("mvx")};
+  color: ${color.blueBlk};
+  display: block;
 `;
 const IntervieweeBio = css(Text.withComponent("p"))`
 
