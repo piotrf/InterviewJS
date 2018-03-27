@@ -61,9 +61,8 @@ export default class MediaPane extends Component {
           </BubbleHTMLWrapper>
         ) : (
           <BubbleHTMLWrapper>
-            this is not a youtube iframe, youtube iframe code starts with{" "}
+            this is not a valid iframe. An iframe code starts with{" "}
             {`<iframe`}, ends with {`></iframe>`} and requires {`src=`}{" "}
-            attribute pointing to youtube server
           </BubbleHTMLWrapper>
         );
       }
@@ -84,7 +83,7 @@ export default class MediaPane extends Component {
             area
             name="value"
             onChange={(e) => this.handleChange(e)}
-            placeholder={`<iframe src="https://www.youtube.com/embed/…`}
+            placeholder={`Insert an iframe to embed a video directly into your chat`}
             required
             rows={10}
             type="url"
