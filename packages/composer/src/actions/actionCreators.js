@@ -1,9 +1,8 @@
-// import Raven from "raven-js";
+import Raven from "raven-js";
 import { Storage } from "aws-amplify";
 import axios from "axios";
-// import { base } from "../configureStore";
 import shortUuid from "short-uuid";
-// import Raven from "raven-js";
+import { base } from "../configureStore";
 
 const uuidv4 = () => shortUuid().fromUUID(shortUuid.uuid());
 
@@ -62,6 +61,13 @@ export function updateStory(payload, storyIndex) {
 export function syncStory(payload) {
   return {
     type: "SYNC_STORY",
+    payload
+  };
+}
+
+export function syncAndSaveStory(payload) {
+  return {
+    type: "SYNC_AND_SAVE_STORY",
     payload
   };
 }
@@ -177,32 +183,56 @@ export function syncFirebaseStories() {
     Storage.vault.list('stories/')
       .then(stories => {
         console.log(stories);
+
         stories.forEach(({key}) => {
           Storage.vault.get(key)
             .then(url => {
               axios.get(url)
-                .then(response => dispatch(syncStory(response.data)))
-                .catch(err => console.log(err));
+                .then(response => {
+                  console.log('AWS', response.data);
+                  dispatch(syncStory(response.data));
+                })
+                .catch(error => Raven.captureException(error));
             })
-            .catch(err => console.log(err));
+            .catch(error => Raven.captureException(error));
         });
-      })
-    .catch(err => console.log(err));
 
-    // uid = "anon"
-    // const NAMESPACE = "alpha";
-    // base
-    //   .fetch(`stories-${NAMESPACE}/${uid}/`, {
-    //     asArray: true
-    //   })
-    //   .then((data) => {
-    //     data.forEach((story) => {
-    //       dispatch(syncStory(story));
-    //     });
-    //   })
-    //   .catch((error) => {
-    //     Raven.captureException(error);
-    //   });
+        // migrate
+        const migrationMap = {
+          "omran.1994@gmail.com": "4gvGewnBKvaBd2nEJzwRBkCCJA92",
+          "robin.kwong@gmail.com": "9L6e5VyswdT9fv9ZCyMUsk9UjcS2",
+          "ayilah@gmail.com": "PCkH3ueyDpXQlA7RMY5spnBvCe63",
+          "ayilahchaudhary2020@u.northwestern.edu": "RsBJYu7btkWGtks05NO1jr0vIsy2",
+          "joana.bogusz@gmail.com": "VLCWoOOhJ6fzU2sHfWYZ91BydBC3",
+          "hello@piotrf.pl": "ZWiXj1RmQwbT7dOVG8kt3VeDkyH2",
+          "jueunchoinuq@gmail.com": "dNtUyPyKNuVAQBoQy9oLoSYkoYM2",
+          "ashultes92@gmail.com": "eqR6K2ORzwXNDpXamFY6HJLJEoj2",
+          "noora.shalaby@gmail.com": "ftInNHeg9lbEnE6xFSl6XWgJJjF2",
+          "haddadme@gmail.com": "jMi2IvAmWFV9DZBrIfWWUrlTEw62",
+          "dev@piotrf.pl": "k7038PtYuuS592n2dYVonOgOGYt1",
+          "morrison.gi@gmail.com": "lHIDyIUPdJNgeVseGI0T1BqtYB93",
+          "juliana.ruhfus77@gmail.com": "rAYYRoNbntXtxZLJ3gG2zS6FFYY2",
+          "laurian@gmail.com": "ui8Ju9ZE6NTeXSmgYYbba70axKn1",
+          "alilouiserae@gmail.com": "yBIVwQEF1xdUewTa1CwM3bmWalU2"
+        };
+        const uid = migrationMap["laurian@gmail.com"];
+        if (uid) {
+          base
+            .fetch(`stories-alpha/${uid}/`, {
+              asArray: true
+            })
+            .then((data) => {
+              // console.log(data);
+              data.forEach((story) => {
+                console.log('FIREBASE', story);
+                dispatch(syncAndSaveStory(story));
+              });
+            })
+            .catch(error => Raven.captureException(error));
+          }
+        // migrate
+      })
+    .catch(error => Raven.captureException(error));
 
     return {
       type: "NOOP"

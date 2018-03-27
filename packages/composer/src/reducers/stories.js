@@ -51,6 +51,21 @@ function stories(state = [], action) {
         return story;
       });
 
+    case "SYNC_AND_SAVE_STORY":
+      console.log("sync/update a story");
+      if (!payload.poll) payload.poll = [];
+      // if (!payload.version) payload.version = 0;
+      // payload.version++;
+
+      const prevStory2 = state.find((story) => story.id === payload.id);
+      if (!prevStory2) return [payload, ...state];
+
+      return state.map((story) => {
+        if (story.id === payload.id && payload.version > story.version)
+          return payload;
+        return story;
+      });
+
     case "CREATE_INTERVIEWEE":
       console.log("creating interviewee");
       return [
@@ -180,16 +195,17 @@ function storiesWrapper(state = [], action) {
   try {
     if (typeof storyIndex !== "number") {
       console.log("no storyIndex");
-      return newState;
+      // return newState;
     }
 
     let storyId = null;
 
     if (typeof storyIndex === "number" && state[storyIndex])
       storyId = state[storyIndex].id;
-    if (type === "CREATE_STORY") storyId = payload.id;
+      if (type === "CREATE_STORY") storyId = payload.id;
+      if (type === "SYNC_AND_SAVE_STORY") storyId = payload.id;
 
-    if (!storyId) storyId = `s0_tmp_${uuidv4()}`;
+    if (!storyId) return newState; // storyId = `s0_tmp_${uuidv4()}`;
 
 
     let currentStory = newState.find((story) => story.id === storyId);
@@ -205,9 +221,9 @@ function storiesWrapper(state = [], action) {
     if (!currentStory.version) currentStory.version = 0;
     currentStory.version++;
 
-    // if (currentStory.uid) uid = currentStory.uid;
+    if (type === "SYNC_AND_SAVE_STORY") currentStory.version--;
 
-    if (type === "CREATE_STORY") {
+    if (type === "CREATE_STORY" || type === "SYNC_AND_SAVE_STORY") {
       Storage.vault.put(`stories/${storyId}/story.json`, JSON.stringify(currentStory), {
         contentType: 'application/json'
       })

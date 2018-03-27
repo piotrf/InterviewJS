@@ -22,16 +22,6 @@ import stories from "./data/stories";
 
 // AWS Mobile
 Amplify.configure(awsmobile);
-// Auth.configure({
-//   Auth: {
-//     cookieStorage: {
-//       domain: document.location.host,
-//       path: '/',
-//       expires: 365,
-//       secure: true
-//     }
-//   }
-// });
 
 // Sentry.io
 Raven.config("https://796f1032b1c74f15aba70d91dfcd14c5@sentry.io/360335", {
@@ -96,7 +86,7 @@ const enhancers = compose(
 
 
 let store;
-switch ("persist") {
+switch ("xpersist") {
   case "persist":
     store = createStore(
       persistedReducer,
