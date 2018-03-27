@@ -92,7 +92,7 @@ export default class Storyline extends React.Component {
     this.scrollToBottom = this.scrollToBottom.bind(this);
   }
   componentDidMount() {
-    setTimeout(this.scrollToBottom, 300);
+    setTimeout(() => this.scrollToBottom("instant"), 300);
   }
   componentDidUpdate(prevProps) {
     return prevProps.storyline.length < this.props.storyline.length
@@ -136,12 +136,14 @@ export default class Storyline extends React.Component {
       droppableParent.parentNode.insertBefore(placeholder, droppableParent);
     }
   }
-  scrollToBottom() {
-    this.anchor.scrollIntoView({
-      behavior: "smooth",
-      block: "end",
-      inline: "end"
-    });
+  scrollToBottom(behaviour) {
+    return this.anchor
+      ? this.anchor.scrollIntoView({
+          behavior: behaviour || "smooth",
+          block: "end",
+          inline: "end"
+        })
+      : null;
   }
   render() {
     const { storyline } = this.props;
@@ -285,8 +287,7 @@ Storyline.propTypes = {
   deleteStorylineItem: func.isRequired,
   moveStorylineItem: func.isRequired,
   storyIndex: number.isRequired,
-  storyline: arrayOf(object),
-  toggleBubbleEdit: func.isRequired
+  storyline: arrayOf(object)
 };
 
 Storyline.defaultProps = {

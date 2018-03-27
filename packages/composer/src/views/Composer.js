@@ -374,7 +374,7 @@ export default class ComposerView extends React.Component {
         }}
         holePadding={10}
         run // or some other boolean for when you want to start it
-        debug
+        // debug
         callback={this.callback}
       />
     ];

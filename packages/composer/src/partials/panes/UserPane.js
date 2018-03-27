@@ -192,8 +192,8 @@ export default class UserPane extends React.Component {
       exploreLibDict: "text",
       exploreLibItem: null,
 
-      exploreVal: "Create Choice Interaction",
-      continueVal: "Create Single Interaction"
+      exploreVal: "Omg why?",
+      continueVal: "Carry on"
     };
     this.addStorylineItem = this.addStorylineItem.bind(this);
     this.customiseActionLabel = this.customiseActionLabel.bind(this);
