@@ -317,7 +317,7 @@ export default class UserPane extends React.Component {
               <UserAction dir="row" active>
                 <Container flex={[0, 0, "140px"]} align="center" dir="column">
                   <PageSubtitle typo="p4">
-                    Continue
+                    Create Single Interaction
                     <Tip
                       position="bottom"
                       title="Create user interactions that will lead into your interview text. Select text by clicking or write your own - it has to be the user’s voice. Explore all tabs!"
@@ -429,7 +429,7 @@ export default class UserPane extends React.Component {
                     onChange={(e) => this.toggleAction("enableExplore", e)}
                   >
                     <PageSubtitle typo="p4">
-                      Explore
+                      Create Choice Interaction
                       <Tip
                         position="bottom"
                         title="Select to add a second interaction. Together with the first question or user interaction it gives the user choice. Multimedia works well - explore all tabs!"
@@ -545,6 +545,6 @@ UserPane.propTypes = {
 };
 
 UserPane.defaultProps = {
-  exploreVal: "Create Choice Interaction",
-  continueVal: "Create Single Interaction"
+  exploreVal: "Omg why?",
+  continueVal: "Carry on"
 };
