@@ -139,14 +139,15 @@ export default class ComposerView extends React.Component {
         color: color.flareLD,
         fontFamily: font.serif,
         fontSize: "13px",
-        padding: "7px 0"
+        padding: "7px 0",
+        textDecoration: "underline"
       },
       back: {
         color: color.flareLD,
         fontFamily: font.serif,
         fontSize: "13px",
         padding: "7px 0",
-        textDecoation: "underline"
+        textDecoration: "underline"
       },
       close: {},
       hole: {}
