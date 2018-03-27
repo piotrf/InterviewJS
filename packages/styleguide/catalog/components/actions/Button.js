@@ -283,6 +283,7 @@ const Button = css.button`
   ${({ fixed }) =>
     fixed
       ? `
+    ${setSpace("phx")};
     width: 130px;
     ${breakpoint.tablet} {
       width: 160px;

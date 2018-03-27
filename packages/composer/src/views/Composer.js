@@ -113,7 +113,8 @@ export default class ComposerView extends React.Component {
         border: "none",
         fontFamily: font.serif,
         fontSize: "15px",
-        fontWeight: "bold"
+        fontWeight: "bold",
+        lineHeight: "20px"
       },
       main: {
         color: color.greyLLt,
@@ -135,13 +136,13 @@ export default class ComposerView extends React.Component {
         padding: "7px 12px"
       },
       skip: {
-        color: color.white,
+        color: color.flareLD,
         fontFamily: font.serif,
         fontSize: "13px",
         padding: "7px 0"
       },
       back: {
-        color: color.white,
+        color: color.flareLD,
         fontFamily: font.serif,
         fontSize: "13px",
         padding: "7px 0",
@@ -152,23 +153,24 @@ export default class ComposerView extends React.Component {
     };
     const steps = [
       {
-        title: "This is your storyline, it’s empty!",
+        title: "1. This is your storyline, it’s empty!",
         text:
-          "Start adding speech bubbles from the side panels. Not sure how? Follow us on a quick tour…",
+          "The speech bubbles you create will appear here. Start adding some. Not sure how? Follow us on a quick tour…",
         selector: ".jr-step1",
         style: joyrideStyles,
         position: "left"
       },
       {
-        title: "This panel is for your interviewees.",
+        title: "2. This panel is for your interviewees.",
         text:
-          "Use it to convert your interview texts into chat messages. Select a bit of text and click + to turn it into a chat text bubble.",
+          "Use it to store the transcript of your interview to use as a base for you speech bubbles. Then start selecting pieces of text and hit the pretty green + button down below.",
         selector: ".jr-step2",
         style: joyrideStyles,
         position: "right"
       },
       {
-        title: "Add images, videos and links",
+        title:
+          "3. Here’s the thing. The interviewee can respond not only with just text.",
         text:
           "You can also create chat bubbles with photos, videos, maps or sound.",
         selector: ".jr-step3",
@@ -176,12 +178,45 @@ export default class ComposerView extends React.Component {
         position: "bottom"
       },
       {
-        title: "Script user actions",
+        title:
+          "4. This is the panel for your end user, the reader of your story.",
         text:
-          "The panel on the right is for inserting user actions and choices. ",
+          "You can use it to provide the reader of your story a choice, wether to continue in a story, or explore a topic.",
         selector: ".jr-step4",
         style: joyrideStyles,
         position: "left"
+      },
+      {
+        title: "5. Continue actions",
+        text:
+          "Your reader needs to be able to move forward in the story at all times. Which is what `Contine` actions are for. Use them to invite the reader to interact with the interviewee. You can select from a library/dictionary of actions we’ve found useful in our storie, but you can also type your own. Continue action will let the user jump to the next speech bubble, simply go along with the story.",
+        selector: ".jr-step5",
+        style: joyrideStyles,
+        position: "left"
+      },
+      {
+        title: "6. Explore actions",
+        text:
+          "You may also want to structure your interviews in a way to give the reader more context on a particular topic. That’s where `explore` actions come in handy. An `explore` action would open a short loop in your story where the reader is being presented with an extra speech bubble that then leads back to the main thread of your story.",
+        selector: ".jr-step6",
+        style: joyrideStyles,
+        position: "left"
+      },
+      {
+        title: "7. Edit your story details here.",
+        text:
+          "Care to make your story intro more appealing? Correct the title? Give your reader more context on the story or simpy edit your interviewees’ details? All here.",
+        selector: ".jr-step7",
+        style: joyrideStyles,
+        position: "bottom"
+      },
+      {
+        title: "8. Publish",
+        text:
+          "When you’re done creating your story, you can publish it here. Each time you publish it you get a new link to share the story with your network.",
+        selector: ".jr-step8",
+        style: joyrideStyles,
+        position: "bottom"
       }
     ];
     this.setState({ joyrideSteps: steps });
@@ -232,7 +267,10 @@ export default class ComposerView extends React.Component {
                 <Icon name="arrow-left" size="x" /> Story overview
               </Action>
               <Separator dir="v" size="m" />
-              <Action onClick={() => this.toggleDetailsModal("meta")}>
+              <Action
+                onClick={() => this.toggleDetailsModal("meta")}
+                className="jr-step7"
+              >
                 <Icon
                   name="info2"
                   size="s"
@@ -249,7 +287,11 @@ export default class ComposerView extends React.Component {
               <PageTitle typo="h2">{story.title}</PageTitle>
             </Container>
             <Container flex={[1, 1, `${100 / 3}%`]} align="right" padded>
-              <Action primary onClick={this.togglePublishModal}>
+              <Action
+                primary
+                onClick={this.togglePublishModal}
+                className="jr-step8"
+              >
                 Publish Story
               </Action>
             </Container>

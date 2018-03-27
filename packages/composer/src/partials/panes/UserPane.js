@@ -313,7 +313,7 @@ export default class UserPane extends React.Component {
           }
         >
           <UserActions>
-            <Container>
+            <Container className="jr-step5">
               <UserAction dir="row" active>
                 <Container flex={[0, 0, "140px"]} align="center" dir="column">
                   <PageSubtitle typo="p4">
@@ -421,7 +421,7 @@ export default class UserPane extends React.Component {
               </UserAction>
             </Container>
             <Separator silent size="s" />
-            <Container>
+            <Container className="jr-step6">
               <UserAction dir="row" active={enableExplore}>
                 <Container flex={[0, 0, "140px"]} align="center" dir="column">
                   <Checkbox
