@@ -4,12 +4,12 @@
 /* eslint no-plusplus: 0 */
 /* eslint no-param-reassign: 0 */
 
-import shortUuid from "short-uuid";
+// import shortUuid from "short-uuid";
 import Raven from "raven-js";
 import { Storage } from "aws-amplify";
 
 
-const uuidv4 = () => shortUuid().fromUUID(shortUuid.uuid());
+// const uuidv4 = () => shortUuid().fromUUID(shortUuid.uuid());
 
 function stories(state = [], action) {
   const {
