@@ -190,7 +190,7 @@ export default class ComposerView extends React.Component {
       {
         title: "5. Continue actions",
         text:
-          "Your reader needs to be able to move forward in the story at all times. Which is what `Contine` actions are for. Use them to invite the reader to interact with the interviewee. You can select from a library/dictionary of actions we’ve found useful in our storie, but you can also type your own. Continue action will let the user jump to the next speech bubble, simply go along with the story.",
+          "Your reader needs to be able to move forward in the story at all times. Which is what `Contine` actions are for. Use them to invite the reader to interact with the interviewee. You can select from a dictionary of actions we’ve found useful in our stories, but you can also type your own. Continue action will let the user jump to the next speech bubble, simply go along with the story. That is unless an `explore` action is present next to it—then it’ll skip the closest next bubble…",
         selector: ".jr-step5",
         style: joyrideStyles,
         position: "left"
@@ -198,7 +198,7 @@ export default class ComposerView extends React.Component {
       {
         title: "6. Explore actions",
         text:
-          "You may also want to structure your interviews in a way to give the reader more context on a particular topic. That’s where `explore` actions come in handy. An `explore` action would open a short loop in your story where the reader is being presented with an extra speech bubble that then leads back to the main thread of your story.",
+          "You may also want to structure your interviews in a way to give the reader more context on a particular topic. That’s where `explore` actions come in handy. An `explore` action would open a short loop in your story where the reader is being presented with an extra speech bubble that then leads back to the main thread of your story. Example: Interviewee: “I witnessed it myself.” — User: “Carry on” (continue) or “Do you have a photo?” (explore)",
         selector: ".jr-step6",
         style: joyrideStyles,
         position: "left"
