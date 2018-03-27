@@ -87,7 +87,7 @@ const enhancers = compose(
 
 
 let store;
-switch ("xpersist") {
+switch ("persist") {
   case "persist":
     store = createStore(
       persistedReducer,
