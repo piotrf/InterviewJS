@@ -122,7 +122,7 @@ export default class IntervieweePane extends React.Component {
               onClick={() => this.setState({ tab: "text" })}
               opinionated
             >
-              <Tip title="Text bubble">
+              <Tip title="Insert Text">
                 <Icon name="text" size="s" />
               </Tip>
             </PaneTab>
@@ -131,7 +131,7 @@ export default class IntervieweePane extends React.Component {
               onClick={() => this.setState({ tab: "link" })}
               opinionated
             >
-              <Tip title="Link bubble">
+              <Tip title="Insert Link">
                 <Icon name="link" size="s" />
               </Tip>
             </PaneTab>
@@ -140,7 +140,7 @@ export default class IntervieweePane extends React.Component {
               onClick={() => this.setState({ tab: "image" })}
               opinionated
             >
-              <Tip title="Image bubble">
+              <Tip title="Insert Image">
                 <Icon name="image" size="s" />
               </Tip>
             </PaneTab>
@@ -149,7 +149,7 @@ export default class IntervieweePane extends React.Component {
               onClick={() => this.setState({ tab: "embed" })}
               opinionated
             >
-              <Tip title="Generic embed bubble">
+              <Tip title="Embed iframe">
                 <Icon name="embed" size="s" />
               </Tip>
             </PaneTab>
@@ -158,7 +158,7 @@ export default class IntervieweePane extends React.Component {
               onClick={() => this.setState({ tab: "map" })}
               opinionated
             >
-              <Tip title="Google Maps bubble">
+              <Tip title="Embed map">
                 <Icon name="map" size="s" />
               </Tip>
             </PaneTab>
@@ -167,7 +167,7 @@ export default class IntervieweePane extends React.Component {
               onClick={() => this.setState({ tab: "media" })}
               opinionated
             >
-              <Tip title="Youtube bubble">
+              <Tip title="Embed video">
                 <Icon name="media" size="s" />
               </Tip>
             </PaneTab>
