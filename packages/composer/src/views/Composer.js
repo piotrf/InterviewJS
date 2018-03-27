@@ -1,6 +1,7 @@
 import React from "react";
 import css from "styled-components";
 import { arrayOf, func, object, shape, string } from "prop-types";
+import Joyride from "react-joyride";
 
 import {
   Action,
@@ -10,8 +11,12 @@ import {
   Separator,
   breakpoint,
   color,
+  font,
+  radius,
   setSpace
 } from "interviewjs-styleguide";
+
+import "./joyride.css";
 
 import {
   DetailsModal,
@@ -74,15 +79,115 @@ export default class ComposerView extends React.Component {
       currentBubble: null,
       currentInterviewee: 0,
       detailsModal: "",
+      joyrideSteps: [],
       publishModal: false
     };
     this.deleteInterviewee = this.deleteInterviewee.bind(this);
+    this.initTour = this.initTour.bind(this);
     this.switchInterviewee = this.switchInterviewee.bind(this);
     this.toggleBubbleEdit = this.toggleBubbleEdit.bind(this);
     this.toggleDetailsModal = this.toggleDetailsModal.bind(this);
     this.togglePublishModal = this.togglePublishModal.bind(this);
     this.updateStory = this.updateStory.bind(this);
   }
+
+  componentDidMount() {
+    this.initTour();
+  }
+
+  initTour() {
+    const joyrideStyles = {
+      fontFamily: font.serif,
+      backgroundColor: color.blueBlk,
+      borderRadius: radius.l,
+      color: color.white,
+      mainColor: color.white,
+      textAlign: "left",
+      padding: 0,
+      arrow: {},
+      beacon: {
+        inner: "#bb11de",
+        outer: "#bb11de"
+      },
+      header: {
+        border: "none",
+        fontFamily: font.serif,
+        fontSize: "15px",
+        fontWeight: "bold"
+      },
+      main: {
+        color: color.greyLLt,
+        fontFamily: font.serif,
+        fontSize: "14px",
+        lineHeight: "20px",
+        margin: 0,
+        padding: "7pxpx 0"
+      },
+      footer: {
+        paddingTop: "3px"
+      },
+      button: {
+        borderRadius: "100px",
+        boxShadow: `0 1px 3px ${color.shadowM}`,
+        color: color.blueM,
+        fontFamily: font.serif,
+        fontSize: "13px",
+        padding: "7px 12px"
+      },
+      skip: {
+        color: color.white,
+        fontFamily: font.serif,
+        fontSize: "13px",
+        padding: "7px 0"
+      },
+      back: {
+        color: color.white,
+        fontFamily: font.serif,
+        fontSize: "13px",
+        padding: "7px 0",
+        textDecoation: "underline"
+      },
+      close: {},
+      hole: {}
+    };
+    const steps = [
+      {
+        title: "This is your storyline, it’s empty!",
+        text:
+          "Start adding speech bubbles from the side panels. Not sure how? Follow us on a quick tour…",
+        selector: ".jr-step1",
+        style: joyrideStyles,
+        position: "left"
+      },
+      {
+        title: "This panel is for your interviewees.",
+        text:
+          "Use it to convert your interview texts into chat messages. Select a bit of text and click + to turn it into a chat text bubble.",
+        selector: ".jr-step2",
+        style: joyrideStyles,
+        position: "right"
+      },
+      {
+        title: "Add images, videos and links",
+        text:
+          "You can also create chat bubbles with photos, videos, maps or sound.",
+        selector: ".jr-step3",
+        style: joyrideStyles,
+        position: "bottom"
+      },
+      {
+        title: "Script user actions",
+        text:
+          "The panel on the right is for inserting user actions and choices. ",
+        selector: ".jr-step4",
+        style: joyrideStyles,
+        position: "left"
+      }
+    ];
+    this.setState({ joyrideSteps: steps });
+    // setTimeout(() => this.setState({ joyrideSteps: steps }), 3000);
+  }
+
   switchInterviewee(interviewee) {
     this.setState({ currentInterviewee: interviewee });
   }
@@ -150,7 +255,7 @@ export default class ComposerView extends React.Component {
             </Container>
           </PageHead>
           <PageBody>
-            <Container flex={[1, 1, `${100 / 3}%`]}>
+            <Container flex={[1, 1, `${100 / 3}%`]} className="jr-step2">
               <IntervieweePane
                 {...this.props}
                 currentBubble={this.state.currentBubble}
@@ -159,7 +264,7 @@ export default class ComposerView extends React.Component {
                 storyIndex={storyIndex}
               />
             </Container>
-            <Container flex={[0, 1, `400px`]}>
+            <Container flex={[0, 1, `400px`]} className="jr-step1">
               <StoryPane
                 {...this.props}
                 currentInterviewee={this.state.currentInterviewee}
@@ -172,7 +277,7 @@ export default class ComposerView extends React.Component {
                 }
               />
             </Container>
-            <Container flex={[1, 1, `${100 / 3}%`]}>
+            <Container flex={[1, 1, `${100 / 3}%`]} className="jr-step4">
               <UserPane
                 {...this.props}
                 currentBubble={this.state.currentBubble}
@@ -209,7 +314,26 @@ export default class ComposerView extends React.Component {
           tab={this.state.detailsModal}
           updateStory={this.updateStory}
         />
-      ) : null
+      ) : null,
+      <Joyride
+        ref="joyride" /* eslint react/no-string-refs: 0 */
+        steps={this.state.joyrideSteps}
+        autoStart
+        showSkipButton
+        showStepsProgress
+        type="continuous"
+        locale={{
+          back: "Back",
+          close: "Close",
+          last: "Thanks!",
+          next: "Next",
+          skip: "Skip tour"
+        }}
+        holePadding={10}
+        run // or some other boolean for when you want to start it
+        debug
+        callback={this.callback}
+      />
     ];
   }
 }

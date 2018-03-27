@@ -90,7 +90,8 @@ export default class IntervieweePane extends React.Component {
     const { draft, clean } = this.state;
 
     let content = draft[source];
-    if (source === "embed" || source === "map" || source === "media") content = { value: clean[source], title: draft[source].title };
+    if (source === "embed" || source === "map" || source === "media")
+      content = { value: clean[source], title: draft[source].title };
 
     const newIntervieweeBubble = {
       content,
@@ -116,7 +117,7 @@ export default class IntervieweePane extends React.Component {
     return (
       <PaneEl fill="white" rounded shift dir="column">
         <Container flex={[0, 0, "auto"]}>
-          <PaneTabs>
+          <PaneTabs className="jr-step3">
             <PaneTab
               active={tab === "text"}
               onClick={() => this.setState({ tab: "text" })}
@@ -202,7 +203,9 @@ export default class IntervieweePane extends React.Component {
             active={tab === "embed"}
             addStorylineItem={() => this.addStorylineItem("embed")}
             draft={this.state.draft.embed}
-            updateDraft={(data, clean) => this.updateDraft(data, "embed", clean)}
+            updateDraft={(data, clean) =>
+              this.updateDraft(data, "embed", clean)
+            }
           />
           <MapPane
             {...this.props}
@@ -215,7 +218,9 @@ export default class IntervieweePane extends React.Component {
             {...this.props}
             active={tab === "media"}
             draft={this.state.draft.media}
-            updateDraft={(data, clean) => this.updateDraft(data, "media", clean)}
+            updateDraft={(data, clean) =>
+              this.updateDraft(data, "media", clean)
+            }
           />
         </Container>
       </PaneEl>
