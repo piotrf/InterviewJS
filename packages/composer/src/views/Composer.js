@@ -154,7 +154,7 @@ export default class ComposerView extends React.Component {
     };
     const steps = [
       {
-        title: "1. This is your storyline, it’s empty!",
+        title: "1. This is your storyline.",
         text:
           "The speech bubbles you create will appear here. Start adding some. Not sure how? Follow us on a quick tour…",
         selector: ".jr-step1",
