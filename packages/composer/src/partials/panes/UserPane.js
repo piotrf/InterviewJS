@@ -192,8 +192,8 @@ export default class UserPane extends React.Component {
       exploreLibDict: "text",
       exploreLibItem: null,
 
-      continueVal: "Continue",
-      exploreVal: "Explore"
+      exploreVal: "Create Choice Interaction",
+      continueVal: "Create Single Interaction"
     };
     this.addStorylineItem = this.addStorylineItem.bind(this);
     this.customiseActionLabel = this.customiseActionLabel.bind(this);
@@ -313,14 +313,14 @@ export default class UserPane extends React.Component {
           }
         >
           <UserActions>
-            <Container>
+            <Container className="jr-step5">
               <UserAction dir="row" active>
                 <Container flex={[0, 0, "140px"]} align="center" dir="column">
                   <PageSubtitle typo="p4">
-                    Continue
+                    Create Single Interaction
                     <Tip
                       position="bottom"
-                      title="Here’s where you add a user interaction that will lead into the interview text in the preview panel.  You can see and import our suggestions via the tabs or better still, write your own. It has to be the user’s voice!"
+                      title="Create user interactions that will lead into your interview text. Select text by clicking or write your own - it has to be the user’s voice. Explore all tabs!"
                     >
                       <Icon
                         name="info2"
@@ -421,7 +421,7 @@ export default class UserPane extends React.Component {
               </UserAction>
             </Container>
             <Separator silent size="s" />
-            <Container>
+            <Container className="jr-step6">
               <UserAction dir="row" active={enableExplore}>
                 <Container flex={[0, 0, "140px"]} align="center" dir="column">
                   <Checkbox
@@ -429,10 +429,10 @@ export default class UserPane extends React.Component {
                     onChange={(e) => this.toggleAction("enableExplore", e)}
                   >
                     <PageSubtitle typo="p4">
-                      Explore
+                      Create Choice Interaction
                       <Tip
                         position="bottom"
-                        title="Here’s where you create a second interaction. In combination with the question or user interaction above it creates a choice for the user."
+                        title="Select to add a second interaction. Together with the first question or user interaction it gives the user choice. Multimedia works well - explore all tabs!"
                       >
                         <Icon
                           name="info2"
@@ -545,6 +545,6 @@ UserPane.propTypes = {
 };
 
 UserPane.defaultProps = {
-  exploreVal: "Explore",
-  continueVal: "Continue"
+  exploreVal: "Omg why?",
+  continueVal: "Carry on"
 };

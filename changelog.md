@@ -1,5 +1,6 @@
 ## 28-03-2018
 
+* composer: help tour in the dashboard
 * composer: new interviewee will now be added as the last and not the first
 * composer: fixed color picker in IntervieweeForm.js
 * composer: it is no longer publish a story without a poll

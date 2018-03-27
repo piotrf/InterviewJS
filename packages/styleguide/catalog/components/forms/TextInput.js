@@ -71,7 +71,7 @@ const TextInput = (props) => {
     };
     return (
       <Button {...props} onClick={(e) => handler(e)}>
-        {props.selected ? "" : "Select file"}
+        {props.selected ? "" : "Select file…"}
       </Button>
     );
   }

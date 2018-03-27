@@ -90,7 +90,8 @@ export default class IntervieweePane extends React.Component {
     const { draft, clean } = this.state;
 
     let content = draft[source];
-    if (source === "embed" || source === "map" || source === "media") content = { value: clean[source], title: draft[source].title };
+    if (source === "embed" || source === "map" || source === "media")
+      content = { value: clean[source], title: draft[source].title };
 
     const newIntervieweeBubble = {
       content,
@@ -116,13 +117,13 @@ export default class IntervieweePane extends React.Component {
     return (
       <PaneEl fill="white" rounded shift dir="column">
         <Container flex={[0, 0, "auto"]}>
-          <PaneTabs>
+          <PaneTabs className="jr-step3">
             <PaneTab
               active={tab === "text"}
               onClick={() => this.setState({ tab: "text" })}
               opinionated
             >
-              <Tip title="Text bubble">
+              <Tip title="Insert Text">
                 <Icon name="text" size="s" />
               </Tip>
             </PaneTab>
@@ -131,7 +132,7 @@ export default class IntervieweePane extends React.Component {
               onClick={() => this.setState({ tab: "link" })}
               opinionated
             >
-              <Tip title="Link bubble">
+              <Tip title="Insert Link">
                 <Icon name="link" size="s" />
               </Tip>
             </PaneTab>
@@ -140,7 +141,7 @@ export default class IntervieweePane extends React.Component {
               onClick={() => this.setState({ tab: "image" })}
               opinionated
             >
-              <Tip title="Image bubble">
+              <Tip title="Insert Image">
                 <Icon name="image" size="s" />
               </Tip>
             </PaneTab>
@@ -149,7 +150,7 @@ export default class IntervieweePane extends React.Component {
               onClick={() => this.setState({ tab: "embed" })}
               opinionated
             >
-              <Tip title="Generic embed bubble">
+              <Tip title="Embed iframe">
                 <Icon name="embed" size="s" />
               </Tip>
             </PaneTab>
@@ -158,7 +159,7 @@ export default class IntervieweePane extends React.Component {
               onClick={() => this.setState({ tab: "map" })}
               opinionated
             >
-              <Tip title="Google Maps bubble">
+              <Tip title="Embed map">
                 <Icon name="map" size="s" />
               </Tip>
             </PaneTab>
@@ -167,7 +168,7 @@ export default class IntervieweePane extends React.Component {
               onClick={() => this.setState({ tab: "media" })}
               opinionated
             >
-              <Tip title="Youtube bubble">
+              <Tip title="Embed video">
                 <Icon name="media" size="s" />
               </Tip>
             </PaneTab>
@@ -202,7 +203,9 @@ export default class IntervieweePane extends React.Component {
             active={tab === "embed"}
             addStorylineItem={() => this.addStorylineItem("embed")}
             draft={this.state.draft.embed}
-            updateDraft={(data, clean) => this.updateDraft(data, "embed", clean)}
+            updateDraft={(data, clean) =>
+              this.updateDraft(data, "embed", clean)
+            }
           />
           <MapPane
             {...this.props}
@@ -215,7 +218,9 @@ export default class IntervieweePane extends React.Component {
             {...this.props}
             active={tab === "media"}
             draft={this.state.draft.media}
-            updateDraft={(data, clean) => this.updateDraft(data, "media", clean)}
+            updateDraft={(data, clean) =>
+              this.updateDraft(data, "media", clean)
+            }
           />
         </Container>
       </PaneEl>

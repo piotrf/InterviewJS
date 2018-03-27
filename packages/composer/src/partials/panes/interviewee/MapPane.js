@@ -61,9 +61,8 @@ export default class MapPane extends Component {
           </BubbleHTMLWrapper>
         ) : (
           <BubbleHTMLWrapper>
-            this is not a google iframe, google iframe code starts with{" "}
+            this is not a valid iframe. A Google Maps iframe code starts with{" "}
             {`<iframe`}, ends with {`></iframe>`} and requires {`src=`}{" "}
-            attribute pointing to google server
           </BubbleHTMLWrapper>
         );
       }
@@ -84,7 +83,7 @@ export default class MapPane extends Component {
             area
             name="value"
             onChange={(e) => this.handleChange(e)}
-            placeholder={`<iframe src="https://www.google.com/maps/embed…`}
+            placeholder={`Insert an iframe to embed a Google Map directly into your chat`}
             required
             rows={10}
             type="url"
