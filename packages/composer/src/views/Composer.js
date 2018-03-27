@@ -164,7 +164,7 @@ export default class ComposerView extends React.Component {
       {
         title: "2. This panel is for your interviewees.",
         text:
-          "Use it to store the transcript of your interview to use as a base for you speech bubbles. Then start selecting pieces of text and hit the pretty green + button down below.",
+          "Use it to store the transcript of your interview so you can use it as base for interviewee’s speech bubbles. Then start selecting pieces of text and hit the pretty big + button down below.",
         selector: ".jr-step2",
         style: joyrideStyles,
         position: "right"
