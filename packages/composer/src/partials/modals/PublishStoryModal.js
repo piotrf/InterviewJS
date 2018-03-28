@@ -4,6 +4,7 @@ import React, { Component } from "react";
 import ReactModal from "react-modal";
 import { arrayOf, bool, func, number, object } from "prop-types";
 import { Storage } from "aws-amplify";
+import shortUuid from "short-uuid";
 
 import {
   Actionbar,
@@ -23,6 +24,8 @@ import {
 import { DetailsForm, MetaForm, Poll } from "../";
 
 import iframeRatioSpacer from "./iframeRatioSpacer.png";
+
+const uuidv4 = () => shortUuid().fromUUID(shortUuid.uuid());
 
 const getStepState = (step, i) => {
   if (step === i) {
@@ -107,7 +110,7 @@ export default class PublishStoryModal extends Component {
 
       this.setState({
         step: this.state.step + 1,
-        storyKey: result.key,
+        // storyKey: result.key,
       });
     })
     .catch(err => console.log(err));
@@ -118,11 +121,7 @@ export default class PublishStoryModal extends Component {
   }
 
   render() {
-    let iframeViewer = "https://interviewjs.net/";
-    if (document.location.hostname.toLowerCase() === "beta.interviewjs.io") iframeViewer = "https://beta.interviewjs.net/";
-    if (document.location.hostname.toLowerCase() === "localhost") iframeViewer = "https://alpha.interviewjs.net/";
-    if (document.location.hostname.toLowerCase() === "alpha.interviewjs.io") iframeViewer = "https://alpha.interviewjs.net/";
-    if (this.state.storyKey) iframeViewer += this.props.story.id;
+    const iframeViewer = `https://story.interviewjs.io/${this.props.story.id}`;
 
     const { step } = this.state;
     const getModalBody = () => {
@@ -181,7 +180,7 @@ export default class PublishStoryModal extends Component {
               <img src={iframeRatioSpacer} alt="" />
               <iframe
                 title="Preview"
-                src={iframeViewer}
+                src={`${iframeViewer}?${uuidv4()}`}
                 ref={(iframe) => {
                   this.iframe = iframe;
                 }}
@@ -198,7 +197,7 @@ export default class PublishStoryModal extends Component {
               </Action>
               <Action
                 fixed
-                href={`${iframeViewer}`} // TODO actual url
+                href={`${iframeViewer}`}
                 secondary
                 target="_blank"
               >

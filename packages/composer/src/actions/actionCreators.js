@@ -185,14 +185,17 @@ export function syncFirebaseStories(uid, email) {
     dispatch(noop());
     // window.LOG_LEVEL = 'DEBUG';
 
-    Storage.vault.list('stories/')
+    Storage.list('stories/', {
+      bucket: "data.interviewjs.io",
+      level: "private",
+    })
       .then(async stories => {
         console.log("AWS", stories);
         // const meta = {};
 
         // for (let i = 0; i < stories.length; i++) {
         //   const key = stories[i];
-        //   const url = await Storage.vault.get(key, { expires: 120 });
+        //   const url = await Storage.xxx.get(key, { expires: 120 });
         //
         //   console.log(key, url);
         //   // const { data } = axios.get(url);
@@ -204,7 +207,7 @@ export function syncFirebaseStories(uid, email) {
         // }
 
         // stories.forEach(({key}) => {
-        //   Storage.vault.get(key)
+        //   Storage.xxx.get(key)
         //     .then(url => {
         //       axios.get(url)
         //         .then(response => {
@@ -249,7 +252,10 @@ export function syncFirebaseStories(uid, email) {
               }
 
               stories.forEach(({key}) => {
-                Storage.vault.get(key)
+                Storage.get(key, {
+                  bucket: "data.interviewjs.io",
+                  level: "private"
+                })
                   .then(url => {
                     axios.get(url)
                       .then(response => {
@@ -289,7 +295,10 @@ export function syncFirebaseStories(uid, email) {
           } else {
             // AWS LOAD
             stories.forEach(({key}) => {
-              Storage.vault.get(key)
+              Storage.get(key, {
+                bucket: "data.interviewjs.io",
+                level: "private"
+              })
                 .then(url => {
                   axios.get(url)
                     .then(response => {

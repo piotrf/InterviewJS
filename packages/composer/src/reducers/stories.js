@@ -226,28 +226,37 @@ function storiesWrapper(state = [], action) {
     if (type === "SYNC_AND_SAVE_STORY") currentStory.version--;
 
     if (type === "CREATE_STORY" || type === "SYNC_AND_SAVE_STORY") {
-      Storage.vault.put(`stories/${storyId}/story.json`, JSON.stringify(currentStory), {
-        contentType: 'application/json'
+      Storage.put(`stories/${storyId}/story.json`, JSON.stringify(currentStory), {
+        bucket: "data.interviewjs.io",
+        level: "private",
+        contentType: "application/json"
       })
       .then (result => console.log(result))
       .catch(err => console.log(err));
     } else if (type === "SYNC_STORY") {
       // NOOP;
     } else if (type === "DELETE_STORY") {
-      Storage.vault.put(`stories-deleted/${storyId}/story.json`, JSON.stringify(currentStory), {
-        contentType: 'application/json'
+      Storage.put(`stories-deleted/${storyId}/story.json`, JSON.stringify(currentStory), {
+        bucket: "data.interviewjs.io",
+        level: "private",
+        contentType: "application/json"
       })
       .then (result => {
         console.log(result);
         // now delete
-        Storage.vault.remove(`stories/${storyId}/story.json`)
+        Storage.remove(`stories/${storyId}/story.json`, {
+          bucket: "data.interviewjs.io",
+          level: "private"
+        })
         .then(result2 => console.log(result2))
         .catch(err => console.log(err));
       })
       .catch(err => console.log(err));
     } else {
-      Storage.vault.put(`stories/${storyId}/story.json`, JSON.stringify(currentStory), {
-        contentType: 'application/json'
+      Storage.put(`stories/${storyId}/story.json`, JSON.stringify(currentStory), {
+        bucket: "data.interviewjs.io",
+        level: "private",
+        contentType: "application/json"
       })
       .then (result => console.log(result))
       .catch(err => console.log(err));
