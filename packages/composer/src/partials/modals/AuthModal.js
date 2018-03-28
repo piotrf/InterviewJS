@@ -1,27 +1,41 @@
+import css from "styled-components";
 import React from "react";
 import ReactModal from "react-modal";
 import { bool, func } from "prop-types";
 import { Auth } from "aws-amplify";
 
 import {
-  Separator,
-  FormItem,
-  Label,
-  Text,
-  Actionbar,
   Action,
-  TextInput,
-  PaneTabs,
-  PaneTab,
-  Container,
+  Actionbar,
   Animator,
   Bubble,
   BubbleBlock,
+  Container,
+  FormItem,
+  Label,
+  LogoWSymbolNegative,
   Modal,
   ModalBody,
   ModalFoot,
-  color
+  PaneTab,
+  PaneTabs,
+  Separator,
+  Text,
+  TextInput,
+  color,
+  setSpace,
+  setHeight
 } from "interviewjs-styleguide";
+
+const Brandmark = css.div`
+  ${setSpace("mbl")};
+  line-height: 0;
+  opacity: .8;
+  text-align: center;
+  img {
+    ${setHeight("m")}
+  }
+`;
 
 export default class AuthModal extends React.Component {
   constructor(props) {
@@ -152,6 +166,9 @@ export default class AuthModal extends React.Component {
       >
         <Modal {...this.props} persistent transparent>
           <ModalBody>
+            <Brandmark>
+              <img src={LogoWSymbolNegative} alt="InterviewJS" />
+            </Brandmark>
             <BubbleBlock>
               <Bubble
                 animated
