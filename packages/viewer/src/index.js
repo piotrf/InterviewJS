@@ -47,7 +47,7 @@ class Routes extends React.Component {
           <Route path="/:storyId/poll" component={Poll} />
           <Route path="/:storyId/results" component={Results} />
         </Route>
-        <Redirect from="/" to="0bf34b30-743b-46ab-weewe-c875326d86f6" />
+        <Redirect from="/" to="sample-story" />
       </Router>
     );
   }

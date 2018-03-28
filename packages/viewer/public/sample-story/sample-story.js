@@ -1,6 +1,7 @@
-{
+if (!window.InterviewJS.ignoreSampleStory) {
+  window.InterviewJS.story = {
     "title": "Britain’s modern slave trade",
-    "id": "0bf34b30-743b-46ab-weewe-c875326d86f6",
+    "id": "sample-story",
     "author": "David Harrison",
     "authorLink": "http://www.imdb.com/name/nm0307497/",
     "pubDate": "Apr 24, 2016",
@@ -658,4 +659,5 @@
         ]
       }
     ]
-  }
+  };
+}

@@ -21,7 +21,7 @@ Raven.config("https://5ead2dcac648436b93094e8a371bf1b1@sentry.io/365850", {
 }).install();
 
 const defaultState = {
-  story: {}
+  story: window.InterviewJS && window.InterviewJS.story ? window.InterviewJS.story : {}
 };
 
 const enhancers = compose(
