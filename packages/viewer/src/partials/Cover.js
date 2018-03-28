@@ -3,7 +3,7 @@ import css from "styled-components";
 import { array, bool, oneOfType, node, string } from "prop-types";
 
 import {
-  LogoNegative,
+  LogoWSymbolNegative,
   Container,
   breakpoint,
   color,
@@ -54,11 +54,12 @@ const CoverSauce = css.div`
 `;
 
 const Brandmark = css.div`
-  ${setSpace("mvm")};
+  ${setSpace("mts")};
+  ${setSpace("mbm")};
   line-height: 0;
   opacity: .8;
   img {
-    ${setHeight("x")}
+    ${setHeight("s")}
   }
 `;
 
@@ -66,7 +67,7 @@ const Cover = (props) => (
   <CoverEl {...props}>
     <CoverBody compact={props.compact}>
       <Brandmark>
-        <img src={LogoNegative} alt="InterviewJS" />
+        <img src={LogoWSymbolNegative} alt="InterviewJS" />
       </Brandmark>
       <CoverSauce>{props.children}</CoverSauce>
     </CoverBody>
