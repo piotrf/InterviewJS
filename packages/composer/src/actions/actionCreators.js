@@ -47,7 +47,7 @@ export function createStory({
       pubDate,
       title,
       uid,
-      id: `s0_${uuidv4()}`,
+      id: uuidv4(),
       modDate: new Date()
     }
   };
