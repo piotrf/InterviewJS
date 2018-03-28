@@ -59,7 +59,14 @@ const Brandmark = css.div`
   line-height: 0;
   opacity: .8;
   img {
-    ${setHeight("s")}
+    height: 36px;
+  }
+  ${breakpoint.onlyphone} {
+    ${setSpace("mtm")};
+    ${setSpace("ptx")};
+    img {
+      height: 32px;
+    }
   }
 `;
 

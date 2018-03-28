@@ -33,7 +33,7 @@ const Brandmark = css.div`
   opacity: .8;
   text-align: center;
   img {
-    ${setHeight("m")}
+    height: 36px;
   }
 `;
 
