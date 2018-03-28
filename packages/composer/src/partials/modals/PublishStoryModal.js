@@ -105,8 +105,11 @@ export default class PublishStoryModal extends Component {
     .then (async result => {
       console.log(result);
 
-      const { result2 } = await API.get("Story", `/publish/${this.props.story.id}`, { response: true });
-      console.log(result2);
+      // const { result2 } = await API.get("Story", `/publish`, { response: true }); // /${this.props.story.id}
+      // const { result2 } = await API.get("Poll", `/poll`, { response: true }); // /${this.props.story.id}
+      // console.log(result2);
+      // API.get("Poll", `/poll`, { response: true }).then(result2 => console.log(result2));
+      API.post("Push", `/story/${this.props.story.id}`, { response: true, body: { a: 1 } }).then(result2 => console.log(result2));
 
       this.setState({
         step: this.state.step + 1,

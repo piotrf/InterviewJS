@@ -1,7 +1,6 @@
 /* eslint-disable */
+
 'use strict';
-
-
 console.log("Loading function");
 
 exports.handler = function(event, context, callback) {

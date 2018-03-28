@@ -12,29 +12,60 @@ features:
           sdk-generation-stage-name: Development
         paths:
           /poll: !com.amazonaws.mobilehub.v0.Function 
-            codeFilename: uploads/pollHandler-20180328121758.zip
+            codeFilename: uploads/pollHandler-20180328133602.zip
             description: 'Handler for calls to resource path : /poll/{proxy+}'
             environment: {}
             handler: index.handler
-            hashcode: xO9hfCPsFdWVU7dGHzLVi/h1Wfmsf5kmoab1i4wfkGg=
+            hashcode: ehvsMsUm/G6JO5qJT1DNUIj8g7Sm1fmXZHMArDZqGZ8=
             memorySize: '128'
-            modified: '2018-03-28T04:19:33.412+0000'
+            modified: '2018-03-28T05:19:05.335+0000'
             name: pollHandler
             runtime: nodejs6.10
             timeout: '3'
-            version: X3KrtgU._iWO5wwz_wYEe.CwN05DC_GQ
+            version: cdTZ8_YRtW7.s_CfcXThrO1Ai6W02PYc
           '/poll/{proxy+}': !com.amazonaws.mobilehub.v0.Function 
-            codeFilename: uploads/pollHandler-20180328121758.zip
+            codeFilename: uploads/pollHandler-20180328133602.zip
             description: 'Handler for calls to resource path : /poll/{proxy+}'
             environment: {}
             handler: index.handler
-            hashcode: xO9hfCPsFdWVU7dGHzLVi/h1Wfmsf5kmoab1i4wfkGg=
+            hashcode: ehvsMsUm/G6JO5qJT1DNUIj8g7Sm1fmXZHMArDZqGZ8=
             memorySize: '128'
-            modified: '2018-03-28T04:19:33.412+0000'
+            modified: '2018-03-28T05:19:05.335+0000'
             name: pollHandler
             runtime: nodejs6.10
             timeout: '3'
-            version: 4qdo_ks0EwS9fXn87z7Y0D7GYdRnikEy
+            version: cdTZ8_YRtW7.s_CfcXThrO1Ai6W02PYc
+      Push: !com.amazonaws.mobilehub.v0.API 
+        attributes:
+          disable-aws-auth: true
+          name: Push
+          requires-signin: false
+          sdk-generation-stage-name: Development
+        paths:
+          /story: !com.amazonaws.mobilehub.v0.Function 
+            description: 'Handler for calls to resource path : /story/{proxy+}'
+            environment: {}
+            handler: index.handler
+            hashcode: VlCQ+u499H6f5r5qBHDS2TsoGC5w2aiWqPnNdXJ7sSc=
+            memorySize: '128'
+            modified: '2018-03-28T05:24:58.326+0000'
+            name: storyHandler
+            runtime: nodejs6.10
+            timeout: '3'
+            version: mkNZMrQ1rwEohxoGlVyRGmOQvBnzAhyC
+            codeFilename: uploads/storyHandler-20180328133602.zip
+          '/story/{proxy+}': !com.amazonaws.mobilehub.v0.Function 
+            description: 'Handler for calls to resource path : /story/{proxy+}'
+            environment: {}
+            handler: index.handler
+            hashcode: VlCQ+u499H6f5r5qBHDS2TsoGC5w2aiWqPnNdXJ7sSc=
+            memorySize: '128'
+            modified: '2018-03-28T05:24:58.326+0000'
+            name: storyHandler
+            runtime: nodejs6.10
+            timeout: '3'
+            version: VSNB3cJVSQgT6xyS7oDoIHKlYt.2889x
+            codeFilename: uploads/storyHandler-20180328133602.zip
       Story: !com.amazonaws.mobilehub.v0.API 
         attributes:
           disable-aws-auth: false
@@ -42,54 +73,30 @@ features:
           requires-signin: true
           sdk-generation-stage-name: Development
         paths:
-          /export: !com.amazonaws.mobilehub.v0.Function 
-            codeFilename: uploads/exportHandler-20180328121758.zip
-            description: 'Handler for calls to resource path : /export/{proxy+}'
-            environment: {}
-            handler: index.handler
-            hashcode: xO9hfCPsFdWVU7dGHzLVi/h1Wfmsf5kmoab1i4wfkGg=
-            memorySize: '128'
-            modified: '2018-03-28T04:19:34.005+0000'
-            name: exportHandler
-            runtime: nodejs6.10
-            timeout: '3'
-            version: pZkmQBXzImZzsK3XUjoY21cjOv.uNC0H
-          '/export/{proxy+}': !com.amazonaws.mobilehub.v0.Function 
-            codeFilename: uploads/exportHandler-20180328121758.zip
-            description: 'Handler for calls to resource path : /export/{proxy+}'
-            environment: {}
-            handler: index.handler
-            hashcode: xO9hfCPsFdWVU7dGHzLVi/h1Wfmsf5kmoab1i4wfkGg=
-            memorySize: '128'
-            modified: '2018-03-28T04:19:34.005+0000'
-            name: exportHandler
-            runtime: nodejs6.10
-            timeout: '3'
-            version: igDqZN56.cPRNwozq7pNbGNy_CSk9tON
           /publish: !com.amazonaws.mobilehub.v0.Function 
-            codeFilename: uploads/publishHandler-20180328121758.zip
+            codeFilename: uploads/publishHandler-20180328133602.zip
             description: 'Handler for calls to resource path : /publish/{proxy+}'
             environment: {}
             handler: index.handler
-            hashcode: xO9hfCPsFdWVU7dGHzLVi/h1Wfmsf5kmoab1i4wfkGg=
+            hashcode: yP0pVlM5TkP9ba8ZCT09jRFMGDlrviu9qM/ScnhbCUM=
             memorySize: '128'
-            modified: '2018-03-28T04:19:34.193+0000'
+            modified: '2018-03-28T05:19:07.114+0000'
             name: publishHandler
             runtime: nodejs6.10
             timeout: '3'
-            version: g0pIKqIFJidw5Se6lLE_k6V6it0uiH71
+            version: Eq9RSWQgokxj9KTD8uaOAGwXCrpT6519
           '/publish/{proxy+}': !com.amazonaws.mobilehub.v0.Function 
-            codeFilename: uploads/publishHandler-20180328121758.zip
+            codeFilename: uploads/publishHandler-20180328133602.zip
             description: 'Handler for calls to resource path : /publish/{proxy+}'
             environment: {}
             handler: index.handler
-            hashcode: xO9hfCPsFdWVU7dGHzLVi/h1Wfmsf5kmoab1i4wfkGg=
+            hashcode: yP0pVlM5TkP9ba8ZCT09jRFMGDlrviu9qM/ScnhbCUM=
             memorySize: '128'
-            modified: '2018-03-28T04:19:34.193+0000'
+            modified: '2018-03-28T05:19:07.114+0000'
             name: publishHandler
             runtime: nodejs6.10
             timeout: '3'
-            version: .Zt7TiPpNRVTxcqtH4KgInMlf_iomIhz
+            version: Eq9RSWQgokxj9KTD8uaOAGwXCrpT6519
   sign-in: !com.amazonaws.mobilehub.v0.SignIn 
     attributes:
       enabled: true

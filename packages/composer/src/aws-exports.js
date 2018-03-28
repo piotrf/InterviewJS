@@ -7,7 +7,7 @@
 // AWS Mobile Hub Project Constants
 const awsmobile = {
     'aws_cloud_logic': 'enable',
-    'aws_cloud_logic_custom': [{"id":"k4h0nzgmdb","name":"Poll","description":"","endpoint":"https://k4h0nzgmdb.execute-api.us-east-1.amazonaws.com/Development","region":"us-east-1","paths":["/poll","/poll/123"]},{"id":"czwiemzdse","name":"Story","description":"","endpoint":"https://czwiemzdse.execute-api.us-east-1.amazonaws.com/Development","region":"us-east-1","paths":["/export","/export/123","/publish","/publish/123"]}],
+    'aws_cloud_logic_custom': [{"id":"u8fp29u5x9","name":"Push","description":"","endpoint":"https://u8fp29u5x9.execute-api.us-east-1.amazonaws.com/Development","region":"us-east-1","paths":["/story","/story/123"]},{"id":"k4h0nzgmdb","name":"Poll","description":"","endpoint":"https://k4h0nzgmdb.execute-api.us-east-1.amazonaws.com/Development","region":"us-east-1","paths":["/poll","/poll/123"]},{"id":"nb8uyc5mo5","name":"Story","description":"","endpoint":"https://nb8uyc5mo5.execute-api.us-east-1.amazonaws.com/Development","region":"us-east-1","paths":["/publish","/publish/123"]}],
     'aws_cognito_identity_pool_id': 'us-east-1:b664e90d-e934-440d-ad16-97399db45ac3',
     'aws_cognito_region': 'us-east-1',
     'aws_project_id': 'b3a8c824-850b-4b98-9df5-66bd666c3cef',
