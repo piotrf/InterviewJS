@@ -10,7 +10,7 @@ const styles = injectGlobal`
   ${reset};
 `;
 
-import InterviewJSLogo from "./static/interviewjs-logo.png";
+import InterviewJSLogo from "./static/logo.svg";
 import theme from "./theme";
 
 const pages = [
