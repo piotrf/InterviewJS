@@ -91,17 +91,16 @@ export default class OutroView extends Component {
     const resultScore = this.getScore();
     const getResultScore = () => {
       if (resultScore >= 95) {
-        return `Wow, you are truly curious! You have spoken to everyone and
-        collected ${resultScore}% of the information. The world needs more people like
-        you and we can’t wait to hear what you have to say!`;
+        return `Well done, you have exploed the maximum amount of information possible.
+        Would you like to have your say now?`;
       } else if (resultScore >= 70) {
-        return `Well done, you have spoken to all interviewees and collected ${resultScore}% of the information.  You’re pretty well informed now!`;
+        return `Nice one, you have explored ${resultScore}% of the story. Go back to the interviews for more or have your say now.`;
       } else if (resultScore >= 50) {
-        return `You have spoken to all interviewees but left some of them early. You have collected over ${resultScore}% of the information and you’re still much better informed than the average person!`;
+        return `You have explored ${resultScore}% of the story, you can revisit the interviews at any time or have your say now.`;
       } else if (resultScore >= 25) {
-        return `You’ve spoken to most of the interviewees and collected ${resultScore}% of the information.  You can revisit the interviews or have your say now.`;
+        return `You have explored ${resultScore}% of the story, but there is plenty more to find out, you can revisit the interviews at any time or have your say now.`;
       }
-      return `Did the interviewees bore you or are you in a rush? You have collected ${resultScore}% of the information.  Remember that you can always come back for more chat.`;
+      return `Were you in a rush? You have explored ${resultScore}% of the information, but there is plenty more to find out, you can revisit the interviews at any time or have your say now.`;
     };
     return [
       <Topbar

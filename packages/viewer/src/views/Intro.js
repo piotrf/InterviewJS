@@ -118,8 +118,8 @@ export default class IntroView extends Component {
           <PageSubtitle typo="h3">{story.intro}</PageSubtitle>
           <Separator size="m" silent />
           <Aside typo="p3">
-            InterviewJS lets you chat to people at the heart of a story. Hear
-            from them in their own words.
+            InterviewJS brings you journalism through a messenger platform - engage
+            with the people at the heart of the a story
           </Aside>
           <Separator size="l" silent />
           {story.logo ? (
