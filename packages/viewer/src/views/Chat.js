@@ -242,8 +242,6 @@ class ChatView extends Component {
   }
 
   render() {
-    // test
-
     const { history } = this.state;
     const { story } = this.props;
     const { interviewees } = story;
