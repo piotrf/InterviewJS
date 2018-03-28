@@ -8685,9 +8685,9 @@ performance-now@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
 
-pica@^4.0.2:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/pica/-/pica-4.1.0.tgz#32bb25146bfbbdf2f3404317503ec9b32a7af268"
+pica@4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/pica/-/pica-4.0.2.tgz#26e4053e7585ebf94361dfc72636ddb9d1f90e93"
   dependencies:
     inherits "^2.0.3"
     multimath "^1.0.3"

@@ -15,7 +15,7 @@
     "interviewjs-styleguide": "*",
     "lodash": "^4.17.5",
     "md5": "^2.2.1",
-    "pica": "^4.0.2",
+    "pica": "4.0.2",
     "prop-types": "15.6.1",
     "raven-for-redux": "^1.3.0",
     "raven-js": "^3.24.0",
