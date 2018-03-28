@@ -80,9 +80,19 @@ export default class IntroView extends Component {
     }
 
     // Load story via storyId -> getStoryURL
-    if ((!this.props.story || Object.keys(this.props.story).length === 0) && this.props.params.storyId && window.InterviewJS && window.InterviewJS.getStoryURL) {
-      const storyURL = window.InterviewJS.getStoryURL(this.props.params.storyId);
-      if (storyURL) axios.get(storyURL).then(response => this.props.createStory(response.data));
+    if (
+      (!this.props.story || Object.keys(this.props.story).length === 0) &&
+      this.props.params.storyId &&
+      window.InterviewJS &&
+      window.InterviewJS.getStoryURL
+    ) {
+      const storyURL = window.InterviewJS.getStoryURL(
+        this.props.params.storyId
+      );
+      if (storyURL)
+        axios
+          .get(storyURL)
+          .then((response) => this.props.createStory(response.data));
     }
   }
 
@@ -118,8 +128,8 @@ export default class IntroView extends Component {
           <PageSubtitle typo="h3">{story.intro}</PageSubtitle>
           <Separator size="m" silent />
           <Aside typo="p3">
-            InterviewJS brings you journalism through a messenger platform - engage
-            with the people at the heart of the a story
+            InterviewJS brings you journalism through a messenger platform -
+            engage with the people at the heart of the a story
           </Aside>
           <Separator size="l" silent />
           {story.logo ? (

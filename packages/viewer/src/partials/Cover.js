@@ -2,7 +2,14 @@ import React from "react";
 import css from "styled-components";
 import { array, bool, oneOfType, node, string } from "prop-types";
 
-import { Container, breakpoint, color, setSpace } from "interviewjs-styleguide";
+import {
+  LogoNegative,
+  Container,
+  breakpoint,
+  color,
+  setHeight,
+  setSpace
+} from "interviewjs-styleguide";
 
 const CoverEl = css(Container)`
   background-color: ${color.black};
@@ -17,11 +24,11 @@ const CoverEl = css(Container)`
 
 const CoverBody = css.div`
   ${setSpace("phm")};
-  ${setSpace("pth")};
+  ${setSpace("ptm")};
   background-color: ${color.shadowLt};
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: space-between;
   min-height: ${({ compact }) => (compact ? `${100 / 5}vh` : `${100 / 3}vh`)};
   position: relative;
   ${breakpoint.tablet} {
@@ -46,9 +53,21 @@ const CoverSauce = css.div`
   z-index: 2;
 `;
 
+const Brandmark = css.div`
+  ${setSpace("mvm")};
+  line-height: 0;
+  opacity: .8;
+  img {
+    ${setHeight("x")}
+  }
+`;
+
 const Cover = (props) => (
   <CoverEl {...props}>
     <CoverBody compact={props.compact}>
+      <Brandmark>
+        <img src={LogoNegative} alt="InterviewJS" />
+      </Brandmark>
       <CoverSauce>{props.children}</CoverSauce>
     </CoverBody>
   </CoverEl>
