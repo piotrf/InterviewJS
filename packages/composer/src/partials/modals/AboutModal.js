@@ -15,13 +15,15 @@ import {
   ModalBody,
   ModalFoot,
   ModalHead,
+  LogoWSymbol,
   PageSubtitle,
   PageTitle,
   Separator,
   color,
   font,
   setSpace,
-  setType
+  setType,
+  setHeight
 } from "interviewjs-styleguide";
 
 import { ErrorBoundary } from "../";
@@ -59,6 +61,13 @@ const DetailsCopy = css.div`
   }
 `;
 
+const Brandmark = css.div`
+  line-height: 0;
+  img {
+    ${setHeight("l")}
+  }
+`;
+
 export default class AboutModal extends React.Component {
   constructor(props) {
     super(props);
@@ -66,7 +75,7 @@ export default class AboutModal extends React.Component {
   }
 
   getCount() {
-    if (this.state.counter < 3) throw new Error('Test Error');
+    if (this.state.counter < 3) throw new Error("Test Error");
     return this.state.counter;
   }
 
@@ -86,9 +95,14 @@ export default class AboutModal extends React.Component {
       >
         <Modal {...this.props}>
           <ModalHead>
-            <ErrorBoundary>
+            {/* <ErrorBoundary>
               <PageTitle typo="h1"><span title={this.getCount()} onClick={() => this.countDown()}>About</span> <span title={`version ${process.env.VERSION.replace('-dirty', '')}`}>InterviewJS</span></PageTitle>
-            </ErrorBoundary>
+            </ErrorBoundary> */}
+            <PageTitle>
+              <Brandmark>
+                <img src={LogoWSymbol} alt="InterviewJS" />
+              </Brandmark>
+            </PageTitle>
           </ModalHead>
           <ModalBody>
             <Container align="center" limit="m">
