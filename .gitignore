@@ -63,6 +63,7 @@ typings/
 .DS_Store
 
 *.lock
+!yarn.lock
 ideas.md
 
 packages/styleguide/package-lock.json

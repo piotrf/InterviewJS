@@ -3,6 +3,7 @@ import { object, func } from "prop-types";
 import css from "styled-components";
 import React, { Component } from "react";
 import Raven from "raven-js";
+import md5 from "md5";
 
 import { AuthModal } from "../partials";
 
@@ -25,22 +26,24 @@ export default class AuthView extends Component {
     this.handleAuthentication = this.handleAuthentication.bind(this);
   }
 
-  handleAuthentication(user) {
-    const data = {
-      id: user.uid,
-      name: user.displayName,
-      username: user.email,
-      avatar: user.photoURL,
+  handleAuthentication(info) {
+    const user = {
+      id: info.id,
+      name: info.username,
+      username: info.username,
+      email: info.attributes.email,
+      avatar: `https://www.gravatar.com/avatar/${md5(info.attributes.email)}?d=retro`
     };
 
+    this.props.signInUser(user);
+
     Raven.setUserContext({
-      id: user.uid,
+      id: user.id,
+      name: user.name,
       email: user.email,
     });
 
-    this.props.signInUser(data);
-
-    this.props.router.push(`/my/stories`);
+    this.props.router.push(`/stories`);
   }
 
   render() {

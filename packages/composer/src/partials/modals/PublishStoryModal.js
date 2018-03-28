@@ -3,6 +3,8 @@ import css from "styled-components";
 import React, { Component } from "react";
 import ReactModal from "react-modal";
 import { arrayOf, bool, func, number, object } from "prop-types";
+import { API, Storage } from "aws-amplify";
+import shortUuid from "short-uuid";
 
 import {
   Actionbar,
@@ -22,6 +24,8 @@ import {
 import { DetailsForm, MetaForm, Poll } from "../";
 
 import iframeRatioSpacer from "./iframeRatioSpacer.png";
+
+const uuidv4 = () => shortUuid().fromUUID(shortUuid.uuid());
 
 const getStepState = (step, i) => {
   if (step === i) {
@@ -59,7 +63,8 @@ export default class PublishStoryModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      step: 0
+      step: 0,
+      storyKey: null,
     };
     this.handleStep0 = this.handleStep0.bind(this);
     this.handleStep1 = this.handleStep1.bind(this);
@@ -69,10 +74,9 @@ export default class PublishStoryModal extends Component {
 
   componentDidUpdate() {
     if (this.iframe) {
-      console.log(this.iframe);
       this.iframe.addEventListener("load", () => {
-        console.log("iframe loaded");
-        setTimeout(
+        // console.log("iframe loaded");
+        if (!this.state.storyKey) setTimeout(
           () => this.iframe.contentWindow.postMessage(this.props.story, "*"),
           5000
         );
@@ -91,7 +95,28 @@ export default class PublishStoryModal extends Component {
   }
 
   handleStep2() {
-    this.setState({ step: this.state.step + 1 });
+    // Publish
+    console.log(this.props.user);
+    Storage.put(`stories/${this.props.user.id}/${this.props.story.id}/story.json`, JSON.stringify(this.props.story), {
+      bucket: "data.interviewjs.io",
+      level: "public",
+      contentType: "application/json"
+    })
+    .then (async result => {
+      console.log(result);
+
+      // const { result2 } = await API.get("Story", `/publish`, { response: true }); // /${this.props.story.id}
+      // const { result2 } = await API.get("Poll", `/poll`, { response: true }); // /${this.props.story.id}
+      // console.log(result2);
+      // API.get("Poll", `/poll`, { response: true }).then(result2 => console.log(result2));
+      API.post("Push", `/story/${this.props.story.id}`, { response: true, body: { a: 1 } }).then(result2 => console.log(result2));
+
+      this.setState({
+        step: this.state.step + 1,
+        // storyKey: result.key,
+      });
+    })
+    .catch(err => console.log(err));
   }
 
   handleStep3() {
@@ -99,6 +124,8 @@ export default class PublishStoryModal extends Component {
   }
 
   render() {
+    const iframeViewer = `https://story.interviewjs.io/${this.props.story.id}`;
+
     const { step } = this.state;
     const getModalBody = () => {
       if (step === 0) {
@@ -110,6 +137,7 @@ export default class PublishStoryModal extends Component {
               handleSubmit={this.handleStep0}
               story={this.props.story}
               cta="Confirm"
+              required
             />
           </Container>
         );
@@ -125,6 +153,7 @@ export default class PublishStoryModal extends Component {
               handleSubmit={this.handleStep1}
               story={this.props.story}
               cta="Confirm"
+              required
             />
           </Container>
         );
@@ -154,7 +183,7 @@ export default class PublishStoryModal extends Component {
               <img src={iframeRatioSpacer} alt="" />
               <iframe
                 title="Preview"
-                src="http://interviewjs.io/story/"
+                src={`${iframeViewer}?${uuidv4()}`}
                 ref={(iframe) => {
                   this.iframe = iframe;
                 }}
@@ -169,14 +198,14 @@ export default class PublishStoryModal extends Component {
               <Action fixed primary onClick={this.handleStep3}>
                 Close
               </Action>
-              {/* <Action
+              <Action
                 fixed
-                href={`http://interviewjs.io/story/${this.props.story.id}`} // TODO actual url
+                href={`${iframeViewer}`}
                 secondary
                 target="_blank"
               >
                 Open your story
-              </Action> */}
+              </Action>
             </Actionbar>
           </Container>
         );
@@ -241,7 +270,8 @@ PublishStoryModal.propTypes = {
   storyIndex: number.isRequired,
   updateInterviewee: func.isRequired,
   updateStory: func.isRequired,
-  story: object.isRequired
+  story: object.isRequired,
+  user: object.isRequired
 };
 
 PublishStoryModal.defaultProps = {

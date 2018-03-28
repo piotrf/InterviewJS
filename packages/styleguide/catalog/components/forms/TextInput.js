@@ -8,7 +8,7 @@ const Input = css.input`
   ${setSpace("phm")};
   ${setSpace("pvm")};
   ${setType("x")};
-  background: transparent;
+  background: ${color.white};
   border-radius: ${radius.m};
   border: 1px solid ${color.greyHL};
   box-shadow: none;
@@ -71,7 +71,7 @@ const TextInput = (props) => {
     };
     return (
       <Button {...props} onClick={(e) => handler(e)}>
-        {props.selected ? "" : "Select file"}
+        {props.selected ? "" : "Select file…"}
       </Button>
     );
   }

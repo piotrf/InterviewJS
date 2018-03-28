@@ -25,3 +25,5 @@ export { default as IntervieweePane } from "./panes/IntervieweePane";
 
 export { default as StoryPane } from "./panes/StoryPane";
 export { default as UserPane } from "./panes/UserPane";
+
+export { default as ErrorBoundary } from "./util/ErrorBoundary";

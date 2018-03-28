@@ -2,9 +2,14 @@
 /* eslint no-console: 0 */
 /* eslint prefer-destructuring: 0 */
 /* eslint no-plusplus: 0 */
+/* eslint no-param-reassign: 0 */
 
-import uuidv4 from "uuid/v4";
-import { base } from "../configureStore";
+// import shortUuid from "short-uuid";
+import Raven from "raven-js";
+import { Storage } from "aws-amplify";
+
+
+// const uuidv4 = () => shortUuid().fromUUID(shortUuid.uuid());
 
 function stories(state = [], action) {
   const {
@@ -36,8 +41,27 @@ function stories(state = [], action) {
 
     case "SYNC_STORY":
       console.log("sync/update a story");
+      if (!payload.poll) payload.poll = [];
       const prevStory = state.find((story) => story.id === payload.id);
       if (!prevStory) return [payload, ...state];
+
+      return state.map((story) => {
+        if (story.id === payload.id && payload.version > story.version)
+          return payload;
+        return story;
+      });
+
+    case "SYNC_AND_SAVE_STORY":
+      console.log("sync/update a story");
+      if (!payload.poll) payload.poll = [];
+      // if (!payload.version) payload.version = 0;
+      // payload.version++;
+      payload.imported = true;
+      payload.importedVersion = payload.version;
+
+      const prevStory2 = state.find((story) => story.id === payload.id);
+      if (!prevStory2) return [payload, ...state];
+
       return state.map((story) => {
         if (story.id === payload.id && payload.version > story.version)
           return payload;
@@ -50,7 +74,7 @@ function stories(state = [], action) {
         ...state.slice(0, storyIndex),
         {
           ...state[storyIndex],
-          interviewees: [payload, ...state[storyIndex].interviewees]
+          interviewees: [...state[storyIndex].interviewees, payload]
         },
         ...state.slice(storyIndex + 1)
       ];
@@ -88,7 +112,9 @@ function stories(state = [], action) {
 
     case "ADD_STORYLINE_ITEM":
       console.log("adding storyline item");
-
+      if (!state[storyIndex].interviewees[intervieweeIndex].storyline) {
+        state[storyIndex].interviewees[intervieweeIndex].storyline = [];
+      }
       const ADD_STORYLINE_ITEM_STATE = [
         ...state.slice(0, storyIndex),
         {
@@ -163,78 +189,83 @@ function stories(state = [], action) {
 }
 
 function storiesWrapper(state = [], action) {
-  const NAMESPACE = "alpha";
-
   const { type, storyIndex, payload } = action;
 
   console.log(action);
-
   const newState = stories(state, action);
 
-  if (typeof storyIndex !== "number") {
-    console.log("no storyIndex");
-    return newState;
-  }
+  try {
+    if (typeof storyIndex !== "number") {
+      console.log("no storyIndex");
+      // return newState;
+    }
 
-  let storyId = null;
-  let uid = "anon";
+    let storyId = null;
 
-  if (typeof storyIndex === "number" && state[storyIndex])
-    storyId = state[storyIndex].id;
-  if (type === "CREATE_STORY") storyId = payload.id;
+    if (typeof storyIndex === "number" && state[storyIndex])
+      storyId = state[storyIndex].id;
+      if (type === "CREATE_STORY") storyId = payload.id;
+      if (type === "SYNC_AND_SAVE_STORY") storyId = payload.id;
 
-  if (!storyId) storyId = `temp-${uuidv4()}`;
-
-  console.log(uid, storyId);
-
-  let currentStory = newState.find((story) => story.id === storyId);
-  if (type === "DELETE_STORY")
-    currentStory = state.find((story) => story.id === storyId);
-  console.log(currentStory);
-
-  if (!currentStory) return newState;
-  if (currentStory.ignore) return newState;
-
-  if (!currentStory.created) currentStory.created = new Date();
-  currentStory.lastUpdated = new Date();
-  if (!currentStory.version) currentStory.version = 0;
-  currentStory.version++;
-
-  if (currentStory.uid) uid = currentStory.uid;
+    if (!storyId) return newState; // storyId = `s0_tmp_${uuidv4()}`;
 
 
-  if (type === "CREATE_STORY") {
-    base.post(`stories-${NAMESPACE}/${uid}/${storyId}`, {
-      data: currentStory,
-      then(err) {
-        if (err) console.log(err);
-      }
-    });
-  } else if (type === "SYNC_STORY") {
-    // NOOP;
-  } else if (type === "DELETE_STORY") {
-    base.post(`stories-${NAMESPACE}-deleted/${uid}/${storyId}`, {
-      data: currentStory,
-      then(err) {
-        if (err) {
-          console.log(err);
-        } else {
-          base.remove(`stories-${NAMESPACE}/${uid}/${storyId}`, (err2) => {
-            if (err2) console.log(err2);
-          });
-        }
-      }
-    });
-  } else {
-    base.update(`stories-${NAMESPACE}/${uid}/${storyId}`, {
-      data: currentStory,
-      then(err) {
-        if (err) console.log(err);
-      }
-    });
+    let currentStory = newState.find((story) => story.id === storyId);
+    if (type === "DELETE_STORY")
+      currentStory = state.find((story) => story.id === storyId);
+    console.log(currentStory);
+
+    if (!currentStory) return newState;
+    if (currentStory.ignore) return newState;
+
+    if (!currentStory.created) currentStory.created = new Date();
+    currentStory.lastUpdated = new Date();
+    if (!currentStory.version) currentStory.version = 0;
+    currentStory.version++;
+
+    if (type === "SYNC_AND_SAVE_STORY") currentStory.version--;
+
+    if (type === "CREATE_STORY" || type === "SYNC_AND_SAVE_STORY") {
+      Storage.put(`stories/${storyId}/story.json`, JSON.stringify(currentStory), {
+        bucket: "data.interviewjs.io",
+        level: "private",
+        contentType: "application/json"
+      })
+      .then (result => console.log(result))
+      .catch(err => console.log(err));
+    } else if (type === "SYNC_STORY") {
+      // NOOP;
+    } else if (type === "DELETE_STORY") {
+      Storage.put(`stories-deleted/${storyId}/story.json`, JSON.stringify(currentStory), {
+        bucket: "data.interviewjs.io",
+        level: "private",
+        contentType: "application/json"
+      })
+      .then (result => {
+        console.log(result);
+        // now delete
+        Storage.remove(`stories/${storyId}/story.json`, {
+          bucket: "data.interviewjs.io",
+          level: "private"
+        })
+        .then(result2 => console.log(result2))
+        .catch(err => console.log(err));
+      })
+      .catch(err => console.log(err));
+    } else {
+      Storage.put(`stories/${storyId}/story.json`, JSON.stringify(currentStory), {
+        bucket: "data.interviewjs.io",
+        level: "private",
+        contentType: "application/json"
+      })
+      .then (result => console.log(result))
+      .catch(err => console.log(err));
+    }
+  } catch (exception) {
+    Raven.captureException(exception);
   }
 
   return newState;
 }
 
-export default stories; // storiesWrapper
+export default storiesWrapper; // stories

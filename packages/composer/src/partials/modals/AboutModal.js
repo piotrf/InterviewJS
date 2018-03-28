@@ -1,3 +1,6 @@
+/* eslint jsx-a11y/click-events-have-key-events: 0 */
+/* eslint jsx-a11y/no-static-element-interactions: 0 */
+
 import css from "styled-components";
 import React from "react";
 import ReactModal from "react-modal";
@@ -20,6 +23,8 @@ import {
   setSpace,
   setType
 } from "interviewjs-styleguide";
+
+import { ErrorBoundary } from "../";
 
 const DetailsCopy = css.div`
   ${setType("s")};
@@ -57,8 +62,20 @@ const DetailsCopy = css.div`
 export default class AboutModal extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { counter: 7 };
   }
+
+  getCount() {
+    if (this.state.counter < 3) throw new Error('Test Error');
+    return this.state.counter;
+  }
+
+  countDown() {
+    this.setState({
+      counter: this.state.counter - 1
+    });
+  }
+
   render() {
     return (
       <ReactModal
@@ -69,7 +86,9 @@ export default class AboutModal extends React.Component {
       >
         <Modal {...this.props}>
           <ModalHead>
-            <PageTitle typo="h1">About InterviewJS</PageTitle>
+            <ErrorBoundary>
+              <PageTitle typo="h1"><span title={this.getCount()} onClick={() => this.countDown()}>About</span> <span title={`version ${process.env.VERSION.replace('-dirty', '')}`}>InterviewJS</span></PageTitle>
+            </ErrorBoundary>
           </ModalHead>
           <ModalBody>
             <Container align="center" limit="m">
@@ -81,34 +100,6 @@ export default class AboutModal extends React.Component {
                   allows to compose and manage scripted chats for a more
                   immersive storytelling experience.
                 </p>
-                <dl>
-                  <dt>Product lead</dt>
-                  <dd>
-                    Juliana Ruhfus, Ali Rae, Mohammed El-Haddad, Alaa Batayneh
-                  </dd>
-                  <dt>Product Design & Development</dt>
-                  <dd>
-                    <Action
-                      href="https://piotrf.pl"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Piotr Fedorczyk
-                    </Action>
-                  </dd>
-                  <dt>Back-end development & Infrastructure</dt>
-                  <dd>
-                    <Action
-                      href="https://twitter.com/gridinoc"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Laurian Gridinoc
-                    </Action>
-                  </dd>
-                  <dt>Design support</dt>
-                  <dd>Joanna Bogusz</dd>
-                </dl>
                 <PageSubtitle typo="h2">Connect with InterviewJS</PageSubtitle>
                 <Separator silent size="s" />
                 <p>

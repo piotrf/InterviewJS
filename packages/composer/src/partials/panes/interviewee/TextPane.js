@@ -28,6 +28,7 @@ const SrcPlaceholder = css.p`
   display: flex;
   flex-direction: column;
   font-style: italic;
+  line-height: 1.5em;
   height: 100%;
   justify-content: center;
   left: 0;
@@ -115,7 +116,8 @@ export default class TextPane extends Component {
         />
         {this.state.srcText.length === 0 ? (
           <SrcPlaceholder>
-            Paste or type in your interview text here…
+            Here’s where you can type your interview notes or copy and paste
+            existing transcripts to convert into chat bubbles
           </SrcPlaceholder>
         ) : null}
       </PaneFrame>

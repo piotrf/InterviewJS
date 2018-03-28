@@ -1,3 +1,6 @@
+/* eslint func-names: 0 */
+
+import Amplify from "aws-amplify";
 import { createStore, compose, applyMiddleware } from "redux";
 import { syncHistoryWithStore } from "react-router-redux";
 import { browserHistory } from "react-router";
@@ -6,31 +9,33 @@ import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 import firebase from "firebase";
-
 import Rebase from "re-base";
 
 import Raven from "raven-js";
 import createRavenMiddleware from "raven-for-redux";
+import clone from "clone";
 
 import rootReducer from "./reducers";
+import awsmobile from "./aws-exports";
 
 import stories from "./data/stories";
-// import user from "./data/user";
-// const stories = [];
-const user = {};
 
-// Store type
-const STORE = "transient";
-
-const defaultState = {
-  stories,
-  user
-};
+// AWS Mobile
+Amplify.configure(awsmobile);
 
 // Sentry.io
-Raven.config("https://796f1032b1c74f15aba70d91dfcd14c5@sentry.io/360335", {
-  release: process.env.VERSION
-}).install();
+if (document.location.hostname !== "localhost") {
+  Raven.config("https://796f1032b1c74f15aba70d91dfcd14c5@sentry.io/360335", {
+    release: process.env.VERSION,
+    autoBreadcrumbs: {
+      xhr: false,
+      console: false,
+      dom: false,
+    },
+    maxBreadcrumbs: 32,
+    sanitizeKeys: ['logo', 'cover', 'avatar'],
+  }).install();
+}
 
 // FIREBASE
 export const firebaseApp = firebase.initializeApp({
@@ -46,6 +51,7 @@ export const firebaseApp = firebase.initializeApp({
 // RE-BASE
 export const base = Rebase.createClass(firebaseApp.database());
 
+
 // PERSIST
 const persistConfig = {
   key: "root",
@@ -55,17 +61,33 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
+
+const defaultState = {
+  stories, // : [],
+  user: {}
+};
+
 const enhancers = compose(
-  // window.devToolsExtension ? window.devToolsExtension() : (f) => f,
   applyMiddleware(
     createRavenMiddleware(Raven, {
+      stateTransformer: state => ({ stories: state.stories.map(({ id }) => ({ id })) }),
+      actionTransformer: action => {
+        const cloned = clone(action);
+        if (cloned.payload && cloned.payload.content && cloned.payload.content.value && cloned.payload.content.value.length > 64) cloned.payload.content.value = cloned.payload.content.value.substring(64);
+        if (cloned.payload && cloned.payload.avatar && cloned.payload.avatar.length > 64) cloned.payload.avatar = cloned.payload.avatar.substring(64);
+        if (cloned.payload && cloned.payload.logo && cloned.payload.logo.length > 64) cloned.payload.logo = cloned.payload.logo.substring(64);
+        if (cloned.payload && cloned.payload.cover && cloned.payload.cover.length > 64) cloned.payload.cover = cloned.payload.cover.substring(64);
+        return cloned;
+      },
     }),
     thunkMiddleware
-  )
+  ),
+  window.devToolsExtension ? window.devToolsExtension() : (f) => f,
 );
 
+
 let store;
-switch (STORE) {
+switch ("persist") {
   case "persist":
     store = createStore(
       persistedReducer,
@@ -74,7 +96,6 @@ switch (STORE) {
     );
     break;
   default:
-    // transient
     store = createStore(
       rootReducer,
       defaultState,

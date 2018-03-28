@@ -1,6 +1,7 @@
 import React from "react";
-import { func, shape, string } from "prop-types";
+import { bool, func, shape, string } from "prop-types";
 import Dropzone from "react-dropzone";
+import Pica from "pica/dist/pica";
 
 import {
   Actionbar,
@@ -65,15 +66,50 @@ export default class MetaForm extends React.Component {
   }
 
   handleFile(key, f) {
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      const base64data = reader.result.length > 3e6 ? "" : reader.result;
-      // console.log(base64data);
-      this.setState({
-        formData: { ...this.state.formData, [key]: base64data }
-      });
-    };
-    reader.readAsDataURL(f[0]);
+    const { preview } = f[0];
+    const offScreenImage = document.createElement("img");
+    offScreenImage.addEventListener("load", () => {
+      const maxWidth = key === "logo" ? 500 : 1000;
+      console.log(key, maxWidth);
+      const targetWidth =
+        offScreenImage.width > maxWidth ? maxWidth : offScreenImage.width;
+      const targetHeight = parseInt(
+        targetWidth * offScreenImage.height / offScreenImage.width,
+        10
+      );
+      console.log(
+        `${offScreenImage.width} x ${
+          offScreenImage.height
+        } => ${targetWidth} x ${targetHeight}`
+      );
+
+      const offScreenCanvas = document.createElement("canvas");
+      offScreenCanvas.width = targetWidth;
+      offScreenCanvas.height = targetHeight;
+
+      const pica = Pica({ features: ["js", "wasm", "ww"] });
+      pica
+        .resize(offScreenImage, offScreenCanvas, {
+          unsharpAmount: 80,
+          unsharpRadius: 0.6,
+          unsharpThreshold: 2,
+          transferable: true
+        })
+        .then((result) => pica.toBlob(result, "image/jpeg", 0.9))
+        .then((blob) => {
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            console.log("data url length", reader.result.length);
+            const base64data = reader.result.length > 3e6 ? "" : reader.result;
+            this.setState({
+              formData: { ...this.state.formData, [key]: base64data }
+            });
+          };
+          reader.readAsDataURL(blob);
+        })
+        .catch((error) => console.log(error));
+    });
+    offScreenImage.src = preview;
   }
 
   render() {
@@ -114,6 +150,7 @@ export default class MetaForm extends React.Component {
                 onBlur={(e) => this.handleBlur(e)}
                 onChange={(e) => this.handleChange(e)}
                 place="left"
+                required={this.props.required}
                 placeholder="Author’s name"
                 value={this.state.formData.author}
               />
@@ -129,6 +166,7 @@ export default class MetaForm extends React.Component {
                 onChange={(e) => this.handleChange(e)}
                 place="middle"
                 placeholder="Link"
+                required={this.props.required}
                 value={this.state.formData.authorLink}
               />
               <Legend tip="Add a link e.g. to your website">i</Legend>
@@ -144,6 +182,7 @@ export default class MetaForm extends React.Component {
                 onChange={(e) => this.handleChange(e)}
                 place="right"
                 placeholder="Date of publication"
+                required={this.props.required}
                 value={this.state.formData.pubDate}
               />
               <Legend tip="Add the publication date">i</Legend>
@@ -160,7 +199,7 @@ export default class MetaForm extends React.Component {
                 ref={(node) => {
                   this.dropzoneRef = node;
                 }}
-                onDrop={(accepted, rejected) => {
+                onDrop={(accepted) => {
                   this.handleFile("cover", accepted);
                 }}
                 style={{ display: "none" }}
@@ -188,9 +227,9 @@ export default class MetaForm extends React.Component {
               <Dropzone
                 accept="image/jpeg, image/jpg, image/svg, image/gif, image/png"
                 ref={(node) => {
-                  this.dropzoneRef = node;
+                  this.dropzoneRef2 = node;
                 }}
-                onDrop={(accepted, rejected) => {
+                onDrop={(accepted) => {
                   this.handleFile("logo", accepted);
                 }}
                 style={{ display: "none" }}
@@ -201,7 +240,7 @@ export default class MetaForm extends React.Component {
                 file
                 place="right"
                 onClick={() => {
-                  this.dropzoneRef.open();
+                  this.dropzoneRef2.open();
                 }}
               />
               <Legend tip="Add your organisation’s logo">i</Legend>
@@ -221,6 +260,7 @@ export default class MetaForm extends React.Component {
 
 MetaForm.propTypes = {
   cta: string,
+  required: bool,
   handleSave: func,
   handleSubmit: func.isRequired,
   story: shape({
@@ -236,6 +276,7 @@ MetaForm.propTypes = {
 MetaForm.defaultProps = {
   cta: "Save",
   handleSave: null,
+  required: false,
   story: {
     author: "",
     authorLink: "",

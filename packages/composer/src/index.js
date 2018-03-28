@@ -2,6 +2,9 @@ import React from "react";
 import { Provider } from "react-redux";
 import { render } from "react-dom";
 import { Route, Router, IndexRoute, Redirect } from "react-router";
+import ReactGA from "react-ga";
+// import { withAuthenticator } from "aws-amplify-react";
+
 
 import { configureStore, history } from "./configureStore";
 
@@ -12,7 +15,17 @@ import Listing from "./views/Listing";
 
 const store = configureStore();
 
-require("./injectGlobalStyles.js");
+require("./injectGlobalStyles.js"); // meh
+
+ReactGA.initialize("UA-1615344-7");
+const pageView = () => ReactGA.pageview(document.location.pathname);
+
+// const AppWithAuth = withAuthenticator(App, {
+//   // includeGreetings: true
+// });
+// const federated = {
+//   google_client_id: "106275763263-of8jnrgl86kvlgv62v1vfmkp7mu45v2u.apps.googleusercontent.com",
+// };
 
 const rootEl = document.getElementById("root");
 
@@ -27,13 +40,13 @@ class Routes extends React.Component {
 
   render() {
     return (
-      <Router key="Root" history={history}>
-        <Route path="/my" component={App}>
+      <Router key="Root" history={history} onUpdate={pageView}>
+        <Route path="/" component={App}>
           <IndexRoute component={Auth} />
-          <Route path="/my/stories" component={Listing} />
-          <Route path="/my/stories/:storyId" component={Composer} />
+          <Route path="/stories" component={Listing} />
+          <Route path="/stories/:storyId" component={Composer} />
         </Route>
-        <Redirect from="*" to="my" />
+        <Redirect from="*" to="/" />
       </Router>
     );
   }

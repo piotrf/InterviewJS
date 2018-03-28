@@ -1,7 +1,8 @@
 /* eslint react/forbid-prop-types: 0 */
 import css from "styled-components";
 import React, { Component } from "react";
-import { object, shape, string } from "prop-types";
+import { object, shape, string, func } from "prop-types";
+import axios from "axios";
 
 import {
   Action,
@@ -31,15 +32,39 @@ export default class ContextView extends Component {
     this.state = { storyDetailsModal: false };
     this.toggleDetailsModal = this.toggleDetailsModal.bind(this);
   }
+
+  componentDidMount() {
+    // I'm framed, wait for message with JSON that looks like a story -- FIXME
+    if (window.top !== window && window.addEventListener) {
+      window.addEventListener(
+        "message",
+        ({ data, origin, source }) => {
+          console.log(origin, data, source);
+          if (data.interviewees) this.props.createStory(data);
+        },
+        false
+      );
+    }
+
+    // Load story via storyId -> getStoryURL
+    if ((!this.props.story || Object.keys(this.props.story).length === 0) && this.props.params.storyId && window.InterviewJS && window.InterviewJS.getStoryURL) {
+      const storyURL = window.InterviewJS.getStoryURL(this.props.params.storyId);
+      if (storyURL) axios.get(storyURL).then(response => this.props.createStory(response.data));
+    }
+  }
+
   toggleDetailsModal() {
     this.setState({ storyDetailsModal: !this.state.storyDetailsModal });
   }
+
   render() {
     const { story } = this.props;
+    if (!story || Object.keys(story).length === 0) return null; // FIXME show spinner
+
     return [
       <Topbar
         handleDetails={this.toggleDetailsModal}
-        handleBack={() => this.props.router.push(`/story`)}
+        handleBack={() => this.props.router.push(`/${story.id}`)}
         key="topbar"
       />,
       <Page key="page">
@@ -47,17 +72,21 @@ export default class ContextView extends Component {
           <Cover image={story.cover} compact />
         </PageHead>
         <PageBody limit="x" flex={[1, 0, `${100 / 2}%`]}>
-          <PageSubtitle typo="h4">{story.context}</PageSubtitle>
-          <Separator size="m" silent />
           <Aside typo="p3">
-            The more people you interview the more information you gather. In
-            the end you’ll get feedback on how well you’ve done.
+            Explore real stories by interacting directly with the interviewees.
+            At the end we will let you know how much of the story you have covered
+            and you can share your views in a poll.
           </Aside>
+          <Aside typo="p3">
+            Here is the story
+          </Aside>
+          <Separator size="m" silent />
+          <PageSubtitle typo="h4">{story.context}</PageSubtitle>
           <Separator size="l" silent />
           <Actionbar>
             <Action
               fixed
-              onClick={() => this.props.router.push(`/story/interviewees`)}
+              onClick={() => this.props.router.push(`/${story.id}/interviewees`)}
               primary
             >
               Meet your interviewees
@@ -78,6 +107,7 @@ export default class ContextView extends Component {
 }
 
 ContextView.propTypes = {
+  createStory: func.isRequired,
   router: object,
   story: shape({
     title: string

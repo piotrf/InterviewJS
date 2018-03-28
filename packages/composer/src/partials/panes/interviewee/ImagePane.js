@@ -1,6 +1,7 @@
 import { func, shape, string } from "prop-types";
 import React, { Component } from "react";
 import Dropzone from "react-dropzone";
+import Pica from "pica/dist/pica";
 
 import {
   BubbleHTMLWrapper,
@@ -13,14 +14,16 @@ import {
 } from "interviewjs-styleguide";
 import PaneFrame from "../PaneFrame";
 
+
 export default class ImagePane extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      draft: this.props.draft
+      draft: this.props.draft,
     };
     this.handleChange = this.handleChange.bind(this);
   }
+
   componentWillReceiveProps(nextProps) {
     const { draft } = nextProps;
     if (draft !== this.props.draft) {
@@ -28,22 +31,53 @@ export default class ImagePane extends Component {
     }
     return null;
   }
+
+  handleBlob(blob) {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      console.log("data url length", reader.result.length);
+      const base64data = reader.result.length > 3e6 ? '' : reader.result;
+      this.setState({ draft: { ...this.state.draft, value: base64data } }, () =>
+        this.props.updateDraft(this.state.draft)
+      );
+    };
+    reader.readAsDataURL(blob);
+  }
+
+  handleFile(f) {
+    const { type, preview } = f[0];
+    if (type === "image/gif") {
+      this.handleBlob(f[0]);
+    } else {
+      // this.img.src = preview;
+      const offScreenImage = document.createElement('img');
+      offScreenImage.addEventListener('load', () => {
+        const targetWidth = offScreenImage.width > 600 ? 600 : offScreenImage.width;
+        const targetHeight = parseInt(targetWidth * offScreenImage.height / offScreenImage.width, 10);
+        console.log(`${offScreenImage.width} x ${offScreenImage.height} => ${targetWidth} x ${targetHeight}`);
+
+        const offScreenCanvas = document.createElement('canvas');
+        offScreenCanvas.width  = targetWidth;
+        offScreenCanvas.height = targetHeight;
+
+        const pica = Pica({ features: ['js', 'wasm', 'ww'] });
+        pica.resize(offScreenImage, offScreenCanvas, {
+          unsharpAmount: 80,
+          unsharpRadius: 0.6,
+          unsharpThreshold: 2,
+          transferable: true
+        }).then(result => pica.toBlob(result, 'image/jpeg', 0.90))
+          .then(this.handleBlob.bind(this)).catch(error => console.log(error));
+      });
+      offScreenImage.src = preview;
+    }
+  }
+
   handleChange(e) {
     const { name, value } = e.target;
     this.setState({ draft: { ...this.state.draft, [name]: value } }, () =>
       this.props.updateDraft(this.state.draft)
     );
-  }
-  handleFile(f) {
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      const base64data = reader.result.length > 3e6 ? '' : reader.result;
-      // console.log(base64data);
-      this.setState({ draft: { ...this.state.draft, value: base64data } }, () =>
-        this.props.updateDraft(this.state.draft)
-      );
-    };
-    reader.readAsDataURL(f[0]);
   }
 
   render() {
@@ -70,7 +104,7 @@ export default class ImagePane extends Component {
               ref={(node) => {
                 this.dropzoneRef = node;
               }}
-              onDrop={(accepted, rejected) => {
+              onDrop={(accepted) => {
                 this.handleFile(accepted);
               }}
               style={{ display: "none" }}
@@ -103,6 +137,7 @@ export default class ImagePane extends Component {
     );
   }
 }
+
 
 ImagePane.propTypes = {
   draft: shape({

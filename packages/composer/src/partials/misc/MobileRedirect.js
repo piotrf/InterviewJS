@@ -12,14 +12,14 @@ import {
 } from "interviewjs-styleguide";
 
 const MobileRedirectEl = css(Container)`
-  display: none;
-  ${breakpoint.onlyphone} {
-    align-content: center;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    justify-content: center;
+  align-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  ${breakpoint.desktop} {
+    display: none;
   }
 `;
 
@@ -29,7 +29,7 @@ const MobileRedirect = (props) => (
       <PageTitle typo="h2">This page works only on desktop</PageTitle>
       <Separator silent size="m" />
       <Actionbar>
-        <Action primary fixed onClick={() => props.router.push(`/my/stories`)}>
+        <Action primary fixed onClick={() => props.router.push(`/stories`)}>
           Return home
         </Action>
       </Actionbar>

@@ -163,34 +163,6 @@ export default class StoryDetailsModal extends React.Component {
                   allows to compose and manage scripted chats for a more
                   immersive storytelling experience.
                 </p>
-                <dl>
-                  <dt>Product lead</dt>
-                  <dd>
-                    Juliana Ruhfus, Ali Rae, Mohammed El-Haddad, Alaa Batayneh
-                  </dd>
-                  <dt>Product Design & Development</dt>
-                  <dd>
-                    <a
-                      href="https://piotrf.pl"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Piotr Fedorczyk
-                    </a>
-                  </dd>
-                  <dt>Back-end development & Infrastructure</dt>
-                  <dd>
-                    <a
-                      href="https://twitter.com/gridinoc"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Laurian Gridinoc
-                    </a>
-                  </dd>
-                  <dt>Design support</dt>
-                  <dd>Joanna Bogusz</dd>
-                </dl>
               </DetailsCopy>
               <Separator silent size="m" />
               <PageSubtitle typo="h5">Connect with InterviewJS</PageSubtitle>

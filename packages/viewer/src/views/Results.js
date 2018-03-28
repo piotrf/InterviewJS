@@ -1,7 +1,8 @@
 /* eslint react/forbid-prop-types: 0 */
 import css from "styled-components";
 import React, { Component } from "react";
-import { object, shape, string } from "prop-types";
+import { object, shape, string, func } from "prop-types";
+import axios from "axios";
 
 import {
   Action,
@@ -36,19 +37,44 @@ export default class ResultsView extends Component {
     this.toggleDetailsModal = this.toggleDetailsModal.bind(this);
     this.toggleShareStoryModal = this.toggleShareStoryModal.bind(this);
   }
+
+  componentDidMount() {
+    // I'm framed, wait for message with JSON that looks like a story -- FIXME
+    if (window.top !== window && window.addEventListener) {
+      window.addEventListener(
+        "message",
+        ({ data, origin, source }) => {
+          console.log(origin, data, source);
+          if (data.interviewees) this.props.createStory(data);
+        },
+        false
+      );
+    }
+
+    // Load story via storyId -> getStoryURL
+    if ((!this.props.story || Object.keys(this.props.story).length === 0) && this.props.params.storyId && window.InterviewJS && window.InterviewJS.getStoryURL) {
+      const storyURL = window.InterviewJS.getStoryURL(this.props.params.storyId);
+      if (storyURL) axios.get(storyURL).then(response => this.props.createStory(response.data));
+    }
+  }
+
   toggleDetailsModal() {
     this.setState({ storyDetailsModal: !this.state.storyDetailsModal });
   }
+
   toggleShareStoryModal() {
     this.setState({ shareStoryModal: !this.state.shareStoryModal });
   }
+
   render() {
     const { story } = this.props;
+    if (!story || Object.keys(story).length === 0) return null; // FIXME show spinner
+
     const { poll } = story;
     return [
       <Topbar
         handleDetails={this.toggleDetailsModal}
-        handleBack={() => this.props.router.push(`/story/poll`)}
+        handleBack={() => this.props.router.push(`/${story.id}/poll`)}
         key="topbar"
       />,
       <Page key="page">
@@ -98,6 +124,7 @@ export default class ResultsView extends Component {
 }
 
 ResultsView.propTypes = {
+  createStory: func.isRequired,
   router: object,
   story: shape({
     title: string

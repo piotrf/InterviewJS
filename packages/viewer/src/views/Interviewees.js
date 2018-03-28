@@ -1,7 +1,8 @@
 /* eslint react/forbid-prop-types: 0 */
 import css from "styled-components";
 import React, { Component } from "react";
-import { object, shape, string } from "prop-types";
+import { object, shape, string, func } from "prop-types";
+import axios from "axios";
 
 import {
   Action,
@@ -56,10 +57,32 @@ export default class ContextView extends Component {
     this.toggleDetailsModal = this.toggleDetailsModal.bind(this);
     this.toggleIntervieweeModal = this.toggleIntervieweeModal.bind(this);
   }
+
+  componentDidMount() {
+    // I'm framed, wait for message with JSON that looks like a story -- FIXME
+    if (window.top !== window && window.addEventListener) {
+      window.addEventListener(
+        "message",
+        ({ data, origin, source }) => {
+          console.log(origin, data, source);
+          if (data.interviewees) this.props.createStory(data);
+        },
+        false
+      );
+    }
+
+    // Load story via storyId -> getStoryURL
+    if ((!this.props.story || Object.keys(this.props.story).length === 0) && this.props.params.storyId && window.InterviewJS && window.InterviewJS.getStoryURL) {
+      const storyURL = window.InterviewJS.getStoryURL(this.props.params.storyId);
+      if (storyURL) axios.get(storyURL).then(response => this.props.createStory(response.data));
+    }
+  }
+
   toggleDetailsModal(e) {
     if (e) e.stopPropagation();
     this.setState({ storyDetailsModal: !this.state.storyDetailsModal });
   }
+
   toggleIntervieweeModal(e, target) {
     e.stopPropagation();
     if (target !== null) {
@@ -68,16 +91,20 @@ export default class ContextView extends Component {
       this.setState({ intervieweeModal: null });
     }
   }
+
   startChat(e, target) {
     e.stopPropagation();
-    this.props.router.push(`/story/chat/${target}`);
+    this.props.router.push(`/${this.props.story.id}/chat/${target}`);
   }
+
   render() {
     const { story } = this.props;
+    if (!story || Object.keys(story).length === 0) return null; // FIXME show spinner
+
     return [
       <Topbar
         handleDetails={(e) => this.toggleDetailsModal(e)}
-        handleBack={() => this.props.router.push(`/story/context`)}
+        handleBack={() => this.props.router.push(`/${story.id}/context`)}
         key="topbar"
       />,
       <Page key="page">
@@ -97,7 +124,7 @@ export default class ContextView extends Component {
                       size="l"
                       image={interviewee.avatar}
                       onClick={() =>
-                        this.props.router.push(`/story/chat/${interviewee.id}`)
+                        this.props.router.push(`/${story.id}/chat/${interviewee.id}`)
                       }
                     />
                   </Container>
@@ -138,7 +165,7 @@ export default class ContextView extends Component {
               fixed
               onClick={() =>
                 this.props.router.push(
-                  `/story/chat/${story.interviewees[0].id}`
+                  `/${story.id}/chat/${story.interviewees[0].id}`
                 )
               }
               primary
@@ -157,7 +184,7 @@ export default class ContextView extends Component {
           key="intervieweeModal"
           handleSubmit={() =>
             this.props.router.push(
-              `/story/chat/${
+              `/${story.id}/chat/${
                 story.interviewees[this.state.intervieweeModal].id
               }`
             )
@@ -177,6 +204,7 @@ export default class ContextView extends Component {
 }
 
 ContextView.propTypes = {
+  createStory: func.isRequired,
   router: object,
   story: shape({
     title: string
