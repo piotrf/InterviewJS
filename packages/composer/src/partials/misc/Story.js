@@ -150,7 +150,7 @@ export default class Story extends React.Component {
                   <ul>
                     <li>
                       <Action onClick={() => this.toggleDetailsModal("meta")}>
-                        Details
+                        Story Elements
                       </Action>
                     </li>
                     <li>
