@@ -29,7 +29,7 @@ const MobileRedirect = (props) => (
       <PageTitle typo="h2">This page works only on desktop</PageTitle>
       <Separator silent size="m" />
       <Actionbar>
-        <Action primary fixed onClick={() => props.router.push(`/my/stories`)}>
+        <Action primary fixed onClick={() => props.router.push(`/stories`)}>
           Return home
         </Action>
       </Actionbar>

@@ -169,7 +169,7 @@ export default class ListingView extends Component {
 
   componentDidMount() {
     if (! this.props.user.ignore && typeof this.props.user.id === "string") store.dispatch(syncFirebaseStories(this.props.user.id, this.props.user.email));
-    if (! this.props.user || ! this.props.user.id || this.props.user.ignore) this.props.router.push(`/my`);
+    if (! this.props.user || ! this.props.user.id || this.props.user.ignore) this.props.router.push(`/`);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -180,7 +180,7 @@ export default class ListingView extends Component {
     Auth.signOut()
       .then(data => {
         console.log(data);
-        this.props.router.push(`/my`);
+        this.props.router.push(`/`);
       })
       .catch(err => console.log(err));
   }
@@ -264,7 +264,7 @@ export default class ListingView extends Component {
                     deleteStory={() => this.props.deleteStory(i)}
                     key={story.id}
                     openStory={() =>
-                      this.props.router.push(`/my/stories/${story.id}`)
+                      this.props.router.push(`/stories/${story.id}`)
                     }
                     story={story}
                     storyIndex={i}

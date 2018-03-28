@@ -43,7 +43,7 @@ export default class AuthView extends Component {
       email: user.email,
     });
 
-    this.props.router.push(`/my/stories`);
+    this.props.router.push(`/stories`);
   }
 
   render() {

@@ -41,12 +41,12 @@ class Routes extends React.Component {
   render() {
     return (
       <Router key="Root" history={history} onUpdate={pageView}>
-        <Route path="/my" component={App}>
+        <Route path="/" component={App}>
           <IndexRoute component={Auth} />
-          <Route path="/my/stories" component={Listing} />
-          <Route path="/my/stories/:storyId" component={Composer} />
+          <Route path="/stories" component={Listing} />
+          <Route path="/stories/:storyId" component={Composer} />
         </Route>
-        <Redirect from="*" to="my" />
+        <Redirect from="*" to="/" />
       </Router>
     );
   }

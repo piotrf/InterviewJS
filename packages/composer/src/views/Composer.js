@@ -262,7 +262,7 @@ export default class ComposerView extends React.Component {
     const story = this.props.stories[storyIndex];
 
     if (! story) {
-      this.props.router.push(`/my`);
+      this.props.router.push(`/`);
       return null;
     }
 
@@ -273,7 +273,7 @@ export default class ComposerView extends React.Component {
         <ErrorBoundary>
           <PageHead>
             <Container flex={[1, 1, `${100 / 3}%`]} padded>
-              <Action onClick={() => this.props.router.push(`/my/stories`)}>
+              <Action onClick={() => this.props.router.push(`/stories`)}>
                 <Icon name="arrow-left" size="x" /> Story overview
               </Action>
               <Separator dir="v" size="m" />
