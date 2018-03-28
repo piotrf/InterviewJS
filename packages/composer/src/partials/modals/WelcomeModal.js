@@ -39,10 +39,10 @@ export default class WelcomeModal extends React.Component {
           <ModalBody>
             <Container align="center" limit="m">
               <PageSubtitle typo="h3">
-                The InterviewJS app is designed for longform storytelling, 
-                features, and investigations.  Strong interviews with different 
-                points of view work well. You can also embed photos, video, and 
-                other multimedia links.
+                InterviewJS users will engage with your story through a
+                series of direct messaging exchanges based on your interviews.
+                It’s a web app - there’s no need to download anything -
+                users will simply need to be online!
               </PageSubtitle>
               <Separator size="m" silent />
               <Container align="center" limit="s">

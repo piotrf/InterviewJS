@@ -23,7 +23,6 @@ import {
   color
 } from "interviewjs-styleguide";
 
-
 export default class AuthModal extends React.Component {
   constructor(props) {
     super(props);
@@ -35,7 +34,7 @@ export default class AuthModal extends React.Component {
       newPassword: "",
       activeTab: "signIn",
       forgotPassword: false,
-      message: null,
+      message: null
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -43,7 +42,9 @@ export default class AuthModal extends React.Component {
     this.handleSignUp = this.handleSignUp.bind(this);
     this.handleConfirmSignUp = this.handleConfirmSignUp.bind(this);
     this.handleForgotPassword = this.handleForgotPassword.bind(this);
-    this.handleConfirmForgotPassword = this.handleConfirmForgotPassword.bind(this);
+    this.handleConfirmForgotPassword = this.handleConfirmForgotPassword.bind(
+      this
+    );
     this.handleTabActivation = this.handleTabActivation.bind(this);
     this.toggleForgotPassword = this.toggleForgotPassword.bind(this);
   }
@@ -90,49 +91,54 @@ export default class AuthModal extends React.Component {
     const { username, password } = this.state;
 
     Auth.signIn(username, password)
-      .then(async user => {
-          const info = await Auth.currentUserInfo();
-          if (user && info) {
-            this.raiseMessage("OK", info);
-            this.props.handleAuthentication(info);
-          }
+      .then(async (user) => {
+        const info = await Auth.currentUserInfo();
+        if (user && info) {
+          this.raiseMessage("OK", info);
+          this.props.handleAuthentication(info);
+        }
       })
-      .catch(error => this.raiseError(error));
+      .catch((error) => this.raiseError(error));
   }
 
   handleSignUp() {
     const { username, password, email } = this.state;
 
     Auth.signUp({
-      username, password,
+      username,
+      password,
       attributes: { email }
     })
-      .then(data => this.raiseMessage("Check your email for access code", data))
-      .catch(error => this.raiseError(error));
+      .then((data) =>
+        this.raiseMessage("Check your email for access code", data)
+      )
+      .catch((error) => this.raiseError(error));
   }
 
   handleConfirmSignUp() {
     const { username, code } = this.state;
 
     Auth.confirmSignUp(username, code)
-      .then(data => this.raiseMessage("Now please sign in", data))
-      .catch(error => this.raiseError(error));
+      .then((data) => this.raiseMessage("Now please sign in", data))
+      .catch((error) => this.raiseError(error));
   }
 
   handleForgotPassword() {
     const { username } = this.state;
 
     Auth.forgotPassword(username)
-      .then(data => this.raiseMessage("Check your email for access code", data))
-      .catch(error => this.raiseError(error));
+      .then((data) =>
+        this.raiseMessage("Check your email for access code", data)
+      )
+      .catch((error) => this.raiseError(error));
   }
 
   handleConfirmForgotPassword() {
     const { username, code, newPassword } = this.state;
 
     Auth.forgotPasswordSubmit(username, code, newPassword)
-      .then(data => this.raiseMessage("Now please sign in", data))
-      .catch(error => this.raiseError(error));
+      .then((data) => this.raiseMessage("Now please sign in", data))
+      .catch((error) => this.raiseError(error));
   }
 
   render() {
@@ -161,7 +167,7 @@ export default class AuthModal extends React.Component {
                 theme={{ backg: color.flareLLt, color: color.white }}
               >
                 InterviewJS will help you tell interactive stories by converting
-                your interviews into a chat experiences.
+                your interviews into a chat experience.
               </Bubble>
               <Bubble
                 animated
@@ -177,111 +183,207 @@ export default class AuthModal extends React.Component {
             <Animator delay={3000}>
               <Container rounded fill="white">
                 <PaneTabs>
-                  <PaneTab opinionated active={this.state.activeTab === "signIn"} onClick={() => this.handleTabActivation("signIn")}>Sign In</PaneTab>
-                  <PaneTab opinionated active={this.state.activeTab === "signUp"} onClick={() => this.handleTabActivation("signUp")}>Sign Up</PaneTab>
+                  <PaneTab
+                    opinionated
+                    active={this.state.activeTab === "signIn"}
+                    onClick={() => this.handleTabActivation("signIn")}
+                  >
+                    Sign In
+                  </PaneTab>
+                  <PaneTab
+                    opinionated
+                    active={this.state.activeTab === "signUp"}
+                    onClick={() => this.handleTabActivation("signUp")}
+                  >
+                    Sign Up
+                  </PaneTab>
                 </PaneTabs>
 
                 <Separator dir="h" size="s" silent />
-                <Text typo="h3">{ this.state.message ? this.state.message : "\xa0" }</Text>
+                <Text typo="h3">
+                  {this.state.message ? this.state.message : "\xa0"}
+                </Text>
 
-                { !this.state.forgotPassword && this.state.activeTab === "signIn" ?
+                {!this.state.forgotPassword &&
+                this.state.activeTab === "signIn" ? (
                   <div style={{ padding: "1em" }}>
                     <FormItem>
                       <Label>Username</Label>
-                      <TextInput input type="text" name="username" value={this.state.username} onChange={this.handleInputChange} />
+                      <TextInput
+                        input
+                        type="text"
+                        name="username"
+                        value={this.state.username}
+                        onChange={this.handleInputChange}
+                      />
                     </FormItem>
                     <Separator dir="h" size="s" silent />
                     <FormItem>
                       <Label>Password</Label>
-                      <TextInput input type="password" name="password" onChange={this.handleInputChange} />
+                      <TextInput
+                        input
+                        type="password"
+                        name="password"
+                        onChange={this.handleInputChange}
+                      />
                     </FormItem>
                     <Separator dir="h" silent />
                     <Actionbar>
-                      <Action fixed primary onClick={this.handleSignIn}>Sign in</Action>
-                      <Action fixed onClick={this.toggleForgotPassword}>Forgot password?</Action>
+                      <Action fixed primary onClick={this.handleSignIn}>
+                        Sign in
+                      </Action>
+                      <Action fixed onClick={this.toggleForgotPassword}>
+                        Forgot password?
+                      </Action>
                     </Actionbar>
                   </div>
-                 : null
-                }
+                ) : null}
 
-                { this.state.activeTab === "signUp" ?
+                {this.state.activeTab === "signUp" ? (
                   <div style={{ padding: "0em 1em 1em 1em" }}>
                     <Text typo="h5">Step 1</Text>
                     <Separator dir="h" size="s" silent />
                     <FormItem>
                       <Label>Username</Label>
-                      <TextInput input type="text" name="username" value={this.state.username} onChange={this.handleInputChange} />
+                      <TextInput
+                        input
+                        type="text"
+                        name="username"
+                        value={this.state.username}
+                        onChange={this.handleInputChange}
+                      />
                     </FormItem>
                     <Separator dir="h" size="s" silent />
                     <FormItem>
                       <Label>Password</Label>
-                      <TextInput input type="password" name="password" value={this.state.password} onChange={this.handleInputChange} />
+                      <TextInput
+                        input
+                        type="password"
+                        name="password"
+                        value={this.state.password}
+                        onChange={this.handleInputChange}
+                      />
                     </FormItem>
                     <Separator dir="h" size="s" silent />
                     <FormItem>
                       <Label>Email</Label>
-                      <TextInput input type="email" name="email" value={this.state.email} onChange={this.handleInputChange} />
+                      <TextInput
+                        input
+                        type="email"
+                        name="email"
+                        value={this.state.email}
+                        onChange={this.handleInputChange}
+                      />
                     </FormItem>
                     <Separator dir="h" silent />
                     <Actionbar>
-                      <Action fixed primary onClick={this.handleSignUp}>Sign up</Action>
+                      <Action fixed primary onClick={this.handleSignUp}>
+                        Sign up
+                      </Action>
                     </Actionbar>
                     <Separator dir="h" silent />
                     <Text typo="h5">Step 2</Text>
                     <Separator dir="h" size="s" silent />
                     <FormItem>
                       <Label>Username</Label>
-                      <TextInput input type="text" name="username" value={this.state.username} onChange={this.handleInputChange} />
+                      <TextInput
+                        input
+                        type="text"
+                        name="username"
+                        value={this.state.username}
+                        onChange={this.handleInputChange}
+                      />
                     </FormItem>
                     <Separator dir="h" size="s" silent />
                     <FormItem>
                       <Label>Confirmation code</Label>
-                      <TextInput input type="text" name="code" value={this.state.code} onChange={this.handleInputChange} />
+                      <TextInput
+                        input
+                        type="text"
+                        name="code"
+                        value={this.state.code}
+                        onChange={this.handleInputChange}
+                      />
                     </FormItem>
                     <Separator dir="h" silent />
                     <Actionbar>
-                      <Action fixed primary onClick={this.handleConfirmSignUp}>Confirm sign up</Action>
+                      <Action fixed primary onClick={this.handleConfirmSignUp}>
+                        Confirm sign up
+                      </Action>
                     </Actionbar>
                   </div>
-                  : null
-                }
+                ) : null}
 
-                { this.state.forgotPassword  && this.state.activeTab === "signIn" ?
+                {this.state.forgotPassword &&
+                this.state.activeTab === "signIn" ? (
                   <div style={{ padding: "0em 1em 1em 1em" }}>
-                    <Text typo="h5">Forgot Password<br /> Step 1</Text>
+                    <Text typo="h5">
+                      Forgot Password<br /> Step 1
+                    </Text>
                     <Separator dir="h" size="s" silent />
                     <FormItem>
                       <Label>Username</Label>
-                      <TextInput input type="text" name="username" value={this.state.username} onChange={this.handleInputChange} />
+                      <TextInput
+                        input
+                        type="text"
+                        name="username"
+                        value={this.state.username}
+                        onChange={this.handleInputChange}
+                      />
                     </FormItem>
                     <Separator dir="h" silent />
                     <Actionbar>
-                      <Action fixed primary onClick={this.handleForgotPassword}>Forgot password</Action>
+                      <Action fixed primary onClick={this.handleForgotPassword}>
+                        Forgot password
+                      </Action>
                     </Actionbar>
                     <Separator dir="h" silent />
                     <Text typo="h4">Step 2</Text>
                     <Separator dir="h" size="s" silent />
                     <FormItem>
                       <Label>Username</Label>
-                      <TextInput input type="text" name="username" value={this.state.username} onChange={this.handleInputChange} />
+                      <TextInput
+                        input
+                        type="text"
+                        name="username"
+                        value={this.state.username}
+                        onChange={this.handleInputChange}
+                      />
                     </FormItem>
                     <Separator dir="h" size="s" silent />
                     <FormItem>
                       <Label>Confimation Code</Label>
-                      <TextInput input type="text" name="code" value={this.state.code} onChange={this.handleInputChange} />
+                      <TextInput
+                        input
+                        type="text"
+                        name="code"
+                        value={this.state.code}
+                        onChange={this.handleInputChange}
+                      />
                     </FormItem>
                     <Separator dir="h" size="s" silent />
                     <FormItem>
                       <Label>New password</Label>
-                      <TextInput input type="password" name="newPassword" value={this.state.newPassword} onChange={this.handleInputChange} />
+                      <TextInput
+                        input
+                        type="password"
+                        name="newPassword"
+                        value={this.state.newPassword}
+                        onChange={this.handleInputChange}
+                      />
                     </FormItem>
                     <Separator dir="h" silent />
                     <Actionbar>
-                      <Action fixed primary onClick={this.handleConfirmForgotPassword}>Confirm forgot password</Action>
+                      <Action
+                        fixed
+                        primary
+                        onClick={this.handleConfirmForgotPassword}
+                      >
+                        Confirm forgot password
+                      </Action>
                     </Actionbar>
                   </div>
-                  : null
-                }
+                ) : null}
 
                 <Separator dir="h" size="s" silent />
               </Container>
