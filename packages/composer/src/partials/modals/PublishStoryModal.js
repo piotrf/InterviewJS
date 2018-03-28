@@ -93,9 +93,10 @@ export default class PublishStoryModal extends Component {
 
   handleStep2() {
     // Publish
-    // FIXME: security
-    Storage.put(`stories-published/${this.props.story.id}/story.json`, JSON.stringify(this.props.story), {
-      bucket: "alpha.interviewjs.net",
+    console.log(this.props.user);
+    Storage.put(`stories/${this.props.user.id}/${this.props.story.id}/story.json`, JSON.stringify(this.props.story), {
+      bucket: "data.interviewjs.io",
+      level: "public",
       contentType: "application/json"
     })
     .then (async result => {
@@ -267,7 +268,8 @@ PublishStoryModal.propTypes = {
   storyIndex: number.isRequired,
   updateInterviewee: func.isRequired,
   updateStory: func.isRequired,
-  story: object.isRequired
+  story: object.isRequired,
+  user: object.isRequired
 };
 
 PublishStoryModal.defaultProps = {

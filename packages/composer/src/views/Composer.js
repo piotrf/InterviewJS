@@ -362,6 +362,7 @@ export default class ComposerView extends React.Component {
           isOpen
           key="PublishModal"
           story={story}
+          user={this.props.user}
           storyIndex={storyIndex}
           tab={this.state.detailsModal}
           updateStory={this.updateStory}
@@ -395,11 +396,13 @@ ComposerView.propTypes = {
   params: shape({ storyId: string.isRequired }).isRequired,
   router: object.isRequired /* eslint react/forbid-prop-types: 0 */,
   stories: arrayOf(object),
+  user: object,
   updateStory: func
 };
 
 ComposerView.defaultProps = {
   deleteInterviewee: null,
   stories: [],
+  user: {},
   updateStory: null
 };
