@@ -72,12 +72,16 @@ export default class ContextView extends Component {
           <Cover image={story.cover} compact />
         </PageHead>
         <PageBody limit="x" flex={[1, 0, `${100 / 2}%`]}>
-          <PageSubtitle typo="h4">{story.context}</PageSubtitle>
-          <Separator size="m" silent />
           <Aside typo="p3">
-            The more people you interview the more information you gather. In
-            the end you’ll get feedback on how well you’ve done.
+            Explore real stories by interacting directly with the interviewees.
+            At the end we will let you know how much of the story you have covered
+            and you can share your views in a poll.
           </Aside>
+          <Aside typo="p3">
+            Here is the story
+          </Aside>
+          <Separator size="m" silent />
+          <PageSubtitle typo="h4">{story.context}</PageSubtitle>
           <Separator size="l" silent />
           <Actionbar>
             <Action

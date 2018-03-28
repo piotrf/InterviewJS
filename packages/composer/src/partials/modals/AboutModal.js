@@ -100,34 +100,6 @@ export default class AboutModal extends React.Component {
                   allows to compose and manage scripted chats for a more
                   immersive storytelling experience.
                 </p>
-                <dl>
-                  <dt>Product lead</dt>
-                  <dd>
-                    Juliana Ruhfus, Ali Rae, Mohammed El-Haddad, Alaa Batayneh
-                  </dd>
-                  <dt>Product Design & Development</dt>
-                  <dd>
-                    <Action
-                      href="https://piotrf.pl"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Piotr Fedorczyk
-                    </Action>
-                  </dd>
-                  <dt>Back-end development & Infrastructure</dt>
-                  <dd>
-                    <Action
-                      href="https://twitter.com/gridinoc"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Laurian Gridinoc
-                    </Action>
-                  </dd>
-                  <dt>Design support</dt>
-                  <dd>Joanna Bogusz</dd>
-                </dl>
                 <PageSubtitle typo="h2">Connect with InterviewJS</PageSubtitle>
                 <Separator silent size="s" />
                 <p>
