@@ -24,7 +24,6 @@ import {
   TextInput,
   color,
   setSpace,
-  setHeight
 } from "interviewjs-styleguide";
 
 const Brandmark = css.div`

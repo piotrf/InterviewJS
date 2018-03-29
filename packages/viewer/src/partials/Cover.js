@@ -7,7 +7,6 @@ import {
   Container,
   breakpoint,
   color,
-  setHeight,
   setSpace
 } from "interviewjs-styleguide";
 

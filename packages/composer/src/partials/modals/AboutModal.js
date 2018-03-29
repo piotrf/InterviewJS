@@ -26,7 +26,7 @@ import {
   setHeight
 } from "interviewjs-styleguide";
 
-import { ErrorBoundary } from "../";
+// import { ErrorBoundary } from "../";
 
 const DetailsCopy = css.div`
   ${setType("s")};
