@@ -1,11 +1,9 @@
 /* eslint react/forbid-prop-types: 0 */
-/* eslint no-unused-vars: 0 */
 
 import css from "styled-components";
 import React, { Component } from "react";
 import { arrayOf, func, object, shape, string } from "prop-types";
-
-import firebase from "firebase";
+import { Auth } from "aws-amplify";
 
 import {
   Action,
@@ -170,17 +168,21 @@ export default class ListingView extends Component {
   }
 
   componentDidMount() {
-    if (! this.props.user.ignore && typeof this.props.user.id === "string") store.dispatch(syncFirebaseStories(this.props.user.id));
-    if (! this.props.user || ! this.props.user.id || this.props.user.ignore) this.props.router.push(`/my`);
+    if (! this.props.user.ignore && typeof this.props.user.id === "string") store.dispatch(syncFirebaseStories(this.props.user.id, this.props.user.email));
+    if (! this.props.user || ! this.props.user.id || this.props.user.ignore) this.props.router.push(`/`);
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.user.id !== nextProps.user.id && ! nextProps.user.ignore && typeof nextProps.user.id === "string") store.dispatch(syncFirebaseStories(nextProps.user.id ? nextProps.user.id : ""));
+    if (this.props.user.id !== nextProps.user.id && ! nextProps.user.ignore && typeof nextProps.user.id === "string") store.dispatch(syncFirebaseStories(nextProps.user.id ? nextProps.user.id : "", nextProps.user.email));
   }
 
   handleLogout() {
-    firebase.auth().signOut();
-    this.props.router.push(`/my`);
+    Auth.signOut()
+      .then(data => {
+        console.log(data);
+        this.props.router.push(`/`);
+      })
+      .catch(err => console.log(err));
   }
   toggleNewStoryModal() {
     this.setState({ createStoryModal: !this.state.createStoryModal });
@@ -193,7 +195,7 @@ export default class ListingView extends Component {
     this.setState({ welcomeModal: false, createStoryModal: true });
   }
   render() {
-    console.log("LISTING PROPS: ", this.props);
+    // console.log("LISTING PROPS: ", this.props);
     const { createStoryModal, welcomeModal, aboutModal } = this.state;
     const welcomeModalBlocker = localStorage.getItem("welcomeModalBlocker");
     return [
@@ -262,7 +264,7 @@ export default class ListingView extends Component {
                     deleteStory={() => this.props.deleteStory(i)}
                     key={story.id}
                     openStory={() =>
-                      this.props.router.push(`/my/stories/${story.id}`)
+                      this.props.router.push(`/stories/${story.id}`)
                     }
                     story={story}
                     storyIndex={i}

@@ -77,7 +77,7 @@ export default class EmbedPane extends Component {
             area
             name="value"
             onChange={(e) => this.handleChange(e)}
-            placeholder="<iframe…"
+            placeholder="Insert an iframe to display web content directly into your chat"
             required
             rows={10}
             type="url"

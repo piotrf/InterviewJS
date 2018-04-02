@@ -7,6 +7,8 @@ const ModalBody = css.div`
   color: ${color.greyBlk};
   flex: 2 1 auto;
   overflow-y: auto;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
   position: relative;
 `;
 

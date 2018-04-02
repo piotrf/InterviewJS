@@ -9,7 +9,6 @@ import ratioSpacer from "./ratioSpacer.png";
 const BubbleHTMLWrapperEl = css.div`
   ${setType("x")};
   border-radius: ${radius.m};
-  overflow: hidden;
   & > img {
     height: 100%;
     width: 100%;
@@ -36,13 +35,12 @@ const BubbleHTMLWrapperEl = css.div`
       width: 100%;
     }
   }
-  ${({ type }) =>
-    type === "rich" || type === "embed" ? `line-height: 0;` : ``};
+  ${({ displayType }) => (displayType === "embed" ? `line-height: 0;` : ``)};
 `;
 
 const BubbleHTMLWrapper = (props) => (
-  <BubbleHTMLWrapperEl type={props.type}>
-    {props.type === "embed" ? (
+  <BubbleHTMLWrapperEl displayType={props.displayType}>
+    {props.displayType === "embed" ? (
       <div className="iframe">
         <img src={ratioSpacer} alt="" key="ratioSpacer" />
         {props.children}
@@ -57,9 +55,9 @@ export default BubbleHTMLWrapper;
 
 BubbleHTMLWrapper.propTypes = {
   children: oneOfType([array, object, string]).isRequired,
-  type: string
+  displayType: string
 };
 
 BubbleHTMLWrapper.defaultProps = {
-  type: "plain"
+  displayType: "plain"
 };

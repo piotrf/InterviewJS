@@ -12,7 +12,6 @@ import PaneFrame from "../PaneFrame";
 
 import { filterIframe } from "../../../util/IframeSanitizer";
 
-
 export default class MediaPane extends Component {
   constructor(props) {
     super(props);
@@ -35,8 +34,15 @@ export default class MediaPane extends Component {
     const clean = filterIframe(value);
     console.log(clean);
 
-    this.setState({ draft: { ...this.state.draft, [name]: value } }, () =>
-      this.props.updateDraft(this.state.draft, clean)
+    this.setState(
+      { draft: { ...this.state.draft, [name]: value } },
+      () =>
+        clean.toLowerCase().startsWith("<iframe") &&
+        clean.toLowerCase().includes("src=") &&
+        clean.toLowerCase().includes("youtube.com/embed/") &&
+        clean.toLowerCase().endsWith("></iframe>")
+          ? this.props.updateDraft(this.state.draft, clean)
+          : null
     );
   }
 
@@ -55,9 +61,8 @@ export default class MediaPane extends Component {
           </BubbleHTMLWrapper>
         ) : (
           <BubbleHTMLWrapper>
-            this is not a youtube iframe, youtube iframe code starts with{" "}
+            this is not a valid iframe. An iframe code starts with{" "}
             {`<iframe`}, ends with {`></iframe>`} and requires {`src=`}{" "}
-            attribute pointing to youtube server
           </BubbleHTMLWrapper>
         );
       }
@@ -78,7 +83,7 @@ export default class MediaPane extends Component {
             area
             name="value"
             onChange={(e) => this.handleChange(e)}
-            placeholder={`<iframe src="https://www.youtube.com/embed/…`}
+            placeholder={`Insert an iframe to embed a video directly into your chat`}
             required
             rows={10}
             type="url"

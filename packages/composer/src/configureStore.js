@@ -1,5 +1,6 @@
 /* eslint func-names: 0 */
 
+import Amplify from "aws-amplify";
 import { createStore, compose, applyMiddleware } from "redux";
 import { syncHistoryWithStore } from "react-router-redux";
 import { browserHistory } from "react-router";
@@ -8,7 +9,6 @@ import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 import firebase from "firebase";
-
 import Rebase from "re-base";
 
 import Raven from "raven-js";
@@ -16,31 +16,26 @@ import createRavenMiddleware from "raven-for-redux";
 import clone from "clone";
 
 import rootReducer from "./reducers";
+import awsmobile from "./aws-exports";
 
 import stories from "./data/stories";
-// import user from "./data/user";
-// const stories = [];
-const user = {};
 
-// Store type
-const STORE = "persist";
-
-const defaultState = {
-  stories,
-  user
-};
+// AWS Mobile
+Amplify.configure(awsmobile);
 
 // Sentry.io
-Raven.config("https://796f1032b1c74f15aba70d91dfcd14c5@sentry.io/360335", {
-  release: process.env.VERSION,
-  autoBreadcrumbs: {
-    xhr: false,
-    console: false,
-    dom: false,
-  },
-  maxBreadcrumbs: 32,
-  sanitizeKeys: ['logo', 'cover', 'avatar'],
-}).install();
+if (document.location.hostname !== "localhost") {
+  Raven.config("https://796f1032b1c74f15aba70d91dfcd14c5@sentry.io/360335", {
+    release: process.env.VERSION,
+    autoBreadcrumbs: {
+      xhr: false,
+      console: false,
+      dom: false,
+    },
+    maxBreadcrumbs: 32,
+    sanitizeKeys: ['logo', 'cover', 'avatar'],
+  }).install();
+}
 
 // FIREBASE
 export const firebaseApp = firebase.initializeApp({
@@ -56,6 +51,7 @@ export const firebaseApp = firebase.initializeApp({
 // RE-BASE
 export const base = Rebase.createClass(firebaseApp.database());
 
+
 // PERSIST
 const persistConfig = {
   key: "root",
@@ -64,6 +60,12 @@ const persistConfig = {
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+
+const defaultState = {
+  stories, // : [],
+  user: {}
+};
 
 const enhancers = compose(
   applyMiddleware(
@@ -83,8 +85,9 @@ const enhancers = compose(
   window.devToolsExtension ? window.devToolsExtension() : (f) => f,
 );
 
+
 let store;
-switch (STORE) {
+switch ("persist") {
   case "persist":
     store = createStore(
       persistedReducer,
@@ -93,7 +96,6 @@ switch (STORE) {
     );
     break;
   default:
-    // transient
     store = createStore(
       rootReducer,
       defaultState,

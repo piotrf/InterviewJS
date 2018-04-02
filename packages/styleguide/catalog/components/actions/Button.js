@@ -146,7 +146,7 @@ const Button = css.button`
 
   /* inverted */
 
-  ${({ inverted, active }) => {
+  ${({ inverted, active, disabled }) => {
     if (inverted) {
       return `
         ${actionBase.graphic};
@@ -168,6 +168,24 @@ const Button = css.button`
           background: ${color.flareLLt};
           color: ${color.white};
           opacity: 0.75;
+        `
+            : ``
+        };
+        ${
+          disabled
+            ? `
+          background: transparent !important;
+          color: ${color.white};
+          cursor: default;
+        `
+            : ``
+        };
+        ${
+          disabled && active
+            ? `
+          background: ${color.flareLLt} !important;
+          color: ${color.white};
+          cursor: default;
         `
             : ``
         };
@@ -265,6 +283,7 @@ const Button = css.button`
   ${({ fixed }) =>
     fixed
       ? `
+    ${setSpace("phx")};
     width: 130px;
     ${breakpoint.tablet} {
       width: 160px;

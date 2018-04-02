@@ -348,6 +348,314 @@ const story = {
           role: "user"
         }
       ]
+    },
+    {
+      id: "starts-with-interviewee",
+      name: "A name",
+      bio: "",
+      title: "A leading human rights lawyer",
+      avatar: "",
+      color: "violet",
+      srcText: ``,
+      storyline: [
+        {
+          content: {
+            value: `1st interviewee bubble`
+          },
+          id: uuidv4(),
+          role: "interviewee",
+          type: "text"
+        },
+        {
+          content: {
+            value: COVER,
+            title: `1st interviewee bubble`
+          },
+          id: uuidv4(),
+          role: "interviewee",
+          type: "image"
+        },
+        {
+          content: {
+            value: "https://piotrf.pl",
+            title: `A link`
+          },
+          id: uuidv4(),
+          role: "interviewee",
+          type: "link"
+        },
+        {
+          content: {
+            value: `<iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/396684030&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>`,
+            title: ``
+          },
+          id: uuidv4(),
+          role: "interviewee",
+          type: "embed"
+        },
+        {
+          content: {
+            value: `<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d74392.41924233893!2d18.619988271560736!3d54.36116710263702!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46fd731c14d4fa6f%3A0x9bb9fbf163b7be8d!2zR2RhxYRzaw!5e0!3m2!1sen!2spl!4v1521899687730" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>`,
+            title: ``
+          },
+          id: uuidv4(),
+          role: "interviewee",
+          type: "map"
+        },
+        {
+          content: {
+            value: `<iframe width="560" height="315" src="https://www.youtube.com/embed/NUrUrCGQQ1s" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`,
+            title: ``
+          },
+          id: uuidv4(),
+          role: "interviewee",
+          type: "media"
+        },
+        {
+          content: {
+            value: `1st+ interviewee bubble`
+          },
+          id: uuidv4(),
+          role: "interviewee",
+          type: "text"
+        },
+        {
+          content: [
+            { enabled: true, value: "Continue", type: "ignore" },
+            { enabled: true, value: "Explore", type: "explore" }
+          ],
+          id: uuidv4(),
+          role: "user"
+        },
+        {
+          content: {
+            value: `2nd interviewee bubble`
+          },
+          id: uuidv4(),
+          role: "interviewee",
+          type: "text"
+        },
+        {
+          content: {
+            value: `3rd interviewee bubble`
+          },
+          id: uuidv4(),
+          role: "interviewee",
+          type: "text"
+        },
+        {
+          content: [
+            { enabled: true, value: "Continue", type: "ignore" },
+            { enabled: true, value: "Explore", type: "explore" }
+          ],
+          id: uuidv4(),
+          role: "user"
+        },
+        {
+          content: {
+            value: `4th interviewee bubble`
+          },
+          id: uuidv4(),
+          role: "interviewee",
+          type: "text"
+        },
+        {
+          content: [
+            { enabled: true, value: "Continue", type: "ignore" },
+            { enabled: true, value: "Explore", type: "explore" }
+          ],
+          id: uuidv4(),
+          role: "user"
+        },
+        {
+          content: {
+            value: `5th interviewee bubble`
+          },
+          id: uuidv4(),
+          role: "interviewee",
+          type: "text"
+        },
+        {
+          content: {
+            value: `6th interviewee bubble`
+          },
+          id: uuidv4(),
+          role: "interviewee",
+          type: "text"
+        },
+        {
+          content: [
+            { enabled: false, value: "Continue", type: "ignore" },
+            {
+              enabled: true,
+              value: "Explore",
+              type: "explore"
+            }
+          ],
+          id: uuidv4(),
+          role: "user"
+        },
+        {
+          content: {
+            value: `7th interviewee bubble`
+          },
+          id: uuidv4(),
+          role: "interviewee",
+          type: "text"
+        },
+        {
+          content: {
+            value: `8th interviewee bubble`
+          },
+          id: uuidv4(),
+          role: "interviewee",
+          type: "text"
+        },
+        {
+          content: [
+            { enabled: false, value: "", type: "ignore" },
+            {
+              enabled: true,
+              value: "Thank you",
+              type: "explore"
+            }
+          ],
+          id: uuidv4(),
+          role: "user"
+        }
+      ]
+    },
+
+    {
+      id: "start-with-user-action",
+      name: "A name II",
+      bio: "",
+      title: "A leading human rights lawyer",
+      avatar: "",
+      color: "violet",
+      srcText: ``,
+      storyline: [
+        {
+          content: [
+            { enabled: true, value: "Continue", type: "ignore" },
+            { enabled: true, value: "Explore", type: "explore" }
+          ],
+          id: uuidv4(),
+          role: "user"
+        },
+        {
+          content: {
+            value: `1st interviewee bubble`
+          },
+          id: uuidv4(),
+          role: "interviewee",
+          type: "text"
+        },
+        {
+          content: {
+            value: `2nd interviewee bubble`
+          },
+          id: uuidv4(),
+          role: "interviewee",
+          type: "text"
+        },
+        {
+          content: {
+            value: `3rd interviewee bubble`
+          },
+          id: uuidv4(),
+          role: "interviewee",
+          type: "text"
+        },
+        {
+          content: [
+            { enabled: true, value: "Continue", type: "ignore" },
+            { enabled: true, value: "Explore", type: "explore" }
+          ],
+          id: uuidv4(),
+          role: "user"
+        },
+        {
+          content: {
+            value: `4th interviewee bubble`
+          },
+          id: uuidv4(),
+          role: "interviewee",
+          type: "text"
+        },
+        {
+          content: [
+            { enabled: true, value: "Gate 1 Ignore", type: "ignore" },
+            { enabled: true, value: "Gate 1 Explore", type: "explore" }
+          ],
+          id: uuidv4(),
+          role: "user"
+        },
+        {
+          content: [
+            { enabled: true, value: "Gate 2 Ignore", type: "ignore" },
+            { enabled: true, value: "Gate 2 Explore", type: "explore" }
+          ],
+          id: uuidv4(),
+          role: "user"
+        },
+        {
+          content: {
+            value: `5th interviewee bubble`
+          },
+          id: uuidv4(),
+          role: "interviewee",
+          type: "text"
+        },
+        {
+          content: {
+            value: `6th interviewee bubble`
+          },
+          id: uuidv4(),
+          role: "interviewee",
+          type: "text"
+        },
+        {
+          content: [
+            { enabled: false, value: "Continue", type: "ignore" },
+            {
+              enabled: true,
+              value: "Continue",
+              type: "explore"
+            }
+          ],
+          id: uuidv4(),
+          role: "user"
+        },
+        {
+          content: {
+            value: `7th interviewee bubble`
+          },
+          id: uuidv4(),
+          role: "interviewee",
+          type: "text"
+        },
+        {
+          content: {
+            value: `8th interviewee bubble`
+          },
+          id: uuidv4(),
+          role: "interviewee",
+          type: "text"
+        },
+        {
+          content: [
+            { enabled: false, value: "", type: "ignore" },
+            {
+              enabled: true,
+              value: "Thank you",
+              type: "explore"
+            }
+          ],
+          id: uuidv4(),
+          role: "user"
+        }
+      ]
     }
   ]
 };

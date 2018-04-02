@@ -23,7 +23,7 @@ import {
 
 import PaneFrame from "./PaneFrame";
 
-import { USER_ACTIONS } from "../../options";
+import { GLOBALS, USER_ACTIONS } from "../../options";
 
 const PaneEl = css(Container)`
   height: 100%;
@@ -180,86 +180,110 @@ export default class UserPane extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      continueDict: "text",
+      enableContinue: false,
+      enableExplore: false,
+
+      customContinueVal: "",
+      customExploreVal: "",
+
       continueLibDict: "text",
       continueLibItem: null,
-      continueVal: "Explore",
-      customContinueVal: "",
-      customSkipVal: "",
-      enableContinue: true,
-      enableSkip: false,
-      skipLibItem: null,
-      skipVal: "Ignore"
+
+      exploreLibDict: "text",
+      exploreLibItem: null,
+
+      exploreVal: "Omg why?",
+      continueVal: "Carry on"
     };
     this.addStorylineItem = this.addStorylineItem.bind(this);
     this.customiseActionLabel = this.customiseActionLabel.bind(this);
     this.selectContinueAction = this.selectContinueAction.bind(this);
-    this.selectSkipAction = this.selectSkipAction.bind(this);
+    this.selectExploreAction = this.selectExploreAction.bind(this);
     this.toggleAction = this.toggleAction.bind(this);
   }
   toggleAction(action, e) {
-    this.setState({ [action]: e.target.checked });
+    // this.setState({ enableExplore: e.target.checked });
+    const { enableExplore, enableIgnore } = this.state;
+    if (!enableExplore && !enableIgnore) {
+      this.setState({ enableContinue: true, enableExplore: e.target.checked });
+    }
+    this.setState({ enableExplore: e.target.checked });
   }
   customiseActionLabel(action, e) {
     const { value } = e.target;
-    return action === "customSkipVal"
+    return action === "customExploreVal"
       ? this.setState({
           [action]: value,
-          enableSkip: value.length > 0,
-          skipLibItem: null,
-          skipVal: value.length > 0 ? value : this.props.skipVal
+          enableExplore: value.length > 0,
+          enableContinue: !this.state.enableContinue ? value.length > 0 : true,
+          exploreLibItem: null,
+          exploreVal: value.length > 0 ? value : this.props.exploreVal
         })
       : this.setState({
           [action]: value,
+          enableContinue: value.length > 0,
           continueLibItem: null,
           continueVal: value.length > 0 ? value : this.props.continueVal
         });
   }
-  selectSkipAction(i, e) {
-    this.setState({
-      customSkipVal: e.target.innerHTML,
-      enableSkip: true,
-      skipLibItem: i,
-      skipVal: e.target.innerHTML
-    });
-  }
   selectContinueAction(dict, i, e) {
     this.setState({
-      customContinueVal: e.target.innerHTML,
       continueLibDict: dict,
       continueLibItem: i,
-      continueVal: e.target.innerHTML
+      continueVal: e.target.innerHTML,
+      customContinueVal: e.target.innerHTML,
+      enableContinue: true
+    });
+  }
+  selectExploreAction(dict, i, e) {
+    this.setState({
+      customExploreVal: e.target.innerHTML,
+      enableContinue: true,
+      enableExplore: true,
+      exploreLibDict: dict,
+      exploreLibItem: i,
+      exploreVal: e.target.innerHTML
     });
   }
   addStorylineItem() {
     const { storyIndex, currentInterviewee } = this.props;
-    const { enableContinue, enableSkip, continueVal, skipVal } = this.state;
+    const {
+      enableContinue,
+      enableExplore,
+      continueVal,
+      exploreVal
+    } = this.state;
     const newUserBubble = {
       content: [
-        { enabled: enableSkip, value: skipVal, type: "ignore" },
-        { enabled: enableContinue, value: continueVal, type: "explore" }
+        {
+          enabled: enableContinue,
+          value: continueVal,
+          type: enableExplore ? "ignore" : "explore"
+        },
+        { enabled: enableExplore, value: exploreVal, type: "explore" }
       ],
       role: "user"
     };
     this.props.addStorylineItem(storyIndex, currentInterviewee, newUserBubble);
     this.setState({
       customContinueVal: "",
-      customSkipVal: "",
-      enableSkip: false,
+      customExploreVal: "",
+      enableContinue: false,
+      enableExplore: false,
       continueLibItem: null,
       continueVal: this.props.continueVal,
-      skipLibItem: null,
-      skipVal: this.props.skipVal
+      exploreLibItem: null,
+      exploreVal: this.props.exploreVal
     });
   }
   render() {
     const {
-      enableContinue,
-      enableSkip,
-      continueDict,
       continueLibDict,
       continueVal,
-      skipVal
+      enableContinue,
+      enableExplore,
+      exploreLibDict,
+      exploreVal
     } = this.state;
     return (
       <PaneEl fill="white" rounded shift dir="column">
@@ -267,33 +291,36 @@ export default class UserPane extends React.Component {
           {...this.props}
           active
           addStorylineItem={this.addStorylineItem}
-          hasDraft={enableContinue || enableSkip}
+          hasDraft={enableContinue || enableExplore}
           side="right"
           draft={
             <Draft>
-              {enableSkip ? (
-                <Action tone="negative" fixed>
-                  {skipVal}
+              {enableContinue ? (
+                <Action
+                  fixed
+                  primary={!enableExplore}
+                  secondary={!!enableExplore}
+                >
+                  {continueVal}
                 </Action>
               ) : null}
-              {enableSkip && enableContinue ? <Separator dir="v" /> : null}
-              {enableContinue ? (
-                <Action tone="positive" fixed>
-                  {continueVal}
+              {enableExplore ? (
+                <Action fixed primary>
+                  {exploreVal}
                 </Action>
               ) : null}
             </Draft>
           }
         >
           <UserActions>
-            <Container>
+            <Container className="jr-step5">
               <UserAction dir="row" active>
                 <Container flex={[0, 0, "140px"]} align="center" dir="column">
                   <PageSubtitle typo="p4">
-                    Continue
+                    Create Single Interaction
                     <Tip
                       position="bottom"
-                      title="`Explore` actions allow the reader to move on to the next interviewee bubble, simply continue in the story."
+                      title="Create user interactions that will lead into your interview text. Select text by clicking or write your own - it has to be the user’s voice. Explore all tabs!"
                     >
                       <Icon
                         name="info2"
@@ -312,8 +339,7 @@ export default class UserPane extends React.Component {
                     <TextInput
                       type="text"
                       placeholder="Type your own text label…"
-                      maxLength={34}
-                      disabled={!enableContinue}
+                      maxLength={GLOBALS.fixedButtonCharLimit}
                       value={this.state.customContinueVal}
                       onChange={(e) =>
                         this.customiseActionLabel("customContinueVal", e)
@@ -323,38 +349,50 @@ export default class UserPane extends React.Component {
                   <Container flex={[1, 0, "auto"]} style={{ width: "100%" }}>
                     <PaneTabs>
                       <PaneTab
-                        active={continueDict === "text"}
-                        onClick={() => this.setState({ continueDict: "text" })}
+                        active={continueLibDict === "text"}
+                        onClick={() =>
+                          this.setState({ continueLibDict: "text" })
+                        }
                       >
                         <Icon name="text" size="x" />
                       </PaneTab>
                       <PaneTab
-                        active={continueDict === "link"}
-                        onClick={() => this.setState({ continueDict: "link" })}
+                        active={continueLibDict === "link"}
+                        onClick={() =>
+                          this.setState({ continueLibDict: "link" })
+                        }
                       >
                         <Icon name="link" size="x" />
                       </PaneTab>
                       <PaneTab
-                        active={continueDict === "image"}
-                        onClick={() => this.setState({ continueDict: "image" })}
+                        active={continueLibDict === "image"}
+                        onClick={() =>
+                          this.setState({ continueLibDict: "image" })
+                        }
                       >
                         <Icon name="image" size="x" />
                       </PaneTab>
                       <PaneTab
-                        active={continueDict === "embed"}
-                        onClick={() => this.setState({ continueDict: "embed" })}
+                        active={continueLibDict === "embed"}
+                        onClick={() =>
+                          this.setState({ continueLibDict: "embed" })
+                        }
                       >
                         <Icon name="embed" size="x" />
                       </PaneTab>
                       <PaneTab
-                        active={continueDict === "map"}
-                        onClick={() => this.setState({ continueDict: "map" })}
+                        active={continueLibDict === "map"}
+                        onClick={() =>
+                          this.setState({ continueLibDict: "map" })
+                        }
                       >
                         <Icon name="map" size="x" />
                       </PaneTab>
                       <PaneTab
-                        active={continueDict === "media"}
-                        onClick={() => this.setState({ continueDict: "media" })}
+                        active={continueLibDict === "media"}
+                        onClick={() =>
+                          this.setState({ continueLibDict: "media" })
+                        }
                       >
                         <Icon name="media" size="x" />
                       </PaneTab>
@@ -362,43 +400,39 @@ export default class UserPane extends React.Component {
                   </Container>
                   <ActionLibHolder flex={[1, 1, "auto"]}>
                     <ActionLibList>
-                      {USER_ACTIONS.explore[continueDict].map((action, i) => (
-                        <ActionLibItem key={i}>
-                          <ActionLibAction
-                            interactive={enableContinue}
-                            active={
-                              enableContinue && continueDict === continueLibDict
-                                ? i === this.state.continueLibItem
-                                : false
-                            }
-                            onClick={(e) =>
-                              enableContinue
-                                ? this.selectContinueAction(continueDict, i, e)
-                                : null
-                            }
-                          >
-                            {action}
-                          </ActionLibAction>
-                        </ActionLibItem>
-                      ))}
+                      {USER_ACTIONS.continue[continueLibDict].map(
+                        (action, i) => (
+                          <ActionLibItem key={i}>
+                            <ActionLibAction
+                              interactive
+                              active={i === this.state.continueLibItem}
+                              onClick={(e) =>
+                                this.selectContinueAction(continueLibDict, i, e)
+                              }
+                            >
+                              {action}
+                            </ActionLibAction>
+                          </ActionLibItem>
+                        )
+                      )}
                     </ActionLibList>
                   </ActionLibHolder>
                 </Container>
               </UserAction>
             </Container>
             <Separator silent size="s" />
-            <Container>
-              <UserAction dir="row" active={enableSkip}>
+            <Container className="jr-step6">
+              <UserAction dir="row" active={enableExplore}>
                 <Container flex={[0, 0, "140px"]} align="center" dir="column">
                   <Checkbox
-                    checked={enableSkip}
-                    onChange={(e) => this.toggleAction("enableSkip", e)}
+                    checked={enableExplore}
+                    onChange={(e) => this.toggleAction("enableExplore", e)}
                   >
                     <PageSubtitle typo="p4">
-                      Skip
+                      Create Choice Interaction
                       <Tip
                         position="bottom"
-                        title="`Ignore` actions allow the reader to skip the closest next group of interviewee bubbles. Use when nesting chats."
+                        title="Select to add a second interaction. Together with the first question or user interaction it gives the user choice. Multimedia works well - explore all tabs!"
                       >
                         <Icon
                           name="info2"
@@ -418,22 +452,73 @@ export default class UserPane extends React.Component {
                     <TextInput
                       type="text"
                       placeholder="Type your own text label…"
-                      maxLength={34}
-                      value={this.state.customSkipVal}
+                      maxLength={GLOBALS.fixedButtonCharLimit}
+                      value={this.state.customExploreVal}
                       onChange={(e) =>
-                        this.customiseActionLabel("customSkipVal", e)
+                        this.customiseActionLabel("customExploreVal", e)
                       }
                     />
                   </CustomActionHolder>
-                  <Separator size="n" />
+                  <Container flex={[1, 0, "auto"]} style={{ width: "100%" }}>
+                    <PaneTabs>
+                      <PaneTab
+                        active={exploreLibDict === "text"}
+                        onClick={() =>
+                          this.setState({ exploreLibDict: "text" })
+                        }
+                      >
+                        <Icon name="text" size="x" />
+                      </PaneTab>
+                      <PaneTab
+                        active={exploreLibDict === "link"}
+                        onClick={() =>
+                          this.setState({ exploreLibDict: "link" })
+                        }
+                      >
+                        <Icon name="link" size="x" />
+                      </PaneTab>
+                      <PaneTab
+                        active={exploreLibDict === "image"}
+                        onClick={() =>
+                          this.setState({ exploreLibDict: "image" })
+                        }
+                      >
+                        <Icon name="image" size="x" />
+                      </PaneTab>
+                      <PaneTab
+                        active={exploreLibDict === "embed"}
+                        onClick={() =>
+                          this.setState({ exploreLibDict: "embed" })
+                        }
+                      >
+                        <Icon name="embed" size="x" />
+                      </PaneTab>
+                      <PaneTab
+                        active={exploreLibDict === "map"}
+                        onClick={() => this.setState({ exploreLibDict: "map" })}
+                      >
+                        <Icon name="map" size="x" />
+                      </PaneTab>
+                      <PaneTab
+                        active={exploreLibDict === "media"}
+                        onClick={() =>
+                          this.setState({ exploreLibDict: "media" })
+                        }
+                      >
+                        <Icon name="media" size="x" />
+                      </PaneTab>
+                    </PaneTabs>
+                  </Container>
                   <ActionLibHolder flex={[1, 1, "auto"]}>
                     <ActionLibList>
-                      {USER_ACTIONS.ignore.map((action, i) => (
+                      {USER_ACTIONS.explore[exploreLibDict].map((action, i) => (
                         <ActionLibItem key={i}>
                           <ActionLibAction
-                            active={i === this.state.skipLibItem}
+                            active={i === this.state.exploreLibItem}
                             interactive
-                            onClick={(e) => this.selectSkipAction(i, e)}
+                            onClick={(e) =>
+                              this.selectExploreAction(exploreLibDict, i, e)
+                            }
                           >
                             {action}
                           </ActionLibAction>
@@ -455,11 +540,11 @@ UserPane.propTypes = {
   addStorylineItem: func.isRequired,
   currentInterviewee: number.isRequired,
   continueVal: string,
-  skipVal: string,
+  exploreVal: string,
   storyIndex: number.isRequired /* eslint react/forbid-prop-types: 0 */
 };
 
 UserPane.defaultProps = {
-  skipVal: "Skip",
-  continueVal: "Continue"
+  exploreVal: "Omg why?",
+  continueVal: "Carry on"
 };

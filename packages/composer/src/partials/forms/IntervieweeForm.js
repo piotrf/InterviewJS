@@ -4,6 +4,7 @@ import css from "styled-components";
 import Dropzone from "react-dropzone";
 import React, { Component } from "react";
 import Pica from "pica/dist/pica";
+// import { S3Image } from "aws-amplify-react";
 
 import {
   Action,
@@ -32,7 +33,15 @@ const ColorPickerWrapper = css.span`
   right: 0;
   z-index: 1000;
 `;
-
+const ColorPickerOverlay = css.div`
+  background: transparent;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 900;
+`;
 
 export default class IntervieweeForm extends Component {
   constructor(props) {
@@ -44,9 +53,9 @@ export default class IntervieweeForm extends Component {
         title: null
       },
       moreDropdown: false,
-      colorPicker: false,
-      colorPicking: false
+      colorPicker: false
     };
+    this.closeColorPicker = this.closeColorPicker.bind(this);
     this.deleteInterviewee = this.deleteInterviewee.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -70,45 +79,53 @@ export default class IntervieweeForm extends Component {
     this.setState({
       formData: { ...this.state.formData, color: color.hex }
     });
-    setTimeout(
-      () =>
-        this.setState({
-          colorPicking: false
-        }),
-      350
-    );
   }
+
+  closeColorPicker = () => {
+    this.setState({ colorPicker: false });
+  };
 
   handleFile(f) {
     const { preview } = f[0];
-    const offScreenImage = document.createElement('img');
-    offScreenImage.addEventListener('load', () => {
-      const targetWidth = offScreenImage.width > 300 ? 300 : offScreenImage.width;
-      const targetHeight = parseInt(targetWidth * offScreenImage.height / offScreenImage.width, 10);
-      console.log(`${offScreenImage.width} x ${offScreenImage.height} => ${targetWidth} x ${targetHeight}`);
+    const offScreenImage = document.createElement("img");
+    offScreenImage.addEventListener("load", () => {
+      const targetWidth =
+        offScreenImage.width > 300 ? 300 : offScreenImage.width;
+      const targetHeight = parseInt(
+        targetWidth * offScreenImage.height / offScreenImage.width,
+        10
+      );
+      console.log(
+        `${offScreenImage.width} x ${
+          offScreenImage.height
+        } => ${targetWidth} x ${targetHeight}`
+      );
 
-      const offScreenCanvas = document.createElement('canvas');
-      offScreenCanvas.width  = targetWidth;
+      const offScreenCanvas = document.createElement("canvas");
+      offScreenCanvas.width = targetWidth;
       offScreenCanvas.height = targetHeight;
 
-      const pica = Pica({ features: ['js', 'wasm', 'ww'] });
-      pica.resize(offScreenImage, offScreenCanvas, {
-        unsharpAmount: 80,
-        unsharpRadius: 0.6,
-        unsharpThreshold: 2,
-        transferable: true
-      }).then(result => pica.toBlob(result, 'image/jpeg', 0.90))
-        .then(blob => {
+      const pica = Pica({ features: ["js", "wasm", "ww"] });
+      pica
+        .resize(offScreenImage, offScreenCanvas, {
+          unsharpAmount: 80,
+          unsharpRadius: 0.6,
+          unsharpThreshold: 2,
+          transferable: true
+        })
+        .then((result) => pica.toBlob(result, "image/jpeg", 0.9))
+        .then((blob) => {
           const reader = new FileReader();
           reader.onloadend = () => {
             console.log("data url length", reader.result.length);
-            const base64data = reader.result.length > 3e6 ? '' : reader.result;
+            const base64data = reader.result.length > 3e6 ? "" : reader.result;
             this.setState({
               formData: { ...this.state.formData, avatar: base64data }
             });
           };
           reader.readAsDataURL(blob);
-        }).catch(error => console.log(error));
+        })
+        .catch((error) => console.log(error));
     });
     offScreenImage.src = preview;
   }
@@ -246,6 +263,10 @@ export default class IntervieweeForm extends Component {
           <Container flex={[0, 0, "50%"]}>
             <FormItem>
               <Label>Profile image</Label>
+
+{ /*
+               <S3Image level="public" title="Select file" path={`files/interviewees/${this.props.interviewee.id}`} picker fileToKey={fileToKey} />
+*/ }
               <Dropzone
                 accept="image/jpeg, image/jpg, image/svg, image/gif, image/png"
                 ref={(node) => {
@@ -279,23 +300,9 @@ export default class IntervieweeForm extends Component {
                 placeholder="i.e. #495abd, red…"
                 name="color"
                 onClick={() => this.setState({ colorPicker: true })}
-                onBlur={
-                  this.state.colorPicking
-                    ? null
-                    : () => this.setState({ colorPicker: false })
-                }
                 value={this.state.formData.color}
                 nooffset
               />
-              {this.state.colorPicker ? (
-                <ColorPickerWrapper>
-                  <SketchPicker
-                    disableAlpha
-                    color={this.state.formData.color}
-                    onChangeComplete={this.handleChangeColor}
-                  />
-                </ColorPickerWrapper>
-              ) : null}
               <Legend tip="Choose the colour of this person’s chat text bubbles">
                 i
               </Legend>
@@ -318,6 +325,21 @@ export default class IntervieweeForm extends Component {
             ? deleteOption
             : null /* this goes inline with satellite={this.props.deleteInterviewee === !null */}
         </Actionbar>
+        {this.state.colorPicker
+          ? [
+              <ColorPickerOverlay
+                key="colorpickeroverlay"
+                onClick={this.closeColorPicker}
+              />,
+              <ColorPickerWrapper key="colorpicker">
+                <SketchPicker
+                  disableAlpha
+                  color={this.state.formData.color}
+                  onChangeComplete={this.handleChangeColor}
+                />
+              </ColorPickerWrapper>
+            ]
+          : null}
       </Form>
     );
   }

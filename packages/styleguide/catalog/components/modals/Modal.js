@@ -19,6 +19,8 @@ const ModalEl = css.div`
   font-family: ${font.serif};
   left: 50%;
   overflow-y: auto;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
   position: fixed;
   top: 50%;
   transform: translate(-50%, -50%);

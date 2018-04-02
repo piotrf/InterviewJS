@@ -15,16 +15,18 @@ import {
   ModalBody,
   ModalFoot,
   ModalHead,
+  LogoWSymbol,
   PageSubtitle,
   PageTitle,
   Separator,
   color,
   font,
   setSpace,
-  setType
+  setType,
+  setHeight
 } from "interviewjs-styleguide";
 
-import { ErrorBoundary } from "../";
+// import { ErrorBoundary } from "../";
 
 const DetailsCopy = css.div`
   ${setType("s")};
@@ -59,6 +61,13 @@ const DetailsCopy = css.div`
   }
 `;
 
+const Brandmark = css.div`
+  line-height: 0;
+  img {
+    ${setHeight("l")}
+  }
+`;
+
 export default class AboutModal extends React.Component {
   constructor(props) {
     super(props);
@@ -66,7 +75,7 @@ export default class AboutModal extends React.Component {
   }
 
   getCount() {
-    if (this.state.counter < 3) throw new Error('Test Error');
+    if (this.state.counter < 3) throw new Error("Test Error");
     return this.state.counter;
   }
 
@@ -86,9 +95,14 @@ export default class AboutModal extends React.Component {
       >
         <Modal {...this.props}>
           <ModalHead>
-            <ErrorBoundary>
+            {/* <ErrorBoundary>
               <PageTitle typo="h1"><span title={this.getCount()} onClick={() => this.countDown()}>About</span> <span title={`version ${process.env.VERSION.replace('-dirty', '')}`}>InterviewJS</span></PageTitle>
-            </ErrorBoundary>
+            </ErrorBoundary> */}
+            <PageTitle>
+              <Brandmark>
+                <img src={LogoWSymbol} alt="InterviewJS" />
+              </Brandmark>
+            </PageTitle>
           </ModalHead>
           <ModalBody>
             <Container align="center" limit="m">
@@ -100,34 +114,6 @@ export default class AboutModal extends React.Component {
                   allows to compose and manage scripted chats for a more
                   immersive storytelling experience.
                 </p>
-                <dl>
-                  <dt>Product lead</dt>
-                  <dd>
-                    Juliana Ruhfus, Ali Rae, Mohammed El-Haddad, Alaa Batayneh
-                  </dd>
-                  <dt>Product Design & Development</dt>
-                  <dd>
-                    <Action
-                      href="https://piotrf.pl"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Piotr Fedorczyk
-                    </Action>
-                  </dd>
-                  <dt>Back-end development & Infrastructure</dt>
-                  <dd>
-                    <Action
-                      href="https://twitter.com/gridinoc"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Laurian Gridinoc
-                    </Action>
-                  </dd>
-                  <dt>Design support</dt>
-                  <dd>Joanna Bogusz</dd>
-                </dl>
                 <PageSubtitle typo="h2">Connect with InterviewJS</PageSubtitle>
                 <Separator silent size="s" />
                 <p>

@@ -66,7 +66,7 @@ export default class LinkPane extends Component {
             input
             name="title"
             onChange={(e) => this.handleChange(e)}
-            placeholder="My link"
+            placeholder="Type the text to be hyperlinked"
             value={title}
           />
         </FormItem>

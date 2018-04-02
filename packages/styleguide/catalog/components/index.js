@@ -5,9 +5,8 @@ export { default as Avatar } from "./avatars/Avatar";
 export { default as Breadcrumb } from "./breadcrumbs/Breadcrumb";
 export { default as Breadcrumbs } from "./breadcrumbs/Breadcrumbs";
 export { default as Bubble } from "./bubbles/Bubble";
-export { default as BubbleGroup } from "./bubbles/BubbleGroup";
+export { default as BubbleBlock } from "./bubbles/BubbleBlock";
 export { default as BubbleHTMLWrapper } from "./bubbles/BubbleHTMLWrapper";
-export { default as Bubbles } from "./bubbles/Bubbles";
 export { default as CharacterCount } from "./forms/CharacterCount";
 export { default as Checkbox } from "./forms/Checkbox";
 export { default as Container } from "./containers/Container";
@@ -21,6 +20,12 @@ export { default as Label } from "./forms/Label";
 export { default as Legend } from "./forms/Legend";
 export { default as List } from "./lists/List";
 export { default as ListItem } from "./lists/ListItem";
+export { default as Logo } from "./logos/logo.svg";
+export { default as LogoNegative } from "./logos/logo-negative.svg";
+export { default as LogoWSymbol } from "./logos/logo-w-symbol.svg";
+export {
+  default as LogoWSymbolNegative
+} from "./logos/logo-w-symbol-negative.svg";
 export { default as Message } from "./messages/Message";
 export { default as Modal } from "./modals/Modal";
 export { default as ModalBody } from "./modals/ModalBody";

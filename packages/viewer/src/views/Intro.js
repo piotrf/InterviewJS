@@ -1,7 +1,8 @@
 /* eslint react/forbid-prop-types: 0 */
 import css from "styled-components";
 import React, { Component } from "react";
-import { object, shape, string, func } from "prop-types";
+import { object, func } from "prop-types";
+import axios from "axios";
 
 import {
   Action,
@@ -66,15 +67,32 @@ export default class IntroView extends Component {
   }
 
   componentDidMount() {
+    // I'm framed, wait for message with JSON that looks like a story -- FIXME
     if (window.top !== window && window.addEventListener) {
       window.addEventListener(
         "message",
         ({ data, origin, source }) => {
-          console.log(origin, data);
+          console.log(origin, data, source);
           if (data.interviewees) this.props.createStory(data);
         },
         false
       );
+    }
+
+    // Load story via storyId -> getStoryURL
+    if (
+      (!this.props.story || Object.keys(this.props.story).length === 0) &&
+      this.props.params.storyId &&
+      window.InterviewJS &&
+      window.InterviewJS.getStoryURL
+    ) {
+      const storyURL = window.InterviewJS.getStoryURL(
+        this.props.params.storyId
+      );
+      if (storyURL)
+        axios
+          .get(storyURL)
+          .then((response) => this.props.createStory(response.data));
     }
   }
 
@@ -85,7 +103,7 @@ export default class IntroView extends Component {
   render() {
     const { story } = this.props;
     if (!story || Object.keys(story).length === 0) return null; // FIXME show spinner
-    console.log(story);
+
     return [
       <Topbar handleDetails={this.toggleDetailsModal} key="topbar" />,
       <Page key="page">
@@ -110,8 +128,8 @@ export default class IntroView extends Component {
           <PageSubtitle typo="h3">{story.intro}</PageSubtitle>
           <Separator size="m" silent />
           <Aside typo="p3">
-            InterviewJS lets you chat to people at the heart of a story. Hear
-            from them in their own words.
+            InterviewJS brings you journalism through a messenger platform -
+            engage with the people at the heart of the a story
           </Aside>
           <Separator size="l" silent />
           {story.logo ? (
@@ -126,7 +144,7 @@ export default class IntroView extends Component {
           <Actionbar>
             <Action
               fixed
-              onClick={() => this.props.router.push(`/story/context`)}
+              onClick={() => this.props.router.push(`/${story.id}/context`)}
               primary
             >
               Continue
@@ -149,12 +167,12 @@ export default class IntroView extends Component {
 IntroView.propTypes = {
   createStory: func.isRequired,
   router: object,
-  story: shape({
-    title: string
-  })
+  story: object,
+  params: object
 };
 
 IntroView.defaultProps = {
   router: null,
-  story: {}
+  story: null,
+  params: {}
 };

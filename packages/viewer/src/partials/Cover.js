@@ -2,7 +2,13 @@ import React from "react";
 import css from "styled-components";
 import { array, bool, oneOfType, node, string } from "prop-types";
 
-import { Container, breakpoint, color, setSpace } from "interviewjs-styleguide";
+import {
+  LogoWSymbolNegative,
+  Container,
+  breakpoint,
+  color,
+  setSpace
+} from "interviewjs-styleguide";
 
 const CoverEl = css(Container)`
   background-color: ${color.black};
@@ -17,11 +23,11 @@ const CoverEl = css(Container)`
 
 const CoverBody = css.div`
   ${setSpace("phm")};
-  ${setSpace("pth")};
+  ${setSpace("ptm")};
   background-color: ${color.shadowLt};
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: space-between;
   min-height: ${({ compact }) => (compact ? `${100 / 5}vh` : `${100 / 3}vh`)};
   position: relative;
   ${breakpoint.tablet} {
@@ -46,9 +52,29 @@ const CoverSauce = css.div`
   z-index: 2;
 `;
 
+const Brandmark = css.div`
+  ${setSpace("mts")};
+  ${setSpace("mbm")};
+  line-height: 0;
+  opacity: .8;
+  img {
+    height: 36px;
+  }
+  ${breakpoint.onlyphone} {
+    ${setSpace("mtm")};
+    ${setSpace("ptx")};
+    img {
+      height: 32px;
+    }
+  }
+`;
+
 const Cover = (props) => (
   <CoverEl {...props}>
     <CoverBody compact={props.compact}>
+      <Brandmark>
+        <img src={LogoWSymbolNegative} alt="InterviewJS" />
+      </Brandmark>
       <CoverSauce>{props.children}</CoverSauce>
     </CoverBody>
   </CoverEl>

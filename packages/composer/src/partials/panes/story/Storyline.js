@@ -6,13 +6,11 @@ import React from "react";
 import {
   Action,
   Bubble,
-  BubbleGroup,
-  BubbleHTMLWrapper,
-  Bubbles,
-  color,
+  BubbleBlock,
+  Container,
   Icon,
+  color,
   radius,
-  Separator,
   setSpace,
   skin
 } from "interviewjs-styleguide";
@@ -33,6 +31,16 @@ const BubbleEdit = css.div`
       : `
     right: 100%;
   `}
+`;
+
+const UserButtons = css(Container)`
+  justify-content: flex-end;
+  align-items: flex-end;
+  align-content: flex-end;
+  width: 100%;
+  & > * {
+    ${setSpace("mlx")}
+  }
 `;
 const StorylineEl = css.div`
   ${setSpace("phl")};
@@ -84,7 +92,7 @@ export default class Storyline extends React.Component {
     this.scrollToBottom = this.scrollToBottom.bind(this);
   }
   componentDidMount() {
-    setTimeout(this.scrollToBottom, 300);
+    setTimeout(() => this.scrollToBottom("instant"), 300);
   }
   componentDidUpdate(prevProps) {
     return prevProps.storyline.length < this.props.storyline.length
@@ -106,7 +114,7 @@ export default class Storyline extends React.Component {
       Number.isInteger(to) &&
       this.over.dataset.droppable !== undefined
     ) {
-      this.dragged.style.display = "block";
+      this.dragged.style.display = "flex";
       this.dragged.parentNode.removeChild(placeholder);
       const payload = { from, to };
       this.props.moveStorylineItem(storyIndex, currentInterviewee, payload);
@@ -128,12 +136,14 @@ export default class Storyline extends React.Component {
       droppableParent.parentNode.insertBefore(placeholder, droppableParent);
     }
   }
-  scrollToBottom() {
-    this.anchor.scrollIntoView({
-      behavior: "smooth",
-      block: "end",
-      inline: "end"
-    });
+  scrollToBottom(behaviour) {
+    return this.anchor
+      ? this.anchor.scrollIntoView({
+          behavior: behaviour || "smooth",
+          block: "end",
+          inline: "end"
+        })
+      : null;
   }
   render() {
     const { storyline } = this.props;
@@ -143,16 +153,23 @@ export default class Storyline extends React.Component {
     const renderUserBubble = (data) => {
       const { content, role } = data;
       return (
-        <Bubble persona={role} theme={{ backg: skin.speakerBackg }}>
-          {content[0].enabled ? (
-            <Action tone="negative">{content[0].value}</Action>
-          ) : null}
-          {content[0].enabled && content[1].enabled ? (
-            <Separator dir="v" size="m" />
-          ) : null}
-          {content[1].enabled ? (
-            <Action tone="positive">{content[1].value}</Action>
-          ) : null}
+        <Bubble persona={role} theme={{ backg: skin.speakerBackg }} plain>
+          <UserButtons dir="row">
+            {content[0].enabled ? (
+              <Action
+                primary={!content[1].enabled}
+                secondary={!!content[1].enabled}
+                fixed
+              >
+                {content[0].value}
+              </Action>
+            ) : null}
+            {content[1].enabled ? (
+              <Action primary fixed>
+                {content[1].value}
+              </Action>
+            ) : null}
+          </UserButtons>
         </Bubble>
       );
     };
@@ -161,8 +178,8 @@ export default class Storyline extends React.Component {
       if (type === "text") {
         return (
           <Bubble
+            displayType="plain"
             persona={role}
-            type="plain"
             theme={{ backg: interviewee.color }}
           >
             {content.value}
@@ -171,52 +188,52 @@ export default class Storyline extends React.Component {
       } else if (type === "link") {
         return (
           <Bubble
+            displayType="plain"
             persona={role}
-            type="plain"
             theme={{ backg: interviewee.color }}
           >
-            <BubbleHTMLWrapper>
-              <a href={content.value} target="_blank">
-                {content.title ? content.title : content.value}
-              </a>
-            </BubbleHTMLWrapper>
+            <a href={content.value} target="_blank">
+              {content.title ? content.title : content.value}
+            </a>
           </Bubble>
         );
       } else if (type === "image") {
         return (
           <Bubble
+            displayType="rich"
             persona={role}
-            type="rich"
             theme={{ backg: interviewee.color }}
           >
-            <BubbleHTMLWrapper>
-              <img src={content.value} alt="" />
-              {content.title ? <p>{content.title}</p> : null}
-            </BubbleHTMLWrapper>
+            <img src={content.value} alt="" />
+            {content.title ? <p>{content.title}</p> : null}
           </Bubble>
         );
       } else if (type === "embed") {
         return (
           <Bubble
             persona={role}
-            type="embed"
+            displayType="embed"
             theme={{ backg: interviewee.color }}
           >
-            <BubbleHTMLWrapper>
-              <div dangerouslySetInnerHTML={{ __html: filterIframe(content.value) }} />
-            </BubbleHTMLWrapper>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: filterIframe(content.value)
+              }}
+            />
           </Bubble>
         );
       } else if (type === "map") {
         return (
           <Bubble
+            displayType="embed"
             persona={role}
-            type="embed"
             theme={{ backg: interviewee.color }}
           >
-            <BubbleHTMLWrapper>
-              <div dangerouslySetInnerHTML={{ __html: filterIframe(content.value) }} />
-            </BubbleHTMLWrapper>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: filterIframe(content.value)
+              }}
+            />
           </Bubble>
         );
       }
@@ -229,7 +246,7 @@ export default class Storyline extends React.Component {
           const { role } = storyline[storyItem];
           const item = storyline[storyItem];
           return (
-            <BubbleGroup
+            <BubbleBlock
               data-droppable
               data-id={i}
               draggable
@@ -237,11 +254,9 @@ export default class Storyline extends React.Component {
               onDragEnd={(e) => this.dragEnd(e)}
               onDragStart={(e) => this.dragStart(e)}
             >
-              <Bubbles persona={role}>
-                {role === "user"
-                  ? renderUserBubble(item)
-                  : renderIntervieweeBubble(item)}
-              </Bubbles>
+              {role === "user"
+                ? renderUserBubble(item)
+                : renderIntervieweeBubble(item)}
               <BubbleEdit persona={role}>
                 {/* <Action iconic onClick={() => this.props.toggleBubbleEdit(i)}>
                   <Icon name="pen" size="x" />
@@ -254,7 +269,7 @@ export default class Storyline extends React.Component {
                   <Icon name="cross" size="x" />
                 </Action>
               </BubbleEdit>
-            </BubbleGroup>
+            </BubbleBlock>
           );
         })}
         <div
@@ -272,8 +287,7 @@ Storyline.propTypes = {
   deleteStorylineItem: func.isRequired,
   moveStorylineItem: func.isRequired,
   storyIndex: number.isRequired,
-  storyline: arrayOf(object),
-  toggleBubbleEdit: func.isRequired
+  storyline: arrayOf(object)
 };
 
 Storyline.defaultProps = {
