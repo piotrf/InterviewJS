@@ -2,7 +2,7 @@
   "private": true,
   "name": "interviewjs-website",
   "description": "Gatsby default starter",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
     "gatsby": "^1.9.238",
