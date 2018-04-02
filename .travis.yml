@@ -30,7 +30,7 @@ deploy:
     acl: public_read
     on:
       repo: AJInteractive/InterviewJS
-      branch: develop
+      branch: master
 
   - provider: s3
     skip_cleanup: true
@@ -42,7 +42,7 @@ deploy:
     acl: public_read
     on:
       repo: AJInteractive/InterviewJS
-      branch: develop
+      branch: master
 
   - provider: s3
     skip_cleanup: true
@@ -55,7 +55,7 @@ deploy:
     acl: public_read
     on:
       repo: AJInteractive/InterviewJS
-      branch: develop
+      branch: master
 
   - provider: s3
     skip_cleanup: true
@@ -67,4 +67,4 @@ deploy:
     acl: public_read
     on:
       repo: AJInteractive/InterviewJS
-      branch: develop
+      branch: master
