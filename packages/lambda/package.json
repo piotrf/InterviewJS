@@ -10,9 +10,12 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@sentry/cli": "^1.30.3",
+    "@sentry/webpack-plugin": "^1.5.0",
     "serverless": "^1.26.1"
   },
   "dependencies": {
+    "async": "^2.6.0",
     "aws-sdk": "^2.219.1",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
@@ -20,7 +23,10 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-stage-3": "^6.24.1",
     "babel-runtime": "^6.26.0",
+    "raven": "^2.4.2",
     "sanitize-html": "^1.18.2",
+    "serverless-sentry": "^1.0.0",
+    "serverless-sentry-lib": "^1.0.0",
     "serverless-webpack": "^5.1.1",
     "short-uuid": "^3.0.0",
     "uuid": "^3.2.1",

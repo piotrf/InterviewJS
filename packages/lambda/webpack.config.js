@@ -1,9 +1,12 @@
 const slsw = require("serverless-webpack");
 const nodeExternals = require("webpack-node-externals");
+const SentryCliPlugin = require("@sentry/webpack-plugin");
+
 
 module.exports = {
   entry: slsw.lib.entries,
   target: "node",
+  devtool: "source-map",
   // Since 'aws-sdk' is not compatible with webpack,
   // we exclude all node dependencies
   externals: [nodeExternals()],
@@ -26,5 +29,13 @@ module.exports = {
         exclude: /node_modules/
       }
     ]
-  }
+  },
+  plugins: [
+    new SentryCliPlugin({
+      include: '.',
+      ignoreFile: '.sentrycliignore',
+      ignore: ['node_modules', 'webpack.config.js'],
+      configFile: 'sentry.properties'
+    })
+  ]
 };

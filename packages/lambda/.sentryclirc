@@ -1,0 +1,6 @@
+[auth]
+token=60d0a5347ed1494e8f4865e2ca532d27e4da83df039546b1b074ea5296712a4b
+
+[defaults]
+project=lambda
+org=interviewjs
