@@ -5,6 +5,7 @@ import ReactModal from "react-modal";
 import { arrayOf, bool, func, number, object } from "prop-types";
 import { Storage } from "aws-amplify";
 import shortUuid from "short-uuid";
+import uuidv5 from "uuid/v5";
 
 import {
   Actionbar,
@@ -58,6 +59,18 @@ const PreviewWrapper = css.div`
     width: 100%;
   }
 `;
+
+const computeId = (userId, storyId) => {
+  let namespace = userId;
+  if (namespace.indexOf(":") > 0) namespace = namespace.split(":").pop();
+
+  let id = storyId;
+  if (id.indexOf("_")) id = id.split("_").pop();
+  if (id.length < 36) id = shortUuid().toUUID(id);
+
+  const uuid = uuidv5(id, namespace);
+  return shortUuid().fromUUID(uuid);
+};
 
 export default class PublishStoryModal extends Component {
   constructor(props) {
@@ -129,7 +142,7 @@ export default class PublishStoryModal extends Component {
 
       this.setState({
         step: this.state.step + 1,
-        // storyKey: result.key,
+        storyKey: computeId(this.props.user.id, this.props.story.id)
       });
     })
     .catch(err => console.log(err));
@@ -140,7 +153,7 @@ export default class PublishStoryModal extends Component {
   }
 
   render() {
-    const iframeViewer = `${this.state.storyBase}${this.props.story.id}`;
+    const iframeViewer = `${this.state.storyBase}${this.state.storyKey ? this.state.storyKey : this.props.story.id}`;
 
     const { step } = this.state;
     const getModalBody = () => {
