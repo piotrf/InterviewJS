@@ -3,6 +3,7 @@ import uuidv5 from "uuid/v5";
 import shortUuid from "short-uuid";
 import async from "async";
 import sanitizeHtml from "sanitize-html";
+import escapeGoat from "escape-goat";
 import Raven from "raven";
 import RavenLambdaWrapper from "serverless-sentry-lib";
 
@@ -57,6 +58,7 @@ const processRecord = (record, callback) => {
 
     const story = JSON.parse(data.Body.toString("utf-8"));
 
+    story.id = publishId;
     // TODO clean iframes
 
     s3.getObject({
@@ -65,22 +67,53 @@ const processRecord = (record, callback) => {
     }, (err, data) => {
       if (err) return callback(err);
 
-      const index = data.Body.toString("utf-8");
+      const meta = [];
+      meta.push(escapeGoat.escapeTag`<title>${story.title}</title>`);
+      meta.push(escapeGoat.escapeTag`<meta property="og:title" content="${story.title}" />`);
+      meta.push(escapeGoat.escapeTag`<meta property="og:type" content="article" />`);
+      meta.push(escapeGoat.escapeTag`<meta property="og:description" content="${story.intro}" />`);
+      meta.push(escapeGoat.escapeTag`<meta property="og:image" content="${story.cover}" />`);
 
-      // TODO replace in html
+      const index = data.Body.toString("utf-8")
+        .replace("/sample-story/sample-story.js", "./story.js")
+        .replace("<head>", `<head>\n${meta.join("\n")}`);
 
       s3.putObject({
-        Body: index,
+        Body: `if (!window.InterviewJS.ignoreSampleStory) { window.InterviewJS.story = ${JSON.stringify(story)} ; }`,
         ACL: "public-read",
-        ContentType: "text/html",
+        ContentType: "application/javascript",
         Bucket: "story.interviewjs.io",
-        Key: `${publishId}/index.html`
+        Key: `${publishId}/story.js`
       }, (err, response) => {
         if (err) return callback(err);
 
-        console.log("done", `${publishId}/index.html`);
-        callback(null, publishId);
+        // index
+        s3.putObject({
+          Body: index,
+          ACL: "public-read",
+          ContentType: "text/html",
+          Bucket: "story.interviewjs.io",
+          Key: `${publishId}/index.html`
+        }, (err, response) => {
+          if (err) return callback(err);
+
+          callback(null, publishId);
+        });
+        // index
       });
+
+      // s3.putObject({
+      //   Body: index,
+      //   ACL: "public-read",
+      //   ContentType: "text/html",
+      //   Bucket: "story.interviewjs.io",
+      //   Key: `${publishId}/index.html`
+      // }, (err, response) => {
+      //   if (err) return callback(err);
+      //
+      //   callback(null, publishId);
+      // });
+
     });
   });
 };
