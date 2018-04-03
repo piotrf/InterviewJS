@@ -62,10 +62,25 @@ const PreviewWrapper = css.div`
 export default class PublishStoryModal extends Component {
   constructor(props) {
     super(props);
+
+    let storyBase = "/"; // FIXME: local-dev url?
+    switch(document.location.hostname) {
+      case "composer.interviewjs.net.s3-website-us-east-1.amazonaws.com":
+        storyBase = "http://story.interviewjs.net.s3-website-us-east-1.amazonaws.com";
+        break;
+      case "composer.interviewjs.net":
+        storyBase = "https://story.interviewjs.net/";
+        break;
+      default:
+        storyBase = "https://story.interviewjs.io/"; // production
+    }
+
     this.state = {
       step: 0,
       storyKey: null,
+      storyBase
     };
+
     this.handleStep0 = this.handleStep0.bind(this);
     this.handleStep1 = this.handleStep1.bind(this);
     this.handleStep2 = this.handleStep2.bind(this);
@@ -124,7 +139,7 @@ export default class PublishStoryModal extends Component {
   }
 
   render() {
-    const iframeViewer = `https://story.interviewjs.io/${this.props.story.id}`;
+    const iframeViewer = `${this.state.storyBase}${this.props.story.id}`;
 
     const { step } = this.state;
     const getModalBody = () => {
