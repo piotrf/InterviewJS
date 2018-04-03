@@ -3,7 +3,7 @@ import css from "styled-components";
 import React, { Component } from "react";
 import ReactModal from "react-modal";
 import { arrayOf, bool, func, number, object } from "prop-types";
-import { API, Storage } from "aws-amplify";
+import { Storage } from "aws-amplify";
 import shortUuid from "short-uuid";
 
 import {
@@ -124,7 +124,8 @@ export default class PublishStoryModal extends Component {
       // const { result2 } = await API.get("Poll", `/poll`, { response: true }); // /${this.props.story.id}
       // console.log(result2);
       // API.get("Poll", `/poll`, { response: true }).then(result2 => console.log(result2));
-      API.post("Push", `/story/${this.props.story.id}`, { response: true, body: { a: 1 } }).then(result2 => console.log(result2));
+
+      // API.post("Push", `/story/${this.props.story.id}`, { response: true, body: { a: 1 } }).then(result2 => console.log(result2));
 
       this.setState({
         step: this.state.step + 1,
