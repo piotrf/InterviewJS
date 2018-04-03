@@ -56,7 +56,7 @@ const processRecord = (record, callback) => {
     if (err) return callback(err);
 
     const story = JSON.parse(data.Body.toString("utf-8"));
-    console.log("story", story);
+
     // TODO clean iframes
 
     s3.getObject({
@@ -66,13 +66,13 @@ const processRecord = (record, callback) => {
       if (err) return callback(err);
 
       const index = data.Body.toString("utf-8");
-      console.log("index", index.substring(0, 32));
+
       // TODO replace in html
 
-      // callback(null, publishId);
       s3.putObject({
         Body: index,
         ACL: "public-read",
+        ContentType: "text/html",
         Bucket: "story.interviewjs.io",
         Key: `${publishId}/index.html`
       }, (err, response) => {
