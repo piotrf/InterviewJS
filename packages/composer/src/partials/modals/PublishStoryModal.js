@@ -3,8 +3,9 @@ import css from "styled-components";
 import React, { Component } from "react";
 import ReactModal from "react-modal";
 import { arrayOf, bool, func, number, object } from "prop-types";
-import { API, Storage } from "aws-amplify";
+import { Storage } from "aws-amplify";
 import shortUuid from "short-uuid";
+import uuidv5 from "uuid/v5";
 
 import {
   Actionbar,
@@ -59,13 +60,40 @@ const PreviewWrapper = css.div`
   }
 `;
 
+const computeId = (userId, storyId) => {
+  let namespace = userId;
+  if (namespace.indexOf(":") > 0) namespace = namespace.split(":").pop();
+
+  let id = storyId;
+  if (id.indexOf("_")) id = id.split("_").pop();
+  if (id.length < 36) id = shortUuid().toUUID(id);
+
+  const uuid = uuidv5(id, namespace);
+  return shortUuid().fromUUID(uuid);
+};
+
 export default class PublishStoryModal extends Component {
   constructor(props) {
     super(props);
+
+    let storyBase = "/"; // FIXME: local-dev url?
+    switch(document.location.hostname) {
+      case "composer.interviewjs.net.s3-website-us-east-1.amazonaws.com":
+        storyBase = "http://story.interviewjs.net.s3-website-us-east-1.amazonaws.com";
+        break;
+      case "composer.interviewjs.net":
+        storyBase = "https://story.interviewjs.net/";
+        break;
+      default:
+        storyBase = "https://story.interviewjs.io/"; // production
+    }
+
     this.state = {
       step: 0,
       storyKey: null,
+      storyBase
     };
+
     this.handleStep0 = this.handleStep0.bind(this);
     this.handleStep1 = this.handleStep1.bind(this);
     this.handleStep2 = this.handleStep2.bind(this);
@@ -109,11 +137,12 @@ export default class PublishStoryModal extends Component {
       // const { result2 } = await API.get("Poll", `/poll`, { response: true }); // /${this.props.story.id}
       // console.log(result2);
       // API.get("Poll", `/poll`, { response: true }).then(result2 => console.log(result2));
-      API.post("Push", `/story/${this.props.story.id}`, { response: true, body: { a: 1 } }).then(result2 => console.log(result2));
+
+      // API.post("Push", `/story/${this.props.story.id}`, { response: true, body: { a: 1 } }).then(result2 => console.log(result2));
 
       this.setState({
         step: this.state.step + 1,
-        // storyKey: result.key,
+        storyKey: computeId(this.props.user.id, this.props.story.id)
       });
     })
     .catch(err => console.log(err));
@@ -124,7 +153,7 @@ export default class PublishStoryModal extends Component {
   }
 
   render() {
-    const iframeViewer = `https://story.interviewjs.io/${this.props.story.id}`;
+    const iframeViewer = `${this.state.storyBase}${this.state.storyKey ? this.state.storyKey : this.props.story.id}`;
 
     const { step } = this.state;
     const getModalBody = () => {
