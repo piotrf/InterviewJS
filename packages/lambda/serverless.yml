@@ -1,0 +1,19 @@
+service: interviewjs
+
+plugins:
+  - serverless-webpack
+
+custom:
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: prod
+  region: us-east-1
+
+functions:
+  publish:
+    handler: story.publish
