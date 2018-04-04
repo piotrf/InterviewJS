@@ -8,7 +8,9 @@ import {
   Container,
   Icon,
   PageTitle,
+  Preloader,
   Separator,
+  Text,
   breakpoint,
   color,
   font,
@@ -52,6 +54,10 @@ const PageHead = css.div`
     color: ${color.blueBlk};
   }
 `;
+const SaveIndicator = css(Text)`
+  color: ${color.greenM};
+  font-weight: bold;
+`;
 
 const PageBody = css.div`
   ${setSpace("pbm")};
@@ -80,7 +86,8 @@ export default class ComposerView extends React.Component {
       currentInterviewee: 0,
       detailsModal: "",
       joyrideSteps: [],
-      publishModal: false
+      publishModal: false,
+      savedLabel: null
     };
     this.deleteInterviewee = this.deleteInterviewee.bind(this);
     this.initTour = this.initTour.bind(this);
@@ -89,6 +96,7 @@ export default class ComposerView extends React.Component {
     this.toggleDetailsModal = this.toggleDetailsModal.bind(this);
     this.togglePublishModal = this.togglePublishModal.bind(this);
     this.updateStory = this.updateStory.bind(this);
+    this.showSavedIndicator = this.showSavedIndicator.bind(this);
   }
 
   componentDidMount() {
@@ -252,6 +260,13 @@ export default class ComposerView extends React.Component {
     const { storyId } = this.props.params;
     const i = this.props.stories.findIndex((story) => story.id === storyId);
     this.props.updateStory(data, i);
+    this.showSavedIndicator();
+  }
+
+  showSavedIndicator() {
+    this.setState({ savedLabel: false });
+    setTimeout(() => this.setState({ savedLabel: true }), 2000);
+    setTimeout(() => this.setState({ savedLabel: null }), 5000);
   }
 
   render() {
@@ -261,12 +276,26 @@ export default class ComposerView extends React.Component {
     );
     const story = this.props.stories[storyIndex];
 
-    if (! story) {
+    if (!story) {
       this.props.router.push(`/`);
       return null;
     }
 
     console.log("COMPOSER PROPS: ", this.props);
+
+    const renderSaveIndicator = () => {
+      if (this.state.savedLabel === false) {
+        return [<Preloader />, <Separator dir="v" size="m" />];
+      } else if (this.state.savedLabel === true) {
+        return [
+          <SaveIndicator typo="p5">
+            <Icon name="checkmark" /> Saved
+          </SaveIndicator>,
+          <Separator dir="v" size="m" />
+        ];
+      }
+      return null;
+    };
 
     return [
       <Page key="Page">
@@ -297,6 +326,11 @@ export default class ComposerView extends React.Component {
               <PageTitle typo="h2">{story.title}</PageTitle>
             </Container>
             <Container flex={[1, 1, `${100 / 3}%`]} align="right" padded>
+              {renderSaveIndicator()}
+              <Action href="https://interviewjs.io" target="_blank">
+                Help
+              </Action>
+              <Separator dir="v" size="m" />
               <Action
                 primary
                 onClick={this.togglePublishModal}
@@ -314,6 +348,7 @@ export default class ComposerView extends React.Component {
                 currentInterviewee={this.state.currentInterviewee}
                 story={story}
                 storyIndex={storyIndex}
+                showSavedIndicator={this.showSavedIndicator}
               />
             </Container>
             <Container flex={[0, 1, `400px`]} className="jr-step1">
@@ -336,6 +371,7 @@ export default class ComposerView extends React.Component {
                 currentInterviewee={this.state.currentInterviewee}
                 story={story}
                 storyIndex={storyIndex}
+                showSavedIndicator={this.showSavedIndicator}
               />
             </Container>
           </PageBody>
