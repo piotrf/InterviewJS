@@ -195,6 +195,14 @@ export default class ChatView extends Component {
               </Interviewee>
             ))}
           </Interviewees>
+          <Separator dir="h" size="m" silent/>
+          <Action 
+            primary
+            tone="negative"
+            onClick={() => this.props.router.push(`/${story.id}/outro`)}
+          >
+            I’m done chatting
+          </Action>
         </PageBody>
       </Page>,
       this.state.intervieweeModal !== null ? (
