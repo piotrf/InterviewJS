@@ -108,6 +108,8 @@ export default class IntervieweePane extends React.Component {
     this.setState({
       draft: { ...this.state.draft, [source]: { value: "", title: "" } }
     });
+
+    this.props.showSavedIndicator();
   }
 
   render() {
@@ -230,6 +232,7 @@ export default class IntervieweePane extends React.Component {
 
 IntervieweePane.propTypes = {
   addStorylineItem: func.isRequired,
+  showSavedIndicator: func.isRequired,
   currentBubble: number,
   currentInterviewee: number.isRequired,
   story: object.isRequired /* eslint react/forbid-prop-types: 0 */,

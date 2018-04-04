@@ -275,6 +275,8 @@ export default class UserPane extends React.Component {
       exploreLibItem: null,
       exploreVal: this.props.exploreVal
     });
+
+    this.props.showSavedIndicator();
   }
   render() {
     const {
@@ -538,6 +540,7 @@ export default class UserPane extends React.Component {
 
 UserPane.propTypes = {
   addStorylineItem: func.isRequired,
+  showSavedIndicator: func.isRequired,
   currentInterviewee: number.isRequired,
   continueVal: string,
   exploreVal: string,

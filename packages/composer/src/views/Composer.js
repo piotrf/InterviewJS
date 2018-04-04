@@ -13,7 +13,8 @@ import {
   color,
   font,
   radius,
-  setSpace
+  setSpace,
+  Preloader
 } from "interviewjs-styleguide";
 
 import "./joyride.css";
@@ -80,7 +81,8 @@ export default class ComposerView extends React.Component {
       currentInterviewee: 0,
       detailsModal: "",
       joyrideSteps: [],
-      publishModal: false
+      publishModal: false,
+      savedLabel: true
     };
     this.deleteInterviewee = this.deleteInterviewee.bind(this);
     this.initTour = this.initTour.bind(this);
@@ -89,6 +91,7 @@ export default class ComposerView extends React.Component {
     this.toggleDetailsModal = this.toggleDetailsModal.bind(this);
     this.togglePublishModal = this.togglePublishModal.bind(this);
     this.updateStory = this.updateStory.bind(this);
+    this.showSavedIndicator = this.showSavedIndicator.bind(this);
   }
 
   componentDidMount() {
@@ -252,6 +255,12 @@ export default class ComposerView extends React.Component {
     const { storyId } = this.props.params;
     const i = this.props.stories.findIndex((story) => story.id === storyId);
     this.props.updateStory(data, i);
+    this.showSavedIndicator();
+  }
+
+  showSavedIndicator() {
+    this.setState({ savedLabel: false })
+    setTimeout(() => this.setState({ savedLabel: true }), 2000);
   }
 
   render() {
@@ -292,11 +301,15 @@ export default class ComposerView extends React.Component {
                 />
                 {` `}Story elements
               </Action>
+              <Separator dir="v" size="m" />
+              {this.state.savedLabel ? <Action>Saved</Action> : <Preloader/>}
             </Container>
             <Container flex={[1, 1, `${100 / 3}%`]} align="center">
               <PageTitle typo="h2">{story.title}</PageTitle>
             </Container>
             <Container flex={[1, 1, `${100 / 3}%`]} align="right" padded>
+            <Action href="#">Help</Action>
+            <Separator dir="v" size="m" />
               <Action
                 primary
                 onClick={this.togglePublishModal}
@@ -314,6 +327,7 @@ export default class ComposerView extends React.Component {
                 currentInterviewee={this.state.currentInterviewee}
                 story={story}
                 storyIndex={storyIndex}
+                showSavedIndicator={this.showSavedIndicator}
               />
             </Container>
             <Container flex={[0, 1, `400px`]} className="jr-step1">
@@ -336,6 +350,7 @@ export default class ComposerView extends React.Component {
                 currentInterviewee={this.state.currentInterviewee}
                 story={story}
                 storyIndex={storyIndex}
+                showSavedIndicator={this.showSavedIndicator}
               />
             </Container>
           </PageBody>
