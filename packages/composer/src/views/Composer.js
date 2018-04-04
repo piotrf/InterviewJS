@@ -8,13 +8,14 @@ import {
   Container,
   Icon,
   PageTitle,
+  Preloader,
   Separator,
+  Text,
   breakpoint,
   color,
   font,
   radius,
-  setSpace,
-  Preloader
+  setSpace
 } from "interviewjs-styleguide";
 
 import "./joyride.css";
@@ -53,6 +54,10 @@ const PageHead = css.div`
     color: ${color.blueBlk};
   }
 `;
+const SaveIndicator = css(Text)`
+  color: ${color.greenM};
+  font-weight: bold;
+`;
 
 const PageBody = css.div`
   ${setSpace("pbm")};
@@ -82,7 +87,7 @@ export default class ComposerView extends React.Component {
       detailsModal: "",
       joyrideSteps: [],
       publishModal: false,
-      savedLabel: true
+      savedLabel: null
     };
     this.deleteInterviewee = this.deleteInterviewee.bind(this);
     this.initTour = this.initTour.bind(this);
@@ -259,8 +264,9 @@ export default class ComposerView extends React.Component {
   }
 
   showSavedIndicator() {
-    this.setState({ savedLabel: false })
+    this.setState({ savedLabel: false });
     setTimeout(() => this.setState({ savedLabel: true }), 2000);
+    setTimeout(() => this.setState({ savedLabel: null }), 5000);
   }
 
   render() {
@@ -270,12 +276,26 @@ export default class ComposerView extends React.Component {
     );
     const story = this.props.stories[storyIndex];
 
-    if (! story) {
+    if (!story) {
       this.props.router.push(`/`);
       return null;
     }
 
     console.log("COMPOSER PROPS: ", this.props);
+
+    const renderSaveIndicator = () => {
+      if (this.state.savedLabel === false) {
+        return [<Preloader />, <Separator dir="v" size="m" />];
+      } else if (this.state.savedLabel === true) {
+        return [
+          <SaveIndicator typo="p5">
+            <Icon name="checkmark" /> Saved
+          </SaveIndicator>,
+          <Separator dir="v" size="m" />
+        ];
+      }
+      return null;
+    };
 
     return [
       <Page key="Page">
@@ -301,15 +321,16 @@ export default class ComposerView extends React.Component {
                 />
                 {` `}Story elements
               </Action>
-              <Separator dir="v" size="m" />
-              {this.state.savedLabel ? <Action>Saved</Action> : <Preloader/>}
             </Container>
             <Container flex={[1, 1, `${100 / 3}%`]} align="center">
               <PageTitle typo="h2">{story.title}</PageTitle>
             </Container>
             <Container flex={[1, 1, `${100 / 3}%`]} align="right" padded>
-            <Action href="#">Help</Action>
-            <Separator dir="v" size="m" />
+              {renderSaveIndicator()}
+              <Action href="https://interviewjs.io" target="_blank">
+                Help
+              </Action>
+              <Separator dir="v" size="m" />
               <Action
                 primary
                 onClick={this.togglePublishModal}
