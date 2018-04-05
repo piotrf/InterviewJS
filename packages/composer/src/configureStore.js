@@ -87,7 +87,7 @@ const enhancers = compose(
 
 
 let store;
-switch ("persist") {
+switch (document.location.hostname === "localhost" ? null : "persist") {
   case "persist":
     store = createStore(
       persistedReducer,
