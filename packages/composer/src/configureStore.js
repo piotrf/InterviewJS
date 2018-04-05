@@ -63,7 +63,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 
 const defaultState = {
-  stories, // : [],
+  stories: document.location.hostname === "localhost" ? stories : [],
   user: {}
 };
 
