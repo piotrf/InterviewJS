@@ -11,6 +11,7 @@ cache:
   - node_modules
   - packages/composer/node_modules
   - packages/viewer/node_modules
+  - packages/lambda/node_modules
   - packages/styleguide/node_modules
   - packages/site/node_modules
 script:
