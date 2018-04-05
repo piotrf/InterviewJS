@@ -5,6 +5,7 @@ import { object, shape, string, func } from "prop-types";
 import axios from "axios";
 import {
   Action,
+  Actionbar,
   Avatar,
   Icon,
   Container,
@@ -106,9 +107,19 @@ export default class ChatView extends Component {
     }
 
     // Load story via storyId -> getStoryURL
-    if ((!this.props.story || Object.keys(this.props.story).length === 0) && this.props.params.storyId && window.InterviewJS && window.InterviewJS.getStoryURL) {
-      const storyURL = window.InterviewJS.getStoryURL(this.props.params.storyId);
-      if (storyURL) axios.get(storyURL).then(response => this.props.createStory(response.data));
+    if (
+      (!this.props.story || Object.keys(this.props.story).length === 0) &&
+      this.props.params.storyId &&
+      window.InterviewJS &&
+      window.InterviewJS.getStoryURL
+    ) {
+      const storyURL = window.InterviewJS.getStoryURL(
+        this.props.params.storyId
+      );
+      if (storyURL)
+        axios
+          .get(storyURL)
+          .then((response) => this.props.createStory(response.data));
     }
   }
 
@@ -195,6 +206,15 @@ export default class ChatView extends Component {
               </Interviewee>
             ))}
           </Interviewees>
+          <Separator size="s" silent />
+          <Actionbar>
+            <Action
+              tone="negative"
+              onClick={() => this.props.router.push(`/${story.id}/outro`)}
+            >
+              I’m done chatting
+            </Action>
+          </Actionbar>
         </PageBody>
       </Page>,
       this.state.intervieweeModal !== null ? (

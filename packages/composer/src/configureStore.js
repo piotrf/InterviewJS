@@ -63,7 +63,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 
 const defaultState = {
-  stories, // : [],
+  stories: document.location.hostname === "localhost" ? stories : [],
   user: {}
 };
 
@@ -87,7 +87,7 @@ const enhancers = compose(
 
 
 let store;
-switch ("persist") {
+switch (document.location.hostname === "localhost" ? null : "persist") {
   case "persist":
     store = createStore(
       persistedReducer,

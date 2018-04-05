@@ -1,8 +1,8 @@
 {
   "name": "interviewjs-viewer",
   "description": "",
-  "version": "0.1.1",
-  "author": "",
+  "version": "0.1.2",
+  "authors": ["Laurian Gridinoc <laurian@gridinoc.name>", "Piotr Fedorczyk <piotr@piotrf.pl>"],
   "homepage": "https://story.interviewjs.io/",
   "dependencies": {
     "axios": "^0.18.0",
