@@ -2,7 +2,7 @@
   "name": "interviewjs-composer",
   "description": "",
   "version": "0.1.1",
-  "author": "",
+  "authors": ["Laurian Gridinoc <laurian@gridinoc.name>", "Piotr Fedorczyk <piotr@piotrf.pl>"],
   "homepage": "https://composer.interviewjs.io/",
   "dependencies": {
     "amazon-cognito-auth-js": "^1.1.4",
