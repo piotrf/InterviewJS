@@ -280,7 +280,8 @@ export function syncFirebaseStories(uid, email) {
                   if (data[i].ignore) {
                     dispatch(noop());
                   } else {
-                    dispatch(syncAndSaveStory(data[i]));
+                    dispatch(noop());
+                    // dispatch(syncAndSaveStory(data[i])); // disabled firebase import, TODO remove!
                   }
                 }
               }
