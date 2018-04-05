@@ -2,11 +2,9 @@ dist: trusty
 language: node_js
 node_js:
 - 8
-
 before_install:
-  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.5.1
-  - export PATH=$HOME/.yarn/bin:$PATH
-
+- curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.5.1
+- export PATH=$HOME/.yarn/bin:$PATH
 cache:
   yarn: true
   directories:
@@ -15,80 +13,70 @@ cache:
   - packages/viewer/node_modules
   - packages/styleguide/node_modules
   - packages/site/node_modules
-
 script:
-  - 'yarn run build'
-
+- yarn run build
 deploy:
-  - provider: s3
-    skip_cleanup: true
-    access_key_id: AKIAIZT2LU3JYJK66ENA
-    secret_access_key:
-      secure: rAtDOSOOnIucrqXHcqsDSYUApS8Zz8lGS3lWImAPKOmwf/NtmiP9LsmnQV4iEmCP6x4LkEqnKH2mLoKItJPrQE21efx9EryajF0NDCc5g3NfI2rhIyY3ujK0SRx87R1ysHjTkPX3aFk2zCo13PLgQmTNYHjtGZ106nh56iIiqOV/QQ0kCp5z27v20cJ2d4W4qAY0RrDxdnEeYXLeGwj8VMr9vGGRd8MeeJeWmQJ4ek1lOeBSJ+Z75Q3PCWko2BWzUD58/jZsiUgf8qIu349OA6UVzBJoVQ301wp+4R/Qm9rvvbf3XqO6WY3UQj91VoI6BQ0z+LOcDhoWuRkqwr7QVCgwS9CQ+H5TPJ2GVewX2NWOtg45EuyzDXY0rM0a93NdFNTM9HNDelkV0S7JBHo1FR1EASDDstP8wz54e/oX+3AE5B3t21jJqKJ5IET1u+qs7ls8vKR7tzekQfPbHNu0GJeWxGg1xOSNDGbRkEkAsHEy0OKV7QDvdM1w2RtTHQoRamsk0a2p0FmsTAhC9kyPeoLMBorVzIFpUeO6m2IT6YmwaToeKaquKelmA3Wc/yQVQdRb6ahFy8A4YRy54KnTEpGstuyo9uYjpbHNKbNpAiroP9EsImMCQj0Z3ZSbYvVwkRqQGFdklRXQIiEutV8PAlW5XglllJZhGaB136dnISs=
-    bucket: composer.interviewjs.io
-    local-dir: packages/composer/build/
-    acl: public_read
-    on:
-      repo: AJInteractive/InterviewJS
-      branch: master
-
-  - provider: s3
-    skip_cleanup: true
-    access_key_id: AKIAIZT2LU3JYJK66ENA
-    secret_access_key:
-      secure: rAtDOSOOnIucrqXHcqsDSYUApS8Zz8lGS3lWImAPKOmwf/NtmiP9LsmnQV4iEmCP6x4LkEqnKH2mLoKItJPrQE21efx9EryajF0NDCc5g3NfI2rhIyY3ujK0SRx87R1ysHjTkPX3aFk2zCo13PLgQmTNYHjtGZ106nh56iIiqOV/QQ0kCp5z27v20cJ2d4W4qAY0RrDxdnEeYXLeGwj8VMr9vGGRd8MeeJeWmQJ4ek1lOeBSJ+Z75Q3PCWko2BWzUD58/jZsiUgf8qIu349OA6UVzBJoVQ301wp+4R/Qm9rvvbf3XqO6WY3UQj91VoI6BQ0z+LOcDhoWuRkqwr7QVCgwS9CQ+H5TPJ2GVewX2NWOtg45EuyzDXY0rM0a93NdFNTM9HNDelkV0S7JBHo1FR1EASDDstP8wz54e/oX+3AE5B3t21jJqKJ5IET1u+qs7ls8vKR7tzekQfPbHNu0GJeWxGg1xOSNDGbRkEkAsHEy0OKV7QDvdM1w2RtTHQoRamsk0a2p0FmsTAhC9kyPeoLMBorVzIFpUeO6m2IT6YmwaToeKaquKelmA3Wc/yQVQdRb6ahFy8A4YRy54KnTEpGstuyo9uYjpbHNKbNpAiroP9EsImMCQj0Z3ZSbYvVwkRqQGFdklRXQIiEutV8PAlW5XglllJZhGaB136dnISs=
-    bucket: composer.interviewjs.net
-    local-dir: packages/composer/build/
-    acl: public_read
-    on:
-      repo: AJInteractive/InterviewJS
-      branch: develop
-
-  - provider: s3
-    skip_cleanup: true
-    access_key_id: AKIAIZT2LU3JYJK66ENA
-    secret_access_key:
-      secure: rAtDOSOOnIucrqXHcqsDSYUApS8Zz8lGS3lWImAPKOmwf/NtmiP9LsmnQV4iEmCP6x4LkEqnKH2mLoKItJPrQE21efx9EryajF0NDCc5g3NfI2rhIyY3ujK0SRx87R1ysHjTkPX3aFk2zCo13PLgQmTNYHjtGZ106nh56iIiqOV/QQ0kCp5z27v20cJ2d4W4qAY0RrDxdnEeYXLeGwj8VMr9vGGRd8MeeJeWmQJ4ek1lOeBSJ+Z75Q3PCWko2BWzUD58/jZsiUgf8qIu349OA6UVzBJoVQ301wp+4R/Qm9rvvbf3XqO6WY3UQj91VoI6BQ0z+LOcDhoWuRkqwr7QVCgwS9CQ+H5TPJ2GVewX2NWOtg45EuyzDXY0rM0a93NdFNTM9HNDelkV0S7JBHo1FR1EASDDstP8wz54e/oX+3AE5B3t21jJqKJ5IET1u+qs7ls8vKR7tzekQfPbHNu0GJeWxGg1xOSNDGbRkEkAsHEy0OKV7QDvdM1w2RtTHQoRamsk0a2p0FmsTAhC9kyPeoLMBorVzIFpUeO6m2IT6YmwaToeKaquKelmA3Wc/yQVQdRb6ahFy8A4YRy54KnTEpGstuyo9uYjpbHNKbNpAiroP9EsImMCQj0Z3ZSbYvVwkRqQGFdklRXQIiEutV8PAlW5XglllJZhGaB136dnISs=
-    bucket: story.interviewjs.io
-    local-dir: packages/viewer/build/
-    acl: public_read
-    on:
-      repo: AJInteractive/InterviewJS
-      branch: master
-
-  - provider: s3
-    skip_cleanup: true
-    access_key_id: AKIAIZT2LU3JYJK66ENA
-    secret_access_key:
-      secure: rAtDOSOOnIucrqXHcqsDSYUApS8Zz8lGS3lWImAPKOmwf/NtmiP9LsmnQV4iEmCP6x4LkEqnKH2mLoKItJPrQE21efx9EryajF0NDCc5g3NfI2rhIyY3ujK0SRx87R1ysHjTkPX3aFk2zCo13PLgQmTNYHjtGZ106nh56iIiqOV/QQ0kCp5z27v20cJ2d4W4qAY0RrDxdnEeYXLeGwj8VMr9vGGRd8MeeJeWmQJ4ek1lOeBSJ+Z75Q3PCWko2BWzUD58/jZsiUgf8qIu349OA6UVzBJoVQ301wp+4R/Qm9rvvbf3XqO6WY3UQj91VoI6BQ0z+LOcDhoWuRkqwr7QVCgwS9CQ+H5TPJ2GVewX2NWOtg45EuyzDXY0rM0a93NdFNTM9HNDelkV0S7JBHo1FR1EASDDstP8wz54e/oX+3AE5B3t21jJqKJ5IET1u+qs7ls8vKR7tzekQfPbHNu0GJeWxGg1xOSNDGbRkEkAsHEy0OKV7QDvdM1w2RtTHQoRamsk0a2p0FmsTAhC9kyPeoLMBorVzIFpUeO6m2IT6YmwaToeKaquKelmA3Wc/yQVQdRb6ahFy8A4YRy54KnTEpGstuyo9uYjpbHNKbNpAiroP9EsImMCQj0Z3ZSbYvVwkRqQGFdklRXQIiEutV8PAlW5XglllJZhGaB136dnISs=
-    bucket: story.interviewjs.net
-    local-dir: packages/viewer/build/
-    acl: public_read
-    on:
-      repo: AJInteractive/InterviewJS
-      branch: develop
-
-  - provider: s3
-    skip_cleanup: true
-    access_key_id: AKIAIZT2LU3JYJK66ENA
-    secret_access_key:
-      secure: rAtDOSOOnIucrqXHcqsDSYUApS8Zz8lGS3lWImAPKOmwf/NtmiP9LsmnQV4iEmCP6x4LkEqnKH2mLoKItJPrQE21efx9EryajF0NDCc5g3NfI2rhIyY3ujK0SRx87R1ysHjTkPX3aFk2zCo13PLgQmTNYHjtGZ106nh56iIiqOV/QQ0kCp5z27v20cJ2d4W4qAY0RrDxdnEeYXLeGwj8VMr9vGGRd8MeeJeWmQJ4ek1lOeBSJ+Z75Q3PCWko2BWzUD58/jZsiUgf8qIu349OA6UVzBJoVQ301wp+4R/Qm9rvvbf3XqO6WY3UQj91VoI6BQ0z+LOcDhoWuRkqwr7QVCgwS9CQ+H5TPJ2GVewX2NWOtg45EuyzDXY0rM0a93NdFNTM9HNDelkV0S7JBHo1FR1EASDDstP8wz54e/oX+3AE5B3t21jJqKJ5IET1u+qs7ls8vKR7tzekQfPbHNu0GJeWxGg1xOSNDGbRkEkAsHEy0OKV7QDvdM1w2RtTHQoRamsk0a2p0FmsTAhC9kyPeoLMBorVzIFpUeO6m2IT6YmwaToeKaquKelmA3Wc/yQVQdRb6ahFy8A4YRy54KnTEpGstuyo9uYjpbHNKbNpAiroP9EsImMCQj0Z3ZSbYvVwkRqQGFdklRXQIiEutV8PAlW5XglllJZhGaB136dnISs=
-    bucket: interviewjs.io
-    # local-dir: packages/site/public/
-    local-dir: site
-    acl: public_read
-    on:
-      repo: AJInteractive/InterviewJS
-      branch: master
-
-  - provider: s3
-    skip_cleanup: true
-    access_key_id: AKIAIZT2LU3JYJK66ENA
-    secret_access_key:
-      secure: rAtDOSOOnIucrqXHcqsDSYUApS8Zz8lGS3lWImAPKOmwf/NtmiP9LsmnQV4iEmCP6x4LkEqnKH2mLoKItJPrQE21efx9EryajF0NDCc5g3NfI2rhIyY3ujK0SRx87R1ysHjTkPX3aFk2zCo13PLgQmTNYHjtGZ106nh56iIiqOV/QQ0kCp5z27v20cJ2d4W4qAY0RrDxdnEeYXLeGwj8VMr9vGGRd8MeeJeWmQJ4ek1lOeBSJ+Z75Q3PCWko2BWzUD58/jZsiUgf8qIu349OA6UVzBJoVQ301wp+4R/Qm9rvvbf3XqO6WY3UQj91VoI6BQ0z+LOcDhoWuRkqwr7QVCgwS9CQ+H5TPJ2GVewX2NWOtg45EuyzDXY0rM0a93NdFNTM9HNDelkV0S7JBHo1FR1EASDDstP8wz54e/oX+3AE5B3t21jJqKJ5IET1u+qs7ls8vKR7tzekQfPbHNu0GJeWxGg1xOSNDGbRkEkAsHEy0OKV7QDvdM1w2RtTHQoRamsk0a2p0FmsTAhC9kyPeoLMBorVzIFpUeO6m2IT6YmwaToeKaquKelmA3Wc/yQVQdRb6ahFy8A4YRy54KnTEpGstuyo9uYjpbHNKbNpAiroP9EsImMCQj0Z3ZSbYvVwkRqQGFdklRXQIiEutV8PAlW5XglllJZhGaB136dnISs=
-    bucket: styleguide.interviewjs.io
-    local-dir: packages/styleguide/catalog/build/
-    acl: public_read
-    on:
-      repo: AJInteractive/InterviewJS
-      branch: master
+- provider: s3
+  skip_cleanup: true
+  access_key_id: "$AWS_ACCESS_KEY_ID"
+  secret_access_key: "$AWS_SECRET_ACCESS_KEY"
+  bucket: composer.interviewjs.io
+  local-dir: packages/composer/build/
+  acl: public_read
+  on:
+    repo: AJInteractive/InterviewJS
+    branch: master
+- provider: s3
+  skip_cleanup: true
+  access_key_id: "$AWS_ACCESS_KEY_ID"
+  secret_access_key: "$AWS_SECRET_ACCESS_KEY"
+  bucket: composer.interviewjs.net
+  local-dir: packages/composer/build/
+  acl: public_read
+  on:
+    repo: AJInteractive/InterviewJS
+    branch: develop
+- provider: s3
+  skip_cleanup: true
+  access_key_id: "$AWS_ACCESS_KEY_ID"
+  secret_access_key: "$AWS_SECRET_ACCESS_KEY"
+  bucket: story.interviewjs.io
+  local-dir: packages/viewer/build/
+  acl: public_read
+  on:
+    repo: AJInteractive/InterviewJS
+    branch: master
+- provider: s3
+  skip_cleanup: true
+  access_key_id: "$AWS_ACCESS_KEY_ID"
+  secret_access_key: "$AWS_SECRET_ACCESS_KEY"
+  bucket: story.interviewjs.net
+  local-dir: packages/viewer/build/
+  acl: public_read
+  on:
+    repo: AJInteractive/InterviewJS
+    branch: develop
+- provider: s3
+  skip_cleanup: true
+  access_key_id: "$AWS_ACCESS_KEY_ID"
+  secret_access_key: "$AWS_SECRET_ACCESS_KEY"
+  bucket: interviewjs.io
+  local-dir: site
+  acl: public_read
+  on:
+    repo: AJInteractive/InterviewJS
+    branch: master
+- provider: s3
+  skip_cleanup: true
+  access_key_id: "$AWS_ACCESS_KEY_ID"
+  secret_access_key: "$AWS_SECRET_ACCESS_KEY"
+  bucket: styleguide.interviewjs.io
+  local-dir: packages/styleguide/catalog/build/
+  acl: public_read
+  on:
+    repo: AJInteractive/InterviewJS
+    branch: master
+env:
+  global:
+  - secure: HwnMVdnzc4OuXg7w3p/zT/u8cF3vCxBGbPmJN+euLnNTnLAQ7B6DGFwVYRzXwPvkO8hHjlBs4K6DtJW2LTqECPACP60+tdLKbWhtKYQ37ZSj+G1wBNiM2jkWRgpUPXzK6HRyYgw+J2qMVVdRpRLVcPvnYkVn/s+dE9F7hq/M79d1hqUjIW0NmuoULKIAZ+1ygqYzB2V0HmyfvrZ2Qb9MZP9jbwcsOUxYnZGRS9rYLj7aUlpXpZi9ChPbIkPdb4BF9Vaj3wg8HhXPMuBhYmFToJfySKECrwvRG39VfhcfymYA2TtHGCilx9EwE1T/6ZEJvvKS2Cso/xWOD24eEVQcrb9UFN3BVBOvgEfpX1nAeqcrw/q4IwHz+bwQnujooK/SXn0xA8r0TJXQxoAPrSMTTjsKdpq5N6pjNwxqXIjlrMbPivVzM9TbM663Civ6FKMOxwcg0QzYaS7JrqY5GzZRIr8vW8HnqFa9XXO9Rjuu4ZQ0IGlzJD+7gAJ1uJr/tj/V614vptuyfX7MCd3+NW27+ifqKDGup28E0l4XJBWIIi64N1CABLEqP0YBHbDvJOAX3Yvhz8NeHjV+5mCEs8tOwinfMktlt+/udGb6+TCBBhRDGO9CcJbaoLp7nd6kdbw4u/hEaGLWFB8ppgu2AOBoDrvBIiYOK/rfV8fXp3CQX/A=
+  - secure: dh+hGqHeOqjj9FsfGJxKNHOF5s+xPHOo53tUHyd7bAMBemRQYNG0ruaSdNq/bEavvS9a3HbFvKj+LkvpWoXwfnQE+J5vm5gROjpYdhnD9RP8fKW8KeJHP3Z+RrRdx2kNdCHKAQVbVxGAaMEQonOFJee1t1GmpbqkS3Rcm3MSnUb1JDEqu40DzuLandpLz8v4+FYxiOJj3Bq5WtjUrZ8ZP6rYtDVkROy3mDkcmCq7nROuP1lpqr/kbgBN2f+UtuqnyDibLLMAnz18O1IBj/KWvmqZWLfEtMX3QkBt1yeeuxyncclv4s/d4IEcdeXUJ99fM/kloQrrWTu6Ero7LmxAmdkXi2WBn90TKmvIC2rUti/DQU2ySDA2Kx+9+uZTu0ae5hofMuChA9wIRca/HxnIv7PwyvSCLn99GzXA8qw6RUPKosADRY/prJ7IVanA0Xgx7y/UslT1AzmGsqnOeQKe+jrXkVK0nlbghgUd5zMiXLhTi9aYAD6Cy0vuXiZCxDAi30N8l85fFATy+tRwSBSIcw/Nt+XiI3rIq4ECMIJTn3j1Ac4siCRrB3dSIavOYd529qrX/M74ZtTJv5BO8fahI9sLCp9d4MkIRlG0WepRd/AoEJZP7d9txrQl25JtIaYfAR9o+nyYEKosAcKYIhILtLMU+Q/+kUinXQJhF9ZOo1Y=
