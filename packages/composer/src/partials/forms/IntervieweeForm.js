@@ -1,10 +1,14 @@
-import { bool, func, shape, string } from "prop-types";
+/* eslint react/forbid-prop-types: 0 */
+import { bool, func, shape, string, object } from "prop-types";
 import { SketchPicker } from "react-color";
 import css from "styled-components";
 import Dropzone from "react-dropzone";
 import React, { Component } from "react";
 import Pica from "pica/dist/pica";
-// import { S3Image } from "aws-amplify-react";
+import shortUuid from "short-uuid";
+import uuidv5 from "uuid/v5";
+import sanitizeFilename from "sanitize-filename";
+import { Storage } from "aws-amplify";
 
 import {
   Action,
@@ -26,6 +30,20 @@ import {
 } from "interviewjs-styleguide";
 
 import validateField from "./validateField";
+
+
+const fileToKey = (data, storyId) => {
+    const { name, type } = data;
+    // console.log(name, type);
+
+    let namespace = storyId;
+    if (namespace.indexOf("_")) namespace = namespace.split("_").pop();
+    if (namespace.length < 36) namespace = shortUuid().toUUID(namespace);
+
+    const uuid = uuidv5(`${type},${name}`, namespace);
+    return `${shortUuid().fromUUID(uuid)}-${name}`;
+};
+
 
 const ColorPickerWrapper = css.span`
   position: absolute;
@@ -86,7 +104,7 @@ export default class IntervieweeForm extends Component {
   };
 
   handleFile(f) {
-    const { preview } = f[0];
+    const { type, preview, name } = f[0];
     const offScreenImage = document.createElement("img");
     offScreenImage.addEventListener("load", () => {
       const targetWidth =
@@ -115,15 +133,30 @@ export default class IntervieweeForm extends Component {
         })
         .then((result) => pica.toBlob(result, "image/jpeg", 0.9))
         .then((blob) => {
-          const reader = new FileReader();
-          reader.onloadend = () => {
-            console.log("data url length", reader.result.length);
-            const base64data = reader.result.length > 3e6 ? "" : reader.result;
+          // const reader = new FileReader();
+          // reader.onloadend = () => {
+          //   console.log("data url length", reader.result.length);
+          //   const base64data = reader.result.length > 3e6 ? "" : reader.result;
+          //   this.setState({
+          //     formData: { ...this.state.formData, avatar: base64data }
+          //   });
+          // };
+          // reader.readAsDataURL(blob);
+          //
+          const fkey = fileToKey({type, name: sanitizeFilename(name.replace(/ /g, "_"))}, this.props.story.id);
+          Storage.put(`files/${this.props.user.id}/${this.props.story.id}/${fkey}`, blob, {
+            bucket: "data.interviewjs.io",
+            level: "public",
+            contentType: type
+          })
+          .then (async result => {
+            console.log(result);
             this.setState({
-              formData: { ...this.state.formData, avatar: base64data }
+              formData: { ...this.state.formData, avatar: `https://story.interviewjs.io/files/${this.props.user.id}/${this.props.story.id}/${fkey}` }
             });
-          };
-          reader.readAsDataURL(blob);
+          })
+          .catch(err => console.log(err));
+          //
         })
         .catch((error) => console.log(error));
     });
@@ -252,8 +285,7 @@ export default class IntervieweeForm extends Component {
             value={this.state.formData.bio}
           />
           <Legend
-            tip="Who is this and what role does this person have in your story?
-            Does s/he have a particular view on the issues raised?"
+            tip="Who is this and what role does this person have in your story? Does s/he have a particular view on the issues raised?"
           >
             i
           </Legend>
@@ -279,6 +311,7 @@ export default class IntervieweeForm extends Component {
               >
                 <p>Drop file here</p>
               </Dropzone>
+              { this.state.formData && this.state.formData.avatar ? <img src={this.state.formData.avatar} alt="Avatar Preview" style={{width: "100%"}}/> : null }
               <TextInput
                 file
                 place="left"
@@ -351,6 +384,8 @@ IntervieweeForm.propTypes = {
   deleteInterviewee: func,
   handleSubmit: func.isRequired,
   persistent: bool,
+  user: object.isRequired,
+  story: object.isRequired,
   interviewee: shape({
     avatar: string,
     bio: string,

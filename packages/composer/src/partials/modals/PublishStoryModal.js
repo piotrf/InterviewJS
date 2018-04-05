@@ -173,6 +173,7 @@ export default class PublishStoryModal extends Component {
             <MetaForm
               handleSubmit={this.handleStep0}
               story={this.props.story}
+              user={this.props.user}
               cta="Confirm"
               required
             />

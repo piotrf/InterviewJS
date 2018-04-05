@@ -52,7 +52,7 @@ const processRecord = (record, callback) => {
   console.log(bucket, key)
   s3.getObject({
     Bucket: bucket,
-    Key: decodeURIComponent(key) // FIXME: assemble from parts
+    Key: decodeURIComponent(key)
   }, (err, data) => {
     if (err) return callback(err);
 
@@ -61,8 +61,11 @@ const processRecord = (record, callback) => {
     story.id = publishId;
     // TODO clean iframes
 
+    let storyBucket = "story.interviewjs.io";
+    if (story.composer && (story.composer.host === "localhost" || story.composer.host === "composer.interviewjs.net" || story.composer.host === "composer.interviewjs.net.s3-website-us-east-1.amazonaws.com")) storyBucket = "story.interviewjs.net";
+
     s3.getObject({
-      Bucket: "story.interviewjs.io",
+      Bucket: storyBucket,
       Key: "index.html"
     }, (err, data) => {
       if (err) return callback(err);
@@ -77,9 +80,6 @@ const processRecord = (record, callback) => {
       const index = data.Body.toString("utf-8")
         .replace("/sample-story/sample-story.js", "./story.js")
         .replace("<head>", `<head>\n${meta.join("\n")}`);
-
-      let storyBucket = "story.interviewjs.io";
-      if (story.composer && (story.composer.host === "localhost" || story.composer.host === "composer.interviewjs.net" || story.composer.host === "composer.interviewjs.net.s3-website-us-east-1.amazonaws.com")) storyBucket = "story.interviewjs.net";
 
       s3.putObject({
         Body: `if (!window.InterviewJS.ignoreSampleStory) { window.InterviewJS.story = ${JSON.stringify(story)} ; }`,
@@ -106,9 +106,6 @@ const processRecord = (record, callback) => {
   });
 };
 
-// export const publish = (event, context, callback) => {
-//   async.map(event.Records, processRecord, callback);
-// };
 
 export const publish = RavenLambdaWrapper.handler(Raven, (event, context, callback) => {
   async.map(event.Records, processRecord, callback);

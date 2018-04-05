@@ -78,7 +78,7 @@ export default class ImagePane extends Component {
   }
 
   handleFile(f) {
-    console.log(f);
+    // console.log(f);
     const { type, preview, name } = f[0];
     if (type === "image/gif") {
       this.handleBlob(f[0], type, name);

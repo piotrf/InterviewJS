@@ -1,7 +1,12 @@
+/* eslint react/forbid-prop-types: 0 */
 import React from "react";
-import { bool, func, shape, string } from "prop-types";
+import { bool, func, shape, string, object } from "prop-types";
 import Dropzone from "react-dropzone";
 import Pica from "pica/dist/pica";
+import shortUuid from "short-uuid";
+import uuidv5 from "uuid/v5";
+import sanitizeFilename from "sanitize-filename";
+import { Storage } from "aws-amplify";
 
 import {
   Actionbar,
@@ -17,6 +22,20 @@ import {
 } from "interviewjs-styleguide";
 
 import validateField from "./validateField";
+
+
+const fileToKey = (data, storyId) => {
+    const { name, type } = data;
+    // console.log(name, type);
+
+    let namespace = storyId;
+    if (namespace.indexOf("_")) namespace = namespace.split("_").pop();
+    if (namespace.length < 36) namespace = shortUuid().toUUID(namespace);
+
+    const uuid = uuidv5(`${type},${name}`, namespace);
+    return `${shortUuid().fromUUID(uuid)}-${name}`;
+};
+
 
 export default class MetaForm extends React.Component {
   constructor(props) {
@@ -66,7 +85,7 @@ export default class MetaForm extends React.Component {
   }
 
   handleFile(key, f) {
-    const { preview } = f[0];
+    const { type, preview, name } = f[0];
     const offScreenImage = document.createElement("img");
     offScreenImage.addEventListener("load", () => {
       const maxWidth = key === "logo" ? 500 : 1000;
@@ -97,15 +116,29 @@ export default class MetaForm extends React.Component {
         })
         .then((result) => pica.toBlob(result, "image/jpeg", 0.9))
         .then((blob) => {
-          const reader = new FileReader();
-          reader.onloadend = () => {
-            console.log("data url length", reader.result.length);
-            const base64data = reader.result.length > 3e6 ? "" : reader.result;
+          // const reader = new FileReader();
+          // reader.onloadend = () => {
+          //   console.log("data url length", reader.result.length);
+          //   const base64data = reader.result.length > 3e6 ? "" : reader.result;
+          //   this.setState({
+          //     formData: { ...this.state.formData, [key]: base64data }
+          //   });
+          // };
+          // reader.readAsDataURL(blob);
+          const fkey = fileToKey({type, name: sanitizeFilename(name.replace(/ /g, "_"))}, this.props.story.id);
+          Storage.put(`files/${this.props.user.id}/${this.props.story.id}/${fkey}`, blob, {
+            bucket: "data.interviewjs.io",
+            level: "public",
+            contentType: type
+          })
+          .then (async result => {
+            console.log(result);
             this.setState({
-              formData: { ...this.state.formData, [key]: base64data }
+              formData: { ...this.state.formData, [key]: `https://story.interviewjs.io/files/${this.props.user.id}/${this.props.story.id}/${fkey}` }
             });
-          };
-          reader.readAsDataURL(blob);
+          })
+          .catch(err => console.log(err));
+          //
         })
         .catch((error) => console.log(error));
     });
@@ -206,6 +239,7 @@ export default class MetaForm extends React.Component {
               >
                 <p>Drop file here</p>
               </Dropzone>
+              { this.state.formData && this.state.formData.cover ? <img src={this.state.formData.cover} alt="Cover Preview" style={{width: "100%"}}/> : null }
               <TextInput
                 file
                 place="left"
@@ -214,8 +248,7 @@ export default class MetaForm extends React.Component {
                 }}
               />
               <Legend
-                tip="Choose a photo if you want a “front page” but make sure
-                you have the copyright!"
+                tip="Choose a photo if you want a “front page” but make sure you have the copyright!"
               >
                 i
               </Legend>
@@ -236,6 +269,7 @@ export default class MetaForm extends React.Component {
               >
                 <p>Drop file here</p>
               </Dropzone>
+              { this.state.formData && this.state.formData.logo ? <img src={this.state.formData.logo} alt="Logo Preview" style={{width: "100%"}}/> : null }
               <TextInput
                 file
                 place="right"
@@ -263,7 +297,9 @@ MetaForm.propTypes = {
   required: bool,
   handleSave: func,
   handleSubmit: func.isRequired,
+  user: object.isRequired,
   story: shape({
+    id: string,
     author: string,
     authorLink: string,
     cover: string,
@@ -278,6 +314,7 @@ MetaForm.defaultProps = {
   handleSave: null,
   required: false,
   story: {
+    id: shortUuid().fromUUID(shortUuid.uuid()),
     author: "",
     authorLink: "",
     cover: "",

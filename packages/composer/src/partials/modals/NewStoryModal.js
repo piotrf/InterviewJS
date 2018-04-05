@@ -70,6 +70,7 @@ export default class NewStoryModal extends Component {
               story={
                 this.state.storyCreated ? this.props.stories[0] : undefined
               }
+              user={this.props.user}
             />
           </Container>
         );
