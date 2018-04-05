@@ -259,10 +259,10 @@ export function syncFirebaseStories(uid, email) {
                   .then(url => {
                     axios.get(url)
                       .then(response => {
-                        console.log('AWS', response.data);
+                        // console.log('AWS', response.data);
 
                         if (firebaseStories[response.data.id] && firebaseStories[response.data.id].version > response.data.version) {
-                          console.log("import updated firebase story");
+                          // console.log("import updated firebase story");
                           dispatch(syncAndSaveStory(firebaseStories[response.data.id]));
                         } else {
                           dispatch(syncStory(response.data));
@@ -276,8 +276,12 @@ export function syncFirebaseStories(uid, email) {
               const awsStoriesIds = stories.map(story => story.key.replace("stories/", "").replace("/story.json", ""));
               for (let i = 0; i < data.length; i++) {
                 if ( !awsStoriesIds.includes(data[i].id) ) {
-                  console.log("import firebase story");
-                  dispatch(syncAndSaveStory(data[i]));
+                  // console.log("import firebase story");
+                  if (data[i].ignore) {
+                    dispatch(noop());
+                  } else {
+                    dispatch(syncAndSaveStory(data[i]));
+                  }
                 }
               }
 
@@ -302,8 +306,12 @@ export function syncFirebaseStories(uid, email) {
                 .then(url => {
                   axios.get(url)
                     .then(response => {
-                      console.log('AWS', response.data);
-                      dispatch(syncStory(response.data));
+                      // console.log('AWS', response.data);
+                      if (response.data.ignore) {
+                        dispatch(noop());
+                      } else {
+                        dispatch(syncStory(response.data));
+                      }
                     })
                     .catch(error => Raven.captureException(error));
                 })
