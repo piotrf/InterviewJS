@@ -78,42 +78,30 @@ const processRecord = (record, callback) => {
         .replace("/sample-story/sample-story.js", "./story.js")
         .replace("<head>", `<head>\n${meta.join("\n")}`);
 
+      let storyBucket = "story.interviewjs.io";
+      if (story.composer && (story.composer.host === "localhost" || story.composer.host === "composer.interviewjs.net" || story.composer.host === "composer.interviewjs.net.s3-website-us-east-1.amazonaws.com")) storyBucket = "story.interviewjs.net";
+
       s3.putObject({
         Body: `if (!window.InterviewJS.ignoreSampleStory) { window.InterviewJS.story = ${JSON.stringify(story)} ; }`,
         ACL: "public-read",
         ContentType: "application/javascript",
-        Bucket: "story.interviewjs.io",
+        Bucket: storyBucket,
         Key: `${publishId}/story.js`
       }, (err, response) => {
         if (err) return callback(err);
 
-        // index
         s3.putObject({
           Body: index,
           ACL: "public-read",
           ContentType: "text/html",
-          Bucket: "story.interviewjs.io",
+          Bucket: storyBucket,
           Key: `${publishId}/index.html`
         }, (err, response) => {
           if (err) return callback(err);
 
           callback(null, publishId);
         });
-        // index
       });
-
-      // s3.putObject({
-      //   Body: index,
-      //   ACL: "public-read",
-      //   ContentType: "text/html",
-      //   Bucket: "story.interviewjs.io",
-      //   Key: `${publishId}/index.html`
-      // }, (err, response) => {
-      //   if (err) return callback(err);
-      //
-      //   callback(null, publishId);
-      // });
-
     });
   });
 };
