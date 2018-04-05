@@ -84,6 +84,9 @@ export default class PublishStoryModal extends Component {
       case "composer.interviewjs.net":
         storyBase = "https://story.interviewjs.net/";
         break;
+      case "localhost":
+        storyBase = "https://story.interviewjs.net/"; // FIXME: local-dev url?
+        break;
       default:
         storyBase = "https://story.interviewjs.io/"; // production
     }
@@ -124,8 +127,14 @@ export default class PublishStoryModal extends Component {
 
   handleStep2() {
     // Publish
-    console.log(this.props.user);
-    Storage.put(`stories/${this.props.user.id}/${this.props.story.id}/story.json`, JSON.stringify(this.props.story), {
+    // console.log(this.props.user);
+    const { story } = this.props;
+    story.composer = {
+      host: document.location.hostname,
+      version: process.env.VERSION,
+    };
+
+    Storage.put(`stories/${this.props.user.id}/${story.id}/story.json`, JSON.stringify(story), {
       bucket: "data.interviewjs.io",
       level: "public",
       contentType: "application/json"
