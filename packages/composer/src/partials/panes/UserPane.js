@@ -18,7 +18,9 @@ import {
   radius,
   setSpace,
   setType,
-  time
+  time,
+  Legend,
+  FormItem
 } from "interviewjs-styleguide";
 
 import PaneFrame from "./PaneFrame";
@@ -324,10 +326,10 @@ export default class UserPane extends React.Component {
               <UserAction dir="row" active>
                 <Container flex={[0, 0, "140px"]} align="center" dir="column">
                   <PageSubtitle typo="p4">
-                    Create Single Interaction
+                    Create an interaction:
                     <Tip
                       position="bottom"
-                      title="Create user interactions that will lead into your interview text. Select text by clicking or write your own - it has to be the user’s voice. Explore all tabs!"
+                      title="Create user interactions that lead into your interview quote.  Select text options, type your own text or question, or choose a multimedia request via the tabs. It has to bein  the user’s voice."
                     >
                       <Icon
                         name="info2"
@@ -343,15 +345,22 @@ export default class UserPane extends React.Component {
                 </Container>
                 <Container flex={[2, 2, "auto"]} fill="grey" dir="column">
                   <CustomActionHolder flex={[0, 0, "50px"]} dir="column">
-                    <TextInput
-                      type="text"
-                      placeholder="Type your own text label…"
-                      maxLength={GLOBALS.fixedButtonCharLimit}
-                      value={this.state.customContinueVal}
-                      onChange={(e) =>
-                        this.customiseActionLabel("customContinueVal", e)
-                      }
-                    />
+                    <FormItem fullWidth>
+                      <TextInput
+                        type="text"
+                        placeholder="Type a comment or question here ..."
+                        maxLength={GLOBALS.fixedButtonCharLimit}
+                        value={this.state.customContinueVal}
+                        onChange={(e) =>
+                          this.customiseActionLabel("customContinueVal", e)
+                        }
+                      />
+                      <Legend 
+                        tip="Type your own user interaction here - a comment or a question to lead into your the interview text in the preview panel."
+                      >
+                        i
+                      </Legend>
+                    </FormItem>
                   </CustomActionHolder>
                   <Container flex={[1, 0, "auto"]} style={{ width: "100%" }}>
                     <PaneTabs>
@@ -436,10 +445,10 @@ export default class UserPane extends React.Component {
                     onChange={(e) => this.toggleAction("enableExplore", e)}
                   >
                     <PageSubtitle typo="p4">
-                      Create Choice Interaction
+                        Add Second Interaction: 
                       <Tip
                         position="bottom"
-                        title="Select to add a second interaction. Together with the first question or user interaction it gives the user choice. Multimedia works well - explore all tabs!"
+                        title="Select to add a second interaction. Together with the first question or user interaction it gives the user choice. Multimedia requests works well - explore all tabs!"
                       >
                         <Icon
                           name="info2"
@@ -456,15 +465,22 @@ export default class UserPane extends React.Component {
                 </Container>
                 <Container flex={[2, 2, "auto"]} fill="grey" dir="column">
                   <CustomActionHolder flex={[0, 0, "50px"]} dir="column">
-                    <TextInput
-                      type="text"
-                      placeholder="Type your own text label…"
-                      maxLength={GLOBALS.fixedButtonCharLimit}
-                      value={this.state.customExploreVal}
-                      onChange={(e) =>
-                        this.customiseActionLabel("customExploreVal", e)
-                      }
-                    />
+                    <FormItem fullWidth>      
+                      <TextInput
+                        type="text"
+                        placeholder="Type your own text label…"
+                        maxLength={GLOBALS.fixedButtonCharLimit}
+                        value={this.state.customExploreVal}
+                        onChange={(e) =>
+                          this.customiseActionLabel("customExploreVal", e)
+                        }
+                      />
+                      <Legend 
+                      tip="Use this box to script the second user interaction or question. It must be in the users voice!"
+                      >
+                        i
+                      </Legend>
+                    </FormItem>                   
                   </CustomActionHolder>
                   <Container flex={[1, 0, "auto"]} style={{ width: "100%" }}>
                     <PaneTabs>
