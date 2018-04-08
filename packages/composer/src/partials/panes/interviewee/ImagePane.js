@@ -1,7 +1,12 @@
-import { func, shape, string } from "prop-types";
+/* eslint react/forbid-prop-types: 0 */
+import { func, shape, string, object } from "prop-types";
 import React, { Component } from "react";
+import { Storage } from "aws-amplify";
 import Dropzone from "react-dropzone";
 import Pica from "pica/dist/pica";
+import shortUuid from "short-uuid";
+import uuidv5 from "uuid/v5";
+import sanitizeFilename from "sanitize-filename";
 
 import {
   BubbleHTMLWrapper,
@@ -14,6 +19,18 @@ import {
 } from "interviewjs-styleguide";
 import PaneFrame from "../PaneFrame";
 
+
+const fileToKey = (data, storyId) => {
+    const { name, type } = data;
+    // console.log(name, type);
+
+    let namespace = storyId;
+    if (namespace.indexOf("_")) namespace = namespace.split("_").pop();
+    if (namespace.length < 36) namespace = shortUuid().toUUID(namespace);
+
+    const uuid = uuidv5(`${type},${name}`, namespace);
+    return `${shortUuid().fromUUID(uuid)}-${name}`;
+};
 
 export default class ImagePane extends Component {
   constructor(props) {
@@ -32,22 +49,39 @@ export default class ImagePane extends Component {
     return null;
   }
 
-  handleBlob(blob) {
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      console.log("data url length", reader.result.length);
-      const base64data = reader.result.length > 3e6 ? '' : reader.result;
-      this.setState({ draft: { ...this.state.draft, value: base64data } }, () =>
+  // handleBlob(blob) {
+  //   const reader = new FileReader();
+  //   reader.onloadend = () => {
+  //     console.log("data url length", reader.result.length);
+  //     const base64data = reader.result.length > 3e6 ? '' : reader.result;
+  //     this.setState({ draft: { ...this.state.draft, value: base64data } }, () =>
+  //       this.props.updateDraft(this.state.draft)
+  //     );
+  //   };
+  //   reader.readAsDataURL(blob);
+  // }
+
+  handleBlob(blob, type, name) {
+    const key = fileToKey({type, name: sanitizeFilename(name.replace(/ /g, "_"))}, this.props.story.id);
+    Storage.put(`files/${this.props.user.id}/${this.props.story.id}/${key}`, blob, {
+      bucket: "data.interviewjs.io",
+      level: "public",
+      contentType: type
+    })
+    .then (async result => {
+      console.log(result);
+      this.setState({ draft: { ...this.state.draft, value: `https://story.interviewjs.io/files/${this.props.user.id}/${this.props.story.id}/${key}` } }, () =>
         this.props.updateDraft(this.state.draft)
       );
-    };
-    reader.readAsDataURL(blob);
+    })
+    .catch(err => console.log(err));
   }
 
   handleFile(f) {
-    const { type, preview } = f[0];
+    // console.log(f);
+    const { type, preview, name } = f[0];
     if (type === "image/gif") {
-      this.handleBlob(f[0]);
+      this.handleBlob(f[0], type, name);
     } else {
       // this.img.src = preview;
       const offScreenImage = document.createElement('img');
@@ -67,7 +101,7 @@ export default class ImagePane extends Component {
           unsharpThreshold: 2,
           transferable: true
         }).then(result => pica.toBlob(result, 'image/jpeg', 0.90))
-          .then(this.handleBlob.bind(this)).catch(error => console.log(error));
+          .then(blob => this.handleBlob(blob, type, name)); // .catch(error => console.log(error)); // Raven should catch this
       });
       offScreenImage.src = preview;
     }
@@ -99,6 +133,7 @@ export default class ImagePane extends Component {
         <Form>
           <FormItem>
             <Label>Upload image</Label>
+
             <Dropzone
               accept="image/jpeg, image/jpg, image/svg, image/gif, image/png"
               ref={(node) => {
@@ -117,6 +152,7 @@ export default class ImagePane extends Component {
                 this.dropzoneRef.open();
               }}
             />
+
             <Legend tip="Select an image with extension of .png, .jpg, .jpeg, .svg or .gif">
               i
             </Legend>
@@ -144,7 +180,9 @@ ImagePane.propTypes = {
     value: string,
     title: string
   }),
-  updateDraft: func.isRequired
+  updateDraft: func.isRequired,
+  story: object.isRequired,
+  user: object.isRequired
 };
 
 ImagePane.defaultProps = {

@@ -2,6 +2,7 @@
   "name": "interviewjs-styleguide",
   "description": "",
   "version": "0.1.1",
+  "author": "Piotr Fedorczyk <piotr@piotrf.pl>",
   "homepage": "https://www.interviewjs.io/styleguide/",
   "dependencies": {
     "catalog": "3.4.0",

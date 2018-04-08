@@ -84,6 +84,9 @@ export default class PublishStoryModal extends Component {
       case "composer.interviewjs.net":
         storyBase = "https://story.interviewjs.net/";
         break;
+      case "localhost":
+        storyBase = "https://story.interviewjs.net/"; // FIXME: local-dev url?
+        break;
       default:
         storyBase = "https://story.interviewjs.io/"; // production
     }
@@ -123,23 +126,28 @@ export default class PublishStoryModal extends Component {
   }
 
   handleStep2() {
-    // Publish
-    console.log(this.props.user);
-    Storage.put(`stories/${this.props.user.id}/${this.props.story.id}/story.json`, JSON.stringify(this.props.story), {
+    const { story } = this.props;
+    if (story.ignore) {
+      this.setState({
+        step: this.state.step + 1,
+        storyKey: null
+      });
+
+      return;
+    }
+
+    story.composer = {
+      host: document.location.hostname,
+      version: process.env.VERSION,
+    };
+
+    Storage.put(`stories/${this.props.user.id}/${story.id}/story.json`, JSON.stringify(story), {
       bucket: "data.interviewjs.io",
       level: "public",
       contentType: "application/json"
     })
     .then (async result => {
       console.log(result);
-
-      // const { result2 } = await API.get("Story", `/publish`, { response: true }); // /${this.props.story.id}
-      // const { result2 } = await API.get("Poll", `/poll`, { response: true }); // /${this.props.story.id}
-      // console.log(result2);
-      // API.get("Poll", `/poll`, { response: true }).then(result2 => console.log(result2));
-
-      // API.post("Push", `/story/${this.props.story.id}`, { response: true, body: { a: 1 } }).then(result2 => console.log(result2));
-
       this.setState({
         step: this.state.step + 1,
         storyKey: computeId(this.props.user.id, this.props.story.id)
@@ -165,6 +173,7 @@ export default class PublishStoryModal extends Component {
             <MetaForm
               handleSubmit={this.handleStep0}
               story={this.props.story}
+              user={this.props.user}
               cta="Confirm"
               required
             />

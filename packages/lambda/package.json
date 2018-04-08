@@ -1,13 +1,13 @@
 {
   "name": "lambda",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "",
   "main": "handler.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "deploy": "serverless deploy --aws-profile interviewjs"
   },
   "keywords": [],
-  "author": "",
+  "author": "Laurian Gridinoc <laurian@gridinoc.name>",
   "license": "MIT",
   "devDependencies": {
     "@sentry/cli": "^1.30.3",

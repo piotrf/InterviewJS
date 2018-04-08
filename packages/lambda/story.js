@@ -52,17 +52,27 @@ const processRecord = (record, callback) => {
   console.log(bucket, key)
   s3.getObject({
     Bucket: bucket,
-    Key: decodeURIComponent(key) // FIXME: assemble from parts
+    Key: decodeURIComponent(key)
   }, (err, data) => {
     if (err) return callback(err);
 
     const story = JSON.parse(data.Body.toString("utf-8"));
 
     story.id = publishId;
-    // TODO clean iframes
+
+    story.interviewees = story.interviewees.map(interviewee => {
+      interviewee.storyline = interviewee.storyline.map(bubble => {
+        if (bubble.type === "embed") bubble.content = filterIframe(bubble.content);
+        return bubble;
+      });
+      return interviewee;
+    });
+
+    let storyBucket = "story.interviewjs.io";
+    if (story.composer && (story.composer.host === "localhost" || story.composer.host === "composer.interviewjs.net" || story.composer.host === "composer.interviewjs.net.s3-website-us-east-1.amazonaws.com")) storyBucket = "story.interviewjs.net";
 
     s3.getObject({
-      Bucket: "story.interviewjs.io",
+      Bucket: storyBucket,
       Key: "index.html"
     }, (err, data) => {
       if (err) return callback(err);
@@ -82,45 +92,27 @@ const processRecord = (record, callback) => {
         Body: `if (!window.InterviewJS.ignoreSampleStory) { window.InterviewJS.story = ${JSON.stringify(story)} ; }`,
         ACL: "public-read",
         ContentType: "application/javascript",
-        Bucket: "story.interviewjs.io",
+        Bucket: storyBucket,
         Key: `${publishId}/story.js`
       }, (err, response) => {
         if (err) return callback(err);
 
-        // index
         s3.putObject({
           Body: index,
           ACL: "public-read",
           ContentType: "text/html",
-          Bucket: "story.interviewjs.io",
+          Bucket: storyBucket,
           Key: `${publishId}/index.html`
         }, (err, response) => {
           if (err) return callback(err);
 
           callback(null, publishId);
         });
-        // index
       });
-
-      // s3.putObject({
-      //   Body: index,
-      //   ACL: "public-read",
-      //   ContentType: "text/html",
-      //   Bucket: "story.interviewjs.io",
-      //   Key: `${publishId}/index.html`
-      // }, (err, response) => {
-      //   if (err) return callback(err);
-      //
-      //   callback(null, publishId);
-      // });
-
     });
   });
 };
 
-// export const publish = (event, context, callback) => {
-//   async.map(event.Records, processRecord, callback);
-// };
 
 export const publish = RavenLambdaWrapper.handler(Raven, (event, context, callback) => {
   async.map(event.Records, processRecord, callback);

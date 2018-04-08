@@ -1,3 +1,4 @@
+/* eslint react/forbid-prop-types: 0 */
 import { arrayOf, func, number, object, string } from "prop-types";
 import css from "styled-components";
 import React from "react";
@@ -83,6 +84,8 @@ export default class Interviewees extends React.Component {
             <IntervieweeForm
               handleCancel={() => this.setState({ editItem: null })}
               handleSubmit={this.createInterviewee}
+              story={this.props.story}
+              user={this.props.user}
             />
           );
         } else if (this.state.editItem === null) {
@@ -142,11 +145,13 @@ export default class Interviewees extends React.Component {
             handleCancel={() => this.setState({ editItem: null })}
             handleSubmit={this.updateInterviewee}
             interviewee={interviewees[this.state.editItem]}
+            story={this.props.story}
+            user={this.props.user}
           />
         );
       }
       return (
-        <IntervieweeForm handleSubmit={this.createInterviewee} persistent />
+        <IntervieweeForm handleSubmit={this.createInterviewee} persistent story={this.props.story} user={this.props.user} />
       );
     };
     return <Container>{getPartialBody()}</Container>;
@@ -161,7 +166,9 @@ Interviewees.propTypes = {
   handleSubmit: func.isRequired,
   interviewees: arrayOf(object),
   storyIndex: number.isRequired,
-  updateInterviewee: func.isRequired
+  updateInterviewee: func.isRequired,
+  user: object.isRequired,
+  story: object.isRequired,
 };
 
 Interviewees.defaultProps = {

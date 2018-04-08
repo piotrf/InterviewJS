@@ -1,4 +1,4 @@
-if (!window.InterviewJS.ignoreSampleStory) {
+if (!window.InterviewJS.ignoreSampleStory && document.location.hostname === "localhost") {
   window.InterviewJS.story = {
     title: "Britain’s modern slave trade",
     id: "sample-story",
