@@ -141,7 +141,7 @@ class Storyline extends Component {
             displayType={getBubbleDisplayType()}
             loading={animateAndDelay}
             persona="interviewee"
-            theme={{ backg: interviewee.color }}
+            theme={{ backg: interviewee.color, font: "PT sans" }}
           >
             {getBubbleContent()}
           </Bubble>
@@ -169,7 +169,11 @@ class Storyline extends Component {
 
       return (
         <BubbleBlock key={index} persona="user">
-          <Bubble persona="user" animated={animateAndDelay}>
+          <Bubble 
+            persona="user" 
+            animated={animateAndDelay}
+            theme={{font: "PT sans"}}
+            >
             {getBubbleContent()}
           </Bubble>
         </BubbleBlock>
@@ -181,7 +185,10 @@ class Storyline extends Component {
       if (type === "switchTo") {
         return (
           <BubbleBlock key={index}>
-            <Bubble persona="system">
+            <Bubble 
+              persona="system"
+              theme={{font: "PT sans"}}
+            >
               Choose another interviewee to talk to:
             </Bubble>
             {story.interviewees.map(
@@ -191,6 +198,7 @@ class Storyline extends Component {
                     key={character.name}
                     persona="system"
                     onClick={() => this.props.switchChat(character.id)}
+                    theme={{font: "PT sans"}}
                   >
                     <Container dir="row">
                       <AvatarHolder flex={[1, 0, "auto"]}>

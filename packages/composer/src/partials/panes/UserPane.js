@@ -302,12 +302,17 @@ export default class UserPane extends React.Component {
                   fixed
                   primary={!enableExplore}
                   secondary={!!enableExplore}
+                  theme={{font: "PT sans"}}
                 >
                   {continueVal}
                 </Action>
               ) : null}
               {enableExplore ? (
-                <Action fixed primary>
+                <Action 
+                  fixed 
+                  primary
+                  theme={{font: "PT sans"}}
+                >
                   {exploreVal}
                 </Action>
               ) : null}
