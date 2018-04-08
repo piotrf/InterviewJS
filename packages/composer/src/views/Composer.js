@@ -303,7 +303,7 @@ export default class ComposerView extends React.Component {
           <PageHead>
             <Container flex={[1, 1, `${100 / 3}%`]} padded>
               <Action onClick={() => this.props.router.push(`/stories`)}>
-                <Icon name="arrow-left" size="x" /> Story overview
+                <Icon name="arrow-left" size="x" /> My story library
               </Action>
               <Separator dir="v" size="m" />
               <Action
