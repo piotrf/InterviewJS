@@ -59,7 +59,14 @@ const processRecord = (record, callback) => {
     const story = JSON.parse(data.Body.toString("utf-8"));
 
     story.id = publishId;
-    // TODO clean iframes
+
+    story.interviewees = story.interviewees.map(interviewee => {
+      interviewee.storyline = interviewee.storyline.map(bubble => {
+        if (bubble.type === "embed") bubble.content = filterIframe(bubble.content);
+        return bubble;
+      });
+      return interviewee;
+    });
 
     let storyBucket = "story.interviewjs.io";
     if (story.composer && (story.composer.host === "localhost" || story.composer.host === "composer.interviewjs.net" || story.composer.host === "composer.interviewjs.net.s3-website-us-east-1.amazonaws.com")) storyBucket = "story.interviewjs.net";
