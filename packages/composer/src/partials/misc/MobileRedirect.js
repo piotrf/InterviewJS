@@ -26,7 +26,7 @@ const MobileRedirectEl = css(Container)`
 const MobileRedirect = (props) => (
   <MobileRedirectEl key="Placeholder">
     <Container>
-      <PageTitle typo="h2">This page works only on desktop</PageTitle>
+      <PageTitle typo="h2">The composer works exclusively on desktops. Make sure your browser window is expanded.</PageTitle>
       <Separator silent size="m" />
       <Actionbar>
         <Action primary fixed onClick={() => props.router.push(`/stories`)}>

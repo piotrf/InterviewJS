@@ -1,5 +1,5 @@
 import css from "styled-components";
-import {} from "prop-types";
+import { bool } from "prop-types";
 
 import { setSpace } from "../../../utils";
 
@@ -38,10 +38,15 @@ const FormItem = css.fieldset`
   & sup + textarea {
     ${setSpace("prl")};
   }
+  ${({ fullWidth }) => (fullWidth ? `width:100%` : ``)};
 `;
 
-FormItem.propTypes = {};
+FormItem.propTypes = {
+  fullWidth: bool
+};
 
-FormItem.defaultProps = {};
+FormItem.defaultProps = {
+  fullWidth: false
+};
 
 export default FormItem;

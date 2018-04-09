@@ -214,7 +214,7 @@ export default class PublishStoryModal extends Component {
         return (
           <Container limit="s" align="center">
             <PageSubtitle typo="h3">
-              Well done! Your story is now up running. Here’s a preview:
+              Well done! Your story is now up and running. Here’s a preview:
             </PageSubtitle>
             <Separator size="m" silent />
             <PreviewWrapper>

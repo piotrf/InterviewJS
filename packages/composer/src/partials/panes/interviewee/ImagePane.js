@@ -153,7 +153,7 @@ export default class ImagePane extends Component {
               }}
             />
 
-            <Legend tip="Select an image with extension of .png, .jpg, .jpeg, .svg or .gif">
+            <Legend tip="Select an image format with the extension .jpeg, .png, .svg or .gif.">
               i
             </Legend>
           </FormItem>
@@ -167,6 +167,9 @@ export default class ImagePane extends Component {
               required
               type="text"
             />
+            <Legend tip="Type text for image caption here">
+              i
+            </Legend>
           </FormItem>
         </Form>
       </PaneFrame>
