@@ -1,50 +1,70 @@
 /* eslint react/no-danger: 0 */
-import { arrayOf, func, object, number } from "prop-types";
-import css from "styled-components";
-import React from "react";
+import { arrayOf, func, object, number } from 'prop-types';
+import styled from 'styled-components';
+import React from 'react';
 
 import {
   Action,
   Bubble,
   BubbleBlock,
   Container,
+  Dropdown,
+  DropdownContent,
   Icon,
   color,
   radius,
   setSpace,
   skin
-} from "interviewjs-styleguide";
+} from 'interviewjs-styleguide';
 
-import { filterIframe } from "../../../util/IframeSanitizer";
+import { filterIframe } from '../../../util/IframeSanitizer';
 
-const BubbleEdit = css.div`
+const BubbleWrapper = styled.div`
+  cursor: move;
+  margin: 0 -20px;
+  padding: 0 20px;
+  position: relative;
+`;
+const BubbleMove = styled.div`
+  color: ${color.greyM};
   display: none;
+  margin-left: -10px;
   position: absolute;
+  left: 100%;
   top: 50%;
   transform: translateY(-50%);
   z-index: 50;
-  ${({ persona }) =>
-    persona === "user"
-      ? `
-    left: 100%;
-  `
-      : `
-    right: 100%;
-  `}
+`;
+const BubbleEdit = styled.div`
+  ${setSpace('phs')};
+  align-content: center;
+  align-items: center;
+  bottom: -5px;
+  display: flex;
+  justify-content: flex-start;
+  left: -28px;
+  position: absolute;
+  right: -28px;
+  top: -5px;
+  visibility: hidden;
+  z-index: 50;
+  & > * {
+    ${setSpace('mhx')};
+  }
 `;
 
-const UserButtons = css(Container)`
+const UserButtons = styled(Container)`
   justify-content: flex-end;
   align-items: flex-end;
   align-content: flex-end;
   width: 100%;
   & > * {
-    ${setSpace("mlx")}
+    ${setSpace('mlx')};
   }
 `;
-const StorylineEl = css.div`
-  ${setSpace("phl")};
-  ${setSpace("ptm")};
+const StorylineEl = styled.div`
+  ${setSpace('phl')};
+  ${setSpace('ptm')};
   bottom: 0;
   height: 100%;
   left: 0;
@@ -53,17 +73,13 @@ const StorylineEl = css.div`
   right: 0;
   top: 0;
   & > * {
-    ${setSpace("mvm")};
-  }
-  & > * > *:first-child,
-  & > * > *:first-child * {
-    cursor: move !important;
+    ${setSpace('mvm')};
   }
   & > *:first-child {
-    ${setSpace("mtm")};
+    ${setSpace('mtm')};
   }
   & > *:last-child {
-    ${setSpace("mbl")};
+    ${setSpace('mbl')};
   }
   & .BubblePlaceholder {
     background: ${color.greyWt};
@@ -74,25 +90,31 @@ const StorylineEl = css.div`
   }
   & > *:hover {
     ${BubbleEdit} {
+      visibility: visible;
+    }
+    ${BubbleMove} {
       display: block;
     }
   }
 `;
 
-const placeholder = document.createElement("div");
-placeholder.className = "BubblePlaceholder";
+const placeholder = document.createElement('div');
+placeholder.className = 'BubblePlaceholder';
 
 export default class Storyline extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      dropdown: null
+    };
     this.dragEnd = this.dragEnd.bind(this);
     this.dragOver = this.dragOver.bind(this);
     this.dragStart = this.dragStart.bind(this);
+    this.toggleDropdown = this.toggleDropdown.bind(this);
     this.scrollToBottom = this.scrollToBottom.bind(this);
   }
   componentDidMount() {
-    setTimeout(() => this.scrollToBottom("instant"), 300);
+    setTimeout(() => this.scrollToBottom('instant'), 300);
   }
   componentDidUpdate(prevProps) {
     return prevProps.storyline.length < this.props.storyline.length
@@ -101,8 +123,8 @@ export default class Storyline extends React.Component {
   }
   dragStart(e) {
     this.dragged = e.currentTarget;
-    e.dataTransfer.effectAllowed = "move";
-    e.dataTransfer.setData("text/html", this.dragged);
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/html', this.dragged);
   }
   dragEnd() {
     const { currentInterviewee, storyIndex } = this.props;
@@ -114,7 +136,7 @@ export default class Storyline extends React.Component {
       Number.isInteger(to) &&
       this.over.dataset.droppable !== undefined
     ) {
-      this.dragged.style.display = "flex";
+      this.dragged.style.display = 'flex';
       this.dragged.parentNode.removeChild(placeholder);
       const payload = { from, to };
       this.props.moveStorylineItem(storyIndex, currentInterviewee, payload);
@@ -124,8 +146,8 @@ export default class Storyline extends React.Component {
   dragOver(e) {
     e.preventDefault();
     e.stopPropagation();
-    this.dragged.style.display = "none";
-    if (e.target.className === "BubblePlaceholder") return;
+    this.dragged.style.display = 'none';
+    if (e.target.className === 'BubblePlaceholder') return;
     function findDroppableParent(el) {
       while ((el = el.parentElement) && !el.dataset.droppable);
       return el;
@@ -136,12 +158,25 @@ export default class Storyline extends React.Component {
       droppableParent.parentNode.insertBefore(placeholder, droppableParent);
     }
   }
+  toggleDropdown(dropdown) {
+    if (!dropdown) this.setState({ dropdown: null });
+    this.setState({ dropdown });
+    return null;
+  }
+  toggleEdit(i) {
+    this.props.toggleBubbleEdit(i);
+    this.toggleDropdown();
+  }
+  toggleDelete(i) {
+    this.props.deleteStorylineItem(i);
+    this.toggleDropdown();
+  }
   scrollToBottom(behaviour) {
     return this.anchor
       ? this.anchor.scrollIntoView({
-          behavior: behaviour || "smooth",
-          block: "end",
-          inline: "end"
+          behavior: behaviour || 'smooth',
+          block: 'end',
+          inline: 'end'
         })
       : null;
   }
@@ -153,9 +188,9 @@ export default class Storyline extends React.Component {
     const renderUserBubble = (data) => {
       const { content, role } = data;
       return (
-        <Bubble 
-          persona={role} 
-          theme={{ backg: skin.speakerBackg, font:"PT sans" }} 
+        <Bubble
+          persona={role}
+          theme={{ backg: skin.speakerBackg, font: 'PT sans' }}
           plain
         >
           <UserButtons dir="row">
@@ -163,18 +198,14 @@ export default class Storyline extends React.Component {
               <Action
                 primary={!content[1].enabled}
                 secondary={!!content[1].enabled}
-                theme={{font:"PT sans"}}
+                theme={{ font: 'PT sans' }}
                 fixed
               >
                 {content[0].value}
               </Action>
             ) : null}
             {content[1].enabled ? (
-              <Action 
-                primary
-                fixed
-                theme={{font:"PT sans"}}
-              >
+              <Action primary fixed theme={{ font: 'PT sans' }}>
                 {content[1].value}
               </Action>
             ) : null}
@@ -184,45 +215,45 @@ export default class Storyline extends React.Component {
     };
     const renderIntervieweeBubble = (data) => {
       const { content, type, role } = data;
-      if (type === "text") {
+      if (type === 'text') {
         return (
           <Bubble
             displayType="plain"
             persona={role}
-            theme={{ backg: interviewee.color, font:"PT sans" }}
+            theme={{ backg: interviewee.color, font: 'PT sans' }}
           >
             {content.value}
           </Bubble>
         );
-      } else if (type === "link") {
+      } else if (type === 'link') {
         return (
           <Bubble
             displayType="plain"
             persona={role}
-            theme={{ backg: interviewee.color, font:"PT sans" }}
+            theme={{ backg: interviewee.color, font: 'PT sans' }}
           >
             <a href={content.value} target="_blank">
               {content.title ? content.title : content.value}
             </a>
           </Bubble>
         );
-      } else if (type === "image") {
+      } else if (type === 'image') {
         return (
           <Bubble
             displayType="rich"
             persona={role}
-            theme={{ backg: interviewee.color, font:"PT sans" }}
+            theme={{ backg: interviewee.color, font: 'PT sans' }}
           >
             <img src={content.value} alt="" />
             {content.title ? <p>{content.title}</p> : null}
           </Bubble>
         );
-      } else if (type === "embed") {
+      } else if (type === 'embed') {
         return (
           <Bubble
             persona={role}
             displayType="embed"
-            theme={{ backg: interviewee.color, font:"PT sans" }}
+            theme={{ backg: interviewee.color, font: 'PT sans' }}
           >
             <div
               dangerouslySetInnerHTML={{
@@ -231,12 +262,12 @@ export default class Storyline extends React.Component {
             />
           </Bubble>
         );
-      } else if (type === "map") {
+      } else if (type === 'map') {
         return (
           <Bubble
             displayType="embed"
             persona={role}
-            theme={{ backg: interviewee.color, font:"PT sans" }}
+            theme={{ backg: interviewee.color, font: 'PT sans' }}
           >
             <div
               dangerouslySetInnerHTML={{
@@ -255,7 +286,7 @@ export default class Storyline extends React.Component {
           const { role } = storyline[storyItem];
           const item = storyline[storyItem];
           return (
-            <BubbleBlock
+            <BubbleWrapper
               data-droppable
               data-id={i}
               draggable
@@ -263,22 +294,44 @@ export default class Storyline extends React.Component {
               onDragEnd={(e) => this.dragEnd(e)}
               onDragStart={(e) => this.dragStart(e)}
             >
-              {role === "user"
-                ? renderUserBubble(item)
-                : renderIntervieweeBubble(item)}
-              <BubbleEdit persona={role}>
-                {/* <Action iconic onClick={() => this.props.toggleBubbleEdit(i)}>
-                  <Icon name="pen" size="x" />
-                </Action> */}
-                <Action
-                  tone="negative"
-                  iconic
-                  onClick={() => this.props.deleteStorylineItem(i)}
+              <BubbleBlock>
+                {role === 'user'
+                  ? renderUserBubble(item)
+                  : renderIntervieweeBubble(item)}
+              </BubbleBlock>
+              <BubbleEdit>
+                <Dropdown
+                  onRequestClose={() => this.toggleDropdown()}
+                  open={this.state.dropdown === i}
+                  html={
+                    <DropdownContent>
+                      <ul>
+                        <li>
+                          <Action onClick={() => this.toggleEdit(i)}>
+                            Edit bubble
+                          </Action>
+                        </li>
+                        <li>
+                          <Action
+                            tone="negative"
+                            onClick={() => this.toggleDelete(i)}
+                          >
+                            Delete bubble
+                          </Action>
+                        </li>
+                      </ul>
+                    </DropdownContent>
+                  }
                 >
-                  <Icon name="cross" size="x" />
-                </Action>
+                  <Action iconic onClick={() => this.toggleDropdown(i)}>
+                    <Icon name="hdots" size="s" />
+                  </Action>
+                </Dropdown>
               </BubbleEdit>
-            </BubbleBlock>
+              <BubbleMove>
+                <Icon name="reorder" size="s" />
+              </BubbleMove>
+            </BubbleWrapper>
           );
         })}
         <div
@@ -296,7 +349,8 @@ Storyline.propTypes = {
   deleteStorylineItem: func.isRequired,
   moveStorylineItem: func.isRequired,
   storyIndex: number.isRequired,
-  storyline: arrayOf(object)
+  storyline: arrayOf(object),
+  toggleBubbleEdit: func.isRequired
 };
 
 Storyline.defaultProps = {
