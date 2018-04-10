@@ -268,7 +268,6 @@ export default class ComposerView extends React.Component {
   }
 
   toggleBubbleEdit(target) {
-    console.log('toggleBubbleEdit :', target);
     this.setState({ currentBubble: target });
   }
 
@@ -302,8 +301,6 @@ export default class ComposerView extends React.Component {
       return null;
     }
 
-    console.log('COMPOSER PROPS: ', this.props);
-
     const renderSaveIndicator = () => {
       if (this.state.savedLabel === false) {
         return [<Preloader />, <Separator dir="v" size="m" />];
@@ -317,6 +314,8 @@ export default class ComposerView extends React.Component {
       }
       return null;
     };
+
+    console.log('—— currentBubble: ——', this.state.currentBubble);
 
     return [
       <Page key="Page">
