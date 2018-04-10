@@ -166,9 +166,9 @@ export default class ComposerView extends React.Component {
         title: 'Welcome to the InterviewJS dashboard! ',
         text:
           'Here’s where you convert your interviews into messaging exchanges. Follow us on a quick tour. You don’t have to remember everything - once you’re starting to build conversations you can click ‘i’ for extra info and guidance.',
-        selector: '.jr-step9',
+        selector: '.jr-step0',
         style: joyrideStyles,
-        position: 'center'
+        position: 'top-left'
       },
       {
         title: '1. This is the chat panel',
@@ -320,7 +320,7 @@ export default class ComposerView extends React.Component {
     };
 
     return [
-      <Page key="Page" className="jr-step9">
+      <Page key="Page">
         <ErrorBoundary>
           <PageHead>
             <Container flex={[1, 1, `${100 / 3}%`]} padded>
@@ -429,7 +429,7 @@ export default class ComposerView extends React.Component {
       <Joyride
         ref="joyride" /* eslint react/no-string-refs: 0 */
         steps={this.state.joyrideSteps}
-        autoStart
+        autoStart={false}
         showSkipButton
         showStepsProgress
         type="continuous"
