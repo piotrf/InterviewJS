@@ -42,15 +42,11 @@ const BubbleMove = styled.div`
   z-index: 50;
 `;
 const BubbleEdit = styled.div`
-  align-content: center;
-  align-items: center;
   bottom: -5px;
-  display: flex;
-  justify-content: flex-start;
   left: -38px;
   position: absolute;
   right: -38px;
-  top: -5px;
+  top: 0;
   visibility: hidden;
   z-index: 50;
   & > * {

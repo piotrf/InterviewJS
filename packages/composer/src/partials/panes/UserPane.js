@@ -323,6 +323,7 @@ export default class UserPane extends React.Component {
                 <Container flex={[0, 0, '140px']} align="center" dir="column">
                   <PageSubtitle typo="p4">
                     Create an interaction
+                    <br />
                     <Tip
                       position="bottom"
                       title="Create user interactions that lead into your interview quote.  Select text options, type your own text or question, or choose a multimedia request via the tabs. It has to bein  the user’s voice."
@@ -444,6 +445,7 @@ export default class UserPane extends React.Component {
                   >
                     <PageSubtitle typo="p4">
                       Add Second Interaction
+                      <br />
                       <Tip
                         position="bottom"
                         title="Select to add a second interaction. Together with the first question or user interaction it gives the user choice. Multimedia requests works well - explore all tabs!"
