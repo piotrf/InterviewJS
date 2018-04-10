@@ -166,7 +166,7 @@ export default class ComposerView extends React.Component {
         title: 'Welcome to the InterviewJS dashboard! ',
         text:
           'Here’s where you convert your interviews into messaging exchanges. Follow us on a quick tour. You don’t have to remember everything - once you’re starting to build conversations you can click ‘i’ for extra info and guidance.',
-        selector: '.jr-step0',
+        selector: '.jr-intro',
         style: joyrideStyles,
         position: 'top-left'
       },
@@ -272,12 +272,6 @@ export default class ComposerView extends React.Component {
     this.setState({ currentBubble: target });
   }
 
-  joyrideCallback(callback) {
-    if (callback.type === 'finished') {
-      localStorage.setItem('doneComposerTour', true);
-    }
-  }
-
   updateStory(data) {
     const { storyId } = this.props.params;
     const i = this.props.stories.findIndex((story) => story.id === storyId);
@@ -289,6 +283,11 @@ export default class ComposerView extends React.Component {
     this.setState({ savedLabel: false });
     setTimeout(() => this.setState({ savedLabel: true }), 2000);
     setTimeout(() => this.setState({ savedLabel: null }), 5000);
+  }
+
+  joyrideCallback(cb) {
+    if (cb.type === 'finished') localStorage.setItem('doneComposerTour', true);
+    return null;
   }
 
   render() {

@@ -100,7 +100,7 @@ export default class StoryPane extends React.Component {
     const { currentInterviewee } = this.props;
     const { storyline } = interviewees[currentInterviewee];
     return (
-      <PaneEl fill="white" rounded shift dir="column" className="jr-step0">
+      <PaneEl fill="white" rounded shift dir="column" className="jr-intro">
         <PaneHead>
           <IntervieweesWrapper>
             <Interviewees>
