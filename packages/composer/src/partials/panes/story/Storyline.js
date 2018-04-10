@@ -21,13 +21,11 @@ import { filterIframe } from '../../../util/IframeSanitizer';
 
 const BubbleWrapper = styled.div`
   cursor: move;
-  margin: 0 -20px;
-  padding: 0 20px;
   position: relative;
   ${({ forceEdit }) =>
     forceEdit
       ? `
-    & > * { 
+    & > * {
       visibility: visible !important;
     }
   `
@@ -36,23 +34,22 @@ const BubbleWrapper = styled.div`
 const BubbleMove = styled.div`
   color: ${color.greyM};
   display: none;
-  margin-left: -10px;
-  position: absolute;
+  margin-left: 14px;
   left: 100%;
+  position: absolute;
   top: 50%;
   transform: translateY(-50%);
   z-index: 50;
 `;
 const BubbleEdit = styled.div`
-  ${setSpace('phs')};
   align-content: center;
   align-items: center;
   bottom: -5px;
   display: flex;
   justify-content: flex-start;
-  left: -28px;
+  left: -38px;
   position: absolute;
-  right: -28px;
+  right: -38px;
   top: -5px;
   visibility: hidden;
   z-index: 50;
@@ -130,6 +127,7 @@ export default class Storyline extends React.Component {
       : null;
   }
   dragStart(e) {
+    this.setState({ dropdown: null });
     this.dragged = e.currentTarget;
     e.dataTransfer.effectAllowed = 'move';
     e.dataTransfer.setData('text/html', this.dragged);
