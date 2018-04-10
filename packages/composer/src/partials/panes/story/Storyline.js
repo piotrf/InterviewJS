@@ -24,6 +24,14 @@ const BubbleWrapper = styled.div`
   margin: 0 -20px;
   padding: 0 20px;
   position: relative;
+  ${({ forceEdit }) =>
+    forceEdit
+      ? `
+    & > * { 
+      visibility: visible !important;
+    }
+  `
+      : ``};
 `;
 const BubbleMove = styled.div`
   color: ${color.greyM};
@@ -293,6 +301,7 @@ export default class Storyline extends React.Component {
               key={storyItem}
               onDragEnd={(e) => this.dragEnd(e)}
               onDragStart={(e) => this.dragStart(e)}
+              forceEdit={this.state.dropdown === i}
             >
               <BubbleBlock>
                 {role === 'user'
