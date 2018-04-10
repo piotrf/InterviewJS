@@ -34,30 +34,33 @@ const BubbleWrapper = styled.div`
 const BubbleMove = styled.div`
   color: ${color.greyM};
   display: none;
-  margin-left: 14px;
   left: 100%;
+  margin-left: 14px;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   z-index: 50;
 `;
 const BubbleEdit = styled.div`
+  align-content: center;
+  align-items: center;
   bottom: -5px;
+  display: flex;
+  justify-content: flex-start;
   left: -38px;
   position: absolute;
   right: -38px;
-  top: 0;
+  top: -5px;
   visibility: hidden;
   z-index: 50;
   & > * {
     ${setSpace('mhx')};
   }
 `;
-
 const UserButtons = styled(Container)`
-  justify-content: flex-end;
-  align-items: flex-end;
   align-content: flex-end;
+  align-items: flex-end;
+  justify-content: flex-end;
   width: 100%;
   & > * {
     ${setSpace('mlx')};
@@ -292,10 +295,10 @@ export default class Storyline extends React.Component {
               data-droppable
               data-id={i}
               draggable
+              forceEdit={this.state.dropdown === i}
               key={storyItem}
               onDragEnd={(e) => this.dragEnd(e)}
               onDragStart={(e) => this.dragStart(e)}
-              forceEdit={this.state.dropdown === i}
             >
               <BubbleBlock>
                 {role === 'user'
