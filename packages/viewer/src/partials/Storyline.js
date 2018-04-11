@@ -1,8 +1,8 @@
 /* eslint react/no-danger: 0 */
-import { arrayOf, func, string, object, shape } from "prop-types";
-import css from "styled-components";
-import React, { Component } from "react";
-import { withRouter } from "react-router";
+import { arrayOf, func, string, object, shape } from 'prop-types';
+import css from 'styled-components';
+import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 
 import {
   Action,
@@ -14,10 +14,10 @@ import {
   Icon,
   color,
   setSpace
-} from "interviewjs-styleguide";
+} from 'interviewjs-styleguide';
 
 const StorylineEl = css(Container)`
-  ${setSpace("phl")};
+  ${setSpace('phl')};
   border-left: 1px solid ${color.greyHL};
   border-right: 1px solid ${color.greyHL};
   bottom: 0;
@@ -30,7 +30,7 @@ const StorylineEl = css(Container)`
   right: 0;
   top: 0;
   & > * {
-    ${setSpace("mvm")};
+    ${setSpace('mvm')};
   }
   & > *:last-child {
     margin-bottom: 0;
@@ -44,7 +44,7 @@ const Push = css.div`
 `;
 
 const AvatarHolder = css(Container)`
-  ${setSpace("prs")};
+  ${setSpace('prs')};
 `;
 
 class Storyline extends Component {
@@ -56,9 +56,9 @@ class Storyline extends Component {
     this.scrollToBottom = this.scrollToBottom.bind(this);
   }
   componentDidMount() {
-    setTimeout(() => this.scrollToBottom("instant"), 0);
-    setTimeout(() => this.scrollToBottom("instant"), 300);
-    setTimeout(() => this.scrollToBottom("instant"), 400);
+    setTimeout(() => this.scrollToBottom('instant'), 0);
+    setTimeout(() => this.scrollToBottom('instant'), 300);
+    setTimeout(() => this.scrollToBottom('instant'), 400);
     this.setState({ replayCachedHistory: false });
   }
   componentWillReceiveProps(nextProps) {
@@ -69,8 +69,8 @@ class Storyline extends Component {
   componentDidUpdate(prevProps) {
     if (prevProps.currentIntervieweeId !== this.props.currentIntervieweeId) {
       this.setState({ replayCachedHistory: false });
-      setTimeout(() => this.scrollToBottom("instant"), 0);
-      setTimeout(() => this.scrollToBottom("instant"), 350);
+      setTimeout(() => this.scrollToBottom('instant'), 0);
+      setTimeout(() => this.scrollToBottom('instant'), 350);
     }
     setTimeout(() => this.scrollToBottom(), 0);
     setTimeout(() => this.scrollToBottom(), 350);
@@ -82,9 +82,9 @@ class Storyline extends Component {
   scrollToBottom(behaviour) {
     return this.anchor
       ? this.anchor.scrollIntoView({
-          behavior: behaviour || "smooth",
-          block: "end",
-          inline: "end"
+          behavior: behaviour || 'smooth',
+          block: 'end',
+          inline: 'end'
         })
       : null;
   }
@@ -100,22 +100,22 @@ class Storyline extends Component {
 
       const getBubbleContent = () => {
         switch (type) {
-          case "text":
+          case 'text':
             return <p>{content.value}</p>;
-          case "image":
+          case 'image':
             return [
               <img src={content.value} alt={content.title} key="image" />,
               content.title ? <p key="caption">{content.title}</p> : null
             ];
-          case "link":
+          case 'link':
             return (
               <a href={content.value} target="_blank">
                 {content.title ? content.title : content.value}
               </a>
             );
-          case "embed":
-          case "map":
-          case "media":
+          case 'embed':
+          case 'map':
+          case 'media':
             return <div dangerouslySetInnerHTML={{ __html: content.value }} />;
           default:
             return null;
@@ -123,14 +123,14 @@ class Storyline extends Component {
       };
 
       const getBubbleDisplayType = () => {
-        const isEmbed = ["embed", "media", "map"].includes(type);
-        const isImage = type === "image";
+        const isEmbed = ['embed', 'media', 'map'].includes(type);
+        const isImage = type === 'image';
         if (isEmbed) {
-          return "embed";
+          return 'embed';
         } else if (isImage) {
-          return "rich";
+          return 'rich';
         }
-        return "plain";
+        return 'plain';
       };
 
       return (
@@ -141,7 +141,7 @@ class Storyline extends Component {
             displayType={getBubbleDisplayType()}
             loading={animateAndDelay}
             persona="interviewee"
-            theme={{ backg: interviewee.color, font: "PT sans" }}
+            theme={{ backg: interviewee.color, font: 'PT sans' }}
           >
             {getBubbleContent()}
           </Bubble>
@@ -153,15 +153,15 @@ class Storyline extends Component {
       const { type } = item;
 
       const getBubbleContent = () => {
-        if (type === "ignore" || type === "explore") {
+        if (type === 'ignore' || type === 'explore') {
           const { i } = item;
           const { content } = storyline[i];
           const filterByType = () =>
             content.findIndex((contentEl) => contentEl.type === type);
           return content[filterByType()].value;
-        } else if (type === "diss") {
+        } else if (type === 'diss') {
           return item.value;
-        } else if (type === "emoji") {
+        } else if (type === 'emoji') {
           return <Icon name={item.value} />;
         }
         return null;
@@ -169,11 +169,11 @@ class Storyline extends Component {
 
       return (
         <BubbleBlock key={index} persona="user">
-          <Bubble 
-            persona="user" 
+          <Bubble
+            persona="user"
             animated={animateAndDelay}
-            theme={{font: "PT sans"}}
-            >
+            theme={{ font: 'PT sans' }}
+          >
             {getBubbleContent()}
           </Bubble>
         </BubbleBlock>
@@ -182,13 +182,10 @@ class Storyline extends Component {
 
     const renderSystemBubble = (item, index) => {
       const { type } = item;
-      if (type === "switchTo") {
+      if (type === 'switchTo') {
         return (
           <BubbleBlock key={index}>
-            <Bubble 
-              persona="system"
-              theme={{font: "PT sans"}}
-            >
+            <Bubble persona="system" theme={{ font: 'PT sans' }}>
               Choose another interviewee to talk to:
             </Bubble>
             {story.interviewees.map(
@@ -198,13 +195,13 @@ class Storyline extends Component {
                     key={character.name}
                     persona="system"
                     onClick={() => this.props.switchChat(character.id)}
-                    theme={{font: "PT sans"}}
+                    theme={{ font: 'PT sans' }}
                   >
                     <Container dir="row">
-                      <AvatarHolder flex={[1, 0, "auto"]}>
+                      <AvatarHolder flex={[1, 0, 'auto']}>
                         <Avatar image={character.avatar} size="s" />
                       </AvatarHolder>
-                      <Container flex={[1, 1, "100%"]}>
+                      <Container flex={[1, 1, '100%']}>
                         <Action
                           onClick={() => this.props.switchChat(character.id)}
                         >
@@ -217,7 +214,7 @@ class Storyline extends Component {
             )}
           </BubbleBlock>
         );
-      } else if (type === "quit") {
+      } else if (type === 'quit') {
         return <Message delay={350}>{interviewee.name} left the chat</Message>;
       }
       return null;
@@ -229,11 +226,11 @@ class Storyline extends Component {
         {history.length > 0
           ? history.map((item, index) => {
               const { role } = item;
-              if (role === "interviewee") {
+              if (role === 'interviewee') {
                 return renderIntervieweeBubble(item, index);
-              } else if (role === "user") {
+              } else if (role === 'user') {
                 return renderUserBubble(item, index);
-              } else if (role === "system") {
+              } else if (role === 'system') {
                 return renderSystemBubble(item, index);
               }
               return null;

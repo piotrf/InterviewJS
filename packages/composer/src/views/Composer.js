@@ -374,6 +374,7 @@ export default class ComposerView extends React.Component {
             <Container flex={[0, 1, `400px`]} className="jr-step1">
               <StoryPane
                 {...this.props}
+                currentBubble={this.state.currentBubble}
                 currentInterviewee={this.state.currentInterviewee}
                 story={story}
                 storyIndex={storyIndex}

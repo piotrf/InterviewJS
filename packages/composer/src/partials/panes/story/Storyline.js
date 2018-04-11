@@ -14,7 +14,8 @@ import {
   color,
   radius,
   setSpace,
-  skin
+  skin,
+  time
 } from 'interviewjs-styleguide';
 
 import { filterIframe } from '../../../util/IframeSanitizer';
@@ -22,6 +23,7 @@ import { filterIframe } from '../../../util/IframeSanitizer';
 const BubbleWrapper = styled.div`
   cursor: move;
   position: relative;
+  transition: opacity ${time.m};
   ${({ forceEdit }) =>
     forceEdit
       ? `
@@ -30,6 +32,24 @@ const BubbleWrapper = styled.div`
     }
   `
       : ``};
+  ${({ fadeOut }) => (fadeOut ? `opacity: 0.5` : ``)};
+
+  ${({ editable }) =>
+    editable
+      ? `
+      box-shadow: 0 0 0 5px ${color.greenM}, 0 0 10px 2px ${color.shadowLLt};
+      overflow: hidden;
+  `
+      : ``};
+
+  border-radius: ${({ persona }) => {
+    if (persona === 'user') {
+      return `${radius.h} ${radius.h} ${radius.s} ${radius.h}`;
+    } else if (persona === 'interviewee') {
+      return `${radius.h} ${radius.h} ${radius.h} ${radius.s}`;
+    }
+    return radius.h;
+  }};
 `;
 const BubbleMove = styled.div`
   color: ${color.greyM};
@@ -295,10 +315,15 @@ export default class Storyline extends React.Component {
               data-droppable
               data-id={i}
               draggable
+              editable={this.props.currentBubble === i}
               forceEdit={this.state.dropdown === i}
               key={storyItem}
               onDragEnd={(e) => this.dragEnd(e)}
               onDragStart={(e) => this.dragStart(e)}
+              persona={role}
+              fadeOut={
+                this.props.currentBubble && this.props.currentBubble !== i
+              }
             >
               <BubbleBlock>
                 {role === 'user'
@@ -351,6 +376,7 @@ export default class Storyline extends React.Component {
 }
 
 Storyline.propTypes = {
+  currentBubble: number.isRequired,
   currentInterviewee: number.isRequired,
   deleteStorylineItem: func.isRequired,
   moveStorylineItem: func.isRequired,
