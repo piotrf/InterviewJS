@@ -322,7 +322,8 @@ export default class Storyline extends React.Component {
               onDragStart={(e) => this.dragStart(e)}
               persona={role}
               fadeOut={
-                this.props.currentBubble && this.props.currentBubble !== i
+                this.props.currentBubble !== null &&
+                this.props.currentBubble !== i
               }
             >
               <BubbleBlock>
