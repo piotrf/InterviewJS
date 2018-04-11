@@ -408,7 +408,7 @@ export default class Storyline extends React.Component {
 }
 
 Storyline.propTypes = {
-  currentBubble: number.isRequired,
+  currentBubble: number,
   currentInterviewee: number.isRequired,
   deleteStorylineItem: func.isRequired,
   moveStorylineItem: func.isRequired,
@@ -418,5 +418,6 @@ Storyline.propTypes = {
 };
 
 Storyline.defaultProps = {
+  currentBubble: null,
   storyline: []
 };

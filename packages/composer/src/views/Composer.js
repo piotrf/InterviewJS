@@ -249,7 +249,10 @@ export default class ComposerView extends React.Component {
   }
 
   switchInterviewee(interviewee) {
-    this.setState({ currentInterviewee: interviewee });
+    this.setState({
+      currentInterviewee: interviewee,
+      currentBubble: null
+    });
   }
 
   deleteInterviewee(story, interviewee) {
@@ -363,14 +366,14 @@ export default class ComposerView extends React.Component {
             <Container flex={[1, 1, `${100 / 3}%`]} className="jr-step2">
               <IntervieweePane
                 {...this.props}
-                currentBubble={this.state.currentBubble}
+                currentBubble={storyline[this.state.currentBubble]}
                 currentInterviewee={this.state.currentInterviewee}
                 story={story}
                 storyIndex={storyIndex}
                 showSavedIndicator={this.showSavedIndicator}
                 editMode={
                   !!(
-                    storyline[this.state.currentBubble] &&
+                    this.state.currentBubble &&
                     storyline[this.state.currentBubble].role === 'interviewee'
                   )
                 }
@@ -393,14 +396,14 @@ export default class ComposerView extends React.Component {
             <Container flex={[1, 1, `${100 / 3}%`]} className="jr-step4">
               <UserPane
                 {...this.props}
-                currentBubble={this.state.currentBubble}
+                currentBubble={storyline[this.state.currentBubble]}
                 currentInterviewee={this.state.currentInterviewee}
                 story={story}
                 storyIndex={storyIndex}
                 showSavedIndicator={this.showSavedIndicator}
                 editMode={
                   !!(
-                    storyline[this.state.currentBubble] &&
+                    this.state.currentBubble &&
                     storyline[this.state.currentBubble].role === 'user'
                   )
                 }
@@ -440,6 +443,7 @@ export default class ComposerView extends React.Component {
         ref="joyride" /* eslint react/no-string-refs: 0 */
         steps={this.state.joyrideSteps}
         autoStart={false}
+        key="joyride"
         showSkipButton
         showStepsProgress
         type="continuous"
