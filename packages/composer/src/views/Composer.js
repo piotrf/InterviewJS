@@ -92,6 +92,7 @@ export default class ComposerView extends React.Component {
     this.deleteInterviewee = this.deleteInterviewee.bind(this);
     this.initTour = this.initTour.bind(this);
     this.joyrideCallback = this.joyrideCallback.bind(this);
+    this.setCurrentBubbleNone = this.setCurrentBubbleNone.bind(this);
     this.showSavedIndicator = this.showSavedIndicator.bind(this);
     this.switchInterviewee = this.switchInterviewee.bind(this);
     this.toggleBubbleEdit = this.toggleBubbleEdit.bind(this);
@@ -248,6 +249,10 @@ export default class ComposerView extends React.Component {
     // setTimeout(() => this.setState({ joyrideSteps: steps }), 3000);
   }
 
+  setCurrentBubbleNone() {
+    this.setState({ currentBubble: null });
+  }
+
   switchInterviewee(interviewee) {
     this.setState({
       currentInterviewee: interviewee,
@@ -367,7 +372,9 @@ export default class ComposerView extends React.Component {
               <IntervieweePane
                 {...this.props}
                 currentBubble={storyline[this.state.currentBubble]}
+                currentBubbleIndex={this.state.currentBubble}
                 currentInterviewee={this.state.currentInterviewee}
+                setCurrentBubbleNone={this.setCurrentBubbleNone}
                 story={story}
                 storyIndex={storyIndex}
                 showSavedIndicator={this.showSavedIndicator}
@@ -397,7 +404,9 @@ export default class ComposerView extends React.Component {
               <UserPane
                 {...this.props}
                 currentBubble={storyline[this.state.currentBubble]}
+                currentBubbleIndex={this.state.currentBubble}
                 currentInterviewee={this.state.currentInterviewee}
+                setCurrentBubbleNone={this.setCurrentBubbleNone}
                 story={story}
                 storyIndex={storyIndex}
                 showSavedIndicator={this.showSavedIndicator}

@@ -1,4 +1,4 @@
-import { func, number, string } from 'prop-types';
+import { func, number, object, string } from 'prop-types';
 import styled from 'styled-components';
 import React from 'react';
 
@@ -178,11 +178,34 @@ const Draft = styled.div`
 `;
 
 export default class UserPane extends React.Component {
+  static getDerivedStateFromProps(nextProps) {
+    if (!nextProps.currentBubble) return null;
+    const { content } = nextProps.currentBubble;
+    const isBinary = content[0].enabled && content[1].enabled;
+    return {
+      enableContinue: !!isBinary,
+      enableExplore: true,
+      customContinueVal: isBinary ? content[0].value : content[1].value,
+      customExploreVal: content[1].value,
+      continueVal: isBinary ? content[0].value : content[1].value,
+      exploreVal: content[1].value
+      // customContinueVal: isBinary ? content[0].value : content[1].value,
+      // customExploreVal: isBinary ? content[1].value : '',
+      // continueVal: isBinary ? content[0].value : content[1].value,
+      // exploreVal: content[1].enabled ? content[1].value : ''
+    };
+  }
   constructor(props) {
     super(props);
+
+    const { currentBubble } = this.props;
+    const areWeEdtingHere = currentBubble !== null;
+
     this.state = {
-      enableContinue: false,
-      enableExplore: false,
+      enableContinue: areWeEdtingHere
+        ? currentBubble.content[0].enabled
+        : false,
+      enableExplore: areWeEdtingHere ? currentBubble.content[1].enabled : false,
 
       customContinueVal: '',
       customExploreVal: '',
@@ -193,8 +216,10 @@ export default class UserPane extends React.Component {
       exploreLibDict: 'text',
       exploreLibItem: null,
 
-      exploreVal: 'Omg why?',
-      continueVal: 'Carry on'
+      exploreVal: areWeEdtingHere ? currentBubble.content[0].value : 'Carry on',
+      continueVal: areWeEdtingHere
+        ? currentBubble.content[1].value
+        : 'Omg, why?'
     };
     this.addStorylineItem = this.addStorylineItem.bind(this);
     this.customiseActionLabel = this.customiseActionLabel.bind(this);
@@ -282,16 +307,46 @@ export default class UserPane extends React.Component {
   }
   updateStorylineItem() {
     console.log('updateStorylineItem()');
+    const { storyIndex, currentInterviewee, currentBubbleIndex } = this.props;
+    const {
+      enableContinue,
+      enableExplore,
+      continueVal,
+      exploreVal
+    } = this.state;
+    const editedUserBubble = {
+      content: [
+        {
+          enabled: enableContinue,
+          value: continueVal,
+          type: enableExplore ? 'ignore' : 'explore'
+        },
+        { enabled: enableExplore, value: exploreVal, type: 'explore' }
+      ],
+      role: 'user'
+    };
+    this.props.updateStorylineItem(
+      storyIndex,
+      currentInterviewee,
+      currentBubbleIndex,
+      editedUserBubble
+    );
+    this.setState({
+      customContinueVal: '',
+      customExploreVal: '',
+      enableContinue: false,
+      enableExplore: false,
+      continueLibItem: null,
+      continueVal: this.props.continueVal,
+      exploreLibItem: null,
+      exploreVal: this.props.exploreVal
+    });
+
+    this.props.setCurrentBubbleNone();
+    this.props.showSavedIndicator();
   }
   render() {
-    const { currentBubble, story, currentInterviewee } = this.props;
-
-    if (currentBubble) {
-      const interviewee = story.interviewees[currentInterviewee];
-      const { storyline } = interviewee;
-      const editableBubble = storyline[currentBubble];
-      const isEditMode = editableBubble.role === 'user';
-    }
+    console.log(this.props.currentBubble);
 
     const {
       continueLibDict,
@@ -333,7 +388,12 @@ export default class UserPane extends React.Component {
           <UserActions>
             <Container className="jr-step5">
               <UserAction dir="row" active>
-                <Container flex={[0, 0, '140px']} align="center" dir="column">
+                <Container
+                  align="center"
+                  dir="column"
+                  flex={[0, 0, '140px']}
+                  style={{ padding: '0 5px' }}
+                >
                   <PageSubtitle typo="p4">
                     Create an interaction
                     <br />
@@ -451,7 +511,12 @@ export default class UserPane extends React.Component {
             <Separator silent size="s" />
             <Container className="jr-step6">
               <UserAction dir="row" active={enableExplore}>
-                <Container flex={[0, 0, '140px']} align="center" dir="column">
+                <Container
+                  align="center"
+                  dir="column"
+                  flex={[0, 0, '140px']}
+                  style={{ padding: '0 5px' }}
+                >
                   <Checkbox
                     checked={enableExplore}
                     onChange={(e) => this.toggleAction('enableExplore', e)}
@@ -575,16 +640,20 @@ export default class UserPane extends React.Component {
 }
 
 UserPane.propTypes = {
-  currentBubble: number,
   addStorylineItem: func.isRequired,
-  showSavedIndicator: func.isRequired,
-  currentInterviewee: number.isRequired,
   continueVal: string,
+  currentBubble: object,
+  currentBubbleIndex: number,
+  currentInterviewee: number.isRequired,
   exploreVal: string,
-  storyIndex: number.isRequired /* eslint react/forbid-prop-types: 0 */
+  setCurrentBubbleNone: func.isRequired,
+  showSavedIndicator: func.isRequired,
+  storyIndex: number.isRequired /* eslint react/forbid-prop-types: 0 */,
+  updateStorylineItem: func.isRequired
 };
 
 UserPane.defaultProps = {
+  currentBubbleIndex: null,
   currentBubble: null,
   exploreVal: 'Omg why?',
   continueVal: 'Carry on'
