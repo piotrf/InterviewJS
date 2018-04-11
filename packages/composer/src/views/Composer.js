@@ -295,6 +295,7 @@ export default class ComposerView extends React.Component {
       (story) => story.id === storyId
     );
     const story = this.props.stories[storyIndex];
+    const { storyline } = story.interviewees[this.state.currentInterviewee];
 
     if (!story) {
       this.props.router.push(`/`);
@@ -314,8 +315,6 @@ export default class ComposerView extends React.Component {
       }
       return null;
     };
-
-    console.log('—— currentBubble: ——', this.state.currentBubble);
 
     return [
       <Page key="Page">
@@ -369,6 +368,12 @@ export default class ComposerView extends React.Component {
                 story={story}
                 storyIndex={storyIndex}
                 showSavedIndicator={this.showSavedIndicator}
+                editMode={
+                  !!(
+                    storyline[this.state.currentBubble] &&
+                    storyline[this.state.currentBubble].role === 'interviewee'
+                  )
+                }
               />
             </Container>
             <Container flex={[0, 1, `400px`]} className="jr-step1">
@@ -393,6 +398,12 @@ export default class ComposerView extends React.Component {
                 story={story}
                 storyIndex={storyIndex}
                 showSavedIndicator={this.showSavedIndicator}
+                editMode={
+                  !!(
+                    storyline[this.state.currentBubble] &&
+                    storyline[this.state.currentBubble].role === 'user'
+                  )
+                }
               />
             </Container>
           </PageBody>

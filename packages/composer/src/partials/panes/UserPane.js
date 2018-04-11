@@ -202,6 +202,7 @@ export default class UserPane extends React.Component {
     this.selectContinueAction = this.selectContinueAction.bind(this);
     this.selectExploreAction = this.selectExploreAction.bind(this);
     this.toggleAction = this.toggleAction.bind(this);
+    this.updateStorylineItem = this.updateStorylineItem.bind(this);
   }
   toggleAction(action, e) {
     // this.setState({ enableExplore: e.target.checked });
@@ -280,7 +281,19 @@ export default class UserPane extends React.Component {
 
     this.props.showSavedIndicator();
   }
+  updateStorylineItem() {
+    console.log('updateStorylineItem()');
+  }
   render() {
+    const { currentBubble, story, currentInterviewee } = this.props;
+
+    if (currentBubble) {
+      const interviewee = story.interviewees[currentInterviewee];
+      const { storyline } = interviewee;
+      const editableBubble = storyline[currentBubble];
+      const isEditMode = editableBubble.role === 'user';
+    }
+
     const {
       continueLibDict,
       continueVal,
@@ -297,6 +310,7 @@ export default class UserPane extends React.Component {
           addStorylineItem={this.addStorylineItem}
           hasDraft={enableContinue || enableExplore}
           side="right"
+          updateStorylineItem={this.updateStorylineItem}
           draft={
             <Draft>
               {enableContinue ? (
@@ -562,6 +576,7 @@ export default class UserPane extends React.Component {
 }
 
 UserPane.propTypes = {
+  currentBubble: number,
   addStorylineItem: func.isRequired,
   showSavedIndicator: func.isRequired,
   currentInterviewee: number.isRequired,
@@ -571,6 +586,7 @@ UserPane.propTypes = {
 };
 
 UserPane.defaultProps = {
+  currentBubble: null,
   exploreVal: 'Omg why?',
   continueVal: 'Carry on'
 };
