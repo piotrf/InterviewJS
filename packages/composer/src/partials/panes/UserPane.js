@@ -1,5 +1,5 @@
 import { func, number, string } from 'prop-types';
-import css from 'styled-components';
+import styled from 'styled-components';
 import React from 'react';
 
 import {
@@ -27,11 +27,11 @@ import PaneFrame from './PaneFrame';
 
 import { GLOBALS, USER_ACTIONS } from '../../options';
 
-const PaneEl = css(Container)`
+const PaneEl = styled(Container)`
   height: 100%;
 `;
 
-const UserActions = css(Container)`
+const UserActions = styled(Container)`
   ${setSpace('pbm')};
   height: 100%;
   position: relative;
@@ -42,7 +42,7 @@ const UserActions = css(Container)`
   }
 `;
 
-const UserAction = css(Container)`
+const UserAction = styled(Container)`
   align-items: stretch;
   border-radius: ${radius.l};
   border: 1px solid ${color.greyHL};
@@ -88,7 +88,7 @@ const UserAction = css(Container)`
       transform: translateY(-50%);
       z-index: 0;
     }
-  };
+  }
   & label > span {
     left: -19px;
   }
@@ -108,20 +108,20 @@ const UserAction = css(Container)`
   }
 `;
 
-const ActionLibHolder = css(Container)`
+const ActionLibHolder = styled(Container)`
   overflow-y: auto;
   width: 100%;
   height: 100%;
 `;
-const ActionLibList = css.ul`
+const ActionLibList = styled.ul`
   display: block;
   text-align: center;
 `;
-const ActionLibItem = css.li`
+const ActionLibItem = styled.li`
   ${setSpace('phs')};
   ${setSpace('mvx')};
 `;
-const ActionLibAction = css.button`
+const ActionLibAction = styled.button`
   ${setSpace('phs')};
   ${setSpace('pvx')};
   ${setType('x')};
@@ -142,8 +142,7 @@ const ActionLibAction = css.button`
     border-color: ${color.blueBlk};
     color: ${color.blueBlk};
   `
-      : ``}
-  ${({ interactive }) =>
+      : ``} ${({ interactive }) =>
     interactive
       ? `
     cursor: pointer;
@@ -151,10 +150,10 @@ const ActionLibAction = css.button`
       color: ${color.blueBlk};
     }
   `
-      : ``}
+      : ``};
 `;
 
-const CustomActionHolder = css(Container)`
+const CustomActionHolder = styled(Container)`
   ${setSpace('phs')};
   width: 100%;
   input {
@@ -164,7 +163,7 @@ const CustomActionHolder = css(Container)`
   }
 `;
 
-const Draft = css.div`
+const Draft = styled.div`
   align-content: center;
   align-items: center;
   display: flex;
