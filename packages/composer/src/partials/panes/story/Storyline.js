@@ -21,7 +21,7 @@ import {
 import { filterIframe } from '../../../util/IframeSanitizer';
 
 const BubbleWrapper = styled.div`
-  cursor: move;
+  cursor: ${({ draggable }) => (draggable ? `move` : `default`)};
   position: relative;
   transition: opacity ${time.m};
   ${({ forceEdit }) =>
@@ -314,7 +314,7 @@ export default class Storyline extends React.Component {
             <BubbleWrapper
               data-droppable
               data-id={i}
-              draggable
+              draggable={this.props.currentBubble === null}
               editable={this.props.currentBubble === i}
               forceEdit={this.state.dropdown === i}
               key={storyItem}
@@ -331,38 +331,42 @@ export default class Storyline extends React.Component {
                   ? renderUserBubble(item)
                   : renderIntervieweeBubble(item)}
               </BubbleBlock>
-              <BubbleEdit>
-                <Dropdown
-                  onRequestClose={() => this.toggleDropdown()}
-                  open={this.state.dropdown === i}
-                  html={
-                    <DropdownContent>
-                      <ul>
-                        <li>
-                          <Action onClick={() => this.toggleEdit(i)}>
-                            Edit bubble
-                          </Action>
-                        </li>
-                        <li>
-                          <Action
-                            tone="negative"
-                            onClick={() => this.toggleDelete(i)}
-                          >
-                            Delete bubble
-                          </Action>
-                        </li>
-                      </ul>
-                    </DropdownContent>
-                  }
-                >
-                  <Action iconic onClick={() => this.toggleDropdown(i)}>
-                    <Icon name="hdots" size="s" />
-                  </Action>
-                </Dropdown>
-              </BubbleEdit>
-              <BubbleMove>
-                <Icon name="reorder" size="s" />
-              </BubbleMove>
+              {this.props.currentBubble === null
+                ? [
+                    <BubbleEdit key="bubbleedit">
+                      <Dropdown
+                        onRequestClose={() => this.toggleDropdown()}
+                        open={this.state.dropdown === i}
+                        html={
+                          <DropdownContent>
+                            <ul>
+                              <li>
+                                <Action onClick={() => this.toggleEdit(i)}>
+                                  Edit bubble
+                                </Action>
+                              </li>
+                              <li>
+                                <Action
+                                  tone="negative"
+                                  onClick={() => this.toggleDelete(i)}
+                                >
+                                  Delete bubble
+                                </Action>
+                              </li>
+                            </ul>
+                          </DropdownContent>
+                        }
+                      >
+                        <Action iconic onClick={() => this.toggleDropdown(i)}>
+                          <Icon name="hdots" size="s" />
+                        </Action>
+                      </Dropdown>
+                    </BubbleEdit>,
+                    <BubbleMove key="bubblemove">
+                      <Icon name="reorder" size="s" />
+                    </BubbleMove>
+                  ]
+                : null}
             </BubbleWrapper>
           );
         })}
