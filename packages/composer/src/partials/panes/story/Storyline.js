@@ -153,19 +153,28 @@ export default class Storyline extends React.Component {
     const renderUserBubble = (data) => {
       const { content, role } = data;
       return (
-        <Bubble persona={role} theme={{ backg: skin.speakerBackg }} plain>
+        <Bubble 
+          persona={role} 
+          theme={{ backg: skin.speakerBackg, font:"PT sans" }} 
+          plain
+        >
           <UserButtons dir="row">
             {content[0].enabled ? (
               <Action
                 primary={!content[1].enabled}
                 secondary={!!content[1].enabled}
+                theme={{font:"PT sans"}}
                 fixed
               >
                 {content[0].value}
               </Action>
             ) : null}
             {content[1].enabled ? (
-              <Action primary fixed>
+              <Action 
+                primary
+                fixed
+                theme={{font:"PT sans"}}
+              >
                 {content[1].value}
               </Action>
             ) : null}
@@ -180,7 +189,7 @@ export default class Storyline extends React.Component {
           <Bubble
             displayType="plain"
             persona={role}
-            theme={{ backg: interviewee.color }}
+            theme={{ backg: interviewee.color, font:"PT sans" }}
           >
             {content.value}
           </Bubble>
@@ -190,7 +199,7 @@ export default class Storyline extends React.Component {
           <Bubble
             displayType="plain"
             persona={role}
-            theme={{ backg: interviewee.color }}
+            theme={{ backg: interviewee.color, font:"PT sans" }}
           >
             <a href={content.value} target="_blank">
               {content.title ? content.title : content.value}
@@ -202,7 +211,7 @@ export default class Storyline extends React.Component {
           <Bubble
             displayType="rich"
             persona={role}
-            theme={{ backg: interviewee.color }}
+            theme={{ backg: interviewee.color, font:"PT sans" }}
           >
             <img src={content.value} alt="" />
             {content.title ? <p>{content.title}</p> : null}
@@ -213,7 +222,7 @@ export default class Storyline extends React.Component {
           <Bubble
             persona={role}
             displayType="embed"
-            theme={{ backg: interviewee.color }}
+            theme={{ backg: interviewee.color, font:"PT sans" }}
           >
             <div
               dangerouslySetInnerHTML={{
@@ -227,7 +236,7 @@ export default class Storyline extends React.Component {
           <Bubble
             displayType="embed"
             persona={role}
-            theme={{ backg: interviewee.color }}
+            theme={{ backg: interviewee.color, font:"PT sans" }}
           >
             <div
               dangerouslySetInnerHTML={{

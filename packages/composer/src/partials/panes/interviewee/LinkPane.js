@@ -6,7 +6,8 @@ import {
   FormItem,
   Label,
   Separator,
-  TextInput
+  TextInput,
+  Legend
 } from "interviewjs-styleguide";
 import PaneFrame from "../PaneFrame";
 
@@ -53,15 +54,20 @@ export default class LinkPane extends Component {
             input
             name="value"
             onChange={(e) => this.handleChange(e)}
-            placeholder="https://…, http://…, www.…, "
+            placeholder="Select and paste URL e.g. http:// ... or www. ... "
             required
             type="url"
             value={value}
           />
+          <Legend
+            tip="Select and paste URL e.g. http:// ... or www. ... "
+          >
+            i
+          </Legend>
         </FormItem>
         <Separator size="m" silent />
         <FormItem>
-          <Label>Display text</Label>
+          <Label>Display text (optional)</Label>
           <TextInput
             input
             name="title"
@@ -69,6 +75,11 @@ export default class LinkPane extends Component {
             placeholder="Type the text to be hyperlinked"
             value={title}
           />
+          <Legend
+            tip="Type the text to be hyperlinked"
+          >
+            i
+          </Legend>
         </FormItem>
       </PaneFrame>
     );

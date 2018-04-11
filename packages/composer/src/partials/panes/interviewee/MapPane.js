@@ -6,7 +6,8 @@ import {
   FormItem,
   Label,
   Separator,
-  TextInput
+  TextInput,
+  Legend
 } from "interviewjs-styleguide";
 import PaneFrame from "../PaneFrame";
 
@@ -61,8 +62,8 @@ export default class MapPane extends Component {
           </BubbleHTMLWrapper>
         ) : (
           <BubbleHTMLWrapper>
-            this is not a valid iframe. A Google Maps iframe code starts with{" "}
-            {`<iframe`}, ends with {`></iframe>`} and requires {`src=`}{" "}
+            This is not a valid iframe. A Google Maps iframe code starts with{" "}
+            {`"<iframe"`}, ends with {`"></iframe>"`} and is from a Google Maps web address.
           </BubbleHTMLWrapper>
         );
       }
@@ -89,6 +90,9 @@ export default class MapPane extends Component {
             type="url"
             value={this.state.draft.value}
           />
+          <Legend tip="Choose a location on Google Maps to access the iframe code. Select the share button and click the “embed map” option. Then copy and paste.">
+              i
+          </Legend>
         </FormItem>
       </PaneFrame>
     );

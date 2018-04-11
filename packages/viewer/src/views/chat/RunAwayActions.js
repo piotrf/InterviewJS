@@ -10,6 +10,7 @@ const RunAwayActions = (props) => [
       key="talkToSomebodyElse"
       onClick={() => props.updateHistory("switchTo")}
       primary
+      theme={{font: "PT sans"}}
     >
       I want to talk to somebody else
     </Action>
@@ -20,6 +21,7 @@ const RunAwayActions = (props) => [
     onClick={() => props.navigateAway(`/${props.story.id}/outro`)}
     primary
     tone="negative"
+    theme={{font: "PT sans"}}
   >
     I’m done chatting
   </Action>

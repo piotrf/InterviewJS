@@ -229,7 +229,7 @@ export default class ListingView extends Component {
             </UserMenu>
           </Container>
           <Container flex={[1, 1, `${100 / 3}%`]} align="center">
-            <PageTitle typo="h1">Story overview</PageTitle>
+            <PageTitle typo="h1">My story library</PageTitle>
           </Container>
           <Container flex={[1, 1, `${100 / 3}%`]} align="right" padded>
             <MobileNewStoryToggle>
