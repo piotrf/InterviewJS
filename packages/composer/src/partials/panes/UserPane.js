@@ -189,10 +189,6 @@ export default class UserPane extends React.Component {
       customExploreVal: content[1].value,
       continueVal: isBinary ? content[0].value : content[1].value,
       exploreVal: content[1].value
-      // customContinueVal: isBinary ? content[0].value : content[1].value,
-      // customExploreVal: isBinary ? content[1].value : '',
-      // continueVal: isBinary ? content[0].value : content[1].value,
-      // exploreVal: content[1].enabled ? content[1].value : ''
     };
   }
   constructor(props) {
@@ -346,8 +342,6 @@ export default class UserPane extends React.Component {
     this.props.showSavedIndicator();
   }
   render() {
-    console.log(this.props.currentBubble);
-
     const {
       continueLibDict,
       continueVal,
