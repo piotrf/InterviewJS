@@ -367,11 +367,13 @@ export default class Storyline extends React.Component {
                         html={
                           <DropdownContent>
                             <ul>
-                              <li>
-                                <Action onClick={() => this.toggleEdit(i)}>
-                                  Edit bubble
-                                </Action>
-                              </li>
+                              {role === 'user' ? (
+                                <li>
+                                  <Action onClick={() => this.toggleEdit(i)}>
+                                    Edit bubble
+                                  </Action>
+                                </li>
+                              ) : null}
                               <li>
                                 <Action
                                   tone="negative"
