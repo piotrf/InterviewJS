@@ -1,7 +1,7 @@
 /* eslint react/no-danger: 0 */
 import { arrayOf, func, object, number } from 'prop-types';
-import styled from 'styled-components';
 import React from 'react';
+import styled, { keyframes } from 'styled-components';
 
 import {
   Action,
@@ -20,8 +20,38 @@ import {
 
 import { filterIframe } from '../../../util/IframeSanitizer';
 
+const animateEditableBubble = keyframes`
+  0% {
+    -webkit-transform: translate(0);
+            transform: translate(0);
+  }
+  20% {
+    -webkit-transform: translate(-2px, 2px);
+            transform: translate(-2px, 2px);
+  }
+  40% {
+    -webkit-transform: translate(-2px, -2px);
+            transform: translate(-2px, -2px);
+  }
+  60% {
+    -webkit-transform: translate(2px, 2px);
+            transform: translate(2px, 2px);
+  }
+  80% {
+    -webkit-transform: translate(2px, -2px);
+            transform: translate(2px, -2px);
+  }
+  100% {
+    -webkit-transform: translate(0);
+            transform: translate(0);
+  }
+`;
+
 const BubbleWrapper = styled.div`
-  cursor: ${({ draggable }) => (draggable ? `move` : `default`)};
+  &,
+  & * {
+    cursor: ${({ draggable }) => (draggable ? `move` : `default`)};
+  }
   position: relative;
   transition: opacity ${time.m};
   ${({ forceEdit }) =>
@@ -37,19 +67,16 @@ const BubbleWrapper = styled.div`
   ${({ editable }) =>
     editable
       ? `
-      box-shadow: 0 0 0 5px ${color.greenM}, 0 0 10px 2px ${color.shadowLLt};
-      overflow: hidden;
+  animation-delay: 0ms;
+  animation-direction: normal;
+  animation-duration: 0.75s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: ${animateEditableBubble};
+  animation-play-state: running;
+  animation-timing-function: linear;
   `
       : ``};
-
-  border-radius: ${({ persona }) => {
-    if (persona === 'user') {
-      return `${radius.h} ${radius.h} ${radius.s} ${radius.h}`;
-    } else if (persona === 'interviewee') {
-      return `${radius.h} ${radius.h} ${radius.h} ${radius.s}`;
-    }
-    return radius.h;
-  }};
 `;
 const BubbleMove = styled.div`
   color: ${color.greyM};
@@ -215,8 +242,8 @@ export default class Storyline extends React.Component {
       return (
         <Bubble
           persona={role}
-          theme={{ backg: skin.speakerBackg, font: 'PT sans' }}
           plain
+          theme={{ backg: skin.speakerBackg, font: 'PT sans' }}
         >
           <UserButtons dir="row">
             {content[0].enabled ? (
@@ -276,8 +303,8 @@ export default class Storyline extends React.Component {
       } else if (type === 'embed') {
         return (
           <Bubble
-            persona={role}
             displayType="embed"
+            persona={role}
             theme={{ backg: interviewee.color, font: 'PT sans' }}
           >
             <div
