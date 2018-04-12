@@ -78,10 +78,10 @@ const PageBody = css.div`
   }
 `;
 
-const joyrideCallback = (cb) => {
+const joyrideCallback = cb => {
   if (cb.type === "finished") localStorage.setItem("doneComposerTour", true);
   return null;
-}
+};
 
 export default class ComposerView extends React.Component {
   constructor(props) {
