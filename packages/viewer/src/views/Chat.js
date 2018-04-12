@@ -76,9 +76,9 @@ class ChatView extends Component {
       } else if (thisItemType === "followup") {
         if (isItIntervieweesTurn) {
           // wait 1050 for the prev bubble to end preloading
-          setTimeout(() => this.updateHistory("followup"), 1050);
+          setTimeout(() => this.updateHistory("followup"), 1500);
         } else if (isItUsersTurn) {
-          setTimeout(() => this.setState({ actionbar: "scripted" }), 1400);
+          setTimeout(() => this.setState({ actionbar: "scripted" }), 1500);
         }
         return null;
       } else if (thisItemType === "emoji") {
@@ -283,7 +283,7 @@ class ChatView extends Component {
               onClick={() => this.updateHistory(action.type, i)}
               primary={action.type === "explore"}
               secondary={action.type === "ignore"}
-              theme={{font: "PT sans"}}
+              theme={{ font: "PT sans" }}
             >
               {action.value}
             </Action>
