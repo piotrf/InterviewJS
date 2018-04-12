@@ -82,15 +82,27 @@ const PaneFrame = props => {
         <DraftHolder>
           <Draft fill="grey">{props.draft}</Draft>
           <SubmitButton side={props.side}>
-            <Action
-              disabled={!hasDraft}
-              iconic
-              onClick={hasDraft ? props.addStorylineItem : null}
-              primary
-              tone="positive"
-            >
-              <Icon name="plus" size="l" />
-            </Action>
+            {props.editMode ? (
+              <Action
+                disabled={!hasDraft}
+                iconic
+                onClick={hasDraft ? props.updateStorylineItem : null}
+                primary
+                tone="positive"
+              >
+                <Icon name="checkmark" size="l" />
+              </Action>
+            ) : (
+              <Action
+                disabled={!hasDraft}
+                iconic
+                onClick={hasDraft ? props.addStorylineItem : null}
+                primary
+                tone="positive"
+              >
+                <Icon name="plus" size="l" />
+              </Action>
+            )}
           </SubmitButton>
         </DraftHolder>
       </Container>
@@ -100,14 +112,17 @@ const PaneFrame = props => {
 
 PaneFrame.propTypes = {
   addStorylineItem: func.isRequired,
+  updateStorylineItem: func.isRequired,
   children: oneOfType([array, string, node]).isRequired,
   draft: oneOfType([array, string, node]),
+  editMode: bool,
   hasDraft: bool,
   side: string,
 };
 
 PaneFrame.defaultProps = {
   draft: null,
+  editMode: false,
   hasDraft: false,
   side: "left",
 };
