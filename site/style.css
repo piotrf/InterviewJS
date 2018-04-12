@@ -1,12 +1,50 @@
 html{
   width:100%;
 }
+.shown{
+  display: block;
+  text-align: center;
+  font-size:6px;
+  padding:0;
+  margin:0;
+  line-height: 1px;
+  color:#495abd;
+}
 body {
   font-family: "PT Sans", Arial, sans-serif;
   color:#f7f7f7;
   background-color:#495abd;
+  background-color:#ffffff;
 }
-
+  .videoContainerFULLSCREEN 
+{
+   height:1300px;
+   width:100%;
+   overflow: hidden;
+   z-index:9;
+   background-color: #495abd;
+   padding:50px;
+   padding-top:530px;
+}
+  .videoContainerover 
+{
+   position:absolute;
+   height:700px;
+   width:100%;
+   overflow: hidden;
+   z-index:99;
+   padding:50px;
+   padding-top:90px;
+}
+.videoContainerFULLSCREEN video 
+{
+   width: 100%;
+   height: 100%;
+}
+.whatis{
+  position: absolute;
+  margin-top:500px;
+}
 .nav > li > a{
   padding: 10px 20px;
 }
@@ -57,7 +95,6 @@ h1{
 }
 .blue{
   background-color:#495abd;
-  margin-bottom:100px;
 }
 .strong-text{
   font-weight: 700;
@@ -69,27 +106,10 @@ p{
   padding:0;
   margin:0;
 }
-
 ol li{
   font-size: 18px;
   margin:10px;
 }
-/*
-a:visited{
-    color: #eeeeee;
-    text-decoration: underline;
-    font-weight: normal;
-}
-a:hover{
-    color: #fb9d04;
-    text-decoration: underline;
-    font-weight: normal;
-}
-
-a:link {color: #eeeeee;
-    text-decoration: underline;
-    font-weight: normal;
-  }*/
 .first-bubble{
   background-color: rgba(255,255,255,.10);
   padding:10px 20px;
@@ -113,6 +133,28 @@ a:link {color: #eeeeee;
   color:#eeeeee;
   padding:20px;
 }
+
+.bluelink{
+  margin-top:15px;
+  padding:10px;
+  display: block;
+  font-size: 14px;
+  }
+.bluelink a:visited{
+    color: #eeeeee;
+    text-decoration: underline;
+    font-weight: normal;
+}
+.bluelink a:hover{
+    color: #ffffff;
+    text-decoration: underline;
+    font-weight: normal;
+}
+.bluelink a:link {
+    color: #eeeeee;
+    text-decoration: underline;
+    font-weight: normal;
+  }
 .blacktext {
   color:#333333;
   padding:20px;
@@ -141,25 +183,20 @@ padding-top: 15px;
 position:absolute;
 width:100%;
 }
-
-
 .brand-logo{
   border-top:1px solid #cccccc;
   padding-top:30px;
   margin-bottom:40px;
 }
-
 .brand-logo p {
 color: #333333;
 font-size: 18px;
 text-align: center;
 }
-
 .brand-logo-img{
   margin: auto;
   display: block;
 }
-
 .foot{
   background-color:#495abd;
   padding:10px;
