@@ -283,6 +283,7 @@ class ChatView extends Component {
               onClick={() => this.updateHistory(action.type, i)}
               primary={action.type === "explore"}
               secondary={action.type === "ignore"}
+              theme={{font: "PT sans"}}
             >
               {action.value}
             </Action>

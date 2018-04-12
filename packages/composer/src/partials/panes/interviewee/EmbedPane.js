@@ -1,17 +1,10 @@
 import { func, shape, string } from "prop-types";
 import React, { Component } from "react";
 
-import {
-  BubbleHTMLWrapper,
-  FormItem,
-  Label,
-  Separator,
-  TextInput
-} from "interviewjs-styleguide";
+import { BubbleHTMLWrapper, FormItem, Label, Separator, TextInput, Legend } from "interviewjs-styleguide";
 import PaneFrame from "../PaneFrame";
 
 import { filterIframe } from "../../../util/IframeSanitizer";
-
 
 export default class EmbedPane extends Component {
   constructor(props) {
@@ -34,11 +27,15 @@ export default class EmbedPane extends Component {
     const { name, value } = e.target;
     const clean = filterIframe(value);
     console.log(clean);
-    this.setState({ draft: { ...this.state.draft, [name]: value } }, () => clean.toLowerCase().startsWith("<iframe") &&
+    this.setState(
+      { draft: { ...this.state.draft, [name]: value } },
+      () =>
+        clean.toLowerCase().startsWith("<iframe") &&
         clean.toLowerCase().includes("src=") &&
         clean.toLowerCase().endsWith("></iframe>")
-        ? this.props.updateDraft(this.state.draft, clean)
-        : null);
+          ? this.props.updateDraft(this.state.draft, clean)
+          : null
+    );
   }
 
   render() {
@@ -55,8 +52,8 @@ export default class EmbedPane extends Component {
           </BubbleHTMLWrapper>
         ) : (
           <BubbleHTMLWrapper>
-            this is not an iframe, iframe code starts with {`<iframe`}, ends
-            with {`></iframe>`} and requires {`src=`} attribute
+            This is not a valid iframe. An iframe code starts with {`"<iframe" `}
+            and ends with {`"></iframe>"`}
           </BubbleHTMLWrapper>
         );
       }
@@ -76,32 +73,33 @@ export default class EmbedPane extends Component {
           <TextInput
             area
             name="value"
-            onChange={(e) => this.handleChange(e)}
+            onChange={e => this.handleChange(e)}
             placeholder="Insert an iframe to display web content directly into your chat"
             required
             rows={10}
             type="url"
             value={this.state.draft.value}
           />
+          <Legend tip="Insert an iframe to display web content directly in your chat. Click the share icon to see if an ‘embed code’ is available. Then copy and paste.">
+            i
+          </Legend>
         </FormItem>
       </PaneFrame>
     );
   }
 }
 
-
 EmbedPane.propTypes = {
   updateDraft: func.isRequired,
   draft: shape({
     value: string,
-    title: string
-  })
+    title: string,
+  }),
 };
-
 
 EmbedPane.defaultProps = {
   draft: {
     value: "",
-    title: ""
-  }
+    title: "",
+  },
 };
