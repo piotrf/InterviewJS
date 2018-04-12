@@ -78,6 +78,11 @@ const PageBody = css.div`
   }
 `;
 
+const joyrideCallback = (cb) => {
+  if (cb.type === "finished") localStorage.setItem("doneComposerTour", true);
+  return null;
+}
+
 export default class ComposerView extends React.Component {
   constructor(props) {
     super(props);
@@ -162,6 +167,7 @@ export default class ComposerView extends React.Component {
       close: {},
       hole: {},
     };
+
     const steps = [
       {
         title: "Welcome to the InterviewJS dashboard! ",
@@ -244,6 +250,7 @@ export default class ComposerView extends React.Component {
         position: "bottom",
       },
     ];
+
     const doneComposerTour = localStorage.getItem("doneComposerTour");
     if (!doneComposerTour) this.setState({ joyrideSteps: steps });
     // setTimeout(() => this.setState({ joyrideSteps: steps }), 3000);
@@ -288,11 +295,6 @@ export default class ComposerView extends React.Component {
     this.setState({ savedLabel: false });
     setTimeout(() => this.setState({ savedLabel: true }), 2000);
     setTimeout(() => this.setState({ savedLabel: null }), 5000);
-  }
-
-  joyrideCallback(cb) {
-    if (cb.type === "finished") localStorage.setItem("doneComposerTour", true);
-    return null;
   }
 
   render() {
@@ -443,7 +445,7 @@ export default class ComposerView extends React.Component {
         holePadding={10}
         run // or some other boolean for when you want to start it
         // debug
-        callback={this.joyrideCallback}
+        callback={joyrideCallback}
       />,
     ];
   }

@@ -23,11 +23,10 @@ import {
   setHeight,
   setSpace,
   time,
-  // PageParagraph
 } from "interviewjs-styleguide";
 
 import { configureStore } from "../configureStore";
-import { syncFirebaseStories } from "../actions/actionCreators";
+import { syncRemoteStories } from "../actions/actionCreators";
 
 import { AboutModal, NewStoryModal, Stories, Story, WelcomeModal } from "../partials";
 
@@ -163,13 +162,13 @@ export default class ListingView extends Component {
 
   componentDidMount() {
     if (!this.props.user.ignore && typeof this.props.user.id === "string")
-      store.dispatch(syncFirebaseStories(this.props.user.id, this.props.user.email));
+      store.dispatch(syncRemoteStories(this.props.user.id, this.props.user.email));
     if (!this.props.user || !this.props.user.id || this.props.user.ignore) this.props.router.push(`/`);
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.user.id !== nextProps.user.id && !nextProps.user.ignore && typeof nextProps.user.id === "string")
-      store.dispatch(syncFirebaseStories(nextProps.user.id ? nextProps.user.id : "", nextProps.user.email));
+      store.dispatch(syncRemoteStories(nextProps.user.id ? nextProps.user.id : "", nextProps.user.email));
   }
 
   handleLogout() {
@@ -294,7 +293,6 @@ ListingView.propTypes = {
   createStory: func,
   deleteStory: func,
   router: object,
-  firebase: object,
   stories: arrayOf(object),
   updateStory: func,
   user: shape({
@@ -308,7 +306,6 @@ ListingView.defaultProps = {
   createStory: null,
   deleteStory: null,
   router: null,
-  firebase: null,
   stories: [],
   updateStory: null,
   user: {},
