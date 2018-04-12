@@ -92,7 +92,6 @@ export default class IntervieweePane extends React.Component {
 
   render() {
     const { tab } = this.state;
-    console.log(this.state);
     const { currentInterviewee, story } = this.props;
     return (
       <PaneEl fill="white" rounded shift dir="column">
@@ -183,7 +182,7 @@ export default class IntervieweePane extends React.Component {
 IntervieweePane.propTypes = {
   addStorylineItem: func.isRequired,
   showSavedIndicator: func.isRequired,
-  currentBubble: number,
+  currentBubble: object,
   currentInterviewee: number.isRequired,
   story: object.isRequired /* eslint react/forbid-prop-types: 0 */,
   storyIndex: number.isRequired,

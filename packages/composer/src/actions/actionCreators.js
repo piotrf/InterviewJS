@@ -115,19 +115,18 @@ export function addStorylineItem(storyIndex, intervieweeIndex, payload) {
     type: "ADD_STORYLINE_ITEM",
     id: `sl_${uuidv4()}`,
     intervieweeIndex,
-    order: 0,
     payload,
     storyIndex,
   };
 }
 
-export function updateStorylineItem(storyIndex, intervieweeIndex, storylineItemIndex, payload) {
+export function updateStorylineItem(storyIndex, intervieweeIndex, storyItemIndex, payload) {
   return {
     type: "UPDATE_STORYLINE_ITEM",
     intervieweeIndex,
     payload,
     storyIndex,
-    storylineItemIndex,
+    storyItemIndex,
   };
 }
 
