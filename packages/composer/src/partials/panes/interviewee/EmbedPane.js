@@ -1,7 +1,14 @@
 import { func, shape, string } from "prop-types";
 import React, { Component } from "react";
 
-import { BubbleHTMLWrapper, FormItem, Label, Separator, TextInput, Legend } from "interviewjs-styleguide";
+import {
+  BubbleHTMLWrapper,
+  FormItem,
+  Label,
+  Separator,
+  TextInput,
+  Legend
+} from "interviewjs-styleguide";
 import PaneFrame from "../PaneFrame";
 
 import { filterIframe } from "../../../util/IframeSanitizer";
@@ -10,7 +17,7 @@ export default class EmbedPane extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      draft: this.props.draft,
+      draft: this.props.draft
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -47,12 +54,13 @@ export default class EmbedPane extends Component {
         return clean.toLowerCase().startsWith("<iframe") &&
           clean.toLowerCase().includes("src=") &&
           clean.toLowerCase().endsWith("></iframe>") ? (
-          <BubbleHTMLWrapper type="embed">
+          <BubbleHTMLWrapper displayType="embed">
             <div dangerouslySetInnerHTML={{ __html: clean }} />
           </BubbleHTMLWrapper>
         ) : (
           <BubbleHTMLWrapper>
-            This is not a valid iframe. An iframe code starts with {`"<iframe" `}
+            This is not a valid iframe. An iframe code starts with{" "}
+            {`"<iframe" `}
             and ends with {`"></iframe>"`}
           </BubbleHTMLWrapper>
         );
@@ -73,7 +81,7 @@ export default class EmbedPane extends Component {
           <TextInput
             area
             name="value"
-            onChange={e => this.handleChange(e)}
+            onChange={(e) => this.handleChange(e)}
             placeholder="Insert an iframe to display web content directly into your chat"
             required
             rows={10}
@@ -93,13 +101,13 @@ EmbedPane.propTypes = {
   updateDraft: func.isRequired,
   draft: shape({
     value: string,
-    title: string,
-  }),
+    title: string
+  })
 };
 
 EmbedPane.defaultProps = {
   draft: {
     value: "",
-    title: "",
-  },
+    title: ""
+  }
 };
