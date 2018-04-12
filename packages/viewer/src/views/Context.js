@@ -47,9 +47,19 @@ export default class ContextView extends Component {
     }
 
     // Load story via storyId -> getStoryURL
-    if ((!this.props.story || Object.keys(this.props.story).length === 0) && this.props.params.storyId && window.InterviewJS && window.InterviewJS.getStoryURL) {
-      const storyURL = window.InterviewJS.getStoryURL(this.props.params.storyId);
-      if (storyURL) axios.get(storyURL).then(response => this.props.createStory(response.data));
+    if (
+      (!this.props.story || Object.keys(this.props.story).length === 0) &&
+      this.props.params.storyId &&
+      window.InterviewJS &&
+      window.InterviewJS.getStoryURL
+    ) {
+      const storyURL = window.InterviewJS.getStoryURL(
+        this.props.params.storyId
+      );
+      if (storyURL)
+        axios
+          .get(storyURL)
+          .then((response) => this.props.createStory(response.data));
     }
   }
 
@@ -74,11 +84,8 @@ export default class ContextView extends Component {
         <PageBody limit="x" flex={[1, 0, `${100 / 2}%`]}>
           <Aside typo="p3">
             Explore real stories by interacting directly with the interviewees.
-            At the end we will let you know how much of the story you have covered
-            and you can share your views in a poll.
-          </Aside>
-          <Aside typo="p3">
-            Here is the story
+            At the end we will let you know how much of the story you have
+            covered and you can share your views in a poll. Here is the story:
           </Aside>
           <Separator size="m" silent />
           <PageSubtitle typo="h4">{story.context}</PageSubtitle>
@@ -86,7 +93,9 @@ export default class ContextView extends Component {
           <Actionbar>
             <Action
               fixed
-              onClick={() => this.props.router.push(`/${story.id}/interviewees`)}
+              onClick={() =>
+                this.props.router.push(`/${story.id}/interviewees`)
+              }
               primary
             >
               Meet your interviewees
