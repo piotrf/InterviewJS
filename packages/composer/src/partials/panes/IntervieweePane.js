@@ -71,8 +71,7 @@ export default class IntervieweePane extends React.Component {
         embed: "",
         map: "",
         media: ""
-      },
-      tab: "text"
+      }
     };
   }
   constructor(props) {
