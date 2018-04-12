@@ -183,11 +183,11 @@ export default class UserPane extends React.Component {
     const { content } = nextProps.currentBubble;
     const isBinary = content[0].enabled && content[1].enabled;
     return {
-      enableContinue: !!isBinary,
-      enableExplore: true,
-      customContinueVal: isBinary ? content[0].value : content[1].value,
+      enableContinue: isBinary ? true : content[0].enabled,
+      enableExplore: isBinary ? true : content[1].enabled,
+      customContinueVal: content[0].value,
       customExploreVal: content[1].value,
-      continueVal: isBinary ? content[0].value : content[1].value,
+      continueVal: content[0].value,
       exploreVal: content[1].value
     };
   }
