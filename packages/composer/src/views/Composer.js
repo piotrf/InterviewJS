@@ -96,7 +96,6 @@ export default class ComposerView extends React.Component {
     };
     this.deleteInterviewee = this.deleteInterviewee.bind(this);
     this.initTour = this.initTour.bind(this);
-    this.joyrideCallback = this.joyrideCallback.bind(this);
     this.setCurrentBubbleNone = this.setCurrentBubbleNone.bind(this);
     this.showSavedIndicator = this.showSavedIndicator.bind(this);
     this.switchInterviewee = this.switchInterviewee.bind(this);
@@ -296,11 +295,6 @@ export default class ComposerView extends React.Component {
     this.setState({ savedLabel: false });
     setTimeout(() => this.setState({ savedLabel: true }), 2000);
     setTimeout(() => this.setState({ savedLabel: null }), 5000);
-  }
-
-  joyrideCallback(cb) {
-    if (cb.type === "finished") localStorage.setItem("doneComposerTour", true);
-    return null;
   }
 
   render() {
