@@ -71,6 +71,26 @@ deploy:
   skip_cleanup: true
   access_key_id: "$AWS_ACCESS_KEY_ID"
   secret_access_key: "$AWS_SECRET_ACCESS_KEY"
+  bucket: interviewjs.net
+  local-dir: site
+  acl: public_read
+  on:
+    repo: AJInteractive/InterviewJS
+    branch: develop
+- provider: s3
+  skip_cleanup: true
+  access_key_id: "$AWS_ACCESS_KEY_ID"
+  secret_access_key: "$AWS_SECRET_ACCESS_KEY"
+  bucket: interviewjs.net
+  local-dir: site
+  acl: public_read
+  on:
+    repo: AJInteractive/InterviewJS
+    branch: feature/site
+- provider: s3
+  skip_cleanup: true
+  access_key_id: "$AWS_ACCESS_KEY_ID"
+  secret_access_key: "$AWS_SECRET_ACCESS_KEY"
   bucket: styleguide.interviewjs.io
   local-dir: packages/styleguide/catalog/build/
   acl: public_read

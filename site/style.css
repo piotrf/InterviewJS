@@ -1,0 +1,173 @@
+html{
+  width:100%;
+}
+body {
+  font-family: "PT Sans", Arial, sans-serif;
+  color:#f7f7f7;
+  background-color:#495abd;
+}
+
+.nav > li > a{
+  padding: 10px 20px;
+}
+.navbar-default{
+  background-color: #495abd;
+  border:1px solid rgba(255,255,255,0.1);
+  font-size: 18px;
+}
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus{
+  background-color: #495abd;
+}
+.navbar-default .navbar-toggle{
+  border-color:transparent;
+}
+.navbar-default .navbar-nav > li > a{
+  padding-top: 25px;
+  padding-bottom: 0px;
+}
+.navbar-default .navbar-nav > li > a{
+  color:#ffffff;
+}
+.navbar-default .navbar-nav > li > a:focus{
+  color:#ffffff;
+}
+.navbar-default .navbar-nav > li > a:hover{
+  color:#eeeeee;
+}
+.navbar-default .navbar-toggle .icon-bar{
+  background-color:#ffffff;
+}
+.navbar-default .navbar-toggle .icon-bar:hover{
+  color:#495AC0;
+}
+h1{
+  font-weight: 700;
+}
+.rrssb-buttons.small-format li{
+  height:33px !important;
+}
+.example{
+  margin-top:20px;
+}
+.white{
+  background-color:#ffffff;
+  padding:20px;
+  padding-bottom:100px;
+  color:#333333;
+}
+.blue{
+  background-color:#495abd;
+  margin-bottom:100px;
+}
+.strong-text{
+  font-weight: 700;
+}
+p{
+  font-size:18px;
+  text-align:left;
+  color:#333333;
+  padding:0;
+  margin:0;
+}
+
+ol li{
+  font-size: 18px;
+  margin:10px;
+}
+/*
+a:visited{
+    color: #eeeeee;
+    text-decoration: underline;
+    font-weight: normal;
+}
+a:hover{
+    color: #fb9d04;
+    text-decoration: underline;
+    font-weight: normal;
+}
+
+a:link {color: #eeeeee;
+    text-decoration: underline;
+    font-weight: normal;
+  }*/
+.first-bubble{
+  background-color: rgba(255,255,255,.10);
+  padding:10px 20px;
+  width:120px;
+  border-radius: 20px 20px 20px 6px;
+  margin-top:2px;
+  font-size: 18px;
+}
+.second-bubble{
+  background-color: rgba(255,255,255,.10);
+  padding:10px 20px;
+  width:300px;
+  border-radius: 20px 20px 20px 6px;
+  margin-top:10px;
+  font-size: 18px;
+}
+.carousel-control.right, .carousel-control.left{
+  color:#495abd;
+}
+.blue p{
+  color:#eeeeee;
+  padding:20px;
+}
+.blacktext {
+  color:#333333;
+  padding:20px;
+  font-size: 18px;
+  font-family: "PT Sans", Arial, sans-serif;
+}
+.carousel-indicators li{
+    border: 1px solid #495abd;
+    border-radius: 50%;
+}
+.carousel-indicators .active{
+  width: 20px;
+  height: 20px;
+  margin: -2px;
+  border: 5px solid #495abd;
+  border-radius: 50%;
+}
+.panel-body{
+  color:#111111;
+}
+footer {
+background: #ffffff;
+margin:0;
+padding:0;
+padding-top: 15px;
+position:absolute;
+width:100%;
+}
+
+
+.brand-logo{
+  border-top:1px solid #cccccc;
+  padding-top:30px;
+  margin-bottom:40px;
+}
+
+.brand-logo p {
+color: #333333;
+font-size: 18px;
+text-align: center;
+}
+
+.brand-logo-img{
+  margin: auto;
+  display: block;
+}
+
+.foot{
+  background-color:#495abd;
+  padding:10px;
+}
+.foottag{
+  text-align: center;
+  color:#ffffff;
+}
+.foottag a{
+  color:#ffffff;
+}
