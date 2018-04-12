@@ -38,19 +38,41 @@ const PaneEl = css(Container)`
 
 export default class IntervieweePane extends React.Component {
   static getDerivedStateFromProps(nextProps) {
-    if (!nextProps.currentBubble || nextProps.currentBubble.role === "user")
-      return null;
-    const { currentBubble } = nextProps;
+    if (
+      nextProps.currentBubble &&
+      nextProps.currentBubble.role === "interviewee"
+    ) {
+      const { currentBubble } = nextProps;
+      return {
+        draft: {
+          [currentBubble.type]: {
+            value: currentBubble.content.value,
+            title: currentBubble.content.title
+              ? currentBubble.content.title
+              : null
+          }
+        },
+        tab: currentBubble.type
+      };
+    }
     return {
       draft: {
-        [currentBubble.type]: {
-          value: currentBubble.content.value,
-          title: currentBubble.content.title
-            ? currentBubble.content.title
-            : null
-        }
+        text: { value: "" },
+        link: { value: "", title: "" },
+        image: {
+          value: "",
+          title: ""
+        },
+        embed: { value: "" },
+        map: { value: "" },
+        media: { value: "" }
       },
-      tab: currentBubble.type
+      clean: {
+        embed: "",
+        map: "",
+        media: ""
+      },
+      tab: "text"
     };
   }
   constructor(props) {
