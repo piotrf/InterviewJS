@@ -380,7 +380,7 @@ export default class ComposerView extends React.Component {
                 showSavedIndicator={this.showSavedIndicator}
                 editMode={
                   !!(
-                    this.state.currentBubble &&
+                    this.state.currentBubble !== null &&
                     storyline[this.state.currentBubble].role === "interviewee"
                   )
                 }
@@ -412,7 +412,7 @@ export default class ComposerView extends React.Component {
                 showSavedIndicator={this.showSavedIndicator}
                 editMode={
                   !!(
-                    this.state.currentBubble &&
+                    this.state.currentBubble !== null &&
                     storyline[this.state.currentBubble].role === "user"
                   )
                 }

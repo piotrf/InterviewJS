@@ -52,14 +52,6 @@ export default class IntervieweePane extends React.Component {
       },
       tab: currentBubble.type
     };
-    // return {
-    //   enableContinue: isBinary ? true : content[0].enabled,
-    //   enableExplore: isBinary ? true : content[1].enabled,
-    //   customContinueVal: content[0].value,
-    //   customExploreVal: content[1].value,
-    //   continueVal: content[0].value,
-    //   exploreVal: content[1].value
-    // };
   }
   constructor(props) {
     super(props);
@@ -192,8 +184,6 @@ export default class IntervieweePane extends React.Component {
   }
 
   render() {
-    console.log("IntervieweePane State —", this.state);
-    console.log("IntervieweePane Props —", this.props);
     const { tab } = this.state;
     const { currentInterviewee, story } = this.props;
     return (
@@ -304,10 +294,12 @@ export default class IntervieweePane extends React.Component {
           <MediaPane
             {...this.props}
             active={tab === "media"}
+            addStorylineItem={() => this.addStorylineItem("media")}
             draft={this.state.draft.media}
             updateDraft={(data, clean) =>
               this.updateDraft(data, "media", clean)
             }
+            updateStorylineItem={() => this.updateStorylineItem("media")}
           />
         </Container>
       </PaneEl>
