@@ -5,7 +5,6 @@ import { Route, Router, IndexRoute, Redirect } from "react-router";
 import ReactGA from "react-ga";
 // import { withAuthenticator } from "aws-amplify-react";
 
-
 import { configureStore, history } from "./configureStore";
 
 import App from "./App";
