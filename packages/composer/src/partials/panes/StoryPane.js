@@ -2,7 +2,18 @@ import { array, func, shape, number } from "prop-types";
 import css from "styled-components";
 import React from "react";
 
-import { Action, Avatar, Container, Icon, Tip, radius, setSize, setSpace, skin, time } from "interviewjs-styleguide";
+import {
+  Action,
+  Avatar,
+  Container,
+  Icon,
+  Tip,
+  radius,
+  setSize,
+  setSpace,
+  skin,
+  time
+} from "interviewjs-styleguide";
 
 import { Storyline } from "./story";
 
@@ -16,7 +27,7 @@ const PaneHead = css.div`
   right: 0;
   text-align: center;
   transform: translateY(50%);
-  z-index: 5;
+  z-index: 400;
 `;
 const PaneBody = css.div`
   height: 100%;
@@ -96,12 +107,21 @@ export default class StoryPane extends React.Component {
               {interviewees.length > 0
                 ? interviewees.map((interviewee, intervieweeIndex) => (
                     <Interviewee
-                      active={this.props.currentInterviewee === intervieweeIndex}
-                      intervieweeColor={interviewee.color ? interviewee.color : null}
+                      active={
+                        this.props.currentInterviewee === intervieweeIndex
+                      }
+                      intervieweeColor={
+                        interviewee.color ? interviewee.color : null
+                      }
                       key={intervieweeIndex}
                     >
                       <Tip position="bottom" title={interviewee.name}>
-                        <Action secondary onClick={() => this.props.switchInterviewee(intervieweeIndex)}>
+                        <Action
+                          secondary
+                          onClick={() =>
+                            this.props.switchInterviewee(intervieweeIndex)
+                          }
+                        >
                           <Avatar image={interviewee.avatar} size="m" />
                         </Action>
                       </Tip>
@@ -111,7 +131,11 @@ export default class StoryPane extends React.Component {
             </Interviewees>
             <IntervieweesAction>
               <Tip position="bottom" title="Manage interviewees">
-                <Action iconic onClick={this.props.toggleDetailsModal} secondary>
+                <Action
+                  iconic
+                  onClick={this.props.toggleDetailsModal}
+                  secondary
+                >
                   <Icon name="pen" size="x" />
                 </Action>
               </Tip>
@@ -119,7 +143,11 @@ export default class StoryPane extends React.Component {
           </IntervieweesWrapper>
         </PaneHead>
         <PaneBody>
-          <Storyline {...this.props} deleteStorylineItem={this.deleteStorylineItem} storyline={storyline} />
+          <Storyline
+            {...this.props}
+            deleteStorylineItem={this.deleteStorylineItem}
+            storyline={storyline}
+          />
         </PaneBody>
       </PaneEl>
     );
@@ -132,11 +160,11 @@ StoryPane.propTypes = {
   deleteStorylineItem: func.isRequired,
   toggleBubbleEdit: func.isRequired,
   story: shape({
-    interviewees: array.isRequired,
+    interviewees: array.isRequired
   }).isRequired,
   storyIndex: number.isRequired,
   switchInterviewee: func.isRequired,
-  toggleDetailsModal: func.isRequired,
+  toggleDetailsModal: func.isRequired
 };
 
 StoryPane.defaultProps = {};
