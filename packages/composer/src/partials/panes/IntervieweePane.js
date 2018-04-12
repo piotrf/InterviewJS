@@ -37,11 +37,8 @@ const PaneEl = css(Container)`
 `;
 
 export default class IntervieweePane extends React.Component {
-  static getDerivedStateFromProps(nextProps) {
-    if (
-      nextProps.currentBubble &&
-      nextProps.currentBubble.role === "interviewee"
-    ) {
+  static getDerivedStateFromProps(nextProps, nextState) {
+    if (nextProps.editMode) {
       const { currentBubble } = nextProps;
       return {
         draft: {
@@ -55,24 +52,7 @@ export default class IntervieweePane extends React.Component {
         tab: currentBubble.type
       };
     }
-    return {
-      draft: {
-        text: { value: "" },
-        link: { value: "", title: "" },
-        image: {
-          value: "",
-          title: ""
-        },
-        embed: { value: "" },
-        map: { value: "" },
-        media: { value: "" }
-      },
-      clean: {
-        embed: "",
-        map: "",
-        media: ""
-      }
-    };
+    return nextState;
   }
   constructor(props) {
     super(props);
