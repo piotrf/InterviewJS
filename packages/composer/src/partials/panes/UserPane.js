@@ -179,7 +179,11 @@ const Draft = styled.div`
 
 export default class UserPane extends React.Component {
   static getDerivedStateFromProps(nextProps) {
-    if (!nextProps.currentBubble) return null;
+    if (
+      !nextProps.currentBubble ||
+      nextProps.currentBubble.role === "interviewee"
+    )
+      return null;
     const { content } = nextProps.currentBubble;
     const isBinary = content[0].enabled && content[1].enabled;
     return {
@@ -302,7 +306,6 @@ export default class UserPane extends React.Component {
     this.props.showSavedIndicator();
   }
   updateStorylineItem() {
-    console.log("updateStorylineItem()");
     const { storyIndex, currentInterviewee, currentBubbleIndex } = this.props;
     const {
       enableContinue,
