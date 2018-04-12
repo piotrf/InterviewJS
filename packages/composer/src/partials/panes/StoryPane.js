@@ -27,7 +27,7 @@ const PaneHead = css.div`
   right: 0;
   text-align: center;
   transform: translateY(50%);
-  z-index: 400;
+  z-index: 100;
 `;
 const PaneBody = css.div`
   height: 100%;
