@@ -8,8 +8,8 @@
     "catalog": "3.5.2",
     "get-contrast": "^2.0.0",
     "polished": "1.9.2",
-    "react": "16.2.0",
-    "react-dom": "16.2.0",
+    "react": "16.3.1",
+    "react-dom": "16.3.1",
     "react-tippy": "1.2.2",
     "styled-components": "3.2.5"
   },
@@ -20,7 +20,7 @@
     "eslint-plugin-import": "2.10.0",
     "eslint-plugin-jsx-a11y": "6.0.3",
     "eslint-plugin-react": "7.7.0",
-    "prettier": "1.11.1",
+    "prettier": "1.12.0",
     "prettier-eslint": "8.8.1"
   },
   "scripts": {
