@@ -1,4 +1,4 @@
-import css from "styled-components";
+import styled from "styled-components";
 import React from "react";
 import ReactModal from "react-modal";
 import { bool, func } from "prop-types";
@@ -14,24 +14,34 @@ import {
   Modal,
   ModalBody,
   ModalHead,
-  Preloader,
+  PageParagraph,
+  PageTitle,
   PaneTab,
   PaneTabs,
-  PageTitle,
+  Preloader,
   Separator,
-  Text,
   TextInput,
-  setHeight
+  color,
+  font,
+  setHeight,
+  setSpace
 } from "interviewjs-styleguide";
 
-const Brandmark = css.div`
+const Brandmark = styled.div`
   line-height: 0;
-  opacity: .8;
+  opacity: 0.8;
   padding: 1px;
   text-align: center;
   img {
     ${setHeight("l")};
   }
+`;
+
+const Message = styled(PageParagraph)`
+  ${setSpace("mbl")};
+  color: ${color.redM};
+  font-family: ${font.serif};
+  text-align: center;
 `;
 
 export default class AuthModal extends React.Component {
@@ -45,8 +55,9 @@ export default class AuthModal extends React.Component {
       message: null,
       newPassword: "",
       password: "",
-      signInActivated: false,
+      lockForm: false,
       signupStep: 0,
+      recoveryStep: 0,
       username: ""
     };
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -102,7 +113,7 @@ export default class AuthModal extends React.Component {
   handleSignIn(e) {
     if (e) e.preventDefault();
     const { username, password } = this.state;
-    this.setState({ signInActivated: true });
+    this.setState({ lockForm: true });
 
     Auth.signIn(username, password)
       .then(async (user) => {
@@ -110,17 +121,18 @@ export default class AuthModal extends React.Component {
         if (user && info) {
           this.raiseMessage("OK", info);
           this.props.handleAuthentication(info);
+          this.setState({ lockForm: false });
         }
       })
       .catch((error) => {
         this.raiseError(error);
-        this.setState({ signInActivated: false });
       });
   }
 
   handleSignUp(e) {
     if (e) e.preventDefault();
     const { username, password, email } = this.state;
+    this.setState({ lockForm: true });
     Auth.signUp({
       username,
       password,
@@ -128,9 +140,12 @@ export default class AuthModal extends React.Component {
     })
       .then((data) => {
         this.raiseMessage("Check your email for access code", data);
-        this.setState({ signupStep: 1 });
+        this.setState({ signupStep: 1, lockForm: false });
       })
-      .catch((error) => this.raiseError(error));
+      .catch((error) => {
+        this.raiseError(error);
+        this.setState({ lockForm: false });
+      });
   }
 
   handleConfirmSignUp(e) {
@@ -138,26 +153,43 @@ export default class AuthModal extends React.Component {
     const { username, code } = this.state;
 
     Auth.confirmSignUp(username, code)
-      .then((data) => this.raiseMessage("Now please sign in", data))
+      .then((data) => {
+        this.raiseMessage("Now please sign in", data);
+        this.setState({ activeTab: "signIn" });
+      })
       .catch((error) => this.raiseError(error));
   }
 
   handleForgotPassword(e) {
+    if (e) e.preventDefault();
     const { username } = this.state;
+    this.setState({ lockForm: true });
 
     Auth.forgotPassword(username)
-      .then((data) =>
-        this.raiseMessage("Check your email for access code", data)
-      )
-      .catch((error) => this.raiseError(error));
+      .then((data) => {
+        this.raiseMessage("Check your email for access code", data);
+        this.setState({ recoveryStep: 1, lockForm: false });
+      })
+      .catch((error) => {
+        this.raiseError(error);
+        this.setState({ lockForm: false });
+      });
   }
 
   handleConfirmForgotPassword(e) {
+    if (e) e.preventDefault();
     const { username, code, newPassword } = this.state;
+    this.setState({ lockForm: true });
 
     Auth.forgotPasswordSubmit(username, code, newPassword)
-      .then((data) => this.raiseMessage("Now please sign in", data))
-      .catch((error) => this.raiseError(error));
+      .then((data) => {
+        this.raiseMessage("Now please sign in", data);
+        this.setState({ forgotPassword: false, lockForm: false });
+      })
+      .catch((error) => {
+        this.raiseError(error);
+        this.setState({ lockForm: false });
+      });
   }
 
   render() {
@@ -166,7 +198,7 @@ export default class AuthModal extends React.Component {
         <FormItem>
           <Label>Username</Label>
           <TextInput
-            disabled={this.state.signInActivated}
+            disabled={this.state.lockForm}
             input
             name="username"
             onChange={this.handleInputChange}
@@ -178,7 +210,7 @@ export default class AuthModal extends React.Component {
         <FormItem>
           <Label>Password</Label>
           <TextInput
-            disabled={this.state.signInActivated}
+            disabled={this.state.lockForm}
             input
             name="password"
             onChange={this.handleInputChange}
@@ -187,11 +219,11 @@ export default class AuthModal extends React.Component {
         </FormItem>
         <Separator size="m" silent />
         <Actionbar>
-          {this.state.signInActivated ? (
+          {this.state.lockForm ? (
             <Preloader />
           ) : (
             <Action
-              disabled={this.state.signInActivated}
+              disabled={this.state.lockForm}
               fixed
               onClick={this.handleSignIn}
               primary
@@ -245,108 +277,134 @@ export default class AuthModal extends React.Component {
           <FormItem>
             <Label>Username</Label>
             <TextInput
+              disabled={this.state.lockForm}
               input
-              type="text"
               name="username"
-              value={this.state.username}
               onChange={this.handleInputChange}
+              type="text"
+              value={this.state.username}
             />
           </FormItem>
           <Separator size="m" silent />
           <FormItem>
             <Label>Password</Label>
             <TextInput
+              disabled={this.state.lockForm}
               input
-              type="password"
               name="password"
-              value={this.state.password}
               onChange={this.handleInputChange}
+              type="password"
+              value={this.state.password}
             />
           </FormItem>
           <Separator size="m" silent />
           <FormItem>
             <Label>Email</Label>
             <TextInput
+              disabled={this.state.lockForm}
               input
-              type="email"
               name="email"
+              onChange={this.handleInputChange}
+              type="email"
               value={this.state.email}
+            />
+          </FormItem>
+          <Separator size="m" silent />
+          <Actionbar>
+            {this.state.lockForm ? (
+              <Preloader />
+            ) : (
+              <Action fixed primary onClick={this.handleSignUp}>
+                Sign up
+              </Action>
+            )}
+          </Actionbar>
+        </Form>
+      );
+    };
+    const renderRecover = () => {
+      if (this.state.recoveryStep === 1) {
+        return (
+          <Form onSubmit={(e) => this.handleConfirmForgotPassword(e)}>
+            <FormItem>
+              <Label>Username</Label>
+              <TextInput
+                disabled
+                input
+                name="username"
+                onChange={this.handleInputChange}
+                type="text"
+                value={this.state.username}
+              />
+            </FormItem>
+            <Separator size="m" silent />
+            <FormItem>
+              <Label>Confimation Code</Label>
+              <TextInput
+                input
+                type="text"
+                name="code"
+                value={this.state.code}
+                onChange={this.handleInputChange}
+                disabled={this.state.lockForm}
+              />
+            </FormItem>
+            <Separator size="m" silent />
+            <FormItem>
+              <Label>New password</Label>
+              <TextInput
+                input
+                type="password"
+                name="newPassword"
+                value={this.state.newPassword}
+                onChange={this.handleInputChange}
+                disabled={this.state.lockForm}
+              />
+            </FormItem>
+            <Separator size="m" silent />
+            <Actionbar>
+              {this.state.lockForm ? (
+                <Preloader />
+              ) : (
+                <Action
+                  fixed
+                  primary
+                  onClick={this.handleConfirmForgotPassword}
+                >
+                  Confirm new password
+                </Action>
+              )}
+            </Actionbar>
+          </Form>
+        );
+      }
+      return (
+        <Form onSubmit={(e) => this.handleForgotPassword(e)}>
+          <Separator dir="h" size="s" silent />
+          <FormItem>
+            <Label>Username</Label>
+            <TextInput
+              input
+              type="text"
+              name="username"
+              disabled={this.state.lockForm}
+              value={this.state.username}
               onChange={this.handleInputChange}
             />
           </FormItem>
           <Separator size="m" silent />
           <Actionbar>
-            <Action fixed primary onClick={this.handleSignUp}>
-              Sign up
-            </Action>
+            {this.state.lockForm ? (
+              <Preloader />
+            ) : (
+              <Action fixed primary onClick={this.handleForgotPassword}>
+                Send me a recovery code
+              </Action>
+            )}
           </Actionbar>
         </Form>
       );
     };
-
-    const renderRecover = () => (
-      <Form onSubmit={(e) => this.handleForgotPassword(e)}>
-        <Text typo="h5">
-          Forgot Password<br /> Step 1
-        </Text>
-        <Separator dir="h" size="s" silent />
-        <FormItem>
-          <Label>Username</Label>
-          <TextInput
-            input
-            type="text"
-            name="username"
-            value={this.state.username}
-            onChange={this.handleInputChange}
-          />
-        </FormItem>
-        <Actionbar>
-          <Action fixed primary onClick={this.handleForgotPassword}>
-            Forgot password
-          </Action>
-        </Actionbar>
-        <Text typo="h4">Step 2</Text>
-        <FormItem>
-          <Label>Username</Label>
-          <TextInput
-            input
-            type="text"
-            name="username"
-            value={this.state.username}
-            onChange={this.handleInputChange}
-          />
-        </FormItem>
-        <Separator size="m" silent />
-        <FormItem>
-          <Label>Confimation Code</Label>
-          <TextInput
-            input
-            type="text"
-            name="code"
-            value={this.state.code}
-            onChange={this.handleInputChange}
-          />
-        </FormItem>
-        <Separator size="m" silent />
-        <FormItem>
-          <Label>New password</Label>
-          <TextInput
-            input
-            type="password"
-            name="newPassword"
-            value={this.state.newPassword}
-            onChange={this.handleInputChange}
-          />
-        </FormItem>
-        <Separator size="m" silent />
-        <Actionbar>
-          <Action fixed primary onClick={this.handleConfirmForgotPassword}>
-            Confirm forgot password
-          </Action>
-        </Actionbar>
-      </Form>
-    );
-
     return (
       <ReactModal
         ariaHideApp={false}
@@ -380,10 +438,10 @@ export default class AuthModal extends React.Component {
               </PaneTab>
             </PaneTabs>
           </ModalHead>
-          <Separator size="s" silent />
+          <Separator size="x" silent />
           <ModalBody>
             {this.state.message ? (
-              <Text typo="h3">{this.state.message}</Text>
+              <Message typo="p4">{this.state.message}</Message>
             ) : null}
             {!this.state.forgotPassword && this.state.activeTab === "signIn"
               ? renderSignIn()
