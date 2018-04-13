@@ -154,7 +154,7 @@ export default class AuthModal extends React.Component {
 
     Auth.confirmSignUp(username, code)
       .then((data) => {
-        this.raiseMessage("Now please sign in", data);
+        this.raiseMessage("Now please log in", data);
         this.setState({ activeTab: "signIn" });
       })
       .catch((error) => this.raiseError(error));
@@ -228,7 +228,7 @@ export default class AuthModal extends React.Component {
               onClick={this.handleSignIn}
               primary
             >
-              Sign in
+              Log in
             </Action>
           )}
         </Actionbar>
@@ -427,7 +427,7 @@ export default class AuthModal extends React.Component {
                 active={this.state.activeTab === "signIn"}
                 onClick={() => this.handleTabActivation("signIn")}
               >
-                Sign In
+                Log in
               </PaneTab>
               <PaneTab
                 opinionated
