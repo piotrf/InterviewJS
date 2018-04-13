@@ -126,6 +126,7 @@ export default class AuthModal extends React.Component {
       })
       .catch((error) => {
         this.raiseError(error);
+        this.setState({ lockForm: false });
       });
   }
 
