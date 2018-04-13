@@ -37,21 +37,22 @@ const PaneEl = css(Container)`
 `;
 
 export default class IntervieweePane extends React.Component {
-  static getDerivedStateFromProps(nextProps) {
-    if (!nextProps.currentBubble || nextProps.currentBubble.role === "user")
-      return null;
-    const { currentBubble } = nextProps;
-    return {
-      draft: {
-        [currentBubble.type]: {
-          value: currentBubble.content.value,
-          title: currentBubble.content.title
-            ? currentBubble.content.title
-            : null
-        }
-      },
-      tab: currentBubble.type
-    };
+  static getDerivedStateFromProps(nextProps, nextState) {
+    if (nextProps.editMode) {
+      const { currentBubble } = nextProps;
+      return {
+        draft: {
+          [currentBubble.type]: {
+            value: currentBubble.content.value,
+            title: currentBubble.content.title
+              ? currentBubble.content.title
+              : null
+          }
+        },
+        tab: currentBubble.type
+      };
+    }
+    return nextState;
   }
   constructor(props) {
     super(props);

@@ -259,10 +259,13 @@ export default class ComposerView extends React.Component {
   }
 
   switchInterviewee(interviewee) {
-    this.setState({
-      currentInterviewee: interviewee,
-      currentBubble: null
-    });
+    this.setState(
+      {
+        currentInterviewee: interviewee,
+        currentBubble: null
+      },
+      () => this.setCurrentBubbleNone()
+    );
   }
 
   deleteInterviewee(story, interviewee) {
