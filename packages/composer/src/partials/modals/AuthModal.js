@@ -14,6 +14,7 @@ import {
   Modal,
   ModalBody,
   ModalHead,
+  Preloader,
   PaneTab,
   PaneTabs,
   PageTitle,
@@ -44,6 +45,7 @@ export default class AuthModal extends React.Component {
       message: null,
       newPassword: "",
       password: "",
+      signInActivated: false,
       signupStep: 0,
       username: ""
     };
@@ -97,8 +99,10 @@ export default class AuthModal extends React.Component {
     this.setState({ message: "" });
   }
 
-  handleSignIn() {
+  handleSignIn(e) {
+    if (e) e.preventDefault();
     const { username, password } = this.state;
+    this.setState({ signInActivated: true });
 
     Auth.signIn(username, password)
       .then(async (user) => {
@@ -108,27 +112,29 @@ export default class AuthModal extends React.Component {
           this.props.handleAuthentication(info);
         }
       })
-      .catch((error) => this.raiseError(error));
+      .catch((error) => {
+        this.raiseError(error);
+        this.setState({ signInActivated: false });
+      });
   }
 
-  handleSignUp() {
+  handleSignUp(e) {
+    if (e) e.preventDefault();
     const { username, password, email } = this.state;
-
-    const enableAccountConfirmation = (data) => {
-      this.raiseMessage("Check your email for access code", data);
-      this.setState({ signupStep: 1 });
-    };
-
     Auth.signUp({
       username,
       password,
       attributes: { email }
     })
-      .then((data) => enableAccountConfirmation(data))
+      .then((data) => {
+        this.raiseMessage("Check your email for access code", data);
+        this.setState({ signupStep: 1 });
+      })
       .catch((error) => this.raiseError(error));
   }
 
-  handleConfirmSignUp() {
+  handleConfirmSignUp(e) {
+    if (e) e.preventDefault();
     const { username, code } = this.state;
 
     Auth.confirmSignUp(username, code)
@@ -136,7 +142,7 @@ export default class AuthModal extends React.Component {
       .catch((error) => this.raiseError(error));
   }
 
-  handleForgotPassword() {
+  handleForgotPassword(e) {
     const { username } = this.state;
 
     Auth.forgotPassword(username)
@@ -146,7 +152,7 @@ export default class AuthModal extends React.Component {
       .catch((error) => this.raiseError(error));
   }
 
-  handleConfirmForgotPassword() {
+  handleConfirmForgotPassword(e) {
     const { username, code, newPassword } = this.state;
 
     Auth.forgotPasswordSubmit(username, code, newPassword)
@@ -156,32 +162,43 @@ export default class AuthModal extends React.Component {
 
   render() {
     const renderSignIn = () => (
-      <Form>
+      <Form onSubmit={(e) => this.handleSignIn(e)}>
         <FormItem>
           <Label>Username</Label>
           <TextInput
+            disabled={this.state.signInActivated}
             input
-            type="text"
             name="username"
-            value={this.state.username}
             onChange={this.handleInputChange}
+            type="text"
+            value={this.state.username}
           />
         </FormItem>
         <Separator size="m" silent />
         <FormItem>
           <Label>Password</Label>
           <TextInput
+            disabled={this.state.signInActivated}
             input
-            type="password"
             name="password"
             onChange={this.handleInputChange}
+            type="password"
           />
         </FormItem>
         <Separator size="m" silent />
         <Actionbar>
-          <Action fixed primary onClick={this.handleSignIn}>
-            Sign in
-          </Action>
+          {this.state.signInActivated ? (
+            <Preloader />
+          ) : (
+            <Action
+              disabled={this.state.signInActivated}
+              fixed
+              onClick={this.handleSignIn}
+              primary
+            >
+              Sign in
+            </Action>
+          )}
         </Actionbar>
         <Separator silent size="x" />
         <Actionbar>
@@ -192,7 +209,7 @@ export default class AuthModal extends React.Component {
     const renderSignUp = () => {
       if (this.state.signupStep === 1) {
         return (
-          <Form>
+          <Form onSubmit={(e) => this.handleConfirmSignUp(e)}>
             <FormItem>
               <Label>Username</Label>
               <TextInput
@@ -224,7 +241,7 @@ export default class AuthModal extends React.Component {
         );
       }
       return (
-        <Form>
+        <Form onSubmit={(e) => this.handleSignUp(e)}>
           <FormItem>
             <Label>Username</Label>
             <TextInput
@@ -268,7 +285,7 @@ export default class AuthModal extends React.Component {
     };
 
     const renderRecover = () => (
-      <Form>
+      <Form onSubmit={(e) => this.handleForgotPassword(e)}>
         <Text typo="h5">
           Forgot Password<br /> Step 1
         </Text>
