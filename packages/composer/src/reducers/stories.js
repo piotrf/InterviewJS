@@ -119,6 +119,32 @@ function stories(state = [], action) {
       ];
       return ADD_STORYLINE_ITEM_STATE;
 
+    case "UPDATE_STORYLINE_ITEM":
+      console.log("updating storyline item");
+      if (!state[storyIndex].interviewees[intervieweeIndex].storyline) {
+        state[storyIndex].interviewees[intervieweeIndex].storyline = [];
+      }
+      const UPDATE_STORYLINE_ITEM_STATE = [
+        ...state.slice(0, storyIndex),
+        {
+          ...state[storyIndex],
+          interviewees: [
+            ...state[storyIndex].interviewees.slice(0, intervieweeIndex),
+            {
+              ...state[storyIndex].interviewees[intervieweeIndex],
+              storyline: [
+                ...state[storyIndex].interviewees[intervieweeIndex].storyline.slice(0, storyItemIndex),
+                payload,
+                ...state[storyIndex].interviewees[intervieweeIndex].storyline.slice(storyItemIndex + 1),
+              ],
+            },
+            ...state[storyIndex].interviewees.slice(intervieweeIndex + 1),
+          ],
+        },
+        ...state.slice(storyIndex + 1),
+      ];
+      return UPDATE_STORYLINE_ITEM_STATE;
+
     case "MOVE_STORYLINE_ITEM":
       console.log("moving storyline item");
       const { to, from } = payload;

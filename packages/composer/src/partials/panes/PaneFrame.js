@@ -2,7 +2,17 @@ import React from "react";
 import css from "styled-components";
 import { array, bool, func, node, oneOfType, string } from "prop-types";
 
-import { Action, Container, Icon, Separator, color, font, radius, setSpace, setType } from "interviewjs-styleguide";
+import {
+  Action,
+  Container,
+  Icon,
+  Separator,
+  color,
+  font,
+  radius,
+  setSpace,
+  setType
+} from "interviewjs-styleguide";
 
 import ShapeLeft from "../../assets/ShapeAttachedLeft.svg";
 import ShapeRight from "../../assets/ShapeAttachedRight.svg";
@@ -72,7 +82,7 @@ const SubmitButton = css.span`
 
 `;
 
-const PaneFrame = props => {
+const PaneFrame = (props) => {
   const { hasDraft } = props;
   return (
     <Frame {...props} dir="column" padded>
@@ -82,15 +92,27 @@ const PaneFrame = props => {
         <DraftHolder>
           <Draft fill="grey">{props.draft}</Draft>
           <SubmitButton side={props.side}>
-            <Action
-              disabled={!hasDraft}
-              iconic
-              onClick={hasDraft ? props.addStorylineItem : null}
-              primary
-              tone="positive"
-            >
-              <Icon name="plus" size="l" />
-            </Action>
+            {props.editMode ? (
+              <Action
+                disabled={!hasDraft}
+                iconic
+                onClick={hasDraft ? props.updateStorylineItem : null}
+                primary
+                tone="positive"
+              >
+                <Icon name="checkmark" size="l" />
+              </Action>
+            ) : (
+              <Action
+                disabled={!hasDraft}
+                iconic
+                onClick={hasDraft ? props.addStorylineItem : null}
+                primary
+                tone="positive"
+              >
+                <Icon name="plus" size="l" />
+              </Action>
+            )}
           </SubmitButton>
         </DraftHolder>
       </Container>
@@ -100,16 +122,19 @@ const PaneFrame = props => {
 
 PaneFrame.propTypes = {
   addStorylineItem: func.isRequired,
+  updateStorylineItem: func.isRequired,
   children: oneOfType([array, string, node]).isRequired,
   draft: oneOfType([array, string, node]),
+  editMode: bool,
   hasDraft: bool,
-  side: string,
+  side: string
 };
 
 PaneFrame.defaultProps = {
   draft: null,
+  editMode: false,
   hasDraft: false,
-  side: "left",
+  side: "left"
 };
 
 export default PaneFrame;
