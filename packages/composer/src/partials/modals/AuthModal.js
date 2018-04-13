@@ -330,7 +330,7 @@ export default class AuthModal extends React.Component {
             <FormItem>
               <Label>Username</Label>
               <TextInput
-                disabled
+                disabled={this.state.lockForm}
                 input
                 name="username"
                 onChange={this.handleInputChange}
