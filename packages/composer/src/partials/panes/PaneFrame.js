@@ -2,7 +2,17 @@ import React from "react";
 import css from "styled-components";
 import { array, bool, func, node, oneOfType, string } from "prop-types";
 
-import { Action, Container, Icon, Separator, color, font, radius, setSpace, setType } from "interviewjs-styleguide";
+import {
+  Action,
+  Container,
+  Icon,
+  Separator,
+  color,
+  font,
+  radius,
+  setSpace,
+  setType
+} from "interviewjs-styleguide";
 
 import ShapeLeft from "../../assets/ShapeAttachedLeft.svg";
 import ShapeRight from "../../assets/ShapeAttachedRight.svg";
@@ -72,7 +82,7 @@ const SubmitButton = css.span`
 
 `;
 
-const PaneFrame = props => {
+const PaneFrame = (props) => {
   const { hasDraft } = props;
   return (
     <Frame {...props} dir="column" padded>
@@ -117,14 +127,14 @@ PaneFrame.propTypes = {
   draft: oneOfType([array, string, node]),
   editMode: bool,
   hasDraft: bool,
-  side: string,
+  side: string
 };
 
 PaneFrame.defaultProps = {
   draft: null,
   editMode: false,
   hasDraft: false,
-  side: "left",
+  side: "left"
 };
 
 export default PaneFrame;
