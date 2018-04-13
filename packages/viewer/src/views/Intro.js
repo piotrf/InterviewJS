@@ -128,8 +128,8 @@ export default class IntroView extends Component {
           <PageSubtitle typo="h3">{story.intro}</PageSubtitle>
           <Separator size="m" silent />
           <Aside typo="p3">
-            InterviewJS brings you journalism through a messenger platform -
-            engage with the people at the heart of the a story
+            InterviewJS brings you journalism through a messenger platform: real
+            people, real stories.
           </Aside>
           <Separator size="l" silent />
           {story.logo ? (
