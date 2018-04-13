@@ -32,7 +32,9 @@ export default class AuthView extends Component {
       name: info.username,
       username: info.username,
       email: info.attributes.email,
-      avatar: `https://www.gravatar.com/avatar/${md5(info.attributes.email)}?d=retro`,
+      avatar: `https://www.gravatar.com/avatar/${md5(
+        info.attributes.email
+      )}?d=retro`
     };
 
     this.props.signInUser(user);
@@ -40,7 +42,7 @@ export default class AuthView extends Component {
     Raven.setUserContext({
       id: user.id,
       name: user.name,
-      email: user.email,
+      email: user.email
     });
 
     this.props.router.push(`/stories`);
@@ -55,17 +57,16 @@ export default class AuthView extends Component {
         isOpen
         key="AuthModal"
         style={{
-          maxWidth: "350px",
-          minHeight: "350px",
+          maxWidth: "440px"
         }}
-      />,
+      />
     ];
   }
 }
 
 AuthView.propTypes = {
   router: object.isRequired /* eslint react/forbid-prop-types: 0 */,
-  signInUser: func.isRequired,
+  signInUser: func.isRequired
 };
 
 AuthView.defaultProps = {};
