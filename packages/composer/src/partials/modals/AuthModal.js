@@ -7,9 +7,6 @@ import { Auth } from "aws-amplify";
 import {
   Action,
   Actionbar,
-  Container,
-  Breadcrumbs,
-  Breadcrumb,
   Form,
   FormItem,
   Label,
@@ -17,16 +14,13 @@ import {
   Modal,
   ModalBody,
   ModalHead,
-  ModalFoot,
   PaneTab,
   PaneTabs,
   PageTitle,
   Separator,
   Text,
   TextInput,
-  color,
-  setHeight,
-  setSpace
+  setHeight
 } from "interviewjs-styleguide";
 
 const Brandmark = css.div`
