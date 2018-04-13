@@ -83,9 +83,8 @@ export default class ContextView extends Component {
         </PageHead>
         <PageBody limit="x" flex={[1, 0, `${100 / 2}%`]}>
           <Aside typo="p3">
-            Explore real stories by interacting directly with the interviewees.
-            At the end we will let you know how much of the story you have
-            covered and you can share your views in a poll. Here is the story:
+            With InterviewJS you can interact directly with interviewees.
+            Explore different perspectives, then opt to have your say.
           </Aside>
           <Separator size="m" silent />
           <PageSubtitle typo="h4">{story.context}</PageSubtitle>
