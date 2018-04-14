@@ -2,13 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { array, bool, oneOfType, node, string } from "prop-types";
 
-import {
-  LogoWSymbolNegative,
-  Container,
-  breakpoint,
-  color,
-  setSpace
-} from "interviewjs-styleguide";
+import { LogoWSymbolNegative, Container, breakpoint, color, setSpace } from "interviewjs-styleguide";
 
 const CoverEl = styled(Container)`
   background-color: ${color.black};
@@ -75,7 +69,7 @@ const Brandmark = styled.div`
   }
 `;
 
-const Cover = (props) => (
+const Cover = props => (
   <CoverEl {...props}>
     <CoverBody compact={props.compact} hasImage={props.image}>
       <Brandmark>
@@ -89,12 +83,12 @@ const Cover = (props) => (
 Cover.propTypes = {
   children: oneOfType([array, string, node]),
   compact: bool,
-  image: node.isRequired
+  image: node.isRequired,
 };
 
 Cover.defaultProps = {
   children: null,
-  compact: false
+  compact: false,
 };
 
 export default Cover;

@@ -17,17 +17,17 @@ Raven.config("https://5ead2dcac648436b93094e8a371bf1b1@sentry.io/365850", {
     dom: false,
   },
   maxBreadcrumbs: 32,
-  sanitizeKeys: ['logo', 'cover', 'avatar'],
+  sanitizeKeys: ["logo", "cover", "avatar"],
 }).install();
 
 const defaultState = {
-  story: window.InterviewJS && window.InterviewJS.story ? window.InterviewJS.story : {}
+  story: window.InterviewJS && window.InterviewJS.story ? window.InterviewJS.story : {},
 };
 
 const enhancers = compose(
   applyMiddleware(
     createRavenMiddleware(Raven, {
-      stateTransformer: state => (state.id),
+      stateTransformer: state => state.id,
       // actionTransformer: action => {
       //   const cloned = clone(action);
       //   if (cloned.payload && cloned.payload.content && cloned.payload.content.value && cloned.payload.content.value.length > 64) cloned.payload.content.value = cloned.payload.content.value.substring(64);
@@ -38,7 +38,7 @@ const enhancers = compose(
       // },
     })
   ),
-  window.devToolsExtension ? window.devToolsExtension() : (f) => f,
+  window.devToolsExtension ? window.devToolsExtension() : f => f
 );
 
 const store = createStore(rootReducer, defaultState, enhancers);

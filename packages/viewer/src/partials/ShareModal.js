@@ -10,7 +10,7 @@ import {
   TwitterShareButton,
   TwitterIcon,
   EmailShareButton,
-  EmailIcon
+  EmailIcon,
 } from "react-share";
 
 import {
@@ -25,7 +25,7 @@ import {
   PageTitle,
   Separator,
   color,
-  setSpace
+  setSpace,
 } from "interviewjs-styleguide";
 
 const ShareButtons = css.div`
@@ -57,9 +57,7 @@ export default class ShareModal extends React.Component {
           <ModalHead>
             <PageTitle typo="p4">“{story.title}”</PageTitle>
             <Separator silent size="x" />
-            <PageSubtitle typo="h2">
-              Share this story with your network:
-            </PageSubtitle>
+            <PageSubtitle typo="h2">Share this story with your network:</PageSubtitle>
           </ModalHead>
           <ModalBody>
             <Container align="center">
@@ -67,11 +65,7 @@ export default class ShareModal extends React.Component {
                 <FacebookShareButton url={storyUrl} hashtag="interviewjs">
                   <FacebookIcon size={44} round />
                 </FacebookShareButton>
-                <TwitterShareButton
-                  url={storyUrl}
-                  hashtags={["interviewjs"]}
-                  title={story.title}
-                >
+                <TwitterShareButton url={storyUrl} hashtags={["interviewjs"]} title={story.title}>
                   <TwitterIcon size={44} round />
                 </TwitterShareButton>
                 <LinkedinShareButton url={storyUrl} title={story.title}>
@@ -104,8 +98,8 @@ ShareModal.propTypes = {
   handleClose: func.isRequired,
   isOpen: bool.isRequired,
   story: shape({
-    title: string.isRequired
-  }).isRequired
+    title: string.isRequired,
+  }).isRequired,
 };
 
 ShareModal.defaultProps = {};

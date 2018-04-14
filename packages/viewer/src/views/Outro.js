@@ -4,21 +4,9 @@ import { object, shape, string, func } from "prop-types";
 import axios from "axios";
 import { flatten, filter } from "lodash";
 
-import {
-  Action,
-  Actionbar,
-  PageSubtitle,
-  Separator
-} from "interviewjs-styleguide";
+import { Action, Actionbar, PageSubtitle, Separator } from "interviewjs-styleguide";
 
-import {
-  Cover,
-  Page,
-  PageBody,
-  PageHead,
-  StoryDetailsModal,
-  Topbar
-} from "../partials";
+import { Cover, Page, PageBody, PageHead, StoryDetailsModal, Topbar } from "../partials";
 
 export default class OutroView extends Component {
   constructor(props) {
@@ -42,7 +30,12 @@ export default class OutroView extends Component {
     }
 
     // Load story via storyId -> getStoryURL
-    if ((!this.props.story || Object.keys(this.props.story).length === 0) && this.props.params.storyId && window.InterviewJS && window.InterviewJS.getStoryURL) {
+    if (
+      (!this.props.story || Object.keys(this.props.story).length === 0) &&
+      this.props.params.storyId &&
+      window.InterviewJS &&
+      window.InterviewJS.getStoryURL
+    ) {
       const storyURL = window.InterviewJS.getStoryURL(this.props.params.storyId);
       if (storyURL) axios.get(storyURL).then(response => this.props.createStory(response.data));
     }
@@ -54,22 +47,17 @@ export default class OutroView extends Component {
 
     // construct array out of scripted storylines
     const storylines = [];
-    interviewees.forEach((interviewee) =>
-      storylines.push(interviewee.storyline)
-    );
+    interviewees.forEach(interviewee => storylines.push(interviewee.storyline));
 
     // construct array out of localstorage histories
     const histories = [];
-    interviewees.forEach((interviewee) => {
-      const localHistory = JSON.parse(
-        localStorage.getItem(`history-${story.id}-${interviewee.id}`)
-      );
+    interviewees.forEach(interviewee => {
+      const localHistory = JSON.parse(localStorage.getItem(`history-${story.id}-${interviewee.id}`));
       return localHistory ? histories.push(localHistory) : null;
     });
 
     // count only interviewees’ items
-    const getScoreItemsCount = (arr) =>
-      filter(flatten(arr), (o) => o.role === "interviewee").length;
+    const getScoreItemsCount = arr => filter(flatten(arr), o => o.role === "interviewee").length;
 
     // start counting
     const total = getScoreItemsCount(storylines);
@@ -116,18 +104,10 @@ export default class OutroView extends Component {
           <PageSubtitle typo="h3">{getResultScore()}</PageSubtitle>
           <Separator size="l" silent />
           <Actionbar>
-            <Action
-              fixed
-              onClick={() => this.props.router.push(`/${story.id}/listing`)}
-              primary
-            >
+            <Action fixed onClick={() => this.props.router.push(`/${story.id}/listing`)} primary>
               Revisit the interviews
             </Action>
-            <Action
-              fixed
-              onClick={() => this.props.router.push(`/${story.id}/poll`)}
-              primary
-            >
+            <Action fixed onClick={() => this.props.router.push(`/${story.id}/poll`)} primary>
               Have your say
             </Action>
           </Actionbar>
@@ -140,7 +120,7 @@ export default class OutroView extends Component {
           key="detailsModal"
           story={story}
         />
-      ) : null
+      ) : null,
     ];
   }
 }
@@ -150,12 +130,12 @@ OutroView.propTypes = {
   router: object,
   params: object,
   story: shape({
-    title: string
-  })
+    title: string,
+  }),
 };
 
 OutroView.defaultProps = {
   router: null,
   params: {},
-  story: {}
+  story: {},
 };

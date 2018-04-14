@@ -4,25 +4,9 @@ import React, { Component } from "react";
 import { object, shape, string, func } from "prop-types";
 import axios from "axios";
 
-import {
-  Action,
-  Actionbar,
-  Container,
-  PageSubtitle,
-  Separator,
-  setSpace
-} from "interviewjs-styleguide";
+import { Action, Actionbar, Container, PageSubtitle, Separator, setSpace } from "interviewjs-styleguide";
 
-import {
-  Chart,
-  Cover,
-  Page,
-  PageBody,
-  PageHead,
-  ShareModal,
-  StoryDetailsModal,
-  Topbar
-} from "../partials";
+import { Chart, Cover, Page, PageBody, PageHead, ShareModal, StoryDetailsModal, Topbar } from "../partials";
 
 const PollItem = css(Container)`
   &:not(:last-child) {
@@ -52,7 +36,12 @@ export default class ResultsView extends Component {
     }
 
     // Load story via storyId -> getStoryURL
-    if ((!this.props.story || Object.keys(this.props.story).length === 0) && this.props.params.storyId && window.InterviewJS && window.InterviewJS.getStoryURL) {
+    if (
+      (!this.props.story || Object.keys(this.props.story).length === 0) &&
+      this.props.params.storyId &&
+      window.InterviewJS &&
+      window.InterviewJS.getStoryURL
+    ) {
       const storyURL = window.InterviewJS.getStoryURL(this.props.params.storyId);
       if (storyURL) axios.get(storyURL).then(response => this.props.createStory(response.data));
     }
@@ -82,7 +71,7 @@ export default class ResultsView extends Component {
           <Cover image={story.cover} compact />
         </PageHead>
         <PageBody limit="x" flex={[1, 0, `${100 / 4}%`]}>
-          {poll.map((item) => (
+          {poll.map(item => (
             <PollItem key={item.question}>
               <PageSubtitle typo="h3">{item.question}</PageSubtitle>
               <Separator silent size="m" />
@@ -118,7 +107,7 @@ export default class ResultsView extends Component {
           story={story}
           body={<Container />}
         />
-      ) : null
+      ) : null,
     ];
   }
 }
@@ -127,11 +116,11 @@ ResultsView.propTypes = {
   createStory: func.isRequired,
   router: object,
   story: shape({
-    title: string
-  })
+    title: string,
+  }),
 };
 
 ResultsView.defaultProps = {
   router: null,
-  story: {}
+  story: {},
 };

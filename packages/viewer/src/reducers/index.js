@@ -5,7 +5,7 @@ import story from "./story";
 
 const rootReducer = combineReducers({
   story,
-  routing: routerReducer
+  routing: routerReducer,
 });
 
 export default rootReducer;
