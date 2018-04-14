@@ -230,7 +230,7 @@ export default class PublishStoryModal extends Component {
               <img src={iframeRatioSpacer} alt="" />
               <iframe
                 title="Preview"
-                src={`${iframeViewer}?${uuidv4()}`}
+                src={`${iframeViewer}?${uuidv4()}/`}
                 ref={(iframe) => {
                   this.iframe = iframe;
                 }}
