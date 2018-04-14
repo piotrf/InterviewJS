@@ -9,6 +9,7 @@ import shortUuid from "short-uuid";
 const uuidv4 = () => shortUuid().fromUUID(shortUuid.uuid());
 
 export function createStory({
+  id = uuidv4(),
   uid = "anonymous",
   author = "",
   authorLink = "",
@@ -46,7 +47,7 @@ export function createStory({
       pubDate,
       title,
       uid,
-      id: uuidv4(),
+      id,
       modDate: new Date(),
     },
   };
