@@ -1,4 +1,5 @@
 /* eslint react/forbid-prop-types: 0 */
+/* eslint react/prop-types: 0 */
 import css from "styled-components";
 import React, { Component } from "react";
 import { object, shape, string, func } from "prop-types";
@@ -64,8 +65,10 @@ export default class PollView extends Component {
   submitPoll() {
     const { story } = this.props;
     localStorage.setItem(`poll-${story.id}`, JSON.stringify(this.state.formData));
+    console.log(this.state.formData);
     this.moveOn();
   }
+
   moveOn() {
     this.props.router.push(`/${this.props.story.id}/results`);
   }
@@ -87,13 +90,13 @@ export default class PollView extends Component {
           <Cover image={story.cover} compact />
         </PageHead>
         <PageBody limit="x" flex={[1, 0, `${100 / 4}%`]}>
-          {poll.map((item, i) => (
-            <PollItem key={i}>
+          {poll.filter(item => !!item.id).map(item => (
+            <PollItem key={item.id}>
               <PageSubtitle typo="h3">{item.question}</PageSubtitle>
               <Separator silent size="m" />
               <Actionbar>
                 <Action
-                  active={this.state.formData[`question${i}`] === 0}
+                  active={this.state.formData[`question-${item.id}`] === 0}
                   disabled={hasLocalPoll}
                   fixed
                   inverted
@@ -103,7 +106,7 @@ export default class PollView extends Component {
                           this.setState({
                             formData: {
                               ...this.state.formData,
-                              [`question${i}`]: 0,
+                              [`question-${item.id}`]: 0,
                             },
                           })
                       : null
@@ -112,7 +115,7 @@ export default class PollView extends Component {
                   {item.answer1}
                 </Action>
                 <Action
-                  active={this.state.formData[`question${i}`] === 1}
+                  active={this.state.formData[`question-${item.id}`] === 1}
                   disabled={hasLocalPoll}
                   fixed
                   inverted
@@ -122,7 +125,7 @@ export default class PollView extends Component {
                           this.setState({
                             formData: {
                               ...this.state.formData,
-                              [`question${i}`]: 1,
+                              [`question-${item.id}`]: 1,
                             },
                           })
                       : null

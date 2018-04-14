@@ -1,4 +1,5 @@
 /* eslint react/forbid-prop-types: 0 */
+/* eslint react/prop-types: 0 */
 import css from "styled-components";
 import React, { Component } from "react";
 import { object, shape, string, func } from "prop-types";
@@ -17,7 +18,12 @@ const PollItem = css(Container)`
 export default class ResultsView extends Component {
   constructor(props) {
     super(props);
-    this.state = { storyDetailsModal: false, shareStoryModal: false };
+    this.state = {
+      storyDetailsModal: false,
+      shareStoryModal: false,
+      results: window.InterviewJS.poll || [],
+    };
+
     this.toggleDetailsModal = this.toggleDetailsModal.bind(this);
     this.toggleShareStoryModal = this.toggleShareStoryModal.bind(this);
   }
@@ -71,15 +77,15 @@ export default class ResultsView extends Component {
           <Cover image={story.cover} compact />
         </PageHead>
         <PageBody limit="x" flex={[1, 0, `${100 / 4}%`]}>
-          {poll.map(item => (
+          {poll.filter(item => !!item.id).map(item => (
             <PollItem key={item.question}>
               <PageSubtitle typo="h3">{item.question}</PageSubtitle>
               <Separator silent size="m" />
               <Chart
                 answer1={item.answer1}
                 answer2={item.answer2}
-                val1={30} // TODO @LAURIAN plug in live poll results
-                val2={70} // TODO @LAURIAN plug in live poll results
+                val1={this.state.results.find(result => result.id === item.id) ? this.state.results.find(result => result.id === item.id).answer1 : 0}
+                val2={this.state.results.find(result => result.id === item.id) ? this.state.results.find(result => result.id === item.id).answer2 : 0}
               />
             </PollItem>
           ))}
