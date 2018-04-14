@@ -49,15 +49,16 @@ export default class AuthModal extends React.Component {
     super(props);
     this.state = {
       activeTab: "signIn",
+      forgotPassword: false,
+      lockForm: false,
+      recoveryStep: 0,
+      signupStep: 0,
+      message: null,
+
       code: "",
       email: "",
-      forgotPassword: false,
-      message: null,
       newPassword: "",
       password: "",
-      lockForm: false,
-      signupStep: 0,
-      recoveryStep: 0,
       username: ""
     };
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -168,8 +169,9 @@ export default class AuthModal extends React.Component {
 
     Auth.forgotPassword(username)
       .then((data) => {
-        this.raiseMessage("Check your email for access code", data);
-        this.setState({ recoveryStep: 1, lockForm: false });
+        this.setState({ recoveryStep: 1, lockForm: false }, () =>
+          this.raiseMessage("Check your email for access code", data)
+        );
       })
       .catch((error) => {
         this.raiseError(error);
