@@ -66,7 +66,14 @@ export default class PollView extends Component {
     const { story } = this.props;
     localStorage.setItem(`poll-${story.id}`, JSON.stringify(this.state.formData));
     console.log(this.state.formData);
-    this.moveOn();
+    axios.post('https://api.interviewjs.io/v1/polls', {
+      id: this.props.params.storyId,
+      viewer: {
+        host: document.location.hostname,
+        version: process.env.VERSION,
+      },
+      poll: this.state.formData,
+    }).then(() => this.moveOn()).catch(() => this.moveOn());
   }
 
   moveOn() {
@@ -96,7 +103,7 @@ export default class PollView extends Component {
               <Separator silent size="m" />
               <Actionbar>
                 <Action
-                  active={this.state.formData[`question-${item.id}`] === 0}
+                  active={this.state.formData[item.id] === 0}
                   disabled={hasLocalPoll}
                   fixed
                   inverted
@@ -106,7 +113,7 @@ export default class PollView extends Component {
                           this.setState({
                             formData: {
                               ...this.state.formData,
-                              [`question-${item.id}`]: 0,
+                              [item.id]: 0,
                             },
                           })
                       : null
@@ -115,7 +122,7 @@ export default class PollView extends Component {
                   {item.answer1}
                 </Action>
                 <Action
-                  active={this.state.formData[`question-${item.id}`] === 1}
+                  active={this.state.formData[item.id] === 1}
                   disabled={hasLocalPoll}
                   fixed
                   inverted
@@ -125,7 +132,7 @@ export default class PollView extends Component {
                           this.setState({
                             formData: {
                               ...this.state.formData,
-                              [`question-${item.id}`]: 1,
+                              [item.id]: 1,
                             },
                           })
                       : null
