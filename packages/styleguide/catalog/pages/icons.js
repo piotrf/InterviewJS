@@ -1,7 +1,7 @@
-import React from 'react';
-import { markdown, ReactSpecimen } from 'catalog';
+import React from "react";
+import { markdown, ReactSpecimen } from "catalog";
 
-import { Icon } from '../components';
+import { Icon } from "../components";
 
 export default () => markdown`
   ## Size variations
@@ -227,6 +227,16 @@ export default () => markdown`
   ${(
     <ReactSpecimen span={1}>
       <Icon name="twitter" />
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen span={1}>
+      <Icon name="enlarge" />
+    </ReactSpecimen>
+  )}
+  ${(
+    <ReactSpecimen span={1}>
+      <Icon name="question" />
     </ReactSpecimen>
   )}
 `;
