@@ -246,7 +246,7 @@ export default class PublishStoryModal extends Component {
             <TextInput
               input
               disabled
-              value={`${iframeViewer}`}
+              value={`${iframeViewer}/`}
               style={{ textAlign: "center" }}
             />
             <Separator size="m" silent />
@@ -254,7 +254,7 @@ export default class PublishStoryModal extends Component {
               <Action fixed primary onClick={this.handleStep3}>
                 Close
               </Action>
-              <Action fixed href={`${iframeViewer}`} secondary target="_blank">
+              <Action fixed href={`${iframeViewer}/`} secondary target="_blank">
                 Open your story
               </Action>
             </Actionbar>
