@@ -97,7 +97,7 @@ export default class ComposerView extends React.Component {
     this.state = {
       currentBubble: null,
       currentInterviewee: 0,
-      detailsModal: "interviewees",
+      detailsModal: "",
       joyrideSteps: [],
       publishModal: false,
       savedLabel: null,
