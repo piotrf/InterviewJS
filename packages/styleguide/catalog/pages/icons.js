@@ -239,4 +239,9 @@ export default () => markdown`
       <Icon name="question" />
     </ReactSpecimen>
   )}
+  ${(
+    <ReactSpecimen span={1}>
+      <Icon name="rearrange" />
+    </ReactSpecimen>
+  )}
 `;

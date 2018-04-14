@@ -3,7 +3,15 @@ import React from "react";
 import ReactModal from "react-modal";
 import { bool, func, number, shape, string, object } from "prop-types";
 
-import { Modal, ModalBody, ModalHead, PageTitle, PaneTab, PaneTabs, Separator } from "interviewjs-styleguide";
+import {
+  Modal,
+  ModalBody,
+  ModalHead,
+  PageTitle,
+  PaneTab,
+  PaneTabs,
+  Separator
+} from "interviewjs-styleguide";
 
 import { Interviewees, DetailsForm, MetaForm } from "../";
 
@@ -37,9 +45,10 @@ export default class DetailsModal extends React.Component {
               deleteInterviewee={this.props.deleteInterviewee}
               handleSubmit={this.props.handleClose}
               interviewees={this.props.story.interviewees}
+              pushInterviewee={this.props.pushInterviewee}
+              story={this.props.story}
               storyIndex={this.props.storyIndex}
               updateInterviewee={this.props.updateInterviewee}
-              story={this.props.story}
               user={this.props.user}
             />
           );
@@ -59,19 +68,36 @@ export default class DetailsModal extends React.Component {
       }
     };
     return (
-      <ReactModal ariaHideApp={false} isOpen={this.props.isOpen} onRequestClose={this.props.handleClose} role="dialog">
+      <ReactModal
+        ariaHideApp={false}
+        isOpen={this.props.isOpen}
+        onRequestClose={this.props.handleClose}
+        role="dialog"
+      >
         <Modal {...this.props}>
           <ModalHead fill="grey">
             <PageTitle typo="h2">{this.props.story.title}</PageTitle>
             <Separator size="s" silent />
             <PaneTabs>
-              <PaneTab active={tab === "meta"} onClick={() => this.switchTab("meta")} opinionated>
+              <PaneTab
+                active={tab === "meta"}
+                onClick={() => this.switchTab("meta")}
+                opinionated
+              >
                 Story
               </PaneTab>
-              <PaneTab active={tab === "details"} onClick={() => this.switchTab("details")} opinionated>
+              <PaneTab
+                active={tab === "details"}
+                onClick={() => this.switchTab("details")}
+                opinionated
+              >
                 Story Info
               </PaneTab>
-              <PaneTab active={tab === "interviewees"} onClick={() => this.switchTab("interviewees")} opinionated>
+              <PaneTab
+                active={tab === "interviewees"}
+                onClick={() => this.switchTab("interviewees")}
+                opinionated
+              >
                 Interviewees
               </PaneTab>
               {/* <PaneTab
@@ -93,20 +119,21 @@ export default class DetailsModal extends React.Component {
 DetailsModal.propTypes = {
   createInterviewee: func.isRequired,
   deleteInterviewee: func.isRequired,
+  pushInterviewee: func.isRequired,
   handleClose: func.isRequired,
   isOpen: bool,
   story: shape({
     id: string.isRequired,
-    title: string.isRequired,
+    title: string.isRequired
   }).isRequired,
   storyIndex: number.isRequired,
   tab: string,
   updateInterviewee: func.isRequired,
   updateStory: func.isRequired,
-  user: object.isRequired,
+  user: object.isRequired
 };
 
 DetailsModal.defaultProps = {
   isOpen: false,
-  tab: "meta",
+  tab: "meta"
 };
