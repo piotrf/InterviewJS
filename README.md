@@ -1,6 +1,6 @@
 # InterviewJS [![Build Status](https://travis-ci.org/AJInteractive/InterviewJS.svg?branch=master)](https://travis-ci.org/AJInteractive/InterviewJS)
 
-## InterviewJS environements:
+## InterviewJS environments:
 
 * [interviewjs.io](interviewjs.io) — public facing website
 * [styleguide.interviewjs.io](styleguide.interviewjs.io) — design system documentation
