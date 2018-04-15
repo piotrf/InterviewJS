@@ -354,16 +354,7 @@ export default class ComposerView extends React.Component {
                 onClick={() => this.toggleDetailsModal("meta")}
                 className="jr-step7"
               >
-                <Icon
-                  name="info2"
-                  size="s"
-                  style={{
-                    position: "relative",
-                    top: "1px",
-                    marginRight: "2px"
-                  }}
-                />
-                {` `}Story elements
+                Story elements
               </Action>
             </Container>
             <Container flex={[1, 1, `${100 / 3}%`]} align="center">

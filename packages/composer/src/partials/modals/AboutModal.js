@@ -103,8 +103,8 @@ export default class AboutModal extends React.Component {
             <Container align="center" limit="m">
               <DetailsCopy>
                 <p>
-                  Turn interview transcripts to shareable and embeddable interactive chats—InterviewJS is an open-source
-                  Google DNI & Al Jazeera-backed app for journalists and newsrooms that allows to compose and manage
+                  Turn interview transcripts into shareable and embeddable interactive chats—InterviewJS is an open-source
+                  Google DNI & Al Jazeera-backed web app for newsrooms that enables journalists to compose and manage 
                   scripted chats for a more immersive storytelling experience.
                 </p>
                 <PageSubtitle typo="h2">Connect with InterviewJS</PageSubtitle>
