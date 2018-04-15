@@ -111,7 +111,7 @@ const processRecord = (record, callback) => {
         s3.putObject({
           Body: index,
           ACL: "public-read",
-          ContentType: "text/html",
+          ContentType: "text/html; charset=utf-8",
           Bucket: storyBucket,
           Key: `${publishId}/index.html`
         }, (err, response) => {
