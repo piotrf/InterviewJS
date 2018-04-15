@@ -6,7 +6,6 @@ import axios from "axios";
 
 import {
   Action,
-  Actionbar,
   Avatar,
   Container,
   Icon,
@@ -109,6 +108,8 @@ export default class ContextView extends Component {
           <Cover image={story.cover} compact />
         </PageHead>
         <PageBody limit="x" flex={[1, 0, `${100 / 2}%`]}>
+        <Text typo="h2">Select an interviewee to chat with</Text>
+        <Separator size="m" silent />
           <Interviewees>
             {story.interviewees.map((interviewee, i) => (
               <Interviewee key={interviewee.id} onClick={e => this.startChat(e, interviewee.id)}>
@@ -141,16 +142,6 @@ export default class ContextView extends Component {
               </Interviewee>
             ))}
           </Interviewees>
-          <Separator size="l" silent />
-          <Actionbar>
-            <Action
-              fixed
-              onClick={() => this.props.router.push(`/${story.id}/chat/${story.interviewees[0].id}`)}
-              primary
-            >
-              Start your first interview
-            </Action>
-          </Actionbar>
         </PageBody>
       </Page>,
       this.state.intervieweeModal !== null ? (

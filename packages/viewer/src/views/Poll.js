@@ -5,7 +5,16 @@ import React, { Component } from "react";
 import { object, shape, string, func } from "prop-types";
 import axios from "axios";
 
-import { Action, Actionbar, Container, PageSubtitle, Separator, setSpace } from "interviewjs-styleguide";
+import {
+  Action,
+  Actionbar,
+  Container,
+  PageSubtitle,
+  PageParagraph,
+  Separator,
+  setSpace,
+  color
+} from "interviewjs-styleguide";
 
 import { Cover, Page, PageBody, PageHead, StoryDetailsModal, Topbar } from "../partials";
 
@@ -16,6 +25,10 @@ const PollItem = css(Container)`
   ${Actionbar} {
     ${setSpace("phn")};
   }
+`;
+
+const Aside = css(PageParagraph)`
+  color: ${color.flareHD};
 `;
 
 export default class PollView extends Component {
@@ -148,7 +161,18 @@ export default class PollView extends Component {
             <Action fixed onClick={hasLocalPoll ? this.moveOn : this.submitPoll} primary>
               Show me results
             </Action>
+            <Action
+              fixed
+              onClick={hasLocalPoll ? this.moveOn : this.submitPoll}
+              secondary
+            >
+              Skip
+            </Action>
           </Actionbar>
+          <Separator size="s" silent />
+          <Aside typo="p6">
+            This is a simple poll.  We won’t use your data for anything else.
+          </Aside>
         </PageBody>
       </Page>,
       this.state.storyDetailsModal ? (
