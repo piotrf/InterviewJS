@@ -24,6 +24,8 @@ deploy:
   bucket: composer.interviewjs.io
   local-dir: packages/composer/build/
   acl: public_read
+  default_text_charset: 'utf-8'
+  cache_control: 'max-age=600'
   on:
     repo: AJInteractive/InterviewJS
     branch: master
@@ -34,6 +36,8 @@ deploy:
   bucket: composer.interviewjs.net
   local-dir: packages/composer/build/
   acl: public_read
+  default_text_charset: 'utf-8'
+  cache_control: 'max-age=0'
   on:
     repo: AJInteractive/InterviewJS
     branch: develop
@@ -44,6 +48,8 @@ deploy:
   bucket: story.interviewjs.io
   local-dir: packages/viewer/build/
   acl: public_read
+  default_text_charset: 'utf-8'
+  cache_control: 'max-age=60'
   on:
     repo: AJInteractive/InterviewJS
     branch: master
@@ -54,6 +60,8 @@ deploy:
   bucket: story.interviewjs.net
   local-dir: packages/viewer/build/
   acl: public_read
+  default_text_charset: 'utf-8'
+  cache_control: 'max-age=0'
   on:
     repo: AJInteractive/InterviewJS
     branch: develop
@@ -64,6 +72,8 @@ deploy:
   bucket: interviewjs.io
   local-dir: site
   acl: public_read
+  default_text_charset: 'utf-8'
+  cache_control: 'max-age=600'
   on:
     repo: AJInteractive/InterviewJS
     branch: master
@@ -74,6 +84,8 @@ deploy:
   bucket: interviewjs.net
   local-dir: site
   acl: public_read
+  default_text_charset: 'utf-8'
+  cache_control: 'max-age=0'
   on:
     repo: AJInteractive/InterviewJS
     branch: develop
@@ -84,6 +96,8 @@ deploy:
   bucket: interviewjs.net
   local-dir: site
   acl: public_read
+  default_text_charset: 'utf-8'
+  cache_control: 'max-age=0'
   on:
     repo: AJInteractive/InterviewJS
     branch: feature/site
@@ -94,6 +108,8 @@ deploy:
   bucket: styleguide.interviewjs.io
   local-dir: packages/styleguide/catalog/build/
   acl: public_read
+  default_text_charset: 'utf-8'
+  cache_control: 'max-age=600'
   on:
     repo: AJInteractive/InterviewJS
     branch: master
