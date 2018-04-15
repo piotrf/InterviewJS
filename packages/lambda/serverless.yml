@@ -20,7 +20,7 @@ provider:
   stage: prod
   region: us-east-1
   environment:
-    kinesis_interviewjs_poll: arn:aws:kinesis:us-east-1:305945025992:stream/interviewjs-poll
+    kinesis_interviewjs_poll: interviewjs-poll
     dynamodb_interviewjs_polls: arn:aws:dynamodb:us-east-1:305945025992:table/interviewjs-polls
 
 functions:
