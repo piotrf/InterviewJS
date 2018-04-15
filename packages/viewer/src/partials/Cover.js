@@ -1,16 +1,10 @@
 import React from "react";
-import css from "styled-components";
+import styled from "styled-components";
 import { array, bool, oneOfType, node, string } from "prop-types";
 
-import {
-  LogoWSymbolNegative,
-  Container,
-  breakpoint,
-  color,
-  setSpace
-} from "interviewjs-styleguide";
+import { LogoWSymbolNegative, Container, breakpoint, color, setSpace } from "interviewjs-styleguide";
 
-const CoverEl = css(Container)`
+const CoverEl = styled(Container)`
   background-color: ${color.black};
   background-image: url(${({ image }) => image});
   background-position: center center;
@@ -21,10 +15,9 @@ const CoverEl = css(Container)`
   width: 100%;
 `;
 
-const CoverBody = css.div`
+const CoverBody = styled.div`
   ${setSpace("phm")};
   ${setSpace("ptm")};
-  background-color: ${color.shadowLt};
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -33,30 +26,37 @@ const CoverBody = css.div`
   ${breakpoint.tablet} {
     min-height: ${({ compact }) => (compact ? `${100 / 4}vh` : `${100 / 2}vh`)};
   }
-  &:after {
-    height: 50%;
-    background: linear-gradient(rgba(0,0,0,0), ${color.black});
-    bottom: 0;
-    content: " ";
-    display: block;
-    left: 0;
-    position: absolute;
-    right: 0;
-    z-index: 1;
-  }
+  ${({ hasImage }) =>
+    hasImage
+      ? `
+      background-color: ${color.shadowLt};
+      &:after {
+        height: 50%;
+        background: linear-gradient(rgba(0,0,0,0), ${color.black});
+        bottom: 0;
+        content: " ";
+        display: block;
+        left: 0;
+        position: absolute;
+        right: 0;
+        z-index: 1;
+      }
+
+  `
+      : ``};
 `;
 
-const CoverSauce = css.div`
+const CoverSauce = styled.div`
   ${setSpace("mbm")};
   position: relative;
   z-index: 2;
 `;
 
-const Brandmark = css.div`
+const Brandmark = styled.div`
   ${setSpace("mts")};
   ${setSpace("mbm")};
   line-height: 0;
-  opacity: .8;
+  opacity: 0.8;
   img {
     height: 36px;
   }
@@ -69,9 +69,9 @@ const Brandmark = css.div`
   }
 `;
 
-const Cover = (props) => (
+const Cover = props => (
   <CoverEl {...props}>
-    <CoverBody compact={props.compact}>
+    <CoverBody compact={props.compact} hasImage={props.image}>
       <Brandmark>
         <img src={LogoWSymbolNegative} alt="InterviewJS" />
       </Brandmark>
@@ -83,12 +83,12 @@ const Cover = (props) => (
 Cover.propTypes = {
   children: oneOfType([array, string, node]),
   compact: bool,
-  image: node.isRequired
+  image: node.isRequired,
 };
 
 Cover.defaultProps = {
   children: null,
-  compact: false
+  compact: false,
 };
 
 export default Cover;

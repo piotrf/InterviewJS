@@ -96,6 +96,7 @@ export default class NewStoryModal extends Component {
               interviewees={this.props.stories[0].interviewees}
               storyIndex={0}
               updateInterviewee={this.props.updateInterviewee}
+              story={this.props.stories[0]}
             />
           </Container>
         );

@@ -15,7 +15,7 @@ import {
   PageTitle,
   Separator,
   TextBlock,
-  color
+  color,
 } from "interviewjs-styleguide";
 
 export default class IntervieweeModal extends React.Component {
@@ -67,11 +67,11 @@ IntervieweeModal.propTypes = {
   isOpen: bool.isRequired,
   interviewee: shape({
     avatar: string,
-    name: string
+    name: string,
   }).isRequired,
-  cta: string
+  cta: string,
 };
 
 IntervieweeModal.defaultProps = {
-  cta: "Start chatting"
+  cta: "Start chatting",
 };

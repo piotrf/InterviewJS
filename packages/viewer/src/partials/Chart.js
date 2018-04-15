@@ -2,13 +2,7 @@ import React from "react";
 import css from "styled-components";
 import { number, string } from "prop-types";
 
-import {
-  color,
-  radius,
-  setSpace,
-  setType,
-  track
-} from "interviewjs-styleguide";
+import { color, radius, setSpace, setType, track } from "interviewjs-styleguide";
 
 const chartBase = `
   border-radius: ${radius.a};
@@ -75,7 +69,7 @@ const ChartVal = css.span`
   letter-spacing: ${track.s};
 `;
 
-const Chart = (props) => (
+const Chart = props => (
   <ChartEl>
     <ChartBlock>
       <ChartAnswer>{props.answer1}</ChartAnswer>
@@ -96,12 +90,12 @@ Chart.propTypes = {
   answer1: string.isRequired,
   answer2: string.isRequired,
   val1: number,
-  val2: number
+  val2: number,
 };
 
 Chart.defaultProps = {
   val1: 0,
-  val2: 0
+  val2: 0,
 };
 
 export default Chart;

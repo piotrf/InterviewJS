@@ -1,7 +1,7 @@
 {
   "name": "interviewjs-viewer",
   "description": "",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "authors": ["Laurian Gridinoc <laurian@gridinoc.name>", "Piotr Fedorczyk <piotr@piotrf.pl>"],
   "homepage": "https://story.interviewjs.io/",
   "dependencies": {
@@ -54,7 +54,7 @@
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-app-rewired eject",
-    "prettier": "prettier --single-quote --print-width=120 --trailing-comma es5",
+    "prettier": "prettier --print-width=120 --trailing-comma es5",
     "format": "npm run prettier -- --write '{,!(build|generators)/**/}*.js'",
     "precommit": "lint-staged",
     "eslint-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",

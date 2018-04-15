@@ -23,7 +23,7 @@ const TopbarHolder = css(Container)`
   justify-content: space-between;
   width: 100%;
 `;
-const Topbar = (props) => (
+const Topbar = props => (
   <TopbarEl {...props}>
     <TopbarHolder limit="m" padded>
       <Container flex={[0, 0, `${100 / 2}%`]} align="left">
@@ -44,11 +44,11 @@ const Topbar = (props) => (
 
 Topbar.propTypes = {
   handleBack: func,
-  handleDetails: func.isRequired
+  handleDetails: func.isRequired,
 };
 
 Topbar.defaultProps = {
-  handleBack: null
+  handleBack: null,
 };
 
 export default Topbar;

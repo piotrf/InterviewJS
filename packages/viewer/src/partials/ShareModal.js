@@ -3,8 +3,6 @@ import css from "styled-components";
 import ReactModal from "react-modal";
 import { bool, func, shape, string } from "prop-types";
 import {
-  FacebookShareButton,
-  FacebookIcon,
   LinkedinShareButton,
   LinkedinIcon,
   TwitterShareButton,
@@ -64,9 +62,6 @@ export default class ShareModal extends React.Component {
           <ModalBody>
             <Container align="center">
               <ShareButtons>
-                <FacebookShareButton url={storyUrl} hashtag="interviewjs">
-                  <FacebookIcon size={44} round />
-                </FacebookShareButton>
                 <TwitterShareButton
                   url={storyUrl}
                   hashtags={["interviewjs"]}

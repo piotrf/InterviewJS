@@ -18,18 +18,21 @@ if (!window.InterviewJS.ignoreSampleStory && document.location.hostname === "loc
         question:
           "Should The National Crime Agency lialise with its Vietnamese counterparts to try to break the people-smuggling rings?",
         answer1: "Yes",
-        answer2: "No"
+        answer2: "No",
+        id: "q1"
       },
       {
         question:
           "Car companies will order their dealerships accross the UK to check suppliers and contractors to ensure they were not using workers who were being exploited as modern-day slaves.",
         answer1: "Unlikely",
-        answer2: "Likely"
+        answer2: "Likely",
+        id: "q2"
       },
       {
         question: "Did you like this story?",
         answer1: "Yes",
-        answer2: "No"
+        answer2: "No",
+        id: "q3"
       }
     ],
     interviewees: [

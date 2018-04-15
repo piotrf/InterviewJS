@@ -22,6 +22,7 @@ import "./joyride.css";
 
 import {
   DetailsModal,
+  ComposerWelcomeModal,
   IntervieweePane,
   MobileRedirect,
   PublishStoryModal,
@@ -84,6 +85,13 @@ const joyrideCallback = (cb) => {
 };
 
 export default class ComposerView extends React.Component {
+  static getDerivedStateFromProps(nextState) {
+    const skipComposerWelcome = localStorage.getItem("skipComposerWelcome");
+    return {
+      ...nextState,
+      welcomeModal: !skipComposerWelcome
+    };
+  }
   constructor(props) {
     super(props);
     this.state = {
@@ -92,7 +100,8 @@ export default class ComposerView extends React.Component {
       detailsModal: "",
       joyrideSteps: [],
       publishModal: false,
-      savedLabel: null
+      savedLabel: null,
+      welcomeModal: false
     };
     this.deleteInterviewee = this.deleteInterviewee.bind(this);
     this.initTour = this.initTour.bind(this);
@@ -283,6 +292,11 @@ export default class ComposerView extends React.Component {
     this.setState({ publishModal: !this.state.publishModal });
   }
 
+  closeWelcomeModal() {
+    this.setState({ welcomeModal: false });
+    localStorage.setItem("skipComposerWelcome", true);
+  }
+
   toggleBubbleEdit(target) {
     this.setState({ currentBubble: target });
   }
@@ -449,6 +463,14 @@ export default class ComposerView extends React.Component {
           storyIndex={storyIndex}
           tab={this.state.detailsModal}
           updateStory={this.updateStory}
+        />
+      ) : null,
+      this.state.welcomeModal ? (
+        <ComposerWelcomeModal
+          {...this.props}
+          handleClose={() => this.closeWelcomeModal()}
+          isOpen
+          key="ComposerWelcomeModal"
         />
       ) : null,
       <Joyride

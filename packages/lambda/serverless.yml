@@ -19,7 +19,22 @@ provider:
   runtime: nodejs8.10
   stage: prod
   region: us-east-1
+  environment:
+    kinesis_interviewjs_poll: arn:aws:kinesis:us-east-1:305945025992:stream/interviewjs-poll
+    dynamodb_interviewjs_polls: arn:aws:dynamodb:us-east-1:305945025992:table/interviewjs-polls
 
 functions:
   publish:
     handler: story.publish
+    tags:
+      Project: InterviewJS
+
+  gateway:
+    handler: poll.gateway
+    tags:
+      Project: InterviewJS
+
+  stream:
+    handler: poll.stream
+    tags:
+      Project: InterviewJS
