@@ -145,8 +145,8 @@ export default class StoryDetailsModal extends React.Component {
               <Separator silent size="m" />
               <DetailsCopy>
                 <p>
-                  Turn interview transcripts to shareable and embeddable interactive chats—InterviewJS is an open-source
-                  Google DNI & Al Jazeera-backed app for journalists and newsrooms that allows to compose and manage
+                  Turn interview transcripts into shareable and embeddable interactive chats—InterviewJS is an open-source
+                  Google DNI & Al Jazeera-backed web app for newsrooms that enables journalists to compose and manage 
                   scripted chats for a more immersive storytelling experience.
                 </p>
               </DetailsCopy>
