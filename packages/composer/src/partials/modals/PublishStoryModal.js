@@ -99,7 +99,6 @@ export default class PublishStoryModal extends Component {
       step: 0,
       storyKey: null,
       storyBase,
-      loading: true,
     };
 
     this.handleStep0 = this.handleStep0.bind(this);
@@ -174,8 +173,7 @@ export default class PublishStoryModal extends Component {
       this.state.storyKey ? this.state.storyKey : this.props.story.id
     }`;
 
-    const { step, loading } = this.state;
-    console.log(loading);
+    const { step } = this.state;
     const getModalBody = () => {
       if (step === 0) {
         return (
