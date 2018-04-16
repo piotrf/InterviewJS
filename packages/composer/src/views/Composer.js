@@ -320,12 +320,12 @@ export default class ComposerView extends React.Component {
       (story) => story.id === storyId
     );
     const story = this.props.stories[storyIndex];
-    const { storyline } = story.interviewees[this.state.currentInterviewee];
-
     if (!story) {
       this.props.router.push(`/`);
       return null;
     }
+    
+    const { storyline } = story.interviewees[this.state.currentInterviewee];
 
     const renderSaveIndicator = () => {
       if (this.state.savedLabel === false) {
