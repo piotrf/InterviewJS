@@ -14,7 +14,6 @@ import {
   PageSubtitle,
   PageTitle,
   Separator,
-  PageParagraph,
 } from "interviewjs-styleguide";
 
 import WelcomeImage from "../../assets/welcome-image.png";
