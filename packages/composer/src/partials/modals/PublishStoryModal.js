@@ -252,9 +252,9 @@ export default class PublishStoryModal extends Component {
             <Separator size="s" silent />
             <TextInput
               input
-              disabled
-              value={`${iframeViewer}/`}
+              readonly="readonly"
               style={{ textAlign: "center" }}
+              value={`${iframeViewer}/`}
             />
             <Separator size="m" silent />
             <Actionbar>

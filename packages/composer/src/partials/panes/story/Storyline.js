@@ -332,6 +332,20 @@ export default class Storyline extends React.Component {
             />
           </Bubble>
         );
+      } else if (type === "media") {
+        return (
+          <Bubble
+            displayType="embed"
+            persona={role}
+            theme={{ backg: interviewee.color, font: "PT sans" }}
+          >
+            <div
+              dangerouslySetInnerHTML={{
+                __html: filterIframe(content.value)
+              }}
+            />
+          </Bubble>
+        );
       }
       return null;
     };
