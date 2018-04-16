@@ -20,7 +20,9 @@ import {
   PageTitle,
   Separator,
   TextInput,
-  radius
+  radius,
+  Preloader,
+  Text
 } from "interviewjs-styleguide";
 
 import { DetailsForm, MetaForm, Poll } from "../";
@@ -96,7 +98,8 @@ export default class PublishStoryModal extends Component {
     this.state = {
       step: 0,
       storyKey: null,
-      storyBase
+      storyBase,
+      loading: true,
     };
 
     this.handleStep0 = this.handleStep0.bind(this);
@@ -143,7 +146,6 @@ export default class PublishStoryModal extends Component {
       host: document.location.hostname,
       version: process.env.VERSION
     };
-
     Storage.put(
       `stories/${this.props.user.id}/${story.id}/story.json`,
       JSON.stringify(story),
@@ -157,7 +159,7 @@ export default class PublishStoryModal extends Component {
         console.log(result);
         this.setState({
           step: this.state.step + 1,
-          storyKey: computeId(this.props.user.id, this.props.story.id)
+          storyKey: computeId(this.props.user.id, this.props.story.id),
         });
       })
       .catch((err) => console.log(err));
@@ -172,7 +174,8 @@ export default class PublishStoryModal extends Component {
       this.state.storyKey ? this.state.storyKey : this.props.story.id
     }`;
 
-    const { step } = this.state;
+    const { step, loading } = this.state;
+    console.log(loading);
     const getModalBody = () => {
       if (step === 0) {
         return (
@@ -227,6 +230,10 @@ export default class PublishStoryModal extends Component {
             </PageSubtitle>
             <Separator size="m" silent />
             <PreviewWrapper>
+              <Separator size="l" silent />
+              <Text>Please wait. Your InterviewJS story is being created.</Text>
+              <Separator size="m" silent />
+              <Preloader />
               <img src={iframeRatioSpacer} alt="" />
               <iframe
                 title="Preview"

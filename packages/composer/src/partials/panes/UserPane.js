@@ -112,7 +112,14 @@ const ActionLibHolder = styled(Container)`
   overflow-y: auto;
   width: 100%;
   height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0) 98%,
+    rgba(224,224,224,1) 100%
+  );
 `;
+
 const ActionLibList = styled.ul`
   display: block;
   text-align: center;
