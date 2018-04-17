@@ -74,9 +74,10 @@ export default class NewStoryModal extends Component {
         return (
           <Container limit="s" align="center">
             <PageSubtitle typo="h3">
-              Motivate your users by setting a quest: tell them what they will learn by speaking to your interviewees.
-              Then give them some context to the story so that the interviews make sense. You’ll be able to change your
-              text as you continue to build your story.
+              Motivate your users with an assignment: 
+              what will they learn by speaking to your interviewees?
+              Then give them some context to the story.
+              You’ll be able to change your text later.
             </PageSubtitle>
             <Separator size="m" silent />
             <DetailsForm handleSubmit={this.handleStep1} story={this.props.stories[0]} />
@@ -85,7 +86,7 @@ export default class NewStoryModal extends Component {
       } else if (step === 2) {
         return (
           <Container limit="s" align="center">
-            <PageSubtitle typo="h3">You can add profiles for more interviewees now or later.</PageSubtitle>
+            <PageSubtitle typo="h3">Here’s where you add profiles for your interviewees.</PageSubtitle>
             <Separator size="m" silent />
             <Interviewees
               createInterviewee={this.props.createInterviewee}

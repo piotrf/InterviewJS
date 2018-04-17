@@ -14,7 +14,6 @@ import {
   PageSubtitle,
   PageTitle,
   Separator,
-  PageParagraph,
 } from "interviewjs-styleguide";
 
 import WelcomeImage from "../../assets/welcome-image.png";
@@ -46,11 +45,6 @@ export default class WelcomeModal extends React.Component {
           </ModalBody>
           <ModalFoot>
             <Container align="center" limit="m">
-              <PageParagraph typo="p3">
-                Users will interact with your story through a series of direct messaging exchanges based on your
-                interviews. It’s a web app - there’s no need to download anything - so users will need to be online!
-              </PageParagraph>
-              <Separator size="m" silent />
               <Actionbar>
                 <Action fixed primary onClick={this.props.handleClose}>
                   Create your first story

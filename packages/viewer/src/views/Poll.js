@@ -5,9 +5,25 @@ import React, { Component } from "react";
 import { object, shape, string, func } from "prop-types";
 import axios from "axios";
 
-import { Action, Actionbar, Container, PageSubtitle, Separator, setSpace } from "interviewjs-styleguide";
+import {
+  Action,
+  Actionbar,
+  Container,
+  PageSubtitle,
+  PageParagraph,
+  Separator,
+  setSpace,
+  color
+} from "interviewjs-styleguide";
 
-import { Cover, Page, PageBody, PageHead, StoryDetailsModal, Topbar } from "../partials";
+import {
+  Cover,
+  Page,
+  PageBody,
+  PageHead,
+  StoryDetailsModal,
+  Topbar
+} from "../partials";
 
 const PollItem = css(Container)`
   &:not(:last-child) {
@@ -18,6 +34,10 @@ const PollItem = css(Container)`
   }
 `;
 
+const Aside = css(PageParagraph)`
+  color: ${color.flareHD};
+`;
+
 export default class PollView extends Component {
   constructor(props) {
     super(props);
@@ -26,7 +46,7 @@ export default class PollView extends Component {
     this.state = {
       formData: localPoll || {},
       hasLocalPoll: !!localPoll,
-      storyDetailsModal: false,
+      storyDetailsModal: false
     };
     this.moveOn = this.moveOn.bind(this);
     this.submitPoll = this.submitPoll.bind(this);
@@ -53,8 +73,13 @@ export default class PollView extends Component {
       window.InterviewJS &&
       window.InterviewJS.getStoryURL
     ) {
-      const storyURL = window.InterviewJS.getStoryURL(this.props.params.storyId);
-      if (storyURL) axios.get(storyURL).then(response => this.props.createStory(response.data));
+      const storyURL = window.InterviewJS.getStoryURL(
+        this.props.params.storyId
+      );
+      if (storyURL)
+        axios
+          .get(storyURL)
+          .then((response) => this.props.createStory(response.data));
     }
   }
 
@@ -64,16 +89,22 @@ export default class PollView extends Component {
 
   submitPoll() {
     const { story } = this.props;
-    localStorage.setItem(`poll-${story.id}`, JSON.stringify(this.state.formData));
+    localStorage.setItem(
+      `poll-${story.id}`,
+      JSON.stringify(this.state.formData)
+    );
     console.log(this.state.formData);
-    axios.post('https://api.interviewjs.io/v1/polls', {
-      id: this.props.params.storyId,
-      viewer: {
-        host: document.location.hostname,
-        version: process.env.VERSION,
-      },
-      poll: this.state.formData,
-    }).then(() => this.moveOn()).catch(() => this.moveOn());
+    axios
+      .post("https://api.interviewjs.io/v1/polls", {
+        id: this.props.params.storyId,
+        viewer: {
+          host: document.location.hostname,
+          version: process.env.VERSION
+        },
+        poll: this.state.formData
+      })
+      .then(() => this.moveOn())
+      .catch(() => this.moveOn());
   }
 
   moveOn() {
@@ -97,7 +128,7 @@ export default class PollView extends Component {
           <Cover image={story.cover} compact />
         </PageHead>
         <PageBody limit="x" flex={[1, 0, `${100 / 4}%`]}>
-          {poll.filter(item => !!item.id).map(item => (
+          {poll.filter((item) => !!item.id).map((item) => (
             <PollItem key={item.id}>
               <PageSubtitle typo="h3">{item.question}</PageSubtitle>
               <Separator silent size="m" />
@@ -113,8 +144,8 @@ export default class PollView extends Component {
                           this.setState({
                             formData: {
                               ...this.state.formData,
-                              [item.id]: 0,
-                            },
+                              [item.id]: 0
+                            }
                           })
                       : null
                   }
@@ -132,8 +163,8 @@ export default class PollView extends Component {
                           this.setState({
                             formData: {
                               ...this.state.formData,
-                              [item.id]: 1,
-                            },
+                              [item.id]: 1
+                            }
                           })
                       : null
                   }
@@ -145,10 +176,25 @@ export default class PollView extends Component {
           ))}
           <Separator size="l" silent />
           <Actionbar>
-            <Action fixed onClick={hasLocalPoll ? this.moveOn : this.submitPoll} primary>
+            <Action
+              fixed
+              onClick={this.moveOn}
+              secondary
+            >
+              Skip
+            </Action>
+            <Action
+              fixed
+              onClick={hasLocalPoll ? this.moveOn : this.submitPoll}
+              primary
+            >
               Show me results
             </Action>
           </Actionbar>
+          <Separator size="s" silent />
+          <Aside typo="p6">
+            This is a simple poll. We won’t use your data for anything else.
+          </Aside>
         </PageBody>
       </Page>,
       this.state.storyDetailsModal ? (
@@ -158,7 +204,7 @@ export default class PollView extends Component {
           key="detailsModal"
           story={story}
         />
-      ) : null,
+      ) : null
     ];
   }
 }
@@ -167,11 +213,11 @@ PollView.propTypes = {
   createStory: func.isRequired,
   router: object,
   story: shape({
-    title: string,
-  }),
+    title: string
+  })
 };
 
 PollView.defaultProps = {
   router: null,
-  story: {},
+  story: {}
 };

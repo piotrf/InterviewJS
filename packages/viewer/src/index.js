@@ -2,6 +2,7 @@ import React from "react";
 import { Provider } from "react-redux";
 import { render } from "react-dom";
 import { Route, Router, IndexRoute, Redirect } from "react-router";
+import ReactGA from "react-ga";
 
 import { configureStore, history } from "./configureStore";
 
@@ -19,6 +20,14 @@ const store = configureStore();
 
 require("./injectGlobalStyles.js");
 
+ReactGA.initialize("UA-1615344-7");
+const pageView = () => ReactGA.pageview(document.location.pathname);
+
+const onUpdate = () => {
+  pageView();
+  window.scrollTo(0, 0);
+};
+
 const rootEl = document.getElementById("root");
 
 class Routes extends React.Component {
@@ -32,7 +41,7 @@ class Routes extends React.Component {
 
   render() {
     return (
-      <Router onUpdate={() => window.scrollTo(0, 0)} key="Root" history={history}>
+      <Router onUpdate={onUpdate} key="Root" history={history}>
         <Route path="/:storyId" component={App}>
           <IndexRoute component={Intro} />
           <Route path="/:storyId/chat/:chatId" component={Chat} />
