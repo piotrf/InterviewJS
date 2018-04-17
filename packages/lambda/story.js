@@ -87,6 +87,7 @@ const processRecord = (record, callback) => {
 
       const index = data.Body.toString("utf-8")
         .replace("/sample-story/sample-story.js", "./story.js")
+        .replace("/sample-story/sample-poll.js", "./poll.js")
         .replace("<head>", `<head>\n${meta.join("\n")}`);
 
       s3.putObject({
@@ -98,10 +99,19 @@ const processRecord = (record, callback) => {
       }, (err, response) => {
         if (err) return callback(err);
 
+        // FIXME: sequence this
+        s3.putObject({
+          Body: "/* */",
+          ACL: "public-read",
+          ContentType: "application/javascript",
+          Bucket: storyBucket,
+          Key: `${publishId}/poll.js`
+        }, () => {}); // FIXME
+
         s3.putObject({
           Body: index,
           ACL: "public-read",
-          ContentType: "text/html",
+          ContentType: "text/html; charset=utf-8",
           Bucket: storyBucket,
           Key: `${publishId}/index.html`
         }, (err, response) => {
