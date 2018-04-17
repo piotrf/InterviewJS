@@ -2,7 +2,10 @@
   "name": "interviewjs-viewer",
   "description": "",
   "version": "0.1.6",
-  "authors": ["Laurian Gridinoc <laurian@gridinoc.name>", "Piotr Fedorczyk <piotr@piotrf.pl>"],
+  "authors": [
+    "Laurian Gridinoc <laurian@gridinoc.name>",
+    "Piotr Fedorczyk <piotr@piotrf.pl>"
+  ],
   "homepage": "https://story.interviewjs.io/",
   "dependencies": {
     "axios": "^0.18.0",
@@ -15,6 +18,7 @@
     "raven-js": "^3.24.0",
     "react": "16.3.1",
     "react-dom": "16.3.1",
+    "react-ga": "^2.4.1",
     "react-modal": "3.3.2",
     "react-redux": "5.0.7",
     "react-router-dom": "4.2.2",
