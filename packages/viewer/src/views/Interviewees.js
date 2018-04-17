@@ -126,7 +126,7 @@ export default class ContextView extends Component {
           <Cover image={story.cover} compact />
         </PageHead>
         <PageBody limit="x" flex={[1, 0, `${100 / 2}%`]}>
-          <Aside typo="p6">Select an interviewee to chat with:</Aside>
+          <Aside typo="p3">Select an interviewee to chat with:</Aside>
           <Separator size="m" silent />
           <Interviewees>
             {story.interviewees.map((interviewee, i) => (
