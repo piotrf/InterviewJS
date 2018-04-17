@@ -217,8 +217,9 @@ text-align: center;
 }
 
 .signup {
-    padding-left: 10px;
-    font-size: 14px;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: 20px;
     align-content: center;
     -webkit-box-align: center;
     align-items: center;
@@ -237,7 +238,7 @@ text-align: center;
     text-overflow: ellipsis;
     background-color: rgb(255, 255, 255);
     color: rgb(73, 91, 189);
-    min-height: 40px;
+    min-height: 50px;
     border-color: transparent;
     border-radius: 100px;
     border-style: solid;
