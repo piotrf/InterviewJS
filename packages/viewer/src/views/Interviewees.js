@@ -9,14 +9,23 @@ import {
   Avatar,
   Container,
   Icon,
+  PageTitle,
   Separator,
   Text,
   Tip,
   color,
-  setSpace,
+  setSpace
 } from "interviewjs-styleguide";
 
-import { Cover, IntervieweeModal, Page, PageBody, PageHead, StoryDetailsModal, Topbar } from "../partials";
+import {
+  Cover,
+  IntervieweeModal,
+  Page,
+  PageBody,
+  PageHead,
+  StoryDetailsModal,
+  Topbar
+} from "../partials";
 
 const Interviewees = css.ul`
   display: block;
@@ -38,6 +47,10 @@ const Interviewee = css.li`
 
 const IntervieweeTitle = css(Text)`
   color: ${color.flareD};
+`;
+
+const Aside = css(PageTitle)`
+  color: ${color.flareHD};
 `;
 
 export default class ContextView extends Component {
@@ -69,8 +82,13 @@ export default class ContextView extends Component {
       window.InterviewJS &&
       window.InterviewJS.getStoryURL
     ) {
-      const storyURL = window.InterviewJS.getStoryURL(this.props.params.storyId);
-      if (storyURL) axios.get(storyURL).then(response => this.props.createStory(response.data));
+      const storyURL = window.InterviewJS.getStoryURL(
+        this.props.params.storyId
+      );
+      if (storyURL)
+        axios
+          .get(storyURL)
+          .then((response) => this.props.createStory(response.data));
     }
   }
 
@@ -99,7 +117,7 @@ export default class ContextView extends Component {
 
     return [
       <Topbar
-        handleDetails={e => this.toggleDetailsModal(e)}
+        handleDetails={(e) => this.toggleDetailsModal(e)}
         handleBack={() => this.props.router.push(`/${story.id}/context`)}
         key="topbar"
       />,
@@ -108,32 +126,49 @@ export default class ContextView extends Component {
           <Cover image={story.cover} compact />
         </PageHead>
         <PageBody limit="x" flex={[1, 0, `${100 / 2}%`]}>
-        <Text typo="h2">Select an interviewee to chat with</Text>
-        <Separator size="m" silent />
+          <Aside typo="p6">Select an interviewee to chat with:</Aside>
+          <Separator size="m" silent />
           <Interviewees>
             {story.interviewees.map((interviewee, i) => (
-              <Interviewee key={interviewee.id} onClick={e => this.startChat(e, interviewee.id)}>
+              <Interviewee
+                key={interviewee.id}
+                onClick={(e) => this.startChat(e, interviewee.id)}
+              >
                 <Container dir="row">
                   <Container flex={[1, 0, "auto"]}>
                     <Avatar
                       size="l"
                       image={interviewee.avatar}
-                      onClick={() => this.props.router.push(`/${story.id}/chat/${interviewee.id}`)}
+                      onClick={() =>
+                        this.props.router.push(
+                          `/${story.id}/chat/${interviewee.id}`
+                        )
+                      }
                     />
                   </Container>
                   <Container flex={[0, 1, "100%"]} align="left">
                     <Text typo="p1">{interviewee.name}</Text>
                     <Separator silent size="n" />
-                    <IntervieweeTitle typo="p5">{interviewee.title}</IntervieweeTitle>
+                    <IntervieweeTitle typo="p5">
+                      {interviewee.title}
+                    </IntervieweeTitle>
                   </Container>
                   <Container flex={[1, 0, "auto"]}>
                     <Tip title="About this interviewee">
-                      <Action iconic inverted onClick={e => this.toggleIntervieweeModal(e, i)}>
+                      <Action
+                        iconic
+                        inverted
+                        onClick={(e) => this.toggleIntervieweeModal(e, i)}
+                      >
                         <Icon name="info" />
                       </Action>
                     </Tip>
                     <Tip title="Start chatting">
-                      <Action iconic onClick={e => this.startChat(e, interviewee.id)} primary>
+                      <Action
+                        iconic
+                        onClick={(e) => this.startChat(e, interviewee.id)}
+                        primary
+                      >
                         <Icon name="bubbles" />
                       </Action>
                     </Tip>
@@ -147,12 +182,16 @@ export default class ContextView extends Component {
       this.state.intervieweeModal !== null ? (
         <IntervieweeModal
           {...this.props}
-          handleClose={e => this.toggleIntervieweeModal(e, null)}
+          handleClose={(e) => this.toggleIntervieweeModal(e, null)}
           interviewee={story.interviewees[this.state.intervieweeModal]}
           isOpen={this.state.intervieweeModal !== null}
           key="intervieweeModal"
           handleSubmit={() =>
-            this.props.router.push(`/${story.id}/chat/${story.interviewees[this.state.intervieweeModal].id}`)
+            this.props.router.push(
+              `/${story.id}/chat/${
+                story.interviewees[this.state.intervieweeModal].id
+              }`
+            )
           }
         />
       ) : null,
@@ -163,7 +202,7 @@ export default class ContextView extends Component {
           key="detailsModal"
           story={story}
         />
-      ) : null,
+      ) : null
     ];
   }
 }
@@ -172,11 +211,11 @@ ContextView.propTypes = {
   createStory: func.isRequired,
   router: object,
   story: shape({
-    title: string,
-  }),
+    title: string
+  })
 };
 
 ContextView.defaultProps = {
   router: null,
-  story: {},
+  story: {}
 };
