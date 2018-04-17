@@ -9,8 +9,8 @@
 
 ## Requirements
 
-* yarn 1.5.0+
-* node 8+
+* yarn 1.5.1+
+* node 8.*
 
 ## Installation
 
@@ -27,3 +27,7 @@ From the package folder (`packages/composer`, `packages/viewer`, `packages/style
 ```
 yarn start
 ```
+
+## Infrastructure and Deployment
+
+Check the wiki pages [wiki/Infrastructure](https://github.com/AJInteractive/InterviewJS/wiki/Infrastructure)
