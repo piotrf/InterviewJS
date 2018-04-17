@@ -122,7 +122,7 @@ export default class StoryPane extends React.Component {
                             this.props.switchInterviewee(intervieweeIndex)
                           }
                         >
-                          <Avatar image={interviewee.avatar} size="l" />
+                          <Avatar image={interviewee.avatar} size="m" />
                         </Action>
                       </Tip>
                     </Interviewee>
