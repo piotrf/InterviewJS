@@ -19,8 +19,9 @@ import {
   PageSubtitle,
   PageTitle,
   Separator,
-  TextInput,
-  radius
+  radius,
+  Preloader,
+  Text
 } from "interviewjs-styleguide";
 
 import { DetailsForm, MetaForm, Poll } from "../";
@@ -61,6 +62,21 @@ const PreviewWrapper = css.div`
   }
 `;
 
+const PlaceHolder = css.div`
+  border: 1px solid #e9e9e9;
+  box-sizing: border-box;
+  border-radius: 6px;
+  font-family: "PT Serif",serif;
+  display: block;
+  font-size: 14px;
+  color: #28336e;
+  line-height: 20px;
+  margin: 10px 0;
+  padding: 20px;
+  vertical-align: baseline;
+  width: 100%
+`;
+
 const computeId = (userId, storyId) => {
   let namespace = userId;
   if (namespace.indexOf(":") > 0) namespace = namespace.split(":").pop();
@@ -96,13 +112,15 @@ export default class PublishStoryModal extends Component {
     this.state = {
       step: 0,
       storyKey: null,
-      storyBase
+      storyBase,
+      embedModal: false,
     };
 
     this.handleStep0 = this.handleStep0.bind(this);
     this.handleStep1 = this.handleStep1.bind(this);
     this.handleStep2 = this.handleStep2.bind(this);
     this.handleStep3 = this.handleStep3.bind(this);
+    this.toggleEmbedModal = this.toggleEmbedModal.bind(this);
   }
 
   componentDidUpdate() {
@@ -143,7 +161,6 @@ export default class PublishStoryModal extends Component {
       host: document.location.hostname,
       version: process.env.VERSION
     };
-
     Storage.put(
       `stories/${this.props.user.id}/${story.id}/story.json`,
       JSON.stringify(story),
@@ -157,7 +174,7 @@ export default class PublishStoryModal extends Component {
         console.log(result);
         this.setState({
           step: this.state.step + 1,
-          storyKey: computeId(this.props.user.id, this.props.story.id)
+          storyKey: computeId(this.props.user.id, this.props.story.id),
         });
       })
       .catch((err) => console.log(err));
@@ -165,6 +182,12 @@ export default class PublishStoryModal extends Component {
 
   handleStep3() {
     this.props.handleClose();
+  }
+
+  toggleEmbedModal() {
+    this.setState({
+      embedModal: !this.state.embedModal,
+    })
   }
 
   render() {
@@ -227,6 +250,10 @@ export default class PublishStoryModal extends Component {
             </PageSubtitle>
             <Separator size="m" silent />
             <PreviewWrapper>
+              <Separator size="l" silent />
+              <Text>Please wait. Your InterviewJS story is being created.</Text>
+              <Separator size="m" silent />
+              <Preloader />
               <img src={iframeRatioSpacer} alt="" />
               <iframe
                 title="Preview"
@@ -243,21 +270,42 @@ export default class PublishStoryModal extends Component {
               Grab the link and share on social:
             </PageSubtitle>
             <Separator size="s" silent />
-            <TextInput
-              input
-              readonly="readonly"
-              style={{ textAlign: "center" }}
-              value={`${iframeViewer}/`}
-            />
+              <Action target="_blank" href={`${iframeViewer}/`}>
+                {`${iframeViewer}/`}
+              </Action>
             <Separator size="m" silent />
             <Actionbar>
-              <Action fixed primary onClick={this.handleStep3}>
-                Close
+              <Action fixed secondary onClick={this.handleStep3}>
+                Back to composer
               </Action>
-              <Action fixed href={`${iframeViewer}/`} secondary target="_blank">
-                Open your story
+              <Action 
+                fixed 
+                primary 
+                onClick={this.toggleEmbedModal}
+              >
+                Embed
               </Action>
             </Actionbar>
+            <ReactModal 
+              isOpen={this.state.embedModal}
+              ariaHideApp={false}
+            >
+              <Modal handleClose={this.toggleEmbedModal} >
+                <ModalHead fill="grey">
+                  <PageTitle typo="h2">Embed Code</PageTitle>
+                  <Separator size="s" silent />
+                </ModalHead>
+                <ModalBody>
+                  <Text>
+                    Copy the code below and embed it in your HTML editor
+                  </Text>
+                  <PlaceHolder>
+                    {`<iframe width='100%' height='768px' src='${iframeViewer}'>
+                    </iframe>`}
+                  </PlaceHolder>
+                </ModalBody>
+              </Modal>
+            </ReactModal>
           </Container>
         );
       }

@@ -320,12 +320,12 @@ export default class ComposerView extends React.Component {
       (story) => story.id === storyId
     );
     const story = this.props.stories[storyIndex];
-    const { storyline } = story.interviewees[this.state.currentInterviewee];
-
     if (!story) {
       this.props.router.push(`/`);
       return null;
     }
+    
+    const { storyline } = story.interviewees[this.state.currentInterviewee];
 
     const renderSaveIndicator = () => {
       if (this.state.savedLabel === false) {
@@ -354,16 +354,7 @@ export default class ComposerView extends React.Component {
                 onClick={() => this.toggleDetailsModal("meta")}
                 className="jr-step7"
               >
-                <Icon
-                  name="info2"
-                  size="s"
-                  style={{
-                    position: "relative",
-                    top: "1px",
-                    marginRight: "2px"
-                  }}
-                />
-                {` `}Story elements
+                Story elements
               </Action>
             </Container>
             <Container flex={[1, 1, `${100 / 3}%`]} align="center">
