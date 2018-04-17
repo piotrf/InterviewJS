@@ -74,7 +74,6 @@ const PlaceHolder = css.div`
   margin: 10px 0;
   padding: 20px;
   vertical-align: baseline;
-  ${props => props.center ? 'text-align: center' : ''}
   width: 100%
 `;
 
@@ -271,11 +270,9 @@ export default class PublishStoryModal extends Component {
               Grab the link and share on social:
             </PageSubtitle>
             <Separator size="s" silent />
-            <PlaceHolder>
-              <Action href={`${iframeViewer}/`}>
+              <Action target="_blank" href={`${iframeViewer}/`}>
                 {`${iframeViewer}/`}
               </Action>
-            </PlaceHolder>
             <Separator size="m" silent />
             <Actionbar>
               <Action fixed secondary onClick={this.handleStep3}>
@@ -293,7 +290,7 @@ export default class PublishStoryModal extends Component {
               isOpen={this.state.embedModal}
               ariaHideApp={false}
             >
-              <Modal {...this.props}>
+              <Modal handleClose={this.toggleEmbedModal} >
                 <ModalHead fill="grey">
                   <PageTitle typo="h2">Embed Code</PageTitle>
                   <Separator size="s" silent />
