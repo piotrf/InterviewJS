@@ -178,7 +178,7 @@ export default class PollView extends Component {
           <Actionbar>
             <Action
               fixed
-              onClick={hasLocalPoll ? this.moveOn : this.submitPoll}
+              onClick={this.moveOn}
               secondary
             >
               Skip
