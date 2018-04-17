@@ -370,9 +370,7 @@ export default class IntervieweeForm extends Component {
                 value={this.state.formData.color}
                 nooffset
               />
-              <Legend tip="Choose the colour of this person’s chat text bubbles">
-                i
-              </Legend>
+              <Legend tip="Choose the colour of this person’s messages">i</Legend>
             </FormItem>
           </Container>
         </Container>
