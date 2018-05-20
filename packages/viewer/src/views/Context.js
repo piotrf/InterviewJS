@@ -4,23 +4,9 @@ import React, { Component } from "react";
 import { object, shape, string, func } from "prop-types";
 import axios from "axios";
 
-import {
-  Action,
-  Actionbar,
-  PageParagraph,
-  PageSubtitle,
-  Separator,
-  color
-} from "interviewjs-styleguide";
+import { Action, Actionbar, PageParagraph, PageSubtitle, Separator, color } from "interviewjs-styleguide";
 
-import {
-  Cover,
-  Page,
-  PageBody,
-  PageHead,
-  StoryDetailsModal,
-  Topbar
-} from "../partials";
+import { Cover, Page, PageBody, PageHead, StoryDetailsModal, Topbar } from "../partials";
 
 const Aside = css(PageParagraph)`
   color: ${color.flareHD};
@@ -47,7 +33,12 @@ export default class ContextView extends Component {
     }
 
     // Load story via storyId -> getStoryURL
-    if ((!this.props.story || Object.keys(this.props.story).length === 0) && this.props.params.storyId && window.InterviewJS && window.InterviewJS.getStoryURL) {
+    if (
+      (!this.props.story || Object.keys(this.props.story).length === 0) &&
+      this.props.params.storyId &&
+      window.InterviewJS &&
+      window.InterviewJS.getStoryURL
+    ) {
       const storyURL = window.InterviewJS.getStoryURL(this.props.params.storyId);
       if (storyURL) axios.get(storyURL).then(response => this.props.createStory(response.data));
     }
@@ -73,22 +64,14 @@ export default class ContextView extends Component {
         </PageHead>
         <PageBody limit="x" flex={[1, 0, `${100 / 2}%`]}>
           <Aside typo="p3">
-            Explore real stories by interacting directly with the interviewees.
-            At the end we will let you know how much of the story you have covered
-            and you can share your views in a poll.
-          </Aside>
-          <Aside typo="p3">
-            Here is the story
+            With InterviewJS you can interact directly with interviewees. Explore different perspectives, then opt to
+            have your say.
           </Aside>
           <Separator size="m" silent />
           <PageSubtitle typo="h4">{story.context}</PageSubtitle>
           <Separator size="l" silent />
           <Actionbar>
-            <Action
-              fixed
-              onClick={() => this.props.router.push(`/${story.id}/interviewees`)}
-              primary
-            >
+            <Action fixed onClick={() => this.props.router.push(`/${story.id}/interviewees`)} primary>
               Meet your interviewees
             </Action>
           </Actionbar>
@@ -101,7 +84,7 @@ export default class ContextView extends Component {
           key="detailsModal"
           story={story}
         />
-      ) : null
+      ) : null,
     ];
   }
 }
@@ -110,11 +93,11 @@ ContextView.propTypes = {
   createStory: func.isRequired,
   router: object,
   story: shape({
-    title: string
-  })
+    title: string,
+  }),
 };
 
 ContextView.defaultProps = {
   router: null,
-  story: {}
+  story: {},
 };

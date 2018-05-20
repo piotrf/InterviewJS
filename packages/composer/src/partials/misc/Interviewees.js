@@ -1,5 +1,6 @@
+/* eslint react/forbid-prop-types: 0 */
 import { arrayOf, func, number, object, string } from "prop-types";
-import css from "styled-components";
+import styled from "styled-components";
 import React from "react";
 
 import {
@@ -10,16 +11,30 @@ import {
   Icon,
   Separator,
   Text,
+  Tip,
   color,
-  setSpace
+  radius,
+  setSpace,
+  setSize
 } from "interviewjs-styleguide";
 
 import { IntervieweeForm } from "../";
 
-const IntervieweesList = css.ul`
-  display: block;
+const SwapWrap = styled.div`
+  display: none;
+  left: 50%;
+  position: absolute;
+  top: 100%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
 `;
-const Interviewee = css.li`
+const IntervieweesList = styled.ul`
+  display: block;
+  &:hover ${SwapWrap} {
+    display: block;
+  }
+`;
+const Interviewee = styled.li`
   ${setSpace("pam")};
   align-content: center;
   align-items: center;
@@ -27,21 +42,27 @@ const Interviewee = css.li`
   display: flex;
   flex-direction: row;
   jusitfy-content: space-between;
+  position: relative;
   & > *:nth-child(2) {
     ${setSpace("phm")};
   }
+  & .swapPlaces {
+    ${setSize("m")};
+    background: ${color.white};
+    border-radius: ${radius.a};
+    border: 1px solid ${color.greyHL};
+    display: inline-block;
+  }
 `;
-const IntervieweeName = css(Text.withComponent("h2"))`
+const IntervieweeName = styled(Text.withComponent("h2"))`
   color: ${color.blueBlk};
 `;
-const IntervieweeTitle = css(Text)`
+const IntervieweeTitle = styled(Text)`
   ${setSpace("mvx")};
   color: ${color.blueBlk};
   display: block;
 `;
-const IntervieweeBio = css(Text.withComponent("p"))`
-
-`;
+const IntervieweeBio = styled(Text.withComponent("p"))``;
 
 export default class Interviewees extends React.Component {
   constructor(props) {
@@ -51,6 +72,7 @@ export default class Interviewees extends React.Component {
     };
     this.createInterviewee = this.createInterviewee.bind(this);
     this.deleteInterviewee = this.deleteInterviewee.bind(this);
+    this.swapInterviewees = this.swapInterviewees.bind(this);
     this.toggleAddInterviewee = this.toggleAddInterviewee.bind(this);
     this.toggleEditInterviewee = this.toggleEditInterviewee.bind(this);
     this.updateInterviewee = this.updateInterviewee.bind(this);
@@ -68,6 +90,9 @@ export default class Interviewees extends React.Component {
   deleteInterviewee(intervieweeIndex) {
     this.props.deleteInterviewee(this.props.storyIndex, intervieweeIndex);
   }
+  swapInterviewees(intervieweeIndex) {
+    this.props.pushInterviewee(this.props.storyIndex, intervieweeIndex);
+  }
   toggleAddInterviewee() {
     this.setState({ editItem: "new" });
   }
@@ -83,6 +108,8 @@ export default class Interviewees extends React.Component {
             <IntervieweeForm
               handleCancel={() => this.setState({ editItem: null })}
               handleSubmit={this.createInterviewee}
+              story={this.props.story}
+              user={this.props.user}
             />
           );
         } else if (this.state.editItem === null) {
@@ -95,7 +122,11 @@ export default class Interviewees extends React.Component {
                       <Container flex={[1, 1, "auto"]}>
                         <Avatar image={interviewee.avatar} size="l" />
                       </Container>
-                      <Container flex={[1, 2, "100%"]} align="left">
+                      <Container
+                        flex={[1, 2, "100%"]}
+                        align="left"
+                        style={{ position: "static" }}
+                      >
                         <IntervieweeName typo="p4">
                           {interviewee.name}
                         </IntervieweeName>
@@ -105,6 +136,19 @@ export default class Interviewees extends React.Component {
                         <IntervieweeBio typo="p5">
                           {interviewee.bio}
                         </IntervieweeBio>
+                        {interviewees.length > 1 &&
+                        i !== interviewees.length - 1 ? (
+                          <SwapWrap>
+                            <Tip title="Swap places">
+                              <Action
+                                className="swapPlaces"
+                                onClick={() => this.swapInterviewees(i)}
+                              >
+                                <Icon name="rearrange" size="x" />
+                              </Action>
+                            </Tip>
+                          </SwapWrap>
+                        ) : null}
                       </Container>
                       <Container flex={[1, 1, "auto"]}>
                         <Action
@@ -142,11 +186,18 @@ export default class Interviewees extends React.Component {
             handleCancel={() => this.setState({ editItem: null })}
             handleSubmit={this.updateInterviewee}
             interviewee={interviewees[this.state.editItem]}
+            story={this.props.story}
+            user={this.props.user}
           />
         );
       }
       return (
-        <IntervieweeForm handleSubmit={this.createInterviewee} persistent />
+        <IntervieweeForm
+          handleSubmit={this.createInterviewee}
+          persistent
+          story={this.props.story}
+          user={this.props.user}
+        />
       );
     };
     return <Container>{getPartialBody()}</Container>;
@@ -154,14 +205,17 @@ export default class Interviewees extends React.Component {
 }
 
 Interviewees.propTypes = {
-  editItem: number,
-  cta: string,
   createInterviewee: func.isRequired,
+  cta: string,
   deleteInterviewee: func.isRequired,
+  editItem: number,
   handleSubmit: func.isRequired,
   interviewees: arrayOf(object),
+  pushInterviewee: func.isRequired,
+  story: object.isRequired,
   storyIndex: number.isRequired,
-  updateInterviewee: func.isRequired
+  updateInterviewee: func.isRequired,
+  user: object.isRequired
 };
 
 Interviewees.defaultProps = {

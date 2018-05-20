@@ -42,9 +42,19 @@ export default class OutroView extends Component {
     }
 
     // Load story via storyId -> getStoryURL
-    if ((!this.props.story || Object.keys(this.props.story).length === 0) && this.props.params.storyId && window.InterviewJS && window.InterviewJS.getStoryURL) {
-      const storyURL = window.InterviewJS.getStoryURL(this.props.params.storyId);
-      if (storyURL) axios.get(storyURL).then(response => this.props.createStory(response.data));
+    if (
+      (!this.props.story || Object.keys(this.props.story).length === 0) &&
+      this.props.params.storyId &&
+      window.InterviewJS &&
+      window.InterviewJS.getStoryURL
+    ) {
+      const storyURL = window.InterviewJS.getStoryURL(
+        this.props.params.storyId
+      );
+      if (storyURL)
+        axios
+          .get(storyURL)
+          .then((response) => this.props.createStory(response.data));
     }
   }
 
@@ -91,7 +101,7 @@ export default class OutroView extends Component {
     const resultScore = this.getScore();
     const getResultScore = () => {
       if (resultScore >= 95) {
-        return `Well done, you have exploed the maximum amount of information possible.
+        return `Well done, you have explored the maximum amount of information possible.
         Would you like to have your say now?`;
       } else if (resultScore >= 70) {
         return `Nice one, you have explored ${resultScore}% of the story. Go back to the interviews for more or have your say now.`;

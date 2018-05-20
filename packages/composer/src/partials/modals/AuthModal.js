@@ -1,4 +1,4 @@
-import css from "styled-components";
+import styled from "styled-components";
 import React from "react";
 import ReactModal from "react-modal";
 import { bool, func } from "prop-types";
@@ -7,50 +7,60 @@ import { Auth } from "aws-amplify";
 import {
   Action,
   Actionbar,
-  Animator,
-  Bubble,
-  BubbleBlock,
-  Container,
+  Form,
   FormItem,
   Label,
-  LogoWSymbolNegative,
+  LogoWSymbol,
   Modal,
   ModalBody,
-  ModalFoot,
+  ModalHead,
+  PageParagraph,
+  PageTitle,
   PaneTab,
   PaneTabs,
+  Preloader,
   Separator,
-  Text,
   TextInput,
   color,
-  setSpace,
-  setHeight
+  font,
+  setHeight,
+  setSpace
 } from "interviewjs-styleguide";
 
-const Brandmark = css.div`
-  ${setSpace("mbl")};
+const Brandmark = styled.div`
   line-height: 0;
-  opacity: .8;
+  opacity: 0.8;
+  padding: 1px;
   text-align: center;
   img {
-    ${setHeight("m")}
+    ${setHeight("l")};
   }
+`;
+
+const Message = styled(PageParagraph)`
+  ${setSpace("mbl")};
+  color: ${color.redM};
+  font-family: ${font.serif};
+  text-align: center;
 `;
 
 export default class AuthModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
-      password: "",
-      email: "",
-      code: "",
-      newPassword: "",
       activeTab: "signIn",
       forgotPassword: false,
-      message: null
-    };
+      lockForm: false,
+      recoveryStep: 0,
+      signupStep: 0,
+      message: null,
 
+      code: "",
+      email: "",
+      newPassword: "",
+      password: "",
+      username: ""
+    };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSignIn = this.handleSignIn.bind(this);
     this.handleSignUp = this.handleSignUp.bind(this);
@@ -101,8 +111,10 @@ export default class AuthModal extends React.Component {
     this.setState({ message: "" });
   }
 
-  handleSignIn() {
+  handleSignIn(e) {
+    if (e) e.preventDefault();
     const { username, password } = this.state;
+    this.setState({ lockForm: true });
 
     Auth.signIn(username, password)
       .then(async (user) => {
@@ -110,52 +122,292 @@ export default class AuthModal extends React.Component {
         if (user && info) {
           this.raiseMessage("OK", info);
           this.props.handleAuthentication(info);
+          this.setState({ lockForm: false });
         }
       })
-      .catch((error) => this.raiseError(error));
+      .catch((error) => {
+        this.raiseError(error);
+        this.setState({ lockForm: false });
+      });
   }
 
-  handleSignUp() {
+  handleSignUp(e) {
+    if (e) e.preventDefault();
     const { username, password, email } = this.state;
-
+    this.setState({ lockForm: true });
     Auth.signUp({
       username,
       password,
       attributes: { email }
     })
-      .then((data) =>
-        this.raiseMessage("Check your email for access code", data)
-      )
-      .catch((error) => this.raiseError(error));
+      .then((data) => {
+        this.raiseMessage("Check your email for access code", data);
+        this.setState({ signupStep: 1, lockForm: false });
+      })
+      .catch((error) => {
+        this.raiseError(error);
+        this.setState({ lockForm: false });
+      });
   }
 
-  handleConfirmSignUp() {
+  handleConfirmSignUp(e) {
+    if (e) e.preventDefault();
     const { username, code } = this.state;
 
     Auth.confirmSignUp(username, code)
-      .then((data) => this.raiseMessage("Now please sign in", data))
+      .then((data) => {
+        this.raiseMessage("Now please log in", data);
+        this.setState({ activeTab: "signIn" });
+      })
       .catch((error) => this.raiseError(error));
   }
 
-  handleForgotPassword() {
+  handleForgotPassword(e) {
+    if (e) e.preventDefault();
     const { username } = this.state;
+    this.setState({ lockForm: true });
 
     Auth.forgotPassword(username)
-      .then((data) =>
-        this.raiseMessage("Check your email for access code", data)
-      )
-      .catch((error) => this.raiseError(error));
+      .then((data) => {
+        this.setState({ recoveryStep: 1, lockForm: false }, () =>
+          this.raiseMessage("Check your email for access code", data)
+        );
+      })
+      .catch((error) => {
+        this.raiseError(error);
+        this.setState({ lockForm: false });
+      });
   }
 
-  handleConfirmForgotPassword() {
+  handleConfirmForgotPassword(e) {
+    if (e) e.preventDefault();
     const { username, code, newPassword } = this.state;
+    this.setState({ lockForm: true });
 
     Auth.forgotPasswordSubmit(username, code, newPassword)
-      .then((data) => this.raiseMessage("Now please sign in", data))
-      .catch((error) => this.raiseError(error));
+      .then((data) => {
+        this.raiseMessage("Now please sign in", data);
+        this.setState({ forgotPassword: false, lockForm: false });
+      })
+      .catch((error) => {
+        this.raiseError(error);
+        this.setState({ lockForm: false });
+      });
   }
 
   render() {
+    const renderSignIn = () => (
+      <Form onSubmit={(e) => this.handleSignIn(e)}>
+        <FormItem>
+          <Label>Username</Label>
+          <TextInput
+            disabled={this.state.lockForm}
+            input
+            name="username"
+            onChange={this.handleInputChange}
+            type="text"
+            value={this.state.username}
+          />
+        </FormItem>
+        <Separator size="m" silent />
+        <FormItem>
+          <Label>Password</Label>
+          <TextInput
+            disabled={this.state.lockForm}
+            input
+            name="password"
+            onChange={this.handleInputChange}
+            type="password"
+          />
+        </FormItem>
+        <Separator size="m" silent />
+        <Actionbar>
+          {this.state.lockForm ? (
+            <Preloader />
+          ) : (
+            <Action
+              disabled={this.state.lockForm}
+              fixed
+              onClick={this.handleSignIn}
+              primary
+            >
+              Log in
+            </Action>
+          )}
+        </Actionbar>
+        <Separator silent size="x" />
+        <Actionbar>
+          <Action onClick={this.toggleForgotPassword}>Forgot password?</Action>
+        </Actionbar>
+      </Form>
+    );
+    const renderSignUp = () => {
+      if (this.state.signupStep === 1) {
+        return (
+          <Form onSubmit={(e) => this.handleConfirmSignUp(e)}>
+            <FormItem>
+              <Label>Username</Label>
+              <TextInput
+                input
+                type="text"
+                name="username"
+                value={this.state.username}
+                onChange={this.handleInputChange}
+              />
+            </FormItem>
+            <Separator size="m" silent />
+            <FormItem>
+              <Label>Confirmation code</Label>
+              <TextInput
+                input
+                type="text"
+                name="code"
+                value={this.state.code}
+                onChange={this.handleInputChange}
+              />
+            </FormItem>
+            <Separator size="m" silent />
+            <Actionbar>
+              <Action fixed primary onClick={this.handleConfirmSignUp}>
+                Confirm sign up
+              </Action>
+            </Actionbar>
+          </Form>
+        );
+      }
+      return (
+        <Form onSubmit={(e) => this.handleSignUp(e)}>
+          <FormItem>
+            <Label>Username</Label>
+            <TextInput
+              disabled={this.state.lockForm}
+              input
+              name="username"
+              onChange={this.handleInputChange}
+              type="text"
+              value={this.state.username}
+            />
+          </FormItem>
+          <Separator size="m" silent />
+          <FormItem>
+            <Label>Password</Label>
+            <TextInput
+              disabled={this.state.lockForm}
+              input
+              name="password"
+              onChange={this.handleInputChange}
+              type="password"
+              value={this.state.password}
+            />
+          </FormItem>
+          <Separator size="m" silent />
+          <FormItem>
+            <Label>Email</Label>
+            <TextInput
+              disabled={this.state.lockForm}
+              input
+              name="email"
+              onChange={this.handleInputChange}
+              type="email"
+              value={this.state.email}
+            />
+          </FormItem>
+          <Separator size="m" silent />
+          <Actionbar>
+            {this.state.lockForm ? (
+              <Preloader />
+            ) : (
+              <Action fixed primary onClick={this.handleSignUp}>
+                Sign up
+              </Action>
+            )}
+          </Actionbar>
+        </Form>
+      );
+    };
+    const renderRecover = () => {
+      if (this.state.recoveryStep === 1) {
+        return (
+          <Form onSubmit={(e) => this.handleConfirmForgotPassword(e)}>
+            <FormItem>
+              <Label>Username</Label>
+              <TextInput
+                disabled={this.state.lockForm}
+                input
+                name="username"
+                onChange={this.handleInputChange}
+                type="text"
+                value={this.state.username}
+              />
+            </FormItem>
+            <Separator size="m" silent />
+            <FormItem>
+              <Label>Confimation Code</Label>
+              <TextInput
+                input
+                type="text"
+                name="code"
+                value={this.state.code}
+                onChange={this.handleInputChange}
+                disabled={this.state.lockForm}
+              />
+            </FormItem>
+            <Separator size="m" silent />
+            <FormItem>
+              <Label>New password</Label>
+              <TextInput
+                input
+                type="password"
+                name="newPassword"
+                value={this.state.newPassword}
+                onChange={this.handleInputChange}
+                disabled={this.state.lockForm}
+              />
+            </FormItem>
+            <Separator size="m" silent />
+            <Actionbar>
+              {this.state.lockForm ? (
+                <Preloader />
+              ) : (
+                <Action
+                  fixed
+                  primary
+                  onClick={this.handleConfirmForgotPassword}
+                >
+                  Confirm new password
+                </Action>
+              )}
+            </Actionbar>
+          </Form>
+        );
+      }
+      return (
+        <Form onSubmit={(e) => this.handleForgotPassword(e)}>
+          <Separator dir="h" size="s" silent />
+          <FormItem>
+            <Label>Username</Label>
+            <TextInput
+              input
+              type="text"
+              name="username"
+              disabled={this.state.lockForm}
+              value={this.state.username}
+              onChange={this.handleInputChange}
+            />
+          </FormItem>
+          <Separator size="m" silent />
+          <Actionbar>
+            {this.state.lockForm ? (
+              <Preloader />
+            ) : (
+              <Action fixed primary onClick={this.handleForgotPassword}>
+                Send me a recovery code
+              </Action>
+            )}
+          </Actionbar>
+        </Form>
+      );
+    };
     return (
       <ReactModal
         ariaHideApp={false}
@@ -164,248 +416,44 @@ export default class AuthModal extends React.Component {
         overlayClassName="ReactModal__HeroOverlay"
         role="dialog"
       >
-        <Modal {...this.props} persistent transparent>
+        <Modal {...this.props} persistent>
+          <ModalHead fill="grey">
+            <PageTitle typo="h2">
+              <Brandmark>
+                <img src={LogoWSymbol} alt="InterviewJS" />
+              </Brandmark>
+            </PageTitle>
+            <Separator size="s" silent />
+            <PaneTabs>
+              <PaneTab
+                opinionated
+                active={this.state.activeTab === "signIn"}
+                onClick={() => this.handleTabActivation("signIn")}
+              >
+                Log in
+              </PaneTab>
+              <PaneTab
+                opinionated
+                active={this.state.activeTab === "signUp"}
+                onClick={() => this.handleTabActivation("signUp")}
+              >
+                Sign Up
+              </PaneTab>
+            </PaneTabs>
+          </ModalHead>
+          <Separator size="x" silent />
           <ModalBody>
-            <Brandmark>
-              <img src={LogoWSymbolNegative} alt="InterviewJS" />
-            </Brandmark>
-            <BubbleBlock>
-              <Bubble
-                animated
-                persona="interviewee"
-                theme={{ backg: color.flareLLt, color: color.white }}
-              >
-                Welcome!
-              </Bubble>
-              <Bubble
-                animated
-                delay={1000}
-                persona="interviewee"
-                theme={{ backg: color.flareLLt, color: color.white }}
-              >
-                InterviewJS will help you tell interactive stories by converting
-                your interviews into a chat experience.
-              </Bubble>
-              <Bubble
-                animated
-                delay={2000}
-                persona="interviewee"
-                theme={{ backg: color.flareLLt, color: color.white }}
-              >
-                To continue, sign in with your Google account.
-              </Bubble>
-            </BubbleBlock>
+            {this.state.message ? (
+              <Message typo="p4">{this.state.message}</Message>
+            ) : null}
+            {!this.state.forgotPassword && this.state.activeTab === "signIn"
+              ? renderSignIn()
+              : null}
+            {this.state.activeTab === "signUp" ? renderSignUp() : null}
+            {this.state.forgotPassword && this.state.activeTab === "signIn"
+              ? renderRecover()
+              : null}
           </ModalBody>
-          <ModalFoot>
-            <Animator delay={3000}>
-              <Container rounded fill="white">
-                <PaneTabs>
-                  <PaneTab
-                    opinionated
-                    active={this.state.activeTab === "signIn"}
-                    onClick={() => this.handleTabActivation("signIn")}
-                  >
-                    Sign In
-                  </PaneTab>
-                  <PaneTab
-                    opinionated
-                    active={this.state.activeTab === "signUp"}
-                    onClick={() => this.handleTabActivation("signUp")}
-                  >
-                    Sign Up
-                  </PaneTab>
-                </PaneTabs>
-
-                <Separator dir="h" size="s" silent />
-                <Text typo="h3">
-                  {this.state.message ? this.state.message : "\xa0"}
-                </Text>
-
-                {!this.state.forgotPassword &&
-                this.state.activeTab === "signIn" ? (
-                  <div style={{ padding: "1em" }}>
-                    <FormItem>
-                      <Label>Username</Label>
-                      <TextInput
-                        input
-                        type="text"
-                        name="username"
-                        value={this.state.username}
-                        onChange={this.handleInputChange}
-                      />
-                    </FormItem>
-                    <Separator dir="h" size="s" silent />
-                    <FormItem>
-                      <Label>Password</Label>
-                      <TextInput
-                        input
-                        type="password"
-                        name="password"
-                        onChange={this.handleInputChange}
-                      />
-                    </FormItem>
-                    <Separator dir="h" silent />
-                    <Actionbar>
-                      <Action fixed primary onClick={this.handleSignIn}>
-                        Sign in
-                      </Action>
-                      <Action fixed onClick={this.toggleForgotPassword}>
-                        Forgot password?
-                      </Action>
-                    </Actionbar>
-                  </div>
-                ) : null}
-
-                {this.state.activeTab === "signUp" ? (
-                  <div style={{ padding: "0em 1em 1em 1em" }}>
-                    <Text typo="h5">Step 1</Text>
-                    <Separator dir="h" size="s" silent />
-                    <FormItem>
-                      <Label>Username</Label>
-                      <TextInput
-                        input
-                        type="text"
-                        name="username"
-                        value={this.state.username}
-                        onChange={this.handleInputChange}
-                      />
-                    </FormItem>
-                    <Separator dir="h" size="s" silent />
-                    <FormItem>
-                      <Label>Password</Label>
-                      <TextInput
-                        input
-                        type="password"
-                        name="password"
-                        value={this.state.password}
-                        onChange={this.handleInputChange}
-                      />
-                    </FormItem>
-                    <Separator dir="h" size="s" silent />
-                    <FormItem>
-                      <Label>Email</Label>
-                      <TextInput
-                        input
-                        type="email"
-                        name="email"
-                        value={this.state.email}
-                        onChange={this.handleInputChange}
-                      />
-                    </FormItem>
-                    <Separator dir="h" silent />
-                    <Actionbar>
-                      <Action fixed primary onClick={this.handleSignUp}>
-                        Sign up
-                      </Action>
-                    </Actionbar>
-                    <Separator dir="h" silent />
-                    <Text typo="h5">Step 2</Text>
-                    <Separator dir="h" size="s" silent />
-                    <FormItem>
-                      <Label>Username</Label>
-                      <TextInput
-                        input
-                        type="text"
-                        name="username"
-                        value={this.state.username}
-                        onChange={this.handleInputChange}
-                      />
-                    </FormItem>
-                    <Separator dir="h" size="s" silent />
-                    <FormItem>
-                      <Label>Confirmation code</Label>
-                      <TextInput
-                        input
-                        type="text"
-                        name="code"
-                        value={this.state.code}
-                        onChange={this.handleInputChange}
-                      />
-                    </FormItem>
-                    <Separator dir="h" silent />
-                    <Actionbar>
-                      <Action fixed primary onClick={this.handleConfirmSignUp}>
-                        Confirm sign up
-                      </Action>
-                    </Actionbar>
-                  </div>
-                ) : null}
-
-                {this.state.forgotPassword &&
-                this.state.activeTab === "signIn" ? (
-                  <div style={{ padding: "0em 1em 1em 1em" }}>
-                    <Text typo="h5">
-                      Forgot Password<br /> Step 1
-                    </Text>
-                    <Separator dir="h" size="s" silent />
-                    <FormItem>
-                      <Label>Username</Label>
-                      <TextInput
-                        input
-                        type="text"
-                        name="username"
-                        value={this.state.username}
-                        onChange={this.handleInputChange}
-                      />
-                    </FormItem>
-                    <Separator dir="h" silent />
-                    <Actionbar>
-                      <Action fixed primary onClick={this.handleForgotPassword}>
-                        Forgot password
-                      </Action>
-                    </Actionbar>
-                    <Separator dir="h" silent />
-                    <Text typo="h4">Step 2</Text>
-                    <Separator dir="h" size="s" silent />
-                    <FormItem>
-                      <Label>Username</Label>
-                      <TextInput
-                        input
-                        type="text"
-                        name="username"
-                        value={this.state.username}
-                        onChange={this.handleInputChange}
-                      />
-                    </FormItem>
-                    <Separator dir="h" size="s" silent />
-                    <FormItem>
-                      <Label>Confimation Code</Label>
-                      <TextInput
-                        input
-                        type="text"
-                        name="code"
-                        value={this.state.code}
-                        onChange={this.handleInputChange}
-                      />
-                    </FormItem>
-                    <Separator dir="h" size="s" silent />
-                    <FormItem>
-                      <Label>New password</Label>
-                      <TextInput
-                        input
-                        type="password"
-                        name="newPassword"
-                        value={this.state.newPassword}
-                        onChange={this.handleInputChange}
-                      />
-                    </FormItem>
-                    <Separator dir="h" silent />
-                    <Actionbar>
-                      <Action
-                        fixed
-                        primary
-                        onClick={this.handleConfirmForgotPassword}
-                      >
-                        Confirm forgot password
-                      </Action>
-                    </Actionbar>
-                  </div>
-                ) : null}
-
-                <Separator dir="h" size="s" silent />
-              </Container>
-            </Animator>
-          </ModalFoot>
         </Modal>
       </ReactModal>
     );

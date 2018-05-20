@@ -37,6 +37,23 @@ const PaneEl = css(Container)`
 `;
 
 export default class IntervieweePane extends React.Component {
+  static getDerivedStateFromProps(nextProps, nextState) {
+    if (nextProps.editMode) {
+      const { currentBubble } = nextProps;
+      return {
+        draft: {
+          [currentBubble.type]: {
+            value: currentBubble.content.value,
+            title: currentBubble.content.title
+              ? currentBubble.content.title
+              : null
+          }
+        },
+        tab: currentBubble.type
+      };
+    }
+    return nextState;
+  }
   constructor(props) {
     super(props);
     this.state = {
@@ -59,8 +76,11 @@ export default class IntervieweePane extends React.Component {
       tab: "text"
     };
     this.addStorylineItem = this.addStorylineItem.bind(this);
+    this.constructDrafts = this.constructDrafts.bind(this);
+    this.switchTab = this.switchTab.bind(this);
     this.updateDraft = this.updateDraft.bind(this);
     this.updateSrcText = this.updateSrcText.bind(this);
+    this.updateStorylineItem = this.updateStorylineItem.bind(this);
   }
 
   updateSrcText(data) {
@@ -82,6 +102,27 @@ export default class IntervieweePane extends React.Component {
     this.setState({
       draft: { ...this.state.draft, [type]: data },
       clean: { ...this.state.clean, [type]: clean }
+    });
+  }
+
+  constructDrafts() {
+    this.setState({
+      draft: {
+        text: { value: "" },
+        link: { value: "", title: "" },
+        image: {
+          value: "",
+          title: ""
+        },
+        embed: { value: "" },
+        map: { value: "" },
+        media: { value: "" }
+      },
+      clean: {
+        embed: "",
+        map: "",
+        media: ""
+      }
     });
   }
 
@@ -108,11 +149,43 @@ export default class IntervieweePane extends React.Component {
     this.setState({
       draft: { ...this.state.draft, [source]: { value: "", title: "" } }
     });
+
+    this.props.showSavedIndicator();
+  }
+  updateStorylineItem() {
+    const { storyIndex, currentInterviewee, currentBubbleIndex } = this.props;
+    const editedIntervieweeBubble = {
+      content: this.state.draft[this.state.tab],
+      role: "interviewee",
+      type: this.state.tab
+    };
+    this.props.updateStorylineItem(
+      storyIndex,
+      currentInterviewee,
+      currentBubbleIndex,
+      editedIntervieweeBubble
+    );
+    this.setState({
+      draft: {
+        ...this.state.draft,
+        [this.state.tab]: {
+          value: "",
+          title: ""
+        }
+      }
+    });
+
+    this.props.setCurrentBubbleNone();
+    this.props.showSavedIndicator();
+  }
+
+  switchTab(target) {
+    this.setState({ tab: target }, () => this.props.setCurrentBubbleNone());
+    this.constructDrafts();
   }
 
   render() {
     const { tab } = this.state;
-    console.log(this.state);
     const { currentInterviewee, story } = this.props;
     return (
       <PaneEl fill="white" rounded shift dir="column">
@@ -120,7 +193,7 @@ export default class IntervieweePane extends React.Component {
           <PaneTabs className="jr-step3">
             <PaneTab
               active={tab === "text"}
-              onClick={() => this.setState({ tab: "text" })}
+              onClick={() => this.switchTab("text")}
               opinionated
             >
               <Tip title="Insert Text">
@@ -129,7 +202,7 @@ export default class IntervieweePane extends React.Component {
             </PaneTab>
             <PaneTab
               active={tab === "link"}
-              onClick={() => this.setState({ tab: "link" })}
+              onClick={() => this.switchTab("link")}
               opinionated
             >
               <Tip title="Insert Link">
@@ -138,7 +211,7 @@ export default class IntervieweePane extends React.Component {
             </PaneTab>
             <PaneTab
               active={tab === "image"}
-              onClick={() => this.setState({ tab: "image" })}
+              onClick={() => this.switchTab("image")}
               opinionated
             >
               <Tip title="Insert Image">
@@ -147,7 +220,7 @@ export default class IntervieweePane extends React.Component {
             </PaneTab>
             <PaneTab
               active={tab === "embed"}
-              onClick={() => this.setState({ tab: "embed" })}
+              onClick={() => this.switchTab("embed")}
               opinionated
             >
               <Tip title="Embed iframe">
@@ -156,7 +229,7 @@ export default class IntervieweePane extends React.Component {
             </PaneTab>
             <PaneTab
               active={tab === "map"}
-              onClick={() => this.setState({ tab: "map" })}
+              onClick={() => this.switchTab("map")}
               opinionated
             >
               <Tip title="Embed map">
@@ -165,7 +238,7 @@ export default class IntervieweePane extends React.Component {
             </PaneTab>
             <PaneTab
               active={tab === "media"}
-              onClick={() => this.setState({ tab: "media" })}
+              onClick={() => this.switchTab("media")}
               opinionated
             >
               <Tip title="Embed video">
@@ -183,6 +256,7 @@ export default class IntervieweePane extends React.Component {
             srcText={story.interviewees[currentInterviewee].srcText}
             updateDraft={(data) => this.updateDraft(data, "text")}
             updateSrcText={this.updateSrcText}
+            updateStorylineItem={() => this.updateStorylineItem("text")}
           />
           <LinkPane
             {...this.props}
@@ -190,6 +264,7 @@ export default class IntervieweePane extends React.Component {
             addStorylineItem={() => this.addStorylineItem("link")}
             draft={this.state.draft.link}
             updateDraft={(data) => this.updateDraft(data, "link")}
+            updateStorylineItem={() => this.updateStorylineItem("link")}
           />
           <ImagePane
             {...this.props}
@@ -197,12 +272,14 @@ export default class IntervieweePane extends React.Component {
             addStorylineItem={() => this.addStorylineItem("image")}
             draft={this.state.draft.image}
             updateDraft={(data) => this.updateDraft(data, "image")}
+            updateStorylineItem={() => this.updateStorylineItem("image")}
           />
           <EmbedPane
             {...this.props}
             active={tab === "embed"}
             addStorylineItem={() => this.addStorylineItem("embed")}
             draft={this.state.draft.embed}
+            updateStorylineItem={() => this.updateStorylineItem("embed")}
             updateDraft={(data, clean) =>
               this.updateDraft(data, "embed", clean)
             }
@@ -213,14 +290,17 @@ export default class IntervieweePane extends React.Component {
             addStorylineItem={() => this.addStorylineItem("map")}
             draft={this.state.draft.map}
             updateDraft={(data, clean) => this.updateDraft(data, "map", clean)}
+            updateStorylineItem={() => this.updateStorylineItem("map")}
           />
           <MediaPane
             {...this.props}
             active={tab === "media"}
+            addStorylineItem={() => this.addStorylineItem("media")}
             draft={this.state.draft.media}
             updateDraft={(data, clean) =>
               this.updateDraft(data, "media", clean)
             }
+            updateStorylineItem={() => this.updateStorylineItem("media")}
           />
         </Container>
       </PaneEl>
@@ -230,7 +310,8 @@ export default class IntervieweePane extends React.Component {
 
 IntervieweePane.propTypes = {
   addStorylineItem: func.isRequired,
-  currentBubble: number,
+  showSavedIndicator: func.isRequired,
+  currentBubble: object,
   currentInterviewee: number.isRequired,
   story: object.isRequired /* eslint react/forbid-prop-types: 0 */,
   storyIndex: number.isRequired,

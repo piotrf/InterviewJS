@@ -8,7 +8,9 @@ import {
   Container,
   Icon,
   PageTitle,
+  Preloader,
   Separator,
+  Text,
   breakpoint,
   color,
   font,
@@ -20,6 +22,7 @@ import "./joyride.css";
 
 import {
   DetailsModal,
+  ComposerWelcomeModal,
   IntervieweePane,
   MobileRedirect,
   PublishStoryModal,
@@ -52,6 +55,10 @@ const PageHead = css.div`
     color: ${color.blueBlk};
   }
 `;
+const SaveIndicator = css(Text)`
+  color: ${color.greenM};
+  font-weight: bold;
+`;
 
 const PageBody = css.div`
   ${setSpace("pbm")};
@@ -72,7 +79,19 @@ const PageBody = css.div`
   }
 `;
 
+const joyrideCallback = (cb) => {
+  if (cb.type === "finished") localStorage.setItem("doneComposerTour", true);
+  return null;
+};
+
 export default class ComposerView extends React.Component {
+  static getDerivedStateFromProps(nextState) {
+    const skipComposerWelcome = localStorage.getItem("skipComposerWelcome");
+    return {
+      ...nextState,
+      welcomeModal: !skipComposerWelcome
+    };
+  }
   constructor(props) {
     super(props);
     this.state = {
@@ -80,10 +99,14 @@ export default class ComposerView extends React.Component {
       currentInterviewee: 0,
       detailsModal: "",
       joyrideSteps: [],
-      publishModal: false
+      publishModal: false,
+      savedLabel: null,
+      welcomeModal: false
     };
     this.deleteInterviewee = this.deleteInterviewee.bind(this);
     this.initTour = this.initTour.bind(this);
+    this.setCurrentBubbleNone = this.setCurrentBubbleNone.bind(this);
+    this.showSavedIndicator = this.showSavedIndicator.bind(this);
     this.switchInterviewee = this.switchInterviewee.bind(this);
     this.toggleBubbleEdit = this.toggleBubbleEdit.bind(this);
     this.toggleDetailsModal = this.toggleDetailsModal.bind(this);
@@ -93,6 +116,10 @@ export default class ComposerView extends React.Component {
 
   componentDidMount() {
     this.initTour();
+  }
+
+  setCurrentBubbleNone() {
+    this.setState({ currentBubble: null });
   }
 
   initTour() {
@@ -152,80 +179,102 @@ export default class ComposerView extends React.Component {
       close: {},
       hole: {}
     };
+
     const steps = [
       {
-        title: "1. This is your storyline.",
+        title: "Welcome to the InterviewJS dashboard! ",
         text:
-          "The speech bubbles you create will appear here. Start adding some. Not sure how? Follow us on a quick tour…",
+          "Here’s where you convert your interviews into messaging exchanges. Follow us on a quick tour. You don’t have to remember everything - once you’re starting to build conversations you can click ‘i’ for extra info and guidance.",
+        selector: ".jr-intro",
+        style: joyrideStyles,
+        position: "top-left"
+      },
+      {
+        title: "1. This is the chat panel",
+        text:
+          "It displays the conversations between your interviewees and end users. Switch between different messaging exchanges by clicking the interviewee profile pictures at the top.",
         selector: ".jr-step1",
         style: joyrideStyles,
         position: "left"
       },
       {
-        title: "2. This panel is for your interviewees.",
+        title: "2. This is the interviewee panel",
         text:
-          "Use it to store the transcript of your interview so you can use it as base for interviewee’s speech bubbles. Then start selecting pieces of text and hit the pretty big + button down below.",
+          "Use this space to create text messages from an interview or transcript.  Type a text or paste a transcript, then highlight and select a quote and click + to add it to the chat panel in the middle.",
         selector: ".jr-step2",
         style: joyrideStyles,
         position: "right"
       },
       {
-        title:
-          "3. Here’s the thing. The interviewee can respond not only with just text.",
+        title: "3. Create multimedia messages",
         text:
-          "You can also create chat bubbles with photos, videos, maps or sound.",
+          "Your interviewee can respond with more than just text. Select these icons to create messages that contain links, photos, videos, maps or audio.",
         selector: ".jr-step3",
         style: joyrideStyles,
         position: "bottom"
       },
       {
-        title:
-          "4. This is the panel for your end user, the reader of your story.",
+        title: "4. This is the user panel",
         text:
-          "You can use it to provide the reader of your story a choice, wether to continue in a story, or explore a topic.",
+          "Here you create interactions for the readers of your chat story.  We call them ‘users’ because InterviewJS allows them to actively engage with the interviewees via the interactions that you create for them.",
         selector: ".jr-step4",
         style: joyrideStyles,
         position: "left"
       },
       {
-        title: "5. Continue actions",
+        title: "5. Option 1 - Single interaction ",
         text:
-          "Your reader needs to be able to move forward in the story at all times. Which is what `Contine` actions are for. Use them to invite the reader to interact with the interviewee. You can select from a dictionary of actions we’ve found useful in our stories, but you can also type your own. Continue action will let the user jump to the next speech bubble, simply go along with the story. That is unless an `explore` action is present next to it—then it’ll skip the closest next bubble…",
+          "A single interaction simply moves the story on. Want users to ask the interviewee a question? Type it into the space provided! Alternatively choose a pre-scripted comment or type your own. Select tabs to create user requests for multimedia.  Then click + to add this user message to the central chat panel.",
         selector: ".jr-step5",
         style: joyrideStyles,
         position: "left"
       },
       {
-        title: "6. Explore actions",
+        title: "6. Option 2 - Choice interaction",
         text:
-          "You may also want to structure your interviews in a way to give the reader more context on a particular topic. That’s where `explore` actions come in handy. An `explore` action would open a short loop in your story where the reader is being presented with an extra speech bubble that then leads back to the main thread of your story. Example: Interviewee: “I witnessed it myself.” — User: “Carry on” (continue) or “Do you have a photo?” (explore)",
+          "Create a choice between two user interactions here. Select this after creating a question, a comment or a multimedia request above and add a second one in the same way. Once both interactions have been created, click + to add them to the central chat panel.",
         selector: ".jr-step6",
         style: joyrideStyles,
         position: "left"
       },
       {
-        title: "7. Edit your story details here.",
+        title: "7. Edit your conversation",
         text:
-          "Care to make your story intro more appealing? Correct the title? Give your reader more context on the story or simpy edit your interviewees’ details? All here.",
+          "InterviewJS allows you to edit text in your messages. You can also re-arrange the order by drag and drop.",
+        selector: ".jr-step1",
+        style: joyrideStyles,
+        position: "left"
+      },
+      {
+        title: "8. Edit your story elements",
+        text:
+          "Need to correct the title or edit a profile? Or give the user a bit more context? Select “story elements” to access your story intro and biographies.",
         selector: ".jr-step7",
         style: joyrideStyles,
         position: "bottom"
       },
       {
-        title: "8. Publish",
+        title: "9. Publish",
         text:
-          "When you’re done creating your story, you can publish it here. Each time you publish it you get a new link to share the story with your network.",
+          "Once you’re done creating your story, you can publish it here - you’ll see a preview before it goes live! Each time you publish, you will be given a new link to share with your network.",
         selector: ".jr-step8",
         style: joyrideStyles,
         position: "bottom"
       }
     ];
-    this.setState({ joyrideSteps: steps });
+    const doneComposerTour = localStorage.getItem("doneComposerTour");
+    if (!doneComposerTour) this.setState({ joyrideSteps: steps });
     // setTimeout(() => this.setState({ joyrideSteps: steps }), 3000);
   }
 
   switchInterviewee(interviewee) {
-    this.setState({ currentInterviewee: interviewee });
+    this.setState(
+      {
+        currentInterviewee: interviewee,
+        currentBubble: null
+      },
+      () => this.setCurrentBubbleNone()
+    );
   }
 
   deleteInterviewee(story, interviewee) {
@@ -243,8 +292,12 @@ export default class ComposerView extends React.Component {
     this.setState({ publishModal: !this.state.publishModal });
   }
 
+  closeWelcomeModal() {
+    this.setState({ welcomeModal: false });
+    localStorage.setItem("skipComposerWelcome", true);
+  }
+
   toggleBubbleEdit(target) {
-    console.log("toggleBubbleEdit :", target);
     this.setState({ currentBubble: target });
   }
 
@@ -252,6 +305,13 @@ export default class ComposerView extends React.Component {
     const { storyId } = this.props.params;
     const i = this.props.stories.findIndex((story) => story.id === storyId);
     this.props.updateStory(data, i);
+    this.showSavedIndicator();
+  }
+
+  showSavedIndicator() {
+    this.setState({ savedLabel: false });
+    setTimeout(() => this.setState({ savedLabel: true }), 2000);
+    setTimeout(() => this.setState({ savedLabel: null }), 5000);
   }
 
   render() {
@@ -260,13 +320,26 @@ export default class ComposerView extends React.Component {
       (story) => story.id === storyId
     );
     const story = this.props.stories[storyIndex];
-
-    if (! story) {
+    if (!story) {
       this.props.router.push(`/`);
       return null;
     }
+    
+    const { storyline } = story.interviewees[this.state.currentInterviewee];
 
-    console.log("COMPOSER PROPS: ", this.props);
+    const renderSaveIndicator = () => {
+      if (this.state.savedLabel === false) {
+        return [<Preloader />, <Separator dir="v" size="m" />];
+      } else if (this.state.savedLabel === true) {
+        return [
+          <SaveIndicator typo="p5">
+            <Icon name="checkmark" /> Saved
+          </SaveIndicator>,
+          <Separator dir="v" size="m" />
+        ];
+      }
+      return null;
+    };
 
     return [
       <Page key="Page">
@@ -274,29 +347,25 @@ export default class ComposerView extends React.Component {
           <PageHead>
             <Container flex={[1, 1, `${100 / 3}%`]} padded>
               <Action onClick={() => this.props.router.push(`/stories`)}>
-                <Icon name="arrow-left" size="x" /> Story overview
+                <Icon name="arrow-left" size="x" /> My story library
               </Action>
               <Separator dir="v" size="m" />
               <Action
                 onClick={() => this.toggleDetailsModal("meta")}
                 className="jr-step7"
               >
-                <Icon
-                  name="info2"
-                  size="s"
-                  style={{
-                    position: "relative",
-                    top: "1px",
-                    marginRight: "2px"
-                  }}
-                />
-                {` `}Story elements
+                Story elements
               </Action>
             </Container>
             <Container flex={[1, 1, `${100 / 3}%`]} align="center">
               <PageTitle typo="h2">{story.title}</PageTitle>
             </Container>
             <Container flex={[1, 1, `${100 / 3}%`]} align="right" padded>
+              {renderSaveIndicator()}
+              <Action href="https://interviewjs.io/help.html" target="_blank">
+                Help
+              </Action>
+              <Separator dir="v" size="m" />
               <Action
                 primary
                 onClick={this.togglePublishModal}
@@ -310,15 +379,25 @@ export default class ComposerView extends React.Component {
             <Container flex={[1, 1, `${100 / 3}%`]} className="jr-step2">
               <IntervieweePane
                 {...this.props}
-                currentBubble={this.state.currentBubble}
+                currentBubble={storyline[this.state.currentBubble]}
+                currentBubbleIndex={this.state.currentBubble}
                 currentInterviewee={this.state.currentInterviewee}
+                setCurrentBubbleNone={this.setCurrentBubbleNone}
                 story={story}
                 storyIndex={storyIndex}
+                showSavedIndicator={this.showSavedIndicator}
+                editMode={
+                  !!(
+                    this.state.currentBubble !== null &&
+                    storyline[this.state.currentBubble].role === "interviewee"
+                  )
+                }
               />
             </Container>
             <Container flex={[0, 1, `400px`]} className="jr-step1">
               <StoryPane
                 {...this.props}
+                currentBubble={this.state.currentBubble}
                 currentInterviewee={this.state.currentInterviewee}
                 story={story}
                 storyIndex={storyIndex}
@@ -332,10 +411,19 @@ export default class ComposerView extends React.Component {
             <Container flex={[1, 1, `${100 / 3}%`]} className="jr-step4">
               <UserPane
                 {...this.props}
-                currentBubble={this.state.currentBubble}
+                currentBubble={storyline[this.state.currentBubble]}
+                currentBubbleIndex={this.state.currentBubble}
                 currentInterviewee={this.state.currentInterviewee}
+                setCurrentBubbleNone={this.setCurrentBubbleNone}
                 story={story}
                 storyIndex={storyIndex}
+                showSavedIndicator={this.showSavedIndicator}
+                editMode={
+                  !!(
+                    this.state.currentBubble !== null &&
+                    storyline[this.state.currentBubble].role === "user"
+                  )
+                }
               />
             </Container>
           </PageBody>
@@ -368,10 +456,19 @@ export default class ComposerView extends React.Component {
           updateStory={this.updateStory}
         />
       ) : null,
+      this.state.welcomeModal ? (
+        <ComposerWelcomeModal
+          {...this.props}
+          handleClose={() => this.closeWelcomeModal()}
+          isOpen
+          key="ComposerWelcomeModal"
+        />
+      ) : null,
       <Joyride
         ref="joyride" /* eslint react/no-string-refs: 0 */
         steps={this.state.joyrideSteps}
-        autoStart
+        autoStart={false}
+        key="joyride"
         showSkipButton
         showStepsProgress
         type="continuous"
@@ -385,7 +482,7 @@ export default class ComposerView extends React.Component {
         holePadding={10}
         run // or some other boolean for when you want to start it
         // debug
-        callback={this.callback}
+        callback={joyrideCallback}
       />
     ];
   }

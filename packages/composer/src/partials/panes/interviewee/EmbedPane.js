@@ -6,18 +6,18 @@ import {
   FormItem,
   Label,
   Separator,
-  TextInput
+  TextInput,
+  Legend
 } from "interviewjs-styleguide";
 import PaneFrame from "../PaneFrame";
 
 import { filterIframe } from "../../../util/IframeSanitizer";
 
-
 export default class EmbedPane extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      draft: this.props.draft,
+      draft: this.props.draft
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -34,11 +34,15 @@ export default class EmbedPane extends Component {
     const { name, value } = e.target;
     const clean = filterIframe(value);
     console.log(clean);
-    this.setState({ draft: { ...this.state.draft, [name]: value } }, () => clean.toLowerCase().startsWith("<iframe") &&
+    this.setState(
+      { draft: { ...this.state.draft, [name]: value } },
+      () =>
+        clean.toLowerCase().startsWith("<iframe") &&
         clean.toLowerCase().includes("src=") &&
         clean.toLowerCase().endsWith("></iframe>")
-        ? this.props.updateDraft(this.state.draft, clean)
-        : null);
+          ? this.props.updateDraft(this.state.draft, clean)
+          : null
+    );
   }
 
   render() {
@@ -50,13 +54,14 @@ export default class EmbedPane extends Component {
         return clean.toLowerCase().startsWith("<iframe") &&
           clean.toLowerCase().includes("src=") &&
           clean.toLowerCase().endsWith("></iframe>") ? (
-          <BubbleHTMLWrapper type="embed">
+          <BubbleHTMLWrapper displayType="embed">
             <div dangerouslySetInnerHTML={{ __html: clean }} />
           </BubbleHTMLWrapper>
         ) : (
           <BubbleHTMLWrapper>
-            this is not an iframe, iframe code starts with {`<iframe`}, ends
-            with {`></iframe>`} and requires {`src=`} attribute
+            This is not a valid iframe. An iframe code starts with{" "}
+            {`"<iframe" `}
+            and ends with {`"></iframe>"`}
           </BubbleHTMLWrapper>
         );
       }
@@ -83,12 +88,14 @@ export default class EmbedPane extends Component {
             type="url"
             value={this.state.draft.value}
           />
+          <Legend tip="Insert an iframe to display web content directly in your chat. Click the share icon to see if an ‘embed code’ is available. Then copy and paste.">
+            i
+          </Legend>
         </FormItem>
       </PaneFrame>
     );
   }
 }
-
 
 EmbedPane.propTypes = {
   updateDraft: func.isRequired,
@@ -97,7 +104,6 @@ EmbedPane.propTypes = {
     title: string
   })
 };
-
 
 EmbedPane.defaultProps = {
   draft: {

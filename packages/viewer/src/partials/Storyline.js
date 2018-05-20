@@ -4,17 +4,7 @@ import css from "styled-components";
 import React, { Component } from "react";
 import { withRouter } from "react-router";
 
-import {
-  Action,
-  Avatar,
-  Bubble,
-  BubbleBlock,
-  Message,
-  Container,
-  Icon,
-  color,
-  setSpace
-} from "interviewjs-styleguide";
+import { Action, Avatar, Bubble, BubbleBlock, Message, Container, Icon, color, setSpace } from "interviewjs-styleguide";
 
 const StorylineEl = css(Container)`
   ${setSpace("phl")};
@@ -51,7 +41,7 @@ class Storyline extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      replayCachedHistory: true
+      replayCachedHistory: true,
     };
     this.scrollToBottom = this.scrollToBottom.bind(this);
   }
@@ -81,11 +71,11 @@ class Storyline extends Component {
   }
   scrollToBottom(behaviour) {
     return this.anchor
-      ? this.anchor.scrollIntoView({
-          behavior: behaviour || "smooth",
-          block: "end",
-          inline: "end"
-        })
+      ? this.anchor.parentElement.scroll({
+        top: this.anchor.offsetTop, 
+        left: 0, 
+        behavior: behaviour || "smooth",
+      })
       : null;
   }
   render() {
@@ -105,7 +95,7 @@ class Storyline extends Component {
           case "image":
             return [
               <img src={content.value} alt={content.title} key="image" />,
-              content.title ? <p key="caption">{content.title}</p> : null
+              content.title ? <p key="caption">{content.title}</p> : null,
             ];
           case "link":
             return (
@@ -141,7 +131,7 @@ class Storyline extends Component {
             displayType={getBubbleDisplayType()}
             loading={animateAndDelay}
             persona="interviewee"
-            theme={{ backg: interviewee.color }}
+            theme={{ backg: interviewee.color, font: "PT sans" }}
           >
             {getBubbleContent()}
           </Bubble>
@@ -156,8 +146,7 @@ class Storyline extends Component {
         if (type === "ignore" || type === "explore") {
           const { i } = item;
           const { content } = storyline[i];
-          const filterByType = () =>
-            content.findIndex((contentEl) => contentEl.type === type);
+          const filterByType = () => content.findIndex(contentEl => contentEl.type === type);
           return content[filterByType()].value;
         } else if (type === "diss") {
           return item.value;
@@ -169,7 +158,7 @@ class Storyline extends Component {
 
       return (
         <BubbleBlock key={index} persona="user">
-          <Bubble persona="user" animated={animateAndDelay}>
+          <Bubble persona="user" animated={animateAndDelay} theme={{ font: "PT sans" }}>
             {getBubbleContent()}
           </Bubble>
         </BubbleBlock>
@@ -181,7 +170,7 @@ class Storyline extends Component {
       if (type === "switchTo") {
         return (
           <BubbleBlock key={index}>
-            <Bubble persona="system">
+            <Bubble persona="system" theme={{ font: "PT sans" }}>
               Choose another interviewee to talk to:
             </Bubble>
             {story.interviewees.map(
@@ -191,17 +180,14 @@ class Storyline extends Component {
                     key={character.name}
                     persona="system"
                     onClick={() => this.props.switchChat(character.id)}
+                    theme={{ font: "PT sans" }}
                   >
                     <Container dir="row">
                       <AvatarHolder flex={[1, 0, "auto"]}>
                         <Avatar image={character.avatar} size="s" />
                       </AvatarHolder>
                       <Container flex={[1, 1, "100%"]}>
-                        <Action
-                          onClick={() => this.props.switchChat(character.id)}
-                        >
-                          {character.name}
-                        </Action>
+                        <Action onClick={() => this.props.switchChat(character.id)}>{character.name}</Action>
                       </Container>
                     </Container>
                   </Bubble>
@@ -232,7 +218,7 @@ class Storyline extends Component {
             })
           : null}
         <div
-          ref={(el) => {
+          ref={el => {
             this.anchor = el;
           }}
         />
@@ -246,18 +232,18 @@ Storyline.propTypes = {
   currentIntervieweeId: string.isRequired,
   switchChat: func.isRequired,
   interviewee: shape({
-    color: string.isRequired
+    color: string.isRequired,
   }).isRequired,
   storyline: arrayOf(object),
   story: shape({
-    interviewees: arrayOf(object)
-  })
+    interviewees: arrayOf(object),
+  }),
 };
 
 Storyline.defaultProps = {
   history: [],
   storyline: [],
-  story: {}
+  story: {},
 };
 
 export default withRouter(Storyline);

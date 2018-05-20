@@ -14,7 +14,7 @@ import {
   color,
   font,
   setSpace,
-  setType
+  setType,
 } from "interviewjs-styleguide";
 
 import { Cover, PageBody, PageHead } from "../partials";
@@ -116,40 +116,28 @@ export default class StoryDetailsModal extends React.Component {
               <Separator silent size="m" />
               <DetailsCopy>
                 <dl>
-                  {story.title
-                    ? [<dt>Full title</dt>, <dd>{story.title}</dd>]
-                    : null}
+                  {story.title ? [<dt>Full title</dt>, <dd>{story.title}</dd>] : null}
                   {story.author && story.authorLink
                     ? [
                         <dt>Author</dt>,
                         <dd>
-                          <a
-                            href={story.authorLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
+                          <a href={story.authorLink} target="_blank" rel="noopener noreferrer">
                             {story.author}
                           </a>
-                        </dd>
+                        </dd>,
                       ]
                     : null}
                   {!story.author && story.authorLink
                     ? [
                         <dt>Author link</dt>,
                         <dd>
-                          <a
-                            href={story.authorLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
+                          <a href={story.authorLink} target="_blank" rel="noopener noreferrer">
                             {story.authorLink}
                           </a>
-                        </dd>
+                        </dd>,
                       ]
                     : null}
-                  {story.pubDate
-                    ? [<dt>Published</dt>, <dd>{story.pubDate}</dd>]
-                    : null}
+                  {story.pubDate ? [<dt>Published</dt>, <dd>{story.pubDate}</dd>] : null}
                 </dl>
               </DetailsCopy>
               <Separator silent size="m" />
@@ -157,11 +145,9 @@ export default class StoryDetailsModal extends React.Component {
               <Separator silent size="m" />
               <DetailsCopy>
                 <p>
-                  Turn interview transcripts to shareable and embeddable
-                  interactive chats—InterviewJS is an open-source Google DNI &
-                  Al Jazeera-backed app for journalists and newsrooms that
-                  allows to compose and manage scripted chats for a more
-                  immersive storytelling experience.
+                  Turn interview transcripts into shareable and embeddable interactive chats—InterviewJS is an open-source
+                  Google DNI & Al Jazeera-backed web app for newsrooms that enables journalists to compose and manage 
+                  scripted chats for a more immersive storytelling experience.
                 </p>
               </DetailsCopy>
               <Separator silent size="m" />
@@ -169,26 +155,16 @@ export default class StoryDetailsModal extends React.Component {
               <Separator silent size="m" />
               <DetailsCopy>
                 <p>
-                  InterviewJS is an open-source software happily accepting
-                  stars, forks and PRs on Github and followers on Twitter:
+                  InterviewJS is an open-source software happily accepting stars, forks and PRs on Github and followers
+                  on Twitter:
                 </p>
               </DetailsCopy>
               <Separator silent size="m" />
               <Actionbar>
-                <Action
-                  href="https://github.com/AJInteractive/InterviewJS"
-                  target="_blank"
-                  inverted
-                  fixed
-                >
+                <Action href="https://github.com/AJInteractive/InterviewJS" target="_blank" inverted fixed>
                   <Icon name="github" /> Github
                 </Action>
-                <Action
-                  href="https://twitter.com/interview_js"
-                  target="_blank"
-                  inverted
-                  fixed
-                >
+                <Action href="https://twitter.com/interview_js" target="_blank" inverted fixed>
                   <Icon name="twitter" /> Twitter
                 </Action>
               </Actionbar>
@@ -203,7 +179,7 @@ export default class StoryDetailsModal extends React.Component {
 StoryDetailsModal.propTypes = {
   handleClose: func.isRequired,
   isOpen: bool.isRequired,
-  story: shape({}).isRequired
+  story: shape({}).isRequired,
 };
 
 StoryDetailsModal.defaultProps = {};

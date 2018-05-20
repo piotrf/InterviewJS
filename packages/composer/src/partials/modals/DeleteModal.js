@@ -34,9 +34,9 @@ export default class DeleteModal extends React.Component {
           <ModalBody>
             <Container align="center">
               <Text typo="p2">
-                <strong>“{this.props.story.title}”</strong> will be deleted from
-                your InterviewJS panel. Related data will remain on your Google
-                Drive. Do you really want to proceed?
+                Are you sure you want to delete this story?{" "}
+                <strong>“{this.props.story.title}”</strong> will be deleted. Do
+                you really want to proceed?
               </Text>
             </Container>
           </ModalBody>

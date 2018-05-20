@@ -6,10 +6,10 @@ import axios from "axios";
 
 import {
   Action,
-  Actionbar,
   Avatar,
   Container,
   Icon,
+  PageTitle,
   Separator,
   Text,
   Tip,
@@ -49,6 +49,10 @@ const IntervieweeTitle = css(Text)`
   color: ${color.flareD};
 `;
 
+const Aside = css(PageTitle)`
+  color: ${color.flareHD};
+`;
+
 export default class ContextView extends Component {
   constructor(props) {
     super(props);
@@ -72,9 +76,19 @@ export default class ContextView extends Component {
     }
 
     // Load story via storyId -> getStoryURL
-    if ((!this.props.story || Object.keys(this.props.story).length === 0) && this.props.params.storyId && window.InterviewJS && window.InterviewJS.getStoryURL) {
-      const storyURL = window.InterviewJS.getStoryURL(this.props.params.storyId);
-      if (storyURL) axios.get(storyURL).then(response => this.props.createStory(response.data));
+    if (
+      (!this.props.story || Object.keys(this.props.story).length === 0) &&
+      this.props.params.storyId &&
+      window.InterviewJS &&
+      window.InterviewJS.getStoryURL
+    ) {
+      const storyURL = window.InterviewJS.getStoryURL(
+        this.props.params.storyId
+      );
+      if (storyURL)
+        axios
+          .get(storyURL)
+          .then((response) => this.props.createStory(response.data));
     }
   }
 
@@ -112,6 +126,8 @@ export default class ContextView extends Component {
           <Cover image={story.cover} compact />
         </PageHead>
         <PageBody limit="x" flex={[1, 0, `${100 / 2}%`]}>
+          <Aside typo="p3">Select an interviewee to chat with:</Aside>
+          <Separator size="m" silent />
           <Interviewees>
             {story.interviewees.map((interviewee, i) => (
               <Interviewee
@@ -124,7 +140,9 @@ export default class ContextView extends Component {
                       size="l"
                       image={interviewee.avatar}
                       onClick={() =>
-                        this.props.router.push(`/${story.id}/chat/${interviewee.id}`)
+                        this.props.router.push(
+                          `/${story.id}/chat/${interviewee.id}`
+                        )
                       }
                     />
                   </Container>
@@ -159,20 +177,6 @@ export default class ContextView extends Component {
               </Interviewee>
             ))}
           </Interviewees>
-          <Separator size="l" silent />
-          <Actionbar>
-            <Action
-              fixed
-              onClick={() =>
-                this.props.router.push(
-                  `/${story.id}/chat/${story.interviewees[0].id}`
-                )
-              }
-              primary
-            >
-              Start your first interview
-            </Action>
-          </Actionbar>
         </PageBody>
       </Page>,
       this.state.intervieweeModal !== null ? (

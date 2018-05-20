@@ -1,6 +1,7 @@
+/* eslint react/forbid-prop-types: 0 */
 import React from "react";
 import ReactModal from "react-modal";
-import { bool, func, number, shape, string } from "prop-types";
+import { bool, func, number, shape, string, object } from "prop-types";
 
 import {
   Modal,
@@ -44,8 +45,11 @@ export default class DetailsModal extends React.Component {
               deleteInterviewee={this.props.deleteInterviewee}
               handleSubmit={this.props.handleClose}
               interviewees={this.props.story.interviewees}
+              pushInterviewee={this.props.pushInterviewee}
+              story={this.props.story}
               storyIndex={this.props.storyIndex}
               updateInterviewee={this.props.updateInterviewee}
+              user={this.props.user}
             />
           );
         case "styles":
@@ -58,6 +62,7 @@ export default class DetailsModal extends React.Component {
               handleSave={this.props.updateStory}
               handleSubmit={this.props.handleClose}
               story={this.props.story}
+              user={this.props.user}
             />
           );
       }
@@ -79,14 +84,14 @@ export default class DetailsModal extends React.Component {
                 onClick={() => this.switchTab("meta")}
                 opinionated
               >
-                Meta
+                Story
               </PaneTab>
               <PaneTab
                 active={tab === "details"}
                 onClick={() => this.switchTab("details")}
                 opinionated
               >
-                Details
+                Story Info
               </PaneTab>
               <PaneTab
                 active={tab === "interviewees"}
@@ -114,15 +119,18 @@ export default class DetailsModal extends React.Component {
 DetailsModal.propTypes = {
   createInterviewee: func.isRequired,
   deleteInterviewee: func.isRequired,
+  pushInterviewee: func.isRequired,
   handleClose: func.isRequired,
   isOpen: bool,
   story: shape({
+    id: string.isRequired,
     title: string.isRequired
   }).isRequired,
   storyIndex: number.isRequired,
   tab: string,
   updateInterviewee: func.isRequired,
-  updateStory: func.isRequired
+  updateStory: func.isRequired,
+  user: object.isRequired
 };
 
 DetailsModal.defaultProps = {

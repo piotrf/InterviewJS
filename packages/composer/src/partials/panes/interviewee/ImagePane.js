@@ -1,7 +1,12 @@
-import { func, shape, string } from "prop-types";
+/* eslint react/forbid-prop-types: 0 */
+import { func, shape, string, object } from "prop-types";
 import React, { Component } from "react";
+import { Storage } from "aws-amplify";
 import Dropzone from "react-dropzone";
 import Pica from "pica/dist/pica";
+import shortUuid from "short-uuid";
+import uuidv5 from "uuid/v5";
+import sanitizeFilename from "sanitize-filename";
 
 import {
   BubbleHTMLWrapper,
@@ -14,12 +19,23 @@ import {
 } from "interviewjs-styleguide";
 import PaneFrame from "../PaneFrame";
 
+const fileToKey = (data, storyId) => {
+  const { name, type } = data;
+  // console.log(name, type);
+
+  let namespace = storyId;
+  if (namespace.indexOf("_")) namespace = namespace.split("_").pop();
+  if (namespace.length < 36) namespace = shortUuid().toUUID(namespace);
+
+  const uuid = uuidv5(`${type},${name}`, namespace);
+  return `${shortUuid().fromUUID(uuid)}-${name}`;
+};
 
 export default class ImagePane extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      draft: this.props.draft,
+      draft: this.props.draft
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -32,42 +48,84 @@ export default class ImagePane extends Component {
     return null;
   }
 
-  handleBlob(blob) {
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      console.log("data url length", reader.result.length);
-      const base64data = reader.result.length > 3e6 ? '' : reader.result;
-      this.setState({ draft: { ...this.state.draft, value: base64data } }, () =>
-        this.props.updateDraft(this.state.draft)
-      );
-    };
-    reader.readAsDataURL(blob);
+  // handleBlob(blob) {
+  //   const reader = new FileReader();
+  //   reader.onloadend = () => {
+  //     console.log("data url length", reader.result.length);
+  //     const base64data = reader.result.length > 3e6 ? '' : reader.result;
+  //     this.setState({ draft: { ...this.state.draft, value: base64data } }, () =>
+  //       this.props.updateDraft(this.state.draft)
+  //     );
+  //   };
+  //   reader.readAsDataURL(blob);
+  // }
+
+  handleBlob(blob, type, name) {
+    const key = fileToKey(
+      { type, name: sanitizeFilename(name.replace(/ /g, "_")) },
+      this.props.story.id
+    );
+    Storage.put(
+      `files/${this.props.user.id}/${this.props.story.id}/${key}`,
+      blob,
+      {
+        bucket: "data.interviewjs.io",
+        level: "public",
+        contentType: type
+      }
+    )
+      .then(async (result) => {
+        console.log(result);
+        this.setState(
+          {
+            draft: {
+              ...this.state.draft,
+              value: `https://story.interviewjs.io/files/${
+                this.props.user.id
+              }/${this.props.story.id}/${key}`
+            }
+          },
+          () => this.props.updateDraft(this.state.draft)
+        );
+      })
+      .catch((err) => console.log(err));
   }
 
   handleFile(f) {
-    const { type, preview } = f[0];
+    // console.log(f);
+    const { type, preview, name } = f[0];
     if (type === "image/gif") {
-      this.handleBlob(f[0]);
+      this.handleBlob(f[0], type, name);
     } else {
       // this.img.src = preview;
-      const offScreenImage = document.createElement('img');
-      offScreenImage.addEventListener('load', () => {
-        const targetWidth = offScreenImage.width > 600 ? 600 : offScreenImage.width;
-        const targetHeight = parseInt(targetWidth * offScreenImage.height / offScreenImage.width, 10);
-        console.log(`${offScreenImage.width} x ${offScreenImage.height} => ${targetWidth} x ${targetHeight}`);
+      const offScreenImage = document.createElement("img");
+      offScreenImage.addEventListener("load", () => {
+        const targetWidth =
+          offScreenImage.width > 600 ? 600 : offScreenImage.width;
+        const targetHeight = parseInt(
+          targetWidth * offScreenImage.height / offScreenImage.width,
+          10
+        );
+        console.log(
+          `${offScreenImage.width} x ${
+            offScreenImage.height
+          } => ${targetWidth} x ${targetHeight}`
+        );
 
-        const offScreenCanvas = document.createElement('canvas');
-        offScreenCanvas.width  = targetWidth;
+        const offScreenCanvas = document.createElement("canvas");
+        offScreenCanvas.width = targetWidth;
         offScreenCanvas.height = targetHeight;
 
-        const pica = Pica({ features: ['js', 'wasm', 'ww'] });
-        pica.resize(offScreenImage, offScreenCanvas, {
-          unsharpAmount: 80,
-          unsharpRadius: 0.6,
-          unsharpThreshold: 2,
-          transferable: true
-        }).then(result => pica.toBlob(result, 'image/jpeg', 0.90))
-          .then(this.handleBlob.bind(this)).catch(error => console.log(error));
+        const pica = Pica({ features: ["js", "wasm", "ww"] });
+        pica
+          .resize(offScreenImage, offScreenCanvas, {
+            unsharpAmount: 80,
+            unsharpRadius: 0.6,
+            unsharpThreshold: 2,
+            transferable: true
+          })
+          .then((result) => pica.toBlob(result, "image/jpeg", 0.9))
+          .then((blob) => this.handleBlob(blob, type, name)); // .catch(error => console.log(error)); // Raven should catch this
       });
       offScreenImage.src = preview;
     }
@@ -99,6 +157,7 @@ export default class ImagePane extends Component {
         <Form>
           <FormItem>
             <Label>Upload image</Label>
+
             <Dropzone
               accept="image/jpeg, image/jpg, image/svg, image/gif, image/png"
               ref={(node) => {
@@ -117,7 +176,8 @@ export default class ImagePane extends Component {
                 this.dropzoneRef.open();
               }}
             />
-            <Legend tip="Select an image with extension of .png, .jpg, .jpeg, .svg or .gif">
+
+            <Legend tip="Select an image format with the extension .jpeg, .png, .svg or .gif.">
               i
             </Legend>
           </FormItem>
@@ -128,9 +188,11 @@ export default class ImagePane extends Component {
               text
               name="title"
               onChange={(e) => this.handleChange(e)}
+              value={this.props.draft.title}
               required
               type="text"
             />
+            <Legend tip="Type text for image caption here">i</Legend>
           </FormItem>
         </Form>
       </PaneFrame>
@@ -138,13 +200,14 @@ export default class ImagePane extends Component {
   }
 }
 
-
 ImagePane.propTypes = {
   draft: shape({
     value: string,
     title: string
   }),
-  updateDraft: func.isRequired
+  updateDraft: func.isRequired,
+  story: object.isRequired,
+  user: object.isRequired
 };
 
 ImagePane.defaultProps = {

@@ -54,6 +54,9 @@ const Input = css.input`
     return null;
   }};
   ${({ nooffset }) => (nooffset ? `right: 0; left: 0;` : ``)};
+
+  ${({ disabled }) => (disabled ? `opacity: .75;` : "")};
+
 `;
 
 const Button = css(Input.withComponent("button"))`

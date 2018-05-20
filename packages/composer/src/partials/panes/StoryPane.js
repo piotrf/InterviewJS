@@ -27,7 +27,7 @@ const PaneHead = css.div`
   right: 0;
   text-align: center;
   transform: translateY(50%);
-  z-index: 5;
+  z-index: 100;
 `;
 const PaneBody = css.div`
   height: 100%;
@@ -100,7 +100,7 @@ export default class StoryPane extends React.Component {
     const { currentInterviewee } = this.props;
     const { storyline } = interviewees[currentInterviewee];
     return (
-      <PaneEl fill="white" rounded shift dir="column">
+      <PaneEl fill="white" rounded shift dir="column" className="jr-intro">
         <PaneHead>
           <IntervieweesWrapper>
             <Interviewees>

@@ -1,5 +1,5 @@
-import { func, number, string } from "prop-types";
-import css from "styled-components";
+import { func, number, object, string } from "prop-types";
+import styled from "styled-components";
 import React from "react";
 
 import {
@@ -18,18 +18,20 @@ import {
   radius,
   setSpace,
   setType,
-  time
+  time,
+  Legend,
+  FormItem
 } from "interviewjs-styleguide";
 
 import PaneFrame from "./PaneFrame";
 
 import { GLOBALS, USER_ACTIONS } from "../../options";
 
-const PaneEl = css(Container)`
+const PaneEl = styled(Container)`
   height: 100%;
 `;
 
-const UserActions = css(Container)`
+const UserActions = styled(Container)`
   ${setSpace("pbm")};
   height: 100%;
   position: relative;
@@ -40,7 +42,7 @@ const UserActions = css(Container)`
   }
 `;
 
-const UserAction = css(Container)`
+const UserAction = styled(Container)`
   align-items: stretch;
   border-radius: ${radius.l};
   border: 1px solid ${color.greyHL};
@@ -72,7 +74,7 @@ const UserAction = css(Container)`
     width: 140px;
     with: 100%;
     &:before {
-      content: '';
+      content: "";
       border-width: 1px 0 1px 1px;
       border-radius: ${radius.s} 0 0 ${radius.s};
       border-style: solid;
@@ -86,7 +88,7 @@ const UserAction = css(Container)`
       transform: translateY(-50%);
       z-index: 0;
     }
-  };
+  }
   & label > span {
     left: -19px;
   }
@@ -106,20 +108,21 @@ const UserAction = css(Container)`
   }
 `;
 
-const ActionLibHolder = css(Container)`
+const ActionLibHolder = styled(Container)`
   overflow-y: auto;
   width: 100%;
   height: 100%;
 `;
-const ActionLibList = css.ul`
+
+const ActionLibList = styled.ul`
   display: block;
   text-align: center;
 `;
-const ActionLibItem = css.li`
+const ActionLibItem = styled.li`
   ${setSpace("phs")};
   ${setSpace("mvx")};
 `;
-const ActionLibAction = css.button`
+const ActionLibAction = styled.button`
   ${setSpace("phs")};
   ${setSpace("pvx")};
   ${setType("x")};
@@ -140,8 +143,7 @@ const ActionLibAction = css.button`
     border-color: ${color.blueBlk};
     color: ${color.blueBlk};
   `
-      : ``}
-  ${({ interactive }) =>
+      : ``} ${({ interactive }) =>
     interactive
       ? `
     cursor: pointer;
@@ -149,10 +151,10 @@ const ActionLibAction = css.button`
       color: ${color.blueBlk};
     }
   `
-      : ``}
+      : ``};
 `;
 
-const CustomActionHolder = css(Container)`
+const CustomActionHolder = styled(Container)`
   ${setSpace("phs")};
   width: 100%;
   input {
@@ -162,7 +164,7 @@ const CustomActionHolder = css(Container)`
   }
 `;
 
-const Draft = css.div`
+const Draft = styled.div`
   align-content: center;
   align-items: center;
   display: flex;
@@ -177,11 +179,34 @@ const Draft = css.div`
 `;
 
 export default class UserPane extends React.Component {
+  static getDerivedStateFromProps(nextProps) {
+    if (
+      !nextProps.currentBubble ||
+      nextProps.currentBubble.role === "interviewee"
+    )
+      return null;
+    const { content } = nextProps.currentBubble;
+    const isBinary = content[0].enabled && content[1].enabled;
+    return {
+      enableContinue: isBinary ? true : content[0].enabled,
+      enableExplore: isBinary ? true : content[1].enabled,
+      customContinueVal: content[0].value,
+      customExploreVal: content[1].value,
+      continueVal: content[0].value,
+      exploreVal: content[1].value
+    };
+  }
   constructor(props) {
     super(props);
+
+    const { currentBubble } = this.props;
+    const areWeEdtingHere = currentBubble !== null;
+
     this.state = {
-      enableContinue: false,
-      enableExplore: false,
+      enableContinue: areWeEdtingHere
+        ? currentBubble.content[0].enabled
+        : false,
+      enableExplore: areWeEdtingHere ? currentBubble.content[1].enabled : false,
 
       customContinueVal: "",
       customExploreVal: "",
@@ -192,14 +217,17 @@ export default class UserPane extends React.Component {
       exploreLibDict: "text",
       exploreLibItem: null,
 
-      exploreVal: "Omg why?",
-      continueVal: "Carry on"
+      exploreVal: areWeEdtingHere ? currentBubble.content[0].value : "Carry on",
+      continueVal: areWeEdtingHere
+        ? currentBubble.content[1].value
+        : "Omg, why?"
     };
     this.addStorylineItem = this.addStorylineItem.bind(this);
     this.customiseActionLabel = this.customiseActionLabel.bind(this);
     this.selectContinueAction = this.selectContinueAction.bind(this);
     this.selectExploreAction = this.selectExploreAction.bind(this);
     this.toggleAction = this.toggleAction.bind(this);
+    this.updateStorylineItem = this.updateStorylineItem.bind(this);
   }
   toggleAction(action, e) {
     // this.setState({ enableExplore: e.target.checked });
@@ -275,6 +303,47 @@ export default class UserPane extends React.Component {
       exploreLibItem: null,
       exploreVal: this.props.exploreVal
     });
+
+    this.props.showSavedIndicator();
+  }
+  updateStorylineItem() {
+    const { storyIndex, currentInterviewee, currentBubbleIndex } = this.props;
+    const {
+      enableContinue,
+      enableExplore,
+      continueVal,
+      exploreVal
+    } = this.state;
+    const editedUserBubble = {
+      content: [
+        {
+          enabled: enableContinue,
+          value: continueVal,
+          type: enableExplore ? "ignore" : "explore"
+        },
+        { enabled: enableExplore, value: exploreVal, type: "explore" }
+      ],
+      role: "user"
+    };
+    this.props.updateStorylineItem(
+      storyIndex,
+      currentInterviewee,
+      currentBubbleIndex,
+      editedUserBubble
+    );
+    this.setState({
+      customContinueVal: "",
+      customExploreVal: "",
+      enableContinue: false,
+      enableExplore: false,
+      continueLibItem: null,
+      continueVal: this.props.continueVal,
+      exploreLibItem: null,
+      exploreVal: this.props.exploreVal
+    });
+
+    this.props.setCurrentBubbleNone();
+    this.props.showSavedIndicator();
   }
   render() {
     const {
@@ -293,6 +362,7 @@ export default class UserPane extends React.Component {
           addStorylineItem={this.addStorylineItem}
           hasDraft={enableContinue || enableExplore}
           side="right"
+          updateStorylineItem={this.updateStorylineItem}
           draft={
             <Draft>
               {enableContinue ? (
@@ -300,12 +370,13 @@ export default class UserPane extends React.Component {
                   fixed
                   primary={!enableExplore}
                   secondary={!!enableExplore}
+                  theme={{ font: "PT sans" }}
                 >
                   {continueVal}
                 </Action>
               ) : null}
               {enableExplore ? (
-                <Action fixed primary>
+                <Action fixed primary theme={{ font: "PT sans" }}>
                   {exploreVal}
                 </Action>
               ) : null}
@@ -315,12 +386,18 @@ export default class UserPane extends React.Component {
           <UserActions>
             <Container className="jr-step5">
               <UserAction dir="row" active>
-                <Container flex={[0, 0, "140px"]} align="center" dir="column">
+                <Container
+                  align="center"
+                  dir="column"
+                  flex={[0, 0, "140px"]}
+                  style={{ padding: "0 5px" }}
+                >
                   <PageSubtitle typo="p4">
-                    Create Single Interaction
+                    Create an interaction
+                    <br />
                     <Tip
                       position="bottom"
-                      title="Create user interactions that will lead into your interview text. Select text by clicking or write your own - it has to be the user’s voice. Explore all tabs!"
+                      title="Create user interactions that lead into your interview quote.  Select text options, type your own text or question, or choose a multimedia request via the tabs. It has to bein  the user’s voice."
                     >
                       <Icon
                         name="info2"
@@ -336,15 +413,24 @@ export default class UserPane extends React.Component {
                 </Container>
                 <Container flex={[2, 2, "auto"]} fill="grey" dir="column">
                   <CustomActionHolder flex={[0, 0, "50px"]} dir="column">
-                    <TextInput
-                      type="text"
-                      placeholder="Type your own text label…"
-                      maxLength={GLOBALS.fixedButtonCharLimit}
-                      value={this.state.customContinueVal}
-                      onChange={(e) =>
-                        this.customiseActionLabel("customContinueVal", e)
-                      }
-                    />
+                    <FormItem fullWidth>
+                      <TextInput
+                        type="text"
+                        placeholder="Type a comment or question here ..."
+                        maxLength={GLOBALS.fixedButtonCharLimit}
+                        value={this.state.customContinueVal}
+                        onChange={(e) =>
+                          this.customiseActionLabel("customContinueVal", e)
+                        }
+                        style={{ paddingRight: "40px" }}
+                      />
+                      <Legend
+                        tip="Type your own user interaction here - a comment or a question to lead into your the interview text in the preview panel."
+                        style={{ top: "16px" }}
+                      >
+                        i
+                      </Legend>
+                    </FormItem>
                   </CustomActionHolder>
                   <Container flex={[1, 0, "auto"]} style={{ width: "100%" }}>
                     <PaneTabs>
@@ -423,16 +509,22 @@ export default class UserPane extends React.Component {
             <Separator silent size="s" />
             <Container className="jr-step6">
               <UserAction dir="row" active={enableExplore}>
-                <Container flex={[0, 0, "140px"]} align="center" dir="column">
+                <Container
+                  align="center"
+                  dir="column"
+                  flex={[0, 0, "140px"]}
+                  style={{ padding: "0 5px" }}
+                >
                   <Checkbox
                     checked={enableExplore}
                     onChange={(e) => this.toggleAction("enableExplore", e)}
                   >
                     <PageSubtitle typo="p4">
-                      Create Choice Interaction
+                      Add Second Interaction
+                      <br />
                       <Tip
                         position="bottom"
-                        title="Select to add a second interaction. Together with the first question or user interaction it gives the user choice. Multimedia works well - explore all tabs!"
+                        title="Select to add a second interaction. Together with the first question or user interaction it gives the user choice. Multimedia requests works well - explore all tabs!"
                       >
                         <Icon
                           name="info2"
@@ -449,15 +541,24 @@ export default class UserPane extends React.Component {
                 </Container>
                 <Container flex={[2, 2, "auto"]} fill="grey" dir="column">
                   <CustomActionHolder flex={[0, 0, "50px"]} dir="column">
-                    <TextInput
-                      type="text"
-                      placeholder="Type your own text label…"
-                      maxLength={GLOBALS.fixedButtonCharLimit}
-                      value={this.state.customExploreVal}
-                      onChange={(e) =>
-                        this.customiseActionLabel("customExploreVal", e)
-                      }
-                    />
+                    <FormItem fullWidth>
+                      <TextInput
+                        type="text"
+                        placeholder="Type your own text label…"
+                        maxLength={GLOBALS.fixedButtonCharLimit}
+                        value={this.state.customExploreVal}
+                        onChange={(e) =>
+                          this.customiseActionLabel("customExploreVal", e)
+                        }
+                        style={{ paddingRight: "40px" }}
+                      />
+                      <Legend
+                        tip="Use this box to script the second user interaction or question. It must be in the users voice!"
+                        style={{ top: "16px" }}
+                      >
+                        i
+                      </Legend>
+                    </FormItem>
                   </CustomActionHolder>
                   <Container flex={[1, 0, "auto"]} style={{ width: "100%" }}>
                     <PaneTabs>
@@ -538,13 +639,20 @@ export default class UserPane extends React.Component {
 
 UserPane.propTypes = {
   addStorylineItem: func.isRequired,
-  currentInterviewee: number.isRequired,
   continueVal: string,
+  currentBubble: object,
+  currentBubbleIndex: number,
+  currentInterviewee: number.isRequired,
   exploreVal: string,
-  storyIndex: number.isRequired /* eslint react/forbid-prop-types: 0 */
+  setCurrentBubbleNone: func.isRequired,
+  showSavedIndicator: func.isRequired,
+  storyIndex: number.isRequired /* eslint react/forbid-prop-types: 0 */,
+  updateStorylineItem: func.isRequired
 };
 
 UserPane.defaultProps = {
+  currentBubbleIndex: null,
+  currentBubble: null,
   exploreVal: "Omg why?",
   continueVal: "Carry on"
 };

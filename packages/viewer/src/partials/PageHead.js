@@ -1,11 +1,6 @@
 import css from "styled-components";
 
-import {
-  Container,
-  PageTitle,
-  setSpace,
-  setType
-} from "interviewjs-styleguide";
+import { Container, PageTitle, setSpace, setType } from "interviewjs-styleguide";
 
 const PageHead = css(Container)`
   ${setSpace("pbl")};

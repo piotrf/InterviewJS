@@ -8,7 +8,6 @@
 import Raven from "raven-js";
 import { Storage } from "aws-amplify";
 
-
 // const uuidv4 = () => shortUuid().fromUUID(shortUuid.uuid());
 
 function stories(state = [], action) {
@@ -95,6 +94,25 @@ function stories(state = [], action) {
         ...state.slice(storyIndex + 1)
       ];
 
+    case "PUSH_INTERVIEWEE":
+      console.log("pushing interviewee");
+      const pushInterviewees = state[storyIndex].interviewees;
+      const newpushIntervieweesArr = pushInterviewees.slice();
+      newpushIntervieweesArr.splice(
+        intervieweeIndex + 1,
+        0,
+        newpushIntervieweesArr.splice(intervieweeIndex, 1)[0]
+      );
+
+      return [
+        ...state.slice(0, storyIndex),
+        {
+          ...state[storyIndex],
+          interviewees: newpushIntervieweesArr
+        },
+        ...state.slice(storyIndex + 1)
+      ];
+
     case "DELETE_INTERVIEWEE":
       console.log("deleting interviewee");
       const deleteStoryInterviewees = state[storyIndex].interviewees;
@@ -134,6 +152,36 @@ function stories(state = [], action) {
         ...state.slice(storyIndex + 1)
       ];
       return ADD_STORYLINE_ITEM_STATE;
+
+    case "UPDATE_STORYLINE_ITEM":
+      console.log("updating storyline item");
+      if (!state[storyIndex].interviewees[intervieweeIndex].storyline) {
+        state[storyIndex].interviewees[intervieweeIndex].storyline = [];
+      }
+      const UPDATE_STORYLINE_ITEM_STATE = [
+        ...state.slice(0, storyIndex),
+        {
+          ...state[storyIndex],
+          interviewees: [
+            ...state[storyIndex].interviewees.slice(0, intervieweeIndex),
+            {
+              ...state[storyIndex].interviewees[intervieweeIndex],
+              storyline: [
+                ...state[storyIndex].interviewees[
+                  intervieweeIndex
+                ].storyline.slice(0, storyItemIndex),
+                payload,
+                ...state[storyIndex].interviewees[
+                  intervieweeIndex
+                ].storyline.slice(storyItemIndex + 1)
+              ]
+            },
+            ...state[storyIndex].interviewees.slice(intervieweeIndex + 1)
+          ]
+        },
+        ...state.slice(storyIndex + 1)
+      ];
+      return UPDATE_STORYLINE_ITEM_STATE;
 
     case "MOVE_STORYLINE_ITEM":
       console.log("moving storyline item");
@@ -204,11 +252,10 @@ function storiesWrapper(state = [], action) {
 
     if (typeof storyIndex === "number" && state[storyIndex])
       storyId = state[storyIndex].id;
-      if (type === "CREATE_STORY") storyId = payload.id;
-      if (type === "SYNC_AND_SAVE_STORY") storyId = payload.id;
+    if (type === "CREATE_STORY") storyId = payload.id;
+    if (type === "SYNC_AND_SAVE_STORY") storyId = payload.id;
 
     if (!storyId) return newState; // storyId = `s0_tmp_${uuidv4()}`;
-
 
     let currentStory = newState.find((story) => story.id === storyId);
     if (type === "DELETE_STORY")
@@ -226,40 +273,52 @@ function storiesWrapper(state = [], action) {
     if (type === "SYNC_AND_SAVE_STORY") currentStory.version--;
 
     if (type === "CREATE_STORY" || type === "SYNC_AND_SAVE_STORY") {
-      Storage.put(`stories/${storyId}/story.json`, JSON.stringify(currentStory), {
-        bucket: "data.interviewjs.io",
-        level: "private",
-        contentType: "application/json"
-      })
-      .then (result => console.log(result))
-      .catch(err => console.log(err));
+      Storage.put(
+        `stories/${storyId}/story.json`,
+        JSON.stringify(currentStory),
+        {
+          bucket: "data.interviewjs.io",
+          level: "private",
+          contentType: "application/json"
+        }
+      )
+        .then((result) => console.log(result))
+        .catch((err) => console.log(err));
     } else if (type === "SYNC_STORY") {
       // NOOP;
     } else if (type === "DELETE_STORY") {
-      Storage.put(`stories-deleted/${storyId}/story.json`, JSON.stringify(currentStory), {
-        bucket: "data.interviewjs.io",
-        level: "private",
-        contentType: "application/json"
-      })
-      .then (result => {
-        console.log(result);
-        // now delete
-        Storage.remove(`stories/${storyId}/story.json`, {
+      Storage.put(
+        `stories-deleted/${storyId}/story.json`,
+        JSON.stringify(currentStory),
+        {
           bucket: "data.interviewjs.io",
-          level: "private"
+          level: "private",
+          contentType: "application/json"
+        }
+      )
+        .then((result) => {
+          console.log(result);
+          // now delete
+          Storage.remove(`stories/${storyId}/story.json`, {
+            bucket: "data.interviewjs.io",
+            level: "private"
+          })
+            .then((result2) => console.log(result2))
+            .catch((err) => console.log(err));
         })
-        .then(result2 => console.log(result2))
-        .catch(err => console.log(err));
-      })
-      .catch(err => console.log(err));
+        .catch((err) => console.log(err));
     } else {
-      Storage.put(`stories/${storyId}/story.json`, JSON.stringify(currentStory), {
-        bucket: "data.interviewjs.io",
-        level: "private",
-        contentType: "application/json"
-      })
-      .then (result => console.log(result))
-      .catch(err => console.log(err));
+      Storage.put(
+        `stories/${storyId}/story.json`,
+        JSON.stringify(currentStory),
+        {
+          bucket: "data.interviewjs.io",
+          level: "private",
+          contentType: "application/json"
+        }
+      )
+        .then((result) => console.log(result))
+        .catch((err) => console.log(err));
     }
   } catch (exception) {
     Raven.captureException(exception);

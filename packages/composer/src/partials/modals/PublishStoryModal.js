@@ -3,22 +3,25 @@ import css from "styled-components";
 import React, { Component } from "react";
 import ReactModal from "react-modal";
 import { arrayOf, bool, func, number, object } from "prop-types";
-import { API, Storage } from "aws-amplify";
+import { Storage } from "aws-amplify";
 import shortUuid from "short-uuid";
+import uuidv5 from "uuid/v5";
 
 import {
-  Actionbar,
   Action,
+  Actionbar,
   Breadcrumb,
   Breadcrumbs,
   Container,
   Modal,
   ModalBody,
   ModalHead,
-  PageTitle,
   PageSubtitle,
+  PageTitle,
   Separator,
-  radius
+  radius,
+  Preloader,
+  Text
 } from "interviewjs-styleguide";
 
 import { DetailsForm, MetaForm, Poll } from "../";
@@ -59,27 +62,76 @@ const PreviewWrapper = css.div`
   }
 `;
 
+const PlaceHolder = css.div`
+  border: 1px solid #e9e9e9;
+  box-sizing: border-box;
+  border-radius: 6px;
+  font-family: "PT Serif",serif;
+  display: block;
+  font-size: 14px;
+  color: #28336e;
+  line-height: 20px;
+  margin: 10px 0;
+  padding: 20px;
+  vertical-align: baseline;
+  width: 100%
+`;
+
+const computeId = (userId, storyId) => {
+  let namespace = userId;
+  if (namespace.indexOf(":") > 0) namespace = namespace.split(":").pop();
+
+  let id = storyId;
+  if (id.indexOf("_")) id = id.split("_").pop();
+  if (id.length < 36) id = shortUuid().toUUID(id);
+
+  const uuid = uuidv5(id, namespace);
+  return shortUuid().fromUUID(uuid);
+};
+
 export default class PublishStoryModal extends Component {
   constructor(props) {
     super(props);
+
+    let storyBase = "/"; // FIXME: local-dev url?
+    switch (document.location.hostname) {
+      case "composer.interviewjs.net.s3-website-us-east-1.amazonaws.com":
+        storyBase =
+          "http://story.interviewjs.net.s3-website-us-east-1.amazonaws.com";
+        break;
+      case "composer.interviewjs.net":
+        storyBase = "https://story.interviewjs.net/";
+        break;
+      case "localhost":
+        storyBase = "https://story.interviewjs.net/"; // FIXME: local-dev url?
+        break;
+      default:
+        storyBase = "https://story.interviewjs.io/"; // production
+    }
+
     this.state = {
       step: 0,
       storyKey: null,
+      storyBase,
+      embedModal: false,
     };
+
     this.handleStep0 = this.handleStep0.bind(this);
     this.handleStep1 = this.handleStep1.bind(this);
     this.handleStep2 = this.handleStep2.bind(this);
     this.handleStep3 = this.handleStep3.bind(this);
+    this.toggleEmbedModal = this.toggleEmbedModal.bind(this);
   }
 
   componentDidUpdate() {
     if (this.iframe) {
       this.iframe.addEventListener("load", () => {
         // console.log("iframe loaded");
-        if (!this.state.storyKey) setTimeout(
-          () => this.iframe.contentWindow.postMessage(this.props.story, "*"),
-          5000
-        );
+        if (!this.state.storyKey)
+          setTimeout(
+            () => this.iframe.contentWindow.postMessage(this.props.story, "*"),
+            5000
+          );
       });
     }
   }
@@ -95,36 +147,53 @@ export default class PublishStoryModal extends Component {
   }
 
   handleStep2() {
-    // Publish
-    console.log(this.props.user);
-    Storage.put(`stories/${this.props.user.id}/${this.props.story.id}/story.json`, JSON.stringify(this.props.story), {
-      bucket: "data.interviewjs.io",
-      level: "public",
-      contentType: "application/json"
-    })
-    .then (async result => {
-      console.log(result);
-
-      // const { result2 } = await API.get("Story", `/publish`, { response: true }); // /${this.props.story.id}
-      // const { result2 } = await API.get("Poll", `/poll`, { response: true }); // /${this.props.story.id}
-      // console.log(result2);
-      // API.get("Poll", `/poll`, { response: true }).then(result2 => console.log(result2));
-      API.post("Push", `/story/${this.props.story.id}`, { response: true, body: { a: 1 } }).then(result2 => console.log(result2));
-
+    const { story } = this.props;
+    if (story.ignore) {
       this.setState({
         step: this.state.step + 1,
-        // storyKey: result.key,
+        storyKey: null
       });
-    })
-    .catch(err => console.log(err));
+
+      return;
+    }
+
+    story.composer = {
+      host: document.location.hostname,
+      version: process.env.VERSION
+    };
+    Storage.put(
+      `stories/${this.props.user.id}/${story.id}/story.json`,
+      JSON.stringify(story),
+      {
+        bucket: "data.interviewjs.io",
+        level: "public",
+        contentType: "application/json"
+      }
+    )
+      .then(async (result) => {
+        console.log(result);
+        this.setState({
+          step: this.state.step + 1,
+          storyKey: computeId(this.props.user.id, this.props.story.id),
+        });
+      })
+      .catch((err) => console.log(err));
   }
 
   handleStep3() {
     this.props.handleClose();
   }
 
+  toggleEmbedModal() {
+    this.setState({
+      embedModal: !this.state.embedModal,
+    })
+  }
+
   render() {
-    const iframeViewer = `https://story.interviewjs.io/${this.props.story.id}`;
+    const iframeViewer = `${this.state.storyBase}${
+      this.state.storyKey ? this.state.storyKey : this.props.story.id
+    }`;
 
     const { step } = this.state;
     const getModalBody = () => {
@@ -136,6 +205,7 @@ export default class PublishStoryModal extends Component {
             <MetaForm
               handleSubmit={this.handleStep0}
               story={this.props.story}
+              user={this.props.user}
               cta="Confirm"
               required
             />
@@ -176,14 +246,18 @@ export default class PublishStoryModal extends Component {
         return (
           <Container limit="s" align="center">
             <PageSubtitle typo="h3">
-              Well done! Your story is now up running. Here’s a preview:
+              Well done! Your story is now up and running. Here’s a preview:
             </PageSubtitle>
             <Separator size="m" silent />
             <PreviewWrapper>
+              <Separator size="l" silent />
+              <Text>Please wait. Your InterviewJS story is being created.</Text>
+              <Separator size="m" silent />
+              <Preloader />
               <img src={iframeRatioSpacer} alt="" />
               <iframe
                 title="Preview"
-                src={`${iframeViewer}?${uuidv4()}`}
+                src={`${iframeViewer}?${uuidv4()}/`}
                 ref={(iframe) => {
                   this.iframe = iframe;
                 }}
@@ -192,21 +266,46 @@ export default class PublishStoryModal extends Component {
               </iframe>
             </PreviewWrapper>
             <Separator size="m" silent />
-            Grab the link and share on social
+            <PageSubtitle typo="h4">
+              Grab the link and share on social:
+            </PageSubtitle>
+            <Separator size="s" silent />
+              <Action target="_blank" href={`${iframeViewer}/`}>
+                {`${iframeViewer}/`}
+              </Action>
             <Separator size="m" silent />
             <Actionbar>
-              <Action fixed primary onClick={this.handleStep3}>
-                Close
+              <Action fixed secondary onClick={this.handleStep3}>
+                Back to composer
               </Action>
-              <Action
-                fixed
-                href={`${iframeViewer}`}
-                secondary
-                target="_blank"
+              <Action 
+                fixed 
+                primary 
+                onClick={this.toggleEmbedModal}
               >
-                Open your story
+                Embed
               </Action>
             </Actionbar>
+            <ReactModal 
+              isOpen={this.state.embedModal}
+              ariaHideApp={false}
+            >
+              <Modal handleClose={this.toggleEmbedModal} >
+                <ModalHead fill="grey">
+                  <PageTitle typo="h2">Embed Code</PageTitle>
+                  <Separator size="s" silent />
+                </ModalHead>
+                <ModalBody>
+                  <Text>
+                    Copy the code below and embed it in your HTML editor
+                  </Text>
+                  <PlaceHolder>
+                    {`<iframe width='100%' height='768px' src='${iframeViewer}'>
+                    </iframe>`}
+                  </PlaceHolder>
+                </ModalBody>
+              </Modal>
+            </ReactModal>
           </Container>
         );
       }

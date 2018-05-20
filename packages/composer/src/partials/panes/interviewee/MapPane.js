@@ -6,12 +6,12 @@ import {
   FormItem,
   Label,
   Separator,
-  TextInput
+  TextInput,
+  Legend
 } from "interviewjs-styleguide";
 import PaneFrame from "../PaneFrame";
 
 import { filterIframe } from "../../../util/IframeSanitizer";
-
 
 export default class MapPane extends Component {
   constructor(props) {
@@ -56,13 +56,14 @@ export default class MapPane extends Component {
           clean.toLowerCase().includes("src=") &&
           clean.toLowerCase().includes("google.com/maps/embed") &&
           clean.toLowerCase().endsWith("></iframe>") ? (
-          <BubbleHTMLWrapper type="embed">
+          <BubbleHTMLWrapper displayType="embed">
             <div dangerouslySetInnerHTML={{ __html: clean }} />
           </BubbleHTMLWrapper>
         ) : (
           <BubbleHTMLWrapper>
-            this is not a valid iframe. A Google Maps iframe code starts with{" "}
-            {`<iframe`}, ends with {`></iframe>`} and requires {`src=`}{" "}
+            This is not a valid iframe. A Google Maps iframe code starts with{" "}
+            {`"<iframe"`}, ends with {`"></iframe>"`} and is from a Google Maps
+            web address.
           </BubbleHTMLWrapper>
         );
       }
@@ -83,12 +84,15 @@ export default class MapPane extends Component {
             area
             name="value"
             onChange={(e) => this.handleChange(e)}
-            placeholder={`Insert an iframe to embed a Google Map directly into your chat`}
+            placeholder="Insert an iframe to embed a Google Map directly into your chat"
             required
             rows={10}
             type="url"
             value={this.state.draft.value}
           />
+          <Legend tip="Choose a location on Google Maps to access the iframe code. Select the share button and click the “embed map” option. Then copy and paste.">
+            i
+          </Legend>
         </FormItem>
       </PaneFrame>
     );

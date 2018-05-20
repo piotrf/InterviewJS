@@ -5,6 +5,7 @@ import { object, shape, string, func } from "prop-types";
 import axios from "axios";
 import {
   Action,
+  Actionbar,
   Avatar,
   Icon,
   Container,
@@ -14,7 +15,7 @@ import {
   Tip,
   color,
   setSpace,
-  time
+  time,
 } from "interviewjs-styleguide";
 
 import { IntervieweeModal, StoryDetailsModal } from "../partials";
@@ -106,7 +107,12 @@ export default class ChatView extends Component {
     }
 
     // Load story via storyId -> getStoryURL
-    if ((!this.props.story || Object.keys(this.props.story).length === 0) && this.props.params.storyId && window.InterviewJS && window.InterviewJS.getStoryURL) {
+    if (
+      (!this.props.story || Object.keys(this.props.story).length === 0) &&
+      this.props.params.storyId &&
+      window.InterviewJS &&
+      window.InterviewJS.getStoryURL
+    ) {
       const storyURL = window.InterviewJS.getStoryURL(this.props.params.storyId);
       if (storyURL) axios.get(storyURL).then(response => this.props.createStory(response.data));
     }
@@ -138,54 +144,36 @@ export default class ChatView extends Component {
     return [
       <Page key="page">
         <Topbar limit="m" padded>
-          <Action
-            iconic
-            onClick={() => this.props.router.push(`/${story.id}/context`)}
-          >
+          <Action iconic onClick={() => this.props.router.push(`/${story.id}/context`)}>
             <Icon name="arrow-left" />
           </Action>
           <PageTitle typo="h2">Interviewees</PageTitle>
-          <Action iconic onClick={(e) => this.toggleDetailsModal(e)}>
+          <Action iconic onClick={e => this.toggleDetailsModal(e)}>
             <Icon name="info" />
           </Action>
         </Topbar>
         <PageBody limit="m" flex={[1, 1, `100%`]}>
           <Interviewees>
             {story.interviewees.map((interviewee, i) => (
-              <Interviewee
-                key={interviewee.id}
-                onClick={(e) => this.startChat(e, interviewee.id)}
-              >
+              <Interviewee key={interviewee.id} onClick={e => this.startChat(e, interviewee.id)}>
                 <Container limit="m" padded>
                   <Container dir="row">
                     <Container flex={[1, 0, "auto"]}>
                       <Avatar size="l" image={interviewee.avatar} />
                     </Container>
                     <Container flex={[0, 1, "100%"]} align="left">
-                      <IntervieweeName typo="p1">
-                        {interviewee.name}
-                      </IntervieweeName>
+                      <IntervieweeName typo="p1">{interviewee.name}</IntervieweeName>
                       <Separator size="n" silent />
-                      <IntervieweeTitle typo="p5">
-                        {interviewee.title}
-                      </IntervieweeTitle>
+                      <IntervieweeTitle typo="p5">{interviewee.title}</IntervieweeTitle>
                     </Container>
                     <Container flex={[1, 0, "auto"]}>
                       <Tip title="Get info">
-                        <Action
-                          iconic
-                          onClick={(e) => this.toggleIntervieweeModal(e, i)}
-                          secondary
-                        >
+                        <Action iconic onClick={e => this.toggleIntervieweeModal(e, i)} secondary>
                           <Icon name="info" />
                         </Action>
                       </Tip>
                       <Tip title="Start chatting">
-                        <Action
-                          iconic
-                          onClick={(e) => this.startChat(e, interviewee.id)}
-                          primary
-                        >
+                        <Action iconic onClick={e => this.startChat(e, interviewee.id)} primary>
                           <Icon name="bubbles" />
                         </Action>
                       </Tip>
@@ -195,18 +183,20 @@ export default class ChatView extends Component {
               </Interviewee>
             ))}
           </Interviewees>
+          <Separator size="s" silent />
+          <Actionbar>
+            <Action tone="negative" onClick={() => this.props.router.push(`/${story.id}/outro`)}>
+              I’m done chatting
+            </Action>
+          </Actionbar>
         </PageBody>
       </Page>,
       this.state.intervieweeModal !== null ? (
         <IntervieweeModal
           {...this.props}
-          handleClose={(e) => this.toggleIntervieweeModal(e, null)}
+          handleClose={e => this.toggleIntervieweeModal(e, null)}
           handleSubmit={() =>
-            this.props.router.push(
-              `/${story.id}/chat/${
-                story.interviewees[this.state.intervieweeModal].id
-              }`
-            )
+            this.props.router.push(`/${story.id}/chat/${story.interviewees[this.state.intervieweeModal].id}`)
           }
           interviewee={story.interviewees[this.state.intervieweeModal]}
           isOpen={this.state.intervieweeModal !== null}
@@ -220,7 +210,7 @@ export default class ChatView extends Component {
           key="detailsModal"
           story={story}
         />
-      ) : null
+      ) : null,
     ];
   }
 }
@@ -230,12 +220,12 @@ ChatView.propTypes = {
   params: object,
   router: object,
   story: shape({
-    title: string
-  })
+    title: string,
+  }),
 };
 
 ChatView.defaultProps = {
   router: null,
   params: {},
-  story: {}
+  story: {},
 };
